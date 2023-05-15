@@ -1,0 +1,14 @@
+[Desktop Entry]
+Version=1.1
+Type=Application
+Name=Files (root)
+Comment=Access and organise files
+Exec=gnome-terminal -- bash -c 'sudo -E nemo;exec bash;'
+Icon=grub-customizer
+Categories=System;FileTools;GTK;
+Keywords=folders;filesystem;explorer;
+Type=Application
+Terminal=false
+StartupNotify=false
+X-GNOME-UsesNotifications=true
+Name[en_US]=Files (root)

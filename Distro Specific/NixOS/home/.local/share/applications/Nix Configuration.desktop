@@ -1,0 +1,14 @@
+[Desktop Entry]
+Version=1.1
+Type=Application
+Name=NixOS Configuration
+Comment=Nix Configuration Tool
+GenericName=Nix Configuration
+Exec=gnome-terminal -- bash -c 'sudo nano /etc/nixos/configuration.nix;exec bash;'
+Icon=plasmadiscover
+Categories=System;FileTools;GTK;
+Keywords=cache;clean;free;performance;privacy;
+StartupNotify=true
+X-GNOME-UsesNotifications=true
+Name[en_US]=Nix Configuration
+Terminal=false
