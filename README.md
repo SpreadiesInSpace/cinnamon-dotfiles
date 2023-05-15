@@ -19,7 +19,6 @@ galculator gnome-screenshot gnome-system-monitor gnome-terminal gedit
 
 Brave Browser Setup
 https://brave.com/linux/#release-channel-installation
-https://pastebin.com/J8hgRrde (t.ly/Kdi1)
 
 Bash Scripts
 https://pastebin.com/3KEhUUzF
