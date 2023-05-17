@@ -3,5 +3,11 @@
 #
 # Syntax: simple "KEY=VAL" pairs on separate lines
 #
-QT_QPA_PLATFORMTHEME=qt5ct
+
 EDITOR="/usr/bin/nvim"
+GTK_THEME=Gruvbox-Dark-BL
+# QT_STYLE_OVERRIDE=kvantum
+# QT_QPA_PLATFORMTHEME=gnome
+QT_QPA_PLATFORMTHEME=qt5ct
+
+
