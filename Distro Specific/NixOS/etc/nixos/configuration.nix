@@ -105,6 +105,7 @@
     bleachbit
     bottom
     brave
+    copyq
     filezilla
     gcc
     git
