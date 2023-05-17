@@ -1,3 +1,5 @@
+#!/usr/bin/env xdg-open
+
 [Desktop Entry]
 Version=1.1
 Type=Application
@@ -12,3 +14,4 @@ Keywords=cache;clean;free;performance;privacy;
 StartupNotify=true
 X-GNOME-UsesNotifications=true
 Name[en_US]=Bleachbit
+Hidden=true

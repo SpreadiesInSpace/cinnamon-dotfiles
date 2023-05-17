@@ -1,0 +1,14 @@
+[Desktop Entry]
+Version=1.1
+Type=Application
+Name=Nix Rebuild & Clean
+#Exec=gnome-terminal -- zsh -c 'sudo clear;neofetch --ascii /home/f16poom/Temp\\ Files/NixAscii.txt;exec zsh;'
+Exec=gnome-terminal -- zsh -c 'sudo nixos-rebuild switch --upgrade; flatpak update -y && flatpak remove --unused;rm -rf ~/.cache/*; sudo rm /nix/var/nix/gcroots/auto/*; sudo nix-collect-garbage -d; nix-collect-garbage -d; sudo nix-store --optimise; nix-store --optimise; sudo nix-env -p /nix/var/nix/profiles/system --delete-generations old; sudo nix-env --delete-generations old; nix-env --delete-generations old; sudo journalctl --flush --rotate;sudo journalctl --vacuum-time=1s; rmlint; sudo bleachbit -c --preset && bleachbit -c --preset;rm -rf .zsh_history && bash rmlint.sh -d;sudo bleachbit;exit;exec zsh;'
+Icon=plasmadiscover
+Categories=System;FileTools;GTK;
+Keywords=cache;clean;free;performance;privacy;
+StartupNotify=true
+X-GNOME-UsesNotifications=true
+Terminal=false
+Comment=
+Name[en_US]=Nix Rebuild & Clean.desktop

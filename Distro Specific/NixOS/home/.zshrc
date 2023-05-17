@@ -122,6 +122,9 @@ alias btm='btm --color gruvbox'
 # NixOS Neofetch
 alias neofetch='neofetch --ascii /home/f16poom/Temp\ Files/NixAscii.txt'
 
+# NixOS Config
+alias NC='sudo nano /etc/nixos/configuration.nix'
+
 # NixOS Cleaning
 alias cleanLint='bash rmlint.sh -d'
 alias cleanAll='flatpak remove --unused;rm -rf ~/.cache/*; sudo rm /nix/var/nix/gcroots/auto/*; sudo nix-collect-garbage -d; nix-collect-garbage -d; sudo nix-store --optimise; nix-store --optimise; sudo nix-env -p /nix/var/nix/profiles/system --delete-generations old; sudo nix-env --delete-generations old; nix-env --delete-generations old; sudo journalctl --flush --rotate;sudo journalctl --vacuum-time=1s; rmlint; sudo bleachbit -c --preset && bleachbit -c --preset;rm -rf .zsh_history && cleanLint'
