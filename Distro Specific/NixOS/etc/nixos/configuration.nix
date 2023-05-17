@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   imports = [ # Include the results of the hardware scan.
@@ -44,11 +44,9 @@
   services.xserver.displayManager.lightdm.greeters.slick.theme.name = "Gruvbox-Dark-BL";
   services.xserver.displayManager.lightdm.greeters.slick.iconTheme.package = pkgs.gruvbox-dark-icons-gtk;
   services.xserver.displayManager.lightdm.greeters.slick.iconTheme.name = "oomox-gruvbox-dark";
-  # services.xserver.displayManager.lightdm.greeters.slick.font.package = pkgs.ubuntu_font_family;
-  # services.xserver.displayManager.lightdm.greeters.slick.font.name = "Ubuntu 11";
   services.xserver.displayManager.lightdm.greeters.slick.cursorTheme.package = pkgs.capitaine-cursors-themed;
   services.xserver.displayManager.lightdm.greeters.slick.cursorTheme.name = "Capitaine Cursors (Gruvbox) - White";
-  services.xserver.displayManager.lightdm.greeters.slick.draw-user-backgrounds = true;
+  services.xserver.displayManager.lightdm.greeters.slick.extraConfig = "clock-format=%a, %-e %b %-l:%M %p ";
   
   # Enable automatic login for the user.
   services.xserver.displayManager.autoLogin.enable = true;
@@ -102,14 +100,15 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
 
-  environment.systemPackages = (with pkgs; [
+  environment.systemPackages = with pkgs.gnome // pkgs.libsForQt5 // pkgs; ([
     authy
     bleachbit
     bottom
     brave
-    cantarell-fonts
     filezilla
+    gcc
     git
+    gnome-system-monitor
     gparted
     haruna
     home-manager
@@ -117,49 +116,43 @@
     ncdu
     neofetch
     qbittorrent
+    # qt5ct
     ripgrep
     rmlint
     virt-manager
     wget
     xorg.xkill
-  ]) ++ (with pkgs.gnome; [
-    gedit
-    gnome-system-monitor
-  ]) ++ (with pkgs.libsForQt5; [
-    # qt5ct
     qtstyleplugin-kvantum
   ]);
   
   # Cinnamon DE Packages Exclude List
-  environment.cinnamon.excludePackages = (with pkgs; [
-    cinnamon.mint-themes
-    cinnamon.mint-x-icons
-    cinnamon.mint-y-icons
-    cinnamon.pix
-    cinnamon.xreader
-    cinnamon.xviewer
-    cinnamon.warpinator
+  environment.cinnamon.excludePackages = with pkgs.cinnamon // pkgs.gnome // pkgs; ([
+    bulky
+    gnome-calendar
     hexchat
-    xed-editor
+    mint-artwork
+    mint-cursor-themes
+    mint-themes
+    mint-x-icons
+    mint-y-icons
+    nixos-artwork.wallpapers.simple-dark-gray
+    onboard
+    orca
+    pix
+    sound-theme-freedesktop
+    xplayer
+    warpinator
   ]);
   
-  # Gnome DE Packages Exclude List
-  # environment.gnome.excludePackages = (with pkgs; [
-    # gnome-terminal
-  # ]) ++ (with pkgs.gnome; [
-    # geary
-    # gnome-disk-utility
-  # ]);
+  # Disable Gnome Packages
+    programs.geary.enable = false;
+    programs.gnome-disks.enable = false;
   
-  # QT Settings
-  # qt.enable = true;
-  # qt.style = "gtk2";
-  # qt.platformTheme = "qt5ct";
-
   # Environment Variables
   environment.variables = {
-    # QT_QPA_PLATFORMTHEME="qt5ct";
-    # EDITOR = "nvim";
+    QT_STYLE_OVERRIDE = lib.mkForce "kvantum";
+    # QT_QPA_PLATFORMTHEME = lib.mkForce "qt5ct";
+    GTK_THEME = "Gruvbox-Dark-BL";
   };
   
   # Enable Select Nerd Fonts + Other Fonts
@@ -193,9 +186,6 @@
   programs.neovim.vimAlias = true;
   programs.neovim.viAlias = true;
 
-  # Spice-Vdagent (QEMU) Service
-  # services.spice-vdagentd.enable = true;
-
   # Enable Virt-Manager Services
   virtualisation.libvirtd.enable = true;
   programs.dconf.enable = true;
@@ -225,8 +215,6 @@
 
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
   networking.firewall = {
     enable = true;
     allowedTCPPortRanges = [{
