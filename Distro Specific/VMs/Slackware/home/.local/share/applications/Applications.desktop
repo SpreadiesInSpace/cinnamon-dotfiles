@@ -1,0 +1,10 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Name=Applications
+Exec=sudo sbopkg
+Comment=Lanuches sbopkg
+Terminal=true
+Icon=software
+Type=Application
+Name[en_US]=Applications.desktop

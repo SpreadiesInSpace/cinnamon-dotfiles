@@ -1,0 +1,9 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Name=Audio
+Exec=gnome-terminal -- bash -c 'pulseaudio --start;clear;neofetch;exec bash;'
+Comment=
+Terminal=false
+Icon=software
+Type=Application

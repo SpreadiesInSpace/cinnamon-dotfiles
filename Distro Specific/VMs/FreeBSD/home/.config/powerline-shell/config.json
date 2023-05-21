@@ -1,0 +1,16 @@
+{
+  "segments": [
+    "virtual_env",
+    "username",
+    "hostname",
+    "ssh",
+    "git",
+    "hg",
+    "jobs",
+    "root"
+  ],
+  "cwd": {
+    "mode": "dironly"
+  },
+  "theme": "/home/f16poom/.config/powerline-shell/Red.py"
+}
