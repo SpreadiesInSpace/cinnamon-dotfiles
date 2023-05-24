@@ -9,3 +9,4 @@ Icon=software
 Type=Application
 Hidden=false
 NoDisplay=false
+Name[en_US]=Mount CIFS Share
