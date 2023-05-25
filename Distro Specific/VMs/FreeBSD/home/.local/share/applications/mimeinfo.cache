@@ -1,0 +1,11 @@
+[MIME Cache]
+application/vnd.openofficeorg.extension=libreoffice-startcenter.desktop;
+x-scheme-handler/ms-access=libreoffice-startcenter.desktop;
+x-scheme-handler/ms-excel=libreoffice-startcenter.desktop;
+x-scheme-handler/ms-powerpoint=libreoffice-startcenter.desktop;
+x-scheme-handler/ms-visio=libreoffice-startcenter.desktop;
+x-scheme-handler/ms-word=libreoffice-startcenter.desktop;
+x-scheme-handler/vnd.libreoffice.cmis=libreoffice-startcenter.desktop;
+x-scheme-handler/vnd.libreoffice.command=libreoffice-startcenter.desktop;
+x-scheme-handler/vnd.sun.star.webdav=libreoffice-startcenter.desktop;
+x-scheme-handler/vnd.sun.star.webdavs=libreoffice-startcenter.desktop;

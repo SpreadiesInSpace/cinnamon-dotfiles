@@ -1,0 +1,14 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Name=Brave Web Browser
+Comment=Access the Internet
+Exec=/compat/ubuntu/bin/brave --no-sandbox --no-zygote --test-type --v=0
+Terminal=false
+StartupNotify=true
+Icon=browser
+Hidden=false
+NoDisplay=false
+Name[C]=Brave Web Browser.desktop

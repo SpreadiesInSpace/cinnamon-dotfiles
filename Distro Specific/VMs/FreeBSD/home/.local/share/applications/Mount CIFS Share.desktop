@@ -1,7 +1,12 @@
+#!/usr/bin/env xdg-open
 [Desktop Entry]
 Name=Mount CIFS Share
-Exec=gnome-terminal -- bash -c 'nemo smb://192.168.1.127/Share;clear;neofetch;exec bash;'
+#Exec=gnome-terminal -- bash -c 'nemo smb://192.168.1.127/Share;clear;neofetch;exec bash;'
+Exec=/home/f16poom/restart_cinnamon.sh
 Comment=
 Terminal=false
 Icon=plasmadiscover
 Type=Application
+Name[C]=Mount CIFS Share.desktop
+Hidden=false
+NoDisplay=false

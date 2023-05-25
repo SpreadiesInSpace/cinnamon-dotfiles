@@ -1,0 +1,12 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Name=Services Settings
+Exec=sudo nano /etc/rc.conf
+Comment=
+Terminal=true
+Icon=/home/f16poom/Temp Files/authy.png
+Type=Application
+Name[C]=Services Settings.desktop
+Hidden=false
+NoDisplay=false

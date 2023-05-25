@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Neofetch
+Exec=gnome-terminal -- bash -c 'cd /home/f16poom/.local/share/applications/bleachbit; python3 bleachbit.py;exit;exec bash;'
+Comment=
+Terminal=false
+Icon=bleachbit
+Type=Application
+Name[C]=BleachBit.desktop
+NoDisplay=false
+Hidden=false

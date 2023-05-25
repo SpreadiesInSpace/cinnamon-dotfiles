@@ -1,0 +1,11 @@
+Metadata-Version: 1.1
+Name: bleachbit
+Version: 4.4.2
+Summary: BleachBit - Free space and maintain privacy
+Home-page: https://www.bleachbit.org
+Author: Andrew Ziem
+Author-email: andrew@bleachbit.org
+License: GPLv3
+Download-URL: https://www.bleachbit.org/download
+Description: BleachBit frees space and maintains privacy by quickly wiping files you don't need and didn't know you had. Supported applications include Edge, Firefox, Google Chrome, VLC, and many others.
+Platform: Linux and Windows; Python v2.6 and 2.7; GTK v3.12+
