@@ -105,20 +105,20 @@
     bleachbit
     bottom
     brave
-    copyq
+    celluloid
+    clipit
     filezilla
     gcc
     gedit
     git
     gnome-system-monitor
     gparted
-    haruna
-    home-manager
+    # home-manager
     libreoffice-fresh
     ncdu
     neofetch
     qbittorrent
-    # qt5ct
+    qt5ct
     ripgrep
     rmlint
     virt-manager
@@ -148,8 +148,8 @@
   ]);
   
   # Disable Gnome Packages
-    programs.geary.enable = false;
-    programs.gnome-disks.enable = false;
+  programs.geary.enable = false;
+  programs.gnome-disks.enable = false;
   
   # Environment Variables
   environment.variables = {
