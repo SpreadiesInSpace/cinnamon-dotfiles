@@ -106,8 +106,9 @@
     bottom
     brave
     copyq
-    filezilla
+    filezillaz
     gcc
+    gedit
     git
     gnome-system-monitor
     gparted
@@ -141,6 +142,7 @@
     orca
     pix
     sound-theme-freedesktop
+    xed-editor
     xplayer
     warpinator
   ]);
