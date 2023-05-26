@@ -106,7 +106,7 @@
     bottom
     brave
     copyq
-    filezillaz
+    filezilla
     gcc
     gedit
     git
