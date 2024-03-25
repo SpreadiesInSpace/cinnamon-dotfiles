@@ -3,41 +3,28 @@
 # Get the current username
 username=$(whoami)
 
-# Update system and install packages
-sudo zypper refresh
-sudo zypper dist-upgrade -y
+# Install base-devel, git, and other dependencies
+sudo xbps-install -Sy base-devel git xtools
 
-# Install and run mirrorsorcerer for faster mirrors
-sudo zypper install -y mirrorsorcerer
-sudo mirrorsorcerer -x
-sudo systemctl enable mirrorsorcerer
+# Install xmirror utility
+sudo xbps-install -Sy xmirror
 
-# Install git
-sudo zypper install -y git
-
-# Install Media Codecs
-sudo zypper ar -cfp 90 --no-gpgcheck 'https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/Essentials/' packman-essentials
-sudo zypper refresh
-sudo zypper dup --from packman-essentials --allow-vendor-change -y
-sudo zypper install --from packman-essentials -y ffmpeg gstreamer-plugins-{good,bad,ugly,libav} libavcodec-full vlc-codecs
+# Use xmirror to select the fastest mirrors
+sudo xmirror -s https://repo-fastly.voidlinux.org/
 
 # Install Brave
-sudo zypper install -y curl
-sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
-sudo zypper addrepo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
-sudo zypper install -y brave-browser
+cd home/Void
+chmod +x brave_updates.sh
+./brave_updates.sh
+cd ..
 
-# Install rmlint
-sudo zypper addrepo --no-gpgcheck https://download.opensuse.org/repositories/home:darix:apps/openSUSE_Tumbleweed/home:darix:apps.repo
-sudo zypper refresh
-sudo zypper install -y rmlint
-
-# All packages
+# All packages (adapt package names as needed for Void Linux)
 packages=(
     # System utilities
     "file-roller"
     "flatpak"
     "gparted"
+    "grub-customizer"
     "ncdu"
     "neofetch"
     "timeshift"
@@ -47,64 +34,65 @@ packages=(
     # Network utilities
     "filezilla"
     "gvfs"
-    "gvfs-backends"
-    "kdeconnect-kde"
+    "gvfs-afc"
+    "gvfs-gphoto2"
+    "gvfs-mtp"
+    "gvfs-smb"
+    "kdeconnect"
     "samba"
     # Desktop environment and related packages
     "cinnamon"
     "celluloid"
     "eog"
     "evince"
+    "gedit"
     "gnome-calculator"
     "gnome-screenshot"
     "gnome-system-monitor"
     "gnome-terminal"
     "gthumb"
-    "kvantum-manager"
-    "kvantum-qt5"
-    "kvantum-qt6"
+    "gufw"
+    "kvantum"
     "lightdm"
-    "lightdm-slick-greeter"
-    "nemo"
-    "nemo-extension-fileroller"
-    "nemo-extension-image-converter"
-    "nemo-extension-preview"
-    "nemo-extension-share"
+    "lightdm-gtk-greeter-settings"
+    "lightdm-gtk3-greeter"
+    "nemo-fileroller"
+    "nemo-image-converter"
+    "nemo-preview"
+    #"nemo-share"
     "qt5ct"
     "qt6ct"
     # Applications
     "bleachbit"
     "bottom"
-    "gpaste"
-    "typelib-1_0-GPaste-2"
+    "GPaste"
     "libreoffice"
-    "libreoffice-gtk3"
     "neovim"
     "qbittorrent"
+    "rmlint"
     "spice-vdagent"
-    "google-noto-coloremoji-fonts"
-    "google-noto-sans-fonts"
+    "noto-fonts-ttf"
+    "font-emoji-one-color"
     "xclip"
-    "xed"
     # For NvChad
     "gcc"
     "make"
     "ripgrep"
     # Virtualization tools
-    "yast2-vm"
+    "virt-manager"
+    "qemu"
     "libvirt"
+    "edk2-ovmf"
+    "dnsmasq"
+    "vde2"
+    "bridge-utils"
+    "iptables"
+    "dmidecode"
+    "libguestfs"
 )
 
-# Install packages
-for package in "${packages[@]}"; do
-    sudo zypper install -y $package
-done
-
-# Install Cinnamon Control Center (needs to be seperate according to openSUSE wiki)
-sudo zypper install cinnamon-control-center
-
-# Install Additional Tools for Virt Manager
-sudo zypper install -y -t pattern kvm_server kvm_tools
+# Update system and install packages
+sudo xbps-install -Syu "${packages[@]}"
 
 # Enable Flathub
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
@@ -157,7 +145,7 @@ if ! grep -q "^swtpm_group = \"$username\"$" /etc/libvirt/qemu.conf; then
 fi
 
 # Enable and start the libvirtd service
-sudo systemctl enable --now libvirtd.service
+sudo ln -s /etc/sv/libvirtd /var/service/
 
 # Start and autostart the default network
 # sudo virsh net-start default
@@ -172,18 +160,11 @@ done
 # Backs up old lightdm.conf
 sudo cp /etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf.old
 
-# Copies example lightdm.conf
-sudo cp /usr/share/doc/packages/lightdm/lightdm.conf.example /etc/lightdm/lightdm.conf
-
 # Replace specific lines in lightdm.conf
 sudo awk -i inplace '
 /^\[Seat:\*\]/ {a=1}
 a==1 && /^#?greeter-hide-users=/ {
     print "greeter-hide-users=false"
-    next
-}
-a==1 && /^#?greeter-session=/ {
-    print "greeter-session=slick-greeter"
     next
 }
 a==1 && /^#?display-setup-script=/ {
@@ -207,17 +188,16 @@ sudo groupadd -f autologin
 sudo gpasswd -a $username autologin
 
 # Modify systemd configuration to change the default timeout for stopping services during shutdown, preserving old one
-sudo cp /etc/systemd/system.conf.d/timeout.conf /etc/systemd/system.conf.d/timeout.conf.old
-sudo mkdir -p /etc/systemd/system.conf.d/
-echo -e "[Manager]\nDefaultTimeoutStopSec=15s" | sudo tee /etc/systemd/system.conf.d/timeout.conf
+# sudo cp /etc/systemd/system.conf /etc/systemd/system.conf.old
+# sudo sed -i 's/^#DefaultTimeoutStopSec=.*/DefaultTimeoutStopSec=15s/' /etc/systemd/system.conf
 
 # Reload the systemd configuration
-sudo systemctl daemon-reload
+# sudo systemctl daemon-reload
 
 # Run the setup script
 cd home/
-chmod +x Setup-openSUSE.sh
-./Setup-openSUSE.sh
+chmod +x Setup-Void.sh
+./Setup-Void.sh
 cd ..
 
 # Reboot for the changes to take effect
