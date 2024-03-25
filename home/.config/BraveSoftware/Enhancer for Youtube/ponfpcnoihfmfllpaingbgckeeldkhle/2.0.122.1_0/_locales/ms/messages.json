@@ -1,0 +1,572 @@
+{
+   "appearance": {
+      "message": "Penampilan"
+   },
+   "auto_apply_video_filters": {
+      "message": "Dayakan penapis video secara automatik"
+   },
+   "auto_boost_volume": {
+      "message": "Tingkatkan kelantangan secara automatik"
+   },
+   "auto_cinema_mode": {
+      "message": "Dayakan mod pawagan secara automatik"
+   },
+   "auto_enable_theater_mode": {
+      "message": "Dayakan “Mod teater” YouTube secara automatik"
+   },
+   "auto_execute_script": {
+      "message": "Laksanakan skrip secara automatik ketika YouTube telah dimuatkan ke tab"
+   },
+   "auto_expand_description": {
+      "message": "Kembangkan butiran video secara automatik"
+   },
+   "auto_expand_player": {
+      "message": "Kembangkan pemain video secara automatik"
+   },
+   "auto_hide_cards_end_screens": {
+      "message": "Sorokkan kad dan skrin tamat secara automatik"
+   },
+   "auto_select_quality": {
+      "message": "Pilih kualiti main balik secara automatik"
+   },
+   "auto_sort_comments": {
+      "message": "Susun komen dari terbaru secara automatik"
+   },
+   "autoplay": {
+      "message": "Automain"
+   },
+   "backup": {
+      "message": "Sandar"
+   },
+   "below_video_player": {
+      "message": "Di bawah pemain video"
+   },
+   "block_hfr_formats": {
+      "message": "Paksa penggunaan format kadar bingkai standard (24, 25, 30 FPS) daripada format kadar bingkai tinggi (48, 50, 60 FPS)"
+   },
+   "block_webm_formats": {
+      "message": "Paksa menggunaan format MP4 dan kodek OVC (H.264) daripada format WebM dan kodec VP9 (resolusi tertinggi 1080p60HD)"
+   },
+   "boost_volume": {
+      "message": "Tambah kelantangan"
+   },
+   "bottom_left_corner": {
+      "message": "Buju bawah kiri"
+   },
+   "bottom_of_window": {
+      "message": "Di bawah tetingkap"
+   },
+   "bottom_right_corner": {
+      "message": "Buju bawah kanan"
+   },
+   "brightness": {
+      "message": "Kecerahan:"
+   },
+   "cards_end_screens_control_info": {
+      "message": "Klik untuk togol penampilan kad dan skrin tamat"
+   },
+   "center_control_bar": {
+      "message": "Simpan bar kawalan di tengah bawah pemain video apabila pemain video dikembangkan atau mod skrin penuh diaktifkan"
+   },
+   "center_video_player": {
+      "message": "Alihkan pemain video di tengah-tengah kawasan pandangan"
+   },
+   "cinema_mode": {
+      "message": "Mod pawagan"
+   },
+   "cinema_mode_control_info": {
+      "message": "Klik untuk togol mod pawagam"
+   },
+   "cinema_mode_toggle_size": {
+      "message": "Kembangkan atau kecilkan pemain video secara automatik ketika mod pawagan didayakan"
+   },
+   "color": {
+      "message": "Warna:"
+   },
+   "color_inversion": {
+      "message": "Penyonsangan warna:"
+   },
+   "configure_keyboard_shortcuts": {
+      "message": "Tetapkan pintasan kekunci"
+   },
+   "contrast": {
+      "message": "Kontras:"
+   },
+   "control_bar_location": {
+      "message": "Lokasi kawalan bar:"
+   },
+   "control_speed": {
+      "message": "Kawal kelajuan main balik dengan roda tetikus ketika kursor tetikus diatas pemain video dan ketika kekunci “Control” (Ctrl) ditekan"
+   },
+   "control_speed_mouse_button": {
+      "message": "Hanya ketika butang tetikus kanan ditekan"
+   },
+   "control_volume": {
+      "message": "Kawal kelantangan dengan roda tetikus ketika kursor berada di kawasan pemain video"
+   },
+   "control_volume_mouse_button": {
+      "message": "Hanya ketika butang tetikus kanan ditekan"
+   },
+   "controls": {
+      "message": "Kawalan"
+   },
+   "controls_visible": {
+      "message": "Tunjukkan kawalan tanpa perlu mengklik atau menghala atas kawalan ••• dengan tetikus"
+   },
+   "controls_within_control_bar": {
+      "message": "Simpan kawalan di dalam bar kawalan"
+   },
+   "controls_within_video_player": {
+      "message": "Simpan kawalan di dalam pemain video"
+   },
+   "convert_shorts": {
+      "message": "Convert Shorts"
+   },
+   "copy_to_clipboard": {
+      "message": "Salin ke papan klip"
+   },
+   "custom_script": {
+      "message": "Skrip tersuai"
+   },
+   "custom_script_control_info": {
+      "message": "Klik untuk melaksanakan skrip tersuai"
+   },
+   "custom_script_instructions": {
+      "message": "Tampal atau taip kod JavaScript disini. Simpan skrip menggunakan butang dibawah. Klik kawalan “Skrip tersuai” apabila anda ingin melaksanakannya."
+   },
+   "custom_script_warning": {
+      "message": "Untuk keselamatan, anda haruslah menggunakan kod yang anda faham ataupun yang telah dibangunkan oleh pembangun yang anda percaya"
+   },
+   "custom_theme": {
+      "message": "Tema tersuai"
+   },
+   "custom_theme_instructions": {
+      "message": "Tampal atau taipkan kod CSS disini dan simpan melalui butang dibawah."
+   },
+   "dark_theme": {
+      "message": "Tema Gelap"
+   },
+   "decrease_playback_speed": {
+      "message": "Kurangkan kelajuan main balik"
+   },
+   "default_playback_speed": {
+      "message": "Kelajuan main balik lalai"
+   },
+   "default_volume_level": {
+      "message": "Kelantangan lalai:"
+   },
+   "description": {
+      "message": "Kuasai YouTube dan tingkatkan pengalaman penggunaan anda!"
+   },
+   "detailed_description": {
+      "message": "Dibina untuk mengguna pakaikan hampir keseluruhan YouTube, ekstensi ini telah dipakejkan dengan ciri-ciri yang membolehkan anda, diantara perkara-perkara yang lain, mengawal kelajuan main balik dan kelantangan suara menggunakan roda tetikus anda, melaksanakan tugasan yang berulang seperti memilih kualiti main balik secara automatik, tetapkan pelbagai pintasan kekunci untuk menguasai YouTube seperti pro, dan banyak lagi.. Cubalah sekarang! Tetapi ingatlah bahawa anda mungkin tidak akan menggunakan YouTube lagi tanpa ekstensi ini ;)\n\nYouTube is a trademark of Google LLC. Use of this trademark is subject to Google Permissions."
+   },
+   "disable_autoplay": {
+      "message": "Nyahdayakan automain"
+   },
+   "display_control_bar": {
+      "message": "Tunjukkan kawalan bar hanya apabila tetikus dihalakan di atas bar kawalan"
+   },
+   "donate": {
+      "message": "Sumbangan"
+   },
+   "execute_custom_script": {
+      "message": "Laksanakan skrip tersuai"
+   },
+   "expand": {
+      "message": "Kembangkan"
+   },
+   "expand_shrink_video_player": {
+      "message": "Kembangkan atau kecilkan pemain video"
+   },
+   "expanded_player_viewport": {
+      "message": "Gunakan kawasan yang tersedia ada pada kawasan pandangan untuk kembangan pemain video"
+   },
+   "export": {
+      "message": "Eksport"
+   },
+   "export_instructions": {
+      "message": "Cipta fail teks baharu dan tampalkan kod berikut tanpa mengubahnya."
+   },
+   "flip_horizontally": {
+      "message": "Selak menegak"
+   },
+   "flip_horizontally_control_info": {
+      "message": "Klik untuk selak video secara menegak"
+   },
+   "flip_vertically": {
+      "message": "Selak melintang"
+   },
+   "flip_vertically_control_info": {
+      "message": "Klik untuk selak video secara melintang"
+   },
+   "flip_video_horizontally": {
+      "message": "Selakkan video secara menegak"
+   },
+   "flip_video_vertically": {
+      "message": "Selakkan video secara melintang"
+   },
+   "focus_video_player": {
+      "message": "Tetapkan fokus kepada pemain video"
+   },
+   "gaussian_blur": {
+      "message": "Kabur Gaussian:"
+   },
+   "grayscale": {
+      "message": "Skala kelabu:"
+   },
+   "hide_chat": {
+      "message": "Sorokkan chat"
+   },
+   "hide_comments": {
+      "message": "Sorokkan komen"
+   },
+   "hide_related_videos": {
+      "message": "Sorokkan video berkaitan"
+   },
+   "hide_shorts": {
+      "message": "Hide Shorts"
+   },
+   "hue_rotation": {
+      "message": "Putaran rona:"
+   },
+   "ignore_playlists": {
+      "message": "Jangan elakkan automain untuk senarai main"
+   },
+   "ignore_pop_up_player": {
+      "message": "Abaikan pemain timbul"
+   },
+   "import": {
+      "message": "Import"
+   },
+   "import_error": {
+      "message": "Kandungan fail sandaran tidak sah!"
+   },
+   "import_instructions": {
+      "message": "Tampal kandungan fail sandaran dan klik butang “Import”. Halaman ini akan dimulakan secara automatik setelah tetapan telah berjaya diimport."
+   },
+   "increase_playback_speed": {
+      "message": "Tingkatkan kelajuan main balik"
+   },
+   "keyboard_shortcuts": {
+      "message": "Pintasan kekunci"
+   },
+   "keyboard_shortcuts_control_info": {
+      "message": "Klik untuk tampilkan seluruh pintasan kekunci untuk YouTube (halaman luar)"
+   },
+   "keyboard_shortcuts_page": {
+      "message": "Tampilkan pintasan kekunci untuk YouTube"
+   },
+   "launch_mini_player": {
+      "message": "Lancarkan pemain mini ketika mengimbas seksyen komen"
+   },
+   "locale_code": {
+      "message": "ms"
+   },
+   "locale_dir": {
+      "message": "ltr"
+   },
+   "loop": {
+      "message": "Ulangan"
+   },
+   "loop_control_info": {
+      "message": "Klik atau klik-kanan untuk togol mod ulangan"
+   },
+   "loop_end": {
+      "message": "Tamat:"
+   },
+   "loop_start": {
+      "message": "Mula:"
+   },
+   "message": {
+      "message": "Mesej"
+   },
+   "mini_player": {
+      "message": "Pemain mini"
+   },
+   "mini_player_position": {
+      "message": "Posisi pemain mini:"
+   },
+   "mini_player_size": {
+      "message": "Saiz pemain mini:"
+   },
+   "not_now": {
+      "message": "Bukan sekarang"
+   },
+   "opacity": {
+      "message": "Kelegapan:"
+   },
+   "open_options_page": {
+      "message": "Buka halaman pilihan"
+   },
+   "options": {
+      "message": "Pilihan"
+   },
+   "options_control_info": {
+      "message": "Klik untuk membuka halaman pilihan"
+   },
+   "override_playback_speeds": {
+      "message": "Gantikan kelajuan main balik lalai"
+   },
+   "page_reload_required": {
+      "message": "Enhancer for YouTube™ telah dikemas kini. Semua halaman YouTube mesti dimuat semula."
+   },
+   "pause_videos": {
+      "message": "Jedakan video yang dimainkan di latar belakang ketika video di latar depan bermula"
+   },
+   "playback_quality": {
+      "message": "Kualiti main balik"
+   },
+   "playback_speed": {
+      "message": "Kelajuan main balik"
+   },
+   "playlists": {
+      "message": "Senarai main:"
+   },
+   "playlists_full_screen": {
+      "message": "Senarai main (skrin penuh):"
+   },
+   "pop_up_player": {
+      "message": "Pemain timbul"
+   },
+   "pop_up_player_control_info": {
+      "message": "Klik atau klik kanan untuk menonton dengan pemain timbul"
+   },
+   "pop_up_player_embeds": {
+      "message": "Pemain timbul dan video terbenam"
+   },
+   "pop_up_player_embeds_full_screen": {
+      "message": "Pemain timbul dan video terbenam (skrin penuh):"
+   },
+   "pop_up_player_size": {
+      "message": "Saiz pemain timbul:"
+   },
+   "preserve_black_bars_color": {
+      "message": "Jangan ubah warna bar hitam menegak apabila tema YouTube-DeepDark digunakan ataupun mod pawagam diaktifkan"
+   },
+   "prevent_autoplay": {
+      "message": "Elakkan video yang dimuatkan pada tab latar belakang daripada dimainkan"
+   },
+   "prevent_autoplay_foreground_tab": {
+      "message": "Elakkan video yang dimuatkan pada tab latar depan daripada dimainkan juga"
+   },
+   "preview": {
+      "message": "Pretonton"
+   },
+   "rate": {
+      "message": "Nilai"
+   },
+   "rate_extension": {
+      "message": "Nilai pengalaman anda dengan Enhancer for YouTube™."
+   },
+   "reset": {
+      "message": "Tetap semula"
+   },
+   "reverse_mouse_wheel_direction": {
+      "message": "Terbalikkan arah kawalan roda tetikus untuk kelajuan main balik dan kelantangan"
+   },
+   "reverse_playlist": {
+      "message": "Terbalikkan senarai main"
+   },
+   "reverse_playlist_control_info": {
+      "message": "Klik atau klik kanan untuk menonton senarai main dalam susunan menaik dengan pemain timbul"
+   },
+   "reverse_playlist_order": {
+      "message": "Terbalikkan urutan senarai main"
+   },
+   "saturation": {
+      "message": "Ketepuan:"
+   },
+   "save": {
+      "message": "Simpan"
+   },
+   "screenshot": {
+      "message": "Syot layar"
+   },
+   "screenshot_control_info": {
+      "message": "Klik untuk mengambil syot layar video"
+   },
+   "select_default_playback_speed": {
+      "message": "Tetapkan kelajuan main balik lalai"
+   },
+   "select_normal_playback_speed": {
+      "message": "Tetapkan kelajuan main balik normal"
+   },
+   "select_quality_1080p": {
+      "message": "Pilih kualiti main balik “1080p”"
+   },
+   "select_quality_1440p": {
+      "message": "Pilih kualiti main balik “1440p”"
+   },
+   "select_quality_144p": {
+      "message": "Pilih kualiti main balik “144p”"
+   },
+   "select_quality_2160p": {
+      "message": "Pilih kualiti main balik “2160p”"
+   },
+   "select_quality_240p": {
+      "message": "Pilih kualiti main balik “240p”"
+   },
+   "select_quality_2880p": {
+      "message": "Pilih kualiti main balik “2880p”"
+   },
+   "select_quality_360p": {
+      "message": "Pilih kualiti main balik “360p”"
+   },
+   "select_quality_4320p": {
+      "message": "Pilih kualiti main balik “4320p”"
+   },
+   "select_quality_480p": {
+      "message": "Pilih kualiti main balik “480p”"
+   },
+   "select_quality_720p": {
+      "message": "Pilih kualiti main balik “720p”"
+   },
+   "select_quality_auto": {
+      "message": "Pilih kualiti main balik “Auto”"
+   },
+   "select_quality_full_screen": {
+      "message": "Pilih kualiti main balik yang lain ketika memasuki mod skrin penuh"
+   },
+   "sepia": {
+      "message": "Sepia:"
+   },
+   "shrink": {
+      "message": "Kecilkan"
+   },
+   "size_control_info": {
+      "message": "Klik untuk kembangkan atau kecilkan pemain video ataupun klik kanan untuk mengalihkan pemain video di tengah-tengah kawasan pandangan"
+   },
+   "speed": {
+      "message": "Kelajuan"
+   },
+   "speed_control_info": {
+      "message": "Gunakan roda tetikus untuk mengawal kelajuan main balik ataupun klik untuk kembali ke kelajuan lalai ataupun klik kanan untuk tetapkan ke kelajuan normal"
+   },
+   "speed_minus_control_info": {
+      "message": "Klik untuk kurangkan kelajuan main balik"
+   },
+   "speed_plus_control_info": {
+      "message": "Klik untuk kurangkan kelajuan pemain"
+   },
+   "speed_variation": {
+      "message": "Variasi kelajuan ketika menggunakan roda tetikus ataupun ketika menggunakan butang kelajuan “+” dan “-”:"
+   },
+   "stop": {
+      "message": "Henti"
+   },
+   "stop_control_info": {
+      "message": "Klik untuk hentikan video"
+   },
+   "stop_video": {
+      "message": "Hentikan video"
+   },
+   "stop_videos": {
+      "message": "Hentikan video sepenuhnya, bukan hanya melalui autoplay"
+   },
+   "support": {
+      "message": "Sokongan"
+   },
+   "switch_back_previous_quality": {
+      "message": "Tukar kembali ke kualiti main balik yang sebelumnya selepas keluar daripada mod skrin penuh"
+   },
+   "take_screenshot": {
+      "message": "Ambil syot layar video"
+   },
+   "theme": {
+      "message": "Tema"
+   },
+   "theme_custom_theme": {
+      "message": "Tema: Tema Tersuai"
+   },
+   "theme_youtube_dark": {
+      "message": "Tema: YouTube™ (Dark)"
+   },
+   "theme_youtube_deep_dark": {
+      "message": "Tema: YouTube-DeepDark"
+   },
+   "theme_youtube_deep_dark_custom": {
+      "message": "Tema: YouTube-DeepDark (Tersuai)"
+   },
+   "toggle_cards_end_screens": {
+      "message": "Togol penampilan kad dan skrin tamat"
+   },
+   "toggle_cinema_mode": {
+      "message": "Togol mod pawagam"
+   },
+   "toggle_comments_visibility": {
+      "message": "Togol penampilan komen"
+   },
+   "toggle_loop": {
+      "message": "Togol mod ulangan"
+   },
+   "toggle_pip_mode": {
+      "message": "Togol mod Picture-in-Picture"
+   },
+   "toggle_related_videos_visibility": {
+      "message": "Togol penampilan video berkaitan"
+   },
+   "toggle_video_filters": {
+      "message": "Togol penapis video"
+   },
+   "toggle_visibility": {
+      "message": "Togol penampilan kad/skrin taman"
+   },
+   "toggle_volume_booster": {
+      "message": "Togol penambah suara"
+   },
+   "top_left_corner": {
+      "message": "Buju atas kiri"
+   },
+   "top_right_corner": {
+      "message": "Buju atas kanan"
+   },
+   "translate": {
+      "message": "Terjemahkan"
+   },
+   "variant": {
+      "message": "Variasi"
+   },
+   "video_codecs_and_formats": {
+      "message": "Kodek video dan format"
+   },
+   "video_filters": {
+      "message": "Penapis video"
+   },
+   "video_filters_control_info": {
+      "message": "Klik untuk togol penapis video atau klik kanan untuk togol penampilan penal penapis video"
+   },
+   "video_player": {
+      "message": "Pemain video"
+   },
+   "videos": {
+      "message": "Video:"
+   },
+   "videos_full_screen": {
+      "message": "Video (skrin penuh):"
+   },
+   "volume": {
+      "message": "Kelantangan"
+   },
+   "volume_booster_control_info": {
+      "message": "Klik untuk togol penambah suara"
+   },
+   "volume_booster_level": {
+      "message": "Kelatangan tambahan:"
+   },
+   "volume_variation": {
+      "message": "Variasi kelatangan ketika menggunakan roda tetikus"
+   },
+   "watch_pop_up_player": {
+      "message": "Tonton dengan pemain timbul"
+   },
+   "youtube_dark_theme": {
+      "message": "YouTube (tema rasmi)"
+   },
+   "youtube_deep_dark": {
+      "message": "YouTube-DeepDark (dari RaitaroH)"
+   },
+   "youtube_deep_dark_custom": {
+      "message": "YouTube-DeepDark (tersuai)"
+   }
+}

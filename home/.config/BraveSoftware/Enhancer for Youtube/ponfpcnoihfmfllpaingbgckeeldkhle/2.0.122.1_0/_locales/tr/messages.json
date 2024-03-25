@@ -1,0 +1,572 @@
+{
+   "appearance": {
+      "message": "Görünüm"
+   },
+   "auto_apply_video_filters": {
+      "message": "Video filtrelerini otomatik olarak uygula"
+   },
+   "auto_boost_volume": {
+      "message": "Sesi otomatik olarak artırın"
+   },
+   "auto_cinema_mode": {
+      "message": "Sinema modunu otomatik olarak etkinleştir"
+   },
+   "auto_enable_theater_mode": {
+      "message": "YouTube'un “Sinema modu”nu otomatik olarak etkinleştir"
+   },
+   "auto_execute_script": {
+      "message": "YouTube bir sekmede açıldığında komutu otomatik olarak çalıştır"
+   },
+   "auto_expand_description": {
+      "message": "Video açıklamalarını otomatik olarak genişlet"
+   },
+   "auto_expand_player": {
+      "message": "Video oynatıcıyı otomatik olarak genişlet"
+   },
+   "auto_hide_cards_end_screens": {
+      "message": "Bilgi kartlarını ve bitiş ekranlarını otomatik olarak gizle"
+   },
+   "auto_select_quality": {
+      "message": "Oynatma kalitesini otomatik seç"
+   },
+   "auto_sort_comments": {
+      "message": "Yorumları otomatik olarak yeniden eskiye doğru sırala"
+   },
+   "autoplay": {
+      "message": "Otomatik oynatma"
+   },
+   "backup": {
+      "message": "Yedekle"
+   },
+   "below_video_player": {
+      "message": "Video oynatıcının altında"
+   },
+   "block_hfr_formats": {
+      "message": "Yüksek kare hızı formatı (48, 50, 60 FPS) yerine standart kare hızı formatı (24, 25, 30 FPS) kullanmaya zorla"
+   },
+   "block_webm_formats": {
+      "message": "WebM formatı ve VP9 codec yerine MP4 formatı ve AVC codec (H.264) kullanmaya zorla (maximum çözünürlük: 1080p60 HD)"
+   },
+   "boost_volume": {
+      "message": "Ses yükseltici"
+   },
+   "bottom_left_corner": {
+      "message": "Sol alt köşe"
+   },
+   "bottom_of_window": {
+      "message": "Pencerenin en altında"
+   },
+   "bottom_right_corner": {
+      "message": "Sağ alt köşe"
+   },
+   "brightness": {
+      "message": "Parlaklık:"
+   },
+   "cards_end_screens_control_info": {
+      "message": "Kartları ve bitiş ekranını göstermek/gizlemek için tıklayın"
+   },
+   "center_control_bar": {
+      "message": "Video oynatıcı genişletildiğinde veya tam ekranda, kontrol çubuğunu video oynatıcının altında ortala"
+   },
+   "center_video_player": {
+      "message": "Video oynatıcıyı görüntü alanı içinde ortala"
+   },
+   "cinema_mode": {
+      "message": "Sinema modu"
+   },
+   "cinema_mode_control_info": {
+      "message": "Sinema modunu açmak/kapatmak için tıklayın"
+   },
+   "cinema_mode_toggle_size": {
+      "message": "Sinema modu açıldığında video oynatıcıyı genişlet, kapatıldığında küçült"
+   },
+   "color": {
+      "message": "Renk:"
+   },
+   "color_inversion": {
+      "message": "Renk zıtlığı:"
+   },
+   "configure_keyboard_shortcuts": {
+      "message": "Klavye kısayollarını yapılandırın"
+   },
+   "contrast": {
+      "message": "Karşıtlık:"
+   },
+   "control_bar_location": {
+      "message": "Kontrol çubuğu konumu:"
+   },
+   "control_speed": {
+      "message": "Fare imleci oynatıcı üzerindeyken Ctrl basıldığında çalma hızını fare tekerleğiyle kontrol et"
+   },
+   "control_speed_mouse_button": {
+      "message": "Yalnızca sağ fare düğmesine basıldığında"
+   },
+   "control_volume": {
+      "message": "Fare imleci oynatıcı üzerindeyken ses seviyesini fare tekerleğiyle kontrol et"
+   },
+   "control_volume_mouse_button": {
+      "message": "Yalnızca sağ fare düğmesine basıldığında"
+   },
+   "controls": {
+      "message": "Kontrol düğmeleri"
+   },
+   "controls_visible": {
+      "message": "••• düğmesine tıklamak veya fare imleciyle üzerine gelmek zorunda kalmadan kontrolleri daima görünür tut"
+   },
+   "controls_within_control_bar": {
+      "message": "Kontrol düğmelerini bir kontrol çubuğunun içine yerleştir"
+   },
+   "controls_within_video_player": {
+      "message": "Kontrol düğmelerini video oynatıcının içine yerleştir"
+   },
+   "convert_shorts": {
+      "message": "Short'ları dönüştür"
+   },
+   "copy_to_clipboard": {
+      "message": "Panoya kopyala"
+   },
+   "custom_script": {
+      "message": "Özel komut"
+   },
+   "custom_script_control_info": {
+      "message": "Özel komutu çalıştırmak için tıklayın"
+   },
+   "custom_script_instructions": {
+      "message": "JavaScript kodlarınızı buraya yapıştırın veya yazın, sonra aşağıdaki düğmeyi kullanarak kaydedin. Çalıştırmak istediğinizde araç çubuğundaki “Özel komut” düğmesine tıklayın."
+   },
+   "custom_script_warning": {
+      "message": "Güvenlik nedenleriyle, yalnızca bildiğiniz kodları veya güvendiğiniz geliştiriciler tarafından yazılmış olan kodları kullanmalısınız."
+   },
+   "custom_theme": {
+      "message": "Özel tema kullan"
+   },
+   "custom_theme_instructions": {
+      "message": "CSS kodunuzu buraya yapıştırın veya yazın, sonra aşağıdaki düğmeyi kullanarak kaydedin."
+   },
+   "dark_theme": {
+      "message": "Koyu tema kullan"
+   },
+   "decrease_playback_speed": {
+      "message": "Çalma hızını azalt"
+   },
+   "default_playback_speed": {
+      "message": "Varsayılan çalma hızı:"
+   },
+   "default_volume_level": {
+      "message": "Varsayılan ses seviyesi:"
+   },
+   "description": {
+      "message": "YouTube'un kontrolünü elinize alın ve kullanıcı deneyiminizi artırın!"
+   },
+   "detailed_description": {
+      "message": "YouTube'dan en iyi şekilde yararlanmak için tasarlanan bu uzantı, size izin veren her türlü özellik ile birlikte gelir, oynatma hızını ve ses seviyesini fare tekerleğinizle kontrol etmenizi, uygun oynatma kalitesini seçmek gibi yinelenen görevleri otomatikleştirmenizi, YouTube'u bir profesyonel gibi kontrol etmek için düzinelerce klavye kısayolunu yapılandırabilmenizi ve çok daha fazlasını... Bir deneyin! Ancak bundan sonra YouTube'u onsuz asla kullanmak istemeyeceğinizi unutmayın ;)\n\nYouTube, Google LLC'nin bir ticari markasıdır. Bu ticari markanın kullanımı Google izinlerine tabidir."
+   },
+   "disable_autoplay": {
+      "message": "Otomatik oynatmayı kapat"
+   },
+   "display_control_bar": {
+      "message": "Kontrol çubuğunu yalnızca fare imleciyle üzerine gelindiğinde görüntüle"
+   },
+   "donate": {
+      "message": "Bağış Yap"
+   },
+   "execute_custom_script": {
+      "message": "Özel komut dosyasını çalıştır"
+   },
+   "expand": {
+      "message": "Genişlet"
+   },
+   "expand_shrink_video_player": {
+      "message": "Video oynatıcıyı genişlet veya küçült"
+   },
+   "expanded_player_viewport": {
+      "message": "Video oynatıcıyı görüntü alanına göre genişlet"
+   },
+   "export": {
+      "message": "Dışa aktar"
+   },
+   "export_instructions": {
+      "message": "Yeni bir metin dosyası oluşturun ve aşağıdaki kodu değiştirmeden yapıştırın."
+   },
+   "flip_horizontally": {
+      "message": "Yatay çevir"
+   },
+   "flip_horizontally_control_info": {
+      "message": "Videoyu yatay olarak çevirmek için tıklayın"
+   },
+   "flip_vertically": {
+      "message": "Dikey çevir"
+   },
+   "flip_vertically_control_info": {
+      "message": "Videoyu dikey olarak çevirmek için tıklayın"
+   },
+   "flip_video_horizontally": {
+      "message": "Videoyu yatay olarak çevir"
+   },
+   "flip_video_vertically": {
+      "message": "Videoyu dikey olarak çevir"
+   },
+   "focus_video_player": {
+      "message": "Video oynatıcıya odaklan"
+   },
+   "gaussian_blur": {
+      "message": "Bulanıklık:"
+   },
+   "grayscale": {
+      "message": "Gri tonu:"
+   },
+   "hide_chat": {
+      "message": "Sohbeti gizle"
+   },
+   "hide_comments": {
+      "message": "Yorumları gizle"
+   },
+   "hide_related_videos": {
+      "message": "İlgili videoları gizle"
+   },
+   "hide_shorts": {
+      "message": "Short'ları gizle"
+   },
+   "hue_rotation": {
+      "message": "Renk özü:"
+   },
+   "ignore_playlists": {
+      "message": "Oynatma listelerindeki videoların otomatik oynatılmasına izin ver"
+   },
+   "ignore_pop_up_player": {
+      "message": "Açılır pencere oynatıcısını hariç tut"
+   },
+   "import": {
+      "message": "İçe aktar"
+   },
+   "import_error": {
+      "message": "Yedekleme dosyasının içeriği geçerli değil!"
+   },
+   "import_instructions": {
+      "message": "Yedekleme dosyasının içeriğini buraya yapıştırın ve “İçe aktar” düğmesine tıklayın. Ayarlar başarılı bir şekilde alınırsa sayfa otomatik olarak yeniden yüklenecektir."
+   },
+   "increase_playback_speed": {
+      "message": "Çalma hızını artır"
+   },
+   "keyboard_shortcuts": {
+      "message": "Klavye kısayolları"
+   },
+   "keyboard_shortcuts_control_info": {
+      "message": "YouTube için tüm klavye kısayollarının listesini görüntülemek için tıklayın (harici sayfa)"
+   },
+   "keyboard_shortcuts_page": {
+      "message": "YouTube için tüm klavye kısayollarını görüntüle"
+   },
+   "launch_mini_player": {
+      "message": "Yorumları okumak için aşağı kaydırırken bir mini oynatıcı başlat"
+   },
+   "locale_code": {
+      "message": "tr"
+   },
+   "locale_dir": {
+      "message": "ltr"
+   },
+   "loop": {
+      "message": "Döngü"
+   },
+   "loop_control_info": {
+      "message": "Döngü modunu açmak/kapatmak için sol veya sağ tıklayın"
+   },
+   "loop_end": {
+      "message": "Bitir:"
+   },
+   "loop_start": {
+      "message": "Başlat:"
+   },
+   "message": {
+      "message": "Mesaj"
+   },
+   "mini_player": {
+      "message": "Mini oynatıcı"
+   },
+   "mini_player_position": {
+      "message": "Mini oynatıcı konumu:"
+   },
+   "mini_player_size": {
+      "message": "Mini oynatıcı boyutu:"
+   },
+   "not_now": {
+      "message": "Şimdi değil"
+   },
+   "opacity": {
+      "message": "Opaklık:"
+   },
+   "open_options_page": {
+      "message": "Seçenekler sayfasını aç"
+   },
+   "options": {
+      "message": "Seçenekler"
+   },
+   "options_control_info": {
+      "message": "Seçenekler sayfasını açmak için tıklayın"
+   },
+   "override_playback_speeds": {
+      "message": "Varsayılan çalma hızlarını geçersiz kıl"
+   },
+   "page_reload_required": {
+      "message": "Enhancer for YouTube™ az önce güncellendi, tüm YouTube sayfalarının yeniden yüklenmesi gerekir."
+   },
+   "pause_videos": {
+      "message": "Ön plandaki sekmede bir video oynatılıyorsa, arka plandaki videoları duraklat"
+   },
+   "playback_quality": {
+      "message": "Oynatma kalitesi"
+   },
+   "playback_speed": {
+      "message": "Oynatma hızı"
+   },
+   "playlists": {
+      "message": "Oynatma listeleri:"
+   },
+   "playlists_full_screen": {
+      "message": "Oynatma listeleri (tam ekranda):"
+   },
+   "pop_up_player": {
+      "message": "Açılır pencere oynatıcısı"
+   },
+   "pop_up_player_control_info": {
+      "message": "Açılır pencere oynatıcısıyla izlemek için sol veya sağ tıklayın"
+   },
+   "pop_up_player_embeds": {
+      "message": "Açılır pencere oynatıcısı ve gömülü videolar:"
+   },
+   "pop_up_player_embeds_full_screen": {
+      "message": "Açılır pencere oynatıcısı ve gömülü videolar (tam ekranda):"
+   },
+   "pop_up_player_size": {
+      "message": "Açılır pencere oynatıcısı boyutu:"
+   },
+   "preserve_black_bars_color": {
+      "message": "YouTube-DeepDark teması uygulandığında veya sinema modu etkinleştirildiğinde dikey siyah çubukların rengini değiştirme"
+   },
+   "prevent_autoplay": {
+      "message": "Arka plandaki sekmelerde yüklenen videoların otomatik oynatılmasını önle"
+   },
+   "prevent_autoplay_foreground_tab": {
+      "message": "Ön plandaki sekmede yüklenen videoların da otomatik oynatılmasını önle"
+   },
+   "preview": {
+      "message": "Önizleme"
+   },
+   "rate": {
+      "message": "Oyla"
+   },
+   "rate_extension": {
+      "message": "Enhancer for YouTube™ deneyiminizi değerlendirin."
+   },
+   "reset": {
+      "message": "Sıfırla"
+   },
+   "reverse_mouse_wheel_direction": {
+      "message": "Çalma hızını ve ses seviyesini kontrol etmek için fare tekerleği yönünü tersine çevir"
+   },
+   "reverse_playlist": {
+      "message": "Oynatma listesini ters çevir"
+   },
+   "reverse_playlist_control_info": {
+      "message": "Oynatma listesini açılır pencere oynatıcısıyla ters sırada izlemek için sol veya sağ tıklayın"
+   },
+   "reverse_playlist_order": {
+      "message": "Oynatma listesi sırasını tersine çevir"
+   },
+   "saturation": {
+      "message": "Doygunluk:"
+   },
+   "save": {
+      "message": "Kaydet"
+   },
+   "screenshot": {
+      "message": "Ekran görüntüsü"
+   },
+   "screenshot_control_info": {
+      "message": "Videonun ekran görüntüsünü almak için tıklayın"
+   },
+   "select_default_playback_speed": {
+      "message": "Varsayılan çalma hızını seç"
+   },
+   "select_normal_playback_speed": {
+      "message": "Normal çalma hızını seç"
+   },
+   "select_quality_1080p": {
+      "message": "Oynatma kalitesini “1080p” seç"
+   },
+   "select_quality_1440p": {
+      "message": "Oynatma kalitesini “1440p” seç"
+   },
+   "select_quality_144p": {
+      "message": "Oynatma kalitesini “144p” seç"
+   },
+   "select_quality_2160p": {
+      "message": "Oynatma kalitesini “2160p” seç"
+   },
+   "select_quality_240p": {
+      "message": "Oynatma kalitesini “240p” seç"
+   },
+   "select_quality_2880p": {
+      "message": "Oynatma kalitesini “2880p” seç"
+   },
+   "select_quality_360p": {
+      "message": "Oynatma kalitesini “360p” seç"
+   },
+   "select_quality_4320p": {
+      "message": "Oynatma kalitesini “4320p” seç"
+   },
+   "select_quality_480p": {
+      "message": "Oynatma kalitesini “480p” seç"
+   },
+   "select_quality_720p": {
+      "message": "Oynatma kalitesini “720p” seç"
+   },
+   "select_quality_auto": {
+      "message": "Oynatma kalitesini “Otomatik” seç"
+   },
+   "select_quality_full_screen": {
+      "message": "Tam ekrana geçildiğinde farklı bir oynatma kalitesi seç"
+   },
+   "sepia": {
+      "message": "Sepya tonu:"
+   },
+   "shrink": {
+      "message": "Küçült"
+   },
+   "size_control_info": {
+      "message": "Video oynatıcıyı genişletmek/küçültmek için sol tıklayın, görüntü alanı içinde ortalamak için sağ tıklayın"
+   },
+   "speed": {
+      "message": "Hız"
+   },
+   "speed_control_info": {
+      "message": "Çalma hızları arasında geçiş yapmak için düğme üzerinde fare tekerleğini kullanın, varsayılan çalma hızı için sol tıklayın, normal çalma hızı için sağ tıklayın"
+   },
+   "speed_minus_control_info": {
+      "message": "Çalma hızını azaltmak için tıklayın"
+   },
+   "speed_plus_control_info": {
+      "message": "Çalma hızını artırmak için tıklayın"
+   },
+   "speed_variation": {
+      "message": "Fare tekerliği veya -/+ çalma hızı düğmeleri kullanıldığında hız değişimi:"
+   },
+   "stop": {
+      "message": "Durdur"
+   },
+   "stop_control_info": {
+      "message": "Videoyu durdurmak için tıklayın"
+   },
+   "stop_video": {
+      "message": "Videoyu durdur"
+   },
+   "stop_videos": {
+      "message": "Videoların otomatik oynatılmasını önlemek yerine tamamen durdur"
+   },
+   "support": {
+      "message": "Destek"
+   },
+   "switch_back_previous_quality": {
+      "message": "Tam ekrandan çıkıldığında önceki oynatma kalitesine geri dön"
+   },
+   "take_screenshot": {
+      "message": "Videonun ekran görüntüsünü al"
+   },
+   "theme": {
+      "message": "Tema"
+   },
+   "theme_custom_theme": {
+      "message": "Tema: Özel tema"
+   },
+   "theme_youtube_dark": {
+      "message": "Tema: YouTube™ (Koyu)"
+   },
+   "theme_youtube_deep_dark": {
+      "message": "Tema: YouTube-DeepDark"
+   },
+   "theme_youtube_deep_dark_custom": {
+      "message": "Tema: YouTube-DeepDark (Özel)"
+   },
+   "toggle_cards_end_screens": {
+      "message": "Kartları ve bitiş ekranını göster/gizle"
+   },
+   "toggle_cinema_mode": {
+      "message": "Sinema modunu aç/kapat"
+   },
+   "toggle_comments_visibility": {
+      "message": "Yorumları göster/gizle"
+   },
+   "toggle_loop": {
+      "message": "Döngü modunu aç/kapat"
+   },
+   "toggle_pip_mode": {
+      "message": "Pencere içinde Pencere (PiP) modunu aç/kapat"
+   },
+   "toggle_related_videos_visibility": {
+      "message": "İlgili videoları göster/gizle"
+   },
+   "toggle_video_filters": {
+      "message": "Video filtrelerini aç/kapat"
+   },
+   "toggle_visibility": {
+      "message": "Kartları ve bitiş ekranını göster/gizle"
+   },
+   "toggle_volume_booster": {
+      "message": "Ses yükselticiyi aç/kapat"
+   },
+   "top_left_corner": {
+      "message": "Sol üst köşe"
+   },
+   "top_right_corner": {
+      "message": "Sağ üst köşe"
+   },
+   "translate": {
+      "message": "Çeviri"
+   },
+   "variant": {
+      "message": "Stil:"
+   },
+   "video_codecs_and_formats": {
+      "message": "Video codec ve formatı"
+   },
+   "video_filters": {
+      "message": "Video filtreleri"
+   },
+   "video_filters_control_info": {
+      "message": "Video filtrelerini açmak/kapatmak için sol tıklayın, paneli gizlemek/göstermek için sağ tıklayın."
+   },
+   "video_player": {
+      "message": "Video oynatıcı"
+   },
+   "videos": {
+      "message": "Videolar:"
+   },
+   "videos_full_screen": {
+      "message": "Videolar (tam ekranda):"
+   },
+   "volume": {
+      "message": "Ses"
+   },
+   "volume_booster_control_info": {
+      "message": "Ses yükselticiyi açmak/kapatmak için tıklayın"
+   },
+   "volume_booster_level": {
+      "message": "Ses yükseltici kademesi:"
+   },
+   "volume_variation": {
+      "message": "Fare tekerleği döndürüldüğünde ses seviyesi değişimi:"
+   },
+   "watch_pop_up_player": {
+      "message": "Açılır pencere oynatıcısıyla izle"
+   },
+   "youtube_dark_theme": {
+      "message": "YouTube (resmi koyu tema)"
+   },
+   "youtube_deep_dark": {
+      "message": "YouTube-DeepDark (RaitaroH tarafından)"
+   },
+   "youtube_deep_dark_custom": {
+      "message": "YouTube-DeepDark (özel)"
+   }
+}

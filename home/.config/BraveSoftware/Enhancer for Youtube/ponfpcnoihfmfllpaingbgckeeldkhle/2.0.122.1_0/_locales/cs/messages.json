@@ -1,0 +1,572 @@
+{
+   "appearance": {
+      "message": "Vzhled"
+   },
+   "auto_apply_video_filters": {
+      "message": "Automaticky použít video filtry"
+   },
+   "auto_boost_volume": {
+      "message": "Automaticky zvýšit hlasitost"
+   },
+   "auto_cinema_mode": {
+      "message": "Automaticky zapínat režim Kino"
+   },
+   "auto_enable_theater_mode": {
+      "message": "Automaticky spustit režim kina"
+   },
+   "auto_execute_script": {
+      "message": "Automaticky spustit skript pokud je YouTube načten v záložce"
+   },
+   "auto_expand_description": {
+      "message": "Automaticky otevřít popisy videí"
+   },
+   "auto_expand_player": {
+      "message": "Automaticky zvětšit velikost přehrávače"
+   },
+   "auto_hide_cards_end_screens": {
+      "message": "Automaticky skrýt informační karty a závěrečné obrazovky"
+   },
+   "auto_select_quality": {
+      "message": "Automaticky přehrávat videa v mnou preferované kvalitě"
+   },
+   "auto_sort_comments": {
+      "message": "Automaticky uspořádat komentáře od nejnovějších po nejstarší"
+   },
+   "autoplay": {
+      "message": "Automatické přehrávání"
+   },
+   "backup": {
+      "message": "Záloha"
+   },
+   "below_video_player": {
+      "message": "Pod přehrávačem videa"
+   },
+   "block_hfr_formats": {
+      "message": "Vynutit použití standardních formátů snímkových frekvencí (24, 25, 30 FPS) namísto formátů s vysokou snímkovou frekvencí (48, 50, 60 FPS)"
+   },
+   "block_webm_formats": {
+      "message": "Vynutit použití formátu MP4 a kodeku AVC (H.264) namísto formátu WebM a kodeku VP9 (maximální rozlišení 1080p60 HD)"
+   },
+   "boost_volume": {
+      "message": "Zvyšte hlasitost"
+   },
+   "bottom_left_corner": {
+      "message": "Dolní levý okraj"
+   },
+   "bottom_of_window": {
+      "message": "Ve spodní části okna"
+   },
+   "bottom_right_corner": {
+      "message": "Dolní pravý okraj"
+   },
+   "brightness": {
+      "message": "Jas:"
+   },
+   "cards_end_screens_control_info": {
+      "message": "Kliknutím přepnete viditelnost karet a závěrečných obrazovek"
+   },
+   "center_control_bar": {
+      "message": "Když je rozbalený nebo aktivní režim celé obrazovky, vycentrujte ovládací panel pod přehrávačem videa"
+   },
+   "center_video_player": {
+      "message": "Vycentrovat video přehrávač do výřezu"
+   },
+   "cinema_mode": {
+      "message": "Režim Kino"
+   },
+   "cinema_mode_control_info": {
+      "message": "Kliknutím přepněte na mód KINO"
+   },
+   "cinema_mode_toggle_size": {
+      "message": "Automaticky zvětšit přehrávač při zapnutí režimu Kino"
+   },
+   "color": {
+      "message": "Barva:"
+   },
+   "color_inversion": {
+      "message": "Inverze barev:"
+   },
+   "configure_keyboard_shortcuts": {
+      "message": "Nastavení klávesových zkratek"
+   },
+   "contrast": {
+      "message": "Kontrast:"
+   },
+   "control_bar_location": {
+      "message": "Umístění ovládací lišty:"
+   },
+   "control_speed": {
+      "message": "Když je kurzor myši nad přehrávačem videa a je stisknut klávesa „Control“ (Ctrl), můžete ovládat rychlost přehrávání kolečkem myši"
+   },
+   "control_speed_mouse_button": {
+      "message": "Jen pokud je pravé tlačítko myši stisknuto"
+   },
+   "control_volume": {
+      "message": "Hlasitost můžete ovládat pomocí držení kurzoru na přehrávači a použití kolečka myši"
+   },
+   "control_volume_mouse_button": {
+      "message": "Pouze když je pravé tlačítko myši stlačeno"
+   },
+   "controls": {
+      "message": "Ovládání"
+   },
+   "controls_visible": {
+      "message": "Udržujte ovládací prvky viditelné, aniž byste museli klikat na ovládací prvek ••• nebo na něj ukazovat kurzorem myši"
+   },
+   "controls_within_control_bar": {
+      "message": "Umístěte ovládací prvky do ovládací lišty"
+   },
+   "controls_within_video_player": {
+      "message": "Umístěte ovládací prvky do přehrávače videa"
+   },
+   "convert_shorts": {
+      "message": "Convert Shorts"
+   },
+   "copy_to_clipboard": {
+      "message": "Zkopírovat do schránky"
+   },
+   "custom_script": {
+      "message": "Vlastní skript"
+   },
+   "custom_script_control_info": {
+      "message": "Kliknutím spustíte vlastní skript"
+   },
+   "custom_script_instructions": {
+      "message": "Vložte nebo napište svůj JavaScript kód zde, uložíte jej pomocí tlačítka níže poté klikněte na „Vlastní skript“ v liště pokud jej chcete spustit."
+   },
+   "custom_script_warning": {
+      "message": "Z bezpečnostních důvodů používejte výhradně kód, jemuž rozumíte, nebo pocházející z důvěryhodného zdroje."
+   },
+   "custom_theme": {
+      "message": "Vlastní téma"
+   },
+   "custom_theme_instructions": {
+      "message": "Zde vložte nebo zadejte kód CSS a uložte jej pomocí tlačítka níže."
+   },
+   "dark_theme": {
+      "message": "Tmavý téma"
+   },
+   "decrease_playback_speed": {
+      "message": "Snížit rychlost přehrávání"
+   },
+   "default_playback_speed": {
+      "message": "Výchozí rychlost přehrávání:"
+   },
+   "default_volume_level": {
+      "message": "Výchozí hlasitost:"
+   },
+   "description": {
+      "message": "Převezměte kontrolu nad YouTube a vylepšete svůj uživatelský komfort!"
+   },
+   "detailed_description": {
+      "message": "Toto rozšíření, navržené tak, aby co nejlépe využilo YouTube, je vybaveno nejrůznějšími funkcemi, které vám mimo jiné umožňují, ovládat rychlost přehrávání a úroveň hlasitosti pomocí kolečka myši, automatizovat opakující se úkoly, jako je při výběru vhodné kvality přehrávání nakonfigurujte desítky klávesových zkratek pro ovládání YouTube jako profesionála a mnoho dalšího... Vyzkoušejte to! Uvědomte si však, že poté už nebudete chtít YouTube používat ;)\n\nYouTube je ochranná známka společnosti Google LLC. Používání této ochranné známky podléhá povolení společnosti Google."
+   },
+   "disable_autoplay": {
+      "message": "Vypnout automatické přehrávání"
+   },
+   "display_control_bar": {
+      "message": "Ovládací panel zobrazte pouze při najetí kurzorem myši na něj"
+   },
+   "donate": {
+      "message": "Přispět"
+   },
+   "execute_custom_script": {
+      "message": "Spustit vlastní skript"
+   },
+   "expand": {
+      "message": "Zvětšit"
+   },
+   "expand_shrink_video_player": {
+      "message": "Zvětšit nebo zmenšit video přehrávač"
+   },
+   "expanded_player_viewport": {
+      "message": "Rozbalte přehrávač videa pomocí dostupného místa na základě rozměrů výřezu"
+   },
+   "export": {
+      "message": "Odeslat"
+   },
+   "export_instructions": {
+      "message": "Vytvořte nový textový soubor a vložte uvedený kód, aniž byste jej upravovali."
+   },
+   "flip_horizontally": {
+      "message": "Otočit horizontálně"
+   },
+   "flip_horizontally_control_info": {
+      "message": "Kliknutím převrátíte video vodorovně"
+   },
+   "flip_vertically": {
+      "message": "Otočit vertikálně"
+   },
+   "flip_vertically_control_info": {
+      "message": "Kliknutím převrátíte video svisle"
+   },
+   "flip_video_horizontally": {
+      "message": "Překlopte video vodorovně"
+   },
+   "flip_video_vertically": {
+      "message": "Překlopte video svisle"
+   },
+   "focus_video_player": {
+      "message": "Zaostřete na přehrávač videa"
+   },
+   "gaussian_blur": {
+      "message": "Gaussovské rozostření:"
+   },
+   "grayscale": {
+      "message": "Stupně šedi:"
+   },
+   "hide_chat": {
+      "message": "Skrýt chat"
+   },
+   "hide_comments": {
+      "message": "Skrýt komentáře"
+   },
+   "hide_related_videos": {
+      "message": "Skrýt související videa"
+   },
+   "hide_shorts": {
+      "message": "Skrýt Shorts"
+   },
+   "hue_rotation": {
+      "message": "Rotace odstínu:"
+   },
+   "ignore_playlists": {
+      "message": "Nezastavovat videa v playlistech"
+   },
+   "ignore_pop_up_player": {
+      "message": "Ignorovat přehrávač ve vyskakovacím okně"
+   },
+   "import": {
+      "message": "Importovat"
+   },
+   "import_error": {
+      "message": "Obsah záložního souboru není platný!"
+   },
+   "import_instructions": {
+      "message": "Vložte obsah záložního souboru a klikněte na tlačítko „Importovat“. Pokud budou nastavení úspěšně importována, stránka se automaticky znovu načte."
+   },
+   "increase_playback_speed": {
+      "message": "Zvýšit rychlost přehrávání"
+   },
+   "keyboard_shortcuts": {
+      "message": "Klávesové zkratky"
+   },
+   "keyboard_shortcuts_control_info": {
+      "message": "Kliknutím zobrazíte seznam všech klávesových zkratek pro YouTube (externí stránka)"
+   },
+   "keyboard_shortcuts_page": {
+      "message": "Zobrazit všechny klávesové zkratky pro YouTube"
+   },
+   "launch_mini_player": {
+      "message": "Při procházení dolů spusťte mini přehrávač a přečtěte si komentáře"
+   },
+   "locale_code": {
+      "message": "cs"
+   },
+   "locale_dir": {
+      "message": "ltr"
+   },
+   "loop": {
+      "message": "Opakovat"
+   },
+   "loop_control_info": {
+      "message": "Kliknutím nebo kliknutím pravým tlačítkem přepnete režim smyčky"
+   },
+   "loop_end": {
+      "message": "Konec:"
+   },
+   "loop_start": {
+      "message": "Začátek:"
+   },
+   "message": {
+      "message": "Zpráva"
+   },
+   "mini_player": {
+      "message": "Mini přehrávač"
+   },
+   "mini_player_position": {
+      "message": "Umístění mini přehrávače:"
+   },
+   "mini_player_size": {
+      "message": "Velikost mini přehrávače:"
+   },
+   "not_now": {
+      "message": "Teď ne"
+   },
+   "opacity": {
+      "message": "Neprůhlednost:"
+   },
+   "open_options_page": {
+      "message": "Otevřete stránku možností"
+   },
+   "options": {
+      "message": "Nastavení"
+   },
+   "options_control_info": {
+      "message": "Kliknutím otěvřete nastavení stránky"
+   },
+   "override_playback_speeds": {
+      "message": "Přepsat výchozí rychlost přehrávání"
+   },
+   "page_reload_required": {
+      "message": "Enhancer for YouTube™ byl právě aktualizován, všechny stránky YouTube musí být znovu načteny."
+   },
+   "pause_videos": {
+      "message": "Pozastavte přehrávání videí na kartách na pozadí, když se video začne přehrávat na kartě v popředí"
+   },
+   "playback_quality": {
+      "message": "Kvalita přehrávání"
+   },
+   "playback_speed": {
+      "message": "Rychlost přehrávání"
+   },
+   "playlists": {
+      "message": "Playlisty:"
+   },
+   "playlists_full_screen": {
+      "message": "Seznamy skladeb (celá obrazovka):"
+   },
+   "pop_up_player": {
+      "message": "Přehrávač ve vyskakovacím okně"
+   },
+   "pop_up_player_control_info": {
+      "message": "Kliknutím nebo kliknutím pravým tlačítkem myši budete sledovat vyskakovací přehrávač"
+   },
+   "pop_up_player_embeds": {
+      "message": "Vyskakovací přehrávač a vložená videa:"
+   },
+   "pop_up_player_embeds_full_screen": {
+      "message": "Vyskakovací přehrávač a vložená videa (celá obrazovka):"
+   },
+   "pop_up_player_size": {
+      "message": "Velikost přehrávače ve vyskakovacím okně:"
+   },
+   "preserve_black_bars_color": {
+      "message": "Neměňte barvu svislých černých pruhů, pokud je použit motiv YouTube-DeepDark nebo je-li povolen režim kino"
+   },
+   "prevent_autoplay": {
+      "message": "Automaticky pozastavit videa otevřená na pozadí"
+   },
+   "prevent_autoplay_foreground_tab": {
+      "message": "Pozastavit také videa otevřená v popředí"
+   },
+   "preview": {
+      "message": "Ukázka"
+   },
+   "rate": {
+      "message": "Ohodnoťte"
+   },
+   "rate_extension": {
+      "message": "Ohodnoťte své zkušenosti s Enhancer for YouTube™."
+   },
+   "reset": {
+      "message": "Resetovat"
+   },
+   "reverse_mouse_wheel_direction": {
+      "message": "Rychlost přehrávání a úroveň hlasitosti můžete ovládat otáčením kolečka myši"
+   },
+   "reverse_playlist": {
+      "message": "Seznam skladeb pozpátku"
+   },
+   "reverse_playlist_control_info": {
+      "message": "Kliknutím nebo kliknutím pravým tlačítkem zobrazíte seznam skladeb v opačném pořadí s vyskakovacím přehrávačem"
+   },
+   "reverse_playlist_order": {
+      "message": "Obrátit pořadí playlistu"
+   },
+   "saturation": {
+      "message": "Saturace:"
+   },
+   "save": {
+      "message": "Uložit"
+   },
+   "screenshot": {
+      "message": "Vyfotit"
+   },
+   "screenshot_control_info": {
+      "message": "Kliknutím pořídíte snímek obrazovky videa"
+   },
+   "select_default_playback_speed": {
+      "message": "Vyberte výchozí rychlost přehrávání"
+   },
+   "select_normal_playback_speed": {
+      "message": "Vyberte normální rychlost přehrávání"
+   },
+   "select_quality_1080p": {
+      "message": "Vyberte kvalitu přehrávání „1080p“"
+   },
+   "select_quality_1440p": {
+      "message": "Vyberte kvalitu přehrávání „1440p“"
+   },
+   "select_quality_144p": {
+      "message": "Vyberte kvalitu přehrávání „144p“"
+   },
+   "select_quality_2160p": {
+      "message": "Vyberte kvalitu přehrávání „2160p“"
+   },
+   "select_quality_240p": {
+      "message": "Vyberte kvalitu přehrávání „240p“"
+   },
+   "select_quality_2880p": {
+      "message": "Vyberte kvalitu přehrávání „2880p“"
+   },
+   "select_quality_360p": {
+      "message": "Vyberte kvalitu přehrávání „360p“"
+   },
+   "select_quality_4320p": {
+      "message": "Vyberte kvalitu přehrávání „4320p“"
+   },
+   "select_quality_480p": {
+      "message": "Vyberte kvalitu přehrávání „480p“"
+   },
+   "select_quality_720p": {
+      "message": "Vyberte kvalitu přehrávání „720p“"
+   },
+   "select_quality_auto": {
+      "message": "Vyberte kvalitu přehrávání „Auto“"
+   },
+   "select_quality_full_screen": {
+      "message": "Při vstupu do režimu celé obrazovky vyberte jinou kvalitu přehrávání"
+   },
+   "sepia": {
+      "message": "Sépie:"
+   },
+   "shrink": {
+      "message": "Zmenšit"
+   },
+   "size_control_info": {
+      "message": "Kliknutím rozbalíte nebo zmenšíte přehrávač videa nebo kliknutím pravým tlačítkem vycentrujete přehrávač videa ve výřezu"
+   },
+   "speed": {
+      "message": "Rychlost"
+   },
+   "speed_control_info": {
+      "message": "Pomocí kolečka myši můžete ovládat rychlost přehrávání nebo kliknutím vybrat výchozí rychlost přehrávání nebo kliknutím pravým tlačítkem zvolit normální rychlost přehrávání"
+   },
+   "speed_minus_control_info": {
+      "message": "Kliknutím snížíte rychlost přehrávání"
+   },
+   "speed_plus_control_info": {
+      "message": "Kliknutím zvýšíte rychlost přehrávání"
+   },
+   "speed_variation": {
+      "message": "Ovládání rychlosti otáčením kolečka myši nebo kliknutím na tlačítka rychlosti „-“ a „+“:"
+   },
+   "stop": {
+      "message": "Stop"
+   },
+   "stop_control_info": {
+      "message": "Klinutím stopněte video"
+   },
+   "stop_video": {
+      "message": "Zastavte video"
+   },
+   "stop_videos": {
+      "message": "Zabránit načítání automaticky pozastavených videí"
+   },
+   "support": {
+      "message": "Podpora"
+   },
+   "switch_back_previous_quality": {
+      "message": "Při ukončení režimu celé obrazovky přepněte zpět na předchozí kvalitu přehrávání"
+   },
+   "take_screenshot": {
+      "message": "Pořídit snímek videa"
+   },
+   "theme": {
+      "message": "Téma"
+   },
+   "theme_custom_theme": {
+      "message": "Vzhled: Vlastní motiv"
+   },
+   "theme_youtube_dark": {
+      "message": "Vzhled: YouTube™ (Tmavý motiv)"
+   },
+   "theme_youtube_deep_dark": {
+      "message": "Vzhled: YouTube-DeepDark"
+   },
+   "theme_youtube_deep_dark_custom": {
+      "message": "Vzhled: YouTube-DeepDark (Vlastní)"
+   },
+   "toggle_cards_end_screens": {
+      "message": "Přepnout viditelnost karet a závěrečných obrazovek"
+   },
+   "toggle_cinema_mode": {
+      "message": "Přepnout režim kina"
+   },
+   "toggle_comments_visibility": {
+      "message": "Přepnout viditelnost komentářů"
+   },
+   "toggle_loop": {
+      "message": "Přepnout režim smyčky"
+   },
+   "toggle_pip_mode": {
+      "message": "Přepnutí režimu obraz v obraze"
+   },
+   "toggle_related_videos_visibility": {
+      "message": "Přepnout viditelnost souvisejících videí"
+   },
+   "toggle_video_filters": {
+      "message": "Přepnout video filtry"
+   },
+   "toggle_visibility": {
+      "message": "Přepnout viditelnost karet/závěrečných obrazovek"
+   },
+   "toggle_volume_booster": {
+      "message": "Přepněte zesilovač hlasitosti"
+   },
+   "top_left_corner": {
+      "message": "Levý horní okraj"
+   },
+   "top_right_corner": {
+      "message": "Pravý horní okraj"
+   },
+   "translate": {
+      "message": "Překlad"
+   },
+   "variant": {
+      "message": "Varianta:"
+   },
+   "video_codecs_and_formats": {
+      "message": "Video kodeky a formáty"
+   },
+   "video_filters": {
+      "message": "Video filtry"
+   },
+   "video_filters_control_info": {
+      "message": "Kliknutím levým tlačítkem myši přepnete filtry videa nebo kliknutím pravým tlačítkem přepnete viditelnost panelu filtrů videa"
+   },
+   "video_player": {
+      "message": "Video přehrávač"
+   },
+   "videos": {
+      "message": "Videa:"
+   },
+   "videos_full_screen": {
+      "message": "Video (celá obrazovka):"
+   },
+   "volume": {
+      "message": "Hlasitost"
+   },
+   "volume_booster_control_info": {
+      "message": "Kliknutím přepnete zesilovač hlasitosti"
+   },
+   "volume_booster_level": {
+      "message": "Úroveň zesílení hlasitosti:"
+   },
+   "volume_variation": {
+      "message": "Změna hlasitosti při otáčení kola myši:"
+   },
+   "watch_pop_up_player": {
+      "message": "Sledujte s vyskakovacím přehrávačem"
+   },
+   "youtube_dark_theme": {
+      "message": "YouTube (oficiální téma)"
+   },
+   "youtube_deep_dark": {
+      "message": "YouTube-DeepDark (od RaitaroH)"
+   },
+   "youtube_deep_dark_custom": {
+      "message": "YouTube-DeepDark (Vlastní)"
+   }
+}

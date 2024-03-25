@@ -1,0 +1,572 @@
+{
+   "appearance": {
+      "message": "Зовнішній вигляд"
+   },
+   "auto_apply_video_filters": {
+      "message": "Автоматично застосувати відео фільтри"
+   },
+   "auto_boost_volume": {
+      "message": "Автоматично збільшити гучність"
+   },
+   "auto_cinema_mode": {
+      "message": "Автоматично вмикати режим кіно"
+   },
+   "auto_enable_theater_mode": {
+      "message": "Автоматично вмикати «Театральний режим» YouTube"
+   },
+   "auto_execute_script": {
+      "message": "Автоматично виконувати сценарій YouTube під час завантаження вкладки"
+   },
+   "auto_expand_description": {
+      "message": "Автоматичне розширення опису відео"
+   },
+   "auto_expand_player": {
+      "message": "Автоматичне збільшення відеопрогравача"
+   },
+   "auto_hide_cards_end_screens": {
+      "message": "Автоматично сховати інфо картки та фінальні екрани"
+   },
+   "auto_select_quality": {
+      "message": "Автоматично обирати якість відтворення"
+   },
+   "auto_sort_comments": {
+      "message": "Автоматично сортувати коментарі від найновіших до найстаріших"
+   },
+   "autoplay": {
+      "message": "Автовідтворення"
+   },
+   "backup": {
+      "message": "Резервне копіювання"
+   },
+   "below_video_player": {
+      "message": "Під відеоплеєром"
+   },
+   "block_hfr_formats": {
+      "message": "Примусово використовувати стандартні формати частоти кадрів (24, 25, 30 FPS) замість високих частот кадрів (48, 50, 60 FPS)"
+   },
+   "block_webm_formats": {
+      "message": "Примусово використовувати формати MP4 та кодек AVC (H.264) замість формату WebM та кодеку VP9 (максимальна роздільна здатність 1080p60 HD)"
+   },
+   "boost_volume": {
+      "message": "Збільшити гучність"
+   },
+   "bottom_left_corner": {
+      "message": "Внизу зліва"
+   },
+   "bottom_of_window": {
+      "message": "Внизу екрану"
+   },
+   "bottom_right_corner": {
+      "message": "Внизу справа"
+   },
+   "brightness": {
+      "message": "Яскравість:"
+   },
+   "cards_end_screens_control_info": {
+      "message": "Клікніть щоб показати/приховати анотації"
+   },
+   "center_control_bar": {
+      "message": "Центрувати панель керування під відеоплеєром коли він збільшений або коли увімкнений повноекранний режим"
+   },
+   "center_video_player": {
+      "message": "Центрувати відео плеєр на сторінці"
+   },
+   "cinema_mode": {
+      "message": "Режим кінотеатру"
+   },
+   "cinema_mode_control_info": {
+      "message": "Клікніть щоб увімкнути/вимкнути режим кіно"
+   },
+   "cinema_mode_toggle_size": {
+      "message": "Автоматично збільшувати відеопрогравач під час активування режиму кіно"
+   },
+   "color": {
+      "message": "Колір:"
+   },
+   "color_inversion": {
+      "message": "Інверсія кольорів:"
+   },
+   "configure_keyboard_shortcuts": {
+      "message": "Налаштуй гарячі клавіші"
+   },
+   "contrast": {
+      "message": "Контрастність:"
+   },
+   "control_bar_location": {
+      "message": "Розташування панелі керування:"
+   },
+   "control_speed": {
+      "message": "Керувати швидкістю відтворення за допомогою колеса мишки якщо курсор знаходиться над відео плеєром і натиснута клавіша «Control» (Ctrl)"
+   },
+   "control_speed_mouse_button": {
+      "message": "Тільки коли натиснута права кнопка мишки"
+   },
+   "control_volume": {
+      "message": "Контролюйте рівень гучності за допомогою колеса миші, коли навести курсор на відеопрогравач"
+   },
+   "control_volume_mouse_button": {
+      "message": "Тільки при натисканні правої кнопки миші"
+   },
+   "controls": {
+      "message": "Управління"
+   },
+   "controls_visible": {
+      "message": "Відображати елементи керування без необхідності клікати на ••• або проводити над ним курсором миші"
+   },
+   "controls_within_control_bar": {
+      "message": "Відобразити елементи керування всередині панелі керування"
+   },
+   "controls_within_video_player": {
+      "message": "Відобразити елементи керування всередині відеоплеєра"
+   },
+   "convert_shorts": {
+      "message": "Конвертувати Shorts"
+   },
+   "copy_to_clipboard": {
+      "message": "Скопіюйте до буферу обміну"
+   },
+   "custom_script": {
+      "message": "Користувацький скрипт"
+   },
+   "custom_script_control_info": {
+      "message": "Клікніть щоб виконати користувацький скрипт"
+   },
+   "custom_script_instructions": {
+      "message": "Вставте або введіть свій JavaScript-код тут, збережіть його, натиснувши кнопку нижче, потім натисніть кнопку «Користувацький скрипт» на панелі інструментів, якщо ви хочете його виконати."
+   },
+   "custom_script_warning": {
+      "message": "З міркувань безпеки ви повинні використовувати коди, який ви розумієте, або код, написаний розробником, якому ви довіряєте."
+   },
+   "custom_theme": {
+      "message": "Спеціальна тема"
+   },
+   "custom_theme_instructions": {
+      "message": "Вставте або введіть свій CSS-код тут, а потім збережіть його за допомогою кнопки нижче."
+   },
+   "dark_theme": {
+      "message": "Темна тема"
+   },
+   "decrease_playback_speed": {
+      "message": "Зменшити швидкість відтворення"
+   },
+   "default_playback_speed": {
+      "message": "Швидкість відтворення за замовчуванням:"
+   },
+   "default_volume_level": {
+      "message": "Рівень гучності за замовчуванням:"
+   },
+   "description": {
+      "message": "Контролюй роботу YouTube та покращ зручність користування!"
+   },
+   "detailed_description": {
+      "message": "Розроблене для отримання максимуму від YouTube, це розширення поставляється з усією різноманіттю функціональності яка дозволяє вам, окрім іншого, керувати швидкістю відтворення а також гучністю колесом мишки, автоматизувати дії що повторюються, такі як вибір відповідної якості відтворення відео, налаштовувати дюжину гарячих клавіш для майстерного контролю YouTube, а також багато іншого... Спробуйте! Але знайте, що ви ніколи більше не захочете користуватись з YouTube без цього розширення ;)\n\nYouTube це рзареєстрована торгова марка Google LLC. Використання цієї торгової марки підпадає під дозвіл від Google."
+   },
+   "disable_autoplay": {
+      "message": "Вимкнути функцію «Автоматичне відтворення»"
+   },
+   "display_control_bar": {
+      "message": "Відображати панель керування тільки при наведення курсору мишки"
+   },
+   "donate": {
+      "message": "Пожертвувати"
+   },
+   "execute_custom_script": {
+      "message": "Виконати користувацький скрипт"
+   },
+   "expand": {
+      "message": "Розширити"
+   },
+   "expand_shrink_video_player": {
+      "message": "Розширити/згорнути відео плеєр"
+   },
+   "expanded_player_viewport": {
+      "message": "Використовувати всю проекцію для збільшення відеоплеєра, коли не увімкнуто режим кіно"
+   },
+   "export": {
+      "message": "Експортуйте"
+   },
+   "export_instructions": {
+      "message": "Створіть новий текстовий файл і вставте код нижче, не змінюючи його."
+   },
+   "flip_horizontally": {
+      "message": "Повернути горизонтально"
+   },
+   "flip_horizontally_control_info": {
+      "message": "Клікніть щоб повернути відео горизонтально"
+   },
+   "flip_vertically": {
+      "message": "Повернути вертикально"
+   },
+   "flip_vertically_control_info": {
+      "message": "Клікніть щоб повернути відео вертикально"
+   },
+   "flip_video_horizontally": {
+      "message": "Повернути відео горизонтально"
+   },
+   "flip_video_vertically": {
+      "message": "Повернути відео вертикально"
+   },
+   "focus_video_player": {
+      "message": "Встановити фокус на відеоплеєрі"
+   },
+   "gaussian_blur": {
+      "message": "Ґаусове розмиття:"
+   },
+   "grayscale": {
+      "message": "Відтінки сірого:"
+   },
+   "hide_chat": {
+      "message": "Сховати чат"
+   },
+   "hide_comments": {
+      "message": "Сховати коментарі"
+   },
+   "hide_related_videos": {
+      "message": "Сховати пов'язані відео"
+   },
+   "hide_shorts": {
+      "message": "Сховати Shorts"
+   },
+   "hue_rotation": {
+      "message": "Обертання відтінку:"
+   },
+   "ignore_playlists": {
+      "message": "Не призупиняти відео в списках відтворення"
+   },
+   "ignore_pop_up_player": {
+      "message": "Ігнорувати спливаючий плеєр"
+   },
+   "import": {
+      "message": "Імпортуйте"
+   },
+   "import_error": {
+      "message": "Вміст файлу резервної копії недійсний!"
+   },
+   "import_instructions": {
+      "message": "Вставте вміст файла резервної копії та натисніть кнопку «Імпортувати». Сторінка буде автоматично завантажена, якщо налаштування успішно імпортовані."
+   },
+   "increase_playback_speed": {
+      "message": "Збільшити швидкість відтворення"
+   },
+   "keyboard_shortcuts": {
+      "message": "Гарячі клавіші"
+   },
+   "keyboard_shortcuts_control_info": {
+      "message": "Клікніть щоб показати список всіх гарячих клавіш YouTube (зовнішня сторінка)"
+   },
+   "keyboard_shortcuts_page": {
+      "message": "Показати гарячі клавіши для YouTube"
+   },
+   "launch_mini_player": {
+      "message": "Увімкнути міні плеєр коли скролите вниз щоб прочитати коментарі"
+   },
+   "locale_code": {
+      "message": "uk"
+   },
+   "locale_dir": {
+      "message": "ltr"
+   },
+   "loop": {
+      "message": "Повторювати"
+   },
+   "loop_control_info": {
+      "message": "Клікніть (також правою клавішою) щоб увімкнути/вимкнути режим повторення"
+   },
+   "loop_end": {
+      "message": "Кінець:"
+   },
+   "loop_start": {
+      "message": "Початок:"
+   },
+   "message": {
+      "message": "Повідомлення"
+   },
+   "mini_player": {
+      "message": "Міні плеєр"
+   },
+   "mini_player_position": {
+      "message": "Розташування міні плеєра:"
+   },
+   "mini_player_size": {
+      "message": "Розмір міні плеєра:"
+   },
+   "not_now": {
+      "message": "Не зараз"
+   },
+   "opacity": {
+      "message": "Прозорість:"
+   },
+   "open_options_page": {
+      "message": "Відкрий сторінку налаштувань"
+   },
+   "options": {
+      "message": "Параметри"
+   },
+   "options_control_info": {
+      "message": "Клікни щоб відкрити сторінку налаштувань"
+   },
+   "override_playback_speeds": {
+      "message": "Перевизначити швидкість відтворення за умовчанням"
+   },
+   "page_reload_required": {
+      "message": "Enhancer for YouTube™ був оновлений, цю сторінку потрібно перезавантажити."
+   },
+   "pause_videos": {
+      "message": "Призупинення відтворення відео у фонових вкладках, коли відео починає відтворюватися на вкладці переднього плану"
+   },
+   "playback_quality": {
+      "message": "Якість відтворення"
+   },
+   "playback_speed": {
+      "message": "Швидкість відтворення"
+   },
+   "playlists": {
+      "message": "Плейлисти:"
+   },
+   "playlists_full_screen": {
+      "message": "Плейлисти (повноекранний режим):"
+   },
+   "pop_up_player": {
+      "message": "Спливаючий плеєр"
+   },
+   "pop_up_player_control_info": {
+      "message": "Клікніть (також правою клавішою) щоб переглянути в спливаючому плеєрі"
+   },
+   "pop_up_player_embeds": {
+      "message": "Спливаючий плеєр та вбудовані відео:"
+   },
+   "pop_up_player_embeds_full_screen": {
+      "message": "Спливаючий плеєр та вбудовані відео (повноекранний режим):"
+   },
+   "pop_up_player_size": {
+      "message": "Розмір спливаючого плеєра:"
+   },
+   "preserve_black_bars_color": {
+      "message": "Не змінювати колір вертикальних чорних панелей коли застосована тема YouTube-DeepDark або коли увімкнений режим кіно"
+   },
+   "prevent_autoplay": {
+      "message": "Автоматичне призупинення відеозаписів, відкритих у фонових вкладках"
+   },
+   "prevent_autoplay_foreground_tab": {
+      "message": "Пауза відео також встановлена на вкладці переднього плану"
+   },
+   "preview": {
+      "message": "Передогляд налаштувань"
+   },
+   "rate": {
+      "message": "Оцінити"
+   },
+   "rate_extension": {
+      "message": "Оцініть ваші враження від Enhancer for YouTube™."
+   },
+   "reset": {
+      "message": "Скинути"
+   },
+   "reverse_mouse_wheel_direction": {
+      "message": "Змініть напрямок колеса миші, щоб контролювати швидкість відтворення та рівень гучності"
+   },
+   "reverse_playlist": {
+      "message": "Перевернути список відтворення"
+   },
+   "reverse_playlist_control_info": {
+      "message": "Клікніть (також правою клавішою) щоб переглянути плейлісту в зворотньому напрямку в спливаючому плеєрі"
+   },
+   "reverse_playlist_order": {
+      "message": "Перевернути чергу відтворювання"
+   },
+   "saturation": {
+      "message": "Насиченість:"
+   },
+   "save": {
+      "message": "Зберегти"
+   },
+   "screenshot": {
+      "message": "Скріншот"
+   },
+   "screenshot_control_info": {
+      "message": "Клікніть щоб зробити знімок відео"
+   },
+   "select_default_playback_speed": {
+      "message": "Обрати швидкість відтворювання «за замовчуванням»"
+   },
+   "select_normal_playback_speed": {
+      "message": "Обрати звичайну швидкість відтворювання"
+   },
+   "select_quality_1080p": {
+      "message": "Вибрати якість відтворення “1080p”"
+   },
+   "select_quality_1440p": {
+      "message": "Вибрати якість відтворення “1440p”"
+   },
+   "select_quality_144p": {
+      "message": "Вибрати якість відтворення “144p”"
+   },
+   "select_quality_2160p": {
+      "message": "Вибрати якість відтворення “2160p”"
+   },
+   "select_quality_240p": {
+      "message": "Вибрати якість відтворення “240p”"
+   },
+   "select_quality_2880p": {
+      "message": "Вибрати якість відтворення “2880p”"
+   },
+   "select_quality_360p": {
+      "message": "Вибрати якість відтворення “360p”"
+   },
+   "select_quality_4320p": {
+      "message": "Вибрати якість відтворення “4320p”"
+   },
+   "select_quality_480p": {
+      "message": "Вибрати якість відтворення “480p”"
+   },
+   "select_quality_720p": {
+      "message": "Вибрати якість відтворення “720p”"
+   },
+   "select_quality_auto": {
+      "message": "Вибрати якість відтворення “Авто”"
+   },
+   "select_quality_full_screen": {
+      "message": "Обрати іншу якість відтворення при увімкненні повноекранного режиму"
+   },
+   "sepia": {
+      "message": "Сепія:"
+   },
+   "shrink": {
+      "message": "Зменшити"
+   },
+   "size_control_info": {
+      "message": "Клікніть щоб змінити розмір відеоплеєра. Клікніть правою кнопкою миші щоб центрувати відеоплеєр у вікні перегляду"
+   },
+   "speed": {
+      "message": "Швидкість"
+   },
+   "speed_control_info": {
+      "message": "Використовуйте колесо миші щоб контролювати швидкість відтворення. Клікніть щоб обрати швидкість відтворення «за замовчуванням». Клікніть правою клавішою щоб обрати стандартну швидкість відтворення"
+   },
+   "speed_minus_control_info": {
+      "message": "Клікніть щоб уповільнити швидкість відтворення"
+   },
+   "speed_plus_control_info": {
+      "message": "Клікніть щоб прискорити швидкість відтворення"
+   },
+   "speed_variation": {
+      "message": "Зміна швидкості при обертанні колеса миші або при натисканні кнопок швидкості «-» та «+»:"
+   },
+   "stop": {
+      "message": "Зупинити"
+   },
+   "stop_control_info": {
+      "message": "Клікніть щоб зупинити відео"
+   },
+   "stop_video": {
+      "message": "Зупинити відео"
+   },
+   "stop_videos": {
+      "message": "Вимкнути попереднє завантаження, коли відео автоматично призупинено"
+   },
+   "support": {
+      "message": "Підтримка"
+   },
+   "switch_back_previous_quality": {
+      "message": "Обрати попередню якість відтворення при виході з повноекранного режиму"
+   },
+   "take_screenshot": {
+      "message": "Зробити знімок відео"
+   },
+   "theme": {
+      "message": "Тема"
+   },
+   "theme_custom_theme": {
+      "message": "Тема: користувацька"
+   },
+   "theme_youtube_dark": {
+      "message": "Тема: YouTube™ (Темна)"
+   },
+   "theme_youtube_deep_dark": {
+      "message": "Тема: YouTube-DeepDark"
+   },
+   "theme_youtube_deep_dark_custom": {
+      "message": "Тема: YouTube-DeepDark (користувацька)"
+   },
+   "toggle_cards_end_screens": {
+      "message": "Переключити видимість карток та екрану"
+   },
+   "toggle_cinema_mode": {
+      "message": "Переключити режим кіно"
+   },
+   "toggle_comments_visibility": {
+      "message": "Переключити відображення коментарів"
+   },
+   "toggle_loop": {
+      "message": "Змінити режим повторювання"
+   },
+   "toggle_pip_mode": {
+      "message": "Переключити режим картинка-в-картинці"
+   },
+   "toggle_related_videos_visibility": {
+      "message": "Переключити відображення повязаних відео"
+   },
+   "toggle_video_filters": {
+      "message": "Переклюючити відео фільтри"
+   },
+   "toggle_visibility": {
+      "message": "Переключити відображення карток/фінального екрану"
+   },
+   "toggle_volume_booster": {
+      "message": "Змінити підсилення гучності"
+   },
+   "top_left_corner": {
+      "message": "Вгорі зліва"
+   },
+   "top_right_corner": {
+      "message": "Вгорі справа"
+   },
+   "translate": {
+      "message": "Перекласти"
+   },
+   "variant": {
+      "message": "Варіант:"
+   },
+   "video_codecs_and_formats": {
+      "message": "Відео кодеки і формати"
+   },
+   "video_filters": {
+      "message": "Відео фільтри"
+   },
+   "video_filters_control_info": {
+      "message": "Клікніть щоб увімкнути/вимкнути фільтри"
+   },
+   "video_player": {
+      "message": "Відеопрогравач"
+   },
+   "videos": {
+      "message": "Відео:"
+   },
+   "videos_full_screen": {
+      "message": "Відео (повноекранний режим):"
+   },
+   "volume": {
+      "message": "Гучність"
+   },
+   "volume_booster_control_info": {
+      "message": "Клікніть щоб увімкнути/вимкнути підсилювач гучності"
+   },
+   "volume_booster_level": {
+      "message": "Рівень підсилення гучності:"
+   },
+   "volume_variation": {
+      "message": "Зміна гучності, коли колесо миші обертається:"
+   },
+   "watch_pop_up_player": {
+      "message": "Відображати в спливаючому плеєрі"
+   },
+   "youtube_dark_theme": {
+      "message": "YouTube (офіційна тема)"
+   },
+   "youtube_deep_dark": {
+      "message": "YouTube-DeepDark (від RaitaroH)"
+   },
+   "youtube_deep_dark_custom": {
+      "message": "YouTube-DeepDark (користувацька)"
+   }
+}

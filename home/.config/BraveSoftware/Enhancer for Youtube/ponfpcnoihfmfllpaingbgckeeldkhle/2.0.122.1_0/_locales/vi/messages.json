@@ -1,0 +1,572 @@
+{
+   "appearance": {
+      "message": "Giao diện"
+   },
+   "auto_apply_video_filters": {
+      "message": "Tự động dùng bộ lọc video"
+   },
+   "auto_boost_volume": {
+      "message": "Tự động khuếch đại âm lượng"
+   },
+   "auto_cinema_mode": {
+      "message": "Tự động bật chế độ “Rạp chiếu phim”"
+   },
+   "auto_enable_theater_mode": {
+      "message": "Tự động bật “chế độ rạp hát” của Youtube"
+   },
+   "auto_execute_script": {
+      "message": "Tự động thực thi tập lệnh khi YouTube được tải trong một tab"
+   },
+   "auto_expand_description": {
+      "message": "Tự động mở rộng mô tả video"
+   },
+   "auto_expand_player": {
+      "message": "Tự động mở rộng trình phát video"
+   },
+   "auto_hide_cards_end_screens": {
+      "message": "Tự động ẩn thẻ thông tin và màn hình kết thúc"
+   },
+   "auto_select_quality": {
+      "message": "Tự động chọn chất lượng phát"
+   },
+   "auto_sort_comments": {
+      "message": "Tự động sắp xếp các nhận xét từ mới nhất đến cũ nhất"
+   },
+   "autoplay": {
+      "message": "Tự động phát"
+   },
+   "backup": {
+      "message": "Sao lưu thiết lập"
+   },
+   "below_video_player": {
+      "message": "Dưới trình phát video"
+   },
+   "block_hfr_formats": {
+      "message": "Dùng tốc độ khung hình tiêu chuẩn (24, 25, 30 FPS) thay vì tốc độ khung hình cao (48, 50, 60 FPS)"
+   },
+   "block_webm_formats": {
+      "message": "Dùng định dạng MP4 và codec AVC (H.264) thay vì định dạng WebM và codec VP9 (độ phân giải tối đa 1080p60 HD)"
+   },
+   "boost_volume": {
+      "message": "Tăng âm lượng"
+   },
+   "bottom_left_corner": {
+      "message": "Dưới cùng bên trái"
+   },
+   "bottom_of_window": {
+      "message": "Cuối cửa sổ"
+   },
+   "bottom_right_corner": {
+      "message": "Dưới cùng bên phải"
+   },
+   "brightness": {
+      "message": "Độ sáng:"
+   },
+   "cards_end_screens_control_info": {
+      "message": "Nhấn để bật/tắt thẻ thông tin và màn hình kết thúc"
+   },
+   "center_control_bar": {
+      "message": "Căn giữa thanh điều khiển khi phóng to trình phát video hoặc trong chế độ toàn màn hình"
+   },
+   "center_video_player": {
+      "message": "Căn giữa trình phát video trong chế độ viewport"
+   },
+   "cinema_mode": {
+      "message": "Chế độ “Rạp chiếu phim”"
+   },
+   "cinema_mode_control_info": {
+      "message": "Nhấn để bật/tắt chế độ “Rạp chiếu phim”"
+   },
+   "cinema_mode_toggle_size": {
+      "message": "Tự động mở rộng trình phát video khi chế độ “Rạp chiếu phim” được bật"
+   },
+   "color": {
+      "message": "Màu:"
+   },
+   "color_inversion": {
+      "message": "Đảo màu:"
+   },
+   "configure_keyboard_shortcuts": {
+      "message": "Thiết lập phím tắt"
+   },
+   "contrast": {
+      "message": "Tương phản:"
+   },
+   "control_bar_location": {
+      "message": "Vị trí thanh điều khiển:"
+   },
+   "control_speed": {
+      "message": "Tăng/Giảm tốc độ phát với con lăn chuột chỉ khi di chuột vào trình phát video và nhấn giữ phím “Ctrl”"
+   },
+   "control_speed_mouse_button": {
+      "message": "Chỉ khi nhấn giữ chuột phải"
+   },
+   "control_volume": {
+      "message": "Kiểm soát mức âm lượng bằng lăn chuột khi di chuột qua trình phát video bằng con trỏ chuột"
+   },
+   "control_volume_mouse_button": {
+      "message": "Chỉ khi nhấn giữ chuột phải"
+   },
+   "controls": {
+      "message": "Điều khiển"
+   },
+   "controls_visible": {
+      "message": "Luôn hiển thị các nút điều khiển thay vì phải nhấn hoặc di chuột vào vị trí nút •••"
+   },
+   "controls_within_control_bar": {
+      "message": "Đặt các nút điều khiển ở thanh điều khiển"
+   },
+   "controls_within_video_player": {
+      "message": "Đặt các nút điều khiển đặt trong trình phát video"
+   },
+   "convert_shorts": {
+      "message": "Convert Shorts"
+   },
+   "copy_to_clipboard": {
+      "message": "Sao chép vào clipboard"
+   },
+   "custom_script": {
+      "message": "Tập lệnh tùy chỉnh"
+   },
+   "custom_script_control_info": {
+      "message": "Nhấn để chạy code tuỳ chỉnh"
+   },
+   "custom_script_instructions": {
+      "message": "Dán hoặc nhập mã JavaScript của bạn ở đây, lưu nó bằng cách sử dụng nút bên dưới, sau đó nhấp vào nút “Tập lệnh tùy chỉnh” trên thanh công cụ khi bạn muốn thực hiện nó."
+   },
+   "custom_script_warning": {
+      "message": "Vì lý do bảo mật, bạn chỉ nên sử dụng mã mà bạn hiểu được hoặc code được viết bởi nhà phát triển ứng dụng mà bạn tin tưởng."
+   },
+   "custom_theme": {
+      "message": "Chủ đề tùy chỉnh"
+   },
+   "custom_theme_instructions": {
+      "message": "Dán hoặc nhập mã CSS của bạn ở đây, sau đó lưu nó bằng cách sử dụng nút bên dưới."
+   },
+   "dark_theme": {
+      "message": "Chủ đề tối"
+   },
+   "decrease_playback_speed": {
+      "message": "Giảm tốc độ phát"
+   },
+   "default_playback_speed": {
+      "message": "Tốc độ phát mặc định:"
+   },
+   "default_volume_level": {
+      "message": "Mức âm lượng mặc định:"
+   },
+   "description": {
+      "message": "Kiểm soát YouTube và nâng cao trải nghiệm người dùng của bạn!"
+   },
+   "detailed_description": {
+      "message": "Được xây dựng để tận dụng tối đa Youtube, tiện ích mở rộng này đi kèm với rất nhiều các tính năng cho bạn sử dụng, trong số đó có thể kể đến như, kiểm soát tốc độ phát và mức âm lượng với con lăn chuột, tự động hóa các tác vụ lặp đi lặp lại như lựa chọn chọn chất lượng phát, cùng với đó là hàng chục các phím tắt để kiểm soát YouTube like a pro, và còn rất nhiều tính năng khác nữa... Thử đi và bạn sẽ không bao giờ muốn dùng Youtube mà thiếu đi tiện ích này đâu ;)\n\nYouTube là nhãn hiệu của Google LLC. Việc sử dụng nhãn hiệu này phải tuân theo Quyền của Google."
+   },
+   "disable_autoplay": {
+      "message": "Tắt trình “Tự động phát”"
+   },
+   "display_control_bar": {
+      "message": "Chỉ hiển thị khi di chuột vào"
+   },
+   "donate": {
+      "message": "Ủng hộ"
+   },
+   "execute_custom_script": {
+      "message": "Chạy script tuỳ chỉnh"
+   },
+   "expand": {
+      "message": "Mở rộng"
+   },
+   "expand_shrink_video_player": {
+      "message": "Mở rộng hoặc thu nhỏ trình phát video"
+   },
+   "expanded_player_viewport": {
+      "message": "Mở rộng trình phát video ra toàn bộ diện tích"
+   },
+   "export": {
+      "message": "Xuất"
+   },
+   "export_instructions": {
+      "message": "Tạo file text (đuôi .txt) mới và dán mã vào đó mà không làm thay đổi mã"
+   },
+   "flip_horizontally": {
+      "message": "Lật ngang"
+   },
+   "flip_horizontally_control_info": {
+      "message": "Nhấn để lật video ngang"
+   },
+   "flip_vertically": {
+      "message": "Lật dọc"
+   },
+   "flip_vertically_control_info": {
+      "message": "Nhấn để lật video dọc"
+   },
+   "flip_video_horizontally": {
+      "message": "Lật video ngang"
+   },
+   "flip_video_vertically": {
+      "message": "Lật video dọc"
+   },
+   "focus_video_player": {
+      "message": "Đặt tiêu điểm vào trình phát video"
+   },
+   "gaussian_blur": {
+      "message": "Độ mờ Gaussian:"
+   },
+   "grayscale": {
+      "message": "Thang màu xám:"
+   },
+   "hide_chat": {
+      "message": "Ẩn tin nhắn"
+   },
+   "hide_comments": {
+      "message": "Ẩn bình luận"
+   },
+   "hide_related_videos": {
+      "message": "Ẩn video liên quan"
+   },
+   "hide_shorts": {
+      "message": "Hide Shorts"
+   },
+   "hue_rotation": {
+      "message": "Luân chuyển màu sắc:"
+   },
+   "ignore_playlists": {
+      "message": "Không tạm dừng các video trong danh sách phát"
+   },
+   "ignore_pop_up_player": {
+      "message": "Không áp dụng với trình phát cửa sổ (pop-up)"
+   },
+   "import": {
+      "message": "Nhập"
+   },
+   "import_error": {
+      "message": "Nội dung tệp sao lưu lỗi!"
+   },
+   "import_instructions": {
+      "message": "Dán nội dung của file dự phòng và nhấn nút “Nhập”. Trang web sẽ tự động tải lại nếu cài đặt được nhập thành công."
+   },
+   "increase_playback_speed": {
+      "message": "Tăng tốc độ phát"
+   },
+   "keyboard_shortcuts": {
+      "message": "Phím tắt"
+   },
+   "keyboard_shortcuts_control_info": {
+      "message": "Nhấn để hiển thị toàn bộ phím tắt Youtube (Trang ngoài)"
+   },
+   "keyboard_shortcuts_page": {
+      "message": "Hiển thị toàn bộ phím tắt Youtube"
+   },
+   "launch_mini_player": {
+      "message": "Mở trình phát thu nhỏ khi cuộn chuột xuống phần bình luận"
+   },
+   "locale_code": {
+      "message": "vi"
+   },
+   "locale_dir": {
+      "message": "ltr"
+   },
+   "loop": {
+      "message": "Lặp lại"
+   },
+   "loop_control_info": {
+      "message": "Nhấn chuột trái hoặc phải để bật/tắt chế độ lặp"
+   },
+   "loop_end": {
+      "message": "Cho đến:"
+   },
+   "loop_start": {
+      "message": "Bắt đầu từ:"
+   },
+   "message": {
+      "message": "Tin nhắn"
+   },
+   "mini_player": {
+      "message": "Trình phát thu nhỏ (mini)"
+   },
+   "mini_player_position": {
+      "message": "Vị trí trình phát thu nhỏ"
+   },
+   "mini_player_size": {
+      "message": "Kích cỡ trình phát thu nhỏ"
+   },
+   "not_now": {
+      "message": "Không phải lúc này"
+   },
+   "opacity": {
+      "message": "Độ mờ:"
+   },
+   "open_options_page": {
+      "message": "Mở trang tùy chọn"
+   },
+   "options": {
+      "message": "Tùy chọn"
+   },
+   "options_control_info": {
+      "message": "Nhấn để mở trang tùy chọn"
+   },
+   "override_playback_speeds": {
+      "message": "Ghi đè tốc độ phát mặc định"
+   },
+   "page_reload_required": {
+      "message": "Enhancer for YouTube™ vừa mới cập nhật, để có được tính năng mới, hãy tải lại tất cả các trang Youtube."
+   },
+   "pause_videos": {
+      "message": "Tạm dừng các video đang phát trong tab nền khi một video bắt đầu phát trong tab nền trước"
+   },
+   "playback_quality": {
+      "message": "Chất lượng phát"
+   },
+   "playback_speed": {
+      "message": "Tốc độ phát"
+   },
+   "playlists": {
+      "message": "Danh sách phát:"
+   },
+   "playlists_full_screen": {
+      "message": "Danh sách phát (toàn màn hình):"
+   },
+   "pop_up_player": {
+      "message": "Trình phát cửa sổ mới (Pop-up)"
+   },
+   "pop_up_player_control_info": {
+      "message": "Nhấn chuột trái hoặc phải xem bằng chế độ cửa sổ"
+   },
+   "pop_up_player_embeds": {
+      "message": "Chế độ cửa sổ và video nhúng (embedded videos)"
+   },
+   "pop_up_player_embeds_full_screen": {
+      "message": "Chế độ cửa sổ và video nhúng (toàn màn hình)"
+   },
+   "pop_up_player_size": {
+      "message": "Kích cỡ trình phát cửa sổ mới"
+   },
+   "preserve_black_bars_color": {
+      "message": "Không thay đổi màu của các thanh màu đen dọc khi chủ đề YouTube-DeepDark được áp dụng hoặc khi chế độ “Rạp chiếu phim” được bật"
+   },
+   "prevent_autoplay": {
+      "message": "Ngăn “Tự động phát” với video mở ở tab nền (background)"
+   },
+   "prevent_autoplay_foreground_tab": {
+      "message": "Ngăn “Tự động phát” cả với video không mở ở tab nền (foreground)"
+   },
+   "preview": {
+      "message": "Xem trước"
+   },
+   "rate": {
+      "message": "Đánh giá"
+   },
+   "rate_extension": {
+      "message": "Đánh giá trải nghiệm của bạn về Enhancer for YouTube™."
+   },
+   "reset": {
+      "message": "Khôi phục mặc định"
+   },
+   "reverse_mouse_wheel_direction": {
+      "message": "Đảo ngược hướng con lăn chuột để kiểm soát tốc độ phát và mức âm lượng"
+   },
+   "reverse_playlist": {
+      "message": "Đảo ngược danh sách phát"
+   },
+   "reverse_playlist_control_info": {
+      "message": "Nhấn chuột trái hoặc phải để đảo ngược danh sách phát với chế độ cửa sổ"
+   },
+   "reverse_playlist_order": {
+      "message": "Đảo ngược thứ tự danh sách phát"
+   },
+   "saturation": {
+      "message": "Độ bão hòa:"
+   },
+   "save": {
+      "message": "Lưu"
+   },
+   "screenshot": {
+      "message": "Chụp ảnh màn hình"
+   },
+   "screenshot_control_info": {
+      "message": "Nhấn để chụp ảnh màn hình"
+   },
+   "select_default_playback_speed": {
+      "message": "Chọn tốc độ phát mặc định"
+   },
+   "select_normal_playback_speed": {
+      "message": "Chọn tốc độ phát bình thường"
+   },
+   "select_quality_1080p": {
+      "message": "Phát ở chất lượng “1080p”"
+   },
+   "select_quality_1440p": {
+      "message": "Phát ở chất lượng “1440p”"
+   },
+   "select_quality_144p": {
+      "message": "Phát ở chất lượng “144p”"
+   },
+   "select_quality_2160p": {
+      "message": "Phát ở chất lượng “2160p”"
+   },
+   "select_quality_240p": {
+      "message": "Phát ở chất lượng “240p”"
+   },
+   "select_quality_2880p": {
+      "message": "Phát ở chất lượng “2880p”"
+   },
+   "select_quality_360p": {
+      "message": "Phát ở chất lượng “360p”"
+   },
+   "select_quality_4320p": {
+      "message": "Phát ở chất lượng “4320p”"
+   },
+   "select_quality_480p": {
+      "message": "Phát ở chất lượng “480p”"
+   },
+   "select_quality_720p": {
+      "message": "Phát ở chất lượng “720p”"
+   },
+   "select_quality_auto": {
+      "message": "Phát ở chất lượng “Tự động”"
+   },
+   "select_quality_full_screen": {
+      "message": "Chọn chất lượng phát lại khác khi vào chế độ toàn màn hình"
+   },
+   "sepia": {
+      "message": "Màu nâu đỏ:"
+   },
+   "shrink": {
+      "message": "Thu nhỏ"
+   },
+   "size_control_info": {
+      "message": "Nhấn để mở rộng hoặc thu nhỏ trình phát video, nhấn chuột phải để căn giữa trình phát video"
+   },
+   "speed": {
+      "message": "Tốc độ"
+   },
+   "speed_control_info": {
+      "message": "Cuộn con lăn chuột để kiểm soát tốc độ phát, nhấn để chọn tốc độ mặc định, nhấn chuột trái để chọn tốc độ bình thường"
+   },
+   "speed_minus_control_info": {
+      "message": "Nhấn để giảm tốc độ phát"
+   },
+   "speed_plus_control_info": {
+      "message": "Nhấn để tăng tốc độ phát"
+   },
+   "speed_variation": {
+      "message": "Tỉ lệ tăng/giảm tốc độ phát khi dùng con lăn chuột hoặc nhấn nút điều khiển “-” và “+”:"
+   },
+   "stop": {
+      "message": "Dừng lại"
+   },
+   "stop_control_info": {
+      "message": "Nhấn chuột trái để dừng video"
+   },
+   "stop_video": {
+      "message": "Dừng video"
+   },
+   "stop_videos": {
+      "message": "Dừng hẳn video thay vì chỉ ngăn lại “Tự động phát”"
+   },
+   "support": {
+      "message": "Hỗ trợ"
+   },
+   "switch_back_previous_quality": {
+      "message": "Tự động khôi phục chất lượng phát khi thoát chế độ toàn màn hình."
+   },
+   "take_screenshot": {
+      "message": "Chụp ảnh màn hình của video"
+   },
+   "theme": {
+      "message": "Chủ đề"
+   },
+   "theme_custom_theme": {
+      "message": "Chủ đề: Tuỳ chỉnh"
+   },
+   "theme_youtube_dark": {
+      "message": "Chủ đề: Youtube™ (Tối)"
+   },
+   "theme_youtube_deep_dark": {
+      "message": "Chủ đề: YouTube-DeepDark"
+   },
+   "theme_youtube_deep_dark_custom": {
+      "message": "Chủ đề: YouTube-DeepDark (Tuỳ chỉnh)"
+   },
+   "toggle_cards_end_screens": {
+      "message": "Bật/Tắt thẻ thông tin và màn hình kết thúc"
+   },
+   "toggle_cinema_mode": {
+      "message": "Bật/Tắt chế độ “Rạp chiếu phim”"
+   },
+   "toggle_comments_visibility": {
+      "message": "Bật/Tắt hiển thị bình luận"
+   },
+   "toggle_loop": {
+      "message": "Bật/Tắt chế độ lặp lại"
+   },
+   "toggle_pip_mode": {
+      "message": "Bật/Tắt chế độ Picture-in-Picture (PIP)"
+   },
+   "toggle_related_videos_visibility": {
+      "message": "Bật/Tắt hiển thị video liên quan"
+   },
+   "toggle_video_filters": {
+      "message": "Bật/Tắt bộ lọc video"
+   },
+   "toggle_visibility": {
+      "message": "Bật/Tắt thẻ thông tin/màn hình kết thúc"
+   },
+   "toggle_volume_booster": {
+      "message": "Bật/Tắt khuếch đại âm lượng"
+   },
+   "top_left_corner": {
+      "message": "Trên cùng bên trái"
+   },
+   "top_right_corner": {
+      "message": "Trên cùng bên phải"
+   },
+   "translate": {
+      "message": "Dịch"
+   },
+   "variant": {
+      "message": "Biến thể:"
+   },
+   "video_codecs_and_formats": {
+      "message": "Video Codecs và định dạng video"
+   },
+   "video_filters": {
+      "message": "Bộ lọc video"
+   },
+   "video_filters_control_info": {
+      "message": "Nhấn chuột trái để bật/tắt bộ lọc video hoặc nhấn chuột phải để hiện/ẩn bảng tùy chỉnh bộ lọc video"
+   },
+   "video_player": {
+      "message": "Trình phát video"
+   },
+   "videos": {
+      "message": "Videos:"
+   },
+   "videos_full_screen": {
+      "message": "Videos (toàn màn hình):"
+   },
+   "volume": {
+      "message": "Âm lượng"
+   },
+   "volume_booster_control_info": {
+      "message": "Nhấn để bật/tắt tăng cường âm lượng"
+   },
+   "volume_booster_level": {
+      "message": "Mức khuếch đại âm lượng:"
+   },
+   "volume_variation": {
+      "message": "Thay đổi âm lượng khi lăn chuột:"
+   },
+   "watch_pop_up_player": {
+      "message": "Xem bằng chế độ cửa sổ"
+   },
+   "youtube_dark_theme": {
+      "message": "YouTube (chủ đề gốc)"
+   },
+   "youtube_deep_dark": {
+      "message": "YouTube-DeepDark (bởi RaitaroH)"
+   },
+   "youtube_deep_dark_custom": {
+      "message": "YouTube-DeepDark (tùy chỉnh)"
+   }
+}

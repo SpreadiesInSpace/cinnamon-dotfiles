@@ -1,0 +1,13 @@
+#
+# This file is parsed by pam_env module
+#
+# Syntax: simple "KEY=VAL" pairs on separate lines
+#
+
+# EDITOR="/usr/bin/nvim"
+# QT_STYLE_OVERRIDE=kvantum
+# QT_QPA_PLATFORMTHEME=gnome
+GTK_THEME=Gruvbox-Dark-BL
+QT_QPA_PLATFORMTHEME=qt5ct
+
+

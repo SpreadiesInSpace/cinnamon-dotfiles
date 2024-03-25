@@ -1,0 +1,193 @@
+{
+   "action": {
+      "default_icon": {
+         "16": "icons/16.png",
+         "24": "icons/24.png",
+         "32": "icons/32.png"
+      },
+      "default_title": "Enhancer for YouTube™"
+   },
+   "background": {
+      "service_worker": "background.js"
+   },
+   "commands": {
+      "c000-options-page": {
+         "description": "__MSG_open_options_page__"
+      },
+      "c020-theme-youtube-dark": {
+         "description": "__MSG_theme_youtube_dark__"
+      },
+      "c030-theme-youtube-deep-dark": {
+         "description": "__MSG_theme_youtube_deep_dark__"
+      },
+      "c040-theme-youtube-deep-dark-custom": {
+         "description": "__MSG_theme_youtube_deep_dark_custom__"
+      },
+      "c050-theme-custom-theme": {
+         "description": "__MSG_theme_custom_theme__"
+      },
+      "c060-focus-video-player": {
+         "description": "__MSG_focus_video_player__"
+      },
+      "c070-toggle-loop": {
+         "description": "__MSG_toggle_loop__"
+      },
+      "c080-stop-video": {
+         "description": "__MSG_stop_video__"
+      },
+      "c090-reverse-playlist": {
+         "description": "__MSG_reverse_playlist_order__"
+      },
+      "c100-toggle-volume-booster": {
+         "description": "__MSG_toggle_volume_booster__"
+      },
+      "c130-toggle-annotations": {
+         "description": "__MSG_toggle_cards_end_screens__"
+      },
+      "c140-toggle-cinema-mode": {
+         "description": "__MSG_toggle_cinema_mode__"
+      },
+      "c150-toggle-player-size": {
+         "description": "__MSG_expand_shrink_video_player__"
+      },
+      "c160-center-video-player": {
+         "description": "__MSG_center_video_player__"
+      },
+      "c170-pop-up-player": {
+         "description": "__MSG_watch_pop_up_player__"
+      },
+      "c180-decrease-speed": {
+         "description": "__MSG_decrease_playback_speed__"
+      },
+      "c190-increase-speed": {
+         "description": "__MSG_increase_playback_speed__"
+      },
+      "c200-default-speed": {
+         "description": "__MSG_select_default_playback_speed__"
+      },
+      "c210-normal-speed": {
+         "description": "__MSG_select_normal_playback_speed__"
+      },
+      "c220-toggle-video-filters": {
+         "description": "__MSG_toggle_video_filters__"
+      },
+      "c230-flip-horizontally": {
+         "description": "__MSG_flip_video_horizontally__"
+      },
+      "c240-flip-vertically": {
+         "description": "__MSG_flip_video_vertically__"
+      },
+      "c250-take-screenshot": {
+         "description": "__MSG_take_screenshot__"
+      },
+      "c260-keyboard-shortcuts": {
+         "description": "__MSG_keyboard_shortcuts_page__"
+      },
+      "c270-custom-script": {
+         "description": "__MSG_execute_custom_script__"
+      },
+      "c280-picture-in-picture": {
+         "description": "__MSG_toggle_pip_mode__"
+      },
+      "c290-quality-highres": {
+         "description": "__MSG_select_quality_4320p__"
+      },
+      "c300-quality-hd2880": {
+         "description": "__MSG_select_quality_2880p__"
+      },
+      "c310-quality-hd2160": {
+         "description": "__MSG_select_quality_2160p__"
+      },
+      "c320-quality-hd1440": {
+         "description": "__MSG_select_quality_1440p__"
+      },
+      "c330-quality-hd1080": {
+         "description": "__MSG_select_quality_1080p__"
+      },
+      "c340-quality-hd720": {
+         "description": "__MSG_select_quality_720p__"
+      },
+      "c350-quality-large": {
+         "description": "__MSG_select_quality_480p__"
+      },
+      "c360-quality-medium": {
+         "description": "__MSG_select_quality_360p__"
+      },
+      "c370-quality-small": {
+         "description": "__MSG_select_quality_240p__"
+      },
+      "c380-quality-tiny": {
+         "description": "__MSG_select_quality_144p__"
+      },
+      "c390-quality-auto": {
+         "description": "__MSG_select_quality_auto__"
+      },
+      "c400-comments-visibility": {
+         "description": "__MSG_toggle_comments_visibility__"
+      },
+      "c410-related-videos-visibility": {
+         "description": "__MSG_toggle_related_videos_visibility__"
+      }
+   },
+   "content_scripts": [ {
+      "exclude_matches": [ "*://www.youtube.com/embed/*", "*://www.youtube.com/live_chat/*", "*://www.youtube.com/pop-up-player/*", "*://www.youtube.com/shorts/*" ],
+      "js": [ "start.js" ],
+      "matches": [ "*://www.youtube.com/*" ],
+      "run_at": "document_start"
+   }, {
+      "exclude_matches": [ "*://www.youtube.com/embed/*", "*://www.youtube.com/pop-up-player/*", "*://www.youtube.com/shorts/*" ],
+      "js": [ "content.js" ],
+      "matches": [ "*://www.youtube.com/*" ],
+      "run_at": "document_end"
+   }, {
+      "exclude_matches": [ "*://www.youtube.com/live_chat/*", "*://www.youtube.com/pop-up-player/*", "*://www.youtube.com/shorts/*" ],
+      "js": [ "idle.js" ],
+      "matches": [ "*://www.youtube.com/*" ],
+      "run_at": "document_idle"
+   }, {
+      "all_frames": true,
+      "js": [ "embed.js" ],
+      "matches": [ "*://www.youtube.com/embed/*" ],
+      "run_at": "document_start"
+   }, {
+      "all_frames": true,
+      "js": [ "live-chat.js" ],
+      "matches": [ "*://www.youtube.com/live_chat*" ],
+      "run_at": "document_start"
+   }, {
+      "css": [ "pop-up-player.css" ],
+      "js": [ "pop-up-player.js" ],
+      "matches": [ "*://www.youtube.com/pop-up-player/*" ],
+      "run_at": "document_end"
+   }, {
+      "js": [ "shorts.js" ],
+      "matches": [ "*://www.youtube.com/shorts/*" ],
+      "run_at": "document_start"
+   } ],
+   "default_locale": "en_US",
+   "description": "__MSG_description__",
+   "host_permissions": [ "*://www.youtube.com/*" ],
+   "icons": {
+      "128": "icons/128.png",
+      "16": "icons/16.png",
+      "19": "icons/19.png",
+      "24": "icons/24.png",
+      "32": "icons/32.png",
+      "38": "icons/38.png",
+      "48": "icons/48.png",
+      "64": "icons/64.png",
+      "96": "icons/96.png"
+   },
+   "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCrJipzcs6r7wrOrIhajflr37G10c+X+VAhhAWTJdL9icUUzFYS91ZcvNKyLqWRSI1j9sQJLK4m4gLYL1nHMZp1Zc/Eeer97b+TRuyQbapxu6ui/6APYHydWPHektVFbrsWdWM/sUzobEsYpYfWvwAiXDjFbwxodGNgC94wYIff1QIDAQAB",
+   "manifest_version": 3,
+   "minimum_chrome_version": "120.0.0.0",
+   "name": "Enhancer for YouTube™",
+   "options_page": "options.html",
+   "permissions": [ "cookies", "scripting", "storage" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "2.0.122.1",
+   "web_accessible_resources": [ {
+      "matches": [ "*://www.youtube.com/*" ],
+      "resources": [ "resources/*" ]
+   } ]
+}

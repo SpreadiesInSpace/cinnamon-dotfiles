@@ -1,0 +1,572 @@
+{
+   "appearance": {
+      "message": "दिखावट"
+   },
+   "auto_apply_video_filters": {
+      "message": "स्वचालित रूप से वीडियो छन्नी को लागु करें"
+   },
+   "auto_boost_volume": {
+      "message": "स्वचालित रूप से वॉल्यूम बढ़ाएं"
+   },
+   "auto_cinema_mode": {
+      "message": "स्वचालित रूप से सिनेमा मोड को सक्षम करें"
+   },
+   "auto_enable_theater_mode": {
+      "message": "स्वचालित रूप से यूट्यूब के \"थिएटर मोड\" को सक्षम करें"
+   },
+   "auto_execute_script": {
+      "message": "यूट्यूब टैब लोड होते ही स्क्रिप्ट को स्वचालित रूप से निष्पादित करें"
+   },
+   "auto_expand_description": {
+      "message": "स्वचालित रूप से वीडियो के विवरण को विस्तृत करें"
+   },
+   "auto_expand_player": {
+      "message": "स्वचालित रूप से वीडियो प्लेयर को विस्तृत करें"
+   },
+   "auto_hide_cards_end_screens": {
+      "message": "स्वचालित रूप से जानकारी कार्ड तथा अंत स्क्रीन छिपाएँ"
+   },
+   "auto_select_quality": {
+      "message": "स्वचालित रूप से प्लेबैक गुणवत्ता का चयन करें"
+   },
+   "auto_sort_comments": {
+      "message": "स्वचालित रूप से टिप्पणियों को नवीनतम से पुरातन के क्रम में क्रमबद्ध करें"
+   },
+   "autoplay": {
+      "message": "स्वत: प्ले"
+   },
+   "backup": {
+      "message": "बैकअप"
+   },
+   "below_video_player": {
+      "message": "वीडियो प्लेयर के नीचे"
+   },
+   "block_hfr_formats": {
+      "message": "उच्च फ्रेम रेट प्रारूपों (४८, ५०, ६० FPS) के बजाय मानक फ्रेम रेट प्रारूपों (२४, २५, ३० FPS) के उपयोग को बाध्य करें"
+   },
+   "block_webm_formats": {
+      "message": "WebM प्रारूप तथा VP9 कोडेक (अधिकतम रिज़ॉल्यूशन १०८०p६० HD) के बजाय MP4 प्रारूप तथा AVC कोडेक (H.२६४) के उपयोग को बाध्य करें"
+   },
+   "boost_volume": {
+      "message": "बूस्ट वॉल्यूम"
+   },
+   "bottom_left_corner": {
+      "message": "निचला बायाँ कोना"
+   },
+   "bottom_of_window": {
+      "message": "गवाक्ष(विंडो) के नीचे"
+   },
+   "bottom_right_corner": {
+      "message": "निचला दायाँ कोना"
+   },
+   "brightness": {
+      "message": "चमक :"
+   },
+   "cards_end_screens_control_info": {
+      "message": "कार्ड टॉगल करने तथा अंत स्क्रीन दृश्यता समाप्त करने हेतु क्लिक करें"
+   },
+   "center_control_bar": {
+      "message": "वीडियो प्लेयर के नीचे नियंत्रण पट्टी को केंद्रत करें जब यह विस्तृत हो अथवा जब पूर्ण स्क्रीन मोड सक्रिय हो"
+   },
+   "center_video_player": {
+      "message": "वीडियो प्लेयर को व्यूपोर्ट के भीतर केंद्रित करें"
+   },
+   "cinema_mode": {
+      "message": "सिनेमा मोड"
+   },
+   "cinema_mode_control_info": {
+      "message": "सिनेमा मोड टॉगल करने हेतु क्लिक करें"
+   },
+   "cinema_mode_toggle_size": {
+      "message": "सिनेमा मोड टॉगल करने पर वीडियो प्लेयर को स्वचालित रूप से विस्तृत अथवा संक्षिप्त करें"
+   },
+   "color": {
+      "message": "रंग :"
+   },
+   "color_inversion": {
+      "message": "रंग व्युत्क्रम :"
+   },
+   "configure_keyboard_shortcuts": {
+      "message": "कुंजीपटल शॉर्टकट विन्यास"
+   },
+   "contrast": {
+      "message": "कंट्रास्ट :"
+   },
+   "control_bar_location": {
+      "message": "नियंत्रण पट्टी का स्थान :"
+   },
+   "control_speed": {
+      "message": "जब माउस सारक(कर्सर) वीडियो प्लेयर के ऊपर हो तथा \"Control\" कुंजी (Ctrl) दबी हुई हो तब माउस के पहिये से प्लेबैक गति को कम या अधिक करें"
+   },
+   "control_speed_mouse_button": {
+      "message": "केवल जब दाहिना माउस बटन दबाया हो"
+   },
+   "control_volume": {
+      "message": "माउस के पहिये से वॉल्यूम स्तर को बढ़ाएँ/घटाएँ जब माउस सारक वीडियो प्लेयर पर मंडरा रहा हो"
+   },
+   "control_volume_mouse_button": {
+      "message": "केवल जब दाहिना माउस बटन दबाया हो"
+   },
+   "controls": {
+      "message": "नियंत्रण"
+   },
+   "controls_visible": {
+      "message": "••• नियंत्रण पर क्लिक किये बिना अथवा माउस सारक(कर्सर) के उस पर मंडराए बिना नियंत्रणों की दृश्यता बनाये रखें"
+   },
+   "controls_within_control_bar": {
+      "message": "नियंत्रणों को नियंत्रण पट्टी के भीतर रखें"
+   },
+   "controls_within_video_player": {
+      "message": "वीडियो प्लेयर के भीतर नियंत्रणों को रखें"
+   },
+   "convert_shorts": {
+      "message": "Convert Shorts"
+   },
+   "copy_to_clipboard": {
+      "message": "क्लिपबोर्ड पर कॉपी करें"
+   },
+   "custom_script": {
+      "message": "अनुकूलित स्क्रिप्ट"
+   },
+   "custom_script_control_info": {
+      "message": "अनुकूलित स्क्रिप्ट निष्पादित करने हेतु क्लिक करें"
+   },
+   "custom_script_instructions": {
+      "message": "JavaScript कोड को चिपकाएँ या टाइप करें, बटन दबाकर सुरक्षित करें, तत्पश्चात \"अनुकूलित स्क्रिप्ट\" को क्लिक करके स्क्रिप्ट को आवश्यकता पड़ने पर निष्पादित करें।"
+   },
+   "custom_script_warning": {
+      "message": "सुरक्षा कारणों हेतु आप उसी कोड का प्रयोग करें जिसको आप स्वयं समझ सकें अथवा जिस कोड का लेख किसी भरोसेमंद विकासक ने किया हो।"
+   },
+   "custom_theme": {
+      "message": "अनुकूलित थीम"
+   },
+   "custom_theme_instructions": {
+      "message": "अपना CSS कोड को चिपकाएँ अथवा टाइप करें तथा निम्न उपस्थित बटन पर क्लिक करके सुरक्षित करें।"
+   },
+   "dark_theme": {
+      "message": "गहरा थीम"
+   },
+   "decrease_playback_speed": {
+      "message": "प्लेबैक गति घटाएँ"
+   },
+   "default_playback_speed": {
+      "message": "तयशुदा प्लेबैक गति :"
+   },
+   "default_volume_level": {
+      "message": "तयशुदा वॉल्यूम स्तर :"
+   },
+   "description": {
+      "message": "यूट्यूब पर नियंत्रण पाएँ एवं उपयोगकर्ता अनुभव को अद्भुत बनाएँ!"
+   },
+   "detailed_description": {
+      "message": "यह एक्सटेंशन सभी प्रकार के फीचरों के साथ आता है जिसके चलते आप यूट्यूब पर विज्ञापनों का प्रबंधन, प्लेबैक गति नियंत्रण, वॉल्यूम स्तर को माउस के पहिये से कम/अधिक कर सकते हैं। एवं उचित वीडियो गुणवत्ता सेट करने जैसे उबाऊ कार्यों को स्वचालित करना, तथा कुंजीपटल शॉर्टकट विन्यास भी कर सकते हैं जिससे आप यूट्यूब को नियंत्रित करने माहिर रहेंगे। एक बार आजमाँ कर तो देखिये... परंतु सावधान ! इसके पश्चात आप स्वयं को पुनः Enhancer for YouTube™ का प्रयोग करने से रोक न पाएँगे ;)\n\nयूट्यूब, गूगल एल. एल. सी. का ट्रेडमार्क है। इस ट्रेडमार्क का उपयोग गूगल की अनुमतियों के अधीन है।"
+   },
+   "disable_autoplay": {
+      "message": "स्वत: प्ले निष्क्रिय करें"
+   },
+   "display_control_bar": {
+      "message": "माउस सारक(कर्सर) के नियंत्रण पट्टी पर मंडराने पर ही उसे दर्शाएँ"
+   },
+   "donate": {
+      "message": "दान करें"
+   },
+   "execute_custom_script": {
+      "message": "अनुकूलित स्क्रिप्ट निष्पादित करें"
+   },
+   "expand": {
+      "message": "विस्तृत"
+   },
+   "expand_shrink_video_player": {
+      "message": "वीडियो प्लेयर को विस्तारित करें या संक्षिप्त करे"
+   },
+   "expanded_player_viewport": {
+      "message": "व्यूपोर्ट आयामों के आधार पर उपलब्ध जगह में वीडियो प्लेयर को विस्तृत करें"
+   },
+   "export": {
+      "message": "निर्यात"
+   },
+   "export_instructions": {
+      "message": "एक नवीन टेक्सट फ़ाइल का सृजन करें तथा निम्नलिखित कोड को बिना संशोधित किये चिपकाएँ"
+   },
+   "flip_horizontally": {
+      "message": "ऊर्ध्वाधर रूप से पलटें"
+   },
+   "flip_horizontally_control_info": {
+      "message": "क्षैतिज रूप से वीडियो पलटने हेतु क्लिक करें"
+   },
+   "flip_vertically": {
+      "message": "क्षैतिज रूप से पलटें"
+   },
+   "flip_vertically_control_info": {
+      "message": "ऊर्ध्वाधर रूप से वीडियो पलटने हेतु क्लिक करें"
+   },
+   "flip_video_horizontally": {
+      "message": "वीडियो को क्षैतिज रूप से पलटें"
+   },
+   "flip_video_vertically": {
+      "message": "वीडियो को ऊर्ध्वाधर रूप से पलटें"
+   },
+   "focus_video_player": {
+      "message": "वीडियो प्लेयर पर ध्यान केंद्रित करें"
+   },
+   "gaussian_blur": {
+      "message": "गाउसीय धुंधलापन :"
+   },
+   "grayscale": {
+      "message": "ग्रे स्केल :"
+   },
+   "hide_chat": {
+      "message": "चैट छिपाएँ"
+   },
+   "hide_comments": {
+      "message": "टिप्पणी छिपाएँ"
+   },
+   "hide_related_videos": {
+      "message": "संबंधित वीडियो छिपाएँ"
+   },
+   "hide_shorts": {
+      "message": "Hide Shorts"
+   },
+   "hue_rotation": {
+      "message": "ह्यू रोटेशन :"
+   },
+   "ignore_playlists": {
+      "message": "प्ले-सूची के लिए स्वतः प्ले को निष्क्रिय न करें"
+   },
+   "ignore_pop_up_player": {
+      "message": "पॉप-अप प्लेयर उपेक्षित करें"
+   },
+   "import": {
+      "message": "आयात"
+   },
+   "import_error": {
+      "message": "बैकअप फाइल की सामग्री वैध नहीं है!"
+   },
+   "import_instructions": {
+      "message": "बैकअप फ़ाइल की सामग्री को चिपकाएँ तथा आयात बटन दबाएँ। यदि सेटिंग्स सफलतापूर्वक आयात हो गयी तो पृष्ठ स्वचालित रूप से पुनः लोड (रीलोड) होगा।"
+   },
+   "increase_playback_speed": {
+      "message": "प्लेबैक गति बढ़ाएँ"
+   },
+   "keyboard_shortcuts": {
+      "message": "कुंजीपटल शॉर्टकट"
+   },
+   "keyboard_shortcuts_control_info": {
+      "message": "प्रत्येक कुंजीपटल शॉर्टकट दर्शाने हेतु क्लिक करें"
+   },
+   "keyboard_shortcuts_page": {
+      "message": "YouTube के सभी कुंजीपटल शॉर्टकट प्रदर्शित करें"
+   },
+   "launch_mini_player": {
+      "message": "टिप्पणियाँ पढ़ने हेतु नीचे स्क्रॉल करते समय छोटू प्लेयर का प्रक्षेपण करें"
+   },
+   "locale_code": {
+      "message": "hi"
+   },
+   "locale_dir": {
+      "message": "ltr"
+   },
+   "loop": {
+      "message": "लूप"
+   },
+   "loop_control_info": {
+      "message": "लूप मोड को टॉगल करने हेतु क्लिक अथवा राइट-क्लिक करें"
+   },
+   "loop_end": {
+      "message": "अंत :"
+   },
+   "loop_start": {
+      "message": "आरम्भ :"
+   },
+   "message": {
+      "message": "संदेश"
+   },
+   "mini_player": {
+      "message": "छोटू प्लेयर"
+   },
+   "mini_player_position": {
+      "message": "छोटू प्लेयर का स्थान :"
+   },
+   "mini_player_size": {
+      "message": "छोटू प्लेयर का आकार :"
+   },
+   "not_now": {
+      "message": "अभी नहीं"
+   },
+   "opacity": {
+      "message": "अपारदर्शिता :"
+   },
+   "open_options_page": {
+      "message": "विकल्प पृष्ठ खोलें"
+   },
+   "options": {
+      "message": "विकल्प"
+   },
+   "options_control_info": {
+      "message": "विकल्प पृष्ठ खोलने हेतु क्लिक करें"
+   },
+   "override_playback_speeds": {
+      "message": "तयशुदा प्लेबैक गतियों का उल्लंघन(override) करें"
+   },
+   "page_reload_required": {
+      "message": "Enhancer for YouTube™ का अभी-अभी अद्यतन किया गया है। प्रत्येक यूट्यूब पृष्ठ को पुनः लोड करना आवश्यक है।"
+   },
+   "pause_videos": {
+      "message": "जब अग्रभूमि में वीडियो आरम्भ हो जाये तब पृष्ठभूमि में चल रही वीडियो पर अल्पविराम (पॉज) लगाएँ"
+   },
+   "playback_quality": {
+      "message": "प्लेबैक गुणवत्ता"
+   },
+   "playback_speed": {
+      "message": "प्लेबैक गति"
+   },
+   "playlists": {
+      "message": "प्ले-सूचीयाँ :"
+   },
+   "playlists_full_screen": {
+      "message": "प्ले-सूची (पूर्ण स्क्रीन) :"
+   },
+   "pop_up_player": {
+      "message": "पॉप-अप प्लेयर"
+   },
+   "pop_up_player_control_info": {
+      "message": "पॉप-अप प्लेयर में देखने हेतु क्लिक अथवा राइट-क्लिक करें"
+   },
+   "pop_up_player_embeds": {
+      "message": "पॉप-अप प्लेयर एवं एम्बेडेड वीडियो :"
+   },
+   "pop_up_player_embeds_full_screen": {
+      "message": "पॉप-अप प्लेयर तथा एम्बेडेड वीडियो (पूर्ण स्क्रीन) :"
+   },
+   "pop_up_player_size": {
+      "message": "पॉप-अप प्लेयर का आकार :"
+   },
+   "preserve_black_bars_color": {
+      "message": "YouTube-DeepDark थीम लागू होने पर या सिनेमा मोड सक्षम होने पर ऊर्ध्वाधर काली पट्टियों का रंग न बदलें"
+   },
+   "prevent_autoplay": {
+      "message": "पृष्ठभूमि टैब में लोड किए गए वीडियो को स्वचालित रूप से चलने से रोकें"
+   },
+   "prevent_autoplay_foreground_tab": {
+      "message": "अग्रभूमि टैब में लोड किए गए वीडियो को भी स्वचालित रूप से चलने से रोकें"
+   },
+   "preview": {
+      "message": "पूर्व दर्शन"
+   },
+   "rate": {
+      "message": "रेटिंग"
+   },
+   "rate_extension": {
+      "message": "अपने Enhancer for YouTube™ अनुभव को रेट करें"
+   },
+   "reset": {
+      "message": "रीसेट :"
+   },
+   "reverse_mouse_wheel_direction": {
+      "message": "गति स्तर एवं वॉल्यूम स्तर को कम/अधिक करने हेतु माउस के पहिये की दिशा को पलट दें"
+   },
+   "reverse_playlist": {
+      "message": "उलटी हुई प्ले-सूची"
+   },
+   "reverse_playlist_control_info": {
+      "message": "प्ले-सूची को पॉप-अप प्लेयर में उलटे क्रम में देखने हेतु क्लिक अथवा राइट-क्लिक करें"
+   },
+   "reverse_playlist_order": {
+      "message": "प्ले-सूची के क्रम को उलट दें"
+   },
+   "saturation": {
+      "message": "परिपूर्णता :"
+   },
+   "save": {
+      "message": "सुरक्षित"
+   },
+   "screenshot": {
+      "message": "स्क्रीनशॉट"
+   },
+   "screenshot_control_info": {
+      "message": "स्क्रीनशॉट लेने हेतु क्लिक करें"
+   },
+   "select_default_playback_speed": {
+      "message": "तयशुदा प्लेबैक गति का चयन करें"
+   },
+   "select_normal_playback_speed": {
+      "message": "सामान्य प्लेबैक गति का चयन करें"
+   },
+   "select_quality_1080p": {
+      "message": "\"१०८०p\" प्लेबैक गुणवत्ता चयनित करें"
+   },
+   "select_quality_1440p": {
+      "message": "\"१४४०p\" प्लेबैक गुणवत्ता चयनित करें"
+   },
+   "select_quality_144p": {
+      "message": "\"१४४p\" प्लेबैक गुणवत्ता चयनित करें"
+   },
+   "select_quality_2160p": {
+      "message": "\"२१६०p\" प्लेबैक गुणवत्ता चयनित करें"
+   },
+   "select_quality_240p": {
+      "message": "\"२४०p\" प्लेबैक गुणवत्ता चयनित करें"
+   },
+   "select_quality_2880p": {
+      "message": "\"२८८०p\" प्लेबैक गुणवत्ता चयनित करें"
+   },
+   "select_quality_360p": {
+      "message": "\"३६०p\" प्लेबैक गुणवत्ता चयनित करें"
+   },
+   "select_quality_4320p": {
+      "message": "\"४३२०p\" प्लेबैक गुणवत्ता चयनित करें"
+   },
+   "select_quality_480p": {
+      "message": "\"४८०p\" प्लेबैक गुणवत्ता चयनित करें"
+   },
+   "select_quality_720p": {
+      "message": "\"७२०p\" प्लेबैक गुणवत्ता चयनित करें"
+   },
+   "select_quality_auto": {
+      "message": "\"स्वतः\" प्लेबैक गुणवत्ता चयनित करें"
+   },
+   "select_quality_full_screen": {
+      "message": "पूर्ण स्क्रीन मोड में प्रवेश करते समय एक अलग प्लेबैक गुणवत्ता का चयन करें"
+   },
+   "sepia": {
+      "message": "सेपिआ :"
+   },
+   "shrink": {
+      "message": "संक्षिप्त"
+   },
+   "size_control_info": {
+      "message": "वीडियो प्लेयर को विस्तृत अथवा संक्षिप्त करने हेतु क्लिक करें अथवा वीडियो प्लेयर को व्यूपोर्ट के भीतर केंद्रित करने हेतु राइट-क्लिक करें"
+   },
+   "speed": {
+      "message": "गति"
+   },
+   "speed_control_info": {
+      "message": "माउस पहिये से प्लेबैक गति को कम/अधिक करें अथवा तयशुदा प्लेबैक गति चयनित करने हेतु क्लिक करें अथवा सामान्य प्लेबैक गति चयनित करने हेतु राइट-क्लिक करें"
+   },
+   "speed_minus_control_info": {
+      "message": "प्लेबैक गति घटाने हेतु क्लिक करें"
+   },
+   "speed_plus_control_info": {
+      "message": "प्लेबैक गति बढ़ाने हेतु क्लिक करें"
+   },
+   "speed_variation": {
+      "message": "माउस का पहिया घुमाते समय अथवा गति के बटन \"-\" या \"+\" क्लिक करते समय इतने अंकों से प्लेबैक गति को काम या अधिक करें :"
+   },
+   "stop": {
+      "message": "रोक दें"
+   },
+   "stop_control_info": {
+      "message": "वीडियो को बंद करने हेतु क्लिक करें"
+   },
+   "stop_video": {
+      "message": "वीडियो रोक दें"
+   },
+   "stop_videos": {
+      "message": "केवल स्वतः प्ले निष्क्रिय करने के बजाय वीडियो को पूर्णतः रोक दें"
+   },
+   "support": {
+      "message": "सहयोग पाएँ"
+   },
+   "switch_back_previous_quality": {
+      "message": "पूर्ण स्क्रीन मोड से बाहर निकलने पर पिछले प्लेबैक गुणवत्ता पर वापस जाएँ"
+   },
+   "take_screenshot": {
+      "message": "वीडियो का स्क्रीनशॉट लें"
+   },
+   "theme": {
+      "message": "थीम"
+   },
+   "theme_custom_theme": {
+      "message": "थीम : अनुकूलित थीम"
+   },
+   "theme_youtube_dark": {
+      "message": "थीम : YouTube™ (काला)"
+   },
+   "theme_youtube_deep_dark": {
+      "message": "थीम : YouTube-DeepDark"
+   },
+   "theme_youtube_deep_dark_custom": {
+      "message": "थीम : YouTube-DeepDark (अनुकूलित)"
+   },
+   "toggle_cards_end_screens": {
+      "message": "कार्ड टॉगल करें तथा अंत स्क्रीन दृश्यता समाप्त करें"
+   },
+   "toggle_cinema_mode": {
+      "message": "सिनेमा मोड टॉगल करें"
+   },
+   "toggle_comments_visibility": {
+      "message": "टिप्पणियों की दृश्यता टॉगल करें"
+   },
+   "toggle_loop": {
+      "message": "लूप मोड टॉगल करें"
+   },
+   "toggle_pip_mode": {
+      "message": "पिक्चर-इन-पिक्चर मोड को टॉगल करें"
+   },
+   "toggle_related_videos_visibility": {
+      "message": "संबंधित वीडियो दृश्यता टॉगल करें"
+   },
+   "toggle_video_filters": {
+      "message": "वीडियो छन्नी टॉगल करें"
+   },
+   "toggle_visibility": {
+      "message": "कार्ड/अंत स्क्रीन दृश्यता को टॉगल करें"
+   },
+   "toggle_volume_booster": {
+      "message": "वॉल्यूम बूस्टर को टॉगल करें"
+   },
+   "top_left_corner": {
+      "message": "ऊपरी बायाँ कोना"
+   },
+   "top_right_corner": {
+      "message": "ऊपरी दायाँ कोना"
+   },
+   "translate": {
+      "message": "अनुवाद करें"
+   },
+   "variant": {
+      "message": "संस्करण :"
+   },
+   "video_codecs_and_formats": {
+      "message": "वीडियो कोडेक तथा फॉर्मेट"
+   },
+   "video_filters": {
+      "message": "वीडियो छन्नी"
+   },
+   "video_filters_control_info": {
+      "message": "वीडियो छन्नी टॉगल करने हेतु क्लिक करें अथवा वीडियो छन्नी पैनल दृश्यता को टॉगल करने हेतु राइट-क्लिक करें"
+   },
+   "video_player": {
+      "message": "वीडियो प्लेयर"
+   },
+   "videos": {
+      "message": "वीडियो :"
+   },
+   "videos_full_screen": {
+      "message": "वीडियो (पूर्ण स्क्रीन) :"
+   },
+   "volume": {
+      "message": "वॉल्यूम"
+   },
+   "volume_booster_control_info": {
+      "message": "वॉल्यूम बूस्टर को टॉगल करने हेतु क्लिक करें"
+   },
+   "volume_booster_level": {
+      "message": "वॉल्यूम बूस्टर स्तर :"
+   },
+   "volume_variation": {
+      "message": "माउस के पहिये को घुमाने पर इतने अंकों से वॉल्यूम को कम या अधिक करें :"
+   },
+   "watch_pop_up_player": {
+      "message": "पॉप-अप प्लेयर में देखें"
+   },
+   "youtube_dark_theme": {
+      "message": "YouTube (आधिकारिक थीम)"
+   },
+   "youtube_deep_dark": {
+      "message": "YouTube-DeepDark (RaitaroH द्वारा)"
+   },
+   "youtube_deep_dark_custom": {
+      "message": "YouTube-DeepDark (अनुकूलित करें)"
+   }
+}

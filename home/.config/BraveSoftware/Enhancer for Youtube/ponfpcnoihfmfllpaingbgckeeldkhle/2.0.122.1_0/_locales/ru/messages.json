@@ -1,0 +1,572 @@
+{
+   "appearance": {
+      "message": "Внешний вид"
+   },
+   "auto_apply_video_filters": {
+      "message": "Автоматически применять фильтры к видео"
+   },
+   "auto_boost_volume": {
+      "message": "Автоматически увеличивать громкость"
+   },
+   "auto_cinema_mode": {
+      "message": "Автоматически включать режим кинотеатра"
+   },
+   "auto_enable_theater_mode": {
+      "message": "Автоматически включать режим «кинотеатр» от YouTube"
+   },
+   "auto_execute_script": {
+      "message": "Автоматически выполнять пользовательский скрипт, если во вкладке загружен YouTube"
+   },
+   "auto_expand_description": {
+      "message": "Автоматически разворачивать описание видео"
+   },
+   "auto_expand_player": {
+      "message": "Автоматически разворачивать плеер"
+   },
+   "auto_hide_cards_end_screens": {
+      "message": "Автоматически скрывать подсказки и конечные заставки"
+   },
+   "auto_select_quality": {
+      "message": "Автоматически выбирать качество воспроизведения"
+   },
+   "auto_sort_comments": {
+      "message": "Автоматически сортировать комментарии от новых к старым"
+   },
+   "autoplay": {
+      "message": "Автовоспроизведение"
+   },
+   "backup": {
+      "message": "Резервное копирование"
+   },
+   "below_video_player": {
+      "message": "Под видеоплеером"
+   },
+   "block_hfr_formats": {
+      "message": "Принудительно использовать стандартную частоту кадров (24, 25, 30 FPS) вместо повышенной (48, 50, 60 FPS)"
+   },
+   "block_webm_formats": {
+      "message": "Принудительное использовать формат MP4 и кодек AVC (H.264) вместо формата WebM и кодека VP9 (максимальное разрешение 1080p60 HD)"
+   },
+   "boost_volume": {
+      "message": "Усилить громкость"
+   },
+   "bottom_left_corner": {
+      "message": "Нижний левый угол"
+   },
+   "bottom_of_window": {
+      "message": "В нижней части окна"
+   },
+   "bottom_right_corner": {
+      "message": "Нижний правый угол"
+   },
+   "brightness": {
+      "message": "Яркость:"
+   },
+   "cards_end_screens_control_info": {
+      "message": "Нажмите, чтобы показать или скрыть подсказки и конечные заставки"
+   },
+   "center_control_bar": {
+      "message": "Центрировать панель управления под видеоплеером, когда он развернут или когда включён полноэкранный режим"
+   },
+   "center_video_player": {
+      "message": "Центрировать видеоплеер в окне просмотра"
+   },
+   "cinema_mode": {
+      "message": "Режим кинотеатра"
+   },
+   "cinema_mode_control_info": {
+      "message": "Нажмите для включения режима кинотеатра"
+   },
+   "cinema_mode_toggle_size": {
+      "message": "Автоматически разворачивать/сворачивать плеер при включении режима кинотеатра"
+   },
+   "color": {
+      "message": "Цвет:"
+   },
+   "color_inversion": {
+      "message": "Инверсия цвета:"
+   },
+   "configure_keyboard_shortcuts": {
+      "message": "Настроить сочетания клавиш"
+   },
+   "contrast": {
+      "message": "Контраст:"
+   },
+   "control_bar_location": {
+      "message": "Расположение панели управления:"
+   },
+   "control_speed": {
+      "message": "Менять скорость воспроизведения колёсиком мыши, когда курсор находится на плеере и зажата кнопка Ctrl"
+   },
+   "control_speed_mouse_button": {
+      "message": "Только когда зажата правая кнопка мыши"
+   },
+   "control_volume": {
+      "message": "Менять громкость колёсиком мыши, когда курсор находится на плеере"
+   },
+   "control_volume_mouse_button": {
+      "message": "Только когда зажата правая кнопка мыши"
+   },
+   "controls": {
+      "message": "Управление"
+   },
+   "controls_visible": {
+      "message": "Оставить элементы управления видимыми без необходимости нажимать на символ ••• или наводить на него курсор мыши"
+   },
+   "controls_within_control_bar": {
+      "message": "Поместить элементы управления в панель управления"
+   },
+   "controls_within_video_player": {
+      "message": "Поместить элементы управления в видеоплеер"
+   },
+   "convert_shorts": {
+      "message": "Конвертировать Shorts"
+   },
+   "copy_to_clipboard": {
+      "message": "Скопировать в буфер обмена"
+   },
+   "custom_script": {
+      "message": "Пользовательский скрипт"
+   },
+   "custom_script_control_info": {
+      "message": "Нажмите, чтобы выполнить пользовательский скрипт"
+   },
+   "custom_script_instructions": {
+      "message": "Вставьте код JavaScript в окно и сохраните его, нажав кнопку ниже. Когда Вы захотите его использовать, нажмите кнопку «Пользовательский скрипт» на панели инструментов."
+   },
+   "custom_script_warning": {
+      "message": "По соображениям безопасности используйте только код, который понимаете или код, написанный доверенным разработчиком."
+   },
+   "custom_theme": {
+      "message": "Пользовательская тема"
+   },
+   "custom_theme_instructions": {
+      "message": "Вставьте код CSS в окно, затем сохраните его с помощью кнопки ниже."
+   },
+   "dark_theme": {
+      "message": "Тёмная тема"
+   },
+   "decrease_playback_speed": {
+      "message": "Замедлить воспроизведение"
+   },
+   "default_playback_speed": {
+      "message": "Скорость воспроизведения по умолчанию:"
+   },
+   "default_volume_level": {
+      "message": "Громкость по умолчанию:"
+   },
+   "description": {
+      "message": "Используйте YouTube с беспрецедентным удобством и контролем!"
+   },
+   "detailed_description": {
+      "message": "Созданное чтобы получить максимум удовольствия от YouTube, это расширение позволяет регулировать колесиком мыши скорость и громкость воспроизведения, автоматически выбирать нужное качество видео, настроить десятки сочетаний клавиш для полного контроля над YouTube, и многое другое... Попробуйте! Но имейте в виду, что после этого Вы никогда не захотите использовать YouTube без расширения ;)\n\nYouTube является торговой маркой компании Google LLC. Использование этого товарного знака регулируется разрешениями Google."
+   },
+   "disable_autoplay": {
+      "message": "Отключить автовоспроизведение"
+   },
+   "display_control_bar": {
+      "message": "Отображать панель управления только при наведении на неё курсора мыши"
+   },
+   "donate": {
+      "message": "Пожертвовать"
+   },
+   "execute_custom_script": {
+      "message": "Выполнить пользовательский скрипт"
+   },
+   "expand": {
+      "message": "Развернуть"
+   },
+   "expand_shrink_video_player": {
+      "message": "Изменить размер видеоплеера"
+   },
+   "expanded_player_viewport": {
+      "message": "Использовать всю область просмотра для развёрнутого плеера, когда режим кинотеатра не включен"
+   },
+   "export": {
+      "message": "Экспорт"
+   },
+   "export_instructions": {
+      "message": "Создайте новый текстовый файл и скопируйте в него приведённый ниже код, не меняя его."
+   },
+   "flip_horizontally": {
+      "message": "Отразить по горизонтали"
+   },
+   "flip_horizontally_control_info": {
+      "message": "Нажмите, чтобы отразить видео по горизонтали"
+   },
+   "flip_vertically": {
+      "message": "Отразить по вертикали"
+   },
+   "flip_vertically_control_info": {
+      "message": "Нажмите, чтобы отразить видео по вертикали"
+   },
+   "flip_video_horizontally": {
+      "message": "Отразить видео по горизонтали"
+   },
+   "flip_video_vertically": {
+      "message": "Отразить видео по вертикали"
+   },
+   "focus_video_player": {
+      "message": "Фокусировка на видеоплеере"
+   },
+   "gaussian_blur": {
+      "message": "Размытие по Гауссу:"
+   },
+   "grayscale": {
+      "message": "Оттенки серого:"
+   },
+   "hide_chat": {
+      "message": "Скрыть чат"
+   },
+   "hide_comments": {
+      "message": "Скрыть комментарии"
+   },
+   "hide_related_videos": {
+      "message": "Скрыть рекомендации"
+   },
+   "hide_shorts": {
+      "message": "Скрыть Shorts"
+   },
+   "hue_rotation": {
+      "message": "Изменение оттенка:"
+   },
+   "ignore_playlists": {
+      "message": "Не предотвращать автовоспроизведение в плейлистах"
+   },
+   "ignore_pop_up_player": {
+      "message": "Игнорировать отсоединённый плеер"
+   },
+   "import": {
+      "message": "Импорт"
+   },
+   "import_error": {
+      "message": "Неправильное содержимое файла резервной копии!"
+   },
+   "import_instructions": {
+      "message": "Вставьте содержимое файла резервной копии и нажмите кнопку «Импорт». Страница будет автоматически перезагружена, если настройки успешно импортированы."
+   },
+   "increase_playback_speed": {
+      "message": "Ускорить воспроизведение"
+   },
+   "keyboard_shortcuts": {
+      "message": "Сочетания клавиш"
+   },
+   "keyboard_shortcuts_control_info": {
+      "message": "Нажмите, чтобы показать все сочетания клавиш YouTube (на новой вкладке)"
+   },
+   "keyboard_shortcuts_page": {
+      "message": "Показать все сочетания клавиш для YouTube"
+   },
+   "launch_mini_player": {
+      "message": "Запускать миниплеер во время просмотра комментариев"
+   },
+   "locale_code": {
+      "message": "ru"
+   },
+   "locale_dir": {
+      "message": "ltr"
+   },
+   "loop": {
+      "message": "Повтор"
+   },
+   "loop_control_info": {
+      "message": "Нажмите, чтобы включить повтор"
+   },
+   "loop_end": {
+      "message": "Конец:"
+   },
+   "loop_start": {
+      "message": "Начало:"
+   },
+   "message": {
+      "message": "Сообщение"
+   },
+   "mini_player": {
+      "message": "Миниплеер"
+   },
+   "mini_player_position": {
+      "message": "Расположение миниплеера:"
+   },
+   "mini_player_size": {
+      "message": "Размер миниплеера:"
+   },
+   "not_now": {
+      "message": "Не сейчас"
+   },
+   "opacity": {
+      "message": "Прозрачность:"
+   },
+   "open_options_page": {
+      "message": "Открыть страницу параметров"
+   },
+   "options": {
+      "message": "Настройки"
+   },
+   "options_control_info": {
+      "message": "Нажмите, чтобы открыть страницу параметров"
+   },
+   "override_playback_speeds": {
+      "message": "Изменить скорость воспроизведения по умолчанию"
+   },
+   "page_reload_required": {
+      "message": "Enhancer for YouTube™ обновился, все страницы YouTube нужно перезагрузить."
+   },
+   "pause_videos": {
+      "message": "Останавливать видео на фоновых вкладках, когда запускается видео на активной вкладке"
+   },
+   "playback_quality": {
+      "message": "Качество воспроизведения"
+   },
+   "playback_speed": {
+      "message": "Скорость воспроизведения"
+   },
+   "playlists": {
+      "message": "Плейлисты:"
+   },
+   "playlists_full_screen": {
+      "message": "Плейлисты (полный экран):"
+   },
+   "pop_up_player": {
+      "message": "Отсоединённый плеер"
+   },
+   "pop_up_player_control_info": {
+      "message": "Нажмите, чтобы открыть видео в отсоединённом плеере"
+   },
+   "pop_up_player_embeds": {
+      "message": "Видео в отдельном окне и встроенные видео:"
+   },
+   "pop_up_player_embeds_full_screen": {
+      "message": "Отсоединённый плеер и встроенные видео (полный экран):"
+   },
+   "pop_up_player_size": {
+      "message": "Размер отсоединённого плеера:"
+   },
+   "preserve_black_bars_color": {
+      "message": "Не менять цвет вертикальных чёрных полос при использовании темы YouTube-DeepDark или при включении режима кинотеатра"
+   },
+   "prevent_autoplay": {
+      "message": "Предотвращать автовоспроизведение в фоновых вкладках"
+   },
+   "prevent_autoplay_foreground_tab": {
+      "message": "Предотвращать автовоспроизведение в активной вкладке"
+   },
+   "preview": {
+      "message": "Предпросмотр"
+   },
+   "rate": {
+      "message": "Оценить"
+   },
+   "rate_extension": {
+      "message": "Оцените впечатления от Enhancer for YouTube™."
+   },
+   "reset": {
+      "message": "Сброс"
+   },
+   "reverse_mouse_wheel_direction": {
+      "message": "Инвертировать колесико мыши при управлении скоростью воспроизведения и громкостью"
+   },
+   "reverse_playlist": {
+      "message": "Развернуть плейлист"
+   },
+   "reverse_playlist_control_info": {
+      "message": "Нажмите, чтобы смотреть плейлист в обратном порядке в отсоединённом плеере"
+   },
+   "reverse_playlist_order": {
+      "message": "Обратный порядок плейлиста"
+   },
+   "saturation": {
+      "message": "Насыщенность:"
+   },
+   "save": {
+      "message": "Сохранить"
+   },
+   "screenshot": {
+      "message": "Скриншот"
+   },
+   "screenshot_control_info": {
+      "message": "Нажмите, чтобы сделать скриншот видео"
+   },
+   "select_default_playback_speed": {
+      "message": "Установить скорость по умолчанию"
+   },
+   "select_normal_playback_speed": {
+      "message": "Установить скорость на нормальную"
+   },
+   "select_quality_1080p": {
+      "message": "Установить качество «1080р»"
+   },
+   "select_quality_1440p": {
+      "message": "Установить качество «1440р»"
+   },
+   "select_quality_144p": {
+      "message": "Установить качество «144р»"
+   },
+   "select_quality_2160p": {
+      "message": "Установить качество «2160р»"
+   },
+   "select_quality_240p": {
+      "message": "Установить качество «240р»"
+   },
+   "select_quality_2880p": {
+      "message": "Установить качество «2880р»"
+   },
+   "select_quality_360p": {
+      "message": "Установить качество «360р»"
+   },
+   "select_quality_4320p": {
+      "message": "Установить качество «4320р»"
+   },
+   "select_quality_480p": {
+      "message": "Установить качество «480р»"
+   },
+   "select_quality_720p": {
+      "message": "Установить качество «720р»"
+   },
+   "select_quality_auto": {
+      "message": "Установить качество «Автоматически»"
+   },
+   "select_quality_full_screen": {
+      "message": "Выбрать другое качество при переходе на полный экран"
+   },
+   "sepia": {
+      "message": "Сепия:"
+   },
+   "shrink": {
+      "message": "Свернуть"
+   },
+   "size_control_info": {
+      "message": "Нажмите, чтобы изменить размер видеоплеера. Правый клик центрирует видеоплеер в окне просмотра."
+   },
+   "speed": {
+      "message": "Скорость"
+   },
+   "speed_control_info": {
+      "message": "Колёсико мыши управляет скоростью воспроизведения; левый клик — скорость по умолчанию; правый клик — обычная скорость"
+   },
+   "speed_minus_control_info": {
+      "message": "Нажмите, чтобы замедлить воспроизведение"
+   },
+   "speed_plus_control_info": {
+      "message": "Нажмите, чтобы ускорить воспроизведение"
+   },
+   "speed_variation": {
+      "message": "Шаг изменения скорости колёсиком мыши или при нажатии кнопок «-» и «+»:"
+   },
+   "stop": {
+      "message": "Стоп"
+   },
+   "stop_control_info": {
+      "message": "Нажмите, чтобы остановить видео"
+   },
+   "stop_video": {
+      "message": "Остановить воспроизведение"
+   },
+   "stop_videos": {
+      "message": "Не подгружать видео, если оно остановлено"
+   },
+   "support": {
+      "message": "Поддержка"
+   },
+   "switch_back_previous_quality": {
+      "message": "Вернуть предыдущее качество воспроизведения при выходе из полного экрана"
+   },
+   "take_screenshot": {
+      "message": "Сделать скриншот видео"
+   },
+   "theme": {
+      "message": "Тема"
+   },
+   "theme_custom_theme": {
+      "message": "Пользовательская тема"
+   },
+   "theme_youtube_dark": {
+      "message": "Тема YouTube™ (тёмная)"
+   },
+   "theme_youtube_deep_dark": {
+      "message": "Тема YouTube-DeepDark"
+   },
+   "theme_youtube_deep_dark_custom": {
+      "message": "Тема YouTube-DeepDark (пользовательская)"
+   },
+   "toggle_cards_end_screens": {
+      "message": "Показать/скрыть подсказки и конечные заставки"
+   },
+   "toggle_cinema_mode": {
+      "message": "Включить/выключить режим кинотеатра"
+   },
+   "toggle_comments_visibility": {
+      "message": "Скрыть/показать комментарии"
+   },
+   "toggle_loop": {
+      "message": "Режим повтора"
+   },
+   "toggle_pip_mode": {
+      "message": "Включить/выключить режим «картинка в картинке»"
+   },
+   "toggle_related_videos_visibility": {
+      "message": "Скрыть/показать рекомендованные видео"
+   },
+   "toggle_video_filters": {
+      "message": "Включить/выключить фильтры видео"
+   },
+   "toggle_visibility": {
+      "message": "Показать/скрыть подсказки и конечные заставки"
+   },
+   "toggle_volume_booster": {
+      "message": "Включить/выключить усилитель громкости"
+   },
+   "top_left_corner": {
+      "message": "Верхний левый угол"
+   },
+   "top_right_corner": {
+      "message": "Верхний правый угол"
+   },
+   "translate": {
+      "message": "Перевод"
+   },
+   "variant": {
+      "message": "Вариант:"
+   },
+   "video_codecs_and_formats": {
+      "message": "Видеокодеки и форматы"
+   },
+   "video_filters": {
+      "message": "Фильтры видео"
+   },
+   "video_filters_control_info": {
+      "message": "Левый клик активирует фильтры видео; правый клик отображает панель фильтров"
+   },
+   "video_player": {
+      "message": "Видеоплеер"
+   },
+   "videos": {
+      "message": "Видео:"
+   },
+   "videos_full_screen": {
+      "message": "Видео (полный экран):"
+   },
+   "volume": {
+      "message": "Громкость"
+   },
+   "volume_booster_control_info": {
+      "message": "Нажмите, чтобы включить усилитель громкости"
+   },
+   "volume_booster_level": {
+      "message": "Уровень усиления громкости:"
+   },
+   "volume_variation": {
+      "message": "Шаг изменения громкости колёсиком мыши:"
+   },
+   "watch_pop_up_player": {
+      "message": "Открыть в отсоединённом плеере"
+   },
+   "youtube_dark_theme": {
+      "message": "YouTube (оригинальное оформление)"
+   },
+   "youtube_deep_dark": {
+      "message": "YouTube-DeepDark (от RaitaroH)"
+   },
+   "youtube_deep_dark_custom": {
+      "message": "YouTube-DeepDark (пользовательская)"
+   }
+}

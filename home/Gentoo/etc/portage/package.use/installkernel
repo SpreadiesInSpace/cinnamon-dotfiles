@@ -1,0 +1,15 @@
+sys-kernel/installkernel dracut
+# required by app-emulation/virt-manager-4.1.0-r1::gentoo[gui,-test]
+# required by virt-manager (argument)
+>=net-misc/spice-gtk-0.42-r3 usbredir
+# required by app-emulation/libvirt-9.8.0-r1::gentoo[virt-network]
+# required by app-emulation/libvirt-glib-4.0.0::gentoo
+# required by app-emulation/virt-manager-4.1.0-r1::gentoo[-test]
+# required by virt-manager (argument)
+>=net-dns/dnsmasq-2.90 script
+# required by app-crypt/swtpm-0.8.1-r2::gentoo
+# required by app-emulation/libvirt-9.8.0-r1::gentoo[qemu]
+# required by app-emulation/libvirt-glib-4.0.0::gentoo
+# required by app-emulation/virt-manager-4.1.0-r1::gentoo[-test]
+# required by virt-manager (argument)
+>=net-libs/gnutls-3.8.0 pkcs11 tools

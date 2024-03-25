@@ -1,0 +1,572 @@
+{
+   "appearance": {
+      "message": "Izskats"
+   },
+   "auto_apply_video_filters": {
+      "message": "Automātiski pielietot video filtrus"
+   },
+   "auto_boost_volume": {
+      "message": "Automātiski palieliniet skaļumu"
+   },
+   "auto_cinema_mode": {
+      "message": "Automātiski ieslēgt kino skatu"
+   },
+   "auto_enable_theater_mode": {
+      "message": "Automātiski ieslēgt YouTube \"Teātra skatu\""
+   },
+   "auto_execute_script": {
+      "message": "Automātiski palaist skriptu, kad YouTube ir atvērts jaunā cilnē"
+   },
+   "auto_expand_description": {
+      "message": "Automātiski rādīt video pilnu aprakstu"
+   },
+   "auto_expand_player": {
+      "message": "Automātiski palielināt video atskaņotāju"
+   },
+   "auto_hide_cards_end_screens": {
+      "message": "Automātiski noņemt sākuma un beigu ekrānus"
+   },
+   "auto_select_quality": {
+      "message": "Automatically select a playback quality"
+   },
+   "auto_sort_comments": {
+      "message": "Automātiski sakārtot komentārus sākot ar jaunākajiem"
+   },
+   "autoplay": {
+      "message": "Automātiska atskaņošana"
+   },
+   "backup": {
+      "message": "Rezerves kopija"
+   },
+   "below_video_player": {
+      "message": "Below the video player"
+   },
+   "block_hfr_formats": {
+      "message": "Force the use of standard frame rates formats (24, 25, 30 FPS) instead of high frame rates formats (48, 50, 60 FPS)"
+   },
+   "block_webm_formats": {
+      "message": "Force the use of the MP4 format and the AVC codec (H.264) instead of the WebM format and the VP9 codec (maximum resolution 1080p60 HD)"
+   },
+   "boost_volume": {
+      "message": "Pastiprināt skaņu"
+   },
+   "bottom_left_corner": {
+      "message": "Kreisais apakšējais stūris"
+   },
+   "bottom_of_window": {
+      "message": "At the bottom of the window"
+   },
+   "bottom_right_corner": {
+      "message": "Labais apakšējais stūris"
+   },
+   "brightness": {
+      "message": "Brightness:"
+   },
+   "cards_end_screens_control_info": {
+      "message": "Click to toggle cards and end screens visibility"
+   },
+   "center_control_bar": {
+      "message": "Center the control bar below the video player when it is expanded or when the full screen mode is active"
+   },
+   "center_video_player": {
+      "message": "Centrēt video atskaņotāju"
+   },
+   "cinema_mode": {
+      "message": "Kino režīms"
+   },
+   "cinema_mode_control_info": {
+      "message": "Click to toggle the cinema mode"
+   },
+   "cinema_mode_toggle_size": {
+      "message": "Automātiski paplašināt, vai samazināt video atskaņotāju, ja ieslēgts kino skats"
+   },
+   "color": {
+      "message": "Krāsa:"
+   },
+   "color_inversion": {
+      "message": "Color inversion:"
+   },
+   "configure_keyboard_shortcuts": {
+      "message": "Konfigurēt tastatūras īsceļus"
+   },
+   "contrast": {
+      "message": "Contrast:"
+   },
+   "control_bar_location": {
+      "message": "Control bar location:"
+   },
+   "control_speed": {
+      "message": "Regulēt atskaņošanas ātrumu ar peles rullīti kad kursors ir uz video atskaņotāja, un ir nospiests Ctrl taustiņš uz tastatūras"
+   },
+   "control_speed_mouse_button": {
+      "message": "Tikai, ja nospiests peles labais taustiņš"
+   },
+   "control_volume": {
+      "message": "Kontrolēt skaņas līmeni ar peles rullīti kad kursors ir uz video atskaņotāja"
+   },
+   "control_volume_mouse_button": {
+      "message": "Tikai, ja peles labais taustiņš ir nospiests"
+   },
+   "controls": {
+      "message": "Kontrole"
+   },
+   "controls_visible": {
+      "message": "Keep controls visible without having to click the ••• control or hover over it with the mouse cursor"
+   },
+   "controls_within_control_bar": {
+      "message": "Place controls within a control bar"
+   },
+   "controls_within_video_player": {
+      "message": "Place controls within the video player"
+   },
+   "convert_shorts": {
+      "message": "Convert Shorts"
+   },
+   "copy_to_clipboard": {
+      "message": "Nokopēt"
+   },
+   "custom_script": {
+      "message": "Pielāgots skripts"
+   },
+   "custom_script_control_info": {
+      "message": "Click to execute the custom script"
+   },
+   "custom_script_instructions": {
+      "message": "Iekopējiet, vai uzrakstiet JavaScript kodu šeit, saglabājiet ar pogu lejā. Pēc tam noklikšķiniet uz \"Pielāgots skripts\" kad vēlaties to palaist."
+   },
+   "custom_script_warning": {
+      "message": "Drošības dēļ Jūs drīkstiet lietot kodu, kuru Jūs saprotiet, vai kodu kuru rakstījis Jums uzticams izstrādātājs."
+   },
+   "custom_theme": {
+      "message": "Pielāgots skats"
+   },
+   "custom_theme_instructions": {
+      "message": "Lekopējiet vai uzrakstiet savu CSS kodu šeit, tad saglabājiet ar apakšējo pogu."
+   },
+   "dark_theme": {
+      "message": "Tumšs skats"
+   },
+   "decrease_playback_speed": {
+      "message": "Samazināt atskaņošanas ātrumu"
+   },
+   "default_playback_speed": {
+      "message": "Noklusētais atskaņošanas ātrums:"
+   },
+   "default_volume_level": {
+      "message": "Noklusējums skaņas līmenis:"
+   },
+   "description": {
+      "message": "Take control of YouTube and boost your user experience!"
+   },
+   "detailed_description": {
+      "message": "Built to get the most out of YouTube, this extension comes packed with all sorts of features that allow you, among other things, to control the playback speed and the volume level with the mouse wheel, automate repetitive tasks such as selecting the appropriate playback quality, configure dozens of keyboard shortcuts to control YouTube like a pro, and much more... Give it a try! But be aware that you will never want to use YouTube without it again ;)\n\nYouTube is a trademark of Google LLC. Use of this trademark is subject to Google Permissions."
+   },
+   "disable_autoplay": {
+      "message": "Atslēgt automātisku atskaņošanu"
+   },
+   "display_control_bar": {
+      "message": "Display the control bar only when hovering over it with the mouse cursor"
+   },
+   "donate": {
+      "message": "Ziedot"
+   },
+   "execute_custom_script": {
+      "message": "Palaist pielāgoto skriptu"
+   },
+   "expand": {
+      "message": "Palielināt"
+   },
+   "expand_shrink_video_player": {
+      "message": "Palielināt vai samazināt video atskaņotāju"
+   },
+   "expanded_player_viewport": {
+      "message": "Use the available space based on the viewport dimensions to expand the video player"
+   },
+   "export": {
+      "message": "Eksportēt"
+   },
+   "export_instructions": {
+      "message": "Izveidot jaunu teksta dokumentu un iekopēt kodu nemodificējot to."
+   },
+   "flip_horizontally": {
+      "message": "Pagriezt horizontāli"
+   },
+   "flip_horizontally_control_info": {
+      "message": "Click to flip the video horizontally"
+   },
+   "flip_vertically": {
+      "message": "Pagriezt vertikāli"
+   },
+   "flip_vertically_control_info": {
+      "message": "Click to flip the video vertically"
+   },
+   "flip_video_horizontally": {
+      "message": "Pagriezt video horizontāli"
+   },
+   "flip_video_vertically": {
+      "message": "Pagriezt video vertikāli"
+   },
+   "focus_video_player": {
+      "message": "Fokusēties uz video atskaņotāju"
+   },
+   "gaussian_blur": {
+      "message": "Gaussian blur:"
+   },
+   "grayscale": {
+      "message": "Grayscale:"
+   },
+   "hide_chat": {
+      "message": "Nerādīt čatu"
+   },
+   "hide_comments": {
+      "message": "Nerādīt komentārus"
+   },
+   "hide_related_videos": {
+      "message": "Nerādīt saistītos video"
+   },
+   "hide_shorts": {
+      "message": "Hide Shorts"
+   },
+   "hue_rotation": {
+      "message": "Hue rotation:"
+   },
+   "ignore_playlists": {
+      "message": "Do not prevent autoplay for playlists"
+   },
+   "ignore_pop_up_player": {
+      "message": "Ignorēt uzlecošo atskaņotāju"
+   },
+   "import": {
+      "message": "Importēt"
+   },
+   "import_error": {
+      "message": "Rezerves kopijas faila saturs nav pareizs!"
+   },
+   "import_instructions": {
+      "message": "Lekopēt rezerves kopijas faila saturu un nospiest pogu \"Importēt\". Lapa automātiski pārlādēsies, ja iestatījumi būs veiksmīgi importēti."
+   },
+   "increase_playback_speed": {
+      "message": "Palielināt atskaņošanas ātrumu"
+   },
+   "keyboard_shortcuts": {
+      "message": "Tastatūras īsceļi"
+   },
+   "keyboard_shortcuts_control_info": {
+      "message": "Click to display the list of all the keyboard shortcuts for YouTube (external page)"
+   },
+   "keyboard_shortcuts_page": {
+      "message": "Parādīt visus tastatūras īsceļus priekš YouTube"
+   },
+   "launch_mini_player": {
+      "message": "Palaist mini atskaņotāju, kad tin uz leju, lai lasītu komentārus"
+   },
+   "locale_code": {
+      "message": "lv"
+   },
+   "locale_dir": {
+      "message": "ltr"
+   },
+   "loop": {
+      "message": "Leciklēt"
+   },
+   "loop_control_info": {
+      "message": "Labais peles klikšķis ieciklē video"
+   },
+   "loop_end": {
+      "message": "Beigt:"
+   },
+   "loop_start": {
+      "message": "Sākt:"
+   },
+   "message": {
+      "message": "Ziņojums"
+   },
+   "mini_player": {
+      "message": "Mini atskaņotājs"
+   },
+   "mini_player_position": {
+      "message": "Mini atskaņotāja novietojums:"
+   },
+   "mini_player_size": {
+      "message": "Mini atskaņotāja izmērs:"
+   },
+   "not_now": {
+      "message": "Not now"
+   },
+   "opacity": {
+      "message": "Caurredzamība:"
+   },
+   "open_options_page": {
+      "message": "Atvērt parametri lapu"
+   },
+   "options": {
+      "message": "Parametri"
+   },
+   "options_control_info": {
+      "message": "Click to open the options page"
+   },
+   "override_playback_speeds": {
+      "message": "Pārsniegt noklusējuma atskaņošanas ātrumu"
+   },
+   "page_reload_required": {
+      "message": "Enhancer for YouTube™ has just been updated, all the YouTube pages must be reloaded."
+   },
+   "pause_videos": {
+      "message": "Pause videos playing in background tabs when a video starts playing in the foreground tab"
+   },
+   "playback_quality": {
+      "message": "Playback quality"
+   },
+   "playback_speed": {
+      "message": "Atskaņošanas ātrums"
+   },
+   "playlists": {
+      "message": "Playlists:"
+   },
+   "playlists_full_screen": {
+      "message": "Playlists (full screen):"
+   },
+   "pop_up_player": {
+      "message": "Uzlecošais atskaņotājs"
+   },
+   "pop_up_player_control_info": {
+      "message": "Click or right-click to watch with the pop-up player"
+   },
+   "pop_up_player_embeds": {
+      "message": "Pop-up player and embedded videos:"
+   },
+   "pop_up_player_embeds_full_screen": {
+      "message": "Pop-up player and embedded videos (full screen):"
+   },
+   "pop_up_player_size": {
+      "message": "Uzlecošā atskaņotāja izmērs:"
+   },
+   "preserve_black_bars_color": {
+      "message": "Nemainīt vertikālo skalu krāsu, ja tiek izmantots YouTube-DeepDark skats, vai ieslēgts kino skats"
+   },
+   "prevent_autoplay": {
+      "message": "Prevent videos loaded in background tabs from automatically playing"
+   },
+   "prevent_autoplay_foreground_tab": {
+      "message": "Prevent videos loaded in the foreground tab from automatically playing as well"
+   },
+   "preview": {
+      "message": "Priekšskats"
+   },
+   "rate": {
+      "message": "Vērtēt"
+   },
+   "rate_extension": {
+      "message": "Rate your experience with Enhancer for YouTube™."
+   },
+   "reset": {
+      "message": "Reset"
+   },
+   "reverse_mouse_wheel_direction": {
+      "message": "Mainīt peles rullīša virzienu, kad tiek regulēta skaņa, vai atskaņošanas ātrums"
+   },
+   "reverse_playlist": {
+      "message": "Apgriezt atskaņošanas sarakstu"
+   },
+   "reverse_playlist_control_info": {
+      "message": "Click or right-click to watch a playlist in reverse order with the pop-up player"
+   },
+   "reverse_playlist_order": {
+      "message": "Sākt no beigām atskaņošanu"
+   },
+   "saturation": {
+      "message": "Saturation:"
+   },
+   "save": {
+      "message": "Save"
+   },
+   "screenshot": {
+      "message": "Ekrānuzņēmums"
+   },
+   "screenshot_control_info": {
+      "message": "Click to take a screenshot of the video"
+   },
+   "select_default_playback_speed": {
+      "message": "Leslēgt noklusējuma atskaņošanas ātrumu"
+   },
+   "select_normal_playback_speed": {
+      "message": "Leslēgt normālu atskaņošanas ātrumu"
+   },
+   "select_quality_1080p": {
+      "message": "Leslēgt atskaņošanas kvalitāti \"1080p\""
+   },
+   "select_quality_1440p": {
+      "message": "Leslēgt atskaņošanas kvalitāti \"1440p\""
+   },
+   "select_quality_144p": {
+      "message": "Leslēgt atskaņošanas kvalitāti \"144p\""
+   },
+   "select_quality_2160p": {
+      "message": "Leslēgt atskaņošanas kvalitāti \"2160p\""
+   },
+   "select_quality_240p": {
+      "message": "Leslēgt atskaņošanas kvalitāti \"240p\""
+   },
+   "select_quality_2880p": {
+      "message": "Leslēgt atskaņošanas kvalitāti \"2880p\""
+   },
+   "select_quality_360p": {
+      "message": "Leslēgt atskaņošanas kvalitāti \"360p\""
+   },
+   "select_quality_4320p": {
+      "message": "Leslēgt atskaņošanas kvalitāti \"4320p\""
+   },
+   "select_quality_480p": {
+      "message": "Leslēgt atskaņošanas kvalitāti \"480p\""
+   },
+   "select_quality_720p": {
+      "message": "Leslēgt atskaņošanas kvalitāti \"720p\""
+   },
+   "select_quality_auto": {
+      "message": "Leslēgt atskaņošanas kvalitāti \"Automātiski\""
+   },
+   "select_quality_full_screen": {
+      "message": "Select a different playback quality when entering the full screen mode"
+   },
+   "sepia": {
+      "message": "Sepia:"
+   },
+   "shrink": {
+      "message": "Samazināt"
+   },
+   "size_control_info": {
+      "message": "Click to expand or shrink the video player or right-click to center the video player within the viewport"
+   },
+   "speed": {
+      "message": "Ātrums"
+   },
+   "speed_control_info": {
+      "message": "Use the mouse wheel to control the playback speed or click to select the default playback speed or right-click to select the normal playback speed"
+   },
+   "speed_minus_control_info": {
+      "message": "Click to decrease the playback speed"
+   },
+   "speed_plus_control_info": {
+      "message": "Click to increase the playback speed"
+   },
+   "speed_variation": {
+      "message": "Ātruma variācijas regulējot ar peles rullīti, vai noklikšķinot uz pogām \"-\" un \"+\": "
+   },
+   "stop": {
+      "message": "Apturēt"
+   },
+   "stop_control_info": {
+      "message": "Peles kliķšķis aptur video"
+   },
+   "stop_video": {
+      "message": "Apturēt video"
+   },
+   "stop_videos": {
+      "message": "Completely stop videos instead of only preventing autoplay"
+   },
+   "support": {
+      "message": "Palīdzība"
+   },
+   "switch_back_previous_quality": {
+      "message": "Switch back to the previous playback quality when exiting the full screen mode"
+   },
+   "take_screenshot": {
+      "message": "Saglabāt video attēlu"
+   },
+   "theme": {
+      "message": "Izskats"
+   },
+   "theme_custom_theme": {
+      "message": "Skats: Pielāgots skats"
+   },
+   "theme_youtube_dark": {
+      "message": "Skats: YouTube™ (Tumšs)"
+   },
+   "theme_youtube_deep_dark": {
+      "message": "Skats: YouTube-DeepDark"
+   },
+   "theme_youtube_deep_dark_custom": {
+      "message": "Skats: YouTube-DeepDark (Pielāgots)"
+   },
+   "toggle_cards_end_screens": {
+      "message": "Leslēgt sākuma un beigu attēlus"
+   },
+   "toggle_cinema_mode": {
+      "message": "Leslēgt kino režīmu"
+   },
+   "toggle_comments_visibility": {
+      "message": "Parādīt komentārus"
+   },
+   "toggle_loop": {
+      "message": "Leslēgt ieciklēšanas režīmu"
+   },
+   "toggle_pip_mode": {
+      "message": "Leslēgt attēlu attēlā"
+   },
+   "toggle_related_videos_visibility": {
+      "message": "Parādīt saistītus video"
+   },
+   "toggle_video_filters": {
+      "message": "Leslēgt video filtrus"
+   },
+   "toggle_visibility": {
+      "message": "Leslēgt sākuma un beigu ekrānu"
+   },
+   "toggle_volume_booster": {
+      "message": "Leslēgt skaņas pastiprināšanu"
+   },
+   "top_left_corner": {
+      "message": "Kreisais augšējais stūris"
+   },
+   "top_right_corner": {
+      "message": "Labais augšējais stūris"
+   },
+   "translate": {
+      "message": "Tulkot"
+   },
+   "variant": {
+      "message": "Variant:"
+   },
+   "video_codecs_and_formats": {
+      "message": "Video codecs and formats"
+   },
+   "video_filters": {
+      "message": "Video filtrs"
+   },
+   "video_filters_control_info": {
+      "message": "Click to toggle the video filters or right-click to toggle the video filters panel visibility"
+   },
+   "video_player": {
+      "message": "Video atskaņotājs"
+   },
+   "videos": {
+      "message": "Videos:"
+   },
+   "videos_full_screen": {
+      "message": "Videos (full screen):"
+   },
+   "volume": {
+      "message": "Skaļums"
+   },
+   "volume_booster_control_info": {
+      "message": "Peles kliķšķis pastiprina skaņu"
+   },
+   "volume_booster_level": {
+      "message": "Skaņas pastiprinājuma līmenis:"
+   },
+   "volume_variation": {
+      "message": "Skaļuma varianti, kad groza peles rullīti:"
+   },
+   "watch_pop_up_player": {
+      "message": "Skatīties uzlecošajā atskaņotājā"
+   },
+   "youtube_dark_theme": {
+      "message": "YouTube (oficiālāis skats)"
+   },
+   "youtube_deep_dark": {
+      "message": "YouTube-DeepDark (by RaitaroH)"
+   },
+   "youtube_deep_dark_custom": {
+      "message": "YouTube-DeepDark (pielāgots)"
+   }
+}

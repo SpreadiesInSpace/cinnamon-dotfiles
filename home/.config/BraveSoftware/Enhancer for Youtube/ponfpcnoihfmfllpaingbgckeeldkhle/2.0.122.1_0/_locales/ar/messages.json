@@ -1,0 +1,572 @@
+{
+   "appearance": {
+      "message": "المظهر"
+   },
+   "auto_apply_video_filters": {
+      "message": "تطبيق فلاتر الفيديو تلقائيا"
+   },
+   "auto_boost_volume": {
+      "message": "زيادة مستوى الصوت تلقائيًا"
+   },
+   "auto_cinema_mode": {
+      "message": "تفعيل \"وضع السينما\" تلقائيا"
+   },
+   "auto_enable_theater_mode": {
+      "message": "تفعيل \"وضع السينما\" تلقائيا"
+   },
+   "auto_execute_script": {
+      "message": "تنفيذ الكود تلقائياً عند تحميل التبويبة YouTube"
+   },
+   "auto_expand_description": {
+      "message": "اضهار تفاصيل الفيديو تلقائيا"
+   },
+   "auto_expand_player": {
+      "message": "تكبير مشغل الفيديو تلقائيًا"
+   },
+   "auto_hide_cards_end_screens": {
+      "message": "إخفاء الكروت وشاشات النهاية تلقائياً"
+   },
+   "auto_select_quality": {
+      "message": "تشغيل الفيديو بدقة عرض تلقائية"
+   },
+   "auto_sort_comments": {
+      "message": "ترتيب تعليقات الفيديو تلقائي من الجديد الى القديم"
+   },
+   "autoplay": {
+      "message": "التشغيل التقائي"
+   },
+   "backup": {
+      "message": "نسخة أحتياطي"
+   },
+   "below_video_player": {
+      "message": "اسفل مشغل الفيديو"
+   },
+   "block_hfr_formats": {
+      "message": "فرض استخدام صيغ معدل الإطارات التقليدي ( 24,25,30 إطار في الثانية) عوضا عن صيغ معدل إطارات مرتفعة ( 48,50,60 إطار في الثانية)"
+   },
+   "block_webm_formats": {
+      "message": "فرض استخدام صيغة MP4 وترميز AVC او ما يسمى (H264) عوضا عن استخدام صيغة WebM مع ترميز VP9 (الدقة القصوى 1080p و 60 إطار في الثانية)"
+   },
+   "boost_volume": {
+      "message": "رفع الصوت"
+   },
+   "bottom_left_corner": {
+      "message": "الزاوية السفلية اليسرى"
+   },
+   "bottom_of_window": {
+      "message": "في الجزء السفلي من النافذة"
+   },
+   "bottom_right_corner": {
+      "message": "الزاوية السفلية اليمنى"
+   },
+   "brightness": {
+      "message": "السطوع:"
+   },
+   "cards_end_screens_control_info": {
+      "message": "اضغط للتبديل بين وضع إظهار الكروت وشاشة النهاية"
+   },
+   "center_control_bar": {
+      "message": "قم بتوسيط شريط التحكم أسفل مشغل الفيديو عندما يتم توسيعه أو عندما يكون وضع ملء الشاشة نشطًا"
+   },
+   "center_video_player": {
+      "message": "توسيط مشغل الفيديو الموسع في وسط الشاشة"
+   },
+   "cinema_mode": {
+      "message": "الوضع السينمائي"
+   },
+   "cinema_mode_control_info": {
+      "message": "اضغط للتبديل بين وضع السينما"
+   },
+   "cinema_mode_toggle_size": {
+      "message": "تكبير الشاشة تلقائي عندما يكون وضع السينما"
+   },
+   "color": {
+      "message": "اللون:"
+   },
+   "color_inversion": {
+      "message": "عكس اللون:"
+   },
+   "configure_keyboard_shortcuts": {
+      "message": "ضبط اختصارات الكيبورد"
+   },
+   "contrast": {
+      "message": "التباين:"
+   },
+   "control_bar_location": {
+      "message": "موقع شريط التحكم :"
+   },
+   "control_speed": {
+      "message": "تحكم بسرعة العرض عن طريق عجلة الفأرة عند الضغط المستمر على زر ال Ctrl ووضع المؤشر فوق مشغل الفيديو"
+   },
+   "control_speed_mouse_button": {
+      "message": "فقط عند الضغط بزر اليمين للفأرة"
+   },
+   "control_volume": {
+      "message": "يمكنك التحكم في مستوى الصوت باستخدام عجلة الماوس عند تحريك مشغل الفيديو باستخدام مؤشر الماوس"
+   },
+   "control_volume_mouse_button": {
+      "message": "فقط عند ضغط على الزر الايمن في الماوس"
+   },
+   "controls": {
+      "message": "ضبط"
+   },
+   "controls_visible": {
+      "message": "حافظ على عناصر التحكم مرئية دون الحاجة إلى النقر فوق عنصر التحكم ••• أو التمرير فوقه بمؤشر الماوس"
+   },
+   "controls_within_control_bar": {
+      "message": "ضع عناصر التحكم داخل شريط التحكم"
+   },
+   "controls_within_video_player": {
+      "message": "ضع عناصر تحكم داخل مشغل الفيديو"
+   },
+   "convert_shorts": {
+      "message": "Convert Shorts"
+   },
+   "copy_to_clipboard": {
+      "message": "انسخ إلى الحافظة"
+   },
+   "custom_script": {
+      "message": "سكريبت مخصص آخر"
+   },
+   "custom_script_control_info": {
+      "message": "اضغط تشغيل السكريبت المخصص"
+   },
+   "custom_script_instructions": {
+      "message": "الصق او اكتب اكواد الجافا سكربت هنا , ثم احفظها من خلال الضغط على الزر الاسفل , ثم الضغط على ' سكربت اخر ' في القائمة لتنفيذه"
+   },
+   "custom_script_warning": {
+      "message": "لأسباب أمنية يجب عليك ألا تستخدم أكواد لا تفهمها او تمت كتابتها من قبل مطورين لا تثق بهم"
+   },
+   "custom_theme": {
+      "message": "مظهر مخصص"
+   },
+   "custom_theme_instructions": {
+      "message": "اكتب او الصق كود ال CSS المخصص واضغط على الزر أدناه للحفظ"
+   },
+   "dark_theme": {
+      "message": "مظهر داكن"
+   },
+   "decrease_playback_speed": {
+      "message": "تخفيض سرعة العرض"
+   },
+   "default_playback_speed": {
+      "message": "سرعة العرض الافتراضية"
+   },
+   "default_volume_level": {
+      "message": "مستوى الصوت الافتراضي:"
+   },
+   "description": {
+      "message": "الكثير من التحديثات لتطوير YouTube."
+   },
+   "detailed_description": {
+      "message": "تم تصميم هذا الامتداد لتحقيق أقصى استفادة من YouTube ، وهو مزود بجميع أنواع الميزات التي تتيح لك ، من بين أشياء أخرى ، والتحكم في سرعة التشغيل ومستوى الصوت باستخدام عجلة الماوس ، و تلقائية المهام المتكررة مثل اختيار جودة التشغيل المناسبة ، قم بتكوين العشرات من اختصارات لوحة المفاتيح للتحكم في YouTube مثل المحترفين ، وغير ذلك الكثير ... جربه الآن ونحن نضمن لك أنك لن ترغب أبدًا في استخدام YouTube بدونه بعد ذلك ؛)\n\nYouTube هي علامة تجارية مملوكة لشركة Google LLC. يخضع استخدام هذه العلامة التجارية لأذونات Google."
+   },
+   "disable_autoplay": {
+      "message": "عدم تفعيل “اعادة التشغيل” ميزة"
+   },
+   "display_control_bar": {
+      "message": "اعرض شريط التحكم فقط عند التمرير فوقه بمؤشر الماوس"
+   },
+   "donate": {
+      "message": "تبرع"
+   },
+   "execute_custom_script": {
+      "message": "تشغيل السكريبت المخصص"
+   },
+   "expand": {
+      "message": "توسيع"
+   },
+   "expand_shrink_video_player": {
+      "message": "توسيع او تقليص مشغل الفيديو"
+   },
+   "expanded_player_viewport": {
+      "message": "استخدم منفذ العرض بالكامل لمشغل الفيديو الموسع عند عدم تمكين وضع السينما, دون تغيير نسبة العرض إلى الارتفاع"
+   },
+   "export": {
+      "message": "تصدير"
+   },
+   "export_instructions": {
+      "message": "أنشاء ملف جديد ونسخ محتواه هنا من غير اي تعديل علية"
+   },
+   "flip_horizontally": {
+      "message": "قلب أفقي"
+   },
+   "flip_horizontally_control_info": {
+      "message": "اضغط لقلب الفيديو أفقياً"
+   },
+   "flip_vertically": {
+      "message": "قلب عمودي"
+   },
+   "flip_vertically_control_info": {
+      "message": "اضغط لقلب الفيديو عاموديا"
+   },
+   "flip_video_horizontally": {
+      "message": "اقلب الفيديو أفقيا"
+   },
+   "flip_video_vertically": {
+      "message": "أقلب القيديو عاموديا"
+   },
+   "focus_video_player": {
+      "message": "حدد التركيز على مشغل الفيديو"
+   },
+   "gaussian_blur": {
+      "message": "التشوية الضبابي:"
+   },
+   "grayscale": {
+      "message": "الرمادية:"
+   },
+   "hide_chat": {
+      "message": "إخفاء المحادثة"
+   },
+   "hide_comments": {
+      "message": "إخفاء التعليقات"
+   },
+   "hide_related_videos": {
+      "message": "أخفاء الفيديوهات المرتبطة"
+   },
+   "hide_shorts": {
+      "message": "Hide Shorts"
+   },
+   "hue_rotation": {
+      "message": "الدوران:"
+   },
+   "ignore_playlists": {
+      "message": "لا توقف التشغيل عندما تكون في قائمة تشغيل"
+   },
+   "ignore_pop_up_player": {
+      "message": "تجاهل مشغل النوافذ المنبثقة"
+   },
+   "import": {
+      "message": "استيراد"
+   },
+   "import_error": {
+      "message": "محتوى النسخة غير صحيح!"
+   },
+   "import_instructions": {
+      "message": "لصق محتوى ملف النسخة الاحتياطي ثم الضغط على ' أستيراد ' , الصفحة تلقائياً ستقوم باعادة التحميل في حالة نجاح العملية"
+   },
+   "increase_playback_speed": {
+      "message": "زيادة سرعة العرض"
+   },
+   "keyboard_shortcuts": {
+      "message": "اختصارات الكيبورد"
+   },
+   "keyboard_shortcuts_control_info": {
+      "message": "اضغط لاظهار قائمة كل الاختصارات الخاصة بيوتيوب ( نافذة تبويب جديدة)"
+   },
+   "keyboard_shortcuts_page": {
+      "message": "أظهر اختصارات الكيبورد الخاصة بيوتيوب"
+   },
+   "launch_mini_player": {
+      "message": "تشغيل المشغل المصغّر عند التمرير للأسفل لقراءة التعليقات"
+   },
+   "locale_code": {
+      "message": "ar"
+   },
+   "locale_dir": {
+      "message": "rtl"
+   },
+   "loop": {
+      "message": "وضع التكرار"
+   },
+   "loop_control_info": {
+      "message": "اضغط أو أضغط بزر اليمين للتبديل بين وضع التكرار"
+   },
+   "loop_end": {
+      "message": "نهاية:"
+   },
+   "loop_start": {
+      "message": "بداية:"
+   },
+   "message": {
+      "message": "رسالة"
+   },
+   "mini_player": {
+      "message": "المشغل المصغّر"
+   },
+   "mini_player_position": {
+      "message": "موضع المشغل المصغّر:"
+   },
+   "mini_player_size": {
+      "message": "حجم المشغل المصغّر :"
+   },
+   "not_now": {
+      "message": "ليس الان"
+   },
+   "opacity": {
+      "message": "الشفافية:"
+   },
+   "open_options_page": {
+      "message": "فتح صفحة الخيارات"
+   },
+   "options": {
+      "message": "الخيارات"
+   },
+   "options_control_info": {
+      "message": "إضغط لفتح صفحة الإعدادات"
+   },
+   "override_playback_speeds": {
+      "message": "تجاوز إعدادات التشغيل الافتراضية"
+   },
+   "page_reload_required": {
+      "message": "تم تحديث Enhancer for YouTube™\nيجب عليكم إعادة تحميل الصفحة لتفعيل التحديثات"
+   },
+   "pause_videos": {
+      "message": "توقف مؤقت للفيديو الذي في تبويبت الخلفية عندما الفيديو يعمل في تابت الحالي"
+   },
+   "playback_quality": {
+      "message": "دقة العرض"
+   },
+   "playback_speed": {
+      "message": "سرعة العرض"
+   },
+   "playlists": {
+      "message": "قوائم التشغيل:"
+   },
+   "playlists_full_screen": {
+      "message": "قوائم التشغيل ( شاشة كاملة):"
+   },
+   "pop_up_player": {
+      "message": "المشغل العائم"
+   },
+   "pop_up_player_control_info": {
+      "message": "اضغط او اضغط بزر اليمين للمشاهدة باستخدام مشغل الفيديو العائم"
+   },
+   "pop_up_player_embeds": {
+      "message": "المشغل العائم والفيديوهات المضمّنة"
+   },
+   "pop_up_player_embeds_full_screen": {
+      "message": "المشغل العائم والفيديوهات المضمّنة ( شاشة كاملة)"
+   },
+   "pop_up_player_size": {
+      "message": "حجم المشغل العائم:"
+   },
+   "preserve_black_bars_color": {
+      "message": "لا تغير لون الأشرطة السوداء العمودية عند تطبيق سمة يوتيوب المظهر الداكن العميق ( YouTube-DeepDark ) أو عند تمكين وضع السينما"
+   },
+   "prevent_autoplay": {
+      "message": "توقيف الفيديو مؤقتاً عندما يكون في تبويبه اخرى"
+   },
+   "prevent_autoplay_foreground_tab": {
+      "message": "توقيف الفيديو تلقائي عندما يكون في تبويب مكرر"
+   },
+   "preview": {
+      "message": "معاينة"
+   },
+   "rate": {
+      "message": "تقييم"
+   },
+   "rate_extension": {
+      "message": "قيم تجربتك مع إضافة Enhancer for Youtube™"
+   },
+   "reset": {
+      "message": "إعادة ضبط"
+   },
+   "reverse_mouse_wheel_direction": {
+      "message": "قم بعكس اتجاه عجلة الماوس للتحكم في التشغيل ومستوى الصوت"
+   },
+   "reverse_playlist": {
+      "message": "عكس قائمة التشغيل"
+   },
+   "reverse_playlist_control_info": {
+      "message": "اضغط أو أضغط بزر اليمين لمشاهدة قائمة التشغيل بترتيب عكسي بواسطة مشغل الفيديو العائم"
+   },
+   "reverse_playlist_order": {
+      "message": "اعكس ترتيب قائمة التشغيل"
+   },
+   "saturation": {
+      "message": "الإشباع:"
+   },
+   "save": {
+      "message": "حفظ"
+   },
+   "screenshot": {
+      "message": "التقاط صورة شاشة"
+   },
+   "screenshot_control_info": {
+      "message": "اضغط لالتقاط صورة من الفيديو"
+   },
+   "select_default_playback_speed": {
+      "message": "اختار سرعة العرض الافتراضية"
+   },
+   "select_normal_playback_speed": {
+      "message": "اختار سرعة عرض عادية"
+   },
+   "select_quality_1080p": {
+      "message": "اختار دقة عرض 1080p"
+   },
+   "select_quality_1440p": {
+      "message": "اختار دقة عرض 1440p"
+   },
+   "select_quality_144p": {
+      "message": "اختار دقة عرض 144p"
+   },
+   "select_quality_2160p": {
+      "message": "اختار دقة عرض 2160p"
+   },
+   "select_quality_240p": {
+      "message": "اختار دقة عرض 240p"
+   },
+   "select_quality_2880p": {
+      "message": "اختار دقة عرض 2880p"
+   },
+   "select_quality_360p": {
+      "message": "اختار دقة عرض 360p"
+   },
+   "select_quality_4320p": {
+      "message": "اختار دقة عرض 4320p"
+   },
+   "select_quality_480p": {
+      "message": "اختار دقة عرض 480p"
+   },
+   "select_quality_720p": {
+      "message": "اختار دقة عرض 720p"
+   },
+   "select_quality_auto": {
+      "message": "اختار دقة عرض تلقائية"
+   },
+   "select_quality_full_screen": {
+      "message": "اختيار دقة عرض مختلفة عند تفعيل وضع الشاشة الكاملة"
+   },
+   "sepia": {
+      "message": "بني داكن:"
+   },
+   "shrink": {
+      "message": "تقليص"
+   },
+   "size_control_info": {
+      "message": "اضغط لتوسيع او تقليص مشغل الفيديو أو اضغط بزر اليمين لتوسيط مشغل الفيديو في المشهد"
+   },
+   "speed": {
+      "message": "سرعة التشغيل"
+   },
+   "speed_control_info": {
+      "message": "استخدم عجلة الفأرة للتحكم بسرعة العرض, أو اضغط لاختيار سرعة عرض افتراضية او اضغط بزر اليمين لاختيار سرعة عرض عادية"
+   },
+   "speed_minus_control_info": {
+      "message": "اضغط لإنقاص سرعة العرض"
+   },
+   "speed_plus_control_info": {
+      "message": "اضغط لزيادة سرعة العرض"
+   },
+   "speed_variation": {
+      "message": "تغيير السرعة عند تحريك عجلة الفارة او عند الضغط على الازرار '-' و '+' :"
+   },
+   "stop": {
+      "message": "إيقاف"
+   },
+   "stop_control_info": {
+      "message": "أضغط لإيقاف الفيديو"
+   },
+   "stop_video": {
+      "message": "اوقف الفيديو"
+   },
+   "stop_videos": {
+      "message": "توقف عن التحميل عندما تقوم تلقائي بتوقيف الفيديو"
+   },
+   "support": {
+      "message": "دعم"
+   },
+   "switch_back_previous_quality": {
+      "message": "العودة لدقة العرض السابقة عند الخروج من وضع الشاشة الكاملة"
+   },
+   "take_screenshot": {
+      "message": "قم بالتقاط صورة من الفيديو"
+   },
+   "theme": {
+      "message": "المظاهر"
+   },
+   "theme_custom_theme": {
+      "message": "المظهر : ثيم مخصص"
+   },
+   "theme_youtube_dark": {
+      "message": "المظهر : يوتيوب ( مظلم)"
+   },
+   "theme_youtube_deep_dark": {
+      "message": "المظهر : يوتيوب ( مظلم جداً)"
+   },
+   "theme_youtube_deep_dark_custom": {
+      "message": "المظهر : يوتيوب ( مظلم جداً مخصص)"
+   },
+   "toggle_cards_end_screens": {
+      "message": "تبديل وضع إظهار الكروت وشاشة النهاية"
+   },
+   "toggle_cinema_mode": {
+      "message": "تبديل وضع السينما"
+   },
+   "toggle_comments_visibility": {
+      "message": "تبديل إظهار التعليقات"
+   },
+   "toggle_loop": {
+      "message": "فعّل وضع التكرار"
+   },
+   "toggle_pip_mode": {
+      "message": "تفعيل وضع ال صورة-بداخل-صورة"
+   },
+   "toggle_related_videos_visibility": {
+      "message": "تبديل إظهار الفيديوهات ذات العلاقة"
+   },
+   "toggle_video_filters": {
+      "message": "تبديل وعرض قائمة فلاتر الفيديو"
+   },
+   "toggle_visibility": {
+      "message": "التبديل بين إظهار الكروت/شاشات النهائية"
+   },
+   "toggle_volume_booster": {
+      "message": "فعّل تقنية تعزيز الصوت"
+   },
+   "top_left_corner": {
+      "message": "الزاوية العلوية اليسرى"
+   },
+   "top_right_corner": {
+      "message": "الزاوية العلوية اليمنى"
+   },
+   "translate": {
+      "message": "ترجمة"
+   },
+   "variant": {
+      "message": "متنوع"
+   },
+   "video_codecs_and_formats": {
+      "message": "الترميزات وصيغ الفيديو"
+   },
+   "video_filters": {
+      "message": "فلاتر الفيديو"
+   },
+   "video_filters_control_info": {
+      "message": "اضغط للتبديل بين إظهار قائمة فلاتر الفيديو"
+   },
+   "video_player": {
+      "message": "مشغل الفيديو"
+   },
+   "videos": {
+      "message": "الفيديوهات:"
+   },
+   "videos_full_screen": {
+      "message": "الفيديوهات ( شاشة كاملة):"
+   },
+   "volume": {
+      "message": "الصوت"
+   },
+   "volume_booster_control_info": {
+      "message": "اضغط للتبديل بين وضع تعزيز الصوت"
+   },
+   "volume_booster_level": {
+      "message": "مستوى الصوت في وضع معزز الصوت:"
+   },
+   "volume_variation": {
+      "message": "تباين الحجم عند تدوير عجلة الماوس:"
+   },
+   "watch_pop_up_player": {
+      "message": "شاهد من خلال مشغل الفيديو العائم"
+   },
+   "youtube_dark_theme": {
+      "message": "YouTube ( المظهر الرسمي )"
+   },
+   "youtube_deep_dark": {
+      "message": "YouTube-DeepDark ( من RaitaroH )"
+   },
+   "youtube_deep_dark_custom": {
+      "message": "YouTube-DeepDark ( مخصص )"
+   }
+}

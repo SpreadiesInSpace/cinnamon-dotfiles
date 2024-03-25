@@ -1,0 +1,572 @@
+{
+   "appearance": {
+      "message": "Aparença"
+   },
+   "auto_apply_video_filters": {
+      "message": "Aplicar automàticament els filtres de vídeo"
+   },
+   "auto_boost_volume": {
+      "message": "Augmenta automàticament el volum"
+   },
+   "auto_cinema_mode": {
+      "message": "Automàticament habilitar el modo de cinema"
+   },
+   "auto_enable_theater_mode": {
+      "message": "Automàticament permetre YouTube \"Modo teatre\""
+   },
+   "auto_execute_script": {
+      "message": "Automàticament executar la seqüència de comandaments quan YouTube es carregat en una pestanya"
+   },
+   "auto_expand_description": {
+      "message": "Automàticament expandir les descripcions dels vídeos"
+   },
+   "auto_expand_player": {
+      "message": "Automàticament expandir el reproductor de vídeo"
+   },
+   "auto_hide_cards_end_screens": {
+      "message": "Automàticament amagar las targetes d'informació i pantalles finals"
+   },
+   "auto_select_quality": {
+      "message": "Automàticament seleccionar una qualitat de reproducció"
+   },
+   "auto_sort_comments": {
+      "message": "Automàticament classificar els comentaris del més nou al més vell"
+   },
+   "autoplay": {
+      "message": "Autoreproduir"
+   },
+   "backup": {
+      "message": "Copia de seguretat"
+   },
+   "below_video_player": {
+      "message": "Below the video player"
+   },
+   "block_hfr_formats": {
+      "message": "Forçar el ús de formats de tases de quadres estàndard (24, 25, 30 quadres per segon) enlloc de formats alts de tases de quadres (48, 50 ,60 quadres per segon)"
+   },
+   "block_webm_formats": {
+      "message": "Forçar l'us del format MP4 i el codificador/descodificador AVC (H.264) enlloc del format WebM i del codificador/descodificador VP9 (resolució màxima 1080p60 HD)"
+   },
+   "boost_volume": {
+      "message": "Reforçar volum"
+   },
+   "bottom_left_corner": {
+      "message": "Cantó inferior esquerre"
+   },
+   "bottom_of_window": {
+      "message": "At the bottom of the window"
+   },
+   "bottom_right_corner": {
+      "message": "Cantó inferior dret"
+   },
+   "brightness": {
+      "message": "Brillantor:"
+   },
+   "cards_end_screens_control_info": {
+      "message": "Clic per alternar la visibilitat de targetes i pantalles finals"
+   },
+   "center_control_bar": {
+      "message": "Center the control bar below the video player when it is expanded or when the full screen mode is active"
+   },
+   "center_video_player": {
+      "message": "Centrar el reproductor de vídeo dintre de la finestra gràfica"
+   },
+   "cinema_mode": {
+      "message": "Mode de cinema"
+   },
+   "cinema_mode_control_info": {
+      "message": "Clic per alternar el modo de cinema"
+   },
+   "cinema_mode_toggle_size": {
+      "message": "Automàticament expandir o contreure el reproductor de vídeo quan el modo de cinema es alternat"
+   },
+   "color": {
+      "message": "Color:"
+   },
+   "color_inversion": {
+      "message": "Inversió de colors:"
+   },
+   "configure_keyboard_shortcuts": {
+      "message": "Configurar dreceres de teclat"
+   },
+   "contrast": {
+      "message": "Contrast:"
+   },
+   "control_bar_location": {
+      "message": "Control bar location:"
+   },
+   "control_speed": {
+      "message": "Controlar la velocitat de reproducció amb la roda del ratolí quan el cursor del ratolí estigui sobre el reproductor de vídeo i el botó control (CTRL) estigui pressionat"
+   },
+   "control_speed_mouse_button": {
+      "message": "Només quan el botó dret estigui pressionat"
+   },
+   "control_volume": {
+      "message": "Controla el nivell del volum amb la roda del ratolí quan planegis sobre el reproductor de vídeo amb el cursor del ratolí"
+   },
+   "control_volume_mouse_button": {
+      "message": "Només quan el botó dret del ratolí es pressionat"
+   },
+   "controls": {
+      "message": "Controls"
+   },
+   "controls_visible": {
+      "message": "Keep controls visible without having to click the ••• control or hover over it with the mouse cursor"
+   },
+   "controls_within_control_bar": {
+      "message": "Place controls within a control bar"
+   },
+   "controls_within_video_player": {
+      "message": "Place controls within the video player"
+   },
+   "convert_shorts": {
+      "message": "Convert Shorts"
+   },
+   "copy_to_clipboard": {
+      "message": "Copiar al porta retalls"
+   },
+   "custom_script": {
+      "message": "Seqüència de comandaments personalitzada"
+   },
+   "custom_script_control_info": {
+      "message": "Clic per executar una seqüència de comandaments personalitzada"
+   },
+   "custom_script_instructions": {
+      "message": "Pegar or escriure el teu codi JavaScript aquí, guardar utilitzant el botó més abaix, i llavor clic en el control \"seqüència de comandaments personalitzada\" quan vulguis executar-la"
+   },
+   "custom_script_warning": {
+      "message": "Per raons de seguretat només hauries de fer servir codis que entens o codis que han estat escrits per un desenvolupador en qui confiïs"
+   },
+   "custom_theme": {
+      "message": "Tema personalitzat"
+   },
+   "custom_theme_instructions": {
+      "message": "Pega o escriu el teu codi CSS aquí i després guarda'l utilitzant el botó més abaix."
+   },
+   "dark_theme": {
+      "message": "Dark theme"
+   },
+   "decrease_playback_speed": {
+      "message": "Disminiuir la velocitat de reproducció"
+   },
+   "default_playback_speed": {
+      "message": "Velocitat de reproducció per defecte:"
+   },
+   "default_volume_level": {
+      "message": "Volum per defecte:"
+   },
+   "description": {
+      "message": "Pren el control de YouTube i millora la teva experiencia d'usuari!"
+   },
+   "detailed_description": {
+      "message": "Programada per obtindre el millor de YouTube, aquesta extensió ve carregada de característiques que et permeten, entre d'altres coses, controlar la velocitat de reproducció i el nivell de volum amb la roda del ratolí, automatitzar tasques repetitives com seleccionar la qualitat de reproducció apropiada, configurar dotzenes de dreceres de teclat, per controlar YouTube com un professional, i molt més... Prova'l! Però sigues conscient de que mai més voldràs utilitzar YouTube sense la extensió després ;)\n\nYouTube es una marca comercial de Google LLC. L'ús d'aquesta marca es subjecte al Permis de Google."
+   },
+   "disable_autoplay": {
+      "message": "Deshabilitar la autoreproducció"
+   },
+   "display_control_bar": {
+      "message": "Display the control bar only when hovering over it with the mouse cursor"
+   },
+   "donate": {
+      "message": "Donar"
+   },
+   "execute_custom_script": {
+      "message": "Executa la seqüència de comandaments personalitzada"
+   },
+   "expand": {
+      "message": "Expandir"
+   },
+   "expand_shrink_video_player": {
+      "message": "Expandir o contreure el reproductor de vídeo"
+   },
+   "expanded_player_viewport": {
+      "message": "Usar el espai disponible basat en les dimensions de la finestra gràfica per expandir el reproductor de vídeo"
+   },
+   "export": {
+      "message": "Exportar"
+   },
+   "export_instructions": {
+      "message": "Crear un fitxer de text nou i pegar el codi més abaix sense modificar-lo"
+   },
+   "flip_horizontally": {
+      "message": "Invertir horitzontalment"
+   },
+   "flip_horizontally_control_info": {
+      "message": "Clic per invertir el vídeo horitzontalment"
+   },
+   "flip_vertically": {
+      "message": "Invertir verticalment"
+   },
+   "flip_vertically_control_info": {
+      "message": "Clica per invertir el vídeo verticalment"
+   },
+   "flip_video_horizontally": {
+      "message": "Invertir el vídeo horitzontalment"
+   },
+   "flip_video_vertically": {
+      "message": "Invertir el vídeo verticalment"
+   },
+   "focus_video_player": {
+      "message": "Posar el focus al reproductor de vídeo"
+   },
+   "gaussian_blur": {
+      "message": "Difuminat Gaussià:"
+   },
+   "grayscale": {
+      "message": "Escala de grisos:"
+   },
+   "hide_chat": {
+      "message": "Amagar xat"
+   },
+   "hide_comments": {
+      "message": "Amagar comentaris"
+   },
+   "hide_related_videos": {
+      "message": "Amagar vídeos relacionats"
+   },
+   "hide_shorts": {
+      "message": "Hide Shorts"
+   },
+   "hue_rotation": {
+      "message": "Rotació de tonalitat:"
+   },
+   "ignore_playlists": {
+      "message": "No prevenir la reproducció de les llistes de reproducció"
+   },
+   "ignore_pop_up_player": {
+      "message": "Ignorar el reproductor emergent"
+   },
+   "import": {
+      "message": "Importar"
+   },
+   "import_error": {
+      "message": "El contingut del fitxer de copia de seguretat no es vàlid!"
+   },
+   "import_instructions": {
+      "message": "Pegar el contingut del fitxer de copia de seguretat i clicar en el botó \"Importar\". La pàgina serà recarregada automàticament si la configuració s'importa correctament."
+   },
+   "increase_playback_speed": {
+      "message": "Incrementar la velocitat de reproducció"
+   },
+   "keyboard_shortcuts": {
+      "message": "Dreceres de teclat"
+   },
+   "keyboard_shortcuts_control_info": {
+      "message": "Clic per mostrar la llista de totes les dreceres de teclat de YouTube (pàgina externa)"
+   },
+   "keyboard_shortcuts_page": {
+      "message": "Mostra totes les dreceres de YouTube"
+   },
+   "launch_mini_player": {
+      "message": "Llençar un mini reproductor quan es desplaci abaix per llegir comentaris"
+   },
+   "locale_code": {
+      "message": "ca"
+   },
+   "locale_dir": {
+      "message": "ltr"
+   },
+   "loop": {
+      "message": "Bucle"
+   },
+   "loop_control_info": {
+      "message": "Clic o clic dret per alternar el modo de bucle"
+   },
+   "loop_end": {
+      "message": "Fin:"
+   },
+   "loop_start": {
+      "message": "Inici:"
+   },
+   "message": {
+      "message": "Missatge"
+   },
+   "mini_player": {
+      "message": "Mini reproductor"
+   },
+   "mini_player_position": {
+      "message": "Posició del mini reproductor:"
+   },
+   "mini_player_size": {
+      "message": "Mida del mini reproductor:"
+   },
+   "not_now": {
+      "message": "Ara no"
+   },
+   "opacity": {
+      "message": "Opacitat:"
+   },
+   "open_options_page": {
+      "message": "Obrir la pàgina d'extensions"
+   },
+   "options": {
+      "message": "Opcions"
+   },
+   "options_control_info": {
+      "message": "Click to open the options page"
+   },
+   "override_playback_speeds": {
+      "message": "Anular les velocitats de reproducció per defecte"
+   },
+   "page_reload_required": {
+      "message": "Enhancer for YouTube™ ha estat actualitzat, totes les pàgines de YouTube han de ser recarregades."
+   },
+   "pause_videos": {
+      "message": "Pausar els vídeos reproduint-se en les pestanyes de segon pla quan un vídeo comença a reproduir-se en primer pla"
+   },
+   "playback_quality": {
+      "message": "Qualitat de reproducció"
+   },
+   "playback_speed": {
+      "message": "Velocitat de reproducció"
+   },
+   "playlists": {
+      "message": "Llistes de reproducció:"
+   },
+   "playlists_full_screen": {
+      "message": "Llistes de reproducció (pantalla completa):"
+   },
+   "pop_up_player": {
+      "message": "Reproductor emergent"
+   },
+   "pop_up_player_control_info": {
+      "message": "Clic o clic dret per visualitzar amb el reproductor emergent"
+   },
+   "pop_up_player_embeds": {
+      "message": "Reproductor emergent i vídeos incrustats:"
+   },
+   "pop_up_player_embeds_full_screen": {
+      "message": "Reproductor emergent i vídeos incrustats (pantalla completa):"
+   },
+   "pop_up_player_size": {
+      "message": "Mida del reproductor emergent:"
+   },
+   "preserve_black_bars_color": {
+      "message": "Do not change the color of the vertical black bars when the YouTube-DeepDark theme is applied or when the cinema mode is enabled"
+   },
+   "prevent_autoplay": {
+      "message": "Prevenir que els vídeos carregats en les pestanyes de segon pla es reprodueixin"
+   },
+   "prevent_autoplay_foreground_tab": {
+      "message": "Prevenir que els vídeos carregats en la pestanya de primer pla es reprodueixin també"
+   },
+   "preview": {
+      "message": "Vista prèvia"
+   },
+   "rate": {
+      "message": "Valora"
+   },
+   "rate_extension": {
+      "message": "Punta la teva experiència amb Enhancer for YouTube™."
+   },
+   "reset": {
+      "message": "Reiniciar"
+   },
+   "reverse_mouse_wheel_direction": {
+      "message": "Invertir la direcció de la roda del ratolí per controlar la velocitat de reproducció i el nivell de volum"
+   },
+   "reverse_playlist": {
+      "message": "Invertir llista de reproducció"
+   },
+   "reverse_playlist_control_info": {
+      "message": "Clic o clic dret per visualitzar una llista de reproducció en ordre invers amb el reproductor emergent"
+   },
+   "reverse_playlist_order": {
+      "message": "Invertir l'ordre de la llista de reproducció"
+   },
+   "saturation": {
+      "message": "Saturació:"
+   },
+   "save": {
+      "message": "Guarda"
+   },
+   "screenshot": {
+      "message": "Imatge de la pantalla"
+   },
+   "screenshot_control_info": {
+      "message": "Clic per capturar una imatge del vídeo"
+   },
+   "select_default_playback_speed": {
+      "message": "Seleccionar la velocitat de reproducció per omissió"
+   },
+   "select_normal_playback_speed": {
+      "message": "Seleccionar la velocitat de reproducció normal"
+   },
+   "select_quality_1080p": {
+      "message": "Seleccionar la qualitat de reproducció \"1080p\""
+   },
+   "select_quality_1440p": {
+      "message": "Seleccionar la qualitat de reproducció \"1440p\""
+   },
+   "select_quality_144p": {
+      "message": "Seleccionar la qualitat de reproducció \"144p\""
+   },
+   "select_quality_2160p": {
+      "message": "Seleccionar la qualitat de reproducció \"2160p\""
+   },
+   "select_quality_240p": {
+      "message": "Seleccionar la qualitat de reproducció \"240p\""
+   },
+   "select_quality_2880p": {
+      "message": "Seleccionar la qualitat de reproducció \"2880p\""
+   },
+   "select_quality_360p": {
+      "message": "Seleccionar la qualitat de reproducció \"360p\""
+   },
+   "select_quality_4320p": {
+      "message": "Seleccionar la qualitat de reproducció \"4320p\""
+   },
+   "select_quality_480p": {
+      "message": "Seleccionar la qualitat de reproducció \"480p\""
+   },
+   "select_quality_720p": {
+      "message": "Seleccionar la qualitat de reproducció \"720p\""
+   },
+   "select_quality_auto": {
+      "message": "Seleccionar la qualitat de reproducció automàtica"
+   },
+   "select_quality_full_screen": {
+      "message": "Seleccionar una qualitat diferent quan entris al modo de pantalla completa"
+   },
+   "sepia": {
+      "message": "Sèpia:"
+   },
+   "shrink": {
+      "message": "Contreure"
+   },
+   "size_control_info": {
+      "message": "Clic per expandir o contreure el reproductor de vídeo"
+   },
+   "speed": {
+      "message": "Velocitat"
+   },
+   "speed_control_info": {
+      "message": "Utilitza la roda del ratolí per controlar la velocitat de reproducció o clic per seleccionar la velocitat de reproducció per defecte o clic dret per seleccionar la velocitat de reproducció normal"
+   },
+   "speed_minus_control_info": {
+      "message": "Clic per disminuir la velocitat de reproducció"
+   },
+   "speed_plus_control_info": {
+      "message": "Clic per incrementar la velocitat de reproducció"
+   },
+   "speed_variation": {
+      "message": "Variació de velocitat quan giris la roda del ratolí o quan cliques als botons de velocitat \"-\" i \"+\": "
+   },
+   "stop": {
+      "message": "Parar"
+   },
+   "stop_control_info": {
+      "message": "Clic per parar el vídeo"
+   },
+   "stop_video": {
+      "message": "Parar el vídeo"
+   },
+   "stop_videos": {
+      "message": "Parar completament els vídeos en lloc de només prevenir la autoreproducció"
+   },
+   "support": {
+      "message": "Suport"
+   },
+   "switch_back_previous_quality": {
+      "message": "Tornar a la qualitat anterior quan surtis del modo pantalla completa"
+   },
+   "take_screenshot": {
+      "message": "Pren una imatge fixa del vídeo"
+   },
+   "theme": {
+      "message": "Tema"
+   },
+   "theme_custom_theme": {
+      "message": "Tema: Tema personalitzat"
+   },
+   "theme_youtube_dark": {
+      "message": "Tema: YouTube™ (Fosc)"
+   },
+   "theme_youtube_deep_dark": {
+      "message": "Tema: YouTube-DeepDark"
+   },
+   "theme_youtube_deep_dark_custom": {
+      "message": "Tema: YouTube-DeepDark (Personalitzat)"
+   },
+   "toggle_cards_end_screens": {
+      "message": "Alternar la visibilitat de targetes i pantalles finals"
+   },
+   "toggle_cinema_mode": {
+      "message": "Alternar el modo de cine"
+   },
+   "toggle_comments_visibility": {
+      "message": "Alternar la visibilitat dels comentaris"
+   },
+   "toggle_loop": {
+      "message": "Alternar el modo de bucle"
+   },
+   "toggle_pip_mode": {
+      "message": "Alternar el modo de imatge-a-imatge"
+   },
+   "toggle_related_videos_visibility": {
+      "message": "Alternar visibilitat dels vídeos relacionats"
+   },
+   "toggle_video_filters": {
+      "message": "Alternar els filtres de vídeo"
+   },
+   "toggle_visibility": {
+      "message": "Alternar visibilitat de targetes/pantalles de fi"
+   },
+   "toggle_volume_booster": {
+      "message": "Alternar el reforç de volum"
+   },
+   "top_left_corner": {
+      "message": "Cantó superior esquerre"
+   },
+   "top_right_corner": {
+      "message": "Cantó superior dret"
+   },
+   "translate": {
+      "message": "Traduir"
+   },
+   "variant": {
+      "message": "Variant"
+   },
+   "video_codecs_and_formats": {
+      "message": "Codificadors/decodificadors i formats de vídeo"
+   },
+   "video_filters": {
+      "message": "Filtres de vídeo"
+   },
+   "video_filters_control_info": {
+      "message": "Clic per alternar els filtres de vídeo o clic dret per alternar la visibilitat del panel de filtres de vídeo"
+   },
+   "video_player": {
+      "message": "Reproductor de vídeo"
+   },
+   "videos": {
+      "message": "Vídeos:"
+   },
+   "videos_full_screen": {
+      "message": "Vídeos (pantalla completa):"
+   },
+   "volume": {
+      "message": "Volum"
+   },
+   "volume_booster_control_info": {
+      "message": "Clic per alternar el reforç de volum"
+   },
+   "volume_booster_level": {
+      "message": "Nivell del reforç de volum:"
+   },
+   "volume_variation": {
+      "message": "Variació de volum quan rotis la roda del ratolí:"
+   },
+   "watch_pop_up_player": {
+      "message": "Visionar amb el reproductor emergent"
+   },
+   "youtube_dark_theme": {
+      "message": "YouTube (official theme)"
+   },
+   "youtube_deep_dark": {
+      "message": "YouTube-DeepDark (by RaitaroH)"
+   },
+   "youtube_deep_dark_custom": {
+      "message": "YouTube-DeepDark (custom)"
+   }
+}

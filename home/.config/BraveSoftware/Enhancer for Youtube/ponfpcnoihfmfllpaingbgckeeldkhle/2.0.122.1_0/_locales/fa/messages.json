@@ -1,0 +1,572 @@
+{
+   "appearance": {
+      "message": "ظاهر"
+   },
+   "auto_apply_video_filters": {
+      "message": "ایجاد فیلتر ویدیو به صورت خودکار"
+   },
+   "auto_boost_volume": {
+      "message": "افزایش خودکار صدا"
+   },
+   "auto_cinema_mode": {
+      "message": "فعال‌سازی خودکار حالت سینما"
+   },
+   "auto_enable_theater_mode": {
+      "message": "فعال کردن خودکار حالت تئاتر یوتیوب"
+   },
+   "auto_execute_script": {
+      "message": "موقع بارگذاری یوتیوب در یک زبانه جدید، اسکریپت به طور خودکار اجرا شود"
+   },
+   "auto_expand_description": {
+      "message": "بسط دادن خودکار قسمت توضیحات ویدئو"
+   },
+   "auto_expand_player": {
+      "message": "بزرگ کردن خودکار پخش‌کننده ویدئو"
+   },
+   "auto_hide_cards_end_screens": {
+      "message": "Automatically hide info cards and end screens"
+   },
+   "auto_select_quality": {
+      "message": "پخش خودکار ویدئوها با کیفیت مقدم مورد نظر من"
+   },
+   "auto_sort_comments": {
+      "message": "مرتب کردن خودکار نظرات از جدیدترین به قدیمی‌ترین"
+   },
+   "autoplay": {
+      "message": "پخش خودکار"
+   },
+   "backup": {
+      "message": "پشتیبان‌گیری"
+   },
+   "below_video_player": {
+      "message": "پایین پخش کننده ویدئو"
+   },
+   "block_hfr_formats": {
+      "message": "Force the use of standard frame rates formats (24, 25, 30 FPS) instead of high frame rates formats (48, 50, 60 FPS)"
+   },
+   "block_webm_formats": {
+      "message": "Force the use of the MP4 format and the AVC codec (H.264) instead of the WebM format and the VP9 codec (maximum resolution 1080p60 HD)"
+   },
+   "boost_volume": {
+      "message": "تقویت صدا"
+   },
+   "bottom_left_corner": {
+      "message": "گوشه پایین سمت چپ"
+   },
+   "bottom_of_window": {
+      "message": "در پایین صفحه"
+   },
+   "bottom_right_corner": {
+      "message": "گوشه پایین سمت راست"
+   },
+   "brightness": {
+      "message": "روشنایی:"
+   },
+   "cards_end_screens_control_info": {
+      "message": "Click to toggle cards and end screens visibility"
+   },
+   "center_control_bar": {
+      "message": "در حالت نمایش ویدئو بصورت تمام صفحه و یا در حالت تصویر بزرگ نمایی شده نوار کنترل را حد وسط ،زیر پخش کننده ویدئویی قرارداده شود"
+   },
+   "center_video_player": {
+      "message": "پخش کننده ویدیو را در داخل Viewport قرار دهید"
+   },
+   "cinema_mode": {
+      "message": "حالت سینما"
+   },
+   "cinema_mode_control_info": {
+      "message": "اطلاع: جهت فعال‌سازی/غیرفعال‌سازی حالت سینما این دکمه را کلیک کنید."
+   },
+   "cinema_mode_toggle_size": {
+      "message": "بزرگ کردن خودکار پخش‌کننده ویدئو هنگام فعال بودن حالت سینما"
+   },
+   "color": {
+      "message": "رنگ:"
+   },
+   "color_inversion": {
+      "message": "وارونگی رنگ:"
+   },
+   "configure_keyboard_shortcuts": {
+      "message": "پیکربندی میانبرهای صفحه کلید"
+   },
+   "contrast": {
+      "message": "کنتراست:"
+   },
+   "control_bar_location": {
+      "message": "مکان نمایش نوار کنترل :"
+   },
+   "control_speed": {
+      "message": "Control the playback speed with the mouse wheel when the mouse cursor is over the video player and the “Control” key (Ctrl) is pressed"
+   },
+   "control_speed_mouse_button": {
+      "message": "تنها زمانی که دکمه راست موس فشرده شود"
+   },
+   "control_volume": {
+      "message": "کنترل میزان صدا با چرخ اسکرول موس، موقع قرار دادن اشاره‌گر موس بر روی پخش‌کننده"
+   },
+   "control_volume_mouse_button": {
+      "message": "تنها وقتی که کلید راست موس فشار داده می‌شود"
+   },
+   "controls": {
+      "message": "کنترل‌ها"
+   },
+   "controls_visible": {
+      "message": "کنترل و تنظیمات بدون نیاز به کیک کردن روی ••• و یا نگه داشتن ماوس روی آن بصورت دائمی نمایش داده صود"
+   },
+   "controls_within_control_bar": {
+      "message": "منو کنترل در نوار کنترل قرار داده شود"
+   },
+   "controls_within_video_player": {
+      "message": "کنترل و تظیمات در بدنه ویدئو درحال پخش نمایش داده شود"
+   },
+   "convert_shorts": {
+      "message": "Convert Shorts"
+   },
+   "copy_to_clipboard": {
+      "message": "کپی در حافظه موقت"
+   },
+   "custom_script": {
+      "message": "اسکریپت سفارشی"
+   },
+   "custom_script_control_info": {
+      "message": "اطلاع: جهت اجرای اسکریپت سفارشی، بر روی این دکمه کلیک کنید."
+   },
+   "custom_script_instructions": {
+      "message": "کد جاوا اسکریپت خود را اینجا تایپ کرده و یا آن را پیست نمایید و سپس آن را توسط دکمه زیر ذخیره کنید؛ سپس وقتی می‌خواهید آن را اجرا کنید، بر روی دکمه اسکریپت سفارشی در نوار ابزار کلیک کنید."
+   },
+   "custom_script_warning": {
+      "message": "هشدار: به دلایل امنیتی، شما باید تنها از کدی استفاده کنید که نحوه کار آن را درک می‌کنید و یا توسط یک توسعه‌دهنده مورد اعتماد نوشته شده است."
+   },
+   "custom_theme": {
+      "message": "قالب سفارشی"
+   },
+   "custom_theme_instructions": {
+      "message": "کد CSS خود را اینجا تایپ کرده یا پیست کنید، سپس با استفاده از دکمه زیر آن را ذخیره کنید."
+   },
+   "dark_theme": {
+      "message": "قالب تیره"
+   },
+   "decrease_playback_speed": {
+      "message": "کاهش سرعت پخش"
+   },
+   "default_playback_speed": {
+      "message": "سرعت پخش پیش‌فرض:"
+   },
+   "default_volume_level": {
+      "message": "سطح صدای پیش‌فرض:"
+   },
+   "description": {
+      "message": "ویژگی‌های بسیار متعدد برای بهبود تجربه کاربری شما در یوتیوب"
+   },
+   "detailed_description": {
+      "message": "این برنامه افزودنی برای بهره مندی بیشتر از YouTube ساخته شده است و دارای انواع مختلفی است که به شما امکان می دهد تبلیغات را هر طور که می خواهید مدیریت کنید ، سرعت پخش و میزان صدا را با چرخ ماوس کنترل کرده و کارهای تکراری خودکار را انجام دهید. به عنوان انتخاب کیفیت پخش مناسب ، ده‌ها میانبر صفحه کلید را برای کنترل YouTube مانند یک حرفه‌ای پیکربندی کنید و موارد دیگر... امتحان کنید! اما توجه داشته باشید که پس از آن دیگر هرگز نخواهید از YouTube استفاده کنید. ;)\n\nYouTube علامت تجاری Google LLC است. استفاده از این علامت تجاری منوط به مجوزهای Google است."
+   },
+   "disable_autoplay": {
+      "message": "غیر فعال کردن ویژگی پخش خودکار یوتیوب"
+   },
+   "display_control_bar": {
+      "message": "فقط زمانی control bar نمایش داده شود که نشانگر موس شما به نزدیکی ان برود"
+   },
+   "donate": {
+      "message": "حمایت مالی"
+   },
+   "execute_custom_script": {
+      "message": "اجرای اسکریپت شخصی سازی شده."
+   },
+   "expand": {
+      "message": "بسط دادن"
+   },
+   "expand_shrink_video_player": {
+      "message": "پخش کننده ویدیو را بزرگ یا کوچک کنید"
+   },
+   "expanded_player_viewport": {
+      "message": "استفاده از تمام قسمت قابل مشاهده توسط کاربر برای پخش‌کننده ویدئوی بزرگ شده هنگامی که حالت سینما فعال نیست، بدون تغییر دادن نسبت ابعاد"
+   },
+   "export": {
+      "message": "گرفتن خروجی"
+   },
+   "export_instructions": {
+      "message": "یک فایل متنی جدید ایجاد کرده و کد زیر را بدون تغییر در آن الصاق نمایید."
+   },
+   "flip_horizontally": {
+      "message": "چرخش افقی"
+   },
+   "flip_horizontally_control_info": {
+      "message": "کلیک کنید تا تصویر بصورت افقی گردش کند"
+   },
+   "flip_vertically": {
+      "message": "چرخش عمودی"
+   },
+   "flip_vertically_control_info": {
+      "message": "کلیک کنید تاذتصویر بصورت عموی گردش کند"
+   },
+   "flip_video_horizontally": {
+      "message": "ویدئو به صورت افقی شود"
+   },
+   "flip_video_vertically": {
+      "message": "ویدئو به صورت عمودی شود"
+   },
+   "focus_video_player": {
+      "message": "فوکوس روی پخش کننده ویدیو باشد"
+   },
+   "gaussian_blur": {
+      "message": "تار کردن گوسی:"
+   },
+   "grayscale": {
+      "message": "سیاه و سفید:"
+   },
+   "hide_chat": {
+      "message": "مخفی کردن گفتگو"
+   },
+   "hide_comments": {
+      "message": "مخفی کردن نظرات"
+   },
+   "hide_related_videos": {
+      "message": "مخفی کردن ویدئوهای مرتبط"
+   },
+   "hide_shorts": {
+      "message": "Hide Shorts"
+   },
+   "hue_rotation": {
+      "message": "چرخش رنگ:"
+   },
+   "ignore_playlists": {
+      "message": "ویدوئوهای داخل لیست‌های پخش مکث نشوند"
+   },
+   "ignore_pop_up_player": {
+      "message": "چشم پوشی از پخش کننده پاپ آپ"
+   },
+   "import": {
+      "message": "وارد کردن"
+   },
+   "import_error": {
+      "message": "محتوای فایل پشتیبان معتبر نیست!"
+   },
+   "import_instructions": {
+      "message": "محتوای فایل پشتیبان را الصاق کرده و دکمه «وارد کردن» را کلیک کنید. اگر تنظیمات با موفقیت وارد شود، صفحه به طور خودکار بارگیری مجدد خواهد شد."
+   },
+   "increase_playback_speed": {
+      "message": "افزایش سرعت پخش"
+   },
+   "keyboard_shortcuts": {
+      "message": "میانبرهای صفحه کلید"
+   },
+   "keyboard_shortcuts_control_info": {
+      "message": "کلیک برای نمایش لیستی از تمام شورتکاتهای کیبورد برای یوتیوب (درصفحه ای جداگانه)"
+   },
+   "keyboard_shortcuts_page": {
+      "message": "نمایش همه میانبرهای صفحه کلید YouTube"
+   },
+   "launch_mini_player": {
+      "message": "Launch a mini player when scrolling down to read comments"
+   },
+   "locale_code": {
+      "message": "fa"
+   },
+   "locale_dir": {
+      "message": "rtl"
+   },
+   "loop": {
+      "message": "تکرار"
+   },
+   "loop_control_info": {
+      "message": "اطلاع: برای فعال یا غیرفعال کردن حالت حلقه تکرار این دکمه را کلیک کنید."
+   },
+   "loop_end": {
+      "message": "پایان:"
+   },
+   "loop_start": {
+      "message": "شروع:"
+   },
+   "message": {
+      "message": "پیغام"
+   },
+   "mini_player": {
+      "message": "mini player"
+   },
+   "mini_player_position": {
+      "message": "محل قرارگیری mini player"
+   },
+   "mini_player_size": {
+      "message": "اندازه mini player"
+   },
+   "not_now": {
+      "message": "الان نه"
+   },
+   "opacity": {
+      "message": "میزان شفافیت:"
+   },
+   "open_options_page": {
+      "message": "باز کردن صفحه تنظیمات"
+   },
+   "options": {
+      "message": "گزینه‌ها"
+   },
+   "options_control_info": {
+      "message": "کلیک برای بازکردن صفحه تنظیمات"
+   },
+   "override_playback_speeds": {
+      "message": "لغو کردن سرعت‌های پیش‌فرض پخش"
+   },
+   "page_reload_required": {
+      "message": "Enhancer for YouTube بروزرسانی شد، این صفحه باید مجدداً بارگیری شود."
+   },
+   "pause_videos": {
+      "message": "مکث کردن ویدئوهای در حال پخش در زبانه‌های پس‌زمینه موقع شروع به پخش یک ویدئو در زبانه پیش‌زمینه"
+   },
+   "playback_quality": {
+      "message": "کیفیت پخش"
+   },
+   "playback_speed": {
+      "message": "سرعت پخش"
+   },
+   "playlists": {
+      "message": "لیست های پخش:"
+   },
+   "playlists_full_screen": {
+      "message": "لیست های پخش (تمام صفحه):"
+   },
+   "pop_up_player": {
+      "message": "پخش‌کننده پاپ‌آپ"
+   },
+   "pop_up_player_control_info": {
+      "message": "کلیک یا کلیک-راست برای تماشاکردن در حالت pop-up player"
+   },
+   "pop_up_player_embeds": {
+      "message": "پخش‌کننده پاپ آپ و ویدئوهای جاسازی شده"
+   },
+   "pop_up_player_embeds_full_screen": {
+      "message": "پخش‌کننده پاپ آپ و ویدئوهای جاسازی شده (تمام صفحه)"
+   },
+   "pop_up_player_size": {
+      "message": "اندازه‌ی پخش‌کننده پاپ‌آپ"
+   },
+   "preserve_black_bars_color": {
+      "message": "Do not change the color of the vertical black bars when the YouTube-DeepDark theme is applied or when the cinema mode is enabled"
+   },
+   "prevent_autoplay": {
+      "message": "مکث کردن خودکار ویدئوهای باز شده در زبانه‌های پس‌زمینه"
+   },
+   "prevent_autoplay_foreground_tab": {
+      "message": "همچنین مکث کردن خودکار ویدئوهای باز شده در زبانه‌های پیش‌زمینه"
+   },
+   "preview": {
+      "message": "پیش‌نمایش"
+   },
+   "rate": {
+      "message": "ثبت امتیاز"
+   },
+   "rate_extension": {
+      "message": "تجربه خود را با Enhancer for YouTube ارزیابی کنید."
+   },
+   "reset": {
+      "message": "تنظیم مجدد"
+   },
+   "reverse_mouse_wheel_direction": {
+      "message": "برعکس کردن جهت دکمه اسکرول موس برای کنترل سرعت پخش و میزان صدا"
+   },
+   "reverse_playlist": {
+      "message": "معکوس کردن لیست پخش"
+   },
+   "reverse_playlist_control_info": {
+      "message": "برای مشاهده لیست پخش معکوس با Pop-Up، کلیک یا «راست کلیک» کنید"
+   },
+   "reverse_playlist_order": {
+      "message": "معکوس سازی لیست پخش"
+   },
+   "saturation": {
+      "message": "اشباع:"
+   },
+   "save": {
+      "message": "ذخیره"
+   },
+   "screenshot": {
+      "message": "عکس صفحه"
+   },
+   "screenshot_control_info": {
+      "message": "کلیک برای تهیه اسکرین شات از ویدیو"
+   },
+   "select_default_playback_speed": {
+      "message": "سرعت پخش پیش فرض را انتخاب کنید"
+   },
+   "select_normal_playback_speed": {
+      "message": "سرعت پخش عادی را انتخاب کنید"
+   },
+   "select_quality_1080p": {
+      "message": "انتخاب کیفیت پخش «1080p»"
+   },
+   "select_quality_1440p": {
+      "message": "انتخاب کیفیت پخش «1440p»"
+   },
+   "select_quality_144p": {
+      "message": "انتخاب کیفیت پخش «144p»"
+   },
+   "select_quality_2160p": {
+      "message": "انتخاب کیفیت پخش «2160p»"
+   },
+   "select_quality_240p": {
+      "message": "انتخاب کیفیت پخش «240p»"
+   },
+   "select_quality_2880p": {
+      "message": "انتخاب کیفیت پخش «2880p»"
+   },
+   "select_quality_360p": {
+      "message": "انتخاب کیفیت پخش «360p»"
+   },
+   "select_quality_4320p": {
+      "message": "انتخاب کیفیت پخش «4320p»"
+   },
+   "select_quality_480p": {
+      "message": "انتخاب کیفیت پخش «480p»"
+   },
+   "select_quality_720p": {
+      "message": "انتخاب کیفیت پخش «720p»"
+   },
+   "select_quality_auto": {
+      "message": "انتخاب کیفیت پخش «خودکار»"
+   },
+   "select_quality_full_screen": {
+      "message": "انتخاب کیفیت پخش متفاوت در حالت تمام صفحه"
+   },
+   "sepia": {
+      "message": "رنگ قرمز قهوه‌ای:"
+   },
+   "shrink": {
+      "message": "کوچک کردن"
+   },
+   "size_control_info": {
+      "message": "اطلاع: برای تغییر اندازه پخش‌کننده ویدئو این دکمه را کلیک کنید. بر روی این دکمه راست کلیک کنید تا پخش‌کننده در وسط منطقه قابل نمایش قرار گیرد."
+   },
+   "speed": {
+      "message": "سرعت"
+   },
+   "speed_control_info": {
+      "message": "استفاده از غلتک موس برای کنترل سرعت پخش یا کلیک کردن برای انتخاب سرعت پخش پیشفرض یا کلیک-راست برای انتخاب سرعت پخش عادی"
+   },
+   "speed_minus_control_info": {
+      "message": "اطلاع: برای کاهش سرعت پخش این دکمه را کلیک کنید."
+   },
+   "speed_plus_control_info": {
+      "message": "اطلاع: برای افزایش سرعت پخش، بر روی این دکمه کلیک کنید."
+   },
+   "speed_variation": {
+      "message": "تغییر سرعت موقع چرخش دکمه وسط موس و یا موقع کلیک بر روی دکمه‌های «-» و «+» که مربوط به سرعت هستند:"
+   },
+   "stop": {
+      "message": "توقف"
+   },
+   "stop_control_info": {
+      "message": "برای متوقف کردن ویدیو کلیک کنید"
+   },
+   "stop_video": {
+      "message": "توقف ویدئو"
+   },
+   "stop_videos": {
+      "message": "غیرفعال کردن پیش بارگیری موقعی که ویدئوها به طور خودکار مکث شده‌اند"
+   },
+   "support": {
+      "message": "پشتیبانی"
+   },
+   "switch_back_previous_quality": {
+      "message": "در هنگام تغییر از تمام صفحه به اندازه و یا وضعیت قبلی کیفیت پخش تصویر ویدئو به حالت قبل برگردانده شود"
+   },
+   "take_screenshot": {
+      "message": "از فیلم «عکس» بگیرید"
+   },
+   "theme": {
+      "message": "قالب"
+   },
+   "theme_custom_theme": {
+      "message": "قالب: سفارشی سازی"
+   },
+   "theme_youtube_dark": {
+      "message": "قالب: یوتیوب (تاریک)"
+   },
+   "theme_youtube_deep_dark": {
+      "message": "قالب: یوتیوب تاریک عمیق"
+   },
+   "theme_youtube_deep_dark_custom": {
+      "message": "قالب: یوتیوب تاریک عمیق (سفارشی)"
+   },
+   "toggle_cards_end_screens": {
+      "message": "Toggle cards and end screens visibility"
+   },
+   "toggle_cinema_mode": {
+      "message": "تغییر حالت سینما"
+   },
+   "toggle_comments_visibility": {
+      "message": "تغییر قابلیت مشاهده نظرات"
+   },
+   "toggle_loop": {
+      "message": "تغییر Loop Mode"
+   },
+   "toggle_pip_mode": {
+      "message": "تغییر حالت تصویر در تصویر"
+   },
+   "toggle_related_videos_visibility": {
+      "message": "تغییر قابلیت مشاهده فیلم های مرتبط"
+   },
+   "toggle_video_filters": {
+      "message": "فیلترهای ویدئو را تغییر دهید"
+   },
+   "toggle_visibility": {
+      "message": "Toggle cards/end screens visibility"
+   },
+   "toggle_volume_booster": {
+      "message": "روشن/خاموش تقویت کننده صدا"
+   },
+   "top_left_corner": {
+      "message": "گوشه بالا سمت چپ"
+   },
+   "top_right_corner": {
+      "message": "گوشه بالا سمت راست"
+   },
+   "translate": {
+      "message": "ترجمه"
+   },
+   "variant": {
+      "message": "نوع"
+   },
+   "video_codecs_and_formats": {
+      "message": "کدک‌ها و فرمت‌های ویدئویی"
+   },
+   "video_filters": {
+      "message": "جلوه های ویژه"
+   },
+   "video_filters_control_info": {
+      "message": "با کلیک کردن فیلتر تصویر فعال گردد و یا با راست کلیک پنل فیلتر تصویر را نمایان و یا پنهان کنید"
+   },
+   "video_player": {
+      "message": "پخش‌کننده ویدئو"
+   },
+   "videos": {
+      "message": "ویدئوها:"
+   },
+   "videos_full_screen": {
+      "message": "ویدئوها (تمام صفحه):"
+   },
+   "volume": {
+      "message": "صدا"
+   },
+   "volume_booster_control_info": {
+      "message": "اطلاع: بر روی این دکمه کلیک کنید تا تقویت‌کننده صدا فعال یا غیرفعال شود."
+   },
+   "volume_booster_level": {
+      "message": "سطح تقویت کننده صدا"
+   },
+   "volume_variation": {
+      "message": "تغییر صدا موقع چرخش دکمه اسکرول موس:"
+   },
+   "watch_pop_up_player": {
+      "message": "با Pop-Up تماشا کنید"
+   },
+   "youtube_dark_theme": {
+      "message": "YouTube (قالب رسمی)"
+   },
+   "youtube_deep_dark": {
+      "message": "YouTube-DeepDark (by RaitaroH)"
+   },
+   "youtube_deep_dark_custom": {
+      "message": "YouTube-DeepDark (شخصی سازی)"
+   }
+}

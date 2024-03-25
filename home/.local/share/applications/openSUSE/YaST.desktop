@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Categories=Settings;System;X-SuSE-Core-System;X-SuSE-ControlCenter-System;X-GNOME-SystemSettings;
+Name=YaST
+Icon=grub-customizer
+GenericName=Administrator Settings
+Exec=/usr/bin/xdg-su -c /sbin/yast2
+Encoding=UTF-8
+Comment=Manage system-wide settings
+
+Terminal=false
+PrefersNonDefaultGPU=false
+Name[en_US]=YaST

@@ -1,0 +1,133 @@
+{ config, lib, pkgs, ... }:
+
+let
+  user = "USERNAME_PLACEHOLDER";
+  nixpkgs_23_05 = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-23.05.tar.gz") {};
+  theme = {
+    package = nixpkgs_23_05.gruvbox-gtk-theme;
+    name = "Gruvbox-Dark-BL";
+  };
+  iconTheme = {
+    package = nixpkgs_23_05.pkgs.gruvbox-dark-icons-gtk;
+    name = "oomox-gruvbox-dark";
+  };
+  cursorTheme = {
+    package = pkgs.capitaine-cursors-themed;
+    name = "Capitaine Cursors (Gruvbox) - White";
+  };
+in
+{
+  imports = [ ./hardware-configuration.nix ];
+
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+  };
+
+  networking = {
+    hostName = "NixOS";
+    networkmanager.enable = true;
+  };
+
+  time.timeZone = "Asia/Bangkok";
+  i18n.defaultLocale = "en_US.utf8";
+
+  services.xserver = {
+    enable = true;
+    layout = "us";
+    xkbVariant = "";
+    desktopManager.cinnamon.enable = true;
+    # desktopManager.cinnamon.sessionPath = [ pkgs.gnome.gpaste ];
+    displayManager = {
+      lightdm = {
+        enable = true;
+        background = "/boot/Login_Wallpaper.jpg";
+        greeters.slick = {
+          enable = true;
+          theme = theme;
+          iconTheme = iconTheme;
+          cursorTheme = cursorTheme;
+          extraConfig = "clock-format=%a, %-e %b %-l:%M %p ";
+        };
+      };
+      autoLogin = {
+        enable = true;
+        user = user;
+      };
+    };
+  };
+
+  sound.enable = true;
+  hardware.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa = {
+      enable = true;
+      support32Bit = true;
+    };
+    pulse.enable = true;
+  };
+
+  users.users.${user} = {
+    isNormalUser = true;
+    description = "Poom Chitnuchtaranon";
+    extraGroups = [ "networkmanager" "wheel" "sudo" "libvirtd" ];
+    packages = with pkgs; [];
+  };
+
+  nixpkgs.config = {
+    allowUnfree = true;
+    # permittedInsecurePackages = [ "electron-9.4.4" ]; # For Authy
+    packageOverrides = pkgs: {
+      unstable = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz") {};
+    };
+  };
+
+  environment = {
+    systemPackages = with pkgs.gnome // pkgs.libsForQt5 // pkgs; ([
+      bleachbit bottom brave celluloid clipit filezilla gcc gedit git gnome-system-monitor
+      gparted libreoffice-fresh ncdu neofetch unstable.neovim qbittorrent qt5ct ripgrep rmlint
+      timeshift unzip virt-manager wget xclip xorg.xkill qtstyleplugin-kvantum
+    ]);
+    cinnamon.excludePackages = with pkgs.cinnamon // pkgs.gnome // pkgs; ([
+      bulky gnome-calendar hexchat mint-artwork mint-cursor-themes mint-l-icons mint-l-theme mint-themes
+      mint-x-icons mint-y-icons nixos-artwork.wallpapers.simple-dark-gray onboard orca pix
+      sound-theme-freedesktop xed-editor xplayer warpinator
+    ]);
+    variables = {
+      QT_STYLE_OVERRIDE = lib.mkForce "kvantum";
+      GTK_THEME = theme.name;
+    };
+  };
+
+  fonts.packages = with pkgs; [
+    noto-fonts noto-fonts-emoji (nerdfonts.override { fonts = [ "SourceCodePro" ]; })
+  ];
+
+  programs = {
+    kdeconnect.enable = true;
+    dconf.enable = true;
+    geary.enable = false;
+    gnome-disks.enable = false;
+    # gpaste.enable = true;
+  };
+
+  xdg.portal.enable = true;
+  services = {
+    flatpak.enable = true;
+    spice-vdagentd.enable = true;
+    # teamviewer.enable = true;
+  };
+  virtualisation.libvirtd.enable = true;
+
+  systemd.extraConfig = "DefaultTimeoutStopSec=15s\n";
+
+  networking.firewall = {
+    enable = true;
+    allowedTCPPortRanges = [ { from = 1714; to = 1764; } ];
+    allowedUDPPortRanges = [ { from = 1714; to = 1764; } ];
+  };
+
+  system.stateVersion = "22.05";
+}

@@ -1,0 +1,572 @@
+{
+   "appearance": {
+      "message": "Izgled"
+   },
+   "auto_apply_video_filters": {
+      "message": "Automatski primeni video filtere"
+   },
+   "auto_boost_volume": {
+      "message": "Automatski pojačaj jačinu zvuka"
+   },
+   "auto_cinema_mode": {
+      "message": "Automatski uključi bioskopski režim"
+   },
+   "auto_enable_theater_mode": {
+      "message": "Automatski uključi bioskopski režim"
+   },
+   "auto_execute_script": {
+      "message": "Automatski izvrši kod kada se YouTube učita na kartici"
+   },
+   "auto_expand_description": {
+      "message": "Automatski proširi opise video-zapisa"
+   },
+   "auto_expand_player": {
+      "message": "Automatski proširi video plejer"
+   },
+   "auto_hide_cards_end_screens": {
+      "message": "Automatski sakrij info kartice i završne ekrane"
+   },
+   "auto_select_quality": {
+      "message": "Automatski izaberi kvalitet"
+   },
+   "auto_sort_comments": {
+      "message": "Automatski sortiraj komentare od najnovijih do najstarijih"
+   },
+   "autoplay": {
+      "message": "Autoplej"
+   },
+   "backup": {
+      "message": "Rezervna kopija podešavanja"
+   },
+   "below_video_player": {
+      "message": "ispod video plejera"
+   },
+   "block_hfr_formats": {
+      "message": "Prinudno koristi standardne formate brzine kadrova (24, 25, 30 FPS) umesto formata visoke brzine kadrova (48, 50, 60 FPS)"
+   },
+   "block_webm_formats": {
+      "message": "Prinudno koristi MP4 format i AVC kodek (H.264) umesto WebM formata i VP9 kodeka (maksimalna rezolucija: 1080p60 HD)"
+   },
+   "boost_volume": {
+      "message": "Pojačaj zvuk"
+   },
+   "bottom_left_corner": {
+      "message": "donji levi ugao"
+   },
+   "bottom_of_window": {
+      "message": "na dnu prozora"
+   },
+   "bottom_right_corner": {
+      "message": "donji desni ugao"
+   },
+   "brightness": {
+      "message": "Osvetljenost:"
+   },
+   "cards_end_screens_control_info": {
+      "message": "Kliknite ovde da uključite vidljivost info kartica i završnih ekrana"
+   },
+   "center_control_bar": {
+      "message": "Centriraj kontrolnu traku ispod video plejera kada je raširen ili kada je uključen režim “ceo ekran”"
+   },
+   "center_video_player": {
+      "message": "Centriraj video po vidljivosti na ekranu"
+   },
+   "cinema_mode": {
+      "message": "Bioskopski režim"
+   },
+   "cinema_mode_control_info": {
+      "message": "Kliknite ovde da uđete u bioskopski režim"
+   },
+   "cinema_mode_toggle_size": {
+      "message": "Automatski proširi ili smanji video plejer kada je uključen bioskopski režim"
+   },
+   "color": {
+      "message": "Boja:"
+   },
+   "color_inversion": {
+      "message": "Obrt boja:"
+   },
+   "configure_keyboard_shortcuts": {
+      "message": "Konfiguriši prečice za tastaturu"
+   },
+   "contrast": {
+      "message": "Kontrast:"
+   },
+   "control_bar_location": {
+      "message": "Lokacija trake za kontrole:"
+   },
+   "control_speed": {
+      "message": "Kontroliši brzinu reprodukcije pomoću točkića miša kada je kursor miša preko video plejera i kada je pritisnut taster „Control“ (Ctrl)"
+   },
+   "control_speed_mouse_button": {
+      "message": "Jedino kada je pritisnut desni klik"
+   },
+   "control_volume": {
+      "message": "Kontroliši nivo jačine zvuka pomoću točkića miša prilikom prelaska kursora miša preko video plejera"
+   },
+   "control_volume_mouse_button": {
+      "message": "Jedino kada je pritisnut desni klik"
+   },
+   "controls": {
+      "message": "Kontrole"
+   },
+   "controls_visible": {
+      "message": "Ostavi kontrole vidljive bez potrebe za klikom na ••• ili prelaska preko ••• kursorom miša"
+   },
+   "controls_within_control_bar": {
+      "message": "Stavi kontrole unutar trake za kontrole"
+   },
+   "controls_within_video_player": {
+      "message": "Stavi kontrole unutar video plejera"
+   },
+   "convert_shorts": {
+      "message": "Konvertuj Shorts"
+   },
+   "copy_to_clipboard": {
+      "message": "Kopiraj u privremenu memoriju"
+   },
+   "custom_script": {
+      "message": "Korisnički uređen kod"
+   },
+   "custom_script_control_info": {
+      "message": "Kliknite ovde da pokrenete korisnički podešen kod"
+   },
+   "custom_script_instructions": {
+      "message": "Nalepite ili otkucajte svoj JavaScript kod ovde, sačuvajte ga pomoću dugmeta ispod, a zatim kliknite na kontrolu „Korisnički uređen kod“ kada želite da ga izvršite."
+   },
+   "custom_script_warning": {
+      "message": "Iz bezbednosnih razloga, koristite samo kod koji razumete ili kod koji je napisao programer kome verujete."
+   },
+   "custom_theme": {
+      "message": "Korisnički urađena tema"
+   },
+   "custom_theme_instructions": {
+      "message": "Nalepite ili napišite svoj CSS kod ovde, zatim ga sačuvajte klikom na dugme ispod."
+   },
+   "dark_theme": {
+      "message": "Mračna tema"
+   },
+   "decrease_playback_speed": {
+      "message": "Smanji brzinu reprodukcije"
+   },
+   "default_playback_speed": {
+      "message": "Uobičajena brzina reprodukcije:"
+   },
+   "default_volume_level": {
+      "message": "Uobičajen nivo jačine zvuka:"
+   },
+   "description": {
+      "message": "Preuzmi kontrolu nad YouTube-om i poboljšajte svoje iskustvo!"
+   },
+   "detailed_description": {
+      "message": "Napravljen da izvuče maksimum iz YouTube-a, ovo proširenje dolazi prepuno svih vrsta funkcija koje vam omogućavaju, između ostalog, da kontrolišete brzinu reprodukcije i nivo jačine zvuka pomoću točkića miša, automatizujete zadatke koji se ponavljaju kao što su kao odabir odgovarajućeg kvaliteta reprodukcije, konfigurišite desetine prečica na tastaturi da kontrolišete YouTube kao profesionalac i još mnogo toga... Isprobajte naše proširenje - verujemo da nećete više hteti da koristite YouTube bez njega ;)\n\nYouTube je zaštitni znak kompanije Google LLC. Korišćenje ovog zaštitnog znaka podleže dozvolama kompanije Google."
+   },
+   "disable_autoplay": {
+      "message": "Isključi autoplej"
+   },
+   "display_control_bar": {
+      "message": "Pokaži kontrolnu traku samo kada prelaziš preko nje mišem"
+   },
+   "donate": {
+      "message": "Donirajte"
+   },
+   "execute_custom_script": {
+      "message": "Pokreni korisnički uređen kod"
+   },
+   "expand": {
+      "message": "Raširi"
+   },
+   "expand_shrink_video_player": {
+      "message": "Raširi ili smanji video plejer"
+   },
+   "expanded_player_viewport": {
+      "message": "Koristi raspoloživ prostor na osnovu dimenzija okvira za prikaz kako bi proširio video plejer"
+   },
+   "export": {
+      "message": "Izvezi"
+   },
+   "export_instructions": {
+      "message": "Napravite novu tekstualnu datoteku i nalepite kod u nastavku bez izmena."
+   },
+   "flip_horizontally": {
+      "message": "Obrni horizontalno"
+   },
+   "flip_horizontally_control_info": {
+      "message": "Kliknite ovde da obrnete video plejer horizontalno"
+   },
+   "flip_vertically": {
+      "message": "Obrni vertikalno"
+   },
+   "flip_vertically_control_info": {
+      "message": "Kliknite ovde da obrnete video plejer vertikalno"
+   },
+   "flip_video_horizontally": {
+      "message": "Obrni video horizontalno"
+   },
+   "flip_video_vertically": {
+      "message": "Obrni video vertikalno"
+   },
+   "focus_video_player": {
+      "message": "Fokusiraj na video plejer"
+   },
+   "gaussian_blur": {
+      "message": "Gausovo zamućenje:"
+   },
+   "grayscale": {
+      "message": "Nijanse sive:"
+   },
+   "hide_chat": {
+      "message": "Sakrij ćaskanje"
+   },
+   "hide_comments": {
+      "message": "Sakrij komentare"
+   },
+   "hide_related_videos": {
+      "message": "Sakrij predložene video-zapise"
+   },
+   "hide_shorts": {
+      "message": "Sakrij Shorts"
+   },
+   "hue_rotation": {
+      "message": "Menjanje nijansi:"
+   },
+   "ignore_playlists": {
+      "message": "Ne sprečavaj automatsku reprodukciju za liste pesama"
+   },
+   "ignore_pop_up_player": {
+      "message": "Zanemari iskačući plejer"
+   },
+   "import": {
+      "message": "Uvezi"
+   },
+   "import_error": {
+      "message": "Sadržaj ove rezervne kopije nije ispravan!"
+   },
+   "import_instructions": {
+      "message": "Nalepite sadržaj rezervne kopije i kliknite na dugme „Uvezi“. Stranica će se automatski ponovo učitati ukoliko su podešavanja uspešno uvezena."
+   },
+   "increase_playback_speed": {
+      "message": "Povećaj brzinu reprodukcije"
+   },
+   "keyboard_shortcuts": {
+      "message": "Prečice za tastaturu"
+   },
+   "keyboard_shortcuts_control_info": {
+      "message": "Kliknite ovde da prikažete sve prečice za tastaturu za YouTube (spoljašnji veb-sajt)"
+   },
+   "keyboard_shortcuts_page": {
+      "message": "Pokaži sve prečice za tastaturu za YouTube"
+   },
+   "launch_mini_player": {
+      "message": "Uključi mini plejer tokom gledanja komentara"
+   },
+   "locale_code": {
+      "message": "sr"
+   },
+   "locale_dir": {
+      "message": "ltr"
+   },
+   "loop": {
+      "message": "Uključi režim ponavljanja"
+   },
+   "loop_control_info": {
+      "message": "Kliknite ovde ili pritisnite desni klik da ukljucite režim ponavljanja"
+   },
+   "loop_end": {
+      "message": "Kraj:"
+   },
+   "loop_start": {
+      "message": "Početak:"
+   },
+   "message": {
+      "message": "Poruka"
+   },
+   "mini_player": {
+      "message": "Mini plejer"
+   },
+   "mini_player_position": {
+      "message": "Pozicija mini plejera:"
+   },
+   "mini_player_size": {
+      "message": "Veličina mini plejera:"
+   },
+   "not_now": {
+      "message": "Ne sada"
+   },
+   "opacity": {
+      "message": "Vidljivost:"
+   },
+   "open_options_page": {
+      "message": "Otvori stranicu sa podešavanjima"
+   },
+   "options": {
+      "message": "Podešavanja"
+   },
+   "options_control_info": {
+      "message": "Kliknite ovde da otvorite stranicu sa podešavanjima"
+   },
+   "override_playback_speeds": {
+      "message": "Odstupi od uobičajene brzine reprodukcije"
+   },
+   "page_reload_required": {
+      "message": "Enhancer for YouTube™ je upravo ažuriran. Ponovo učitajte vaše otvorene YouTube kartice."
+   },
+   "pause_videos": {
+      "message": "Pauziraj video snimke koji se reprodukuju na karticama u pozadini kada video počne da se reprodukuje na trenutnoj kartici"
+   },
+   "playback_quality": {
+      "message": "Kvalitet reprodukcije"
+   },
+   "playback_speed": {
+      "message": "Brzina reprodukcije"
+   },
+   "playlists": {
+      "message": "Plejliste:"
+   },
+   "playlists_full_screen": {
+      "message": "Plejliste (preko celog ekrana):"
+   },
+   "pop_up_player": {
+      "message": "Iskačući plejer:"
+   },
+   "pop_up_player_control_info": {
+      "message": "Kliknite ovde ili pritisnite desni klik uključite iskačući plejer"
+   },
+   "pop_up_player_embeds": {
+      "message": "Iskačući plejer i ugrađeni video-zapisi:"
+   },
+   "pop_up_player_embeds_full_screen": {
+      "message": "Iskačući plejer i ugrađeni video-zapisi (preko celog ekrana):"
+   },
+   "pop_up_player_size": {
+      "message": "Veličina iskačućeg plejera:"
+   },
+   "preserve_black_bars_color": {
+      "message": "Ne menjaj boju vertikalnih crnih traka kada je primenjena tema “YouTube-DeepDark“ ili kada je uključen bioskopski režim"
+   },
+   "prevent_autoplay": {
+      "message": "Spreči autoplej video-zapisa učitanih na karticama u pozadini"
+   },
+   "prevent_autoplay_foreground_tab": {
+      "message": "Spreči autoplej video-zapisa učitanih na trenutnoj kartici"
+   },
+   "preview": {
+      "message": "Pregled"
+   },
+   "rate": {
+      "message": "Ocenite"
+   },
+   "rate_extension": {
+      "message": "Ocenite svoje iskustvo sa Enhancer for YouTube™."
+   },
+   "reset": {
+      "message": "Restartuj"
+   },
+   "reverse_mouse_wheel_direction": {
+      "message": "Obrni smer točkića miša za kontrolisanje brzine reprodukcije i nivoa jačine zvuka"
+   },
+   "reverse_playlist": {
+      "message": "Obrni plejlistu"
+   },
+   "reverse_playlist_control_info": {
+      "message": "Kliknite ovde ili stisnite desni klik da gledate plejlistu u obrnutom redu sa iskačućim plejerom"
+   },
+   "reverse_playlist_order": {
+      "message": "Obrni redosled puštanja u plejlisti"
+   },
+   "saturation": {
+      "message": "Saturacija:"
+   },
+   "save": {
+      "message": "Sačuvaj"
+   },
+   "screenshot": {
+      "message": "Napravi snimak ekrana"
+   },
+   "screenshot_control_info": {
+      "message": "Kliknite ovde da napravite snimak ekrana video-zapisa"
+   },
+   "select_default_playback_speed": {
+      "message": "Izaberi podrazumevanu brzinu reprodukcije"
+   },
+   "select_normal_playback_speed": {
+      "message": "Izaberi običnu brzinu reprodukcije"
+   },
+   "select_quality_1080p": {
+      "message": "Izaberi kvalitet reprodukcije “1080p”"
+   },
+   "select_quality_1440p": {
+      "message": "Izaberi kvalitet reprodukcije “1440p”"
+   },
+   "select_quality_144p": {
+      "message": "Izaberi kvalitet reprodukcije “144p”"
+   },
+   "select_quality_2160p": {
+      "message": "Izaberi kvalitet reprodukcije “2160p”"
+   },
+   "select_quality_240p": {
+      "message": "Izaberi kvalitet reprodukcije “240p”"
+   },
+   "select_quality_2880p": {
+      "message": "Izaberi kvalitet reprodukcije “2880p”"
+   },
+   "select_quality_360p": {
+      "message": "Izaberi kvalitet reprodukcije “360p”"
+   },
+   "select_quality_4320p": {
+      "message": "Izaberi kvalitet reprodukcije “4320p”"
+   },
+   "select_quality_480p": {
+      "message": "Izaberi kvalitet reprodukcije “480p”"
+   },
+   "select_quality_720p": {
+      "message": "Izaberi kvalitet reprodukcije “720p”"
+   },
+   "select_quality_auto": {
+      "message": "Izaberi automatski kvalitet reprodukcije"
+   },
+   "select_quality_full_screen": {
+      "message": "Izaberi drugi kvalitet reprodukcije kada si u režimu prikaza preko celog ekrana"
+   },
+   "sepia": {
+      "message": "Sepia:"
+   },
+   "shrink": {
+      "message": "Smanji"
+   },
+   "size_control_info": {
+      "message": "Kliknite ovde da raširite ili smanjite video plejer ili pritisnite desni klik da centrirate video plejer na tačku vidljivosti"
+   },
+   "speed": {
+      "message": "Brzina"
+   },
+   "speed_control_info": {
+      "message": "Koristite točkić miša da kontrolišete brzinu reprodukcije / Kliknite ovde da izaberete podrazumevanu brzinu reprodukcije / Pritisnite desni klik da izaberete običnu brzinu reprodukcije"
+   },
+   "speed_minus_control_info": {
+      "message": "Kliknite ovde da usporite video-zapis"
+   },
+   "speed_plus_control_info": {
+      "message": "Kliknite ovde da ubrzate video-zapis"
+   },
+   "speed_variation": {
+      "message": "Promena u brzini prilikom okretanja točkića miša ili klika na dugmad za brzinu „-“ i „+“:"
+   },
+   "stop": {
+      "message": "Zaustavi"
+   },
+   "stop_control_info": {
+      "message": "Kliknite ovde da zaustavite reprodukciju video-zapisa"
+   },
+   "stop_video": {
+      "message": "Zaustavi reprodukciju video-zapisa"
+   },
+   "stop_videos": {
+      "message": "Potpuno zaustavi video zapise umesto samo sprečavanja autopleja"
+   },
+   "support": {
+      "message": "Podržite"
+   },
+   "switch_back_previous_quality": {
+      "message": "Vrati nazad na prethodni kvalitet reprodukcije prilikom izlaska iz režima prikaza preko celog ekrana"
+   },
+   "take_screenshot": {
+      "message": "Napravi snimak ekranasa video-zapisa"
+   },
+   "theme": {
+      "message": "Tema"
+   },
+   "theme_custom_theme": {
+      "message": "Tema: korisnički uređena"
+   },
+   "theme_youtube_dark": {
+      "message": "Tema: YouTube™ (Tamna)"
+   },
+   "theme_youtube_deep_dark": {
+      "message": "Tema: YouTube-DeepDark"
+   },
+   "theme_youtube_deep_dark_custom": {
+      "message": "Tema: YouTube-DeepDark (korisnički uređeno)"
+   },
+   "toggle_cards_end_screens": {
+      "message": "Uključi info kartice i završne ekrane"
+   },
+   "toggle_cinema_mode": {
+      "message": "Uključi bioskopski režim"
+   },
+   "toggle_comments_visibility": {
+      "message": "Uključi vidljivost komentara"
+   },
+   "toggle_loop": {
+      "message": "Uključi režim ponavljanja"
+   },
+   "toggle_pip_mode": {
+      "message": "Uključi režim “slika-u-slici”"
+   },
+   "toggle_related_videos_visibility": {
+      "message": "Uključi vidljivost predloženih video-zapisa"
+   },
+   "toggle_video_filters": {
+      "message": "Uključi video filtere"
+   },
+   "toggle_visibility": {
+      "message": "Uključi/isključi vidljivost info kartica i završnih ekrana"
+   },
+   "toggle_volume_booster": {
+      "message": "Uključi pojačivač jačine zvuka"
+   },
+   "top_left_corner": {
+      "message": "gornji levi ugao"
+   },
+   "top_right_corner": {
+      "message": "gornji desni ugao"
+   },
+   "translate": {
+      "message": "Prevedite"
+   },
+   "variant": {
+      "message": "Varijanta:"
+   },
+   "video_codecs_and_formats": {
+      "message": "Video kodeci i formati"
+   },
+   "video_filters": {
+      "message": "Video filteri"
+   },
+   "video_filters_control_info": {
+      "message": "Kliknite ovde da uključite video filtere ili pritisnite desni klik da uključite vidljivost kontrolne table za filtere"
+   },
+   "video_player": {
+      "message": "Video plejer"
+   },
+   "videos": {
+      "message": "Video-zapisi:"
+   },
+   "videos_full_screen": {
+      "message": "Video-zapisi (preko celog ekrana):"
+   },
+   "volume": {
+      "message": "Jačina zvuka"
+   },
+   "volume_booster_control_info": {
+      "message": "Kliknite ovde da uključite pojačivač jačine zvuka"
+   },
+   "volume_booster_level": {
+      "message": "Nivo pojačivača jačine zvuka:"
+   },
+   "volume_variation": {
+      "message": "Promena u nivou jačine zvuka pri okretanju točkića miša:"
+   },
+   "watch_pop_up_player": {
+      "message": "Gledaj sa iskačućim plejerom"
+   },
+   "youtube_dark_theme": {
+      "message": "YouTube (zvanična tema)"
+   },
+   "youtube_deep_dark": {
+      "message": "YouTube-DeepDark (autora RaitaroH)"
+   },
+   "youtube_deep_dark_custom": {
+      "message": "YouTube-DeepDark (korisnički uređeno)"
+   }
+}

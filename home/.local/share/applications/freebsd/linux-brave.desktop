@@ -1,0 +1,14 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Type=Application
+Version=1.0
+Encoding=UTF-8
+Name=Brave Web Browser (Linux)
+Comment=Access the Internet
+Icon=browser
+Exec=/usr/local/bin/linux-brave
+Categories=Application;Network;WebBrowser;
+MimeType=text/html;text/xml;application/xhtml+xml;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/ftp;
+StartupNotify=true
+Terminal=false
+

@@ -1,0 +1,572 @@
+{
+   "appearance": {
+      "message": "Toistonäkymä"
+   },
+   "auto_apply_video_filters": {
+      "message": "Käytä videotehosteita automaattisesti"
+   },
+   "auto_boost_volume": {
+      "message": "Lisää äänenvoimakkuutta automaattisesti"
+   },
+   "auto_cinema_mode": {
+      "message": "Automaattinen teatteritila"
+   },
+   "auto_enable_theater_mode": {
+      "message": "Käytä teatteritilaa automaattisesti"
+   },
+   "auto_execute_script": {
+      "message": "Aja komennot automaattisesti YouTubea käytettäessä"
+   },
+   "auto_expand_description": {
+      "message": "Näytä aina koko kuvausteksti"
+   },
+   "auto_expand_player": {
+      "message": "Laajenna soitin automaattisesti"
+   },
+   "auto_hide_cards_end_screens": {
+      "message": "Kätke kortit ja loppuruudut automaattisesti"
+   },
+   "auto_select_quality": {
+      "message": "Käytä automatisoidusti haluamaasi laatua"
+   },
+   "auto_sort_comments": {
+      "message": "Kommentit viimeisimmästä vanhimpaan"
+   },
+   "autoplay": {
+      "message": "Videotoiston automatisointi"
+   },
+   "backup": {
+      "message": "Varmuuskopiotoiminnot"
+   },
+   "below_video_player": {
+      "message": "Soitinkehyksen alapuolella"
+   },
+   "block_hfr_formats": {
+      "message": "Pakota käyttöön perustason kehysnopeudet (24, 25 tai 30 kehystä sekunnissa) edistyneempien (48, 50, 60) sijaan"
+   },
+   "block_webm_formats": {
+      "message": "Pakota käyttöön MP4- ja AVC-muodot (H.264) oletusarvon WebM ja VP9 sijaan – korkein laatu FHD 1080p60"
+   },
+   "boost_volume": {
+      "message": "Tehosta äänenvoimakkuutta"
+   },
+   "bottom_left_corner": {
+      "message": "Vasen alakulma"
+   },
+   "bottom_of_window": {
+      "message": "Ikkunan alareunassa"
+   },
+   "bottom_right_corner": {
+      "message": "Oikea alakulma"
+   },
+   "brightness": {
+      "message": "Kirkkaus:"
+   },
+   "cards_end_screens_control_info": {
+      "message": "Näytä tai kätke kortit ja loppuruudut napsautuksella"
+   },
+   "center_control_bar": {
+      "message": "Keskitetty hallintapalkki soitinkehyksen alapuolella, kun käytössä on laajennettu tai koko näytön katselutila"
+   },
+   "center_video_player": {
+      "message": "Keskitä laajennettu soitin näkymään"
+   },
+   "cinema_mode": {
+      "message": "Teatteritila"
+   },
+   "cinema_mode_control_info": {
+      "message": "Käytä teatteritilaa tai poistu siitä napsautuksella"
+   },
+   "cinema_mode_toggle_size": {
+      "message": "Laajenna tai supista soitinta automaattisesti teatteritilatoimintoa käytettäessä"
+   },
+   "color": {
+      "message": "Väri:"
+   },
+   "color_inversion": {
+      "message": "Käänteisväritys:"
+   },
+   "configure_keyboard_shortcuts": {
+      "message": "Näppäinoikoteiden määrittäminen"
+   },
+   "contrast": {
+      "message": "Kontrasti:"
+   },
+   "control_bar_location": {
+      "message": "Hallintapalkin sijainti:"
+   },
+   "control_speed": {
+      "message": "Säädä videon toistonopeutta hiiren rullalla pidettäessä CTRL painettuna sekä osoitin kuva-alalla"
+   },
+   "control_speed_mouse_button": {
+      "message": "Vain, kun hiiren oikeaa nappia painetaan"
+   },
+   "control_volume": {
+      "message": "Mahdollista äänenvoimakkuuden säätäminen hiiren rullalla pidettäessä osoitin kuva-alalla"
+   },
+   "control_volume_mouse_button": {
+      "message": "Vain, kun hiiren oikeaa nappia painetaan"
+   },
+   "controls": {
+      "message": "Erityistoiminnot"
+   },
+   "controls_visible": {
+      "message": "Näytä ohjaimet ilman tarvetta viedä osoitin •••:n päälle tai napsauttaa sitä"
+   },
+   "controls_within_control_bar": {
+      "message": "Sijoita ohjaimet hallintapalkkiin"
+   },
+   "controls_within_video_player": {
+      "message": "Sijoita ohjaimet soitinkehykseen"
+   },
+   "convert_shorts": {
+      "message": "Muuta Shorts-lyhytvideot perusvideoiksi"
+   },
+   "copy_to_clipboard": {
+      "message": "Kopioi"
+   },
+   "custom_script": {
+      "message": "Mukautetut komentosarjat"
+   },
+   "custom_script_control_info": {
+      "message": "Napsauta ajaaksesi mukautetut komentosarjat"
+   },
+   "custom_script_instructions": {
+      "message": "Liitä tai kirjoita JavaScript-koodit tänne, tallenna ne sitten alapuolisella painikkeella, ja aja sitten mukautetut komentosarjat niitä tarvitessasi."
+   },
+   "custom_script_warning": {
+      "message": "Käytä turvallisuussyistä vain ymmärtämiäsi tai muutoin erityisen luotettavia komentosarjoja!"
+   },
+   "custom_theme": {
+      "message": "Mukautettu ulkoasu"
+   },
+   "custom_theme_instructions": {
+      "message": "Liitä tai kirjoita CSS-tyylimäärittelyt tähän, ja tallenna ne sitten painamalla alla olevaa painiketta."
+   },
+   "dark_theme": {
+      "message": "Tumma ulkoasu"
+   },
+   "decrease_playback_speed": {
+      "message": "Madalla toistonopeutta"
+   },
+   "default_playback_speed": {
+      "message": "Oletustoistonopeus:"
+   },
+   "default_volume_level": {
+      "message": "Vakioäänenvoimakkuus:"
+   },
+   "description": {
+      "message": "Mukauta YouTube-käyttökokemusta kattavasti haluamaksesi."
+   },
+   "detailed_description": {
+      "message": "Tämä lisäosa auttaa saamaan YouTubesta eniten irti. Ominaisuuksiin kuuluvat muun muassa mainosten videon toistonopeuden ja äänenvoimakkuuden kehittynyt hallinta hiiren rullan avulla. Voit myös määrittää videoiden lähtökohtaisen teknisen laadun, ja kymmeniä näppäinoikotiekäyttöisiä toimintoja, joilla voit hallita YouTubea ammattilaisen tapaan. Niiden kätevyys saattaa myös voimakkaasti koukuttaa ;)\n\nYouTube on Google LLC:n tavaramerkki, jonka käyttöön sovelletaan Googlen käyttöehtoja."
+   },
+   "disable_autoplay": {
+      "message": "Älä toista videoita automaattisesti"
+   },
+   "display_control_bar": {
+      "message": "Näytä hallintapalkki vain sitä hiiriosoittimella osoitettaessa"
+   },
+   "donate": {
+      "message": "Lahjoittaminen"
+   },
+   "execute_custom_script": {
+      "message": "Aja mukautetut komentosarjat"
+   },
+   "expand": {
+      "message": "Laajenna"
+   },
+   "expand_shrink_video_player": {
+      "message": "Laajenna tai supista soitinta"
+   },
+   "expanded_player_viewport": {
+      "message": "Pohjaa soittimen laajentamiskäytäntö ikkunakokoon"
+   },
+   "export": {
+      "message": "Vie"
+   },
+   "export_instructions": {
+      "message": "Luo varmuuskopiotekstitiedosto ja liitä sisältö oheen sitä muokkaamatta."
+   },
+   "flip_horizontally": {
+      "message": "Vaakakääntö"
+   },
+   "flip_horizontally_control_info": {
+      "message": "Napsauta vaakakääntääksesi video"
+   },
+   "flip_vertically": {
+      "message": "Pystykääntö"
+   },
+   "flip_vertically_control_info": {
+      "message": "Napsauta pystykääntääksesi video"
+   },
+   "flip_video_horizontally": {
+      "message": "Videon vaakakääntö"
+   },
+   "flip_video_vertically": {
+      "message": "Videon pystykääntö"
+   },
+   "focus_video_player": {
+      "message": "Kohdennus soittimeen"
+   },
+   "gaussian_blur": {
+      "message": "Gauss-sumennus:"
+   },
+   "grayscale": {
+      "message": "Harmaasävytys:"
+   },
+   "hide_chat": {
+      "message": "Kätke pikaviestittely"
+   },
+   "hide_comments": {
+      "message": "Kätke kommentit"
+   },
+   "hide_related_videos": {
+      "message": "Kätke videosuositukset"
+   },
+   "hide_shorts": {
+      "message": "Piilota Shorts-lyhytvideot"
+   },
+   "hue_rotation": {
+      "message": "Sävytys:"
+   },
+   "ignore_playlists": {
+      "message": "Älä kajoa toistoluettelojen automaattiseen toistoon"
+   },
+   "ignore_pop_up_player": {
+      "message": "Hylkää ponnahdusikkunasoitin"
+   },
+   "import": {
+      "message": "Tuo"
+   },
+   "import_error": {
+      "message": "Varmuuskopiotiedoston sisältö ei kelpaa!"
+   },
+   "import_instructions": {
+      "message": "Liitä varmuuskopiotiedoston sisältö tähän ja napsauta Tuo-painiketta. Jos toiminto onnistuu, sivu virkistetään automaattisesti."
+   },
+   "increase_playback_speed": {
+      "message": "Nosta toistonopeutta"
+   },
+   "keyboard_shortcuts": {
+      "message": "Näppäinoikotiet"
+   },
+   "keyboard_shortcuts_control_info": {
+      "message": "Napsauta avataksesi tietosivu kaikista YouTube-näppäinoikoteistä"
+   },
+   "keyboard_shortcuts_page": {
+      "message": "Näytä kaikki näppäinoikotiet YouTubelle"
+   },
+   "launch_mini_player": {
+      "message": "Käytä pienoissoitinta, kun sivua vieritetään alaspäin kommenttien lukemiseksi"
+   },
+   "locale_code": {
+      "message": "fi"
+   },
+   "locale_dir": {
+      "message": "ltr"
+   },
+   "loop": {
+      "message": "Toistosilmukka"
+   },
+   "loop_control_info": {
+      "message": "Toistosilmukka (hiiren vasen tai oikea nappi)"
+   },
+   "loop_end": {
+      "message": "Loppu:"
+   },
+   "loop_start": {
+      "message": "Alku:"
+   },
+   "message": {
+      "message": "Viesti"
+   },
+   "mini_player": {
+      "message": "Pienoissoitin"
+   },
+   "mini_player_position": {
+      "message": "Pienoissoittimen sijainti:"
+   },
+   "mini_player_size": {
+      "message": "Pienoissoittimen koko:"
+   },
+   "not_now": {
+      "message": "Ei nyt"
+   },
+   "opacity": {
+      "message": "Peittävyys:"
+   },
+   "open_options_page": {
+      "message": "Avaa asetussivu"
+   },
+   "options": {
+      "message": "Asetukset"
+   },
+   "options_control_info": {
+      "message": "Napsauta avataksesi asetusnäkymä"
+   },
+   "override_playback_speeds": {
+      "message": "Käytä vapaasti mukautettuja toistonopeuksia"
+   },
+   "page_reload_required": {
+      "message": "Enhancer for YouTube™ päivitettiin juuri. YouTube-sivut täytyy virkistää."
+   },
+   "pause_videos": {
+      "message": "Aseta taustavälilehtien videot taukotilaan aina, kun edusvälilehdessä katsotaan videota"
+   },
+   "playback_quality": {
+      "message": "Kuvanlaatuasetukset"
+   },
+   "playback_speed": {
+      "message": "Toistonopeus"
+   },
+   "playlists": {
+      "message": "Toistoluettelot:"
+   },
+   "playlists_full_screen": {
+      "message": "Toistoluettelo (koko näyttö):"
+   },
+   "pop_up_player": {
+      "message": "Ponnahdusikkunasoitin"
+   },
+   "pop_up_player_control_info": {
+      "message": "Käytä ponnahdusikkunasoitinta (napsautus hiiren 1- tai 2-painikkeella)"
+   },
+   "pop_up_player_embeds": {
+      "message": "Ponnahdusikkunasoitin ja videoupotukset:"
+   },
+   "pop_up_player_embeds_full_screen": {
+      "message": "Ponnahdusikkunasoitin ja videoupotukset (koko näyttö):"
+   },
+   "pop_up_player_size": {
+      "message": "Ponnahdusikkunasoittimen koko:"
+   },
+   "preserve_black_bars_color": {
+      "message": "Älä muuta mustien pystypalkkien sävyä teatteritilaa tai tummaa ulkoasua YouTube-DeepDark käytettäessä"
+   },
+   "prevent_autoplay": {
+      "message": "Estä taustavälilehtien videoiden automaattinen toistaminen"
+   },
+   "prevent_autoplay_foreground_tab": {
+      "message": "Estä myös edusvälilehden videon automaattinen toistaminen"
+   },
+   "preview": {
+      "message": "Esikatselu"
+   },
+   "rate": {
+      "message": "Arviointi"
+   },
+   "rate_extension": {
+      "message": "Arvostele Enhancer for YouTube™ -lisäosa."
+   },
+   "reset": {
+      "message": "Palauta vakiot"
+   },
+   "reverse_mouse_wheel_direction": {
+      "message": "Käänteinen hiirirullasuunta toistonopeuden ja äänenvoimakkuuden säätämiseen"
+   },
+   "reverse_playlist": {
+      "message": "Käänteinen toistoluettelo"
+   },
+   "reverse_playlist_control_info": {
+      "message": "Napsauta toistaaksesi luettelo käänteisjärjestyksessä ponnahdusikkunasoittimella"
+   },
+   "reverse_playlist_order": {
+      "message": "Käänteinen toistoluettelo"
+   },
+   "saturation": {
+      "message": "Kylläisyys:"
+   },
+   "save": {
+      "message": "Tallenna"
+   },
+   "screenshot": {
+      "message": "Kuvankaappaus"
+   },
+   "screenshot_control_info": {
+      "message": "Napsauta ottaaksesi videosta ruudunkaappauskuva"
+   },
+   "select_default_playback_speed": {
+      "message": "Valitse vakiotoistonopeus"
+   },
+   "select_normal_playback_speed": {
+      "message": "Valitse normaali toistonopeus"
+   },
+   "select_quality_1080p": {
+      "message": "Valitse laatu 1080p"
+   },
+   "select_quality_1440p": {
+      "message": "Valitse laatu 1440p"
+   },
+   "select_quality_144p": {
+      "message": "Valitse laatu 144p"
+   },
+   "select_quality_2160p": {
+      "message": "Valitse laatu 2160p"
+   },
+   "select_quality_240p": {
+      "message": "Valitse laatu 240p"
+   },
+   "select_quality_2880p": {
+      "message": "Valitse laatu 2880p"
+   },
+   "select_quality_360p": {
+      "message": "Valitse laatu 360p"
+   },
+   "select_quality_4320p": {
+      "message": "Valitse laatu 4320p"
+   },
+   "select_quality_480p": {
+      "message": "Valitse laatu 480p"
+   },
+   "select_quality_720p": {
+      "message": "Valitse laatu 720p"
+   },
+   "select_quality_auto": {
+      "message": "Automaattinen laatu"
+   },
+   "select_quality_full_screen": {
+      "message": "Eri laatu Koko näyttö -tilassa"
+   },
+   "sepia": {
+      "message": "Seepia:"
+   },
+   "shrink": {
+      "message": "Supista"
+   },
+   "size_control_info": {
+      "message": "Napsauta laajentaaksesi tai supistaaksesi soitinta, tai napsauta hiiren 2-painiketta keskittääksesi soitin selainnäkymään"
+   },
+   "speed": {
+      "message": "Nopeus"
+   },
+   "speed_control_info": {
+      "message": "Säädä toistonopeutta hiiren rullalla, napsauta käyttääksesi oletusnopeutta, tai napsauta hiiren 2-painiketta käyttääksesi alkuperäistä toistonopeutta"
+   },
+   "speed_minus_control_info": {
+      "message": "Napsauta hidastaaksesi toistoa"
+   },
+   "speed_plus_control_info": {
+      "message": "Napsauta nopeuttaaksesi toistoa"
+   },
+   "speed_variation": {
+      "message": "Rullapykälän tai nopeussäätöpainikkeiden (-/+) painalluksen vaikutus toistonopeuteen:"
+   },
+   "stop": {
+      "message": "Pysäytä"
+   },
+   "stop_control_info": {
+      "message": "Pysäytä video napsautuksella"
+   },
+   "stop_video": {
+      "message": "Pysäytä toisto"
+   },
+   "stop_videos": {
+      "message": "Pysäytä videot täysin"
+   },
+   "support": {
+      "message": "Tuki"
+   },
+   "switch_back_previous_quality": {
+      "message": "Paluu edellislaatuun koko näytön tilasta poistuttaessa"
+   },
+   "take_screenshot": {
+      "message": "Kuvankaappaus"
+   },
+   "theme": {
+      "message": "Ulkoasu"
+   },
+   "theme_custom_theme": {
+      "message": "Ulkoasu: mukautettu"
+   },
+   "theme_youtube_dark": {
+      "message": "Ulkoasu: tumma YouTube™"
+   },
+   "theme_youtube_deep_dark": {
+      "message": "Ulkoasu: YouTube-DeepDark"
+   },
+   "theme_youtube_deep_dark_custom": {
+      "message": "Ulkoasu: mukautettu YouTube-DeepDark"
+   },
+   "toggle_cards_end_screens": {
+      "message": "Näytä tai kätke kortit ja loppuruudut"
+   },
+   "toggle_cinema_mode": {
+      "message": "Teatteritila"
+   },
+   "toggle_comments_visibility": {
+      "message": "Kommenttien näkyvyys"
+   },
+   "toggle_loop": {
+      "message": "Toistosilmukka"
+   },
+   "toggle_pip_mode": {
+      "message": "Kuva kuvassa -tila"
+   },
+   "toggle_related_videos_visibility": {
+      "message": "Videosuositusten näkyvyys"
+   },
+   "toggle_video_filters": {
+      "message": "Videotehosteet päälle/pois"
+   },
+   "toggle_visibility": {
+      "message": "Näytä tai kätke kortit ja loppuruudut"
+   },
+   "toggle_volume_booster": {
+      "message": "Äänenvoimakkuuden tehostus"
+   },
+   "top_left_corner": {
+      "message": "Vasen yläkulma"
+   },
+   "top_right_corner": {
+      "message": "Oikea yläkulma"
+   },
+   "translate": {
+      "message": "Käännös"
+   },
+   "variant": {
+      "message": "Versio:"
+   },
+   "video_codecs_and_formats": {
+      "message": "Videoiden pakkauksenhallinnat ja muodot"
+   },
+   "video_filters": {
+      "message": "Videotehosteet"
+   },
+   "video_filters_control_info": {
+      "message": "Napsauta käyttääksesi tehosteita"
+   },
+   "video_player": {
+      "message": "Soitin"
+   },
+   "videos": {
+      "message": "Videot:"
+   },
+   "videos_full_screen": {
+      "message": "Videot (koko näyttö):"
+   },
+   "volume": {
+      "message": "Äänenvoimakkuus"
+   },
+   "volume_booster_control_info": {
+      "message": "Tehosta äänenvoimakkuutta napsautuksella"
+   },
+   "volume_booster_level": {
+      "message": "Tehostettu äänenvoimakkuus:"
+   },
+   "volume_variation": {
+      "message": "Äänenvoimakkuusvaikutus kutakin hiirirullapykälää kohden:"
+   },
+   "watch_pop_up_player": {
+      "message": "Katselu ponnahdusikkunasoittimella"
+   },
+   "youtube_dark_theme": {
+      "message": "YouTube (virallinen ulkoasu)"
+   },
+   "youtube_deep_dark": {
+      "message": "YouTube-DeepDark (RaitaroH)"
+   },
+   "youtube_deep_dark_custom": {
+      "message": "YouTube-DeepDark (mukautettu)"
+   }
+}

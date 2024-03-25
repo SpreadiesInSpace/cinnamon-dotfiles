@@ -1,0 +1,572 @@
+{
+   "appearance": {
+      "message": "Išvaizda"
+   },
+   "auto_apply_video_filters": {
+      "message": "Automatiškai taikyti vaizdo filtrus"
+   },
+   "auto_boost_volume": {
+      "message": "Automatiškai sustiprinti garsą"
+   },
+   "auto_cinema_mode": {
+      "message": "Automatiškai įjungti kino režimą"
+   },
+   "auto_enable_theater_mode": {
+      "message": "Automatiškai leisti YouTube \"Teatro režimą\""
+   },
+   "auto_execute_script": {
+      "message": "Automatiškai paleisti skriptą, kai YouTube atveriama kortelėje"
+   },
+   "auto_expand_description": {
+      "message": "Automatiškai plėsti vaizdo įrašo aprašą"
+   },
+   "auto_expand_player": {
+      "message": "Automatiškai plėsti vaizdo grotuvą"
+   },
+   "auto_hide_cards_end_screens": {
+      "message": "Automatiškai slėpti info langus ir pasiūlymus pabaigoje"
+   },
+   "auto_select_quality": {
+      "message": "Automatiškai pasirinkti grojimo kokybę"
+   },
+   "auto_sort_comments": {
+      "message": "Automatiškai rūšiuoti komentarus nuo naujausio iki seniausio"
+   },
+   "autoplay": {
+      "message": "Autopaleistis"
+   },
+   "backup": {
+      "message": "Atsarginė kopija"
+   },
+   "below_video_player": {
+      "message": "Po vaizdo grotuvu"
+   },
+   "block_hfr_formats": {
+      "message": "Priverstinai naudoti standartinį kadrų dažnio formatą (24, 25, 30 FPS) vietoj aukštų kadro dažnių formato (48, 50, 60 FPS)"
+   },
+   "block_webm_formats": {
+      "message": "Priverstinai naudoti MP4 formatą ir AVC kodeką (H.264) vietoj WebM formato ir VP9 kodeko (maksimali raiška: 1080p60 HD)"
+   },
+   "boost_volume": {
+      "message": "Garso stiprinimas"
+   },
+   "bottom_left_corner": {
+      "message": "Apatinis kairys kampas"
+   },
+   "bottom_of_window": {
+      "message": "Lango dugne"
+   },
+   "bottom_right_corner": {
+      "message": "Apatinis dešinys kampas"
+   },
+   "brightness": {
+      "message": "Šviesumas:"
+   },
+   "cards_end_screens_control_info": {
+      "message": "Spausti norint įjungti info langus ir nutraukti ekrano matomumą"
+   },
+   "center_control_bar": {
+      "message": "Sucentruoti panelę po vaizdo grotuvu kai jis išplėstas ar pilno ekrano režimas įjungtas"
+   },
+   "center_video_player": {
+      "message": "Sucentruoti vaizdo grotuvą peržiūros srity"
+   },
+   "cinema_mode": {
+      "message": "Kino režimas"
+   },
+   "cinema_mode_control_info": {
+      "message": "Spausti norint įjungti kino režimą"
+   },
+   "cinema_mode_toggle_size": {
+      "message": "Automatiškai plėsti ar sutraukti vaizdo grotuvą įjungus kino režimą"
+   },
+   "color": {
+      "message": "Spalva:"
+   },
+   "color_inversion": {
+      "message": "Spalvos inversija:"
+   },
+   "configure_keyboard_shortcuts": {
+      "message": "Nustatyti sparčiuosius klavišus"
+   },
+   "contrast": {
+      "message": "Kontrastas:"
+   },
+   "control_bar_location": {
+      "message": "Panelės vieta:"
+   },
+   "control_speed": {
+      "message": "Valdyti grojimo spartą pelės ratuku kursoriui esant ant vaizdo grotuvo ir paspaudus \"Control\" klavišą (Ctrl)"
+   },
+   "control_speed_mouse_button": {
+      "message": "Tik spaudžiant dešinį pelės mygtuką"
+   },
+   "control_volume": {
+      "message": "Garso stiprumą keisti pelės ratuku, kursoriui esant virš vaizdo grotuvo"
+   },
+   "control_volume_mouse_button": {
+      "message": "Tik paspaudus dešinį pelės mygtuką"
+   },
+   "controls": {
+      "message": "Valdikliai"
+   },
+   "controls_visible": {
+      "message": "Laikyti valdiklius matomais paspaudus *** ar užvedus pelės kursorių"
+   },
+   "controls_within_control_bar": {
+      "message": "Patalpinti valdiklius panelėje"
+   },
+   "controls_within_video_player": {
+      "message": "Patalpinti valdiklius vaizdo grotuve"
+   },
+   "convert_shorts": {
+      "message": "Konvertuoti Trumpuosius"
+   },
+   "copy_to_clipboard": {
+      "message": "Kopijuoti į iškarpinę"
+   },
+   "custom_script": {
+      "message": "Suasmenintas skriptas"
+   },
+   "custom_script_control_info": {
+      "message": "Spausti, kad paleisti suasmenintą skriptą"
+   },
+   "custom_script_instructions": {
+      "message": "Čia klijuoti ar rašyti savo JavaScript kodą, išsaugoti apatiniu mygtuku, o tada bakstelėti „Pasirinktinis skriptas“ mygtuką, norint jį paleisti"
+   },
+   "custom_script_warning": {
+      "message": "Saugumo sumetimais, naudok tik tą kodą, kurį supranti ar tą, kuris buvo surinktas patikimu programuotoju."
+   },
+   "custom_theme": {
+      "message": "Pasirinktinė tema"
+   },
+   "custom_theme_instructions": {
+      "message": "Čia klijuokite ar rašykite savo CSS kodą ir, bakstelėdami apatinį mygtuką, išsaugokite."
+   },
+   "dark_theme": {
+      "message": "Tamsi tema"
+   },
+   "decrease_playback_speed": {
+      "message": "Sulėtinti grojimo spartą"
+   },
+   "default_playback_speed": {
+      "message": "Numatytoji vaizdo sparta:"
+   },
+   "default_volume_level": {
+      "message": "Numatytasis garso lygis:"
+   },
+   "description": {
+      "message": "Paimk YouTube į savo rankas ir pagerink savo naudojimo potyrius!"
+   },
+   "detailed_description": {
+      "message": "Sukurtas išgauti geriausią YouTube patirtį, šis plėtinys pripildytas įvairiausiomis funkcijomis, leidžiančiomis valdyti grojimo spartą ir garso lygį pelės ratuku, automatizuoti pasikartojančias užduotis, tokias kaip tinkamos įrašo kokybės pasirinkimas, nustatyti tuzinus sparčiųjų klavišų profesionaliai YouTube kontrolei ir dar daugiau...\nPabandyk! Bet turėk omeny, kad YouTube daugiau niekada nebus ta pačia be jo ;)\n\nYouTube yra Google LLC prekinis ženklas. Bet koks šio prekinio ženklo naudojimas reguliuojamas Google Leidimais."
+   },
+   "disable_autoplay": {
+      "message": "Išjungti autopaleistį"
+   },
+   "display_control_bar": {
+      "message": "Rodyti panelę tik užvedus ant jos pelės kursorių"
+   },
+   "donate": {
+      "message": "Parama"
+   },
+   "execute_custom_script": {
+      "message": "Paleisti suasmenintą skriptą"
+   },
+   "expand": {
+      "message": "Plėsti"
+   },
+   "expand_shrink_video_player": {
+      "message": "Išplėsti arba sutraukti vaizdo grotuvą"
+   },
+   "expanded_player_viewport": {
+      "message": "Panaudoti prieinamą erdvę išplėsti vaizdo grotuvui, remiantis peržiūros srities išmatavimais"
+   },
+   "export": {
+      "message": "Eksportuoti"
+   },
+   "export_instructions": {
+      "message": "Sukurk naują tekstinį failą ir įklijuok apatinį kodą jo nekeisdamas"
+   },
+   "flip_horizontally": {
+      "message": "Apversti horizontaliai"
+   },
+   "flip_horizontally_control_info": {
+      "message": "Spausti norint apversti vaizdą horizontaliai"
+   },
+   "flip_vertically": {
+      "message": "Apversti vertikaliai"
+   },
+   "flip_vertically_control_info": {
+      "message": "Spausti norint apversti vaizdą vertikaliai"
+   },
+   "flip_video_horizontally": {
+      "message": "Apversti vaizdą horizontaliai"
+   },
+   "flip_video_vertically": {
+      "message": "Apversti vaizdą vertikaliai"
+   },
+   "focus_video_player": {
+      "message": "Sufokusuoti vaizdo grotuvą"
+   },
+   "gaussian_blur": {
+      "message": "Gausso migla:"
+   },
+   "grayscale": {
+      "message": "Pilkumas:"
+   },
+   "hide_chat": {
+      "message": "Slėpti pokalbį"
+   },
+   "hide_comments": {
+      "message": "Slėpti komentarus"
+   },
+   "hide_related_videos": {
+      "message": "Slėpti susijusius įrašus"
+   },
+   "hide_shorts": {
+      "message": "Slėpti Trumpuosius"
+   },
+   "hue_rotation": {
+      "message": "Atspalvio mainai:"
+   },
+   "ignore_playlists": {
+      "message": "Nestabdyti sąrašų autopaleisties"
+   },
+   "ignore_pop_up_player": {
+      "message": "Nepaisyti iššokančio grotuvo"
+   },
+   "import": {
+      "message": "Importuoti"
+   },
+   "import_error": {
+      "message": "Atsarginės kopijos turinys neteisingas!"
+   },
+   "import_instructions": {
+      "message": "Įklijuok atsarginės kopijos turinį ir paspausk \"Importuoti\". Puslapis automatiškai persikraus, jei nustatymai sėkmingai importuoti"
+   },
+   "increase_playback_speed": {
+      "message": "Pagreitinti grojimo spartą"
+   },
+   "keyboard_shortcuts": {
+      "message": "Spartieji klavišai"
+   },
+   "keyboard_shortcuts_control_info": {
+      "message": "Spausti, kad matyti visų YouTube sparčiujų klavišų sąrašą (atskiram lange)"
+   },
+   "keyboard_shortcuts_page": {
+      "message": "Rodyti visus sparčiuosius YouTube klavišus"
+   },
+   "launch_mini_player": {
+      "message": "Paleisti mini grotuvą slenkant žemyn skaityti komentarus"
+   },
+   "locale_code": {
+      "message": "lt"
+   },
+   "locale_dir": {
+      "message": "ltr"
+   },
+   "loop": {
+      "message": "Kartojimas"
+   },
+   "loop_control_info": {
+      "message": "Paspausti arba spausti dešinį norint įjungti kartojimo režimą"
+   },
+   "loop_end": {
+      "message": "Pabaiga:"
+   },
+   "loop_start": {
+      "message": "Pradžia:"
+   },
+   "message": {
+      "message": "Pranešimai"
+   },
+   "mini_player": {
+      "message": "Mini grotuvas"
+   },
+   "mini_player_position": {
+      "message": "Mini grotuvo padėtis:"
+   },
+   "mini_player_size": {
+      "message": "Mini grotuvo dydis:"
+   },
+   "not_now": {
+      "message": "Ne dabar"
+   },
+   "opacity": {
+      "message": "Skaidra:"
+   },
+   "open_options_page": {
+      "message": "Atverti nustatymų puslapį"
+   },
+   "options": {
+      "message": "Nustatymai"
+   },
+   "options_control_info": {
+      "message": "Spausti, kad atverti nustatymų puslapį"
+   },
+   "override_playback_speeds": {
+      "message": "Perrašyti numatytuosius vaizdo greičius"
+   },
+   "page_reload_required": {
+      "message": "Enhancer for YouTube™ atnaujintas, visi YouTube puslapiai turi būti perkrauti."
+   },
+   "pause_videos": {
+      "message": "Pristabdyti likusius vaizdo įrašus foninėse kortelėse, jei kuris paleidžiamas priekinėje kortelėje"
+   },
+   "playback_quality": {
+      "message": "Grojimo kokybė"
+   },
+   "playback_speed": {
+      "message": "Grojimo sparta"
+   },
+   "playlists": {
+      "message": "Sąrašai:"
+   },
+   "playlists_full_screen": {
+      "message": "Sąrašai (pilnas ekranas):"
+   },
+   "pop_up_player": {
+      "message": "Iššokantis grotuvas"
+   },
+   "pop_up_player_control_info": {
+      "message": "Paspausti ar spausti dešinį norint žiūrėti per iššokantį grotuvą"
+   },
+   "pop_up_player_embeds": {
+      "message": "Iššokantis grotuvas ir įkabinti įrašai:"
+   },
+   "pop_up_player_embeds_full_screen": {
+      "message": "Iššokantis grotuvas ir įkabinti įrašai (pilnas ekranas):"
+   },
+   "pop_up_player_size": {
+      "message": "Iššokančio grotuvo dydis"
+   },
+   "preserve_black_bars_color": {
+      "message": "Nekeisti vertikalių juodų juostų spalvos pritaikius YouTube-DeepDark temą ar įjungus kino režimą"
+   },
+   "prevent_autoplay": {
+      "message": "Neleisti įrašams automatiškai groti foninėse kortelėse"
+   },
+   "prevent_autoplay_foreground_tab": {
+      "message": "Neleisti įrašams automatiškai groti ir priekinėje kortelėje"
+   },
+   "preview": {
+      "message": "Peržiūra"
+   },
+   "rate": {
+      "message": "Vertinti"
+   },
+   "rate_extension": {
+      "message": "Įvertink savo Enhancer for YouTube™ potyrius."
+   },
+   "reset": {
+      "message": "Atkurti"
+   },
+   "reverse_mouse_wheel_direction": {
+      "message": "Apversti pelės ratuko kryptį, kad valdyti grojimo spartą ir garsumą"
+   },
+   "reverse_playlist": {
+      "message": "Atbulinis sąrašas"
+   },
+   "reverse_playlist_control_info": {
+      "message": "Paspausti arba spausti dešinį norint žiūrėti sąrašą atvirkščiai ir iššokančiam grotuve"
+   },
+   "reverse_playlist_order": {
+      "message": "Apversti tvarką sąraše"
+   },
+   "saturation": {
+      "message": "Prisotinimas:"
+   },
+   "save": {
+      "message": "Saugoti"
+   },
+   "screenshot": {
+      "message": "Ekrano nuotrauka"
+   },
+   "screenshot_control_info": {
+      "message": "Spausti norint padaryti momentinį vaizdo įrašą"
+   },
+   "select_default_playback_speed": {
+      "message": "Pasirinkti numatytąją grojimo spartą"
+   },
+   "select_normal_playback_speed": {
+      "message": "Pasirinkti normalią grojimo spartą"
+   },
+   "select_quality_1080p": {
+      "message": "Pasirinkti grojimo kokybę \"1080p\""
+   },
+   "select_quality_1440p": {
+      "message": "Pasirinkti grojimo kokybę \"1440p\""
+   },
+   "select_quality_144p": {
+      "message": "Pasirinkti grojimo kokybę \"144p\""
+   },
+   "select_quality_2160p": {
+      "message": "Pasirinkti grojimo kokybę \"2160p\""
+   },
+   "select_quality_240p": {
+      "message": "Pasirinkti grojimo kokybę \"240p\""
+   },
+   "select_quality_2880p": {
+      "message": "Pasirinkti grojimo kokybę \"2880p\""
+   },
+   "select_quality_360p": {
+      "message": "Pasirinkti grojimo kokybę \"360p\""
+   },
+   "select_quality_4320p": {
+      "message": "Pasirinkti grojimo kokybę \"4320p\""
+   },
+   "select_quality_480p": {
+      "message": "Pasirinkti grojimo kokybę \"480p\""
+   },
+   "select_quality_720p": {
+      "message": "Pasirinkti grojimo kokybę \"720p\""
+   },
+   "select_quality_auto": {
+      "message": "Pasirinkti grojimo kokybę \"Auto\""
+   },
+   "select_quality_full_screen": {
+      "message": "Pasirinkti kitokią grojimo kokybę įjungiant pilno ekrano režimą"
+   },
+   "sepia": {
+      "message": "Sepija:"
+   },
+   "shrink": {
+      "message": "Sutraukti"
+   },
+   "size_control_info": {
+      "message": "Spausti norint išplėsti ar sutraukti vaizdo grotuvą arba spausti dešinį norint sucentruoti vaizdo grotuvą peržiūros srity"
+   },
+   "speed": {
+      "message": "Greitis"
+   },
+   "speed_control_info": {
+      "message": "Naudoti pelės ratuką keisti grojimo spartą ar paspaudus pasirinkti numatytąją grojimo spartą, ar spausti dešinį pasirinkti normaliai grojimo spartai"
+   },
+   "speed_minus_control_info": {
+      "message": "Spausti norint sulėtinti grojimo spartą"
+   },
+   "speed_plus_control_info": {
+      "message": "Spausti norint padidinti grojimo spartą"
+   },
+   "speed_variation": {
+      "message": "Spartos kaita sukant pelės ratuką ar spaudžiant greičio mygtukus \"-\" ir \"+\": "
+   },
+   "stop": {
+      "message": "Stop"
+   },
+   "stop_control_info": {
+      "message": "Paspausti norint sustabdyti"
+   },
+   "stop_video": {
+      "message": "Sustabdyti video"
+   },
+   "stop_videos": {
+      "message": "Visiškai sustabdyti vaizdo grojimą vietoj autopaleisties sustabdymo"
+   },
+   "support": {
+      "message": "Pagalba"
+   },
+   "switch_back_previous_quality": {
+      "message": "Vėl įjungti ankstesnę grojimo kokybę išjungiant pilną ekraną"
+   },
+   "take_screenshot": {
+      "message": "Padaryti momentinę vaizdo kopiją"
+   },
+   "theme": {
+      "message": "Tema"
+   },
+   "theme_custom_theme": {
+      "message": "Tema: Suasmeninta tema"
+   },
+   "theme_youtube_dark": {
+      "message": "Tema: YouTube™ (Tamsi)"
+   },
+   "theme_youtube_deep_dark": {
+      "message": "Tema: YouTube-DeepDark"
+   },
+   "theme_youtube_deep_dark_custom": {
+      "message": "Tema: YouTube-DeepDark (Suasmeninta)"
+   },
+   "toggle_cards_end_screens": {
+      "message": "Įjungti info langus ir nutraukti ekrano matomumą"
+   },
+   "toggle_cinema_mode": {
+      "message": "Įjungti kino režimą"
+   },
+   "toggle_comments_visibility": {
+      "message": "Įjungti komentarų matomumą"
+   },
+   "toggle_loop": {
+      "message": "Įjungti kartojimo režimą"
+   },
+   "toggle_pip_mode": {
+      "message": "Įjungti Nuotraukos-Nuotraukoj režimą"
+   },
+   "toggle_related_videos_visibility": {
+      "message": "Įjungti susijusių įrašų matomumą"
+   },
+   "toggle_video_filters": {
+      "message": "Įjungti vaizdo filtrus"
+   },
+   "toggle_visibility": {
+      "message": "Įjungti info langų/pasiūlymų pabaigoj matomumą"
+   },
+   "toggle_volume_booster": {
+      "message": "Įjungti garso stiprintuvą"
+   },
+   "top_left_corner": {
+      "message": "Viršutinis kairys kampas"
+   },
+   "top_right_corner": {
+      "message": "Viršutinis dešinys kampas"
+   },
+   "translate": {
+      "message": "Vertimas"
+   },
+   "variant": {
+      "message": "Pasirinkimai:"
+   },
+   "video_codecs_and_formats": {
+      "message": "Vaizdo kodekai ir formatai"
+   },
+   "video_filters": {
+      "message": "Vaizdo filtrai"
+   },
+   "video_filters_control_info": {
+      "message": "Spausti norint įjungti vaizdo filtrus ar spausti dešinį norint įjungti filtrų lango matomumą"
+   },
+   "video_player": {
+      "message": "Vaizdo grotuvas"
+   },
+   "videos": {
+      "message": "Įrašai:"
+   },
+   "videos_full_screen": {
+      "message": "Įrašai (pilnas ekranas):"
+   },
+   "volume": {
+      "message": "Garsas"
+   },
+   "volume_booster_control_info": {
+      "message": "Spausti norint įjungti garso stiprintuvą"
+   },
+   "volume_booster_level": {
+      "message": "Garso stiprintuvo lygis:"
+   },
+   "volume_variation": {
+      "message": "Garsumo pokytis sukant pelės ratuką:"
+   },
+   "watch_pop_up_player": {
+      "message": "Žiūrėti per iššokantį grotuvą"
+   },
+   "youtube_dark_theme": {
+      "message": "YouTube (oficiali tema)"
+   },
+   "youtube_deep_dark": {
+      "message": "YouTube-DeepDark (by RaitaroH)"
+   },
+   "youtube_deep_dark_custom": {
+      "message": "YouTube-DeepDark (suasmeninta)"
+   }
+}

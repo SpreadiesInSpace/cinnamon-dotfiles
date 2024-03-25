@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<!DOCTYPE Menu
+  PUBLIC '-//freedesktop//DTD Menu 1.0//EN'
+  'http://standards.freedesktop.org/menu-spec/menu-1.0.dtd'>
+<Menu>
+	<Name>Applications</Name>
+	<MergeFile type="parent">/run/current-system/sw/etc/xdg/menus/cinnamon-applications.menu</MergeFile>
+	<Menu>
+		<Name>Education</Name>
+		<DirectoryDir>/home/f16poom/.local/share/desktop-directories</DirectoryDir>
+		<Exclude>
+			<Filename>math.desktop</Filename>
+		</Exclude>
+		<AppDir>/home/f16poom/.local/share/applications</AppDir>
+		<Exclude>
+			<Filename>libreoffice-math.desktop</Filename>
+		</Exclude>
+	</Menu>
+	<Menu>
+		<Name>Graphics</Name>
+		<Exclude>
+			<Filename>draw.desktop</Filename>
+		</Exclude>
+		<AppDir>/home/f16poom/.local/share/applications</AppDir>
+	</Menu>
+	<Menu>
+		<Name>Office</Name>
+		<Exclude>
+			<Filename>base.desktop</Filename>
+		</Exclude>
+		<AppDir>/home/f16poom/.local/share/applications</AppDir>
+		<Exclude>
+			<Filename>calc.desktop</Filename>
+		</Exclude>
+		<Exclude>
+			<Filename>startcenter.desktop</Filename>
+		</Exclude>
+		<Exclude>
+			<Filename>draw.desktop</Filename>
+		</Exclude>
+		<Exclude>
+			<Filename>impress.desktop</Filename>
+		</Exclude>
+		<Exclude>
+			<Filename>math.desktop</Filename>
+		</Exclude>
+		<Exclude>
+			<Filename>writer.desktop</Filename>
+		</Exclude>
+	</Menu>
+</Menu>

@@ -1,0 +1,572 @@
+{
+   "appearance": {
+      "message": "מראה"
+   },
+   "auto_apply_video_filters": {
+      "message": "החל אוטומטית את מסנני הווידאו"
+   },
+   "auto_boost_volume": {
+      "message": "הגבר אוטומטית את עוצמת הקול"
+   },
+   "auto_cinema_mode": {
+      "message": "הפעל אוטומטית את מצב הקולנוע"
+   },
+   "auto_enable_theater_mode": {
+      "message": "הפעל אוטומטית את \"מצב קולנוע\" של YouTube"
+   },
+   "auto_execute_script": {
+      "message": "בצע באופן אוטומטי את הסקריפט כאשר YouTube נטען בלשונית"
+   },
+   "auto_expand_description": {
+      "message": "הרחב אוטומטית את תיאורי הסרטונים"
+   },
+   "auto_expand_player": {
+      "message": "הגדל אוטומטית את נגן הווידאו"
+   },
+   "auto_hide_cards_end_screens": {
+      "message": "הסתר אוטומטית כרטיסי מידע ומסכי סיום"
+   },
+   "auto_select_quality": {
+      "message": "בחר אוטומטית איכות הפעלה"
+   },
+   "auto_sort_comments": {
+      "message": "מיין אוטומטית את התגובות מהחדשות לישנות"
+   },
+   "autoplay": {
+      "message": "ניגון אוטומטי"
+   },
+   "backup": {
+      "message": "גיבוי"
+   },
+   "below_video_player": {
+      "message": "מתחת לנגן הווידאו"
+   },
+   "block_hfr_formats": {
+      "message": "אלץ את את השימוש בקצב הפריימים הסטנדרטי (24, 25, או 30 FPS) במקום קצב הפריימים הגבוה (48, 50, או 60 FPS)"
+   },
+   "block_webm_formats": {
+      "message": "Force the use of the MP4 format and the AVC codec (H.264) instead of the WebM format and the VP9 codec (maximum resolution 1080p60 HD)"
+   },
+   "boost_volume": {
+      "message": "הגבר ווליום"
+   },
+   "bottom_left_corner": {
+      "message": "הפינה השמאלית התחתונה"
+   },
+   "bottom_of_window": {
+      "message": "בתחתית החלון"
+   },
+   "bottom_right_corner": {
+      "message": "הפינה הימנית התחתונה"
+   },
+   "brightness": {
+      "message": "בהירות:"
+   },
+   "cards_end_screens_control_info": {
+      "message": "הוסף/כבה כרטיסי מידע, וכבה נראות תצוגות"
+   },
+   "center_control_bar": {
+      "message": "מרכז את סרגל הכלים מתחת לנגן הווידאו כאשר הוא מורחב או כאשר מצב מסך מלא פעיל"
+   },
+   "center_video_player": {
+      "message": "מרכז את נגן הווידאו מתחת לשדה הראייה"
+   },
+   "cinema_mode": {
+      "message": "מצב קולנוע"
+   },
+   "cinema_mode_control_info": {
+      "message": "הפעל/כבה את מצב קולנוע"
+   },
+   "cinema_mode_toggle_size": {
+      "message": "הגדל או כווץ אוטומטית את נגן הווידאו כאשר מצב הקולנוע מופעל"
+   },
+   "color": {
+      "message": "צבע:"
+   },
+   "color_inversion": {
+      "message": "היפוך צבעים:"
+   },
+   "configure_keyboard_shortcuts": {
+      "message": "הגדר קיצורי מקלדת"
+   },
+   "contrast": {
+      "message": "ניגודיות:"
+   },
+   "control_bar_location": {
+      "message": "מיקום סרגל הכלים:"
+   },
+   "control_speed": {
+      "message": "שלוט במהירות הניגון עם גלגלת העכבר כאשר סמן העכבר מעל נגן הסרטון ומקש “Control” (Ctrl) לחוץ"
+   },
+   "control_speed_mouse_button": {
+      "message": "רק כאשר לחצן העכבר הימני לחוץ"
+   },
+   "control_volume": {
+      "message": "שלוט בעוצמת הקול עם גלגלת העכבר בעת ריחוף מעל נגן הסרטון עם סמן העכבר"
+   },
+   "control_volume_mouse_button": {
+      "message": "רק כאשר לחצן העכבר הימני לחוץ"
+   },
+   "controls": {
+      "message": "בקרים"
+   },
+   "controls_visible": {
+      "message": "הצג את לחצני הבקרה גם בלי הצורך ללחוץ על כפתור ה- ••• או לרחף מעליו עם סמן העכבר"
+   },
+   "controls_within_control_bar": {
+      "message": "מקם בקרה בתוך שורת הבקרה"
+   },
+   "controls_within_video_player": {
+      "message": "מקם בקרה בתוך נגן הווידאו"
+   },
+   "convert_shorts": {
+      "message": "המר סרטוני \"שורטס\" קצרים"
+   },
+   "copy_to_clipboard": {
+      "message": "העתק ללוח"
+   },
+   "custom_script": {
+      "message": "סקריפט מותאם אישית"
+   },
+   "custom_script_control_info": {
+      "message": "לחץ כדי לבצע את הסקריפט המותאם אישית"
+   },
+   "custom_script_instructions": {
+      "message": "הדבק או הקלד את קוד ה-JavaScript שלך כאן, שמור אותו באמצעות הכפתור למטה, ולאחר מכן לחץ על הכפתור “סקריפט מותאם אישית” כאשר אתה רוצה לבצע אותו."
+   },
+   "custom_script_warning": {
+      "message": "מסיבות אבטחה עליך להשתמש רק בקוד שאתה מבין או קוד אשר נכתב על ידי מפתח שאתה סומך עליו."
+   },
+   "custom_theme": {
+      "message": "ערכת נושא מותאמת אישית"
+   },
+   "custom_theme_instructions": {
+      "message": "הדבק או הקלד את קוד ה־CSS שלך כאן, ולאחר מכן שמור אותו באמצעות הלחצן שבהמשך."
+   },
+   "dark_theme": {
+      "message": "ערכת נושא כהה"
+   },
+   "decrease_playback_speed": {
+      "message": "הפחת את מהירות הניגון"
+   },
+   "default_playback_speed": {
+      "message": "מהירות ניגון ברירת המחדל:"
+   },
+   "default_volume_level": {
+      "message": "עוצמת קול ברירת מחדל:"
+   },
+   "description": {
+      "message": "קח שליטה על YouTube ושפר את חווית המשתמש שלך!"
+   },
+   "detailed_description": {
+      "message": "לאחר שנוצרה כדי להוציא את המיטב מיוטיוב, הרחבה זו באה מוכנה עם סוגים שונים של אפשרויות ופיצ'רים שמאפשרים לך, בין השאר, לשלוט במהירות הניגון ובעוצמת הווליום - באמצעות גלגלת העכבר, להפוך פעולות משעממות לאוטומטיות כמו לבחור את איכות הווידאו הרצויה מראש, הגדרת עשרות מקשי קיצורי דרך על-מנת לשלוט על יוטיוב כמו מקצוען, ועוד...\nתנסו ותראו! אבל ראו אוזהרתם - אתם לעולם לא תרצו להשתמש ביוטיוב בלי זה ;)\n\nYouTube הוא סימן מסחרי רשום של Google LLC. השימוש בסימן מסחרי כפוף לאישור Google."
+   },
+   "disable_autoplay": {
+      "message": "השבת ניגון אוטומטי"
+   },
+   "display_control_bar": {
+      "message": "הצג את סרגל הכלים רק בעת ריחוף מעליו עם סמן העכבר"
+   },
+   "donate": {
+      "message": "תרום"
+   },
+   "execute_custom_script": {
+      "message": "בצע את הסקריפט המותאם אישית"
+   },
+   "expand": {
+      "message": "הרחב"
+   },
+   "expand_shrink_video_player": {
+      "message": "הרחב או כווץ את נגן הווידאו"
+   },
+   "expanded_player_viewport": {
+      "message": "השתמש בשטח הזמין בהתבסס על איזור התצוגה הדפדפן כדי להרחיב את נגן הווידאו."
+   },
+   "export": {
+      "message": "ייצוא"
+   },
+   "export_instructions": {
+      "message": "צור קובץ טקסט חדש והדבק את הקוד למטה מבלי לשנות אותו."
+   },
+   "flip_horizontally": {
+      "message": "הפוך אופקית"
+   },
+   "flip_horizontally_control_info": {
+      "message": "לחץ כדי להפוך את הווידאו אופקית"
+   },
+   "flip_vertically": {
+      "message": "הפוך אנכית"
+   },
+   "flip_vertically_control_info": {
+      "message": "לחץ כדי להפוך את הווידאו אנכית"
+   },
+   "flip_video_horizontally": {
+      "message": "הפוך את הווידאו אופקית"
+   },
+   "flip_video_vertically": {
+      "message": "הפוך את הווידאו אנכית"
+   },
+   "focus_video_player": {
+      "message": "התמקד על נגן הווידאו"
+   },
+   "gaussian_blur": {
+      "message": "טישטוש גאוסיאני:"
+   },
+   "grayscale": {
+      "message": "שחור לבן:"
+   },
+   "hide_chat": {
+      "message": "הסתר צ'אט"
+   },
+   "hide_comments": {
+      "message": "הסתר תגובות"
+   },
+   "hide_related_videos": {
+      "message": "הסתר סרטונים קשורים"
+   },
+   "hide_shorts": {
+      "message": "הסתר סרטוני \"שורטס\" קצרים"
+   },
+   "hue_rotation": {
+      "message": "רוטצית הגוון:"
+   },
+   "ignore_playlists": {
+      "message": "אל תמנע הפעלה אוטומטית ברשימות ניגון"
+   },
+   "ignore_pop_up_player": {
+      "message": "התעלם מהמיני-נגן"
+   },
+   "import": {
+      "message": "ייבוא"
+   },
+   "import_error": {
+      "message": "התוכן של קובץ הגיבוי לא תקין!"
+   },
+   "import_instructions": {
+      "message": "הדבק את התוכן של קובץ הגיבוי ולחץ על הכפתור \"ייבוא\". העמוד אוטומטית יטען מחדש אם הגדרות יובאו בהצלחה."
+   },
+   "increase_playback_speed": {
+      "message": "הגבר את מהירות הניגון"
+   },
+   "keyboard_shortcuts": {
+      "message": "קיצורי מקלדת"
+   },
+   "keyboard_shortcuts_control_info": {
+      "message": "לחץ כדי להציג את הרשימה של כל קיצורי המקלדת ל-YouTube (עמוד חיצוני)"
+   },
+   "keyboard_shortcuts_page": {
+      "message": "הצג את כל קיצורי המקלדת ל-YouTube"
+   },
+   "launch_mini_player": {
+      "message": "הפעל נגן מצומצם בעת גלילה לקריאת תגובות"
+   },
+   "locale_code": {
+      "message": "he"
+   },
+   "locale_dir": {
+      "message": "rtl"
+   },
+   "loop": {
+      "message": "לולאה"
+   },
+   "loop_control_info": {
+      "message": "לחצ או לחץ על המקש הימני כדי להפעיל/לכבות מצב \"לופ\""
+   },
+   "loop_end": {
+      "message": "סיום:"
+   },
+   "loop_start": {
+      "message": "התחלה:"
+   },
+   "message": {
+      "message": "הודעה"
+   },
+   "mini_player": {
+      "message": "נגן מצומצם"
+   },
+   "mini_player_position": {
+      "message": "מיקום נגן מצומצם:"
+   },
+   "mini_player_size": {
+      "message": "גודל נגן מצומצם:"
+   },
+   "not_now": {
+      "message": "לא עכשיו"
+   },
+   "opacity": {
+      "message": "אטימות:"
+   },
+   "open_options_page": {
+      "message": "פתח את עמוד האפשרויות"
+   },
+   "options": {
+      "message": "אפשרויות"
+   },
+   "options_control_info": {
+      "message": "לחץ כדי לפתוח את עמוד האפשרויות"
+   },
+   "override_playback_speeds": {
+      "message": "עקוף את מהירות הניגון הרגילה"
+   },
+   "page_reload_required": {
+      "message": "Enhancer for YouTube™ עודכן כרגע, כל עמודי YouTube צריכים להיטען מחדש."
+   },
+   "pause_videos": {
+      "message": "השהה סרטונים שמופעלים בלשוניות רקע כאשר סרטון מתחיל לפעול בלשונית הנוכחית"
+   },
+   "playback_quality": {
+      "message": "איכות הניגון"
+   },
+   "playback_speed": {
+      "message": "מהירות ניגון"
+   },
+   "playlists": {
+      "message": "רשימות ניגון:"
+   },
+   "playlists_full_screen": {
+      "message": "רשימות ניגון (מסך מלא):"
+   },
+   "pop_up_player": {
+      "message": "מיני-נגן"
+   },
+   "pop_up_player_control_info": {
+      "message": "לחיצהאו לחיצה-ימנית כדי לצפות במיני-נגן"
+   },
+   "pop_up_player_embeds": {
+      "message": "מיני-נגנן וסרטונים מוטמעים"
+   },
+   "pop_up_player_embeds_full_screen": {
+      "message": "מיני-נגן וסרטונים מוטמעים (מסך מלא):"
+   },
+   "pop_up_player_size": {
+      "message": "גדלי המיני-הנגן"
+   },
+   "preserve_black_bars_color": {
+      "message": "אל תשנה את צבע השורות האנכיות השחורות כאשר ערכת הנושא \"YouTube-DeepDark\" מוחלת או כאשר מצב קולנוע מאופשר"
+   },
+   "prevent_autoplay": {
+      "message": "מנע מסרטונים הטעונים בלשוניות רקע לפעול אוטומטית"
+   },
+   "prevent_autoplay_foreground_tab": {
+      "message": "מנע גם מסרטונים הטעונים בלשונית הנוכחית לפעול אוטומטית"
+   },
+   "preview": {
+      "message": "תצוגה מקדימה"
+   },
+   "rate": {
+      "message": "דירוג"
+   },
+   "rate_extension": {
+      "message": "דרג את החוויה שלך עם Enhancer for YouTube™."
+   },
+   "reset": {
+      "message": "איפוס"
+   },
+   "reverse_mouse_wheel_direction": {
+      "message": "הפוך את כיוון גלגלת העכבר בשליטה על מהירות הניגון ועוצמת הקול"
+   },
+   "reverse_playlist": {
+      "message": "הפוך את רשימת הניגון"
+   },
+   "reverse_playlist_control_info": {
+      "message": "לחיצצה או לחיצה-ימנית כדי לצפות ברשימה נגינה בסדר הפוך עם המיני-נגן"
+   },
+   "reverse_playlist_order": {
+      "message": "הפוך את סדר רשימת ההשמעה"
+   },
+   "saturation": {
+      "message": "רוויה:"
+   },
+   "save": {
+      "message": "שמור"
+   },
+   "screenshot": {
+      "message": "צלם מסך"
+   },
+   "screenshot_control_info": {
+      "message": "לחץ כדי לקחת צילום מסך של הווידאו"
+   },
+   "select_default_playback_speed": {
+      "message": "בחר את ברירת המחדל למהירות הניגון"
+   },
+   "select_normal_playback_speed": {
+      "message": "בחר את מהירות הניגון הרגילה"
+   },
+   "select_quality_1080p": {
+      "message": "בחר את איכות ההפעלה “1080p”"
+   },
+   "select_quality_1440p": {
+      "message": "בחר את איכות ההפעלה “1440p”"
+   },
+   "select_quality_144p": {
+      "message": "בחר את איכות ההפעלה “144p”"
+   },
+   "select_quality_2160p": {
+      "message": "בחר את איכות ההפעלה “2160p”"
+   },
+   "select_quality_240p": {
+      "message": "בחר את איכות ההפעלה “240p”"
+   },
+   "select_quality_2880p": {
+      "message": "בחר את איכות ההפעלה “2880p”"
+   },
+   "select_quality_360p": {
+      "message": "בחר את איכות ההפעלה “360p”"
+   },
+   "select_quality_4320p": {
+      "message": "בחר את איכות ההפעלה “4320p”"
+   },
+   "select_quality_480p": {
+      "message": "בחר את איכות ההפעלה “480p”"
+   },
+   "select_quality_720p": {
+      "message": "בחר את איכות ההפעלה “720p”"
+   },
+   "select_quality_auto": {
+      "message": "בחר את איכות ההפעלה \"אוטומטי\""
+   },
+   "select_quality_full_screen": {
+      "message": "בחר איכות הפעלה שונה בכניסה למצב מסך מלא"
+   },
+   "sepia": {
+      "message": "סופיה:"
+   },
+   "shrink": {
+      "message": "כווץ"
+   },
+   "size_control_info": {
+      "message": "לחיצה כדי להגדיל או להקטין את נגן הווידאו או לחיצה-ימנית כדי למרכז אותו בהתבסס על איזור התצוגה של הדפדפן"
+   },
+   "speed": {
+      "message": "מהירות"
+   },
+   "speed_control_info": {
+      "message": "השתמש בגלגלת העכבר כדי לשלוט במהירות הנגון או לחץ כדי לבחור את מהירות הניגון ברירת המחדל או לחץ לחיצה-ימנית כדי לבחור את מהירות הניגון ברירת המחדל"
+   },
+   "speed_minus_control_info": {
+      "message": "לחץ כדי להנמיך את מהירות הניגון"
+   },
+   "speed_plus_control_info": {
+      "message": "לחץ כדי להגביר את מהירות הניגון"
+   },
+   "speed_variation": {
+      "message": "כמות שינוי המהירות בעת גלילת גלגלת העכבר או כאשר לוחצים על כפתורי המהירות “-” ו-“+”:"
+   },
+   "stop": {
+      "message": "עצור"
+   },
+   "stop_control_info": {
+      "message": "לחץ כדי לעצור את הווידאו"
+   },
+   "stop_video": {
+      "message": "עצור את הווידאו"
+   },
+   "stop_videos": {
+      "message": "עצור סרטונים לחלוטין במקום רק למנוע הפעלה אוטומטית"
+   },
+   "support": {
+      "message": "תמיכה"
+   },
+   "switch_back_previous_quality": {
+      "message": "החלף בחזרה למהירות הניגון הקודמת ביציאה ממצב מסך מלא"
+   },
+   "take_screenshot": {
+      "message": "קח צילום מסך של הווידאו"
+   },
+   "theme": {
+      "message": "ערכת נושא"
+   },
+   "theme_custom_theme": {
+      "message": "ערכת נושא: מותאם אישית"
+   },
+   "theme_youtube_dark": {
+      "message": "ערכת נושא: YouTube™ (כהה)"
+   },
+   "theme_youtube_deep_dark": {
+      "message": "ערכת נושא: YouTube-DeepDark"
+   },
+   "theme_youtube_deep_dark_custom": {
+      "message": "ערכת נושא: YouTube-DeepDark (מותאם אישית)"
+   },
+   "toggle_cards_end_screens": {
+      "message": "הוסף/כבה כרטיסי מידע, וכבה נראות מסכי סיום"
+   },
+   "toggle_cinema_mode": {
+      "message": "הפעל מצב קולנוע"
+   },
+   "toggle_comments_visibility": {
+      "message": "הצג/הסתר תגובות"
+   },
+   "toggle_loop": {
+      "message": "הפעל/כבה מצב \"לופ\""
+   },
+   "toggle_pip_mode": {
+      "message": "הפעל/כבה מצב תמונה בתוך תמונה"
+   },
+   "toggle_related_videos_visibility": {
+      "message": "הצג/הסתר סרטונים קשורים"
+   },
+   "toggle_video_filters": {
+      "message": "הפעל/כבה פילטר וידאו"
+   },
+   "toggle_visibility": {
+      "message": "הצג/הסתר את כרטיסי המהידע/מסכי הסיום"
+   },
+   "toggle_volume_booster": {
+      "message": "הפעל/כבה מגביר ווליום"
+   },
+   "top_left_corner": {
+      "message": "הפינה השמאלית העליונה"
+   },
+   "top_right_corner": {
+      "message": "הפינה הימנית העליונה"
+   },
+   "translate": {
+      "message": "תרגום"
+   },
+   "variant": {
+      "message": "סוג:"
+   },
+   "video_codecs_and_formats": {
+      "message": "מקודדים ופורמטים של וידאו"
+   },
+   "video_filters": {
+      "message": "מסנני וידאו"
+   },
+   "video_filters_control_info": {
+      "message": "לחיצה כדי להפעיל/לכבות את הפילטרים על הווידאו או לחיצה-ימנית כדי להראות/להסתיר את פאנל הפילטרים לווידאו"
+   },
+   "video_player": {
+      "message": "נגן וידאו"
+   },
+   "videos": {
+      "message": "סרטונים:"
+   },
+   "videos_full_screen": {
+      "message": "סרטונים (מסך מלא):"
+   },
+   "volume": {
+      "message": "עוצמת קול"
+   },
+   "volume_booster_control_info": {
+      "message": "לחץ כדי להפעיל/לכבות מגביר ווליום"
+   },
+   "volume_booster_level": {
+      "message": "רמת הגברת עוצמת הקול:"
+   },
+   "volume_variation": {
+      "message": "כמות שינוי עוצמת הקול בעת גלילת גלגלת העכבר:"
+   },
+   "watch_pop_up_player": {
+      "message": "צפה עם ה-מיני נגן"
+   },
+   "youtube_dark_theme": {
+      "message": "YouTube (ערכת נושא רשמית)"
+   },
+   "youtube_deep_dark": {
+      "message": "YouTube-DeepDark (מאת RaitaroH)"
+   },
+   "youtube_deep_dark_custom": {
+      "message": "YouTube-DeepDark (מותאם אישית)"
+   }
+}

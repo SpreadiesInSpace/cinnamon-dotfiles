@@ -1,0 +1,572 @@
+{
+   "appearance": {
+      "message": "外觀"
+   },
+   "auto_apply_video_filters": {
+      "message": "自動套用影片濾鏡"
+   },
+   "auto_boost_volume": {
+      "message": "自動提高音量"
+   },
+   "auto_cinema_mode": {
+      "message": "自動啟用劇院模式"
+   },
+   "auto_enable_theater_mode": {
+      "message": "自動啟用 YouTube 的「劇院模式」"
+   },
+   "auto_execute_script": {
+      "message": "當 YouTube 在分頁讀取時，自動執行腳本"
+   },
+   "auto_expand_description": {
+      "message": "自動展開影片資訊"
+   },
+   "auto_expand_player": {
+      "message": "自動放大播放器"
+   },
+   "auto_hide_cards_end_screens": {
+      "message": "自動隱藏資訊卡與結束畫面"
+   },
+   "auto_select_quality": {
+      "message": "自動變更為首選畫質"
+   },
+   "auto_sort_comments": {
+      "message": "自動由新到舊排列留言"
+   },
+   "autoplay": {
+      "message": "自動播放"
+   },
+   "backup": {
+      "message": "備份"
+   },
+   "below_video_player": {
+      "message": "在播放器下方"
+   },
+   "block_hfr_formats": {
+      "message": "強制使用標準格率（24, 25, 30 FPS）而非更高格率（48, 50, 60 FPS）"
+   },
+   "block_webm_formats": {
+      "message": "強制使用 MP4 格式和 AVC 編碼（H.264）而非 WebM 格式和 VP9 編碼（最高畫質 1080p60 HD）"
+   },
+   "boost_volume": {
+      "message": "音量加強"
+   },
+   "bottom_left_corner": {
+      "message": "左下"
+   },
+   "bottom_of_window": {
+      "message": "在視窗的底部"
+   },
+   "bottom_right_corner": {
+      "message": "右下"
+   },
+   "brightness": {
+      "message": "亮度："
+   },
+   "cards_end_screens_control_info": {
+      "message": "點擊這個按鈕顯示／隱藏資訊卡與結束畫面"
+   },
+   "center_control_bar": {
+      "message": "展開或全螢幕模式時，將控制列置中放在播放器下方"
+   },
+   "center_video_player": {
+      "message": "將放大的播放器置中"
+   },
+   "cinema_mode": {
+      "message": "劇院模式"
+   },
+   "cinema_mode_control_info": {
+      "message": "點擊這個按鈕啟用／停用劇院模式"
+   },
+   "cinema_mode_toggle_size": {
+      "message": "切換劇院模式時，自動縮放播放器"
+   },
+   "color": {
+      "message": "底色："
+   },
+   "color_inversion": {
+      "message": "負片："
+   },
+   "configure_keyboard_shortcuts": {
+      "message": "設定快捷鍵"
+   },
+   "contrast": {
+      "message": "對比："
+   },
+   "control_bar_location": {
+      "message": "控制列位置："
+   },
+   "control_speed": {
+      "message": "當游標在播放器上時，按住「Ctrl」鍵並同時使用滑鼠滾輪來調整播放速度"
+   },
+   "control_speed_mouse_button": {
+      "message": "僅當右鍵也一起按下時才生效"
+   },
+   "control_volume": {
+      "message": "當游標在播放器上時，使用滑鼠滾輪控制音量"
+   },
+   "control_volume_mouse_button": {
+      "message": "僅當右鍵也一起按下時才生效"
+   },
+   "controls": {
+      "message": "控制"
+   },
+   "controls_visible": {
+      "message": "保持控制列可見，而無需點選 ••• 控制功能或將滑鼠游標停留在其上方"
+   },
+   "controls_within_control_bar": {
+      "message": "在播放器以外的控制列位置"
+   },
+   "controls_within_video_player": {
+      "message": "在播放器內使用控制列"
+   },
+   "convert_shorts": {
+      "message": "轉換 Shorts"
+   },
+   "copy_to_clipboard": {
+      "message": "複製到剪貼簿"
+   },
+   "custom_script": {
+      "message": "自訂腳本"
+   },
+   "custom_script_control_info": {
+      "message": "點擊這個按鈕執行自訂腳本"
+   },
+   "custom_script_instructions": {
+      "message": "在這裡貼上 JavaScript 代碼並點選下面的儲存按鈕，欲執行時，按下工具列上的「自訂腳本」按鈕。"
+   },
+   "custom_script_warning": {
+      "message": "為了安全起見，建議只使用您了解的代碼或是由具信譽的開發者所開發的代碼。"
+   },
+   "custom_theme": {
+      "message": "自訂主題"
+   },
+   "custom_theme_instructions": {
+      "message": "將您的 CSS 代碼貼在這裡，並按下面的儲存按鈕。"
+   },
+   "dark_theme": {
+      "message": "深色主題"
+   },
+   "decrease_playback_speed": {
+      "message": "降低播放速度"
+   },
+   "default_playback_speed": {
+      "message": "預設播放速度："
+   },
+   "default_volume_level": {
+      "message": "預設音量等級："
+   },
+   "description": {
+      "message": "擁有大量有趣的功能增進您的 YouTube 使用者體驗！"
+   },
+   "detailed_description": {
+      "message": "這款擴充功能是為了最大限度地利用 YouTube 而設計的，它擁有各式各樣的功能，以滑鼠滾輪控制播放速度和音量，自動化完成重複性工作，比如自動選擇合適的播放畫質，設定許多鍵盤快捷鍵，像個專家一樣控制 YouTube，還有更多特色…試試看就對了！但要知道用過之後，就回不去了 ;)\n\nYouTube 是 Google LLC. 的商標。使用該商標須經 Google 許可。"
+   },
+   "disable_autoplay": {
+      "message": "停用自動播放"
+   },
+   "display_control_bar": {
+      "message": "僅滑鼠游標停留在控制列上時才顯示"
+   },
+   "donate": {
+      "message": "贊助"
+   },
+   "execute_custom_script": {
+      "message": "執行自訂腳本"
+   },
+   "expand": {
+      "message": "放大"
+   },
+   "expand_shrink_video_player": {
+      "message": "放大／縮小播放器"
+   },
+   "expanded_player_viewport": {
+      "message": "當劇院模式停用時，在放大播放器使用全視野"
+   },
+   "export": {
+      "message": "匯出"
+   },
+   "export_instructions": {
+      "message": "建立一個文字檔並貼上代碼，不要對代碼做任何變更。"
+   },
+   "flip_horizontally": {
+      "message": "水平翻轉"
+   },
+   "flip_horizontally_control_info": {
+      "message": "點擊這個按鈕水平翻轉影片"
+   },
+   "flip_vertically": {
+      "message": "垂直翻轉"
+   },
+   "flip_vertically_control_info": {
+      "message": "點擊這個按鈕垂直翻轉影片"
+   },
+   "flip_video_horizontally": {
+      "message": "水平翻轉影片"
+   },
+   "flip_video_vertically": {
+      "message": "垂直翻轉影片"
+   },
+   "focus_video_player": {
+      "message": "將焦點移至影片播放器上"
+   },
+   "gaussian_blur": {
+      "message": "高斯模糊："
+   },
+   "grayscale": {
+      "message": "灰階："
+   },
+   "hide_chat": {
+      "message": "隱藏聊天室"
+   },
+   "hide_comments": {
+      "message": "隱藏留言區"
+   },
+   "hide_related_videos": {
+      "message": "隱藏相關影片"
+   },
+   "hide_shorts": {
+      "message": "隱藏 Shorts"
+   },
+   "hue_rotation": {
+      "message": "色調："
+   },
+   "ignore_playlists": {
+      "message": "使用播放清單時停用自動暫停影片"
+   },
+   "ignore_pop_up_player": {
+      "message": "忽略彈出式播放器"
+   },
+   "import": {
+      "message": "匯入"
+   },
+   "import_error": {
+      "message": "備份檔案的內容不正確！"
+   },
+   "import_instructions": {
+      "message": "貼上備份的內容後點擊「匯入」。成功匯入後將會自動重新整理頁面。"
+   },
+   "increase_playback_speed": {
+      "message": "提高播放速度"
+   },
+   "keyboard_shortcuts": {
+      "message": "快捷鍵"
+   },
+   "keyboard_shortcuts_control_info": {
+      "message": "點擊這個按鈕顯示所有 YouTube 的快捷鍵（另開新分頁顯示）"
+   },
+   "keyboard_shortcuts_page": {
+      "message": "顯示所有 YouTube 的快捷鍵"
+   },
+   "launch_mini_player": {
+      "message": "往下滑動時啟動迷你播放器"
+   },
+   "locale_code": {
+      "message": "zh_TW"
+   },
+   "locale_dir": {
+      "message": "ltr"
+   },
+   "loop": {
+      "message": "循環播放"
+   },
+   "loop_control_info": {
+      "message": "點擊這個按鈕或右鍵啟用／停用重複播放模式"
+   },
+   "loop_end": {
+      "message": "終點："
+   },
+   "loop_start": {
+      "message": "起點："
+   },
+   "message": {
+      "message": "訊息"
+   },
+   "mini_player": {
+      "message": "迷你播放器"
+   },
+   "mini_player_position": {
+      "message": "迷你播放器位置："
+   },
+   "mini_player_size": {
+      "message": "迷你播放器尺寸："
+   },
+   "not_now": {
+      "message": "稍後再說"
+   },
+   "opacity": {
+      "message": "不透明度："
+   },
+   "open_options_page": {
+      "message": "開啟設定頁面"
+   },
+   "options": {
+      "message": "設定"
+   },
+   "options_control_info": {
+      "message": "點選以開啟選項頁面"
+   },
+   "override_playback_speeds": {
+      "message": "增強播放速度功能"
+   },
+   "page_reload_required": {
+      "message": "Enhancer for YouTube™ 已更新，請重新整理此頁面。"
+   },
+   "pause_videos": {
+      "message": "在當前分頁播放影片時，暫停背景分頁的影片"
+   },
+   "playback_quality": {
+      "message": "播放畫質"
+   },
+   "playback_speed": {
+      "message": "播放速度"
+   },
+   "playlists": {
+      "message": "播放清單："
+   },
+   "playlists_full_screen": {
+      "message": "播放清單（全螢幕）："
+   },
+   "pop_up_player": {
+      "message": "彈出式播放器"
+   },
+   "pop_up_player_control_info": {
+      "message": "點擊這個按鈕或右鍵以彈出式播放器觀看影片"
+   },
+   "pop_up_player_embeds": {
+      "message": "彈出式播放器與嵌入的影片"
+   },
+   "pop_up_player_embeds_full_screen": {
+      "message": "彈出式播放器與嵌入的影片（全螢幕）："
+   },
+   "pop_up_player_size": {
+      "message": "彈出式播放器尺寸："
+   },
+   "preserve_black_bars_color": {
+      "message": "套用 YouTube-DeepDark 主題或啟用劇院模式時，不更改垂直黑條的顏色"
+   },
+   "prevent_autoplay": {
+      "message": "自動暫停於背景分頁開啟的影片"
+   },
+   "prevent_autoplay_foreground_tab": {
+      "message": "也自動暫停於當前分頁開啟的影片"
+   },
+   "preview": {
+      "message": "預覽"
+   },
+   "rate": {
+      "message": "評分"
+   },
+   "rate_extension": {
+      "message": "給予 Enhancer for YouTube™ 評分"
+   },
+   "reset": {
+      "message": "重設"
+   },
+   "reverse_mouse_wheel_direction": {
+      "message": "控制播放速度和音量時，對調滾輪的增減值"
+   },
+   "reverse_playlist": {
+      "message": "將播放清單顛倒"
+   },
+   "reverse_playlist_control_info": {
+      "message": "點擊這個按鈕或右鍵以彈出式播放器，以及顛倒順序觀賞播放清單"
+   },
+   "reverse_playlist_order": {
+      "message": "顛倒播放清單排序"
+   },
+   "saturation": {
+      "message": "飽和度："
+   },
+   "save": {
+      "message": "儲存"
+   },
+   "screenshot": {
+      "message": "擷圖"
+   },
+   "screenshot_control_info": {
+      "message": "點擊這個按鈕對影片擷圖"
+   },
+   "select_default_playback_speed": {
+      "message": "選擇預設播放速度"
+   },
+   "select_normal_playback_speed": {
+      "message": "選擇正常播放速度"
+   },
+   "select_quality_1080p": {
+      "message": "設定播放畫質為「1080p」"
+   },
+   "select_quality_1440p": {
+      "message": "設定播放畫質為「1440p」"
+   },
+   "select_quality_144p": {
+      "message": "設定播放畫質為「144p」"
+   },
+   "select_quality_2160p": {
+      "message": "設定播放畫質為「2160p」"
+   },
+   "select_quality_240p": {
+      "message": "設定播放畫質為「240p」"
+   },
+   "select_quality_2880p": {
+      "message": "設定播放畫質為「2880p」"
+   },
+   "select_quality_360p": {
+      "message": "設定播放畫質為「360p」"
+   },
+   "select_quality_4320p": {
+      "message": "設定播放畫質為「4320p」"
+   },
+   "select_quality_480p": {
+      "message": "設定播放畫質為「480p」"
+   },
+   "select_quality_720p": {
+      "message": "設定播放畫質為「720p」"
+   },
+   "select_quality_auto": {
+      "message": "設定播放畫質為「自動」"
+   },
+   "select_quality_full_screen": {
+      "message": "進入全螢幕模式時選擇不同的播放畫質"
+   },
+   "sepia": {
+      "message": "復古效果："
+   },
+   "shrink": {
+      "message": "縮小"
+   },
+   "size_control_info": {
+      "message": "點擊這個按鈕調整播放器尺寸，或按右鍵將播放器置中"
+   },
+   "speed": {
+      "message": "播放速度"
+   },
+   "speed_control_info": {
+      "message": "將游標移到這個按鈕上使用滾輪控制播放速度，點擊按鈕則使用選項設定裡的「預設播放速度」，按右鍵恢復正常播放速度"
+   },
+   "speed_minus_control_info": {
+      "message": "點擊這個按鈕降低播放速度"
+   },
+   "speed_plus_control_info": {
+      "message": "點擊這個按鈕增加播放速度"
+   },
+   "speed_variation": {
+      "message": "使用滑鼠滾輪或點擊速度按鈕「－」和 「＋」調整播放速度："
+   },
+   "stop": {
+      "message": "停止載入"
+   },
+   "stop_control_info": {
+      "message": "點擊這個按鈕停止載入影片"
+   },
+   "stop_video": {
+      "message": "停止載入影片"
+   },
+   "stop_videos": {
+      "message": "影片自動暫停時，停用預載"
+   },
+   "support": {
+      "message": "取得支援"
+   },
+   "switch_back_previous_quality": {
+      "message": "離開全螢幕模式時切換回先前的畫質"
+   },
+   "take_screenshot": {
+      "message": "影片擷圖"
+   },
+   "theme": {
+      "message": "主題"
+   },
+   "theme_custom_theme": {
+      "message": "主題：自訂主題"
+   },
+   "theme_youtube_dark": {
+      "message": "主題：YouTube™ 深色主題"
+   },
+   "theme_youtube_deep_dark": {
+      "message": "主題：YouTube-DeepDark"
+   },
+   "theme_youtube_deep_dark_custom": {
+      "message": "主題：YouTube-DeepDark（自訂）"
+   },
+   "toggle_cards_end_screens": {
+      "message": "開啟／隱藏資訊卡與結束畫面"
+   },
+   "toggle_cinema_mode": {
+      "message": "開啟／關閉劇院模式"
+   },
+   "toggle_comments_visibility": {
+      "message": "開啟／隱藏留言區"
+   },
+   "toggle_loop": {
+      "message": "開啟／關閉循環播放"
+   },
+   "toggle_pip_mode": {
+      "message": "開啟／關閉 PIP（子母畫面）模式"
+   },
+   "toggle_related_videos_visibility": {
+      "message": "開啟／隱藏相關影片"
+   },
+   "toggle_video_filters": {
+      "message": "切換影片濾鏡"
+   },
+   "toggle_visibility": {
+      "message": "顯示／隱藏資訊卡與結束畫面"
+   },
+   "toggle_volume_booster": {
+      "message": "開啟／關閉音量加強"
+   },
+   "top_left_corner": {
+      "message": "左上"
+   },
+   "top_right_corner": {
+      "message": "右上"
+   },
+   "translate": {
+      "message": "翻譯"
+   },
+   "variant": {
+      "message": "更改顏色："
+   },
+   "video_codecs_and_formats": {
+      "message": "影片編碼及格式"
+   },
+   "video_filters": {
+      "message": "影片濾鏡"
+   },
+   "video_filters_control_info": {
+      "message": "點擊這個按鈕啟用／停用濾鏡或按右鍵顯示／隱藏濾鏡面板"
+   },
+   "video_player": {
+      "message": "影片播放器"
+   },
+   "videos": {
+      "message": "影片："
+   },
+   "videos_full_screen": {
+      "message": "影片（全螢幕）："
+   },
+   "volume": {
+      "message": "音量"
+   },
+   "volume_booster_control_info": {
+      "message": "點擊這個按鈕啟用／停用音量加強"
+   },
+   "volume_booster_level": {
+      "message": "音量加強等級："
+   },
+   "volume_variation": {
+      "message": "每段滾輪的音量變化值："
+   },
+   "watch_pop_up_player": {
+      "message": "以彈出式播放器觀看"
+   },
+   "youtube_dark_theme": {
+      "message": "Youtube（官方深色主題）"
+   },
+   "youtube_deep_dark": {
+      "message": "Youtube-DeepDark（by RaitaroH）"
+   },
+   "youtube_deep_dark_custom": {
+      "message": "Youtube-DeepDark（自訂）"
+   }
+}

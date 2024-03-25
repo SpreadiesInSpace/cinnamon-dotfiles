@@ -1,0 +1,572 @@
+{
+   "appearance": {
+      "message": "Wygląd"
+   },
+   "auto_apply_video_filters": {
+      "message": "Automatycznie nakładaj filtry wideo"
+   },
+   "auto_boost_volume": {
+      "message": "Automatycznie zwiększ głośność"
+   },
+   "auto_cinema_mode": {
+      "message": "Automatycznie przechodź do trybu kinowego"
+   },
+   "auto_enable_theater_mode": {
+      "message": "Automatycznie włączaj „Tryb kinowy” YouTube"
+   },
+   "auto_execute_script": {
+      "message": "Automatycznie wykonaj skrypt po wczytaniu YouTube do karty"
+   },
+   "auto_expand_description": {
+      "message": "Automatycznie rozwijaj opisy filmów"
+   },
+   "auto_expand_player": {
+      "message": "Automatycznie rozszerzaj odtwarzacz wideo"
+   },
+   "auto_hide_cards_end_screens": {
+      "message": "Automatycznie ukrywaj karty informacyjne i ekrany końcowe"
+   },
+   "auto_select_quality": {
+      "message": "Automatycznie wybierz jakość odtwarzania"
+   },
+   "auto_sort_comments": {
+      "message": "Automatycznie sortuj komentarze od najnowszych do najstarszych"
+   },
+   "autoplay": {
+      "message": "Auto-odtwarzanie"
+   },
+   "backup": {
+      "message": "Kopia zapasowa"
+   },
+   "below_video_player": {
+      "message": "Poniżej odtwarzacza"
+   },
+   "block_hfr_formats": {
+      "message": "Wymuś formaty ze standardową liczbą klatek na sekundę (24, 25, 30 kl./s) zamiast formatów z dużą liczbą klatek na sekundę (48, 50, 60 kl./s)"
+   },
+   "block_webm_formats": {
+      "message": "Wymuś format MP4 i kodek AVC (H.264) zamiast formatu WebM i kodeka VP9 (maksymalna rozdzielczość 1080p60 HD)"
+   },
+   "boost_volume": {
+      "message": "Wzmocnij głośność"
+   },
+   "bottom_left_corner": {
+      "message": "Lewy dolny róg"
+   },
+   "bottom_of_window": {
+      "message": "Na dole okna"
+   },
+   "bottom_right_corner": {
+      "message": "Prawy dolny róg"
+   },
+   "brightness": {
+      "message": "Jasność:"
+   },
+   "cards_end_screens_control_info": {
+      "message": "Kliknij, aby przełączyć widoczność kart i ekranów końcowych"
+   },
+   "center_control_bar": {
+      "message": "Wyśrodkuj pasek sterowania poniżej odtwarzacza wideo, gdy jest rozwinięty lub gdy aktywny jest tryb pełnoekranowy"
+   },
+   "center_video_player": {
+      "message": "Wyśrodkuj rozszerzony odtwarzacz na widoku"
+   },
+   "cinema_mode": {
+      "message": "Tryb kinowy"
+   },
+   "cinema_mode_control_info": {
+      "message": "Kliknij, aby przełączyć tryb kinowy"
+   },
+   "cinema_mode_toggle_size": {
+      "message": "Automatycznie rozszerzaj lub ograniczaj odtwarzacz wideo po przełączeniu trybu kinowego"
+   },
+   "color": {
+      "message": "Kolor:"
+   },
+   "color_inversion": {
+      "message": "Odwrócenie kolorów:"
+   },
+   "configure_keyboard_shortcuts": {
+      "message": "Skonfiguruj skróty klawiszowe"
+   },
+   "contrast": {
+      "message": "Kontrast:"
+   },
+   "control_bar_location": {
+      "message": "Położenie paska sterowania:"
+   },
+   "control_speed": {
+      "message": "Steruj prędkością odtwarzania za pomocą kółka myszy po wskazaniu kursorem myszy na odtwarzacz wideo przy naciśniętym klawiszu „Control” (Ctrl)"
+   },
+   "control_speed_mouse_button": {
+      "message": "Tylko przy wciśniętym prawym przycisku myszy"
+   },
+   "control_volume": {
+      "message": "Steruj poziomem głośności za pomocą kółka myszy po wskazaniu kursorem myszy na odtwarzacz wideo"
+   },
+   "control_volume_mouse_button": {
+      "message": "Tylko przy wciśniętym prawym przycisku myszy"
+   },
+   "controls": {
+      "message": "Kontrolki"
+   },
+   "controls_visible": {
+      "message": "Utrzymaj widoczność kontrolek bez konieczności naciskania ••• lub wskazywania kursorem myszy"
+   },
+   "controls_within_control_bar": {
+      "message": "Umieść klawisze wewnątrz paska sterowania"
+   },
+   "controls_within_video_player": {
+      "message": "Umieść kontrolki wewnątrz odtwarzacza wideo"
+   },
+   "convert_shorts": {
+      "message": "Przekonwertuj Shorts"
+   },
+   "copy_to_clipboard": {
+      "message": "Kopiuj do schowka"
+   },
+   "custom_script": {
+      "message": "Skrypt niestandardowy"
+   },
+   "custom_script_control_info": {
+      "message": "Kliknij, aby wykonać skrypt niestandardowy"
+   },
+   "custom_script_instructions": {
+      "message": "Wklej lub wpisz tutaj kod JavaScript, zapisz go za pomocą poniższego przycisku, a następnie by go wykonać, naciśnij klawisz „Skrypt niestandardowy” na pasku zadań."
+   },
+   "custom_script_warning": {
+      "message": "Dla Twojego bezpieczeństwa powinieneś używać tylko kodu, który w pełni rozumiesz lub który został napisany przez zaufanego programistę."
+   },
+   "custom_theme": {
+      "message": "Motyw niestandardowy"
+   },
+   "custom_theme_instructions": {
+      "message": "Wklej lub wprowadź kod CSS, a następnie zapisz za pomocą poniżsego przycisku."
+   },
+   "dark_theme": {
+      "message": "Ciemny motyw"
+   },
+   "decrease_playback_speed": {
+      "message": "Zmniejsz prędkość odtwarzania"
+   },
+   "default_playback_speed": {
+      "message": "Domyślna prędkość odtwarzania:"
+   },
+   "default_volume_level": {
+      "message": "Domyślny poziom głośności:"
+   },
+   "description": {
+      "message": "Przejmij kontrolę nad YouTube i popraw komfort użytkowania!"
+   },
+   "detailed_description": {
+      "message": "Wykorzystaj w pełni możliwości YouTube. Rozszerzenie wypełnione jest po brzegi funkcjami, które pozwalają między innymi: na sterowanie prędkością odtwarzania i poziomem głośności za kółka myszy; zautomatyzowanie powtarzalnych zadań, takich jak wybieranie odpowiedniej jakości odtwarzania; konfigurowanie dziesiątek skrótów do sterowania YouTubem niczym szef; wiele więcej… Wypróbuj je! Pamiętaj jednak, że od tej pory nigdy nie będziesz chcieć korzystać z YouTube bez niego ;)\n\nYouTube jest znakiem towarowym firmy Google LLC. Użycie tego znaku podlega Google Permissions."
+   },
+   "disable_autoplay": {
+      "message": "Wyłącz auto-odtwarzanie"
+   },
+   "display_control_bar": {
+      "message": "Wyświetl pasek klawiszy tylko po najechaniu kursorem myszy"
+   },
+   "donate": {
+      "message": "Wspomóż"
+   },
+   "execute_custom_script": {
+      "message": "Wykonaj skrypt niestandardowy"
+   },
+   "expand": {
+      "message": "Rozszerz"
+   },
+   "expand_shrink_video_player": {
+      "message": "Rozszerz lub zmniejsz odtwarzacz"
+   },
+   "expanded_player_viewport": {
+      "message": "Użyj całego dostępnego miejsca w widoku na rozszerzenie odtwarzacza wideo"
+   },
+   "export": {
+      "message": "Eksportuj"
+   },
+   "export_instructions": {
+      "message": "Utwórz nowy plik tekstowy i wklej poniższy kod nie zmieniając go."
+   },
+   "flip_horizontally": {
+      "message": "Odbij w poziomie"
+   },
+   "flip_horizontally_control_info": {
+      "message": "Kliknij, aby odwrócić wideo w poziomie"
+   },
+   "flip_vertically": {
+      "message": "Odbij w pionie"
+   },
+   "flip_vertically_control_info": {
+      "message": "Kliknij, aby odwrócić wideo w pionie"
+   },
+   "flip_video_horizontally": {
+      "message": "Odbij wideo w poziomie"
+   },
+   "flip_video_vertically": {
+      "message": "Odbij wideo w pionie"
+   },
+   "focus_video_player": {
+      "message": "Skupienie na odtwarzaczu"
+   },
+   "gaussian_blur": {
+      "message": "Rozmycie gaussowskie:"
+   },
+   "grayscale": {
+      "message": "Skala szarości:"
+   },
+   "hide_chat": {
+      "message": "Ukryj czat"
+   },
+   "hide_comments": {
+      "message": "Ukryj komentarze"
+   },
+   "hide_related_videos": {
+      "message": "Ukryj powiązane filmy"
+   },
+   "hide_shorts": {
+      "message": "Ukryj Shorts"
+   },
+   "hue_rotation": {
+      "message": "Obrócenie odcienia:"
+   },
+   "ignore_playlists": {
+      "message": "Nie zapobiegaj auto-odtwarzaniu dla list odtwarzania"
+   },
+   "ignore_pop_up_player": {
+      "message": "Ignoruj wyskakujący odtwarzacz"
+   },
+   "import": {
+      "message": "Importuj"
+   },
+   "import_error": {
+      "message": "Zawartość pliku kopii jest niewłaściwa!"
+   },
+   "import_instructions": {
+      "message": "Wklej zawartość pliku kopii i kliknij przycisk „Importuj”. Gdy ustawienia wczytają się poprawnie, strona automatycznie się odświeży."
+   },
+   "increase_playback_speed": {
+      "message": "Zwiększ prędkość odtwarzania"
+   },
+   "keyboard_shortcuts": {
+      "message": "Skróty klawiszowe"
+   },
+   "keyboard_shortcuts_control_info": {
+      "message": "Kliknij, aby wyświetlić listę wszystkich skrótów klawiszowych YouTube (strona zewnętrzna)"
+   },
+   "keyboard_shortcuts_page": {
+      "message": "Wyświetl wszystkie skróty klawiszowe YouTube"
+   },
+   "launch_mini_player": {
+      "message": "Uruchom mini-odtwarzacz po przewinięciu do komentarzy"
+   },
+   "locale_code": {
+      "message": "pl"
+   },
+   "locale_dir": {
+      "message": "ltr"
+   },
+   "loop": {
+      "message": "Pętla"
+   },
+   "loop_control_info": {
+      "message": "Kliknij, aby przełączyć wyłączyć tryb zapętlania"
+   },
+   "loop_end": {
+      "message": "Koniec:"
+   },
+   "loop_start": {
+      "message": "Początek:"
+   },
+   "message": {
+      "message": "Wiadomość"
+   },
+   "mini_player": {
+      "message": "Mini-odtwarzacz"
+   },
+   "mini_player_position": {
+      "message": "Pozycja mini-odtwarzacza:"
+   },
+   "mini_player_size": {
+      "message": "Rozmiar mini-odtwarzacza:"
+   },
+   "not_now": {
+      "message": "Nie teraz"
+   },
+   "opacity": {
+      "message": "Przezroczystość:"
+   },
+   "open_options_page": {
+      "message": "Otwórz stronę ustawień"
+   },
+   "options": {
+      "message": "Ustawienia"
+   },
+   "options_control_info": {
+      "message": "Kliknij, aby otworzyć stronę ustawień"
+   },
+   "override_playback_speeds": {
+      "message": "Przesłoń domyślne prędkości odtwarzania"
+   },
+   "page_reload_required": {
+      "message": "Enhancer for YouTube™ został zaktualizowany. Należy przeładować wszystkie karty YouTube."
+   },
+   "pause_videos": {
+      "message": "Wstrzymuj wideo w kartach w tle po rozpoczęciu wideo w bieżącej karcie"
+   },
+   "playback_quality": {
+      "message": "Jakość odtwarzania"
+   },
+   "playback_speed": {
+      "message": "Prędkość odtwarzania"
+   },
+   "playlists": {
+      "message": "Listy odtwarzania:"
+   },
+   "playlists_full_screen": {
+      "message": "Listy odtwarzania (pełny ekran):"
+   },
+   "pop_up_player": {
+      "message": "Odtwarzacz wyskakujący"
+   },
+   "pop_up_player_control_info": {
+      "message": "Kliknij, aby oglądać wideo w trybie wyskakującego odtwarzacza"
+   },
+   "pop_up_player_embeds": {
+      "message": "Odtwarzacz okienkowy i wideo osadzone:"
+   },
+   "pop_up_player_embeds_full_screen": {
+      "message": "Odtwarzacz wyskakujący i wideo osadzone (pełny ekran):"
+   },
+   "pop_up_player_size": {
+      "message": "Rozmiar odtwarzacza wyskakującego:"
+   },
+   "preserve_black_bars_color": {
+      "message": "Nie zmieniaj koloru czarnych pionowych pasów dla motywu YouTube-DeepDark lub po wybraniu trybu kinowego"
+   },
+   "prevent_autoplay": {
+      "message": "Zapobiegaj automatycznemu odtwarzaniu wideo ładowanych w kartach w tle"
+   },
+   "prevent_autoplay_foreground_tab": {
+      "message": "Zapobiegaj również automatycznemu odtwarzaniu wideo ładowanych w bieżącej karcie"
+   },
+   "preview": {
+      "message": "Podgląd"
+   },
+   "rate": {
+      "message": "Oceń"
+   },
+   "rate_extension": {
+      "message": "Oceń swoje doświadczenia z Enhancer for YouTube™."
+   },
+   "reset": {
+      "message": "Przywróć"
+   },
+   "reverse_mouse_wheel_direction": {
+      "message": "Odwróć kierunek kółka myszki podczas sterowania prędkością i głośnością"
+   },
+   "reverse_playlist": {
+      "message": "Odwróć listę odtwarzania"
+   },
+   "reverse_playlist_control_info": {
+      "message": "Kliknij, aby oglądać listę w odwrotnej kolejności w trybie wyskakującego odtwarzacza"
+   },
+   "reverse_playlist_order": {
+      "message": "Odwróć kolejność listy odtwarzania"
+   },
+   "saturation": {
+      "message": "Nasycenie:"
+   },
+   "save": {
+      "message": "Zapisz"
+   },
+   "screenshot": {
+      "message": "Zrzut ekranu"
+   },
+   "screenshot_control_info": {
+      "message": "Kliknij, aby zrobić zrzut ekranu wideo"
+   },
+   "select_default_playback_speed": {
+      "message": "Ustaw domyślną prędkość odtwarzania"
+   },
+   "select_normal_playback_speed": {
+      "message": "Ustaw normalną prędkość odtwarzania"
+   },
+   "select_quality_1080p": {
+      "message": "Wybierz jakość odtwarzania „1080p”"
+   },
+   "select_quality_1440p": {
+      "message": "Wybierz jakość odtwarzania „1440p”"
+   },
+   "select_quality_144p": {
+      "message": "Wybierz jakość odtwarzania „144p”"
+   },
+   "select_quality_2160p": {
+      "message": "Wybierz jakość odtwarzania „2160p”"
+   },
+   "select_quality_240p": {
+      "message": "Wybierz jakość odtwarzania „240p”"
+   },
+   "select_quality_2880p": {
+      "message": "Wybierz jakość odtwarzania „2880p”"
+   },
+   "select_quality_360p": {
+      "message": "Wybierz jakość odtwarzania „360p”"
+   },
+   "select_quality_4320p": {
+      "message": "Wybierz jakość odtwarzania „4320p”"
+   },
+   "select_quality_480p": {
+      "message": "Wybierz jakość odtwarzania „480p”"
+   },
+   "select_quality_720p": {
+      "message": "Wybierz jakość odtwarzania „720p”"
+   },
+   "select_quality_auto": {
+      "message": "Wybierz jakość odtwarzania „Auto”"
+   },
+   "select_quality_full_screen": {
+      "message": "Wybierz inną jakość odtwarzania po przejściu w tryb pełnoekranowy"
+   },
+   "sepia": {
+      "message": "Sepia:"
+   },
+   "shrink": {
+      "message": "Zmniejsz"
+   },
+   "size_control_info": {
+      "message": "Kliknij, aby rozszerzyć lub zmniejszyć odtwarzacz lub kliknij prawym przyciskiem, aby wyśrodkować odtwarzacz w widoku"
+   },
+   "speed": {
+      "message": "Prędkość"
+   },
+   "speed_control_info": {
+      "message": "Używaj kółka myszy, aby kontrolować prędkość odtwarzania lub kliknij lewym przyciskiem, aby ustawić domyślną prędkość, albo kliknij prawym przyciskiem, aby ustawić normalną prędkość"
+   },
+   "speed_minus_control_info": {
+      "message": "Kliknij, aby zmniejszyć prędkość odtwarzania"
+   },
+   "speed_plus_control_info": {
+      "message": "Kliknij, aby zwiększyć prędkość odtwarzania"
+   },
+   "speed_variation": {
+      "message": "Zmiana prędkości przy obracaniu kółkiem myszy lub naciskaniu przycisków prędkości „-” i „+”:"
+   },
+   "stop": {
+      "message": "Zatrzymaj"
+   },
+   "stop_control_info": {
+      "message": "Kliknij, aby zatrzymać wideo"
+   },
+   "stop_video": {
+      "message": "Zatrzymaj wideo"
+   },
+   "stop_videos": {
+      "message": "Zamiast zapobiegać tylko auto-odtwarzaniu całkowicie zatrzymaj wideo"
+   },
+   "support": {
+      "message": "Pomoc"
+   },
+   "switch_back_previous_quality": {
+      "message": "Przywróć poprzednią jakość odtwarzania po opuszczeniu trybu pełnoekranowego"
+   },
+   "take_screenshot": {
+      "message": "Wykonaj zrzut ekranu"
+   },
+   "theme": {
+      "message": "Motyw"
+   },
+   "theme_custom_theme": {
+      "message": "Motyw: Niestandardowy"
+   },
+   "theme_youtube_dark": {
+      "message": "Motyw: YouTube™ (ciemny)"
+   },
+   "theme_youtube_deep_dark": {
+      "message": "Motyw: YouTube-DeepDark"
+   },
+   "theme_youtube_deep_dark_custom": {
+      "message": "Motyw: YouTube-DeepDark (niestandardowy)"
+   },
+   "toggle_cards_end_screens": {
+      "message": "Przełącz widoczność kart i ekranów końcowych"
+   },
+   "toggle_cinema_mode": {
+      "message": "Przełącz tryb kinowy"
+   },
+   "toggle_comments_visibility": {
+      "message": "Przełącz widoczność komentarzy"
+   },
+   "toggle_loop": {
+      "message": "Przełącz tryb pętli"
+   },
+   "toggle_pip_mode": {
+      "message": "Przełącz tryb obrazu w obrazie"
+   },
+   "toggle_related_videos_visibility": {
+      "message": "Przełącz widoczność powiązanych filmów"
+   },
+   "toggle_video_filters": {
+      "message": "Przełącz filtry wideo"
+   },
+   "toggle_visibility": {
+      "message": "Przełącz karty/ekrany końcowe"
+   },
+   "toggle_volume_booster": {
+      "message": "Przełącz wzmocnienie głośności"
+   },
+   "top_left_corner": {
+      "message": "Lewy górny róg"
+   },
+   "top_right_corner": {
+      "message": "Prawy górny róg"
+   },
+   "translate": {
+      "message": "Przetłumacz"
+   },
+   "variant": {
+      "message": "Wariant:"
+   },
+   "video_codecs_and_formats": {
+      "message": "Kodeki i formaty wideo"
+   },
+   "video_filters": {
+      "message": "Filtry wideo"
+   },
+   "video_filters_control_info": {
+      "message": "Kliknij, aby przełączyć filtry wideo; prawy przycisk, by przełączyć widoczność panelu filtrów wideo"
+   },
+   "video_player": {
+      "message": "Odtwarzacz wideo"
+   },
+   "videos": {
+      "message": "Wideo:"
+   },
+   "videos_full_screen": {
+      "message": "Wideo (pełny ekran):"
+   },
+   "volume": {
+      "message": "Głośność"
+   },
+   "volume_booster_control_info": {
+      "message": "Kliknij, aby przełączyć wzmocnienie głośności"
+   },
+   "volume_booster_level": {
+      "message": "Poziom wzmocnienia głośności:"
+   },
+   "volume_variation": {
+      "message": "Zmiana głośności poprzez obrót kółkiem myszy:"
+   },
+   "watch_pop_up_player": {
+      "message": "Oglądaj w trybie wyskakującego odtwarzacza"
+   },
+   "youtube_dark_theme": {
+      "message": "YouTube (oficjalny)"
+   },
+   "youtube_deep_dark": {
+      "message": "YouTube-DeepDark (od RaitaroH)"
+   },
+   "youtube_deep_dark_custom": {
+      "message": "YouTube-DeepDark (niestandardowy)"
+   }
+}

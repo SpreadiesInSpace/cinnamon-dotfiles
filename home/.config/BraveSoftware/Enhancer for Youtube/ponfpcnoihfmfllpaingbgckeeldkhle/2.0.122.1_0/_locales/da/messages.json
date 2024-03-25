@@ -1,0 +1,572 @@
+{
+   "appearance": {
+      "message": "Udseende"
+   },
+   "auto_apply_video_filters": {
+      "message": "Anvend automatisk videofiltrene"
+   },
+   "auto_boost_volume": {
+      "message": "Øg automatisk lydstyrken"
+   },
+   "auto_cinema_mode": {
+      "message": "Aktiver automatisk biograftilstand"
+   },
+   "auto_enable_theater_mode": {
+      "message": "Aktiver automatisk YouTubes “teatertilstand“"
+   },
+   "auto_execute_script": {
+      "message": "Kør automatisk scriptet, når YouTube er indlæst i en fane"
+   },
+   "auto_expand_description": {
+      "message": "Udvid automatisk videobeskrivelserne"
+   },
+   "auto_expand_player": {
+      "message": "Udvid automatisk videoafspilleren"
+   },
+   "auto_hide_cards_end_screens": {
+      "message": "Skjul automatisk infokort og slutskærme"
+   },
+   "auto_select_quality": {
+      "message": "Vælg automatisk en afspilningskvalitet"
+   },
+   "auto_sort_comments": {
+      "message": "Sorter automatisk kommentarer fra nyeste til ældste"
+   },
+   "autoplay": {
+      "message": "Automatisk afspilning"
+   },
+   "backup": {
+      "message": "Backup"
+   },
+   "below_video_player": {
+      "message": "Under videoafspilleren"
+   },
+   "block_hfr_formats": {
+      "message": "Tving brugen af ​​standard billedhastighedsformater (24, 25, 30 FPS) i stedet for høje billedhastighedsformater (48, 50, 60 FPS)"
+   },
+   "block_webm_formats": {
+      "message": "Tving brugen af ​​MP4-formatet og AVC-codec (H.264) i stedet for WebM-formatet og VP9-codec (maksimal opløsning: 1080p60 HD)"
+   },
+   "boost_volume": {
+      "message": "Forstærk lydstyrken"
+   },
+   "bottom_left_corner": {
+      "message": "Nederste venstre hjørne"
+   },
+   "bottom_of_window": {
+      "message": "Nederst i vinduet"
+   },
+   "bottom_right_corner": {
+      "message": "Nederste højre hjørne"
+   },
+   "brightness": {
+      "message": "Lysstyrke:"
+   },
+   "cards_end_screens_control_info": {
+      "message": "Klik for at skifte infokorts og slutskærms synlighed"
+   },
+   "center_control_bar": {
+      "message": "Centrer kontrolbjælken under videoafspilleren, når den udvides, eller når fuldskærmstilstand er aktiv"
+   },
+   "center_video_player": {
+      "message": "Centrer videoafspilleren i viewporten"
+   },
+   "cinema_mode": {
+      "message": "Biograftilstand"
+   },
+   "cinema_mode_control_info": {
+      "message": "Klik for at aktivere/deaktivere biograftilstanden"
+   },
+   "cinema_mode_toggle_size": {
+      "message": "Udvid eller formindsk videoafspilleren automatisk, når biograftilstanden skiftes"
+   },
+   "color": {
+      "message": "Farve:"
+   },
+   "color_inversion": {
+      "message": "Farve inversion:"
+   },
+   "configure_keyboard_shortcuts": {
+      "message": "Konfigurer tastaturgenveje"
+   },
+   "contrast": {
+      "message": "Kontrast:"
+   },
+   "control_bar_location": {
+      "message": "Kontrolbjælkens placering:"
+   },
+   "control_speed": {
+      "message": "Styr afspilningshastigheden med musehjulet, når musemarkøren er over videoafspilleren og “Control”-tasten (Ctrl) er trykket ned"
+   },
+   "control_speed_mouse_button": {
+      "message": "Kun når der trykkes på højre museknap"
+   },
+   "control_volume": {
+      "message": "Juster lydstyrken med musehjulet, når du holder musemarkøren over videoafspilleren"
+   },
+   "control_volume_mouse_button": {
+      "message": "Kun når der trykkes på højre museknap"
+   },
+   "controls": {
+      "message": "Kontroller"
+   },
+   "controls_visible": {
+      "message": "Hold kontrollerne synlige uden at skulle klikke på ••• kontrollen eller holde musemarkøren over den"
+   },
+   "controls_within_control_bar": {
+      "message": "Placer kontroller i en kontrolbjælke"
+   },
+   "controls_within_video_player": {
+      "message": "Placer kontroller i videoafspilleren"
+   },
+   "convert_shorts": {
+      "message": "Konverter Shorts"
+   },
+   "copy_to_clipboard": {
+      "message": "Kopier til udklipsholder"
+   },
+   "custom_script": {
+      "message": "Brugerdefineret script"
+   },
+   "custom_script_control_info": {
+      "message": "Klik for at køre det brugerdefinerede script"
+   },
+   "custom_script_instructions": {
+      "message": "Indsæt eller skriv din JavaScript-kode her, gem den ved at bruge knappen nedenunder, og klik derefter på “Brugerdefineret script“, når du vil køre det."
+   },
+   "custom_script_warning": {
+      "message": "Af sikkerhedsmæssige årsager bør du kun bruge kode, som du forstår, eller kode der er skrevet af en udvikler, du stoler på."
+   },
+   "custom_theme": {
+      "message": "Brugerdefineret tema"
+   },
+   "custom_theme_instructions": {
+      "message": "Indsæt eller skriv din CSS-kode her og gem den ved at bruge knappen nedenunder."
+   },
+   "dark_theme": {
+      "message": "Mørkt tema"
+   },
+   "decrease_playback_speed": {
+      "message": "Reducer afspilningshastigheden"
+   },
+   "default_playback_speed": {
+      "message": "Standard afspilningshastighed:"
+   },
+   "default_volume_level": {
+      "message": "Standard lydstyrkeniveau:"
+   },
+   "description": {
+      "message": "Tag kontrol over YouTube og boost din brugeroplevelse!"
+   },
+   "detailed_description": {
+      "message": "Bygget til at få det meste ud af YouTube, den her browser udvidelse kommer pakket med mange funktioner som lader dig, blandt andet, kontrollere afspilningshastighed og lydstyrkeniveau med dit musehjul, automatisere gentagne opgaver som at vælge den passende afspilningskvalitet, konfigurere mange tastatursgenveje til at kontrolere YouTube som en pro, og meget mere... Giv det et forsøg! Men vær dog opmærksom på, at du aldrig vil kunne bruge YouTube uden det igen ;)\n\nYouTube er et varemærke tilhørende Google LLC. Brug af dette varemærke er underlagt Googles tilladelser."
+   },
+   "disable_autoplay": {
+      "message": "Deaktiver automatisk afspilning"
+   },
+   "display_control_bar": {
+      "message": "Vis kun kontrolbjælken, når du holder musemarkøren over den"
+   },
+   "donate": {
+      "message": "Donere"
+   },
+   "execute_custom_script": {
+      "message": "Udfør det brugerdefinerede script"
+   },
+   "expand": {
+      "message": "Udvid"
+   },
+   "expand_shrink_video_player": {
+      "message": "Udvid eller formindsk videoafspilleren"
+   },
+   "expanded_player_viewport": {
+      "message": "Brug den tilgængelige plads baseret på viewportens dimensioner til at udvide videoafspilleren"
+   },
+   "export": {
+      "message": "Eksportér"
+   },
+   "export_instructions": {
+      "message": "Opret en ny tekstfil og indsæt koden nedenunder uden at ændre den."
+   },
+   "flip_horizontally": {
+      "message": "Vend vandret"
+   },
+   "flip_horizontally_control_info": {
+      "message": "Klik for at vende videoen vandret"
+   },
+   "flip_vertically": {
+      "message": "Vend lodret"
+   },
+   "flip_vertically_control_info": {
+      "message": "Klik for at vende videoen lodret"
+   },
+   "flip_video_horizontally": {
+      "message": "Vend videoen vandret"
+   },
+   "flip_video_vertically": {
+      "message": "Vend videoen lodret"
+   },
+   "focus_video_player": {
+      "message": "Sæt fokus på videoafspilleren"
+   },
+   "gaussian_blur": {
+      "message": "Gaussisk sløring:"
+   },
+   "grayscale": {
+      "message": "Gråtoner:"
+   },
+   "hide_chat": {
+      "message": "Skjul chat"
+   },
+   "hide_comments": {
+      "message": "Skjul kommentarer"
+   },
+   "hide_related_videos": {
+      "message": "Skjul relaterede videoer"
+   },
+   "hide_shorts": {
+      "message": "Skjul Shorts"
+   },
+   "hue_rotation": {
+      "message": "Hue rotation:"
+   },
+   "ignore_playlists": {
+      "message": "Forhindre ikke automatisk afspilning af playlister"
+   },
+   "ignore_pop_up_player": {
+      "message": "Ignorer pop-ud-afspilleren"
+   },
+   "import": {
+      "message": "Importér"
+   },
+   "import_error": {
+      "message": "Indholdet af backupfilen er ugyldigt!"
+   },
+   "import_instructions": {
+      "message": "Indsæt indholdet af backupfilen, og klik på knappen “Importer“. Siden genindlæses automatisk, hvis indstillingerne importeres."
+   },
+   "increase_playback_speed": {
+      "message": "Øge afspilningshastigheden"
+   },
+   "keyboard_shortcuts": {
+      "message": "Tastaturgenveje"
+   },
+   "keyboard_shortcuts_control_info": {
+      "message": "Klik for at få vist listen over alle tastaturgenveje til YouTube (ekstern side)"
+   },
+   "keyboard_shortcuts_page": {
+      "message": "Vis alle tastaturgenvejene til YouTube"
+   },
+   "launch_mini_player": {
+      "message": "Start en miniafspiller, når du ruller ned for at læse kommentarer"
+   },
+   "locale_code": {
+      "message": "da"
+   },
+   "locale_dir": {
+      "message": "ltr"
+   },
+   "loop": {
+      "message": "Gentag"
+   },
+   "loop_control_info": {
+      "message": "Klik eller højreklik for at aktivere/deaktivere looptilstanden"
+   },
+   "loop_end": {
+      "message": "Slut:"
+   },
+   "loop_start": {
+      "message": "Start:"
+   },
+   "message": {
+      "message": "Besked"
+   },
+   "mini_player": {
+      "message": "Mini afspiller"
+   },
+   "mini_player_position": {
+      "message": "Mini afspiller position:"
+   },
+   "mini_player_size": {
+      "message": "Mini afspiller størrelse:"
+   },
+   "not_now": {
+      "message": "Ikke nu"
+   },
+   "opacity": {
+      "message": "Gennemsigtighed:"
+   },
+   "open_options_page": {
+      "message": "Åben instillinger"
+   },
+   "options": {
+      "message": "Indstillinger"
+   },
+   "options_control_info": {
+      "message": "Klik for at åbne indstillingssiden"
+   },
+   "override_playback_speeds": {
+      "message": "Overskriv standard afspilningshastigheder"
+   },
+   "page_reload_required": {
+      "message": "Enhancer for YouTube™ er lige blevet opdateret, alle YouTube-sider skal genindlæses."
+   },
+   "pause_videos": {
+      "message": "Sæt videoer på pause i baggrundsfaner, når en video begynder at afspille på forgrundsfanen"
+   },
+   "playback_quality": {
+      "message": "Afspilningskvalitet"
+   },
+   "playback_speed": {
+      "message": "Afspilningshastighed"
+   },
+   "playlists": {
+      "message": "Playlister:"
+   },
+   "playlists_full_screen": {
+      "message": "Playlister (fuld skærm):"
+   },
+   "pop_up_player": {
+      "message": "Pop-ud-afspiller"
+   },
+   "pop_up_player_control_info": {
+      "message": "Klik eller højreklik for at se med pop-ud-afspilleren"
+   },
+   "pop_up_player_embeds": {
+      "message": "Pop-ud-afspiller og indlejrede videoer:"
+   },
+   "pop_up_player_embeds_full_screen": {
+      "message": "Pop-ud-afspiller og indlejrede videoer (fuld skærm):"
+   },
+   "pop_up_player_size": {
+      "message": "Pop-ud afspiller størrelse:"
+   },
+   "preserve_black_bars_color": {
+      "message": "Skift ikke farven på de lodrette sorte bjælker, når YouTube-DeepDark-temaet er anvendt, eller når biograftilstanden er aktiveret"
+   },
+   "prevent_autoplay": {
+      "message": "Forhindrer at videoer indlæst i baggrundsfaner automatisk afspilles"
+   },
+   "prevent_autoplay_foreground_tab": {
+      "message": "Undgå at videoer der er indlæst i forgrundsfanen afspilles automatisk"
+   },
+   "preview": {
+      "message": "Forhåndsvisning"
+   },
+   "rate": {
+      "message": "Bedøm"
+   },
+   "rate_extension": {
+      "message": "Bedøm din oplevelse med Enhancer for YouTube™."
+   },
+   "reset": {
+      "message": "Nulstil"
+   },
+   "reverse_mouse_wheel_direction": {
+      "message": "Vend musehjulets retning for at kontrollere afspilningshastigheden og lydstyrken"
+   },
+   "reverse_playlist": {
+      "message": "Afspil i omvendt rækkefølge"
+   },
+   "reverse_playlist_control_info": {
+      "message": "Klik eller højreklik for at se en playliste i omvendt rækkefølge med pop-ud-afspilleren"
+   },
+   "reverse_playlist_order": {
+      "message": "Vend playlistenens rækkefølge"
+   },
+   "saturation": {
+      "message": "Mætning:"
+   },
+   "save": {
+      "message": "Gem"
+   },
+   "screenshot": {
+      "message": "Skærmbillede"
+   },
+   "screenshot_control_info": {
+      "message": "klik for at tage et skærmbillede af videoen"
+   },
+   "select_default_playback_speed": {
+      "message": "Vælg standardafspilningshastigheden"
+   },
+   "select_normal_playback_speed": {
+      "message": "Vælg den normale afspilningshastighed"
+   },
+   "select_quality_1080p": {
+      "message": "Vælg afspilningskvalitet “1080p“"
+   },
+   "select_quality_1440p": {
+      "message": "Vælg afspilningskvalitet “1440p“"
+   },
+   "select_quality_144p": {
+      "message": "Vælg afspilningskvalitet “144p“"
+   },
+   "select_quality_2160p": {
+      "message": "Vælg afspilningskvalitet “2160p“"
+   },
+   "select_quality_240p": {
+      "message": "Vælg afspilningskvalitet “240p“"
+   },
+   "select_quality_2880p": {
+      "message": "Vælg afspilningskvalitet “2880p“"
+   },
+   "select_quality_360p": {
+      "message": "Vælg afspilningskvalitet “360p“"
+   },
+   "select_quality_4320p": {
+      "message": "Vælg afspilningskvalitet “4320p“"
+   },
+   "select_quality_480p": {
+      "message": "Vælg afspilningskvalitet “480p“"
+   },
+   "select_quality_720p": {
+      "message": "Vælg afspilningskvalitet “720p“"
+   },
+   "select_quality_auto": {
+      "message": "Vælg afspilningskvalitet “Auto“"
+   },
+   "select_quality_full_screen": {
+      "message": "Vælg en anden afspilningskvalitet, når du går i fuldskærmstilstand"
+   },
+   "sepia": {
+      "message": "Sepia:"
+   },
+   "shrink": {
+      "message": "Formindsk"
+   },
+   "size_control_info": {
+      "message": "Klik for at udvide eller formindske videoafspilleren, eller højreklik for at centrere videoafspilleren i viewporten"
+   },
+   "speed": {
+      "message": "Fart"
+   },
+   "speed_control_info": {
+      "message": "Brug musehjulet til at styre afspilningshastigheden eller klik for at vælge standard afspilningshastighed eller højreklik for at vælge den normale afspilningshastighed"
+   },
+   "speed_minus_control_info": {
+      "message": "Klik for at reducere afspilningshastigheden"
+   },
+   "speed_plus_control_info": {
+      "message": "Klik for at øge afspilningshastigheden"
+   },
+   "speed_variation": {
+      "message": "Fartforskel når musehjulet drejer, eller når fartknapperne “-” og “+” klikkes:"
+   },
+   "stop": {
+      "message": "Stop"
+   },
+   "stop_control_info": {
+      "message": "Klik for at stoppe videoen"
+   },
+   "stop_video": {
+      "message": "Stop videoen"
+   },
+   "stop_videos": {
+      "message": "Stop videoer fuldstændigt i stedet for kun at forhindre automatisk afspilning"
+   },
+   "support": {
+      "message": "Støt"
+   },
+   "switch_back_previous_quality": {
+      "message": "Skift tilbage til den forrige afspilningskvalitet, når du forlader fuldskærmstilstand"
+   },
+   "take_screenshot": {
+      "message": "Tag et skærmbillede af videoen"
+   },
+   "theme": {
+      "message": "Tema"
+   },
+   "theme_custom_theme": {
+      "message": "Tema: Brugerdefineret tema"
+   },
+   "theme_youtube_dark": {
+      "message": "Tema: YouTube™ (Mørk)"
+   },
+   "theme_youtube_deep_dark": {
+      "message": "Tema: YouTube-DeepDark"
+   },
+   "theme_youtube_deep_dark_custom": {
+      "message": "Tema: YouTube-DeepDark (brugerdefineret)"
+   },
+   "toggle_cards_end_screens": {
+      "message": "Skift infokort og slutskærms synlighed"
+   },
+   "toggle_cinema_mode": {
+      "message": "Brug biograftilstand"
+   },
+   "toggle_comments_visibility": {
+      "message": "Skift synlighed af kommentarer"
+   },
+   "toggle_loop": {
+      "message": "Brug loop tilstand"
+   },
+   "toggle_pip_mode": {
+      "message": "Brug billede-i-billede mode"
+   },
+   "toggle_related_videos_visibility": {
+      "message": "Skift synlighed af relaterede videoer"
+   },
+   "toggle_video_filters": {
+      "message": "Brug videofilterne"
+   },
+   "toggle_visibility": {
+      "message": "Skift infokort/slutskærms synlighed"
+   },
+   "toggle_volume_booster": {
+      "message": "Brug lydforstærker"
+   },
+   "top_left_corner": {
+      "message": "Øverste venstre hjørne"
+   },
+   "top_right_corner": {
+      "message": "Øverste højre hjørne"
+   },
+   "translate": {
+      "message": "Oversæt"
+   },
+   "variant": {
+      "message": "Variant:"
+   },
+   "video_codecs_and_formats": {
+      "message": "Video codecs og formater"
+   },
+   "video_filters": {
+      "message": "Videofiltre"
+   },
+   "video_filters_control_info": {
+      "message": "Klik for at aktivere/deaktivere videofiltrene, eller højreklik for at skifte synlighed af videofiltrepanelet"
+   },
+   "video_player": {
+      "message": "Videoafspiller"
+   },
+   "videos": {
+      "message": "Videoer:"
+   },
+   "videos_full_screen": {
+      "message": "Videoer (fuld skærm):"
+   },
+   "volume": {
+      "message": "Lyd"
+   },
+   "volume_booster_control_info": {
+      "message": "Klik for at aktivere/deaktivere lydforstærkeren"
+   },
+   "volume_booster_level": {
+      "message": "Lydforstærker niveau:"
+   },
+   "volume_variation": {
+      "message": "Variation af lydstyrken ved drejning på musehjulet:"
+   },
+   "watch_pop_up_player": {
+      "message": "Se med pop-ud-afspilleren"
+   },
+   "youtube_dark_theme": {
+      "message": "YouTube (officielt tema)"
+   },
+   "youtube_deep_dark": {
+      "message": "YouTube-DeepDark (af RaitaroH)"
+   },
+   "youtube_deep_dark_custom": {
+      "message": "YouTube-DeepDark (brugerdefineret)"
+   }
+}

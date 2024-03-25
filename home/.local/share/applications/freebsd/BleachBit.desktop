@@ -1,0 +1,11 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=Neofetch
+Exec=gnome-terminal -- bash -c 'cd /home/f16poom/.local/share/applications/bleachbit; python3 bleachbit.py;exit;exec bash;'
+Comment=
+Terminal=true
+Icon=bleachbit
+Type=Application
+Name[C]=BleachBit
+NoDisplay=false
+Hidden=false

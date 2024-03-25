@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<!--
+##
+##  Enhancer for YouTube™
+##  =====================
+##
+##  Author: Maxime RF <https://www.mrfdev.com>
+##
+##  This file is protected by copyright laws and international copyright
+##  treaties, as well as other intellectual property laws and treaties.
+##
+##  All rights not expressly granted to you are retained by the author.
+##  Read the license.txt file for more details.
+##
+##  © MRFDEV.com - All Rights Reserved
+##
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Translate Enhancer for YouTube™</title>
+<link rel="stylesheet" href="i18n.css">
+</head>
+<body dir="ltr" translate="no">
+<header>
+  <nav>
+    <div>
+      <img src="./icons/32.png" class="extension-icon" alt="icon"><a href="/options.html" class="extension-name" dir="ltr">Enhancer for YouTube™</a>
+    </div>
+    <div class="rate">
+      <svg version="1.1" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M0 0h24v24H0z" fill="none"/><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+      <a href="https://chromewebstore.google.com/detail/enhancer-for-youtube/ponfpcnoihfmfllpaingbgckeeldkhle/reviews" target="_blank" rel="noopener">Rate</a>
+    </div>
+    <div class="donate">
+      <svg version="1.1" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+      <a href="#" data-paypal="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=JYKCHGNJ6PFC4&item_name=Enhancer%20for%20YouTube%E2%84%A2%20%5BChrome%20Extension%5D&no_note=1&no_shipping=1&rm=1&return=https%3A%2F%2Fwww.mrfdev.com%2Fthanks&cancel_return=https%3A%2F%2Fwww.mrfdev.com%2Fdonate&amount=5.00&currency_code=USD">Donate</a>
+    </div>
+    <div>
+      <svg version="1.1" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>
+      <a href="https://www.mrfdev.com/how-to-use-enhancer-for-youtube" target="_blank" rel="noopener">Support</a>
+    </div>
+    <div>
+      <svg version="1.1" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/></svg>
+      <a href="#">Translate</a>
+    </div>
+  </nav>
+</header>
+<main>
+  <h3><svg version="1.1" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M0 0h24v24H0V0z" fill="none"/><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2s.07-1.35.16-2h4.68c.09.65.16 1.32.16 2s-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"/></svg> Internationalization</h3>
+  <p>You can help translate <strong>Enhancer for YouTube™</strong> to one of the <a href="https://developer.chrome.com/docs/webstore/i18n/#choosing-locales-to-support" target="_blank" rel="noopener">supported locales <svg version="1.1" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 19H5V5h7V3H3v18h18v-9h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg></a> without writing a single line of code. Here are the steps you need to follow:</p>
+  <ol>
+    <li>Select your language</li>
+    <li>Click on the right side of the string(s) you want to translate to enter the edit mode<br><strong>Note:</strong> The “<i>English (USA)</i>” is always up-to-date and must be used as a reference for all the translations</li>
+    <li>When you have finished translating the string(s) click the “<i>Generate code</i>” button</li>
+    <li>Grab the generated code and follow the last steps to save it to a file and to send it</li>
+  </ol>
+  <p><strong>Important:</strong> If you decide to translate more than just a few strings, to avoid you unnecessary work you should contact the developer (<span class="email">webmaster<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10h5v-2h-5c-4.34 0-8-3.66-8-8s3.66-8 8-8 8 3.66 8 8v1.43c0 .79-.71 1.57-1.5 1.57s-1.5-.78-1.5-1.57V12c0-2.76-2.24-5-5-5s-5 2.24-5 5 2.24 5 5 5c1.38 0 2.64-.56 3.54-1.47.65.89 1.77 1.47 2.96 1.47 1.97 0 3.5-1.6 3.5-3.57V12c0-5.52-4.48-10-10-10zm0 13c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/></svg>mrfdev.com</span>) to ask if someone as already started the same translation. It is also highly recommended to regularly click the “<i>Generate code</i>” button to grab the code and save it temporarily because if your browser updates the extension while you are translating strings this page will be closed without any warning and all your work will be lost.</p>
+  <p><strong>Except where otherwise noted you must use the infinitive form.</strong></p>
+  <div class="responsive-table">
+    <table>
+      <thead>
+        <tr>
+          <th>Key</th>
+          <th>English (USA)</th>
+          <th>Language
+            <select id="locale" name="locale">
+              <option value="" data-dir="ltr">---</option>
+              <option value="am" data-dir="ltr">Amharic</option>
+              <option value="ar" data-dir="rtl">Arabic</option>
+              <option value="bn" data-dir="ltr">Bengali</option>
+              <option value="bg" data-dir="ltr">Bulgarian</option>
+              <option value="ca" data-dir="ltr">Catalan</option>
+              <option value="zh_CN" data-dir="ltr">Chinese (China)</option>
+              <option value="zh_TW" data-dir="ltr">Chinese (Taiwan)</option>
+              <option value="hr" data-dir="ltr">Croatian</option>
+              <option value="cs" data-dir="ltr">Czech</option>
+              <option value="da" data-dir="ltr">Danish</option>
+              <option value="nl" data-dir="ltr">Dutch</option>
+              <option value="en_GB" data-dir="ltr">English (Great Britain)</option>
+              <option value="en_US" data-dir="ltr">English (USA)</option>
+              <option value="et" data-dir="ltr">Estonian</option>
+              <option value="fil" data-dir="ltr">Filipino</option>
+              <option value="fi" data-dir="ltr">Finnish</option>
+              <option value="fr" data-dir="ltr">French</option>
+              <option value="de" data-dir="ltr">German</option>
+              <option value="el" data-dir="ltr">Greek</option>
+              <option value="gu" data-dir="ltr">Gujarati</option>
+              <option value="he" data-dir="rtl">Hebrew</option>
+              <option value="hi" data-dir="ltr">Hindi</option>
+              <option value="hu" data-dir="ltr">Hungarian</option>
+              <option value="id" data-dir="ltr">Indonesian</option>
+              <option value="it" data-dir="ltr">Italian</option>
+              <option value="ja" data-dir="ltr">Japanese</option>
+              <option value="kn" data-dir="ltr">Kannada</option>
+              <option value="ko" data-dir="ltr">Korean</option>
+              <option value="lv" data-dir="ltr">Latvian</option>
+              <option value="lt" data-dir="ltr">Lithuanian</option>
+              <option value="ms" data-dir="ltr">Malay</option>
+              <option value="ml" data-dir="ltr">Malayalam</option>
+              <option value="mr" data-dir="ltr">Marathi</option>
+              <option value="no" data-dir="ltr">Norwegian</option>
+              <option value="fa" data-dir="rtl">Persian</option>
+              <option value="pl" data-dir="ltr">Polish</option>
+              <option value="pt_BR" data-dir="ltr">Portuguese (Brazil)</option>
+              <option value="pt_PT" data-dir="ltr">Portuguese (Portugal)</option>
+              <option value="ro" data-dir="ltr">Romanian</option>
+              <option value="ru" data-dir="ltr">Russian</option>
+              <option value="sr" data-dir="ltr">Serbian</option>
+              <option value="sk" data-dir="ltr">Slovak</option>
+              <option value="sl" data-dir="ltr">Slovenian</option>
+              <option value="es" data-dir="ltr">Spanish</option>
+              <option value="es_419" data-dir="ltr">Spanish (Latin America and Caribbean)</option>
+              <option value="sw" data-dir="ltr">Swahili</option>
+              <option value="sv" data-dir="ltr">Swedish</option>
+              <option value="ta" data-dir="ltr">Tamil</option>
+              <option value="te" data-dir="ltr">Telugu</option>
+              <option value="th" data-dir="ltr">Thai</option>
+              <option value="tr" data-dir="ltr">Turkish</option>
+              <option value="uk" data-dir="ltr">Ukrainian</option>
+              <option value="vi" data-dir="ltr">Vietnamese</option>
+            </select>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="group">
+          <td colspan="3"><strong>Extension</strong><br><strong>Note:</strong> You must use the imperative form for “<i>description</i>” (132 characters maximum),<br>and you are free to adapt “<i>detailed_description</i>” (no need to translate it word for word)</td>
+        </tr>
+        <tr>
+          <td class="key">description</td>
+          <td>Take control of YouTube and boost your user experience!</td>
+          <td contenteditable="true" id="description"></td>
+        </tr>
+        <tr>
+          <td class="key">detailed_description</td>
+          <td>Built to get the most out of YouTube, this extension comes packed with all sorts of features that allow you, among other things, to control the playback speed and the volume level with the mouse wheel, automate repetitive tasks such as selecting the appropriate playback quality, configure dozens of keyboard shortcuts to control YouTube like a pro, and much more... Give it a try! But be aware that you will never want to use YouTube without it again ;)<br><br>YouTube is a trademark of Google LLC. Use of this trademark is subject to Google Permissions.</td>
+          <td contenteditable="true" id="detailed_description"></td>
+        </tr>
+        <tr class="group">
+          <td colspan="3"><strong>Options</strong></td>
+        </tr>
+        <tr>
+          <td class="key">options</td>
+          <td>Options</td>
+          <td contenteditable="true" id="options"></td>
+        </tr>
+        <tr>
+          <td class="key">rate</td>
+          <td>Rate</td>
+          <td contenteditable="true" id="rate"></td>
+        </tr>
+        <tr>
+          <td class="key">donate</td>
+          <td>Donate</td>
+          <td contenteditable="true" id="donate"></td>
+        </tr>
+        <tr>
+          <td class="key">support</td>
+          <td>Support</td>
+          <td contenteditable="true" id="support"></td>
+        </tr>
+        <tr>
+          <td class="key">translate</td>
+          <td>Translate</td>
+          <td contenteditable="true" id="translate"></td>
+        </tr>
+        <tr class="group">
+          <td colspan="3"><strong>Options > Theme</strong><br><strong>Note:</strong> Do not translate the words “<em>YouTube</em>”, “<em>YouTube-DeepDark</em>”, and “<em>RaitaroH</em>”.<br>You must use the imperative form for “<i>custom_theme_instructions</i>”.</td>
+        </tr>
+        <tr>
+          <td class="key">theme</td>
+          <td>Theme</td>
+          <td contenteditable="true" id="theme"></td>
+        </tr>
+        <tr>
+          <td class="key">dark_theme</td>
+          <td>Dark theme</td>
+          <td contenteditable="true" id="dark_theme"></td>
+        </tr>
+        <tr>
+          <td class="key">youtube_dark_theme</td>
+          <td>YouTube (official theme)</td>
+          <td contenteditable="true" id="youtube_dark_theme"></td>
+        </tr>
+        <tr>
+          <td class="key">youtube_deep_dark</td>
+          <td>YouTube-DeepDark (by RaitaroH)</td>
+          <td contenteditable="true" id="youtube_deep_dark"></td>
+        </tr>
+        <tr>
+          <td class="key">youtube_deep_dark_custom</td>
+          <td>YouTube-DeepDark (custom)</td>
+          <td contenteditable="true" id="youtube_deep_dark_custom"></td>
+        </tr>
+        <tr>
+          <td class="key">variant</td>
+          <td>Variant:</td>
+          <td contenteditable="true" id="variant"></td>
+        </tr>
+        <tr>
+          <td class="key">custom_theme</td>
+          <td>Custom theme</td>
+          <td contenteditable="true" id="custom_theme"></td>
+        </tr>
+        <tr>
+          <td class="key">custom_theme_instructions</td>
+          <td>Paste or type your CSS code here then save it using the button below.</td>
+          <td contenteditable="true" id="custom_theme_instructions"></td>
+        </tr>
+        <tr>
+          <td class="key">save</td>
+          <td>Save</td>
+          <td contenteditable="true" id="save"></td>
+        </tr>
+        <tr class="group">
+          <td colspan="3"><strong>Options > Keyboard shortcuts</strong><br><strong>Note:</strong> “<em>keyboard_shortcuts</em>” is also used as tooltip for the “Keyboard shortcuts” control</td>
+        </tr>
+        <tr>
+          <td class="key">keyboard_shortcuts</td>
+          <td>Keyboard shortcuts</td>
+          <td contenteditable="true" id="keyboard_shortcuts"></td>
+        </tr>
+        <tr>
+          <td class="key">configure_keyboard_shortcuts</td>
+          <td>Configure keyboard shortcuts</td>
+          <td contenteditable="true" id="configure_keyboard_shortcuts"></td>
+        </tr>
+        <tr class="group">
+          <td colspan="3"><strong>Browser > Extensions shortcuts > Keyboard shortcuts descriptions</strong><br><strong>Note:</strong> Do not translate the words “<em>YouTube</em>” and “<em>YouTube-DeepDark</em>”</td>
+        </tr>
+        <tr>
+          <td class="key">open_options_page</td>
+          <td>Open the options page</td>
+          <td contenteditable="true" id="open_options_page"></td>
+        </tr>
+        <tr>
+          <td class="key">theme_youtube_dark</td>
+          <td>Theme: YouTube™ (Dark)</td>
+          <td contenteditable="true" id="theme_youtube_dark"></td>
+        </tr>
+        <tr>
+          <td class="key">theme_youtube_deep_dark</td>
+          <td>Theme: YouTube-DeepDark</td>
+          <td contenteditable="true" id="theme_youtube_deep_dark"></td>
+        </tr>
+        <tr>
+          <td class="key">theme_youtube_deep_dark_custom</td>
+          <td>Theme: YouTube-DeepDark (Custom)</td>
+          <td contenteditable="true" id="theme_youtube_deep_dark_custom"></td>
+        </tr>
+        <tr>
+          <td class="key">theme_custom_theme</td>
+          <td>Theme: Custom theme</td>
+          <td contenteditable="true" id="theme_custom_theme"></td>
+        </tr>
+        <tr>
+          <td class="key">focus_video_player</td>
+          <td>Set focus on the video player</td>
+          <td contenteditable="true" id="focus_video_player"></td>
+        </tr>
+        <tr>
+          <td class="key">toggle_loop</td>
+          <td>Toggle the loop mode</td>
+          <td contenteditable="true" id="toggle_loop"></td>
+        </tr>
+        <tr>
+          <td class="key">stop_video</td>
+          <td>Stop the video</td>
+          <td contenteditable="true" id="stop_video"></td>
+        </tr>
+        <tr>
+          <td class="key">reverse_playlist_order</td>
+          <td>Reverse the playlist order</td>
+          <td contenteditable="true" id="reverse_playlist_order"></td>
+        </tr>
+        <tr>
+          <td class="key">toggle_volume_booster</td>
+          <td>Toggle the volume booster</td>
+          <td contenteditable="true" id="toggle_volume_booster"></td>
+        </tr>
+        <tr>
+          <td class="key">toggle_cards_end_screens</td>
+          <td>Toggle info cards and end screens visibility</td>
+          <td contenteditable="true" id="toggle_cards_end_screens"></td>
+        </tr>
+        <tr>
+          <td class="key">toggle_cinema_mode</td>
+          <td>Toggle the cinema mode</td>
+          <td contenteditable="true" id="toggle_cinema_mode"></td>
+        </tr>
+        <tr>
+          <td class="key">expand_shrink_video_player</td>
+          <td>Expand or shrink the video player</td>
+          <td contenteditable="true" id="expand_shrink_video_player"></td>
+        </tr>
+        <tr>
+          <td class="key">center_video_player</td>
+          <td>Center the video player within the viewport</td>
+          <td contenteditable="true" id="center_video_player"></td>
+        </tr>
+        <tr>
+          <td class="key">watch_pop_up_player</td>
+          <td>Watch with the pop-up player</td>
+          <td contenteditable="true" id="watch_pop_up_player"></td>
+        </tr>
+        <tr>
+          <td class="key">decrease_playback_speed</td>
+          <td>Decrease the playback speed</td>
+          <td contenteditable="true" id="decrease_playback_speed"></td>
+        </tr>
+        <tr>
+          <td class="key">increase_playback_speed</td>
+          <td>Increase the playback speed</td>
+          <td contenteditable="true" id="increase_playback_speed"></td>
+        </tr>
+        <tr>
+          <td class="key">select_default_playback_speed</td>
+          <td>Select the default playback speed</td>
+          <td contenteditable="true" id="select_default_playback_speed"></td>
+        </tr>
+        <tr>
+          <td class="key">select_normal_playback_speed</td>
+          <td>Select the normal playback speed</td>
+          <td contenteditable="true" id="select_normal_playback_speed"></td>
+        </tr>
+        <tr>
+          <td class="key">toggle_video_filters</td>
+          <td>Toggle the video filters</td>
+          <td contenteditable="true" id="toggle_video_filters"></td>
+        </tr>
+        <tr>
+          <td class="key">flip_video_horizontally</td>
+          <td>Flip the video horizontally</td>
+          <td contenteditable="true" id="flip_video_horizontally"></td>
+        </tr>
+        <tr>
+          <td class="key">flip_video_vertically</td>
+          <td>Flip the video vertically</td>
+          <td contenteditable="true" id="flip_video_vertically"></td>
+        </tr>
+        <tr>
+          <td class="key">take_screenshot</td>
+          <td>Take a screenshot of the video</td>
+          <td contenteditable="true" id="take_screenshot"></td>
+        </tr>
+        <tr>
+          <td class="key">keyboard_shortcuts_page</td>
+          <td>Display all the keyboard shortcuts for YouTube</td>
+          <td contenteditable="true" id="keyboard_shortcuts_page"></td>
+        </tr>
+        <tr>
+          <td class="key">execute_custom_script</td>
+          <td>Execute the custom script</td>
+          <td contenteditable="true" id="execute_custom_script"></td>
+        </tr>
+        <tr>
+          <td class="key">toggle_pip_mode</td>
+          <td>Toggle the Picture-in-Picture mode</td>
+          <td contenteditable="true" id="toggle_pip_mode"></td>
+        </tr>
+        <tr>
+          <td class="key">select_quality_4320p</td>
+          <td>Select the playback quality “4320p”</td>
+          <td contenteditable="true" id="select_quality_4320p"></td>
+        </tr>
+        <tr>
+          <td class="key">select_quality_2880p</td>
+          <td>Select the playback quality “2880p”</td>
+          <td contenteditable="true" id="select_quality_2880p"></td>
+        </tr>
+        <tr>
+          <td class="key">select_quality_2160p</td>
+          <td>Select the playback quality “2160p”</td>
+          <td contenteditable="true" id="select_quality_2160p"></td>
+        </tr>
+        <tr>
+          <td class="key">select_quality_1440p</td>
+          <td>Select the playback quality “1440p”</td>
+          <td contenteditable="true" id="select_quality_1440p"></td>
+        </tr>
+        <tr>
+          <td class="key">select_quality_1080p</td>
+          <td>Select the playback quality “1080p”</td>
+          <td contenteditable="true" id="select_quality_1080p"></td>
+        </tr>
+        <tr>
+          <td class="key">select_quality_720p</td>
+          <td>Select the playback quality “720p”</td>
+          <td contenteditable="true" id="select_quality_720p"></td>
+        </tr>
+        <tr>
+          <td class="key">select_quality_480p</td>
+          <td>Select the playback quality “480p”</td>
+          <td contenteditable="true" id="select_quality_480p"></td>
+        </tr>
+        <tr>
+          <td class="key">select_quality_360p</td>
+          <td>Select the playback quality “360p”</td>
+          <td contenteditable="true" id="select_quality_360p"></td>
+        </tr>
+        <tr>
+          <td class="key">select_quality_240p</td>
+          <td>Select the playback quality “240p”</td>
+          <td contenteditable="true" id="select_quality_240p"></td>
+        </tr>
+        <tr>
+          <td class="key">select_quality_144p</td>
+          <td>Select the playback quality “144p”</td>
+          <td contenteditable="true" id="select_quality_144p"></td>
+        </tr>
+        <tr>
+          <td class="key">select_quality_auto</td>
+          <td>Select the playback quality “Auto”</td>
+          <td contenteditable="true" id="select_quality_auto"></td>
+        </tr>
+        <tr>
+          <td class="key">toggle_comments_visibility</td>
+          <td>Toggle comments visibility</td>
+          <td contenteditable="true" id="toggle_comments_visibility"></td>
+        </tr>
+        <tr>
+          <td class="key">toggle_related_videos_visibility</td>
+          <td>Toggle related videos visibility</td>
+          <td contenteditable="true" id="toggle_related_videos_visibility"></td>
+        </tr>
+        <tr class="group">
+          <td colspan="3"><strong>Options > Video player</strong></td>
+        </tr>
+        <tr>
+          <td class="key">video_player</td>
+          <td>Video player</td>
+          <td contenteditable="true" id="video_player"></td>
+        </tr>
+        <tr class="subgroup">
+          <td colspan="3"><strong>Options > Video player > Controls</strong></td>
+        </tr>
+        <tr>
+          <td class="key">controls</td>
+          <td>Controls</td>
+          <td contenteditable="true" id="controls"></td>
+        </tr>
+        <tr>
+          <td class="key">loop_control_info</td>
+          <td>Click or right-click to toggle the loop mode</td>
+          <td contenteditable="true" id="loop_control_info"></td>
+        </tr>
+        <tr>
+          <td class="key">stop_control_info</td>
+          <td>Click to stop the video</td>
+          <td contenteditable="true" id="stop_control_info"></td>
+        </tr>
+        <tr>
+          <td class="key">reverse_playlist_control_info</td>
+          <td>Click or right-click to watch a playlist in reverse order with the pop-up player</td>
+          <td contenteditable="true" id="reverse_playlist_control_info"></td>
+        </tr>
+        <tr>
+          <td class="key">volume_booster_control_info</td>
+          <td>Click to toggle the volume booster</td>
+          <td contenteditable="true" id="volume_booster_control_info"></td>
+        </tr>
+        <tr>
+          <td class="key">cards_end_screens_control_info</td>
+          <td>Click to toggle info cards and end screens visibility</td>
+          <td contenteditable="true" id="cards_end_screens_control_info"></td>
+        </tr>
+        <tr>
+          <td class="key">cinema_mode_control_info</td>
+          <td>Click to toggle the cinema mode</td>
+          <td contenteditable="true" id="cinema_mode_control_info"></td>
+        </tr>
+        <tr>
+          <td class="key">size_control_info</td>
+          <td>Click to expand or shrink the video player or right-click to center the video player within the viewport</td>
+          <td contenteditable="true" id="size_control_info"></td>
+        </tr>
+        <tr>
+          <td class="key">pop_up_player_control_info</td>
+          <td>Click or right-click to watch with the pop-up player</td>
+          <td contenteditable="true" id="pop_up_player_control_info"></td>
+        </tr>
+        <tr>
+          <td class="key">speed_minus_control_info</td>
+          <td>Click to decrease the playback speed</td>
+          <td contenteditable="true" id="speed_minus_control_info"></td>
+        </tr>
+        <tr>
+          <td class="key">speed_control_info</td>
+          <td>Use the mouse wheel to control the playback speed or click to select the default playback speed or right-click to select the normal playback speed</td>
+          <td contenteditable="true" id="speed_control_info"></td>
+        </tr>
+        <tr>
+          <td class="key">speed_plus_control_info</td>
+          <td>Click to increase the playback speed</td>
+          <td contenteditable="true" id="speed_plus_control_info"></td>
+        </tr>
+        <tr>
+          <td class="key">video_filters_control_info</td>
+          <td>Click to toggle the video filters or right-click to toggle the video filters panel visibility</td>
+          <td contenteditable="true" id="video_filters_control_info"></td>
+        </tr>
+        <tr>
+          <td class="key">flip_horizontally_control_info</td>
+          <td>Click to flip the video horizontally</td>
+          <td contenteditable="true" id="flip_horizontally_control_info"></td>
+        </tr>
+        <tr>
+          <td class="key">flip_vertically_control_info</td>
+          <td>Click to flip the video vertically</td>
+          <td contenteditable="true" id="flip_vertically_control_info"></td>
+        </tr>
+        <tr>
+          <td class="key">screenshot_control_info</td>
+          <td>Click to take a screenshot of the video</td>
+          <td contenteditable="true" id="screenshot_control_info"></td>
+        </tr>
+        <tr>
+          <td class="key">keyboard_shortcuts_control_info</td>
+          <td>Click to display the list of all the keyboard shortcuts for YouTube (external page)</td>
+          <td contenteditable="true" id="keyboard_shortcuts_control_info"></td>
+        </tr>
+        <tr>
+          <td class="key">custom_script_control_info</td>
+          <td>Click to execute the custom script</td>
+          <td contenteditable="true" id="custom_script_control_info"></td>
+        </tr>
+        <tr>
+          <td class="key">options_control_info</td>
+          <td>Click to open the options page</td>
+          <td contenteditable="true" id="options_control_info"></td>
+        </tr>
+        <tr>
+          <td class="key">controls_within_video_player</td>
+          <td>Place controls within the video player</td>
+          <td contenteditable="true" id="controls_within_video_player"></td>
+        </tr>
+        <tr>
+          <td class="key">controls_visible</td>
+          <td>Keep controls visible without having to click the ••• control or hover over it with the mouse cursor</td>
+          <td contenteditable="true" id="controls_visible"></td>
+        </tr>
+        <tr>
+          <td class="key">controls_within_control_bar</td>
+          <td>Place controls within a control bar</td>
+          <td contenteditable="true" id="controls_within_control_bar"></td>
+        </tr>
+        <tr>
+          <td class="key">control_bar_location</td>
+          <td>Control bar location:</td>
+          <td contenteditable="true" id="control_bar_location"></td>
+        </tr>
+        <tr>
+          <td class="key">below_video_player</td>
+          <td>Below the video player</td>
+          <td contenteditable="true" id="below_video_player"></td>
+        </tr>
+        <tr>
+          <td class="key">bottom_of_window</td>
+          <td>At the bottom of the window</td>
+          <td contenteditable="true" id="bottom_of_window"></td>
+        </tr>
+        <tr>
+          <td class="key">center_control_bar</td>
+          <td>Center the control bar below the video player when it is expanded or when the full screen mode is active</td>
+          <td contenteditable="true" id="center_control_bar"></td>
+        </tr>
+        <tr>
+          <td class="key">display_control_bar</td>
+          <td>Display the control bar only when hovering over it with the mouse cursor</td>
+          <td contenteditable="true" id="display_control_bar"></td>
+        </tr>
+        <tr class="subgroup">
+          <td colspan="3"><strong>Options > Video player > Playback quality</strong></td>
+        </tr>
+        <tr>
+          <td class="key">playback_quality</td>
+          <td>Playback quality</td>
+          <td contenteditable="true" id="playback_quality"></td>
+        </tr>
+        <tr>
+          <td class="key">auto_select_quality</td>
+          <td>Automatically select a playback quality</td>
+          <td contenteditable="true" id="auto_select_quality"></td>
+        </tr>
+        <tr>
+          <td class="key">videos</td>
+          <td>Videos:</td>
+          <td contenteditable="true" id="videos"></td>
+        </tr>
+        <tr>
+          <td class="key">playlists</td>
+          <td>Playlists:</td>
+          <td contenteditable="true" id="playlists"></td>
+        </tr>
+        <tr>
+          <td class="key">pop_up_player_embeds</td>
+          <td>Pop-up player and embedded videos:</td>
+          <td contenteditable="true" id="pop_up_player_embeds"></td>
+        </tr>
+        <tr>
+          <td class="key">select_quality_full_screen</td>
+          <td>Select a different playback quality when entering the full screen mode</td>
+          <td contenteditable="true" id="select_quality_full_screen"></td>
+        </tr>
+        <tr>
+          <td class="key">videos_full_screen</td>
+          <td>Videos (full screen):</td>
+          <td contenteditable="true" id="videos_full_screen"></td>
+        </tr>
+        <tr>
+          <td class="key">playlists_full_screen</td>
+          <td>Playlists (full screen):</td>
+          <td contenteditable="true" id="playlists_full_screen"></td>
+        </tr>
+        <tr>
+          <td class="key">pop_up_player_embeds_full_screen</td>
+          <td>Pop-up player and embedded videos (full screen):</td>
+          <td contenteditable="true" id="pop_up_player_embeds_full_screen"></td>
+        </tr>
+        <tr>
+          <td class="key">switch_back_previous_quality</td>
+          <td>Switch back to the previous playback quality when exiting the full screen mode</td>
+          <td contenteditable="true" id="switch_back_previous_quality"></td>
+        </tr>
+        <tr class="subgroup">
+          <td colspan="3"><strong>Options > Video player > Playback speed</strong></td>
+        </tr>
+        <tr>
+          <td class="key">playback_speed</td>
+          <td>Playback speed</td>
+          <td contenteditable="true" id="playback_speed"></td>
+        </tr>
+        <tr>
+          <td class="key">default_playback_speed</td>
+          <td>Default playback speed:</td>
+          <td contenteditable="true" id="default_playback_speed"></td>
+        </tr>
+        <tr>
+          <td class="key">override_playback_speeds</td>
+          <td>Override default playback speeds</td>
+          <td contenteditable="true" id="override_playback_speeds"></td>
+        </tr>
+        <tr>
+          <td class="key">speed_variation</td>
+          <td>Speed variation when rotating the mouse wheel or when clicking the speed buttons “-” and “+”:</td>
+          <td contenteditable="true" id="speed_variation"></td>
+        </tr>
+        <tr>
+          <td class="key">control_speed</td>
+          <td>Control the playback speed with the mouse wheel when the mouse cursor is over the video player and the “Control” key (Ctrl) is pressed</td>
+          <td contenteditable="true" id="control_speed"></td>
+        </tr>
+        <tr>
+          <td class="key">control_speed_mouse_button</td>
+          <td>Only when the right mouse button is pressed</td>
+          <td contenteditable="true" id="control_speed_mouse_button"></td>
+        </tr>
+        <tr class="subgroup">
+          <td colspan="3"><strong>Options > Video player > Volume</strong></td>
+        </tr>
+        <tr>
+          <td class="key">volume</td>
+          <td>Volume</td>
+          <td contenteditable="true" id="volume"></td>
+        </tr>
+        <tr>
+          <td class="key">default_volume_level</td>
+          <td>Default volume level:</td>
+          <td contenteditable="true" id="default_volume_level"></td>
+        </tr>
+        <tr>
+          <td class="key">volume_booster_level</td>
+          <td>Volume booster level:</td>
+          <td contenteditable="true" id="volume_booster_level"></td>
+        </tr>
+        <tr>
+          <td class="key">auto_boost_volume</td>
+          <td>Automatically boost the volume</td>
+          <td contenteditable="true" id="auto_boost_volume"></td>
+        </tr>
+        <tr>
+          <td class="key">control_volume</td>
+          <td>Control the volume level with the mouse wheel when hovering over the video player with the mouse cursor</td>
+          <td contenteditable="true" id="control_volume"></td>
+        </tr>
+        <tr>
+          <td class="key">control_volume_mouse_button</td>
+          <td>Only when the right mouse button is pressed</td>
+          <td contenteditable="true" id="control_volume_mouse_button"></td>
+        </tr>
+        <tr>
+          <td class="key">volume_variation</td>
+          <td>Volume variation when rotating the mouse wheel:</td>
+          <td contenteditable="true" id="volume_variation"></td>
+        </tr>
+        <tr>
+          <td class="key">reverse_mouse_wheel_direction</td>
+          <td>Reverse the mouse wheel direction to control the playback speed and the volume level</td>
+          <td contenteditable="true" id="reverse_mouse_wheel_direction"></td>
+        </tr>
+        <tr class="subgroup">
+          <td colspan="3"><strong>Options > Video player > Autoplay</strong></td>
+        </tr>
+        <tr>
+          <td class="key">autoplay</td>
+          <td>Autoplay</td>
+          <td contenteditable="true" id="autoplay"></td>
+        </tr>
+        <tr>
+          <td class="key">disable_autoplay</td>
+          <td>Disable autoplay</td>
+          <td contenteditable="true" id="disable_autoplay"></td>
+        </tr>
+        <tr>
+          <td class="key">prevent_autoplay</td>
+          <td>Prevent videos loaded in background tabs from automatically playing</td>
+          <td contenteditable="true" id="prevent_autoplay"></td>
+        </tr>
+        <tr>
+          <td class="key">prevent_autoplay_foreground_tab</td>
+          <td>Prevent videos loaded in the foreground tab from automatically playing as well</td>
+          <td contenteditable="true" id="prevent_autoplay_foreground_tab"></td>
+        </tr>
+        <tr>
+          <td class="key">ignore_playlists</td>
+          <td>Do not prevent autoplay for playlists</td>
+          <td contenteditable="true" id="ignore_playlists"></td>
+        </tr>
+        <tr>
+          <td class="key">stop_videos</td>
+          <td>Completely stop videos instead of only preventing autoplay</td>
+          <td contenteditable="true" id="stop_videos"></td>
+        </tr>
+        <tr>
+          <td class="key">pause_videos</td>
+          <td>Pause videos playing in background tabs when a video starts playing in the foreground tab</td>
+          <td contenteditable="true" id="pause_videos"></td>
+        </tr>
+        <tr>
+          <td class="key">ignore_pop_up_player</td>
+          <td>Ignore the pop-up player</td>
+          <td contenteditable="true" id="ignore_pop_up_player"></td>
+        </tr>
+        <tr class="subgroup">
+          <td colspan="3"><strong>Options > Video player > Video codecs and formats</strong></td>
+        </tr>
+        <tr>
+          <td class="key">video_codecs_and_formats</td>
+          <td>Video codecs and formats</td>
+          <td contenteditable="true" id="video_codecs_and_formats"></td>
+        </tr>
+        <tr>
+          <td class="key">block_hfr_formats</td>
+          <td>Force the use of standard frame rates formats (24, 25, 30 FPS) instead of high frame rates formats (48, 50, 60 FPS)</td>
+          <td contenteditable="true" id="block_hfr_formats"></td>
+        </tr>
+        <tr>
+          <td class="key">block_webm_formats</td>
+          <td>Force the use of the MP4 format and the AVC codec (H.264) instead of the WebM format and the VP9 codec (maximum resolution: 1080p60 HD)</td>
+          <td contenteditable="true" id="block_webm_formats"></td>
+        </tr>
+        <tr class="subgroup">
+          <td colspan="3"><strong>Options > Video player > Mini player</strong></td>
+        </tr>
+        <tr>
+          <td class="key">mini_player</td>
+          <td>Mini player</td>
+          <td contenteditable="true" id="mini_player"></td>
+        </tr>
+        <tr>
+          <td class="key">launch_mini_player</td>
+          <td>Launch a mini player when scrolling down to read comments</td>
+          <td contenteditable="true" id="launch_mini_player"></td>
+        </tr>
+        <tr>
+          <td class="key">mini_player_size</td>
+          <td>Mini player size:</td>
+          <td contenteditable="true" id="mini_player_size"></td>
+        </tr>
+        <tr>
+          <td class="key">mini_player_position</td>
+          <td>Mini player position:</td>
+          <td contenteditable="true" id="mini_player_position"></td>
+        </tr>
+        <tr>
+          <td class="key">top_left_corner</td>
+          <td>Top left corner</td>
+          <td contenteditable="true" id="top_left_corner"></td>
+        </tr>
+        <tr>
+          <td class="key">top_right_corner</td>
+          <td>Top right corner</td>
+          <td contenteditable="true" id="top_right_corner"></td>
+        </tr>
+        <tr>
+          <td class="key">bottom_left_corner</td>
+          <td>Bottom left corner</td>
+          <td contenteditable="true" id="bottom_left_corner"></td>
+        </tr>
+        <tr>
+          <td class="key">bottom_right_corner</td>
+          <td>Bottom right corner</td>
+          <td contenteditable="true" id="bottom_right_corner"></td>
+        </tr>
+        <tr class="subgroup">
+          <td colspan="3"><strong>Options > Video player > Appearance</strong></td>
+        </tr>
+        <tr>
+          <td class="key">appearance</td>
+          <td>Appearance</td>
+          <td contenteditable="true" id="appearance"></td>
+        </tr>
+        <tr>
+          <td class="key">auto_apply_video_filters</td>
+          <td>Automatically apply the video filters</td>
+          <td contenteditable="true" id="auto_apply_video_filters"></td>
+        </tr>
+        <tr>
+          <td class="key">auto_hide_cards_end_screens</td>
+          <td>Automatically hide info cards and end screens</td>
+          <td contenteditable="true" id="auto_hide_cards_end_screens"></td>
+        </tr>
+        <tr>
+          <td class="key">preserve_black_bars_color</td>
+          <td>Do not change the color of the vertical black bars when the YouTube-DeepDark theme is applied or when the cinema mode is enabled</td>
+          <td contenteditable="true" id="preserve_black_bars_color"></td>
+        </tr>
+        <tr class="group">
+          <td colspan="3"><strong>Options > Pop-up player</strong><br><strong>Note:</strong> “<em>pop_up_player</em>” is also used as tooltip for the “Pop-up player” control</td>
+        </tr>
+        <tr>
+          <td class="key">pop_up_player</td>
+          <td>Pop-up player</td>
+          <td contenteditable="true" id="pop_up_player"></td>
+        </tr>
+        <tr>
+          <td class="key">pop_up_player_size</td>
+          <td>Pop-up player size:</td>
+          <td contenteditable="true" id="pop_up_player_size"></td>
+        </tr>
+        <tr class="group">
+          <td colspan="3"><strong>Options > Appearance</strong></td>
+        </tr>
+        <tr>
+          <td class="key">auto_enable_theater_mode</td>
+          <td>Automatically enable YouTube's “Theater mode”</td>
+          <td contenteditable="true" id="auto_enable_theater_mode"></td>
+        </tr>
+        <tr>
+          <td class="key">auto_expand_player</td>
+          <td>Automatically expand the video player</td>
+          <td contenteditable="true" id="auto_expand_player"></td>
+        </tr>
+        <tr>
+          <td class="key">expanded_player_viewport</td>
+          <td>Use the available space based on the viewport dimensions to expand the video player</td>
+          <td contenteditable="true" id="expanded_player_viewport"></td>
+        </tr>
+        <tr>
+          <td class="key">auto_expand_description</td>
+          <td>Automatically expand the videos descriptions</td>
+          <td contenteditable="true" id="auto_expand_description"></td>
+        </tr>
+        <tr>
+          <td class="key">auto_sort_comments</td>
+          <td>Automatically sort comments from newest to oldest</td>
+          <td contenteditable="true" id="auto_sort_comments"></td>
+        </tr>
+        <tr>
+          <td class="key">hide_comments</td>
+          <td>Hide comments</td>
+          <td contenteditable="true" id="hide_comments"></td>
+        </tr>
+        <tr>
+          <td class="key">hide_chat</td>
+          <td>Hide chat</td>
+          <td contenteditable="true" id="hide_chat"></td>
+        </tr>
+        <tr>
+          <td class="key">hide_related_videos</td>
+          <td>Hide related videos</td>
+          <td contenteditable="true" id="hide_related_videos"></td>
+        </tr>
+        <tr>
+          <td class="key">hide_shorts</td>
+          <td>Hide Shorts</td>
+          <td contenteditable="true" id="hide_shorts"></td>
+        </tr>
+        <tr>
+          <td class="key">convert_shorts</td>
+          <td>Convert Shorts</td>
+          <td contenteditable="true" id="convert_shorts"></td>
+        </tr>
+        <tr class="group">
+          <td colspan="3"><strong>Options > Cinema mode</strong></td>
+        </tr>
+        <tr>
+          <td class="key">color</td>
+          <td>Color:</td>
+          <td contenteditable="true" id="color"></td>
+        </tr>
+        <tr>
+          <td class="key">opacity</td>
+          <td>Opacity:</td>
+          <td contenteditable="true" id="opacity"></td>
+        </tr>
+        <tr>
+          <td class="key">preview</td>
+          <td>Preview</td>
+          <td contenteditable="true" id="preview"></td>
+        </tr>
+        <tr>
+          <td class="key">auto_cinema_mode</td>
+          <td>Automatically enable the cinema mode</td>
+          <td contenteditable="true" id="auto_cinema_mode"></td>
+        </tr>
+        <tr>
+          <td class="key">cinema_mode_toggle_size</td>
+          <td>Automatically expand or shrink the video player when the cinema mode is toggled</td>
+          <td contenteditable="true" id="cinema_mode_toggle_size"></td>
+        </tr>
+        <tr class="group">
+          <td colspan="3"><strong>Options > Custom script</strong><br><strong>Note:</strong> “<em>custom_script</em>” is also used as tooltip for the “Custom script” control,<br>and you must use the imperative form for “<i>custom_script_warning</i>” and “<i>custom_script_instructions</i>”</td>
+        </tr>
+        <tr>
+          <td class="key">custom_script</td>
+          <td>Custom script</td>
+          <td contenteditable="true" id="custom_script"></td>
+        </tr>
+        <tr>
+          <td class="key">custom_script_warning</td>
+          <td>For security reasons you should only use code that you understand or code that has been written by a developer you trust.</td>
+          <td contenteditable="true" id="custom_script_warning"></td>
+        </tr>
+        <tr>
+          <td class="key">custom_script_instructions</td>
+          <td>Paste or type your JavaScript code here, save it using the button below, then click on the “Custom script” control when you want to execute it.</td>
+          <td contenteditable="true" id="custom_script_instructions"></td>
+        </tr>
+        <tr>
+          <td class="key">auto_execute_script</td>
+          <td>Automatically execute the script when YouTube is loaded in a tab</td>
+          <td contenteditable="true" id="auto_execute_script"></td>
+        </tr>
+        <tr class="group">
+          <td colspan="3"><strong>Options > Backup</strong><br><strong>Note:</strong> You must use the imperative form for “<i>export_instructions</i>” and “<i>import_instructions</i>”</td>
+        </tr>
+        <tr>
+          <td class="key">backup</td>
+          <td>Backup</td>
+          <td contenteditable="true" id="backup"></td>
+        </tr>
+        <tr>
+          <td class="key">export</td>
+          <td>Export</td>
+          <td contenteditable="true" id="export"></td>
+        </tr>
+        <tr>
+          <td class="key">export_instructions</td>
+          <td>Create a new text file and paste the code below without modifying it.</td>
+          <td contenteditable="true" id="export_instructions"></td>
+        </tr>
+        <tr>
+          <td class="key">copy_to_clipboard</td>
+          <td>Copy to clipboard</td>
+          <td contenteditable="true" id="copy_to_clipboard"></td>
+        </tr>
+        <tr>
+          <td class="key">import</td>
+          <td>Import</td>
+          <td contenteditable="true" id="import"></td>
+        </tr>
+        <tr>
+          <td class="key">import_instructions</td>
+          <td>Paste the content of the backup file and click the “Import” button. The page will be automatically reloaded if settings are successfully imported.</td>
+          <td contenteditable="true" id="import_instructions"></td>
+        </tr>
+        <tr>
+          <td class="key">import_error</td>
+          <td>The content of the backup file is not valid!</td>
+          <td contenteditable="true" id="import_error"></td>
+        </tr>
+        <tr class="group">
+          <td colspan="3"><strong>YouTube > Video player > Controls > Tooltips</strong></td>
+        </tr>
+        <tr>
+          <td class="key">loop</td>
+          <td>Loop</td>
+          <td contenteditable="true" id="loop"></td>
+        </tr>
+        <tr>
+          <td class="key">stop</td>
+          <td>Stop</td>
+          <td contenteditable="true" id="stop"></td>
+        </tr>
+        <tr>
+          <td class="key">reverse_playlist</td>
+          <td>Reverse playlist</td>
+          <td contenteditable="true" id="reverse_playlist"></td>
+        </tr>
+        <tr>
+          <td class="key">boost_volume</td>
+          <td>Boost volume</td>
+          <td contenteditable="true" id="boost_volume"></td>
+        </tr>
+        <tr>
+          <td class="key">message</td>
+          <td>Message</td>
+          <td contenteditable="true" id="message"></td>
+        </tr>
+        <tr>
+          <td class="key">toggle_visibility</td>
+          <td>Toggle info cards/end screens visibility</td>
+          <td contenteditable="true" id="toggle_visibility"></td>
+        </tr>
+        <tr>
+          <td class="key">cinema_mode</td>
+          <td>Cinema mode</td>
+          <td contenteditable="true" id="cinema_mode"></td>
+        </tr>
+        <tr>
+          <td class="key">expand</td>
+          <td>Expand</td>
+          <td contenteditable="true" id="expand"></td>
+        </tr>
+        <tr>
+          <td class="key">shrink</td>
+          <td>Shrink</td>
+          <td contenteditable="true" id="shrink"></td>
+        </tr>
+        <tr>
+          <td class="key">speed</td>
+          <td>Speed</td>
+          <td contenteditable="true" id="speed"></td>
+        </tr>
+        <tr>
+          <td class="key">video_filters</td>
+          <td>Video filters</td>
+          <td contenteditable="true" id="video_filters"></td>
+        </tr>
+        <tr>
+          <td class="key">flip_horizontally</td>
+          <td>Flip horizontally</td>
+          <td contenteditable="true" id="flip_horizontally"></td>
+        </tr>
+        <tr>
+          <td class="key">flip_vertically</td>
+          <td>Flip vertically</td>
+          <td contenteditable="true" id="flip_vertically"></td>
+        </tr>
+        <tr>
+          <td class="key">screenshot</td>
+          <td>Screenshot</td>
+          <td contenteditable="true" id="screenshot"></td>
+        </tr>
+        <tr class="group">
+          <td colspan="3"><strong>YouTube > Video player > Loop panel</strong></td>
+        </tr>
+        <tr>
+          <td class="key">loop_start</td>
+          <td>Start:</td>
+          <td contenteditable="true" id="loop_start"></td>
+        </tr>
+        <tr>
+          <td class="key">loop_end</td>
+          <td>End:</td>
+          <td contenteditable="true" id="loop_end"></td>
+        </tr>
+        <tr class="group">
+          <td colspan="3"><strong>YouTube > Video player > Video filters panel</strong></td>
+        </tr>
+        <tr>
+          <td class="key">gaussian_blur</td>
+          <td>Gaussian blur:</td>
+          <td contenteditable="true" id="gaussian_blur"></td>
+        </tr>
+        <tr>
+          <td class="key">brightness</td>
+          <td>Brightness:</td>
+          <td contenteditable="true" id="brightness"></td>
+        </tr>
+        <tr>
+          <td class="key">contrast</td>
+          <td>Contrast:</td>
+          <td contenteditable="true" id="contrast"></td>
+        </tr>
+        <tr>
+          <td class="key">grayscale</td>
+          <td>Grayscale:</td>
+          <td contenteditable="true" id="grayscale"></td>
+        </tr>
+        <tr>
+          <td class="key">hue_rotation</td>
+          <td>Hue rotation:</td>
+          <td contenteditable="true" id="hue_rotation"></td>
+        </tr>
+        <tr>
+          <td class="key">color_inversion</td>
+          <td>Color inversion:</td>
+          <td contenteditable="true" id="color_inversion"></td>
+        </tr>
+        <tr>
+          <td class="key">saturation</td>
+          <td>Saturation:</td>
+          <td contenteditable="true" id="saturation"></td>
+        </tr>
+        <tr>
+          <td class="key">sepia</td>
+          <td>Sepia:</td>
+          <td contenteditable="true" id="sepia"></td>
+        </tr>
+        <tr>
+          <td class="key">reset</td>
+          <td>Reset</td>
+          <td contenteditable="true" id="reset"></td>
+        </tr>
+        <tr class="group">
+          <td colspan="3"><strong>Notifications</strong></td>
+        </tr>
+        <tr>
+          <td class="key">page_reload_required</td>
+          <td>Enhancer for YouTube™ has just been updated, all the YouTube pages must be reloaded.</td>
+          <td contenteditable="true" id="page_reload_required"></td>
+        </tr>
+        <tr>
+          <td class="key">rate_extension</td>
+          <td>Rate your experience with Enhancer for YouTube™.</td>
+          <td contenteditable="true" id="rate_extension"></td>
+        </tr>
+        <tr>
+          <td class="key">not_now</td>
+          <td>Not now</td>
+          <td contenteditable="true" id="not_now"></td>
+        </tr>
+        <tr>
+          <td colspan="3"><button id="generate-code-btn" disabled="true">Generate code</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div id="modal-backdrop"></div>
+  <div class="modal" id="modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close-modal"><svg version="1.1" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg></button>
+          <h3 class="modal-title"></h3>
+        </div>
+        <div class="modal-body" id="modal-content">
+          <p><strong>Thank you very much for your contribution!</strong> Here are the last steps you need to follow:</p>
+          <ol>
+            <li>Somewhere in your documents, create a text file named <strong>messages.txt</strong></li>
+            <li>Copy the generated code and paste it into the file you've just created then save the file</li>
+            <li>Log in to your mailbox to compose a new message</li>
+            <li>Copy the text you see next to the message icon above and use it as subject for your message</li>
+            <li>Attach the file <strong>messages.txt</strong> and feel free to comment your contribution in your message</li>
+            <li>Send your message to <span class="email">webmaster<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10h5v-2h-5c-4.34 0-8-3.66-8-8s3.66-8 8-8 8 3.66 8 8v1.43c0 .79-.71 1.57-1.5 1.57s-1.5-.78-1.5-1.57V12c0-2.76-2.24-5-5-5s-5 2.24-5 5 2.24 5 5 5c1.38 0 2.64-.56 3.54-1.47.65.89 1.77 1.47 2.96 1.47 1.97 0 3.5-1.6 3.5-3.57V12c0-5.52-4.48-10-10-10zm0 13c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/></svg>mrfdev.com</span></li>
+          </ol>
+          <textarea id="code" dir="ltr"></textarea>
+        </div>
+        <div class="modal-footer" id="modal-footer">
+          <div class="flex-align-center">
+            <button type="button" class="i18n" id="copy-to-clipboard-btn">Copy to clipboard</button>
+            <svg version="1.1" viewBox="0 0 52 52" class="checkmark" id="copy-to-clipboard-checkmark"><circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/><path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<script src="i18n.js"></script>
+</body>
+</html>

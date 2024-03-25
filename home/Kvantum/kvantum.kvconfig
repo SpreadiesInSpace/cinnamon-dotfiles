@@ -1,0 +1,6 @@
+[General]
+theme=gruvbox-fallnn
+
+[Applications]
+Gruvbox-Dark-Brown=kdeconnect-app
+Default=yast2

@@ -1,0 +1,572 @@
+{
+   "appearance": {
+      "message": "ลักษณะ"
+   },
+   "auto_apply_video_filters": {
+      "message": "ใช้ฟิลเตอร์วิดีโอโดยอัตโนมัติ"
+   },
+   "auto_boost_volume": {
+      "message": "เพิ่มระดับเสียงโดยอัตโนมัติ"
+   },
+   "auto_cinema_mode": {
+      "message": "เปิดโหมดภาพยนตร์โดยอัตโนมัติ"
+   },
+   "auto_enable_theater_mode": {
+      "message": "เปิด “โหมดโรงภาพยนตร์” สำหรับ YouTube โดยอัตโนมัติ"
+   },
+   "auto_execute_script": {
+      "message": "รันสคริปต์โดยอัตโนมัติเมื่อ YouTube ถูกโหลดขึ้นในแถบ"
+   },
+   "auto_expand_description": {
+      "message": "ขยายรายละเอียดวิดีโอโดยอัตโนมัติ"
+   },
+   "auto_expand_player": {
+      "message": "ขยายตัวเล่นวีดีโอโดยอัตโนมัติ"
+   },
+   "auto_hide_cards_end_screens": {
+      "message": "ซ่อนการ์ดข้อมูล และวิดีโอช่วงท้ายโดยอัตโนมัติ"
+   },
+   "auto_select_quality": {
+      "message": "เลือกคุณภาพการเล่นอัตโนมัติ"
+   },
+   "auto_sort_comments": {
+      "message": "เรียงความคิดเห็นจากล่าสุดไปเก่าสุดโดยอัตโนมัติ"
+   },
+   "autoplay": {
+      "message": "เล่นอัตโนมัติ"
+   },
+   "backup": {
+      "message": "สำรอง"
+   },
+   "below_video_player": {
+      "message": "ด้านล่างตัวเล่นวิดีโอ"
+   },
+   "block_hfr_formats": {
+      "message": "บังคับใช้รูปแบบเฟรมเรทมาตรฐาน (24, 25, 30 FPS) แทนการใช้รูปแบบเฟรมเรทแบบสูง (48, 50, 60 FPS)"
+   },
+   "block_webm_formats": {
+      "message": "บังคับใช้ MP4 และตัวแปลง AVC (H.264) แทนรูปแบบ WebM และตัวแปลง VP9 (ความละเอียดสูงสุด 1080p60 HD)"
+   },
+   "boost_volume": {
+      "message": "เร่งระดับเสียง"
+   },
+   "bottom_left_corner": {
+      "message": "มุมซ้ายล่าง"
+   },
+   "bottom_of_window": {
+      "message": "ด้านล่างของวินโดว์"
+   },
+   "bottom_right_corner": {
+      "message": "มุมขวาล่าง"
+   },
+   "brightness": {
+      "message": "ความสว่าง:"
+   },
+   "cards_end_screens_control_info": {
+      "message": "คลิกเพื่อสลับการ์ด และการแสดงภาพช่วงท้าย"
+   },
+   "center_control_bar": {
+      "message": "แถบควบคุมที่กึ่งกลางด้านล่างของตัวเล่นวิดีโอ เมื่อมีการขยายหน้าจอ หรือใช้โหมดเต็มหน้าจอ"
+   },
+   "center_video_player": {
+      "message": "จัดกึ่งกลางตัวเล่นวิดีโอภายในวิวพอร์ต"
+   },
+   "cinema_mode": {
+      "message": "โหมดภาพยนตร์"
+   },
+   "cinema_mode_control_info": {
+      "message": "คลิกเพื่อสลับโหมดภาพยนตร์"
+   },
+   "cinema_mode_toggle_size": {
+      "message": "ขยายหรือหดย่อตัวเล่นวีดีโอโดยอัตโนมัติ เมื่อมีการสลับโหมดภาพยนตร์"
+   },
+   "color": {
+      "message": "สี:"
+   },
+   "color_inversion": {
+      "message": "การกลับสี:"
+   },
+   "configure_keyboard_shortcuts": {
+      "message": "ตั้งค่าแป้นลัด"
+   },
+   "contrast": {
+      "message": "ความคมชัด:"
+   },
+   "control_bar_location": {
+      "message": "ตำแหน่งแถบควบคุม:"
+   },
+   "control_speed": {
+      "message": "ควบคุมความเร็วการเล่นด้วยลูกกลิ้งเม้าส์ เมื่อเม้าส์อยู่บนตัวเล่นวิดีโอ และมีการกดปุ่ม “Control” (Ctrl)"
+   },
+   "control_speed_mouse_button": {
+      "message": "เมื่อมีการคลิกเม้าส์ขวาเท่านั้น"
+   },
+   "control_volume": {
+      "message": "ควบคุมระดับเสียงด้วยลูกกลิ้งเมาส์เมื่อวางเม้าส์ลอยเหนือตัวเล่นวิดีโอ"
+   },
+   "control_volume_mouse_button": {
+      "message": "เมื่อมีการคลิกเม้าส์ขวาเท่านั้น"
+   },
+   "controls": {
+      "message": "ควบคุม"
+   },
+   "controls_visible": {
+      "message": "แสดงตัวควบคุมตลอดโดยไม่ต้องคลิกที่ ••• หรือวางเม้าส์ลอยเหนือตัวควบคุม"
+   },
+   "controls_within_control_bar": {
+      "message": "แสดงตัวควบคุมภายในแถบควบคุม"
+   },
+   "controls_within_video_player": {
+      "message": "แสดงตัวควบคุมภายในตัวเล่นวิดีโอ"
+   },
+   "convert_shorts": {
+      "message": "Convert Shorts"
+   },
+   "copy_to_clipboard": {
+      "message": "คัดลอกไปยังคลิปบอร์ด"
+   },
+   "custom_script": {
+      "message": "สคริปต์ที่กำหนดเอง"
+   },
+   "custom_script_control_info": {
+      "message": "คลิกเพื่อรันสคริปต์ที่กำหนดเอง"
+   },
+   "custom_script_instructions": {
+      "message": "วางหรือพิมพ์ JavaScript ที่นี่, บันทึกโดยการกดปุ่มข้างล่าง จากนั้นกดปุ่ม “สคริปต์ที่กำหนดเอง” เมื่อคุณต้องการจะให้มันทำงาน"
+   },
+   "custom_script_warning": {
+      "message": "ด้วยเหตุผลด้านความปลอดภัย คุณควรใช้สคริปต์ที่คุณเข้าใจ หรือสคริปต์ที่เขียนโดยนักพัฒนาที่คุณเชื่อถือได้"
+   },
+   "custom_theme": {
+      "message": "ธีมปรับแต่งเอง"
+   },
+   "custom_theme_instructions": {
+      "message": "วางหรือพิมพ์คำสั่ง CSS ที่นี่ แล้วบันทึกด้วยปุ่มด้านล่าง"
+   },
+   "dark_theme": {
+      "message": "ธีมมืด"
+   },
+   "decrease_playback_speed": {
+      "message": "ลดความเร็วการเล่น"
+   },
+   "default_playback_speed": {
+      "message": "ความเร็วการเล่นเริ่มต้น:"
+   },
+   "default_volume_level": {
+      "message": "ระดับเสียงเริ่มต้น:"
+   },
+   "description": {
+      "message": "ควบคุม YouTube และเพิ่มประสบการณ์การใช้งานของคุณ!"
+   },
+   "detailed_description": {
+      "message": "สร้างขึ้นเพื่อการใช้งาน YouTube ได้สูงสุด ส่วนขยายนี้มาพร้อมกับทุกคุณลักษณะที่ให้คุณ กับสิ่งที่คุณใช้ร่วมอยู่สามารถจัดการโฆษณาตามที่คุณปรารถนา ควบคุมความเร็วในการรับชม และระดับความดังของเสียงโดยใช้เพียงลูกลื่นบนเม้าส์, จดจำคุณภาพการเล่นคลิปที่เหมาะสม, ปรับแต่งปุ่มลัดบนคีย์บอร์ดมากมายในการควบคุม YouTube อย่างมืออาชีพ และอื่น ๆ อีกมากมาย... ต้องลอง! ระวังจะติดใจใช้ดู YouTube จนไม่มีไม่ได้ ;)\n\nYouTube เครื่องหมายการค้าของ Google LLC ใช้เครื่องหมายนี้ต้องได้รับความยินยอมจาก Google"
+   },
+   "disable_autoplay": {
+      "message": "ปิดคุณสมบัติ “เล่นอัตโนมัติ”"
+   },
+   "display_control_bar": {
+      "message": "แสดงแถบควบคุมเมื่อมีการวางเม้าส์ลอยเหนือตัวควบคุมเท่านั้น"
+   },
+   "donate": {
+      "message": "สนับสนุน"
+   },
+   "execute_custom_script": {
+      "message": "รันสคริปต์ที่กำหนดเอง"
+   },
+   "expand": {
+      "message": "ขยาย"
+   },
+   "expand_shrink_video_player": {
+      "message": "ขยายหรือหดย่อตัวเล่นวิดีโอ"
+   },
+   "expanded_player_viewport": {
+      "message": "ใช้พื้นที่ว่างทั้งหมดในวิวพอร์ตที่มีเพื่อขยายตัวเล่นวิดีโอ"
+   },
+   "export": {
+      "message": "ส่งออก"
+   },
+   "export_instructions": {
+      "message": "สร้างเท็กซ์ไฟล์ใหม่ และวางโค้ดไว้ด้านล่างโดยไม่ต้องแก้ไข"
+   },
+   "flip_horizontally": {
+      "message": "พลิกตามแนวนอน"
+   },
+   "flip_horizontally_control_info": {
+      "message": "คลิกเพื่อพลิกวิดีโอตามแนวนอน"
+   },
+   "flip_vertically": {
+      "message": "พลิกตามแนวตั้ง"
+   },
+   "flip_vertically_control_info": {
+      "message": "คลิกเพื่อพลิกวิดีโอตามแนวตั้ง"
+   },
+   "flip_video_horizontally": {
+      "message": "พลิกวิดีโอตามแนวนอน"
+   },
+   "flip_video_vertically": {
+      "message": "พลิกวิดีโอตามแนวตั้ง"
+   },
+   "focus_video_player": {
+      "message": "ตั้งค่าโฟกัสบนตัวเล่นวิดีโอ"
+   },
+   "gaussian_blur": {
+      "message": "เกาส์เซียนเบลอ:"
+   },
+   "grayscale": {
+      "message": "ระดับสีเทา:"
+   },
+   "hide_chat": {
+      "message": "ซ่อนแชท"
+   },
+   "hide_comments": {
+      "message": "ซ่อนความคิดเห็น"
+   },
+   "hide_related_videos": {
+      "message": "ซ่อนวิดีโอที่เกี่ยวข้อง"
+   },
+   "hide_shorts": {
+      "message": "Hide Shorts"
+   },
+   "hue_rotation": {
+      "message": "การหมุน Hue:"
+   },
+   "ignore_playlists": {
+      "message": "ไม่ต้องป้องกันการเล่นเพลย์ลิสต์อัตโนมัติ"
+   },
+   "ignore_pop_up_player": {
+      "message": "เพิกเฉยตัวเล่นแบบลอยตัว"
+   },
+   "import": {
+      "message": "นำเข้า"
+   },
+   "import_error": {
+      "message": "ข้อมูลในไฟล์ที่สำรองไม่ถูกต้อง!"
+   },
+   "import_instructions": {
+      "message": "วางข้อมูลในไฟล์ที่สำรอง และคลิกที่ปุ่ม “นำเข้า” หน้าจอจะโหลดใหม่โดยอัตโนมัติหากการตั้งค่านำเข้าเรียบร้อยแล้ว"
+   },
+   "increase_playback_speed": {
+      "message": "เพิ่มความเร็วการเล่น"
+   },
+   "keyboard_shortcuts": {
+      "message": "แป้นลัด"
+   },
+   "keyboard_shortcuts_control_info": {
+      "message": "คลิกเพื่อแสดงลิสต์แป้นลัดทั้งหมดสำหรับ YouTube (ลิงก์ไปภายนอก)"
+   },
+   "keyboard_shortcuts_page": {
+      "message": "แสดงแป้นลัดทั้งหมดสำหรับ YouTube"
+   },
+   "launch_mini_player": {
+      "message": "เปิดตัวเล่นแบบมินิ เมื่อเลื่อนลงไปอ่านความคิดเห็น"
+   },
+   "locale_code": {
+      "message": "th"
+   },
+   "locale_dir": {
+      "message": "ltr"
+   },
+   "loop": {
+      "message": "วนลูป"
+   },
+   "loop_control_info": {
+      "message": "คลิกเม้าส์ซ้าย หรือขวาเพื่อสลับโหมดการเล่นวน"
+   },
+   "loop_end": {
+      "message": "สิ้นสุด:"
+   },
+   "loop_start": {
+      "message": "เริ่ม:"
+   },
+   "message": {
+      "message": "ข้อความ"
+   },
+   "mini_player": {
+      "message": "ตัวเล่นแบบมินิ"
+   },
+   "mini_player_position": {
+      "message": "ตำแหน่งตัวเล่นแบบมินิ:"
+   },
+   "mini_player_size": {
+      "message": "ขนาดตัวเล่นแบบมินิ:"
+   },
+   "not_now": {
+      "message": "ไม่ใช่ตอนนี้"
+   },
+   "opacity": {
+      "message": "ความทึบแสง:"
+   },
+   "open_options_page": {
+      "message": "เปิดหน้าตัวเลือก"
+   },
+   "options": {
+      "message": "ตัวเลือก"
+   },
+   "options_control_info": {
+      "message": "คลิกเพื่อเปิดหน้าตัวเลือก"
+   },
+   "override_playback_speeds": {
+      "message": "ปรับความเร็วการเล่นเอง"
+   },
+   "page_reload_required": {
+      "message": "Enhancer for YouTube™ เพิ่งได้รับการอัพเดท ทุกหน้าเว็บ YouTube ต้องทำการโหลดใหม่"
+   },
+   "pause_videos": {
+      "message": "พักการเล่นวิดีโอในแถบเบื้องหลัง เมื่อมีการเริ่มเล่นวิดีโอในแถบเบื้องหน้า"
+   },
+   "playback_quality": {
+      "message": "คุณภาพการเล่น"
+   },
+   "playback_speed": {
+      "message": "ความเร็วการเล่น"
+   },
+   "playlists": {
+      "message": "เพลย์ลิสต์:"
+   },
+   "playlists_full_screen": {
+      "message": "เพลย์ลิสต์ (เต็มจอ):"
+   },
+   "pop_up_player": {
+      "message": "ตัวเล่นแบบลอยตัว"
+   },
+   "pop_up_player_control_info": {
+      "message": "คลิกเม้าส์ซ้าย หรือขวาเพื่อชมแบบลอยตัว"
+   },
+   "pop_up_player_embeds": {
+      "message": "ตัวเล่นแบบลอยตัว และฝังวิดีโอ:"
+   },
+   "pop_up_player_embeds_full_screen": {
+      "message": "ตัวเล่นแบบลอยตัว และฝังวิดีโอ (เต็มจอ):"
+   },
+   "pop_up_player_size": {
+      "message": "ขนาดตัวเล่นแบบลอยตัว:"
+   },
+   "preserve_black_bars_color": {
+      "message": "ไม่ต้องเปลี่ยนสีแถบดำแนวตั้ง เมื่อมีการใช้ธีม YouTube-DeepDark หรือเมื่อเปิดโหมดภาพยนตร์"
+   },
+   "prevent_autoplay": {
+      "message": "ป้องกันการโหลดวิดีโอในแถบเบื้องหลังจากการเล่นวิดีโออัตโนมัติ"
+   },
+   "prevent_autoplay_foreground_tab": {
+      "message": "ป้องกันการโหลดวิดีโอในแถบเบื้องหน้าจากเล่นวิดีโออัตโนมัติเช่นเดียวกัน"
+   },
+   "preview": {
+      "message": "ตัวอย่าง"
+   },
+   "rate": {
+      "message": "ให้คะแนน"
+   },
+   "rate_extension": {
+      "message": "ให้คะแนนการใช้งาน Enhancer for YouTube™"
+   },
+   "reset": {
+      "message": "เริ่มต้นใหม่"
+   },
+   "reverse_mouse_wheel_direction": {
+      "message": "หมุนลูกกลิ้งเม้าส์ย้อนเพื่อควบคุมความเร็วการเล่น และระดับเสียง"
+   },
+   "reverse_playlist": {
+      "message": "ย้อนเพลย์ลิสต์"
+   },
+   "reverse_playlist_control_info": {
+      "message": "คลิกเม้าส์ซ้าย หรือขวาเพื่อดูเพลย์ลิสต์แบบย้อนลำดับด้วยตัวเล่นแบบลอยตัว"
+   },
+   "reverse_playlist_order": {
+      "message": "ย้อนลำดับเพลย์ลิสต์"
+   },
+   "saturation": {
+      "message": "ความเข้มสี:"
+   },
+   "save": {
+      "message": "บันทึก"
+   },
+   "screenshot": {
+      "message": "จับภาพหน้าจอ"
+   },
+   "screenshot_control_info": {
+      "message": "คลิกเพื่อจับภาพหน้าจอวิดีโอ"
+   },
+   "select_default_playback_speed": {
+      "message": "เลือกความเร็วการเล่นเริ่มต้น"
+   },
+   "select_normal_playback_speed": {
+      "message": "เลือกความการเล่นปกติ"
+   },
+   "select_quality_1080p": {
+      "message": "เลือกคุณภาพการเล่น “1080p”"
+   },
+   "select_quality_1440p": {
+      "message": "เลือกคุณภาพการเล่น “1440p”"
+   },
+   "select_quality_144p": {
+      "message": "เลือกคุณภาพการเล่น “144p”"
+   },
+   "select_quality_2160p": {
+      "message": "เลือกคุณภาพการเล่น “2160p”"
+   },
+   "select_quality_240p": {
+      "message": "เลือกคุณภาพการเล่น “240p”"
+   },
+   "select_quality_2880p": {
+      "message": "เลือกคุณภาพการเล่น “2880p”"
+   },
+   "select_quality_360p": {
+      "message": "เลือกคุณภาพการเล่น “360p”"
+   },
+   "select_quality_4320p": {
+      "message": "เลือกคุณภาพการเล่น “4320p”"
+   },
+   "select_quality_480p": {
+      "message": "เลือกคุณภาพการเล่น “480p”"
+   },
+   "select_quality_720p": {
+      "message": "เลือกคุณภาพการเล่น “720p”"
+   },
+   "select_quality_auto": {
+      "message": "เลือกคุณภาพการเล่น “อัตโนมัติ”"
+   },
+   "select_quality_full_screen": {
+      "message": "เลือกคุณภาพการเล่นที่แตกต่างเมื่อเข้าสู่โหมดเต็มจอ"
+   },
+   "sepia": {
+      "message": "ซีเปีย:"
+   },
+   "shrink": {
+      "message": "หดย่อ"
+   },
+   "size_control_info": {
+      "message": "คลิกเพื่อขยาย หรือหดย่อตัวเล่นวิดีโอ หรือคลิกเม้าส์ขวาเพื่อจัดกึ่งกลางตัวเล่นภายในวิวพอร์ต"
+   },
+   "speed": {
+      "message": "ความเร็ว"
+   },
+   "speed_control_info": {
+      "message": "ใช้ลูกกลิ้งเม้าส์เพื่อควบคุมความเร็วการเล่น หรือคลิกเพื่อเลือกความเร็วการเล่นเริ่มต้น หรือคลิกเม้าส์ขวาเพื่อเลือกความเร็วการเล่นปกติ"
+   },
+   "speed_minus_control_info": {
+      "message": "คลิกเพื่อลดความเร็วการเล่น"
+   },
+   "speed_plus_control_info": {
+      "message": "คลิกเพื่อเร่งความเร็วการเล่น"
+   },
+   "speed_variation": {
+      "message": "ปรับเปลี่ยนความเร็วเมื่อมีการเลื่อนลูกกลิ้งเม้าส์ หรือเมื่อมีการคลิกที่ปุ่ม “-” และ “+”:"
+   },
+   "stop": {
+      "message": "หยุด"
+   },
+   "stop_control_info": {
+      "message": "คลิกเพื่อหยุดวิดีโอ"
+   },
+   "stop_video": {
+      "message": "หยุดวิดีโอ"
+   },
+   "stop_videos": {
+      "message": "หยุดการเล่นวิดีโอโดยสมบูรณ์แทนที่จะเป็นเพียงป้องกันการเล่นวิดีโออัตโนมัติ"
+   },
+   "support": {
+      "message": "ขอความช่วยเหลือ"
+   },
+   "switch_back_previous_quality": {
+      "message": "สลับคุณภาพการเล่นกลับไปก่อนหน้าเมื่อออกจากโหมดเต็มจอ"
+   },
+   "take_screenshot": {
+      "message": "จับภาพหน้าจอวิดีโอ"
+   },
+   "theme": {
+      "message": "ธีม"
+   },
+   "theme_custom_theme": {
+      "message": "ธีม: ธีมปรับแต่งเอง"
+   },
+   "theme_youtube_dark": {
+      "message": "ธีม: YouTube™ (ธีมมืด)"
+   },
+   "theme_youtube_deep_dark": {
+      "message": "ธีม: YouTube-DeepDark"
+   },
+   "theme_youtube_deep_dark_custom": {
+      "message": "ธีม: YouTube-DeepDark (ปรับแต่ง)"
+   },
+   "toggle_cards_end_screens": {
+      "message": "สลับการ์ด และการแสดงภาพช่วงท้าย"
+   },
+   "toggle_cinema_mode": {
+      "message": "สลับโหมดภาพยนตร์"
+   },
+   "toggle_comments_visibility": {
+      "message": "สลับการแสดงความคิดเห็น"
+   },
+   "toggle_loop": {
+      "message": "สลับโหมดเล่นวน"
+   },
+   "toggle_pip_mode": {
+      "message": "สลับโหมดแสดงภาพในภาพ"
+   },
+   "toggle_related_videos_visibility": {
+      "message": "สลับการแสดงวิดีโอที่เกี่ยวข้อง"
+   },
+   "toggle_video_filters": {
+      "message": "สลับฟิลเตอร์วิดีโอ"
+   },
+   "toggle_visibility": {
+      "message": "สลับการแสดงการ์ด/วิดีโอช่วงท้าย"
+   },
+   "toggle_volume_booster": {
+      "message": "สลับตัวเร่งระดับเสียง"
+   },
+   "top_left_corner": {
+      "message": "มุมซ้ายบน"
+   },
+   "top_right_corner": {
+      "message": "มุมขวาบน"
+   },
+   "translate": {
+      "message": "แปล"
+   },
+   "variant": {
+      "message": "ตัวแปร:"
+   },
+   "video_codecs_and_formats": {
+      "message": "ตัวแปลงสัญญาณวิดีโอและรูปแบบ"
+   },
+   "video_filters": {
+      "message": "ฟิลเตอร์วิดีโอ"
+   },
+   "video_filters_control_info": {
+      "message": "คลิกเพื่อสลับฟิลเตอร์วิดีโอ หรือคลิกเม้าส์ขวาเพื่อสลับการแสดงแผงฟิลเตอร์วิดีโอ"
+   },
+   "video_player": {
+      "message": "ตัวเล่นวีดีโอ"
+   },
+   "videos": {
+      "message": "วิดีโอ:"
+   },
+   "videos_full_screen": {
+      "message": "วิดีโอ (เต็มจอ):"
+   },
+   "volume": {
+      "message": "ระดับเสียง"
+   },
+   "volume_booster_control_info": {
+      "message": "คลิกเพื่อสลับตัวเร่งระดับเสียง"
+   },
+   "volume_booster_level": {
+      "message": "ระดับตัวเร่งเสียง:"
+   },
+   "volume_variation": {
+      "message": "ปรับระดับเสียงเมื่อหมุนลูกกลิ้งเมาส์:"
+   },
+   "watch_pop_up_player": {
+      "message": "ชมแบบตัวเล่นลอยตัว"
+   },
+   "youtube_dark_theme": {
+      "message": "YouTube (ธีมหลัก)"
+   },
+   "youtube_deep_dark": {
+      "message": "YouTube-DeepDark (โดย RaitaroH)"
+   },
+   "youtube_deep_dark_custom": {
+      "message": "YouTube-DeepDark (ปรับแต่ง)"
+   }
+}

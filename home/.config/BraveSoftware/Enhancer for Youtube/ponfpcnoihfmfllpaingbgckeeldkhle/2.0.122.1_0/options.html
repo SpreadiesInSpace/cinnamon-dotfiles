@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<!--
+##
+##  Enhancer for YouTube™
+##  =====================
+##
+##  Author: Maxime RF <https://www.mrfdev.com>
+##
+##  This file is protected by copyright laws and international copyright
+##  treaties, as well as other intellectual property laws and treaties.
+##
+##  All rights not expressly granted to you are retained by the author.
+##  Read the license.txt file for more details.
+##
+##  © MRFDEV.com - All Rights Reserved
+##
+-->
+<html>
+<head>
+<meta charset="utf-8">
+<title>Enhancer for YouTube™</title>
+<link rel="stylesheet" href="options.css">
+</head>
+<body>
+<header>
+  <nav>
+    <div>
+      <img src="./icons/32.png" class="extension-icon" alt="icon"><a href="#" class="extension-name" dir="ltr">Enhancer for YouTube™</a>
+    </div>
+    <div class="rate">
+      <svg version="1.1" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M0 0h24v24H0z" fill="none"/><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+      <a href="https://chromewebstore.google.com/detail/enhancer-for-youtube/ponfpcnoihfmfllpaingbgckeeldkhle/reviews" class="i18n" data-text="rate" target="_blank" rel="noopener"></a>
+    </div>
+    <div class="donate">
+      <svg version="1.1" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+      <a href="#" class="i18n" data-text="donate" data-paypal="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=JYKCHGNJ6PFC4&item_name=Enhancer%20for%20YouTube%E2%84%A2%20%5BChrome%20Extension%5D&no_note=1&no_shipping=1&rm=1&return=https%3A%2F%2Fwww.mrfdev.com%2Fthanks&cancel_return=https%3A%2F%2Fwww.mrfdev.com%2Fdonate&amount=AMOUNT&currency_code=CURRENCY_CODE"></a>
+    </div>
+    <div>
+      <svg version="1.1" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>
+      <a href="https://www.mrfdev.com/how-to-use-enhancer-for-youtube" class="i18n" data-text="support" target="_blank" rel="noopener"></a>
+    </div>
+    <div>
+      <svg version="1.1" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/></svg>
+      <a href="/i18n.html" class="i18n" data-text="translate"></a>
+    </div>
+    <div>
+      <svg version="1.1" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M0 0h24v24H0V0z" fill="none"/><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2s.07-1.35.16-2h4.68c.09.65.16 1.32.16 2s-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"/></svg>
+      <select id="locale" name="locale">
+        <option value="ar">Arabic</option>
+        <option value="bg">Bulgarian</option>
+        <option value="ca">Catalan</option>
+        <option value="zh_CN">Chinese (China)</option>
+        <option value="zh_TW">Chinese (Taiwan)</option>
+        <option value="hr">Croatian</option>
+        <option value="cs">Czech</option>
+        <option value="da">Danish</option>
+        <option value="nl">Dutch</option>
+        <option value="en_GB">English (Great Britain)</option>
+        <option value="en_US">English (USA)</option>
+        <option value="fi">Finnish</option>
+        <option value="fr">French</option>
+        <option value="de">German</option>
+        <option value="el">Greek</option>
+        <option value="he">Hebrew</option>
+        <option value="hi">Hindi</option>
+        <option value="hu">Hungarian</option>
+        <option value="id">Indonesian</option>
+        <option value="it">Italian</option>
+        <option value="ja">Japanese</option>
+        <option value="ko">Korean</option>
+        <option value="lv">Latvian</option>
+        <option value="lt">Lithuanian</option>
+        <option value="ms">Malay</option>
+        <option value="no">Norwegian</option>
+        <option value="fa">Persian</option>
+        <option value="pl">Polish</option>
+        <option value="pt_BR">Portuguese (Brazil)</option>
+        <option value="pt_PT">Portuguese (Portugal)</option>
+        <option value="ro">Romanian</option>
+        <option value="ru">Russian</option>
+        <option value="sr">Serbian</option>
+        <option value="sk">Slovak</option>
+        <option value="sl">Slovenian</option>
+        <option value="es">Spanish</option>
+        <option value="es_419">Spanish (Latin America and Caribbean)</option>
+        <option value="sv">Swedish</option>
+        <option value="th">Thai</option>
+        <option value="tr">Turkish</option>
+        <option value="uk">Ukrainian</option>
+        <option value="vi">Vietnamese</option>
+      </select>
+    </div>
+  </nav>
+</header>
+<main>
+  <fieldset>
+    <legend class="i18n" data-text="theme"></legend>
+    <div class="row">
+      <label>
+        <input type="checkbox" id="darktheme"><span class="i18n" data-text="dark_theme"></span>
+      </label>
+    </div>
+    <div class="row indented">
+      <label class="theme">
+        <input type="radio" name="theme" value="default-dark"><span class="i18n" data-text="youtube_dark_theme"></span>
+      </label>
+      <label class="theme">
+        <input type="radio" name="theme" value="youtube-deep-dark"><span class="i18n" data-text="youtube_deep_dark"></span> <a href="https://github.com/RaitaroH/YouTube-DeepDark" target="_blank" rel="noopener" tabindex="-1"><svg version="1.1" viewBox="0 0 24 24" width="1.1em" height="1.1em"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 19H5V5h7V3H3v18h18v-9h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg></a>
+      </label>
+    </div>
+    <div class="row indented-2x">
+      <label for="themevariant" class="i18n" data-text="variant"></label>
+      <select id="themevariant" name="themevariant">
+        <option value="youtube-deep-dark.css">Deep Dark</option>
+        <option value="youtube-deep-dark-green.css">Green Dark</option>
+        <option value="youtube-deep-dark-purple.css">Purple Dark</option>
+        <option value="youtube-deep-dark-pink.css">Pink Dark</option>
+        <option value="youtube-deep-dark-kde.css">KDE</option>
+        <option value="youtube-deep-dark-vertex-dark.css">Vertex Dark</option>
+        <option value="youtube-deep-dark-discord.css">Discord</option>
+        <option value="youtube-deep-dark-firefox-dark.css">Firefox Dark</option>
+        <option value="youtube-deep-dark-firefox-quantum-dark.css">Firefox Quantum Dark</option>
+        <option value="youtube-deep-dark-firefox-alpenglow-dark.css">Firefox Alpenglow Dark</option>
+        <option value="youtube-deep-dark-9anime.css">9anime</option>
+        <option value="youtube-deep-dark-orange.css">Orange Dark</option>
+        <option value="youtube-deep-dark-yellow.css">Yellow Dark</option>
+        <option value="youtube-deep-dark-ubuntu-grey.css">Ubuntu Grey</option>
+        <option value="youtube-deep-dark-ubuntu-purple.css">Ubuntu Purple</option>
+        <option value="youtube-deep-dark-mint-y-dark.css">Mint-Y-Dark</option>
+        <option value="youtube-deep-dark-arc-dark.css">Arc Dark</option>
+        <option value="youtube-deep-dark-youtube-dark.css">Red Dark</option>
+      </select>
+    </div>
+    <div class="row indented">
+      <label class="theme">
+        <input type="radio" name="theme" value="youtube-deep-dark-custom"><span class="i18n" data-text="youtube_deep_dark_custom"></span>
+      </label>
+    </div>
+    <div class="row colors indented-2x hidden" id="customcolors">
+      <div><input type="color" name="--main-color" title="--main-color"></div>
+      <div><input type="color" name="--main-background" title="--main-background"></div>
+      <div><input type="color" name="--second-background" title="--second-background"></div>
+      <div><input type="color" name="--hover-background" title="--hover-background"></div>
+      <div><input type="color" name="--main-text" title="--main-text"></div>
+      <div><input type="color" name="--dimmer-text" title="--dimmer-text"></div>
+      <div><input type="color" name="--shadow"  title="--shadow"></div>
+      <div><button class="i18n" id="reset-custom-colors" data-text="reset"></button></div>
+    </div>
+    <div class="row">
+      <label>
+        <input type="checkbox" id="customtheme"><span class="i18n" data-text="custom_theme"></span>
+      </label>
+    </div>
+    <div class="row hidden">
+      <textarea id="customcssrules" rows="8" required></textarea>
+      <div class="flex-align-center">
+        <button type="button" class="i18n" id="customcssrules-btn" data-text="save"></button>
+        <svg version="1.1" viewBox="0 0 52 52" class="checkmark" id="customcssrules-checkmark"><circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/><path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/></svg>
+      </div>
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend class="i18n" data-text="keyboard_shortcuts"></legend>
+    <div class="flex-align-center">
+      <button class="i18n" id="keyboard-shortcuts-btn" data-text="configure_keyboard_shortcuts"></button>
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend class="i18n" data-text="video_player"></legend>
+    <div class="group">
+      <div class="row">
+        <label class="control-label i18n" data-text="controls"></label>
+        <div class="player-controls">
+          <label class="player-control">
+            <input type="checkbox" id="loop">
+            <svg version="1.1" viewBox="0 0 36 36" class="control"><path d="m 13,13 h 10 v 3 l 4,-4 -4,-4 v 3 H 11 v 6 h 2 z M 23,23 H 13 v -3 l -4,4 4,4 v -3 h 12 v -6 h -2 z"></path></svg>
+            <span class="info" data-message="loop_control_info" data-tooltip="">
+              <svg version="1.1" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+            </span>
+          </label>
+          <label class="player-control">
+            <input type="checkbox" id="stop">
+            <svg version="1.1" viewBox="0 0 36 36" class="control"><path d="M 9.9999997,10 H 26 V 26 H 9.9999997 Z"></path></svg>
+            <span class="info" data-message="stop_control_info" data-tooltip="">
+              <svg version="1.1" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+            </span>
+          </label>
+          <label class="player-control">
+            <input type="checkbox" id="reverse-playlist">
+            <svg version="1.1" viewBox="0 0 36 36" class="control"><path d="M 12,11 V 23 H 9 l 4,4 4,-4 H 14 V 13 11 Z m 11,-2 -4,4 h 3 v 10 2 h 2 V 13 h 3 z"></path></svg>
+            <span class="info" data-message="reverse_playlist_control_info" data-tooltip="">
+              <svg version="1.1" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+            </span>
+          </label>
+          <label class="player-control">
+            <input type="checkbox" id="volume-booster">
+            <svg version="1.1" viewBox="0 0 36 36" class="control"><path d="m 13,21 h 4 l -6,-3 v 2 H 7 l 6,3 z M 8.0617044,16.561704 8.9050563,17.405056 C 9.7006719,16.609441 10.790665,16.124116 12,16.124116 c 1.209335,0 2.299328,0.493281 3.094944,1.28094 l 0.843352,-0.843352 C 14.927864,15.551273 13.535538,14.930693 12,14.930693 c -1.535537,0 -2.9278644,0.62058 -3.9382956,1.631011 z M 12,24.875884 c -1.209335,0 -2.2993281,-0.493282 -3.0949437,-1.280941 L 8.0617044,24.438295 C 9.0721356,25.448727 10.464463,26.069307 12,26.069307 c 1.535538,0 2.927864,-0.62058 3.938296,-1.631012 L 15.094944,23.594943 C 14.299328,24.382602 13.209335,24.875884 12,24.875884 Z m 0,-11.451211 c 1.86174,0 3.5564,0.755834 4.781647,1.981082 L 17.625,14.562403 C 16.184936,13.122339 14.195898,12.23125 12,12.23125 c -2.1958981,0 -4.1849363,0.891089 -5.625,2.331153 l 0.8433525,0.843352 C 8.4436,14.180507 10.13826,13.424673 12,13.424673 Z m 0,15.344207 c 2.195898,0 4.184936,-0.891089 5.625,-2.331153 L 16.781647,25.594375 C 15.5564,26.819622 13.86174,27.575457 12,27.575457 c -1.86174,0 -3.5564,-0.755835 -4.7816475,-1.981082 L 6.375,26.437727 C 7.8150637,27.877791 9.8041019,28.76888 12,28.76888 Z" transform="matrix(0,-1.6,1.6,0,-14.800104,37.2)"></path></svg>
+            <span class="info" data-message="volume_booster_control_info" data-tooltip="">
+              <svg version="1.1" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+            </span>
+          </label>
+          <label class="player-control">
+            <input type="checkbox" id="cards-end-screens">
+            <svg version="1.1" viewBox="0 0 36 36" class="control"><path d="m 23.585753,15.31167 c -4.224201,0 -7.831669,2.627453 -9.293243,6.336303 1.461574,3.708847 5.069042,6.3363 9.293243,6.3363 4.224201,0 7.831669,-2.627453 9.293242,-6.3363 -1.461573,-3.70885 -5.069041,-6.336303 -9.293242,-6.336303 z m 0,10.560503 c -2.331759,0 -4.224201,-1.892442 -4.224201,-4.2242 0,-2.331759 1.892442,-4.224202 4.224201,-4.224202 2.331758,0 4.224201,1.892443 4.224201,4.224202 0,2.331758 -1.892443,4.2242 -4.224201,4.2242 z m 0,-6.758721 c -1.402435,0 -2.534521,1.132087 -2.534521,2.534521 0,1.402434 1.132086,2.53452 2.534521,2.53452 1.402434,0 2.53452,-1.132086 2.53452,-2.53452 0,-1.402434 -1.132086,-2.534521 -2.53452,-2.534521 z M 7.5464614,12.108004 h 8.9170356 v 3.889561 H 7.5464614 Z M 12.520348,23.921535 H 5.3932636 V 10.287985 H 25.843588 v 2.855964 h 2.272258 V 8.0157271 H 3.1210054 V 26.193793 h 9.3993426 z m -0.66097,-3.803731 a 2.1564575,2.1564575 0 0 1 -2.1564585,2.156458 2.1564575,2.1564575 0 0 1 -2.1564581,-2.156458 2.1564575,2.1564575 0 0 1 2.1564581,-2.156458 2.1564575,2.1564575 0 0 1 2.1564585,2.156458 z"></path></svg>
+            <span class="info" data-message="cards_end_screens_control_info" data-tooltip="">
+              <svg version="1.1" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+            </span>
+          </label>
+          <label class="player-control">
+            <input type="checkbox" id="cinema-mode">
+            <svg version="1.1" viewBox="0 0 36 36" class="control"><path d="m 8,8.1430084 c -1.375,0 -2.4882814,1.125 -2.4882812,2.4999996 L 5.5,23.679025 c 0,1.375 1.125,2.5 2.4999999,2.5 H 28 c 1.375,0 2.5,-1.125 2.5,-2.5 V 7.9999999 h -5 L 28,11.75 h -3.75 l -2.5,-3.7500001 h -2.5 L 21.75,11.75 H 18 L 15.5,7.9999999 H 13 L 15.5,11.75 H 11.75 L 9.2500001,8.1430084 Z M 7.7714843,14.017578 H 28.207031 v 9.856759 H 7.7714843 Z"></path></svg>
+            <span class="info" data-message="cinema_mode_control_info" data-tooltip="">
+              <svg version="1.1" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+            </span>
+          </label>
+          <label class="player-control">
+            <input type="checkbox" id="size">
+            <svg version="1.1" viewBox="0 0 36 36" class="control"><path d="M 5.390625,7.9999999 V 26.179687 h 25.21875 V 7.9999999 Z M 7.410156,10.009766 H 28.589844 V 24.169922 H 7.410156 Z m 4.040294,4.050342 h 3.029835 V 12.040219 H 9.430562 v 5.049722 h 2.019888 z m 15.118897,3.029833 h -2.019888 v 3.029834 h -3.029834 v 2.019889 h 5.049722 z"></path></svg>
+            <span class="info" data-message="size_control_info" data-tooltip="">
+              <svg version="1.1" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+            </span>
+          </label>
+          <label class="player-control">
+            <input type="checkbox" id="pop-up-player">
+            <svg version="1.1" viewBox="0 0 36 36" class="control"><path d="m 21.554375,7.9999999 h 2.02 V 10.02 h -2.02 z m 4.04,0 h 2.02 V 10.02 h -2.02 z M 5.394375,16.08 h 2.02 v 2.02 h -2.02 z m 0,-4.04 h 2.02 v 2.02 h -2.02 z m 0,8.08 h 2.02 v 2.02 h -2.02 z m 12.12,-12.1200001 h 2.02 V 10.02 h -2.02 z M 30.605625,26.18 H 9.434375 V 12.04 h 21.17125 z m -2.02,-12.12 h -17.13125 v 10.1 h 17.13125 z M 13.474375,7.9999999 h 2.02 V 10.02 h -2.02 z m -4.04,0 h 2.02 V 10.02 h -2.02 z m -4.04,0 h 2.02 V 10.02 h -2.02 z"></path></svg>
+            <span class="info" data-message="pop_up_player_control_info" data-tooltip="">
+              <svg version="1.1" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+            </span>
+          </label>
+          <label class="player-control">
+            <input type="checkbox" id="speed-minus">
+            <svg version="1.1" viewBox="0 0 36 36" class="control"><path d="M 24.505859 8 C 21.820495 8 19.640625 10.17987 19.640625 12.865234 C 19.640625 15.550597 21.820495 17.730469 24.505859 17.730469 C 27.191222 17.730469 29.371094 15.550597 29.371094 12.865234 C 29.371094 10.17987 27.191222 8 24.505859 8 z M 18.320312 8.0058594 A 11.389523 11.389523 0 0 0 11.833984 9.8027344 L 13.941406 11.203125 A 9.1116182 9.1116182 0 0 1 18.539062 10.265625 C 18.881721 9.48098 19.375712 8.7787333 19.982422 8.1914062 A 11.389523 11.389523 0 0 0 18.320312 8.0058594 z M 9.9550781 11.283203 L 16.400391 20.953125 A 2.2779046 2.2779046 0 0 0 19.623047 20.953125 A 2.2779046 2.2779046 0 0 0 19.623047 17.728516 L 9.9550781 11.283203 z M 21.103516 12.185547 L 23.826172 12.185547 L 25.185547 12.185547 L 26.738281 12.185547 L 27.908203 12.185547 L 27.908203 13.544922 L 25.455078 13.544922 L 25.185547 13.544922 L 23.826172 13.544922 L 23.367188 13.544922 L 21.103516 13.544922 L 21.103516 12.185547 z M 8.4628906 13.150391 A 11.389523 11.389523 0 0 0 8.1542969 25.041016 A 2.2779046 2.2779046 0 0 0 10.136719 26.179688 L 25.910156 26.179688 A 2.2779046 2.2779046 0 0 0 27.869141 25.041016 A 11.389523 11.389523 0 0 0 29.179688 17.386719 C 28.592758 17.993284 27.89155 18.487267 27.107422 18.830078 A 9.1116182 9.1116182 0 0 1 25.910156 23.902344 L 10.125 23.902344 A 9.1116182 9.1116182 0 0 1 9.875 15.269531 L 8.4726562 13.162109 L 8.4628906 13.150391 z "></path></svg>
+            <span class="info" data-message="speed_minus_control_info" data-tooltip="">
+              <svg version="1.1" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+            </span>
+          </label>
+          <label class="player-control">
+            <input type="checkbox" id="speed">
+            <svg version="1.1" viewBox="0 0 36 36" class="control"><path d="m 27.526463,13.161756 -1.400912,2.107062 a 9.1116182,9.1116182 0 0 1 -0.250569,8.633258 H 10.089103 A 9.1116182,9.1116182 0 0 1 22.059491,11.202758 L 24.166553,9.8018471 A 11.389523,11.389523 0 0 0 8.1301049,25.041029 2.2779046,2.2779046 0 0 0 10.089103,26.179981 H 25.863592 A 2.2779046,2.2779046 0 0 0 27.845369,25.041029 11.389523,11.389523 0 0 0 27.537852,13.150367 Z M 16.376119,20.95219 a 2.2779046,2.2779046 0 0 0 3.223235,0 l 6.446471,-9.669705 -9.669706,6.44647 a 2.2779046,2.2779046 0 0 0 0,3.223235 z"></path></svg>
+            <span class="info" data-message="speed_control_info" data-tooltip="">
+              <svg version="1.1" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+            </span>
+          </label>
+          <label class="player-control">
+            <input type="checkbox" id="speed-plus">
+            <svg version="1.1" viewBox="0 0 36 36" class="control"><path d="m 11.494141,8 c -2.6853634,0 -4.8652346,2.17987 -4.8652348,4.865234 0,2.685363 2.1798714,4.865235 4.8652348,4.865235 2.685364,0 4.865234,-2.179872 4.865234,-4.865235 C 16.359375,10.17987 14.179505,8 11.494141,8 Z m -0.679688,1.4609375 h 1.359375 v 2.7246095 h 2.722656 v 1.359375 h -2.722656 v 2.722656 H 10.814453 V 13.544922 H 8.0917969 v -1.359375 h 2.7226561 z m 6.865235,-1.4550784 a 11.389523,11.389523 0 0 0 -1.66211,0.185547 c 0.60671,0.587327 1.100701,1.289573 1.44336,2.0742189 a 9.1116182,9.1116182 0 0 1 4.597656,0.9375 l 2.107422,-1.4003909 a 11.389523,11.389523 0 0 0 -6.486328,-1.796875 z m 8.365234,3.2773439 -9.667969,6.445313 a 2.2779046,2.2779046 0 0 0 0,3.224609 2.2779046,2.2779046 0 0 0 3.222656,0 z m 1.492187,1.867188 -0.0098,0.01172 -1.402344,2.107422 a 9.1116182,9.1116182 0 0 1 -0.25,8.632813 H 10.089844 A 9.1116182,9.1116182 0 0 1 8.8925783,18.830078 C 8.1084503,18.487267 7.4072416,17.993284 6.8203125,17.386719 a 11.389523,11.389523 0 0 0 1.3105468,7.654297 2.2779046,2.2779046 0 0 0 1.9589847,1.138672 h 15.773437 a 2.2779046,2.2779046 0 0 0 1.982422,-1.138672 11.389523,11.389523 0 0 0 -0.308594,-11.890625 z"></path></svg>
+            <span class="info" data-message="speed_plus_control_info" data-tooltip="">
+              <svg version="1.1" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+            </span>
+          </label>
+          <label class="player-control">
+            <input type="checkbox" id="video-filters">
+            <svg version="1.1" viewBox="0 0 36 36" class="control"><path d="m 22.899051,15.920251 -1.037187,2.272983 -1.037186,-2.272983 -2.272983,-1.037187 2.272983,-1.037186 1.037186,-2.272983 1.037187,2.272983 2.272983,1.037186 z m -6.278288,3.65222 -1.379238,3.034322 -1.379237,-3.034322 -3.034322,-1.379237 3.034322,-1.379237 1.379237,-3.034323 1.379238,3.034323 3.034322,1.379237 z M 5.390625,8 v 18.179688 h 25.21875 V 8 Z m 2.0195312,2.009766 H 28.589844 V 24.169922 H 7.4101562 Z"></path></svg>
+            <span class="info" data-message="video_filters_control_info" data-tooltip="">
+              <svg version="1.1" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+            </span>
+          </label>
+          <label class="player-control">
+            <input type="checkbox" id="flip-horizontally">
+            <svg version="1.1" viewBox="0 0 36 36" class="control"><path d="m 21.034058,26.204349 h 2.022705 v -2.022705 h -2.022705 z m 4.04541,-12.136233 h 2.022707 V 12.045411 H 25.079468 Z M 8.897825,8 v 18.204349 h 6.068116 V 24.181644 H 10.92053 V 10.022706 h 4.045411 V 8 Z m 16.181643,0 v 2.022706 h 2.022707 V 8 Z m -8.090821,20.227054 h 2.022706 V 5.9772944 h -2.022706 z m 8.090821,-6.068116 h 2.022707 v -2.022706 h -2.022707 z m -4.04541,-12.136232 h 2.022705 V 8 h -2.022705 z m 4.04541,8.090822 h 2.022707 v -2.022706 h -2.022707 z m 0,8.090821 h 2.022707 v -2.022705 h -2.022707 z"></path></svg>
+            <span class="info" data-message="flip_horizontally_control_info" data-tooltip="">
+              <svg version="1.1" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+            </span>
+          </label>
+          <label class="player-control">
+            <input type="checkbox" id="flip-vertically">
+            <svg version="1.1" viewBox="0 0 36 36" class="control"><path d="m 8.897825,20.136232 v 2.022705 h 2.022705 v -2.022705 z m 12.136233,4.04541 v 2.022707 h 2.022705 v -2.022707 z m 6.068116,-16.181643 -18.204349,0 v 6.068116 h 2.022705 v -4.045411 l 14.158938,0 v 4.045411 h 2.022706 z m 0,16.181643 h -2.022706 v 2.022707 h 2.022706 z M 6.87512,16.090821 v 2.022706 h 22.24976 v -2.022706 z m 6.068116,8.090821 v 2.022707 h 2.022706 v -2.022707 z m 12.136232,-4.04541 v 2.022705 h 2.022706 v -2.022705 z m -8.090822,4.04541 v 2.022707 h 2.022706 v -2.022707 z m -8.090821,0 v 2.022707 h 2.022705 v -2.022707 z"></path></svg>
+            <span class="info" data-message="flip_vertically_control_info" data-tooltip="">
+              <svg version="1.1" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+            </span>
+          </label>
+          <label class="player-control">
+            <input type="checkbox" id="screenshot">
+            <svg version="1.1" viewBox="0 0 36 36" class="control"><path d="M 26.079999,10.02 H 22.878298 L 21.029999,8 h -6.06 l -1.8483,2.02 H 9.9200015 c -1.111,0 -2.02,0.909 -2.02,2.02 v 12.12 c 0,1.111 0.909,2.02 2.02,2.02 H 26.079999 c 1.111,0 2.019999,-0.909 2.019999,-2.02 V 12.04 c 0,-1.111 -0.909,-2.02 -2.019999,-2.02 z m 0,14.14 H 9.9200015 V 12.04 h 4.0904965 l 1.8483,-2.02 h 4.2824 l 1.8483,2.02 h 4.0905 z m -8.08,-11.11 c -2.7876,0 -5.05,2.2624 -5.05,5.05 0,2.7876 2.2624,5.05 5.05,5.05 2.7876,0 5.049999,-2.2624 5.049999,-5.05 0,-2.7876 -2.262399,-5.05 -5.049999,-5.05 z m 0,8.08 c -1.6665,0 -3.03,-1.3635 -3.03,-3.03 0,-1.6665 1.3635,-3.03 3.03,-3.03 1.6665,0 3.03,1.3635 3.03,3.03 0,1.6665 -1.3635,3.03 -3.03,3.03 z"></path></svg>
+            <span class="info" data-message="screenshot_control_info" data-tooltip="">
+              <svg version="1.1" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+            </span>
+          </label>
+          <label class="player-control">
+            <input type="checkbox" id="keyboard-shortcuts">
+            <svg version="1.1" viewBox="0 0 36 36" class="control"><path d="m 24.492861,11.895714 h 2.597142 v 2.597143 h -2.597142 z m 0,3.895714 h 2.597142 v 2.597144 h -2.597142 z m -3.895714,-3.895714 h 2.597143 v 2.597143 h -2.597143 z m 0,3.895714 h 2.597143 v 2.597144 h -2.597143 z m -7.791429,3.895715 H 23.19429 v 2.597143 H 12.805718 Z M 8.9100043,11.895714 h 2.5971427 v 2.597143 H 8.9100043 Z m 0,3.895714 h 2.5971427 v 2.597144 H 8.9100043 Z m 3.8957137,0 h 2.597143 v 2.597144 h -2.597143 z m 0,-3.895714 h 2.597143 v 2.597143 h -2.597143 z m 3.895715,3.895714 h 2.597142 v 2.597144 h -2.597142 z m 0,-3.895714 h 2.597142 v 2.597143 H 16.701433 Z M 7.6113281,8 C 6.1828991,8 5.0273437,9.1692275 5.0273438,10.597656 l -0.013672,12.984375 c 0,1.428429 1.1692272,2.597657 2.5976562,2.597657 H 28.388672 c 1.428429,0 2.597656,-1.169228 2.597656,-2.597657 V 10.597656 C 30.986328,9.1692274 29.817101,8 28.388672,8 Z M 8.7617188,9.8496094 H 27.238281 c 1.27016,0 2.308594,0.9307206 2.308594,2.0683596 v 10.341797 c 0,1.13764 -1.038434,2.068359 -2.308594,2.068359 H 8.7617188 c -1.2701601,0 -2.3085938,-0.930719 -2.3085938,-2.068359 l 0.011719,-10.341797 c -10e-8,-1.137639 1.026715,-2.0683596 2.296875,-2.0683596 z"></path></svg>
+            <span class="info" data-message="keyboard_shortcuts_control_info" data-tooltip="">
+              <svg version="1.1" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+            </span>
+          </label>
+          <label class="player-control">
+            <input type="checkbox" id="custom-script">
+            <svg version="1.1" viewBox="0 0 36 36" class="control"><path d="m 19.658,22.84 5.75,-5.75 -5.75,-5.75 1.75,-1.7499999 7.5,7.4999999 -7.5,7.5 z m -3.316,0 -5.75,-5.75 5.75,-5.75 -1.75,-1.7499999 -7.5,7.4999999 7.5,7.5 z"></path></svg>
+            <span class="info" data-message="custom_script_control_info" data-tooltip="">
+              <svg version="1.1" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+            </span>
+          </label>
+          <label class="player-control">
+            <input type="checkbox" id="options">
+            <svg version="1.1" viewBox="0 0 36 36" class="control"><path d="m 17.215778,7.9998438 -0.121201,1.8617668 a 7.2941366,7.2941366 0 0 0 -2.61169,0.8471364 l -1.19138,-1.433778 -0.19737,0.143504 -0.437247,0.3173086 -0.436823,0.3177284 -0.197372,0.143504 0.993587,1.573917 a 7.2941366,7.2941366 0 0 0 -1.611792,2.223684 l -1.8070586,-0.459551 -0.075748,0.231879 -0.1666512,0.513838 -0.1670707,0.513838 -0.075329,0.232299 1.7271025,0.688064 a 7.2941366,7.2941366 0 0 0 -0.133827,1.374862 7.2941366,7.2941366 0 0 0 0.136352,1.374021 l -1.7296275,0.689325 0.075329,0.231879 0.1670707,0.513837 0.1666512,0.513838 0.075748,0.231877 1.8066396,-0.459549 a 7.2941366,7.2941366 0 0 0 1.614314,2.220318 l -0.99569,1.577282 0.197372,0.143505 0.436823,0.31773 0.437247,0.317306 0.19737,0.143506 1.187172,-1.42831 a 7.2941366,7.2941366 0 0 0 2.615898,0.844193 l 0.121201,1.859242 h 0.244084 0.53993 0.540349 0.244083 l 0.1212,-1.861768 a 7.2941366,7.2941366 0 0 0 2.611271,-0.847137 l 1.1918,1.43378 0.197372,-0.143506 0.437244,-0.317306 0.436827,-0.31773 0.19737,-0.143505 -0.993589,-1.573917 a 7.2941366,7.2941366 0 0 0 1.611792,-2.223683 l 1.807059,0.459549 0.07575,-0.231878 0.166648,-0.513837 0.16707,-0.513838 0.07533,-0.231879 -1.727521,-0.688483 a 7.2941366,7.2941366 0 0 0 0.134246,-1.374863 7.2941366,7.2941366 0 0 0 -0.13635,-1.37402 l 1.729625,-0.688905 -0.07533,-0.232299 -0.16707,-0.513838 -0.166648,-0.513838 -0.07575,-0.231879 -1.806636,0.459551 A 7.2941366,7.2941366 0 0 0 22.981616,11.774298 L 23.977308,10.197014 23.779938,10.05351 23.343111,9.7357816 22.905867,9.418473 22.708495,9.274969 21.521325,10.703277 A 7.2941366,7.2941366 0 0 0 18.905424,9.8590851 l -0.1212,-1.8592413 h -0.244083 -0.540349 -0.53993 z m 0.784434,3.9903412 a 5.0996903,5.0996903 0 0 1 5.099659,5.099659 5.0996903,5.0996903 0 0 1 -5.099659,5.09966 5.0996903,5.0996903 0 0 1 -5.100078,-5.09966 5.0996903,5.0996903 0 0 1 5.100078,-5.099659 z m 0,1.292801 a 3.8068902,3.8068902 0 0 0 -3.807279,3.806858 3.8068902,3.8068902 0 0 0 3.807279,3.80686 3.8068902,3.8068902 0 0 0 3.806859,-3.80686 3.8068902,3.8068902 0 0 0 -3.806859,-3.806858 z m 0,0.804632 a 3.0021577,3.0021577 0 0 1 3.001804,3.002226 3.0021577,3.0021577 0 0 1 -3.001804,3.002225 3.0021577,3.0021577 0 0 1 -3.002226,-3.002225 3.0021577,3.0021577 0 0 1 3.002226,-3.002226 z"></path></svg>
+            <span class="info" data-message="options_control_info" data-tooltip="">
+              <svg version="1.1" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <label>
+          <input type="radio" name="controlbaractive" value="false"><span class="i18n" data-text="controls_within_video_player"></span>
+        </label>
+      </div>
+      <div class="row indented">
+        <label>
+          <input type="checkbox" id="controlsvisible"><span class="i18n" data-text="controls_visible"></span>
+        </label>
+      </div>
+      <div class="row">
+        <label>
+          <input type="radio" name="controlbaractive" value="true"><span class="i18n" data-text="controls_within_control_bar"></span>
+        </label>
+      </div>
+      <div class="row indented">
+        <label for="controlbarposition" class="i18n" data-text="control_bar_location"></label>
+        <select id="controlbarposition" name="controlbarposition">
+          <option value="absolute" class="i18n" data-text="below_video_player"></option>
+          <option value="fixed" class="i18n" data-text="bottom_of_window"></option>
+        </select>
+      </div>
+      <div class="row indented hidden" id="control-bar-centering">
+        <label>
+          <input type="checkbox" id="controlbarcentered"><span class="i18n" data-text="center_control_bar"></span>
+        </label>
+      </div>
+      <div class="row indented hidden" id="control-bar-visibility">
+        <label>
+          <input type="checkbox" id="controlbarautohide"><span class="i18n" data-text="display_control_bar"></span>
+        </label>
+      </div>
+    </div>
+    <div class="group">
+      <label class="control-label i18n" data-text="playback_quality"></label>
+      <div class="row">
+        <label>
+          <input type="checkbox" id="selectquality"><span class="i18n" data-text="auto_select_quality"></span>
+        </label>
+      </div>
+      <div class="row indented">
+        <label for="qualityvideos" class="i18n" data-text="videos"></label>
+        <select id="qualityvideos" name="qualityvideos">
+          <option value="highres">4320p 8K</option>
+          <option value="hd2880">2880p 5K</option>
+          <option value="hd2160">2160p 4K</option>
+          <option value="hd1440">1440p HD</option>
+          <option value="hd1080">1080p HD</option>
+          <option value="hd720">720p</option>
+          <option value="large">480p</option>
+          <option value="medium">360p</option>
+          <option value="small">240p</option>
+          <option value="tiny">144p</option>
+        </select>
+      </div>
+      <div class="row indented">
+        <label for="qualityplaylists" class="i18n" data-text="playlists"></label>
+        <select id="qualityplaylists" name="qualityplaylists">
+          <option value="highres">4320p 8K</option>
+          <option value="hd2880">2880p 5K</option>
+          <option value="hd2160">2160p 4K</option>
+          <option value="hd1440">1440p HD</option>
+          <option value="hd1080">1080p HD</option>
+          <option value="hd720">720p</option>
+          <option value="large">480p</option>
+          <option value="medium">360p</option>
+          <option value="small">240p</option>
+          <option value="tiny">144p</option>
+        </select>
+      </div>
+      <div class="row indented">
+        <label for="qualityembeds" class="i18n" data-text="pop_up_player_embeds"></label>
+        <select id="qualityembeds" name="qualityembeds">
+          <option value="highres">4320p 8K</option>
+          <option value="hd2880">2880p 5K</option>
+          <option value="hd2160">2160p 4K</option>
+          <option value="hd1440">1440p HD</option>
+          <option value="hd1080">1080p HD</option>
+          <option value="hd720">720p</option>
+          <option value="large">480p</option>
+          <option value="medium">360p</option>
+          <option value="small">240p</option>
+          <option value="tiny">144p</option>
+        </select>
+      </div>
+      <div class="row indented">
+        <label>
+          <input type="checkbox" id="selectqualityfullscreenon"><span class="i18n" data-text="select_quality_full_screen"></span>
+        </label>
+      </div>
+      <div class="row indented-2x">
+        <label for="qualityvideosfullscreen" class="i18n" data-text="videos_full_screen"></label>
+        <select id="qualityvideosfullscreen" name="qualityvideosfullscreen">
+          <option value="highres">4320p 8K</option>
+          <option value="hd2880">2880p 5K</option>
+          <option value="hd2160">2160p 4K</option>
+          <option value="hd1440">1440p HD</option>
+          <option value="hd1080">1080p HD</option>
+          <option value="hd720">720p</option>
+          <option value="large">480p</option>
+          <option value="medium">360p</option>
+          <option value="small">240p</option>
+          <option value="tiny">144p</option>
+        </select>
+      </div>
+      <div class="row indented-2x">
+        <label for="qualityplaylistsfullscreen" class="i18n" data-text="playlists_full_screen"></label>
+        <select id="qualityplaylistsfullscreen" name="qualityplaylistsfullscreen">
+          <option value="highres">4320p 8K</option>
+          <option value="hd2880">2880p 5K</option>
+          <option value="hd2160">2160p 4K</option>
+          <option value="hd1440">1440p HD</option>
+          <option value="hd1080">1080p HD</option>
+          <option value="hd720">720p</option>
+          <option value="large">480p</option>
+          <option value="medium">360p</option>
+          <option value="small">240p</option>
+          <option value="tiny">144p</option>
+        </select>
+      </div>
+      <div class="row indented-2x">
+        <label for="qualityembedsfullscreen" class="i18n" data-text="pop_up_player_embeds_full_screen"></label>
+        <select id="qualityembedsfullscreen" name="qualityembedsfullscreen">
+          <option value="highres">4320p 8K</option>
+          <option value="hd2880">2880p 5K</option>
+          <option value="hd2160">2160p 4K</option>
+          <option value="hd1440">1440p HD</option>
+          <option value="hd1080">1080p HD</option>
+          <option value="hd720">720p</option>
+          <option value="large">480p</option>
+          <option value="medium">360p</option>
+          <option value="small">240p</option>
+          <option value="tiny">144p</option>
+        </select>
+      </div>
+      <div class="row indented">
+        <label>
+          <input type="checkbox" id="selectqualityfullscreenoff"><span class="i18n" data-text="switch_back_previous_quality"></span>
+        </label>
+      </div>
+    </div>
+    <div class="group">
+      <label class="control-label i18n" data-text="playback_speed"></label>
+      <div class="row">
+        <label for="playback-speed" class="i18n" id="playback-speed-label" data-text="default_playback_speed"></label>
+        <select id="playback-speed" name="speed">
+          <option value="0.25">0.25</option>
+          <option value="0.5">0.5</option>
+          <option value="0.75">0.75</option>
+          <option value="1">1</option>
+          <option value="1.25">1.25</option>
+          <option value="1.5">1.5</option>
+          <option value="1.75">1.75</option>
+          <option value="2">2</option>
+        </select>
+        <select class="hidden" id="custom-playback-speed" name="custom-speed">
+          <option value="0.25">0.25</option>
+          <option value="0.5">0.5</option>
+          <option value="0.75">0.75</option>
+          <option value="0.8">0.8</option>
+          <option value="0.85">0.85</option>
+          <option value="0.9">0.9</option>
+          <option value="0.95">0.95</option>
+          <option value="1">1</option>
+          <option value="1.1">1.1</option>
+          <option value="1.2">1.2</option>
+          <option value="1.3">1.3</option>
+          <option value="1.4">1.4</option>
+          <option value="1.5">1.5</option>
+          <option value="1.6">1.6</option>
+          <option value="1.7">1.7</option>
+          <option value="1.8">1.8</option>
+          <option value="1.9">1.9</option>
+          <option value="2">2</option>
+          <option value="2.1">2.1</option>
+          <option value="2.2">2.2</option>
+          <option value="2.3">2.3</option>
+          <option value="2.4">2.4</option>
+          <option value="2.5">2.5</option>
+          <option value="2.6">2.6</option>
+          <option value="2.7">2.7</option>
+          <option value="2.8">2.8</option>
+          <option value="2.9">2.9</option>
+          <option value="3">3</option>
+          <option value="3.5">3.5</option>
+          <option value="4">4</option>
+          <option value="4.5">4.5</option>
+          <option value="5">5</option>
+        </select>
+      </div>
+      <div class="row">
+        <label>
+          <input type="checkbox" id="overridespeeds"><span class="i18n" data-text="override_playback_speeds"></span>
+        </label>
+      </div>
+      <div class="row indented">
+        <label for="speedvariation" class="i18n" data-text="speed_variation"></label>
+        <select id="speedvariation" name="speedvariation">
+          <option value="0.01">0.01</option>
+          <option value="0.02">0.02</option>
+          <option value="0.05">0.05</option>
+          <option value="0.1">0.1</option>
+          <option value="0.2">0.2</option>
+          <option value="0.25">0.25</option>
+          <option value="0.5">0.5</option>
+          <option value="1">1</option>
+        </select>
+      </div>
+      <div class="row">
+        <label>
+          <input type="checkbox" id="controlspeed"><span class="i18n" data-text="control_speed"></span>
+        </label>
+      </div>
+      <div class="row indented">
+        <label>
+          <input type="checkbox" id="controlspeedmousebutton"><span class="i18n" data-text="control_speed_mouse_button"></span>
+        </label>
+      </div>
+    </div>
+    <div class="group">
+      <label class="control-label i18n" data-text="volume"></label>
+      <div class="row">
+        <label>
+          <input type="checkbox" id="defaultvolume"><span class="i18n" data-text="default_volume_level"></span>
+        </label>
+        <input type="range" id="volume" name="volume" min="0" max="100" step="1"><span id="volume-preview" dir="ltr"></span>
+      </div>
+      <div class="row">
+        <label for="volumemultiplier" class="i18n" data-text="volume_booster_level"></label>
+        <select id="volumemultiplier" name="volumemultiplier">
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select>
+      </div>
+      <div class="row">
+        <label>
+          <input type="checkbox" id="boostvolume"><span class="i18n" data-text="auto_boost_volume"></span>
+        </label>
+      </div>
+      <div class="row">
+        <label>
+          <input type="checkbox" id="controlvolume"><span class="i18n" data-text="control_volume"></span>
+        </label>
+      </div>
+      <div class="row indented">
+        <label>
+          <input type="checkbox" id="controlvolumemousebutton"><span class="i18n" data-text="control_volume_mouse_button"></span>
+        </label>
+      </div>
+      <div class="row indented">
+        <label for="volumevariation" class="i18n" data-text="volume_variation"></label>
+        <select id="volumevariation" name="volumevariation">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="5">5</option>
+          <option value="10">10</option>
+        </select>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <label>
+        <input type="checkbox" id="reversemousewheeldirection"><span class="i18n" data-text="reverse_mouse_wheel_direction"></span>
+      </label>
+    </div>
+    <hr>
+    <div class="group">
+      <label class="control-label i18n" data-text="autoplay"></label>
+      <div class="row">
+        <label class="flex-align-center autoplay">
+          <input type="checkbox" id="disableautoplay"><span class="i18n" data-text="disable_autoplay"></span>
+          <div class="autoplay-toggle-button-container">
+            <div class="autoplay-toggle-button" aria-checked="true"></div>
+          </div>
+        </label>
+      </div>
+      <div class="row">
+        <label>
+          <input type="checkbox" id="blockautoplay"><span class="i18n" data-text="prevent_autoplay"></span>
+        </label>
+      </div>
+      <div class="row indented">
+        <label>
+          <input type="checkbox" id="pauseforegroundtab"><span class="i18n" data-text="prevent_autoplay_foreground_tab"></span>
+        </label>
+      </div>
+      <div class="row indented">
+        <label>
+          <input type="checkbox" id="ignoreplaylists"><span class="i18n" data-text="ignore_playlists"></span>
+        </label>
+      </div>
+      <div class="row indented">
+        <label>
+          <input type="checkbox" id="stopvideos"><span class="i18n" data-text="stop_videos"></span>
+        </label>
+      </div>
+      <div class="row">
+        <label>
+          <input type="checkbox" id="pausevideos"><span class="i18n" data-text="pause_videos"></span>
+        </label>
+      </div>
+      <div class="row indented">
+        <label>
+          <input type="checkbox" id="ignorepopupplayer"><span class="i18n" data-text="ignore_pop_up_player"></span>
+        </label>
+      </div>
+    </div>
+    <div class="group">
+      <label class="control-label i18n" data-text="video_codecs_and_formats"></label>
+      <div class="row">
+        <label>
+          <input type="checkbox" id="blockhfrformats"><span class="i18n" data-text="block_hfr_formats"></span>
+        </label>
+      </div>
+      <div class="row">
+        <label>
+          <input type="checkbox" id="blockwebmformats"><span class="i18n" data-text="block_webm_formats"></span>
+        </label>
+      </div>
+    </div>
+    <div class="group">
+      <label class="control-label i18n" data-text="mini_player"></label>
+      <div class="row">
+        <label>
+          <input type="checkbox" id="miniplayer"><span class="i18n" data-text="launch_mini_player"></span>
+        </label>
+      </div>
+      <div class="row indented">
+        <label for="miniplayersize" class="i18n" data-text="mini_player_size"></label>
+        <select id="miniplayersize" name="miniplayersize">
+          <option value="_320x180">320x180</option>
+          <option value="_400x225">400x225</option>
+          <option value="_480x270">480x270</option>
+          <option value="_560x315">560x315</option>
+          <option value="_640x360">640x360</option>
+          <option value="_720x405">720x405</option>
+          <option value="_800x450">800x450</option>
+          <option value="_880x495">880x495</option>
+          <option value="_960x540">960x540</option>
+          <option value="_1040x585">1040x585</option>
+          <option value="_1120x630">1120x630</option>
+          <option value="_1200x675">1200x675</option>
+          <option value="_1280x720">1280x720</option>
+        </select>
+      </div>
+      <div class="row indented">
+        <label for="miniplayerposition" class="i18n" data-text="mini_player_position"></label>
+        <select id="miniplayerposition" name="miniplayerposition">
+          <option value="_top-left" class="i18n" data-text="top_left_corner"></option>
+          <option value="_top-right" class="i18n" data-text="top_right_corner"></option>
+          <option value="_bottom-left" class="i18n" data-text="bottom_left_corner"></option>
+          <option value="_bottom-right" class="i18n" data-text="bottom_right_corner"></option>
+        </select>
+      </div>
+    </div>
+    <div class="group">
+      <label class="control-label i18n" data-text="appearance"></label>
+      <div class="row">
+        <label>
+          <input type="checkbox" id="applyvideofilters"><span class="i18n" data-text="auto_apply_video_filters"></span>
+        </label>
+      </div>
+      <div class="row">
+        <label>
+          <input type="checkbox" id="hidecardsendscreens"><span class="i18n" data-text="auto_hide_cards_end_screens"></span>
+        </label>
+      </div>
+      <div class="row">
+        <label>
+          <input type="checkbox" id="blackbars"><span class="i18n" data-text="preserve_black_bars_color"></span>
+        </label>
+      </div>
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend class="i18n" data-text="pop_up_player"></legend>
+    <div class="row">
+      <label for="popuplayersize" class="i18n" data-text="pop_up_player_size"></label>
+      <select id="popuplayersize" name="popuplayersize">
+        <option value="426x240">426x240</option>
+        <option value="533x300">533x300</option>
+        <option value="640x360">640x360</option>
+        <option value="747x420">747x420</option>
+        <option value="854x480">854x480</option>
+        <option value="960x540">960x540</option>
+        <option value="1280x720">1280x720</option>
+      </select>
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend class="i18n" data-text="appearance"></legend>
+    <div class="row">
+      <label>
+        <input type="checkbox" id="theatermode"><span class="i18n" data-text="auto_enable_theater_mode"></span>
+      </label>
+    </div>
+    <div class="row">
+      <label>
+        <input type="checkbox" id="wideplayer"><span class="i18n" data-text="auto_expand_player"></span>
+      </label>
+    </div>
+    <div class="row">
+      <label>
+        <input type="checkbox" id="wideplayerviewport"><span class="i18n" data-text="expanded_player_viewport"></span>
+      </label>
+    </div>
+    <div class="row">
+      <label>
+        <input type="checkbox" id="expanddescription"><span class="i18n" data-text="auto_expand_description"></span>
+      </label>
+    </div>
+    <div class="row">
+      <label>
+        <input type="checkbox" id="newestcomments"><span class="i18n" data-text="auto_sort_comments"></span>
+      </label>
+    </div>
+    <div class="row">
+      <label>
+        <input type="checkbox" id="hidecomments"><span class="i18n" data-text="hide_comments"></span>
+      </label>
+    </div>
+    <div class="row">
+      <label>
+        <input type="checkbox" id="hidechat"><span class="i18n" data-text="hide_chat"></span>
+      </label>
+    </div>
+    <div class="row">
+      <label>
+        <input type="checkbox" id="hiderelated"><span class="i18n" data-text="hide_related_videos"></span>
+      </label>
+    </div>
+    <div class="row">
+      <label>
+        <input type="checkbox" id="hideshorts"><span class="i18n" data-text="hide_shorts"></span>
+      </label>
+    </div>
+    <div class="row">
+      <label>
+        <input type="checkbox" id="convertshorts"><span class="i18n" data-text="convert_shorts"></span>
+      </label>
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend class="i18n" data-text="cinema_mode"></legend>
+    <div class="row flex-align-center">
+      <label for="backgroundcolor" class="i18n" data-text="color"></label>
+      <input type="color" id="backgroundcolor" name="backgroundcolor">
+      <label for="backgroundopacity" class="i18n" data-text="opacity"></label>
+      <input type="range" id="backgroundopacity" name="backgroundopacity" min="50" max="100" step="1"><span id="opacity" dir="ltr"></span>
+    </div>
+    <div class="row" id="cinemamode-preview">
+      <label class="control-label i18n" data-text="preview"></label>
+      <div id="cinemamode-page">
+        <div id="cinemamode-background">
+          <img src="/resources/yt-player.png" alt="video player">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <label>
+        <input type="checkbox" id="cinemamode"><span class="i18n" data-text="auto_cinema_mode"></span>
+      </label>
+    </div>
+    <div class="row">
+      <label>
+        <input type="checkbox" id="cinemamodewideplayer"><span class="i18n" data-text="cinema_mode_toggle_size"></span>
+      </label>
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend class="i18n" data-text="custom_script"></legend>
+    <div class="row alert alert-warning flex-align-center">
+      <svg version="1.1" viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z" fill="#fff"/></svg> <span class="i18n" data-text="custom_script_warning"></span>
+    </div>
+    <div class="row">
+      <textarea id="customscript" rows="8" required></textarea>
+      <div class="flex-align-center">
+        <button type="button" class="i18n" id="customscript-btn" data-text="save"></button>
+        <svg version="1.1" viewBox="0 0 52 52" class="checkmark" id="customscript-checkmark"><circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/><path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/></svg>
+      </div>
+    </div>
+    <div class="row">
+      <label>
+        <input type="checkbox" id="executescript"><span class="i18n" data-text="auto_execute_script"></span>
+      </label>
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend class="i18n" data-text="backup"></legend>
+    <div class="row">
+      <button type="button" class="i18n" id="export-modal-btn" data-text="export"></button> <button type="button" class="i18n" id="import-modal-btn" data-text="import"></button>
+    </div>
+  </fieldset>
+  <div id="modal-backdrop"></div>
+  <div class="modal" id="donate-modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close-modal"><svg version="1.1" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg></button>
+          <h3 class="i18n modal-title" data-text="donate"></h3>
+        </div>
+        <div class="modal-body donate-buttons" data-currency-code="">
+          <button data-amount="1.00">1.00</button>
+          <button data-amount="2.00">2.00</button>
+          <button data-amount="3.00">3.00</button>
+          <button data-amount="4.00">4.00</button>
+          <button data-amount="5.00">5.00</button>
+          <button data-amount="10.00">10.00</button>
+          <button data-amount="15.00">15.00</button>
+          <button data-amount="20.00">20.00</button>
+          <button data-amount="25.00">25.00</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="backup-modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close-modal"><svg version="1.1" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg></button>
+          <h3 class="i18n modal-title" data-text="backup"></h3>
+        </div>
+        <div class="modal-body hidden" id="export-modal-content">
+          <p class="i18n" data-text="export_instructions"></p>
+          <textarea id="export-textarea" dir="ltr"></textarea>
+        </div>
+        <div class="modal-body hidden" id="import-modal-content">
+          <p class="i18n" data-text="import_instructions"></p>
+          <p class="row alert alert-warning  flex-align-center hidden" id="import-error"><svg version="1.1" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" fill="#fff"/></svg> <span class="i18n" data-text="import_error"></span></p>
+          <textarea id="import-textarea" dir="ltr"></textarea>
+        </div>
+        <div class="modal-footer" id="backup-modal-footer">
+          <div class="flex-align-center">
+            <button type="button" class="i18n hidden" id="copy-to-clipboard-btn" data-text="copy_to_clipboard"></button>
+            <svg version="1.1" viewBox="0 0 52 52" class="checkmark hidden" id="copy-to-clipboard-checkmark"><circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/><path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/></svg>
+            <button type="button" class="i18n hidden" id="import-btn" data-text="import"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<script src="options.js"></script>
+</body>
+</html>

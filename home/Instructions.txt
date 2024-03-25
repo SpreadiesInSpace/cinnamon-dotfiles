@@ -1,0 +1,70 @@
+1. Clone this repo https://github.com/SpreadiesInSpace/cinnamon-dotfiles
+2. Head to cinnamon-dotfiles/home
+3. You MUST have unzip installed, or the script will break! Run the Setup.sh of your distro.
+
+Disclaimer: Please go through the script carefully so you know what is going on. Feel free to comment out whatever you don't want before you run the script.
+
+Required Fonts (You only need to download Noto, the rest is accounted for in the script.)
+Noto-fonts
+Cantarell
+Source Code Pro
+Sauce Code Pro Nerd
+
+Dependencies
+unzip (The script will break if this isn't installed.)
+gedit (personal dconf will cause blinding visual glitch until gruvbox-light-gedit-theme.xml is applied)
+git
+gnome-calculator
+gnome-screenshot 
+gnome-system-monitor 
+gnome-terminal
+gpaste (gir1.2-gpaste-4.0 too if on Ubuntu-based distro)
+neofetch
+
+Additional Theming Info
+
+Terminal Prompt (This is taken care of in the script)
+Synth-Shell (https://github.com/andresgongora/synth-shell-prompt)
+Note: See ~/.config/synth-shell/synth-shell-prompt.config to tweak colors
+
+QT & Additional Theming
+kvantum
+kvantum-qt5
+qt5ct
+qt6ct
+
+QT & Additional Theming Instructions (This is taken care of in the script)
+1. Apply gruvbox-fallnn theme to kvantum
+2. Set QT_QPA_PLATFORMTHEME=qt5ct to /etc/environment
+3. Set GTK_THEME=Gruvbox-Dark-BL to /etc/environment
+4. Logout and Log back in, then do the next steps to both qt5ct and qt6ct
+5. Apply Kvantum Theme
+6. Change Fonts to either Noto Sans or Cantarell, Size 10
+7. Set Icon Theme to Gruvbox-Dark (or oomox-gruvbox-dark)
+Note: If you want QT Apps that need sudo to run (such as Btrfs Assistant) to be themed as well, then do all of the above while running kvantum, qt5ct and qt6ct in sudo.
+
+Other Software I Use (Tied to Exported dconf & Personal Dots)
+authy
+bleachbit
+brave (use Dark Reader, set Sepia to 50% for maximum Gruvbox uniformity)
+bottom
+celluloid
+filezilla
+flatpak
+gparted
+grub-customizer
+gufw
+kdeconnect
+libreoffice
+ncdu
+neovim (paired with NVChad's Gruvchad theme)
+qbittorrent (apply mumble-dark-qbittorrent.qbtheme + use system icons if things look off)
+rmlint
+timeshift
+virt-manager
+
+LightDM (Can be taken care of in the script)
+Note: See etc/lightdm for example configs for both Slick and GTK greeter
+
+Boot Splash Screen (NOT Taken care of in the script)
+Note: See boot folder

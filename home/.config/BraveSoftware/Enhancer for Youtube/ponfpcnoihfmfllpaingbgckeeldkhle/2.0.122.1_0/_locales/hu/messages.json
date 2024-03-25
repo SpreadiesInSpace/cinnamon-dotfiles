@@ -1,0 +1,572 @@
+{
+   "appearance": {
+      "message": "Megjelenés"
+   },
+   "auto_apply_video_filters": {
+      "message": "Automatikusan alkalmazza a szűrőket a videókra"
+   },
+   "auto_boost_volume": {
+      "message": "A hangerő automatikus növelése"
+   },
+   "auto_cinema_mode": {
+      "message": "Automatikusan engedélyezze a „Mozi mód”-ot"
+   },
+   "auto_enable_theater_mode": {
+      "message": "Automatikus engedélyezze a „Theater mód”-ot"
+   },
+   "auto_execute_script": {
+      "message": "Automatikusan futtassa le a szkriptet amikor a YouTube meg van nyitva"
+   },
+   "auto_expand_description": {
+      "message": "Videók leírásának automatikus megjelenítése"
+   },
+   "auto_expand_player": {
+      "message": "Automatikusan nagyítsa a videólejátszót"
+   },
+   "auto_hide_cards_end_screens": {
+      "message": "Automatikusan elrejtse a kommentárokat és a videó végi ajánlásokat"
+   },
+   "auto_select_quality": {
+      "message": "Automatikusan az általam preferált minőségben játssza le a videókat"
+   },
+   "auto_sort_comments": {
+      "message": "Kommentek automatikus sorbarendezése az legújabbtól a legrégebbiig"
+   },
+   "autoplay": {
+      "message": "Automatikus lejátszás"
+   },
+   "backup": {
+      "message": "Beállítások mentése/visszatöltése"
+   },
+   "below_video_player": {
+      "message": "A videolejátszó alatt"
+   },
+   "block_hfr_formats": {
+      "message": "Az alapértelmezett képernyőfrissítési formátumokat (24, 25, 30 FPS) alkalmazza a magasabb (48, 50, 60 FPS) képernyőfrissítések helyett"
+   },
+   "block_webm_formats": {
+      "message": "Az MP4 formátumot és az AVC kodeket (H.264) alkalmazza a WebM formátum és a VP9 kodek helyett (maximum felbontás 1080p60 HD)"
+   },
+   "boost_volume": {
+      "message": "Hangerő növelése"
+   },
+   "bottom_left_corner": {
+      "message": "Bal alsó sarok"
+   },
+   "bottom_of_window": {
+      "message": "Az ablak alján"
+   },
+   "bottom_right_corner": {
+      "message": "Jobb alsó sarok"
+   },
+   "brightness": {
+      "message": "Fényerő:"
+   },
+   "cards_end_screens_control_info": {
+      "message": "Kattints erre a gombra hogy megjelenítsd/elrejtsd a kommentárokat"
+   },
+   "center_control_bar": {
+      "message": "A vezérlősáv közepén, a videolejátszó alatt, amikor fel van nagyítva, vagy a teljes képernyős mód aktív"
+   },
+   "center_video_player": {
+      "message": "Kibővített videólejátszó középen tartása"
+   },
+   "cinema_mode": {
+      "message": "Mozi mód"
+   },
+   "cinema_mode_control_info": {
+      "message": "Kattints erre a gombra a „Mozi mód” be/ki kapcsolásához"
+   },
+   "cinema_mode_toggle_size": {
+      "message": "Automatikusan nagyítsa fel a lejátszót, amikor a „Mozi mód” engedélyezve van"
+   },
+   "color": {
+      "message": "Szín:"
+   },
+   "color_inversion": {
+      "message": "Színek felcserélése:"
+   },
+   "configure_keyboard_shortcuts": {
+      "message": "Billentyűzet parancsikonok beállítása"
+   },
+   "contrast": {
+      "message": "Kontraszt:"
+   },
+   "control_bar_location": {
+      "message": "Vezérlősáv helye"
+   },
+   "control_speed": {
+      "message": "Hangerő szabályozása az egérgörgővel, a „Control” gomb (Ctrl) együttes lenyomásával, amikor az egér kurzor a videó lejátszó felett van"
+   },
+   "control_speed_mouse_button": {
+      "message": "Csak a jobb egér gomb nyomvatartásakor"
+   },
+   "control_volume": {
+      "message": "Hangerő szabályozása az egérgörgővel, amikor az egér kurzor a videó lejátszó felett van"
+   },
+   "control_volume_mouse_button": {
+      "message": "Csak a jobb egér gomb nyomvatartásakor"
+   },
+   "controls": {
+      "message": "Gombok"
+   },
+   "controls_visible": {
+      "message": "A vezérlők láthatóan tartása anélkül, hogy rá kellene kattintani a •••-ra, vagy fölé kellene navigálni az egérkurzorral"
+   },
+   "controls_within_control_bar": {
+      "message": "Vezérlők elhelyezése a vezérlősávban"
+   },
+   "controls_within_video_player": {
+      "message": "A vezérlők kihelyezése a videolejátszón belül"
+   },
+   "convert_shorts": {
+      "message": "Convert Shorts"
+   },
+   "copy_to_clipboard": {
+      "message": "Vágólapra másolás"
+   },
+   "custom_script": {
+      "message": "Egyedi szkript"
+   },
+   "custom_script_control_info": {
+      "message": "Kattints erre a gombra az egyedi script végrehajtásához"
+   },
+   "custom_script_instructions": {
+      "message": "Illeszd, vagy gépeld be a saját JavaScript kódodat, majd mentsd el a lenti gombbal. A futtatásához kattints az „Egyedi szkript” gombra az eszköztárban."
+   },
+   "custom_script_warning": {
+      "message": "Biztonsági okokból kizárólag olyan kódot használj, melynek működése számodra is érhető, vagy egy megbízható fejlesztőtől származik!"
+   },
+   "custom_theme": {
+      "message": "Egyéni téma"
+   },
+   "custom_theme_instructions": {
+      "message": "Illeszd vagy gépeld be a CSS kódodat, majd mentsd el az alábbi gombbal."
+   },
+   "dark_theme": {
+      "message": "Sötét téma"
+   },
+   "decrease_playback_speed": {
+      "message": "Lejátszási sebesség csökkentése"
+   },
+   "default_playback_speed": {
+      "message": "Alapértelmezett lejátszási sebesség:"
+   },
+   "default_volume_level": {
+      "message": "Alapértelmezett hangerő:"
+   },
+   "description": {
+      "message": "Számtalan új funkció a felhasználói élmény javítására a YouTube-on."
+   },
+   "detailed_description": {
+      "message": "Azért készült, hogy a YouTube legjavát hozza ki, ez a bővítmény rengeteg funkciójával többek között a lejátszási sebességgel teszi élménnyé számodra a videónézést.\nVedd kezedbe az irányítást, akár az egérrel állíthatod a hangerőt kedvedre, vagy éppen a lejátszás sebességét.\nKiválaszthatod az alapértelmezett lejátszási minőségét, így ezzel soha többet nem kell foglalkozz ha ütős internetkapcsolatod van, és zavar, hogy a YouTube mindig egy sokkal gyengébb minőséggel indítja az aktuális videódat. Számtalan billentyűzetparancsot tudsz beállítani, a még kényelmesebb videónézés érdekében.\nTégy velünk egy próbát! De nem tudjuk garantálni, hogy enélkül már bármikor is képes lennél a YouTube-ot használni! ;)\n\nA YouTube egy bejegyzett védjegye a Google LLC-nek. E védjegy használatához a Google engedélyei vonatkoznak."
+   },
+   "disable_autoplay": {
+      "message": "Az „Automatikus lejátszás” funkció letiltásra került"
+   },
+   "display_control_bar": {
+      "message": "A vezérlősáv megjelenítése amikor az egérkurzorral fölé állunk"
+   },
+   "donate": {
+      "message": "Adomány"
+   },
+   "execute_custom_script": {
+      "message": "Egyedi szkript végrehajtása"
+   },
+   "expand": {
+      "message": "Kiterjesztés"
+   },
+   "expand_shrink_video_player": {
+      "message": "Videólejátszó kibővítése/zsugorítása"
+   },
+   "expanded_player_viewport": {
+      "message": "Ha a „Mozi mód” nincs aktiválva a megnövelt videólejátszó a teljes ablakot töltse ki, a 16:9 arány módosítása nélkül"
+   },
+   "export": {
+      "message": "Exportálás"
+   },
+   "export_instructions": {
+      "message": "Hozz létre egy üres szöveges állományt, majd másold bele az itt található kódot. (módosítás nélkül)"
+   },
+   "flip_horizontally": {
+      "message": "Vízszintes tükrözés"
+   },
+   "flip_horizontally_control_info": {
+      "message": "Kattints erre a gombra a videó vízszintes tükrözéséhez"
+   },
+   "flip_vertically": {
+      "message": "Függőleges tükrözés"
+   },
+   "flip_vertically_control_info": {
+      "message": "Kattints erre a gombra a videó függőleges tükrözéséhez"
+   },
+   "flip_video_horizontally": {
+      "message": "Videó tükrözése vízszintesen"
+   },
+   "flip_video_vertically": {
+      "message": "Videó tükrözése függőlegesen"
+   },
+   "focus_video_player": {
+      "message": "Fókusz beállítása a videólejátszóra"
+   },
+   "gaussian_blur": {
+      "message": "Gauss elmosás:"
+   },
+   "grayscale": {
+      "message": "Szürkeárnyalatos:"
+   },
+   "hide_chat": {
+      "message": "Chat elrejtése"
+   },
+   "hide_comments": {
+      "message": "Hozzászólások elrejtése"
+   },
+   "hide_related_videos": {
+      "message": "Ajánlott videók elrejtése"
+   },
+   "hide_shorts": {
+      "message": "Hide Shorts"
+   },
+   "hue_rotation": {
+      "message": "Színárnyalat forgatás:"
+   },
+   "ignore_playlists": {
+      "message": "Ne állítsa meg a videókat lejátszási listában"
+   },
+   "ignore_pop_up_player": {
+      "message": "Felugró lejátszó mellőzése"
+   },
+   "import": {
+      "message": "Importálás"
+   },
+   "import_error": {
+      "message": "A beillesztett tartalom nem megfelelő!"
+   },
+   "import_instructions": {
+      "message": "Illeszd be ide a korábbi beállításokat tartalmazó szöveges állomány tartalmát, majd kattints az „Importálás” gombra. Sikeres importálás esetén az oldal automatikusan újratöltődik az új beállításokkal."
+   },
+   "increase_playback_speed": {
+      "message": "Lejátszási sebesség növelése"
+   },
+   "keyboard_shortcuts": {
+      "message": "Billentyűzet parancsikonok"
+   },
+   "keyboard_shortcuts_control_info": {
+      "message": "Kattints erre a gombra a billentyűzet parancsikonok listájához (külső oldal)"
+   },
+   "keyboard_shortcuts_page": {
+      "message": "Minden YouTube billentyűzet parancsikon mutatása"
+   },
+   "launch_mini_player": {
+      "message": "Minilejátszó indítása hozzászólások görgetése közben"
+   },
+   "locale_code": {
+      "message": "hu"
+   },
+   "locale_dir": {
+      "message": "ltr"
+   },
+   "loop": {
+      "message": "Ismétlés"
+   },
+   "loop_control_info": {
+      "message": "Kattints erre a gombra a „Videó ismétlése” mód be/ki kapcsolásához"
+   },
+   "loop_end": {
+      "message": "Befejezés:"
+   },
+   "loop_start": {
+      "message": "Kezdés:"
+   },
+   "message": {
+      "message": "Üzenet"
+   },
+   "mini_player": {
+      "message": "Minilejátszó"
+   },
+   "mini_player_position": {
+      "message": "Minilejátszó helye:"
+   },
+   "mini_player_size": {
+      "message": "Minilejátszó mérete:"
+   },
+   "not_now": {
+      "message": "Ne most"
+   },
+   "opacity": {
+      "message": "Átlátszatlanság:"
+   },
+   "open_options_page": {
+      "message": "Beállítások oldal megnyitása"
+   },
+   "options": {
+      "message": "Beállítások"
+   },
+   "options_control_info": {
+      "message": "Kattints erre a lehetőségek oldalának megnyitásához"
+   },
+   "override_playback_speeds": {
+      "message": "Felülbírálja az alapértelmezett lejátszási sebességet"
+   },
+   "page_reload_required": {
+      "message": "Az Enhancer for YouTube™ frissítve lett. Az oldal újratöltése szükséges."
+   },
+   "pause_videos": {
+      "message": "Az aktív fülön megnyitott videók lejátszásának szüneteltetése, ha azok háttérbe kerülnek"
+   },
+   "playback_quality": {
+      "message": "Lejátszási minőség"
+   },
+   "playback_speed": {
+      "message": "Lejátszási sebesség"
+   },
+   "playlists": {
+      "message": "Lejátszási listák:"
+   },
+   "playlists_full_screen": {
+      "message": "Lejátszási listák (teljes képernyős):"
+   },
+   "pop_up_player": {
+      "message": "Felugró lejátszó"
+   },
+   "pop_up_player_control_info": {
+      "message": "Kattints ide vagy jobb klikkelve kattints felugró ablakban lejátszáshoz"
+   },
+   "pop_up_player_embeds": {
+      "message": "Felugró lejátszó és beágyazott videók:"
+   },
+   "pop_up_player_embeds_full_screen": {
+      "message": "Felugró lejátszó és beágyazott videók (teljes képernyős):"
+   },
+   "pop_up_player_size": {
+      "message": "Felugró lejátszó mérete:"
+   },
+   "preserve_black_bars_color": {
+      "message": "Mozi módban ne változtassa meg a függőleges csíkok színét, amikor a YouTube-DeepDark téma van kiválasztva"
+   },
+   "prevent_autoplay": {
+      "message": "Háttérben játszott videók automatikus leállítása"
+   },
+   "prevent_autoplay_foreground_tab": {
+      "message": "Elõtérben lévõ videókat is szüneteltessen"
+   },
+   "preview": {
+      "message": "Előnézet"
+   },
+   "rate": {
+      "message": "Értékelés"
+   },
+   "rate_extension": {
+      "message": "Értékeld az Enhancer for Youtube™-ot."
+   },
+   "reset": {
+      "message": "Visszaállítás"
+   },
+   "reverse_mouse_wheel_direction": {
+      "message": "Egér görgetési irány érzékelésének megfordítása. (Lejátszási sebesség és hangerő-módosítás esetén)"
+   },
+   "reverse_playlist": {
+      "message": "Lejátszási lista fordított sorrendben"
+   },
+   "reverse_playlist_control_info": {
+      "message": "Kattints ide vagy jobb klikkelve kattintva felugró ablakban lejátszáshoz fordított sorrendben"
+   },
+   "reverse_playlist_order": {
+      "message": "Lejátszási sorrend megfordítása"
+   },
+   "saturation": {
+      "message": "Telítettség:"
+   },
+   "save": {
+      "message": "Mentés"
+   },
+   "screenshot": {
+      "message": "Képernyőmentés"
+   },
+   "screenshot_control_info": {
+      "message": "Kattints ide egy képernyőmentés felvételéhez"
+   },
+   "select_default_playback_speed": {
+      "message": "Alapértelmezett lejátszási sebesség kiválasztása"
+   },
+   "select_normal_playback_speed": {
+      "message": "Normál lejátszási sebesség kiválasztása"
+   },
+   "select_quality_1080p": {
+      "message": "Lejátszási minőség beállítása „1080p”"
+   },
+   "select_quality_1440p": {
+      "message": "Lejátszási minőség beállítása „1440p”"
+   },
+   "select_quality_144p": {
+      "message": "Lejátszási minőség beállítása „144p”"
+   },
+   "select_quality_2160p": {
+      "message": "Lejátszási minőség beállítása „2160p”"
+   },
+   "select_quality_240p": {
+      "message": "Lejátszási minőség beállítása „240p”"
+   },
+   "select_quality_2880p": {
+      "message": "Lejátszási minőség beállítása „2880p”"
+   },
+   "select_quality_360p": {
+      "message": "Lejátszási minőség beállítása „360p”"
+   },
+   "select_quality_4320p": {
+      "message": "Lejátszási minőség beállítása „4320p”"
+   },
+   "select_quality_480p": {
+      "message": "Lejátszási minőség beállítása „480p”"
+   },
+   "select_quality_720p": {
+      "message": "Lejátszási minőség beállítása „720p”"
+   },
+   "select_quality_auto": {
+      "message": "Lejátszási minőség beállítása „Automatikus”"
+   },
+   "select_quality_full_screen": {
+      "message": "Teljes képernyős módban lévő minőség kiválasztása"
+   },
+   "sepia": {
+      "message": "Szépia:"
+   },
+   "shrink": {
+      "message": "Zsugorítás"
+   },
+   "size_control_info": {
+      "message": "Kattints erre a gombra a videólejátszó átméretezéséhez. Ha az egér jobb gombjával kattintasz rá, a videólejátszó az ablak közepére kerül."
+   },
+   "speed": {
+      "message": "Sebesség"
+   },
+   "speed_control_info": {
+      "message": "Használd az egérgörgőt a lejátszási sebesség beállításához. (Görgesd az egeret, amikor a kurzor a gomb fölött van.) Ha rákattintasz, visszaáll az alapértelmezett lejátszási sebesség."
+   },
+   "speed_minus_control_info": {
+      "message": "Kattints erre a gombra a lejátszási sebesség csökkentéséhez"
+   },
+   "speed_plus_control_info": {
+      "message": "Kattints erre a gombra a lejátszási sebesség növeléséhez"
+   },
+   "speed_variation": {
+      "message": "A sebességváltoztatás mértéke. (Görgetéskor, valamint a sebességállító gombok (+, -) megnyomásakor)"
+   },
+   "stop": {
+      "message": "Megállít"
+   },
+   "stop_control_info": {
+      "message": "Kattints erre a gombra a videó leállításához"
+   },
+   "stop_video": {
+      "message": "Videó megállítása"
+   },
+   "stop_videos": {
+      "message": "Elõtöltés letiltása a videó megállításakor"
+   },
+   "support": {
+      "message": "Támogatás"
+   },
+   "switch_back_previous_quality": {
+      "message": "Előző minőségre váltás a teljes képernyős mód elhagyásakor"
+   },
+   "take_screenshot": {
+      "message": "Képernyőmentés készítése"
+   },
+   "theme": {
+      "message": "Téma"
+   },
+   "theme_custom_theme": {
+      "message": "Téma: Egyéni téma"
+   },
+   "theme_youtube_dark": {
+      "message": "Téma: YouTube™ (Sötét)"
+   },
+   "theme_youtube_deep_dark": {
+      "message": "Téma: YouTube-DeepDark"
+   },
+   "theme_youtube_deep_dark_custom": {
+      "message": "Téma: YouTube-DeepDark (Egyéni)"
+   },
+   "toggle_cards_end_screens": {
+      "message": "Kommentárok és videó végi ajánlások engedélyezése/tiltása"
+   },
+   "toggle_cinema_mode": {
+      "message": "Mozi mód engedélyezése/tiltása"
+   },
+   "toggle_comments_visibility": {
+      "message": "Hozzászólások láthatóságának engedélyezése/tiltása"
+   },
+   "toggle_loop": {
+      "message": "Ismétlés beállítása"
+   },
+   "toggle_pip_mode": {
+      "message": "Kép-a-képben engedélyezése/tiltása"
+   },
+   "toggle_related_videos_visibility": {
+      "message": "Ajánlott videók láthatóságának engedélyezése/tiltása"
+   },
+   "toggle_video_filters": {
+      "message": "Videószűrők engedélyezése/tiltása"
+   },
+   "toggle_visibility": {
+      "message": "Kommentárok/videó végi ajánlások láthatóságának engedélyezése/tiltása"
+   },
+   "toggle_volume_booster": {
+      "message": "Hangerőnövelő engedélyezése/tiltása"
+   },
+   "top_left_corner": {
+      "message": "Bal felső sarok"
+   },
+   "top_right_corner": {
+      "message": "Jobb felső sarok"
+   },
+   "translate": {
+      "message": "Fordítás"
+   },
+   "variant": {
+      "message": "Változat:"
+   },
+   "video_codecs_and_formats": {
+      "message": "Videókodekek és formátumok"
+   },
+   "video_filters": {
+      "message": "Videószűrők"
+   },
+   "video_filters_control_info": {
+      "message": "Kattints erre a gombra a szűrők engedélyezéséhez/letiltásához"
+   },
+   "video_player": {
+      "message": "Videólejátszó"
+   },
+   "videos": {
+      "message": "Videók:"
+   },
+   "videos_full_screen": {
+      "message": "Videók (teljes képernyős):"
+   },
+   "volume": {
+      "message": "Hangerő"
+   },
+   "volume_booster_control_info": {
+      "message": "Kattints erre a gombra a hangerő növelő funkció be/ki kapcsolásához"
+   },
+   "volume_booster_level": {
+      "message": "Hangerő növelő szintje:"
+   },
+   "volume_variation": {
+      "message": "Hangerő-módosítás, amikor az egérgörgő elfordul:"
+   },
+   "watch_pop_up_player": {
+      "message": "Felugró ablakban lejátszás"
+   },
+   "youtube_dark_theme": {
+      "message": "YouTube (hivatalos téma)"
+   },
+   "youtube_deep_dark": {
+      "message": "YouTube-DeepDark (RaitaroH-tól)"
+   },
+   "youtube_deep_dark_custom": {
+      "message": "YouTube-DeepDark (egyedi)"
+   }
+}

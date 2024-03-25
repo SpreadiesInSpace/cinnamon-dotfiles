@@ -1,0 +1,9 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=Grub Config
+Exec=sudo nano /etc/default/grub
+Comment=
+Terminal=true
+PrefersNonDefaultGPU=false
+Icon=grub-customizer
+Type=Application

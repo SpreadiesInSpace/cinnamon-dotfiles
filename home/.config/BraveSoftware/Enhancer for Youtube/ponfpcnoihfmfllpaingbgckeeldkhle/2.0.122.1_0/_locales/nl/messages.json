@@ -1,0 +1,572 @@
+{
+   "appearance": {
+      "message": "Vormgeving"
+   },
+   "auto_apply_video_filters": {
+      "message": "De videofilters automatisch toepassen"
+   },
+   "auto_boost_volume": {
+      "message": "Verhoog automatisch het volume"
+   },
+   "auto_cinema_mode": {
+      "message": "Automatisch de bioscoopmodus inschakelen"
+   },
+   "auto_enable_theater_mode": {
+      "message": "Automatisch YouTube’s ‘Theatermodus’ inschakelen"
+   },
+   "auto_execute_script": {
+      "message": "Het script automatisch uitvoeren wanneer YouTube in een tabblad is geladen"
+   },
+   "auto_expand_description": {
+      "message": "Automatisch de videobeschrijvingen uitvouwen"
+   },
+   "auto_expand_player": {
+      "message": "Automatisch de videospeler vergroten"
+   },
+   "auto_hide_cards_end_screens": {
+      "message": "Infokaarten en eindschermen automatisch verbergen"
+   },
+   "auto_select_quality": {
+      "message": "Automatisch een afspeelkwaliteit selecteren"
+   },
+   "auto_sort_comments": {
+      "message": "Reacties automatisch van nieuwste naar oudste sorteren"
+   },
+   "autoplay": {
+      "message": "Autoplay"
+   },
+   "backup": {
+      "message": "Back-up"
+   },
+   "below_video_player": {
+      "message": "Onder de videospeler"
+   },
+   "block_hfr_formats": {
+      "message": "Het gebruik van indelingen voor standaard framerates (24, 25, 30 FPS) forceren in plaats van indelingen voor hoge framerates (48, 50, 60 FPS)"
+   },
+   "block_webm_formats": {
+      "message": "Het gebruik van de MP4-indeling en de AVC-codec (H.264) forceren in plaats van de WebM-indeling en de VP9-codec (maximale resolutie 1080p60 HD)"
+   },
+   "boost_volume": {
+      "message": "Volume versterken"
+   },
+   "bottom_left_corner": {
+      "message": "Linksonder"
+   },
+   "bottom_of_window": {
+      "message": "Onderaan het venster"
+   },
+   "bottom_right_corner": {
+      "message": "Rechtsonder"
+   },
+   "brightness": {
+      "message": "Helderheid:"
+   },
+   "cards_end_screens_control_info": {
+      "message": "Klik om de zichtbaarheid van kaarten en eindschermen in/uit te schakelen"
+   },
+   "center_control_bar": {
+      "message": "De besturingsbalk onder de videospeler centreren als deze wordt uitgevouwen of de volledigschermmodus actief is"
+   },
+   "center_video_player": {
+      "message": "De videospeler binnen de viewport centreren"
+   },
+   "cinema_mode": {
+      "message": "Bioscoopmodus"
+   },
+   "cinema_mode_control_info": {
+      "message": "Klik om de bioscoopmodus in/uit te schakelen"
+   },
+   "cinema_mode_toggle_size": {
+      "message": "Automatisch de videospeler vergroten of verkleinen wanneer de bioscoopmodus wordt in-/uitgeschakeld"
+   },
+   "color": {
+      "message": "Kleur:"
+   },
+   "color_inversion": {
+      "message": "Kleurinversie:"
+   },
+   "configure_keyboard_shortcuts": {
+      "message": "Sneltoetsen configureren"
+   },
+   "contrast": {
+      "message": "Contrast:"
+   },
+   "control_bar_location": {
+      "message": "Locatie van besturingsbalk:"
+   },
+   "control_speed": {
+      "message": "De afspeelsnelheid beheren met het muiswiel bij ingedrukt houden van de ‘Control’-toets (Ctrl) tijdens aanwijzen van de videospeler met de muiscursor"
+   },
+   "control_speed_mouse_button": {
+      "message": "Alleen wanneer op de rechtermuisknop wordt geklikt"
+   },
+   "control_volume": {
+      "message": "Het volumeniveau met het muiswiel beheren bij aanwijzen van de videospeler"
+   },
+   "control_volume_mouse_button": {
+      "message": "Alleen wanneer op de rechtermuisknop wordt geklikt"
+   },
+   "controls": {
+      "message": "Besturingselementen"
+   },
+   "controls_visible": {
+      "message": "Besturingselementen zichtbaar houden zonder op het besturingselement ••• te moeten klikken of de muiscursor erboven te houden"
+   },
+   "controls_within_control_bar": {
+      "message": "Besturingselementen binnen een besturingsbalk plaatsen"
+   },
+   "controls_within_video_player": {
+      "message": "Besturingselementen binnen de videospeler plaatsen"
+   },
+   "convert_shorts": {
+      "message": "Shorts converteren"
+   },
+   "copy_to_clipboard": {
+      "message": "Kopiëren naar klembord"
+   },
+   "custom_script": {
+      "message": "Aangepast script"
+   },
+   "custom_script_control_info": {
+      "message": "Klik om het aangepaste script uit te voeren"
+   },
+   "custom_script_instructions": {
+      "message": "Plak of typ hier uw JavaScript-code, sla deze op met de onderstaande knop en klik daarna op de knop ‘Aangepast script’ als u de code wilt uitvoeren."
+   },
+   "custom_script_warning": {
+      "message": "Uit veiligheidsoverwegingen dient u alleen code te gebruiken die u zelf begrijpt, of code die is geschreven door een ontwikkelaar die u vertrouwt."
+   },
+   "custom_theme": {
+      "message": "Aangepast thema"
+   },
+   "custom_theme_instructions": {
+      "message": "Plak of typ hier uw CSS-code, en sla deze op met de onderstaande knop."
+   },
+   "dark_theme": {
+      "message": "Donker thema"
+   },
+   "decrease_playback_speed": {
+      "message": "De afspeelsnelheid verlagen"
+   },
+   "default_playback_speed": {
+      "message": "Standaard afspeelsnelheid:"
+   },
+   "default_volume_level": {
+      "message": "Standaard volumeniveau:"
+   },
+   "description": {
+      "message": "Neem de controle over YouTube en geef je gebruikerservaring een boost!"
+   },
+   "detailed_description": {
+      "message": "Deze extensie, gebouwd om het meeste uit YouTube te halen, bevat allerlei functies waarmee u, naast andere dingen, de afspeelsnelheid en het volumeniveau kunt regelen met uw muiswiel, herhalende taken zoals het selecteren van de juiste afspeelkwaliteit kunt automatiseren, tientallen sneltoetsen kunt configureren zodat u YouTube kunt beheren als een pro, en nog veel meer... Probeer het zelf! Maar let op: daarna zult u YouTube nooit meer zonder willen gebruiken ;)\n\nYouTube is een handelsmerk van Google LLC. Gebruik van dit handelsmerk is onderworpen aan Google Permissions."
+   },
+   "disable_autoplay": {
+      "message": "Autoplay uitschakelen"
+   },
+   "display_control_bar": {
+      "message": "De besturingsbalk alleen weergeven bij aanwijzen met de muiscursor"
+   },
+   "donate": {
+      "message": "Doneren"
+   },
+   "execute_custom_script": {
+      "message": "Het aangepaste script uitvoeren"
+   },
+   "expand": {
+      "message": "Vergroten"
+   },
+   "expand_shrink_video_player": {
+      "message": "De videospeler vergroten of verkleinen"
+   },
+   "expanded_player_viewport": {
+      "message": "De volledige ruimte op basis van de afmetingen van de viewport gebruiken om de videospeler te vergroten"
+   },
+   "export": {
+      "message": "Exporteren"
+   },
+   "export_instructions": {
+      "message": "Maak een nieuw tekstbestand aan en plak de onderstaande code zonder deze te aan te passen."
+   },
+   "flip_horizontally": {
+      "message": "Horizontaal spiegelen"
+   },
+   "flip_horizontally_control_info": {
+      "message": "Klik om de video horizontaal te spiegelen"
+   },
+   "flip_vertically": {
+      "message": "Verticaal spiegelen"
+   },
+   "flip_vertically_control_info": {
+      "message": "Klik om de video verticaal te spiegelen"
+   },
+   "flip_video_horizontally": {
+      "message": "De video horizontaal spiegelen"
+   },
+   "flip_video_vertically": {
+      "message": "De video verticaal spiegelen"
+   },
+   "focus_video_player": {
+      "message": "Focus op de videospeler leggen"
+   },
+   "gaussian_blur": {
+      "message": "Gaussiaanse vervaging:"
+   },
+   "grayscale": {
+      "message": "Grijstinten:"
+   },
+   "hide_chat": {
+      "message": "Chat verbergen"
+   },
+   "hide_comments": {
+      "message": "Reacties verbergen"
+   },
+   "hide_related_videos": {
+      "message": "Gerelateerde video’s verbergen"
+   },
+   "hide_shorts": {
+      "message": "Shorts verbergen"
+   },
+   "hue_rotation": {
+      "message": "Tintrotatie:"
+   },
+   "ignore_playlists": {
+      "message": "Automatisch afspelen voor afspeellijsten niet voorkomen"
+   },
+   "ignore_pop_up_player": {
+      "message": "De pop-upspeler negeren"
+   },
+   "import": {
+      "message": "Importeren"
+   },
+   "import_error": {
+      "message": "De inhoud van het back-upbestand is niet geldig!"
+   },
+   "import_instructions": {
+      "message": "Plak de inhoud van het back-upbestand en klik op de knop ‘Importeren’. De pagina wordt automatisch vernieuwd als de instellingen zijn geïmporteerd."
+   },
+   "increase_playback_speed": {
+      "message": "De afspeelsnelheid verhogen"
+   },
+   "keyboard_shortcuts": {
+      "message": "Sneltoetsen"
+   },
+   "keyboard_shortcuts_control_info": {
+      "message": "Klik om de lijst van alle sneltoetsen voor YouTube weer te geven (externe pagina)"
+   },
+   "keyboard_shortcuts_page": {
+      "message": "Alle sneltoetsen voor YouTube weergeven"
+   },
+   "launch_mini_player": {
+      "message": "Een minispeler starten bij omlaag scrollen om reacties te lezen"
+   },
+   "locale_code": {
+      "message": "nl"
+   },
+   "locale_dir": {
+      "message": "ltr"
+   },
+   "loop": {
+      "message": "Lus"
+   },
+   "loop_control_info": {
+      "message": "Klik om de herhalingsmodus in/uit te schakelen"
+   },
+   "loop_end": {
+      "message": "Einde:"
+   },
+   "loop_start": {
+      "message": "Begin:"
+   },
+   "message": {
+      "message": "Bericht"
+   },
+   "mini_player": {
+      "message": "Minispeler"
+   },
+   "mini_player_position": {
+      "message": "Positie van minispeler:"
+   },
+   "mini_player_size": {
+      "message": "Grootte van minispeler:"
+   },
+   "not_now": {
+      "message": "Niet nu"
+   },
+   "opacity": {
+      "message": "Transparantie:"
+   },
+   "open_options_page": {
+      "message": "De optiespagina openen"
+   },
+   "options": {
+      "message": "Opties"
+   },
+   "options_control_info": {
+      "message": "Klik om de optiespagina te openen"
+   },
+   "override_playback_speeds": {
+      "message": "Standaard afspeelsnelheden negeren"
+   },
+   "page_reload_required": {
+      "message": "Enhancer for YouTube™ is bijgewerkt; deze pagina moet worden vernieuwd."
+   },
+   "pause_videos": {
+      "message": "In achtergrondtabbladen afgespeelde video’s pauzeren wanneer een video in het voorgrondtabblad begint te spelen"
+   },
+   "playback_quality": {
+      "message": "Afspeelkwaliteit"
+   },
+   "playback_speed": {
+      "message": "Afspeelsnelheid"
+   },
+   "playlists": {
+      "message": "Afspeellijsten:"
+   },
+   "playlists_full_screen": {
+      "message": "Afspeellijsten (volledig scherm):"
+   },
+   "pop_up_player": {
+      "message": "Pop-upspeler"
+   },
+   "pop_up_player_control_info": {
+      "message": "Klik of klik met de rechtermuisknop om met de pop-upspeler te kijken"
+   },
+   "pop_up_player_embeds": {
+      "message": "Pop-upspeler en ingebedde video’s:"
+   },
+   "pop_up_player_embeds_full_screen": {
+      "message": "Pop-upspeler en ingebedde video’s (volledig scherm):"
+   },
+   "pop_up_player_size": {
+      "message": "Grootte van pop-upspeler:"
+   },
+   "preserve_black_bars_color": {
+      "message": "De kleur van de verticale zwarte balken niet wijzigen wanneer het YouTube-DeepDark-thema wordt toegepast of wanneer de bioscoopmodus is ingeschakeld"
+   },
+   "prevent_autoplay": {
+      "message": "Automatisch afspelen van in achtergrondtabbladen geladen video’s voorkomen"
+   },
+   "prevent_autoplay_foreground_tab": {
+      "message": "Ook het automatisch afspelen van in het voorgrondtabblad geladen video’s voorkomen"
+   },
+   "preview": {
+      "message": "Voorbeeld"
+   },
+   "rate": {
+      "message": "Waarderen"
+   },
+   "rate_extension": {
+      "message": "Deel uw ervaring met Enhancer for YouTube™."
+   },
+   "reset": {
+      "message": "Terugzetten"
+   },
+   "reverse_mouse_wheel_direction": {
+      "message": "Richting van het muiswiel omkeren om de afspeelsnelheid en het volumeniveau te regelen"
+   },
+   "reverse_playlist": {
+      "message": "Afspeellijst omkeren"
+   },
+   "reverse_playlist_control_info": {
+      "message": "Klik met linker- of rechtermuisknop om een afspeellijst in omgekeerde volgorde met de pop-upspeler te bekijken"
+   },
+   "reverse_playlist_order": {
+      "message": "De afspeellijstvolgorde omkeren"
+   },
+   "saturation": {
+      "message": "Verzadiging:"
+   },
+   "save": {
+      "message": "Opslaan"
+   },
+   "screenshot": {
+      "message": "Schermafbeelding"
+   },
+   "screenshot_control_info": {
+      "message": "Klik om een schermafbeelding van de video te maken"
+   },
+   "select_default_playback_speed": {
+      "message": "De standaard afspeelsnelheid selecteren"
+   },
+   "select_normal_playback_speed": {
+      "message": "De normale afspeelsnelheid selecteren"
+   },
+   "select_quality_1080p": {
+      "message": "De afspeelkwaliteit ‘1080p’ kiezen"
+   },
+   "select_quality_1440p": {
+      "message": "De afspeelkwaliteit ‘1440p’ kiezen"
+   },
+   "select_quality_144p": {
+      "message": "De afspeelkwaliteit ‘144p’ kiezen"
+   },
+   "select_quality_2160p": {
+      "message": "De afspeelkwaliteit ‘2160p’ kiezen"
+   },
+   "select_quality_240p": {
+      "message": "De afspeelkwaliteit ‘240p’ kiezen"
+   },
+   "select_quality_2880p": {
+      "message": "De afspeelkwaliteit ‘2880p’ kiezen"
+   },
+   "select_quality_360p": {
+      "message": "De afspeelkwaliteit ‘360p’ kiezen"
+   },
+   "select_quality_4320p": {
+      "message": "De afspeelkwaliteit ‘4320p’ kiezen"
+   },
+   "select_quality_480p": {
+      "message": "De afspeelkwaliteit ‘480p’ kiezen"
+   },
+   "select_quality_720p": {
+      "message": "De afspeelkwaliteit ‘720p’ kiezen"
+   },
+   "select_quality_auto": {
+      "message": "De afspeelkwaliteit ‘Automatisch’ kiezen"
+   },
+   "select_quality_full_screen": {
+      "message": "Een andere afspeelkwaliteit selecteren bij betreden van de volledigschermmodus"
+   },
+   "sepia": {
+      "message": "Sepia:"
+   },
+   "shrink": {
+      "message": "Verkleinen"
+   },
+   "size_control_info": {
+      "message": "Klik om de grootte van de videospeler te wijzigen, of klik met de rechtermuisknop om de videospeler binnen de viewport te centreren"
+   },
+   "speed": {
+      "message": "Snelheid"
+   },
+   "speed_control_info": {
+      "message": "Gebruik het muiswiel om de afspeelsnelheid te regelen, of klik om de standaard afspeelsnelheid te selecteren, of klik met de rechtermuisknop om de normale afspeelsnelheid te gebruiken"
+   },
+   "speed_minus_control_info": {
+      "message": "Klik om de afspeelsnelheid te verlagen"
+   },
+   "speed_plus_control_info": {
+      "message": "Klik om de afspeelsnelheid te verhogen"
+   },
+   "speed_variation": {
+      "message": "Snelheidsvariatie bij verdraaien van het muiswiel of klikken op de snelheidsknoppen ‘-’ en ‘+’:"
+   },
+   "stop": {
+      "message": "Stoppen"
+   },
+   "stop_control_info": {
+      "message": "Klik of klik met de rechtermuisknop om de video te stoppen"
+   },
+   "stop_video": {
+      "message": "De video stoppen"
+   },
+   "stop_videos": {
+      "message": "Video’s volledig stoppen in plaats van alleen automatisch afspelen voorkomen"
+   },
+   "support": {
+      "message": "Ondersteuning"
+   },
+   "switch_back_previous_quality": {
+      "message": "Terugschakelen naar de vorige afspeelkwaliteit bij verlaten van de volledigschermmodus"
+   },
+   "take_screenshot": {
+      "message": "Een schermafbeelding van de video maken"
+   },
+   "theme": {
+      "message": "Thema"
+   },
+   "theme_custom_theme": {
+      "message": "Thema: aangepast thema"
+   },
+   "theme_youtube_dark": {
+      "message": "Thema: YouTube™ (Donker)"
+   },
+   "theme_youtube_deep_dark": {
+      "message": "Thema: YouTube-DeepDark"
+   },
+   "theme_youtube_deep_dark_custom": {
+      "message": "Thema: YouTube-DeepDark (Aangepast)"
+   },
+   "toggle_cards_end_screens": {
+      "message": "Zichtbaarheid van kaarten en eindschermen in-/uitschakelen"
+   },
+   "toggle_cinema_mode": {
+      "message": "De bioscoopmodus in-/uitschakelen"
+   },
+   "toggle_comments_visibility": {
+      "message": "Zichtbaarheid van reacties in-/uitschakelen"
+   },
+   "toggle_loop": {
+      "message": "Herhalingsmodus in-/uitschakelen"
+   },
+   "toggle_pip_mode": {
+      "message": "De Picture-in-Picture-modus in-/uitschakelen"
+   },
+   "toggle_related_videos_visibility": {
+      "message": "Zichtbaarheid van gerelateerde video’s in-/uitschakelen"
+   },
+   "toggle_video_filters": {
+      "message": "De videoafspeelfilters in-/uitschakelen"
+   },
+   "toggle_visibility": {
+      "message": "Zichtbaarheid van kaarten/eindschermen in-/uitschakelen"
+   },
+   "toggle_volume_booster": {
+      "message": "De volumeversterker in-/uitschakelen"
+   },
+   "top_left_corner": {
+      "message": "Linksboven"
+   },
+   "top_right_corner": {
+      "message": "Rechtsboven"
+   },
+   "translate": {
+      "message": "Vertalen"
+   },
+   "variant": {
+      "message": "Variant:"
+   },
+   "video_codecs_and_formats": {
+      "message": "Videocodecs en -indelingen"
+   },
+   "video_filters": {
+      "message": "Videofilters"
+   },
+   "video_filters_control_info": {
+      "message": "Klik om de videofilters in/uit te schakelen, of klik met de rechtermuisknop om de zichtbaarheid van het videofilterpaneel in/uit te schakelen"
+   },
+   "video_player": {
+      "message": "Videospeler"
+   },
+   "videos": {
+      "message": "Video’s:"
+   },
+   "videos_full_screen": {
+      "message": "Video’s (volledig scherm):"
+   },
+   "volume": {
+      "message": "Volume"
+   },
+   "volume_booster_control_info": {
+      "message": "Klik om de volumeversterker in/uit te schakelen"
+   },
+   "volume_booster_level": {
+      "message": "Volumeversterkerniveau:"
+   },
+   "volume_variation": {
+      "message": "Volumevariatie bij draaien van het muiswiel:"
+   },
+   "watch_pop_up_player": {
+      "message": "Bekijken via de pop-upspeler"
+   },
+   "youtube_dark_theme": {
+      "message": "YouTube (officieel thema)"
+   },
+   "youtube_deep_dark": {
+      "message": "YouTube-DeepDark (door RaitaroH)"
+   },
+   "youtube_deep_dark_custom": {
+      "message": "YouTube-DeepDark (aangepast)"
+   }
+}

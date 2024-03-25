@@ -1,0 +1,572 @@
+{
+   "appearance": {
+      "message": "외관"
+   },
+   "auto_apply_video_filters": {
+      "message": "비디오 필터 자동 적용"
+   },
+   "auto_boost_volume": {
+      "message": "자동으로 소리 높이기"
+   },
+   "auto_cinema_mode": {
+      "message": "자동으로 영화 모드 전환"
+   },
+   "auto_enable_theater_mode": {
+      "message": "자동으로 YouTube의 “극장 모드”를 사용"
+   },
+   "auto_execute_script": {
+      "message": "YouTube가 탭에서 로드 되었을 때 자동으로 스크립트를 실행"
+   },
+   "auto_expand_description": {
+      "message": "자동으로 동영상 정보를 확장"
+   },
+   "auto_expand_player": {
+      "message": "자동으로 비디오 크기 확대"
+   },
+   "auto_hide_cards_end_screens": {
+      "message": "정보 카드 및 최종 화면 자동 숨기기"
+   },
+   "auto_select_quality": {
+      "message": "자동으로 비디오 품질 선택"
+   },
+   "auto_sort_comments": {
+      "message": "자동으로 최신 댓글과 오래된 댓글로 분류"
+   },
+   "autoplay": {
+      "message": "자동 재생"
+   },
+   "backup": {
+      "message": "백업"
+   },
+   "below_video_player": {
+      "message": "비디오 재생기 아래에"
+   },
+   "block_hfr_formats": {
+      "message": "높은 프레임 속도 형식 (48, 50, 60FPS) 대신 표준 프레임 속도 형식 (24, 25, 30FPS)을 강제로 사용합니다"
+   },
+   "block_webm_formats": {
+      "message": "WebM 형식 및 VP9 코덱 (최대 해상도 1080p60 HD) 대신 MP4 형식 및 AVC 코덱 (H.264)을 강제로 사용합니다"
+   },
+   "boost_volume": {
+      "message": "소리 증폭"
+   },
+   "bottom_left_corner": {
+      "message": "왼쪽 아래 구석"
+   },
+   "bottom_of_window": {
+      "message": "창 아래에"
+   },
+   "bottom_right_corner": {
+      "message": "오른쪽 아래 구석"
+   },
+   "brightness": {
+      "message": "밝기:"
+   },
+   "cards_end_screens_control_info": {
+      "message": "주석을 숨기거나 표시하려면 이 버튼을 클릭하세요"
+   },
+   "center_control_bar": {
+      "message": "비디오 재생기가 확대되거나 전체 화면 모드가 활성화 되었을때 컨트롤바를 비디오 재생기 하단 중앙에 정렬하기"
+   },
+   "center_video_player": {
+      "message": "확장된 비디오 재생기를 뷰포트 중앙에 배치"
+   },
+   "cinema_mode": {
+      "message": "영화 모드"
+   },
+   "cinema_mode_control_info": {
+      "message": "영화 모드를 활성화/비활성화하려면 이 버튼을 클릭하세요"
+   },
+   "cinema_mode_toggle_size": {
+      "message": "영화 모드로 전환되었을 때 자동으로 비디오 확장하기"
+   },
+   "color": {
+      "message": "색상:"
+   },
+   "color_inversion": {
+      "message": "색 반전:"
+   },
+   "configure_keyboard_shortcuts": {
+      "message": "키보드 단축키 구성"
+   },
+   "contrast": {
+      "message": "대비:"
+   },
+   "control_bar_location": {
+      "message": "컨트롤 바 위치:"
+   },
+   "control_speed": {
+      "message": "비디오 재생기 위로 마우스 커서를 가져간 상태에서 컨트롤을 누른 상태에서 마우스 휠로 재생 속도를 제어합니다"
+   },
+   "control_speed_mouse_button": {
+      "message": "마우스 오른쪽 버튼을 눌렀을 때만"
+   },
+   "control_volume": {
+      "message": "마우스 커서가 비디오 재생기 위에 있을 때 마우스 휠을 통해 소리 크기 제어"
+   },
+   "control_volume_mouse_button": {
+      "message": "마우스 오른쪽 버튼을 클릭하였을시에만"
+   },
+   "controls": {
+      "message": "컨트롤"
+   },
+   "controls_visible": {
+      "message": "••• 컨트롤을 클릭 하지 않고 마우스 커서를 가져다 놓지 않아도 보이게 유지"
+   },
+   "controls_within_control_bar": {
+      "message": "컨트롤 바 내에 컨트롤 넣기"
+   },
+   "controls_within_video_player": {
+      "message": "비디오 재생기 내에 컨트롤 놓기"
+   },
+   "convert_shorts": {
+      "message": "쇼츠 변환"
+   },
+   "copy_to_clipboard": {
+      "message": "클립 보드에 복사"
+   },
+   "custom_script": {
+      "message": "커스텀 스크립트"
+   },
+   "custom_script_control_info": {
+      "message": "커스텀 스크립트를 사용하려면 이 버튼을 클릭하세요"
+   },
+   "custom_script_instructions": {
+      "message": "JavaScript 코드를 작성하거나 붙여넣고 아래의 버튼을 눌러서 저장하세요. 이 기능을 실행하고 싶다면 툴바의 “커스텀 스크립트” 버튼을 클릭하세요."
+   },
+   "custom_script_warning": {
+      "message": "보안상의 이유로 당신이 이해할 수 있거나 믿을 수 있는 개발자가 작성한 코드만을 사용해야 합니다."
+   },
+   "custom_theme": {
+      "message": "커스텀 테마"
+   },
+   "custom_theme_instructions": {
+      "message": "CSS 코드를 작성하거나 붙여넣고 아래의 버튼을 눌러서 저장하세요."
+   },
+   "dark_theme": {
+      "message": "다크 테마"
+   },
+   "decrease_playback_speed": {
+      "message": "재생 속도 감소"
+   },
+   "default_playback_speed": {
+      "message": "기본 재생 속도:"
+   },
+   "default_volume_level": {
+      "message": "기본 소리 크기:"
+   },
+   "description": {
+      "message": "YouTube를 당신에게 맞추어 더 편하게 사용해보세요!"
+   },
+   "detailed_description": {
+      "message": "YouTube를 최대로 활용하기 위해 만든 확장 프로그램으로서, 마우스 휠로 재생 속도와 소리 조절, 선호하는 비디오 품질 설정의 자동 적용, 수십여 가지의 키보드 단축키 설정을 포함해 여러가지의 기능을 제공합니다. YouTube를 전문가처럼 활용하게 해주는 Enhancer for YouTube™를 한 번 사용해보세요! 한 번 쓰고 나면 다시는 YouTube를 이전처럼 쓰고 싶지 않을 겁니다. ;)\n\nYouTube는 Google LLC의 상표입니다. 이 상표의 사용은 Google 권한에 따릅니다."
+   },
+   "disable_autoplay": {
+      "message": "자동 재생 기능 제거"
+   },
+   "display_control_bar": {
+      "message": "마우스 커서를 가져다 놓을때만 컨트롤 바 보이기"
+   },
+   "donate": {
+      "message": "기부"
+   },
+   "execute_custom_script": {
+      "message": "사용자 지정 스크립트 실행"
+   },
+   "expand": {
+      "message": "확장"
+   },
+   "expand_shrink_video_player": {
+      "message": "비디오 재생기 확장 또는 축소"
+   },
+   "expanded_player_viewport": {
+      "message": "화면에 따라 사용 가능한 공간을 이용해 비디오 재생기 확장"
+   },
+   "export": {
+      "message": "내보내기"
+   },
+   "export_instructions": {
+      "message": "새 텍스트 파일을 만들어 다음 코드를 고치지 않고 그대로 복사해 주세요."
+   },
+   "flip_horizontally": {
+      "message": "가로로 뒤집기"
+   },
+   "flip_horizontally_control_info": {
+      "message": "비디오를 가로로 뒤집으려면 클릭하세요"
+   },
+   "flip_vertically": {
+      "message": "세로로 뒤집기"
+   },
+   "flip_vertically_control_info": {
+      "message": "비디오를 세로로 뒤집으려면 클릭하세요"
+   },
+   "flip_video_horizontally": {
+      "message": "비디오 가로로 뒤집기"
+   },
+   "flip_video_vertically": {
+      "message": "비디오 세로로 뒤집기"
+   },
+   "focus_video_player": {
+      "message": "비디오 재생기에 초점 설정"
+   },
+   "gaussian_blur": {
+      "message": "흐림 효과:"
+   },
+   "grayscale": {
+      "message": "흑백조:"
+   },
+   "hide_chat": {
+      "message": "채팅 숨기기"
+   },
+   "hide_comments": {
+      "message": "댓글 숨기기"
+   },
+   "hide_related_videos": {
+      "message": "관련 동영상 숨기기"
+   },
+   "hide_shorts": {
+      "message": "쇼츠 숨기기"
+   },
+   "hue_rotation": {
+      "message": "색조 회전:"
+   },
+   "ignore_playlists": {
+      "message": "플레이 리스트 내 동영상 일시정지 안하기"
+   },
+   "ignore_pop_up_player": {
+      "message": "팝업 재생기 무시"
+   },
+   "import": {
+      "message": "가져오기"
+   },
+   "import_error": {
+      "message": "백업 파일의 코드에 문제가 있습니다!"
+   },
+   "import_instructions": {
+      "message": "백업 파일의 코드를 붙여넣은 후 '가져오기'를 눌러주세요. 가져오기가 정상적으로 완료되면 자동으로 페이지가 새로고침됩니다."
+   },
+   "increase_playback_speed": {
+      "message": "재생 속도 증가"
+   },
+   "keyboard_shortcuts": {
+      "message": "키보드 단축키"
+   },
+   "keyboard_shortcuts_control_info": {
+      "message": "YouTube의 모든 키보드 단축키 목록을 표시하려면 클릭하세요 (외부 페이지)"
+   },
+   "keyboard_shortcuts_page": {
+      "message": "모든 키보드 단축키 표시"
+   },
+   "launch_mini_player": {
+      "message": "아래로 스크롤하여 댓글을 읽을 때 미니 재생기 실행"
+   },
+   "locale_code": {
+      "message": "ko"
+   },
+   "locale_dir": {
+      "message": "ltr"
+   },
+   "loop": {
+      "message": "반복"
+   },
+   "loop_control_info": {
+      "message": "비디오 반복을 활성/비활성화 할려면 이 버튼을 클릭하세요"
+   },
+   "loop_end": {
+      "message": "끝:"
+   },
+   "loop_start": {
+      "message": "시작:"
+   },
+   "message": {
+      "message": "메시지"
+   },
+   "mini_player": {
+      "message": "미니 재생기"
+   },
+   "mini_player_position": {
+      "message": "미니 재생기 위치:"
+   },
+   "mini_player_size": {
+      "message": "미니 재생기 크기:"
+   },
+   "not_now": {
+      "message": "지금은 아닙니다"
+   },
+   "opacity": {
+      "message": "불투명도:"
+   },
+   "open_options_page": {
+      "message": "설정 페이지 열기"
+   },
+   "options": {
+      "message": "옵션"
+   },
+   "options_control_info": {
+      "message": "설정 페이지를 열려면 이 버튼을 클릭하세요"
+   },
+   "override_playback_speeds": {
+      "message": "기본 재생 속도 무시"
+   },
+   "page_reload_required": {
+      "message": "Enhancer for YouTube™가 업데이트 되었습니다. 모든 YouTube 페이지를 새로고침 해주세요."
+   },
+   "pause_videos": {
+      "message": "포그라운드 탭에서 비디오가 재생될 때 백그라운드 탭 비디오 재생 일시정지"
+   },
+   "playback_quality": {
+      "message": "재생 품질"
+   },
+   "playback_speed": {
+      "message": "재생 속도"
+   },
+   "playlists": {
+      "message": "재생 목록:"
+   },
+   "playlists_full_screen": {
+      "message": "재생 목록 (전체 화면):"
+   },
+   "pop_up_player": {
+      "message": "팝업 재생기"
+   },
+   "pop_up_player_control_info": {
+      "message": "팝업 재생기로 시청하려면 클릭하거나 마우스 오른쪽 버튼을 클릭하세요"
+   },
+   "pop_up_player_embeds": {
+      "message": "팝업 재생기 및 삽입 동영상:"
+   },
+   "pop_up_player_embeds_full_screen": {
+      "message": "팝업 재생기 및 삽입 동영상 (전체 화면):"
+   },
+   "pop_up_player_size": {
+      "message": "팝업 재생기 크기:"
+   },
+   "preserve_black_bars_color": {
+      "message": "YouTube-DeepDark 테마가 적용 되었거나 영화 모드가 활성화 되었을때 수직 검은색 막대 색깔 변경 안함"
+   },
+   "prevent_autoplay": {
+      "message": "백그라운드 탭이 열렸을 때 자동적으로 비디오 일시정지"
+   },
+   "prevent_autoplay_foreground_tab": {
+      "message": "포그라운드 탭의 비디오 또한 일시정지"
+   },
+   "preview": {
+      "message": "미리보기"
+   },
+   "rate": {
+      "message": "평가"
+   },
+   "rate_extension": {
+      "message": "Enhancer for YouTube™에 대한 평가를 남겨주세요."
+   },
+   "reset": {
+      "message": "초기화"
+   },
+   "reverse_mouse_wheel_direction": {
+      "message": "재생 속도와 소리 조절을 위한 마우스 휠 입력을 반대로 변경"
+   },
+   "reverse_playlist": {
+      "message": "재생 목록 반전"
+   },
+   "reverse_playlist_control_info": {
+      "message": "팝업 재생기로 재생 목록을 역순으로 보려면 클릭하거나 마우스 오른쪽 버튼을 클릭하세요"
+   },
+   "reverse_playlist_order": {
+      "message": "재생 목록 순서 반전"
+   },
+   "saturation": {
+      "message": "채도:"
+   },
+   "save": {
+      "message": "저장"
+   },
+   "screenshot": {
+      "message": "스크린샷"
+   },
+   "screenshot_control_info": {
+      "message": "비디오의 스크린 샷을 찍으려면 클릭하세요"
+   },
+   "select_default_playback_speed": {
+      "message": "기본 재생 속도 선택"
+   },
+   "select_normal_playback_speed": {
+      "message": "표준 재생 속도 선택"
+   },
+   "select_quality_1080p": {
+      "message": "재생 품질 '1080p' 선택"
+   },
+   "select_quality_1440p": {
+      "message": "재생 품질 '1440p' 선택"
+   },
+   "select_quality_144p": {
+      "message": "재생 품질 '144p' 선택"
+   },
+   "select_quality_2160p": {
+      "message": "재생 품질 '2160p' 선택"
+   },
+   "select_quality_240p": {
+      "message": "재생 품질 '240p' 선택"
+   },
+   "select_quality_2880p": {
+      "message": "재생 품질 '2880p' 선택"
+   },
+   "select_quality_360p": {
+      "message": "재생 품질 '360p' 선택"
+   },
+   "select_quality_4320p": {
+      "message": "재생 품질 '4320p' 선택"
+   },
+   "select_quality_480p": {
+      "message": "재생 품질 '480p' 선택"
+   },
+   "select_quality_720p": {
+      "message": "재생 품질 '720p' 선택"
+   },
+   "select_quality_auto": {
+      "message": "재생 품질 '자동' 선택"
+   },
+   "select_quality_full_screen": {
+      "message": "전체 화면 모드로 들어갈 때 다른 재생 품질을 선택하세요"
+   },
+   "sepia": {
+      "message": "세피아:"
+   },
+   "shrink": {
+      "message": "축소"
+   },
+   "size_control_info": {
+      "message": "재생기 크기를 조절하려면 이 버튼을 클릭하세요. 재생기를 화면 영역 내에 중앙 정렬하려면 마우스 오른쪽 버튼을 클릭하세요."
+   },
+   "speed": {
+      "message": "재생 속도"
+   },
+   "speed_control_info": {
+      "message": "마우스 커서가 이 버튼 위에 있을 때 마우스 휠을 사용하여 재생 속도를 컨트롤하세요. 기본 재생 속도로 바꾸려면 이것을 누르세요."
+   },
+   "speed_minus_control_info": {
+      "message": "재생속도를 줄이려면 이 버튼을 클릭하세요"
+   },
+   "speed_plus_control_info": {
+      "message": "재생속도를 높히려면 이 버튼을 클릭하세요"
+   },
+   "speed_variation": {
+      "message": "마우스 휠, 혹은 속도 버튼 “-” 와 “+” 이 클릭되었을 시 스피드 변동:"
+   },
+   "stop": {
+      "message": "정지"
+   },
+   "stop_control_info": {
+      "message": "비디오를 중지하려면 클릭"
+   },
+   "stop_video": {
+      "message": "비디오 중지"
+   },
+   "stop_videos": {
+      "message": "자동적으로 비디오가 일시정지 되었을때 비디오 로딩 안하기"
+   },
+   "support": {
+      "message": "지원"
+   },
+   "switch_back_previous_quality": {
+      "message": "전체 화면 모드를 종료 할 때 이전 재생 품질로 다시 전환"
+   },
+   "take_screenshot": {
+      "message": "스크린샷 찍기"
+   },
+   "theme": {
+      "message": "테마"
+   },
+   "theme_custom_theme": {
+      "message": "테마: 커스텀 테마"
+   },
+   "theme_youtube_dark": {
+      "message": "테마: YouTube™ (다크)"
+   },
+   "theme_youtube_deep_dark": {
+      "message": "테마: YouTube-DeepDark"
+   },
+   "theme_youtube_deep_dark_custom": {
+      "message": "테마: YouTube-DeepDark (커스텀)"
+   },
+   "toggle_cards_end_screens": {
+      "message": "카드 및 최종 화면 가시성 전환"
+   },
+   "toggle_cinema_mode": {
+      "message": "영화 모드 전환"
+   },
+   "toggle_comments_visibility": {
+      "message": "댓글 가시성 전환"
+   },
+   "toggle_loop": {
+      "message": "반복 모드 전환"
+   },
+   "toggle_pip_mode": {
+      "message": "화면 속 화면 모드 전환"
+   },
+   "toggle_related_videos_visibility": {
+      "message": "관련 동영상 가시성 전환"
+   },
+   "toggle_video_filters": {
+      "message": "비디오 필터 전환"
+   },
+   "toggle_visibility": {
+      "message": "정보 카드 / 최종 화면 가시성"
+   },
+   "toggle_volume_booster": {
+      "message": "소리 증폭 전환"
+   },
+   "top_left_corner": {
+      "message": "왼쪽 위 구석"
+   },
+   "top_right_corner": {
+      "message": "오른쪽 위 구석"
+   },
+   "translate": {
+      "message": "번역"
+   },
+   "variant": {
+      "message": "변형"
+   },
+   "video_codecs_and_formats": {
+      "message": "비디오 코덱 및 형식"
+   },
+   "video_filters": {
+      "message": "비디오 필터"
+   },
+   "video_filters_control_info": {
+      "message": "필터를 활성/비활성화 하려면 이 버튼을 클릭하세요"
+   },
+   "video_player": {
+      "message": "비디오 재생기"
+   },
+   "videos": {
+      "message": "비디오:"
+   },
+   "videos_full_screen": {
+      "message": "비디오 (전체 화면):"
+   },
+   "volume": {
+      "message": "소리"
+   },
+   "volume_booster_control_info": {
+      "message": "소리 증폭을 활성/비활성화 할려면 이 버튼을 클릭하세요"
+   },
+   "volume_booster_level": {
+      "message": "소리 증폭 수준:"
+   },
+   "volume_variation": {
+      "message": "마우스 휠을 돌렸을 때의 소리 변화:"
+   },
+   "watch_pop_up_player": {
+      "message": "팝업 재생기로 보기"
+   },
+   "youtube_dark_theme": {
+      "message": "YouTube (공식 테마)"
+   },
+   "youtube_deep_dark": {
+      "message": "YouTube-DeepDark (RaitaroH 제작)"
+   },
+   "youtube_deep_dark_custom": {
+      "message": "YouTube-DeepDark (커스텀)"
+   }
+}

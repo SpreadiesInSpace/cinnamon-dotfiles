@@ -1,0 +1,13 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Name=Mount CIFS Share
+Exec=gnome-terminal -- bash -c 'mkdir -p ${HOME}/Share;chmod 777 ${HOME}/Share;sudo mount -t 9p -o trans=virtio /sharepoint ${HOME}/Share;clear;neofetch --ascii ${HOME}/NixAscii.txt;exec bash;'
+Comment=
+Terminal=false
+Icon=software
+Type=Application
+Categories=System;FileTools
+Hidden=false
+NoDisplay=false
+Name[en_US]=Mount CIFS Share

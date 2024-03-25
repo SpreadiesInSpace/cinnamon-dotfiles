@@ -1,0 +1,572 @@
+{
+   "appearance": {
+      "message": "Control aspect"
+   },
+   "auto_apply_video_filters": {
+      "message": "Aplicați automat filtrele video"
+   },
+   "auto_boost_volume": {
+      "message": "Măriți automat volumul"
+   },
+   "auto_cinema_mode": {
+      "message": "Se activează automat modul Cinema"
+   },
+   "auto_enable_theater_mode": {
+      "message": "Activează în mod automat „Modul cinema” al YouTube-ului"
+   },
+   "auto_execute_script": {
+      "message": "Se execută automat scriptul când YouTube este încărcat în filă"
+   },
+   "auto_expand_description": {
+      "message": "Extinde automat descrierea videourilor"
+   },
+   "auto_expand_player": {
+      "message": "Se mărește automat playerul"
+   },
+   "auto_hide_cards_end_screens": {
+      "message": "Ascundeți automat cardurile de informații și ecranele de final"
+   },
+   "auto_select_quality": {
+      "message": "Se redă automat clipul la calitatea preferată"
+   },
+   "auto_sort_comments": {
+      "message": "Sortează comentariile automat de la cele mai noi la cele mai vechi"
+   },
+   "autoplay": {
+      "message": "Autoplay"
+   },
+   "backup": {
+      "message": "Backup"
+   },
+   "below_video_player": {
+      "message": "Sub playerul video"
+   },
+   "block_hfr_formats": {
+      "message": "Forțați utilizarea formatelor standard de frecvență de cadre (24, 25, 30 FPS) în loc de formate de rate de cadre mari (48, 50, 60 FPS)"
+   },
+   "block_webm_formats": {
+      "message": "Forțați utilizarea formatului MP4 și a codecului AVC (H.264) în locul formatului WebM și a codecului VP9 (rezoluție maximă 1080p60 HD)"
+   },
+   "boost_volume": {
+      "message": "Boost volum"
+   },
+   "bottom_left_corner": {
+      "message": "Colţul din stânga-jos"
+   },
+   "bottom_of_window": {
+      "message": "În partea de jos a ferestrei"
+   },
+   "bottom_right_corner": {
+      "message": "Colţul din dreapta-jos"
+   },
+   "brightness": {
+      "message": "Strălucire:"
+   },
+   "cards_end_screens_control_info": {
+      "message": "Faceţi clic pe acest buton pentru a comutați vizibilitatea cardurilor/ecranelor finale"
+   },
+   "center_control_bar": {
+      "message": "Centrați bara de control sub playerul video atunci când acesta este extins sau când modul ecran complet este activ"
+   },
+   "center_video_player": {
+      "message": "Centrați playerul video în fereastra de vizualizare"
+   },
+   "cinema_mode": {
+      "message": "Mod Cinema"
+   },
+   "cinema_mode_control_info": {
+      "message": "Faceți clic pe acest buton pentru a activa/dezactiva modul cinema"
+   },
+   "cinema_mode_toggle_size": {
+      "message": "Se mărește automat player-ul atunci când modul Cinema este activat"
+   },
+   "color": {
+      "message": "Culoare:"
+   },
+   "color_inversion": {
+      "message": "Inversare culori:"
+   },
+   "configure_keyboard_shortcuts": {
+      "message": "Definiți comenzi rapide"
+   },
+   "contrast": {
+      "message": "Contrast:"
+   },
+   "control_bar_location": {
+      "message": "Localizarea barei de control:"
+   },
+   "control_speed": {
+      "message": "Controlați viteza de redare cu roata mouse-ului atunci când cursorul mouse-ului este peste playerul video și se apasă tasta „Control” (Ctrl)"
+   },
+   "control_speed_mouse_button": {
+      "message": "Numai când este apăsat butonul din dreapta al mouse-ului"
+   },
+   "control_volume": {
+      "message": "Se ajustează volumul cu rotița mausului atunci când cursorul acestuia se află deasupra player-ului"
+   },
+   "control_volume_mouse_button": {
+      "message": "Doar atunci când este apăsat butonul din dreapta al mouse-ului"
+   },
+   "controls": {
+      "message": "Control"
+   },
+   "controls_visible": {
+      "message": "Păstrați controalele vizibile fără a fi nevoie să faceți clic pe controlul ••• sau să treceți cu mouse-ul deasupra acestuia"
+   },
+   "controls_within_control_bar": {
+      "message": "Plasați comenzile într-o bară de control"
+   },
+   "controls_within_video_player": {
+      "message": "Plasați comenzile în playerul video"
+   },
+   "convert_shorts": {
+      "message": "Transformă Shorts-uri"
+   },
+   "copy_to_clipboard": {
+      "message": "Copiaza la clipboard"
+   },
+   "custom_script": {
+      "message": "Script personalizat"
+   },
+   "custom_script_control_info": {
+      "message": "Faceți clic pe acest buton pentru a executa script-ul personalizat"
+   },
+   "custom_script_instructions": {
+      "message": "Lipiți sau scrieți aici cod JavaScript, salvați scriptul folosind butonul „Salvează”, apoi dați clic pe butonul „Script personalizat” din bara de unelte, pentru a-l executa."
+   },
+   "custom_script_warning": {
+      "message": "Din motive de siguranţă, ar trebui să foloseşti doar cod pe care îl înţelegi sau cod ce a fost scris de un dezvoltator de încredere."
+   },
+   "custom_theme": {
+      "message": "Temă particularizată"
+   },
+   "custom_theme_instructions": {
+      "message": "Lipeşte sau scrie codul tău CSS aici, apoi salvează-l folosind butonul de mai jos."
+   },
+   "dark_theme": {
+      "message": "Tema întunecată"
+   },
+   "decrease_playback_speed": {
+      "message": "Reduceți viteza de redare"
+   },
+   "default_playback_speed": {
+      "message": "Viteză de redare implicită:"
+   },
+   "default_volume_level": {
+      "message": "Nivel prestabilit al volumului:"
+   },
+   "description": {
+      "message": "Nenumărate opţiuni pentru a avea o plăcere în a folosi YouTube."
+   },
+   "detailed_description": {
+      "message": "Construită pentru a profita la maximum de YouTube, această extensie vine cu tot felul de funcții care vă permit, printre altele, să controlați viteza de redare și nivelul volumului cu roata mouse-ului, să automatizați sarcini repetitive, cum ar fi selectând calitatea de redare adecvată, configurați zeci de comenzi rapide de la tastatură pentru a controla YouTube ca un profesionist și multe altele... Încercați! Dar rețineți că nu veți dori niciodată să folosiți YouTube fără aceasta, după aceea ;)\n\nYouTube este o marcă comercială a Google LLC. Utilizarea acestei mărci comerciale este supusă permisiunilor Google."
+   },
+   "disable_autoplay": {
+      "message": "Dezactivează opţiunea „Autoplay” al YouTube-ului"
+   },
+   "display_control_bar": {
+      "message": "Afișați bara de control numai când treceți cu mouse-ul peste ea"
+   },
+   "donate": {
+      "message": "Donează"
+   },
+   "execute_custom_script": {
+      "message": "Executați scriptul personalizat"
+   },
+   "expand": {
+      "message": "Extinde"
+   },
+   "expand_shrink_video_player": {
+      "message": "Extindeți sau micșorați playerul video"
+   },
+   "expanded_player_viewport": {
+      "message": "Utilizați spațiul disponibil în funcție de dimensiunile vizualizării pentru a extinde playerul video."
+   },
+   "export": {
+      "message": "Exportă"
+   },
+   "export_instructions": {
+      "message": "Creați un nou fișier tip text și lipiți codul de mai jos fără să îl modificați."
+   },
+   "flip_horizontally": {
+      "message": "Rotiți orizontal"
+   },
+   "flip_horizontally_control_info": {
+      "message": "Faceți clic pentru a întoarce videoclipul pe orizontală"
+   },
+   "flip_vertically": {
+      "message": "Rotiți vertical"
+   },
+   "flip_vertically_control_info": {
+      "message": "Faceți clic pentru a întoarce videoclipul pe verticală"
+   },
+   "flip_video_horizontally": {
+      "message": "Întoarceți videoclipul pe orizontală"
+   },
+   "flip_video_vertically": {
+      "message": "Întoarceți videoclipul pe verticală"
+   },
+   "focus_video_player": {
+      "message": "Fixați focalizarea pe playerul video"
+   },
+   "gaussian_blur": {
+      "message": "Gaussian blur:"
+   },
+   "grayscale": {
+      "message": "Tonuri de gri:"
+   },
+   "hide_chat": {
+      "message": "Ascunde chat-ul"
+   },
+   "hide_comments": {
+      "message": "Ascunde comentarii"
+   },
+   "hide_related_videos": {
+      "message": "Ascundeți videoclipurile similare"
+   },
+   "hide_shorts": {
+      "message": "Ascunde Shorts-uri"
+   },
+   "hue_rotation": {
+      "message": "Rotaţie HUE:"
+   },
+   "ignore_playlists": {
+      "message": "Nu pune pauză pentru videourile ce sunt în lista de redare"
+   },
+   "ignore_pop_up_player": {
+      "message": "Ignorați playerul pop-up"
+   },
+   "import": {
+      "message": "Importă"
+   },
+   "import_error": {
+      "message": "Conținutul fișierului de backup nu este valid!"
+   },
+   "import_instructions": {
+      "message": "Lipește conținutul filei de backup și dă clic pe butonul „Importă”. Pagina se va reîncărca în mod automat dacă setările au fost importate cu succes."
+   },
+   "increase_playback_speed": {
+      "message": "Măriți viteza de redare"
+   },
+   "keyboard_shortcuts": {
+      "message": "Comenzi rapide"
+   },
+   "keyboard_shortcuts_control_info": {
+      "message": "Faceți clic pentru a afișa lista tuturor comenzilor rapide de la tastatură pentru YouTube (pagină externă)"
+   },
+   "keyboard_shortcuts_page": {
+      "message": "Afișați toate comenzile rapide de la tastatură pentru YouTube"
+   },
+   "launch_mini_player": {
+      "message": "Lansați un mini player când derulați în jos pentru a citi comentarii"
+   },
+   "locale_code": {
+      "message": "ro"
+   },
+   "locale_dir": {
+      "message": "ltr"
+   },
+   "loop": {
+      "message": "Buclă"
+   },
+   "loop_control_info": {
+      "message": "Faceți clic pe acest buton pentru a activa/dezactiva modul repetare"
+   },
+   "loop_end": {
+      "message": "Oprește:"
+   },
+   "loop_start": {
+      "message": "Începe:"
+   },
+   "message": {
+      "message": "Mesaj"
+   },
+   "mini_player": {
+      "message": "Mini player"
+   },
+   "mini_player_position": {
+      "message": "Poziția mini-jucătorului:"
+   },
+   "mini_player_size": {
+      "message": "Dimensiunea mini playerului:"
+   },
+   "not_now": {
+      "message": "Nu acum"
+   },
+   "opacity": {
+      "message": "Transparență:"
+   },
+   "open_options_page": {
+      "message": "Deschideți pagina de opțiuni"
+   },
+   "options": {
+      "message": "Opțiuni"
+   },
+   "options_control_info": {
+      "message": "Faceți clic pentru a deschide pagina de opțiuni"
+   },
+   "override_playback_speeds": {
+      "message": "Treci peste viteza de redare implicită"
+   },
+   "page_reload_required": {
+      "message": "Enhancer for YouTube™ a fost actualizat, această pagină trebuie reîncărcată."
+   },
+   "pause_videos": {
+      "message": "Pauzează videoul care rulează în tabul din background (din spate) atunci când se începe redarea unui video în foreground (deasupra)"
+   },
+   "playback_quality": {
+      "message": "Calitatea redării"
+   },
+   "playback_speed": {
+      "message": "Viteza de redare"
+   },
+   "playlists": {
+      "message": "Playlisturi:"
+   },
+   "playlists_full_screen": {
+      "message": "Liste de redare (ecran complet):"
+   },
+   "pop_up_player": {
+      "message": "Player pop-up"
+   },
+   "pop_up_player_control_info": {
+      "message": "Faceți clic sau faceți clic dreapta pentru a viziona cu playerul pop-up"
+   },
+   "pop_up_player_embeds": {
+      "message": "Player pop-up și videoclipuri încorporate:"
+   },
+   "pop_up_player_embeds_full_screen": {
+      "message": "Player pop-up și videoclipuri încorporate (ecran complet):"
+   },
+   "pop_up_player_size": {
+      "message": "Dimensiunea playerului pop-up:"
+   },
+   "preserve_black_bars_color": {
+      "message": "Nu modificați culoarea barelor negre verticale atunci când este aplicată tema YouTube-DeepDark sau când modul cinema este activat"
+   },
+   "prevent_autoplay": {
+      "message": "Pauzează în mod automat videorile ce au fost deschise în taburile inferioare (background)"
+   },
+   "prevent_autoplay_foreground_tab": {
+      "message": "Pauzează şi videorile ce sunt deasupra (foreground)"
+   },
+   "preview": {
+      "message": "Previzualizare"
+   },
+   "rate": {
+      "message": "Evaluează"
+   },
+   "rate_extension": {
+      "message": "Evaluează-ți experiența cu Enhancer for YouTube™."
+   },
+   "reset": {
+      "message": "Restartează"
+   },
+   "reverse_mouse_wheel_direction": {
+      "message": "Inversează direcția rotiței mouse-ului pentru controlul vitezei de redare și al nivelului sunetului"
+   },
+   "reverse_playlist": {
+      "message": "Inversează listă de redare"
+   },
+   "reverse_playlist_control_info": {
+      "message": "Faceți clic sau faceți clic dreapta pentru a viziona o listă de redare în ordine inversă cu ajutorul ferestrei pop-up"
+   },
+   "reverse_playlist_order": {
+      "message": "Inversați ordinea listei de redare"
+   },
+   "saturation": {
+      "message": "Saturaţie:"
+   },
+   "save": {
+      "message": "Salvează"
+   },
+   "screenshot": {
+      "message": "Captură de ecran"
+   },
+   "screenshot_control_info": {
+      "message": "Faceți clic pentru a face o captură de ecran a videoclipului"
+   },
+   "select_default_playback_speed": {
+      "message": "Selectați viteza de redare implicită"
+   },
+   "select_normal_playback_speed": {
+      "message": "Selectați viteza normală de redare"
+   },
+   "select_quality_1080p": {
+      "message": "Selectați calitatea de redare „1080p”"
+   },
+   "select_quality_1440p": {
+      "message": "Selectați calitatea de redare „1440p”"
+   },
+   "select_quality_144p": {
+      "message": "Selectați calitatea de redare „144p”"
+   },
+   "select_quality_2160p": {
+      "message": "Selectați calitatea redare „2160p”"
+   },
+   "select_quality_240p": {
+      "message": "Selectați calitatea de redare „240p”"
+   },
+   "select_quality_2880p": {
+      "message": "Selectați calitatea redare „2880p”"
+   },
+   "select_quality_360p": {
+      "message": "Selectați calitatea de redare „360p”"
+   },
+   "select_quality_4320p": {
+      "message": "Selectați calitatea de redare „4320p”"
+   },
+   "select_quality_480p": {
+      "message": "Selectați calitatea de redare „480p”"
+   },
+   "select_quality_720p": {
+      "message": "Selectați calitatea de redare „720p”"
+   },
+   "select_quality_auto": {
+      "message": "Selectați calitatea de redare „Auto”"
+   },
+   "select_quality_full_screen": {
+      "message": "Selectați o calitate de redare diferită când intrați în modul ecran complet"
+   },
+   "sepia": {
+      "message": "Sepia:"
+   },
+   "shrink": {
+      "message": "Micșoreaza"
+   },
+   "size_control_info": {
+      "message": "Faceți clic pe acest buton pentru a redimensiona player-ul. Faceți clic dreapta pe acest buton pentru a centra player-ul video în centrul ferestrei."
+   },
+   "speed": {
+      "message": "Viteză"
+   },
+   "speed_control_info": {
+      "message": "Folosiţi rotiţa mouse-ului pentru a modifica viteza de redare atunci când sunteţi deasupra acestui buton cu cursorul. Faceţi clic pe el pentru a folosi viteza de redare implicită."
+   },
+   "speed_minus_control_info": {
+      "message": "Faceți clic pe acest buton pentru a încetini viteza de redare"
+   },
+   "speed_plus_control_info": {
+      "message": "Faceți clic pe acest buton pentru a mări viteza de redare"
+   },
+   "speed_variation": {
+      "message": "Variere de viteză atunci când se foloseşte rotiţa mouse-ului sau când se face clic pe unul dintre butoanele „-” sau „+”:"
+   },
+   "stop": {
+      "message": "Stop"
+   },
+   "stop_control_info": {
+      "message": "Faceți clic pentru a opri videoclipul"
+   },
+   "stop_video": {
+      "message": "Opriți videoclipul"
+   },
+   "stop_videos": {
+      "message": "Dezactivează preîncărcarea atunci când videoul este pus pe pauză"
+   },
+   "support": {
+      "message": "Ajutor"
+   },
+   "switch_back_previous_quality": {
+      "message": "Reveniți la calitatea de redare anterioară când ieșiți din modul ecran complet"
+   },
+   "take_screenshot": {
+      "message": "Faceți o captură de ecran a videoclipului"
+   },
+   "theme": {
+      "message": "Teme"
+   },
+   "theme_custom_theme": {
+      "message": "Tema: Tema personalizată"
+   },
+   "theme_youtube_dark": {
+      "message": "Tema: YouTube™ (Dark)"
+   },
+   "theme_youtube_deep_dark": {
+      "message": "Tema: YouTube-DeepDark"
+   },
+   "theme_youtube_deep_dark_custom": {
+      "message": "Tema: YouTube-DeepDark (Personalizat)"
+   },
+   "toggle_cards_end_screens": {
+      "message": "Comutați vizibilitatea cărților și a ecranelor finale"
+   },
+   "toggle_cinema_mode": {
+      "message": "Comutați modul cinema"
+   },
+   "toggle_comments_visibility": {
+      "message": "Comutați vizibilitatea comentariilor"
+   },
+   "toggle_loop": {
+      "message": "Comutați modul buclă"
+   },
+   "toggle_pip_mode": {
+      "message": "Comutați modul Picture-in-Picture"
+   },
+   "toggle_related_videos_visibility": {
+      "message": "Comutați vizibilitatea videoclipurilor asociate"
+   },
+   "toggle_video_filters": {
+      "message": "Comutați filtrele video"
+   },
+   "toggle_visibility": {
+      "message": "Comutați vizibilitatea cardurilor/ecranelor finale"
+   },
+   "toggle_volume_booster": {
+      "message": "Comutați amplificatorul de volum"
+   },
+   "top_left_corner": {
+      "message": "Colţul din stânga-sus"
+   },
+   "top_right_corner": {
+      "message": "Colţul din dreapta-sus"
+   },
+   "translate": {
+      "message": "Tradu"
+   },
+   "variant": {
+      "message": "Variantă:"
+   },
+   "video_codecs_and_formats": {
+      "message": "Codecuri și formate video"
+   },
+   "video_filters": {
+      "message": "Filtre Video"
+   },
+   "video_filters_control_info": {
+      "message": "Faceți clic pe acest buton pentru a activa/dezactiva filtrele"
+   },
+   "video_player": {
+      "message": "Player video"
+   },
+   "videos": {
+      "message": "Videoclipuri:"
+   },
+   "videos_full_screen": {
+      "message": "Videoclipuri (ecran complet):"
+   },
+   "volume": {
+      "message": "Volum"
+   },
+   "volume_booster_control_info": {
+      "message": "Faceți clic pe acest buton pentru a activa/dezactiva booster-ul de volum"
+   },
+   "volume_booster_level": {
+      "message": "Amplificator de volum:"
+   },
+   "volume_variation": {
+      "message": "Variere volum atunci când se foloseşte rotiţa mouse-ului:"
+   },
+   "watch_pop_up_player": {
+      "message": "Redați în playerul pop-up"
+   },
+   "youtube_dark_theme": {
+      "message": "YouTube (temă oficială)"
+   },
+   "youtube_deep_dark": {
+      "message": "YouTube-DeepDark (de RaitaroH)"
+   },
+   "youtube_deep_dark_custom": {
+      "message": "YouTube-DeepDark (personalizat)"
+   }
+}
