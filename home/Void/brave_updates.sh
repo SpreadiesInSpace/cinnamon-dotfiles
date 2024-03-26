@@ -36,7 +36,7 @@ convert_and_install_brave() {
   ./xdeb -Sedf brave-browser*.deb
 
   # Install the package
-  sudo xbps-install -R ./binpkgs brave-browser
+  sudo xbps-install -y -R ./binpkgs brave-browser
 }
 
 # Main process

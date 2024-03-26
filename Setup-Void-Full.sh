@@ -4,7 +4,7 @@
 username=$(whoami)
 
 # Install base-devel, git, and other dependencies
-sudo xbps-install -Syu base-devel git xtools
+sudo xbps-install -Syu git xtools
 
 # Install xmirror utility
 sudo xbps-install -Sy xmirror
@@ -15,12 +15,6 @@ sudo xmirror -s https://repo-fastly.voidlinux.org/
 # Install multilib and nonfree repos
 sudo xbps-install -Sy void-repo-nonfree void-repo-multilib void-repo-multilib-nonfree
 sudo xbps-install -Syu
-
-# Install Brave
-cd home/Void
-chmod +x brave_updates.sh
-./brave_updates.sh
-cd ..
 
 # All packages (adapt package names as needed for Void Linux)
 packages=(
@@ -97,6 +91,12 @@ packages=(
 
 # Update system and install packages
 sudo xbps-install -Syu "${packages[@]}"
+
+# Install Brave
+cd home/Void
+chmod +x brave_updates.sh
+./brave_updates.sh
+cd ..
 
 # Enable Flathub
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
