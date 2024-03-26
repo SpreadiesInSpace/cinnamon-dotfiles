@@ -43,3 +43,5 @@ convert_and_install_brave() {
 setup_xdeb
 check_and_download_brave
 convert_and_install_brave
+
+rm -rf "$WORKDIR"
