@@ -4,13 +4,17 @@
 username=$(whoami)
 
 # Install base-devel, git, and other dependencies
-sudo xbps-install -Sy base-devel git xtools
+sudo xbps-install -Syu base-devel git xtools
 
 # Install xmirror utility
 sudo xbps-install -Sy xmirror
 
 # Use xmirror to select the fastest mirrors
 sudo xmirror -s https://repo-fastly.voidlinux.org/
+
+# Install multilib and nonfree repos
+sudo xbps-install -Sy void-repo-nonfree void-repo-multilib void-repo-multilib-nonfree
+sudo xbps-install -Syu
 
 # Install Brave
 cd home/Void
