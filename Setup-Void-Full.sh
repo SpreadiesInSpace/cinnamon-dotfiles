@@ -70,7 +70,7 @@ packages=(
     "rmlint"
     "spice-vdagent"
     "noto-fonts-ttf"
-    "font-emoji-one-color"
+    "noto-fonts-emoji"
     "xclip"
     # For NvChad
     "gcc"
