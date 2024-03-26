@@ -8,10 +8,30 @@
 	<Menu>
 		<Name>Education</Name>
 		<DirectoryDir>/home/f16poom/.local/share/desktop-directories</DirectoryDir>
+		<Exclude>
+			<Filename>libreoffice-math.desktop</Filename>
+		</Exclude>
+		<AppDir>/home/f16poom/.local/share/applications</AppDir>
 	</Menu>
 	<Menu>
 		<Name>Development</Name>
 		<DirectoryDir>/home/f16poom/.local/share/desktop-directories</DirectoryDir>
+		<Exclude>
+			<Filename>org.gtk.IconBrowser4.desktop</Filename>
+		</Exclude>
+		<AppDir>/home/f16poom/.local/share/applications</AppDir>
+		<Exclude>
+			<Filename>assistant-qt5.desktop</Filename>
+		</Exclude>
+		<Exclude>
+			<Filename>designer-qt5.desktop</Filename>
+		</Exclude>
+		<Exclude>
+			<Filename>linguist-qt5.desktop</Filename>
+		</Exclude>
+		<Exclude>
+			<Filename>qdbusviewer-qt5.desktop</Filename>
+		</Exclude>
 	</Menu>
 	<Menu>
 		<Name>Internet</Name>
@@ -52,5 +72,12 @@
 			<Filename>xterm.desktop</Filename>
 			<Merge type="files"/>
 		</Layout>
+	</Menu>
+	<Menu>
+		<Name>Office</Name>
+		<Exclude>
+			<Filename>org.gnome.Evince.desktop</Filename>
+		</Exclude>
+		<AppDir>/home/f16poom/.local/share/applications</AppDir>
 	</Menu>
 </Menu>
