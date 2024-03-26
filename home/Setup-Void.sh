@@ -50,11 +50,11 @@ cp -vnpr .config/kdeglobals /root/.config/
 # Copies Cinnamon spice settings, preserving old ones
 mkdir -p ~/.config/cinnamon/spices/old
 mv ~/.config/cinnamon/spices/* ~/.config/cinnamon/spices/old
-cp -vnpr .config/cinnamon/spices.arch/* ~/.config/cinnamon/spices/
+cp -vnpr .config/cinnamon/spices.void/* ~/.config/cinnamon/spices/
 
 # Copies My Personal Shortcuts
 mkdir -p ~/.local/share/applications
-cp -vnpr .local/share/applications/arch/* ~/.local/share/applications/
+cp -vnpr .local/share/applications/void/* ~/.local/share/applications/
 
 # Copies .bashrc to home directory, preserving old one
 cp -vnpr Void/* ~/
@@ -99,7 +99,7 @@ sudo cp -vprf gruvbox-dark.xml /root/.local/share/gedit/styles/
 # Copies Menu Preferences to appropriate directory
 mkdir -p ~/.config/menus/old
 mv ~/.config/menus/*.menu ~/.config/menus/old
-cp -vnpr .config/menus/arch/* ~/.config/menus/
+cp -vnpr .config/menus/void/* ~/.config/menus/
 
 # Copies Qbittorent config to appropriate directory, preserving old one
 mv ~/.config/qBittorrent/qBittorrent.conf ~/.config/qBittorrent/qBittorrent.conf.old
@@ -122,7 +122,7 @@ cp -vnpr .face ~/
 # Import Entire Desktop Configuration, preserving old one
 dconf dump / > Old_Desktop_Configuration.dconf
 mv Old_Desktop_Configuration.dconf ~/
-dconf load / < Arch.dconf
+dconf load / < Void.dconf
 
 # Define the path to .desktop file
 # desktop_file_path="${HOME}/.local/share/applications/authy.desktop"
