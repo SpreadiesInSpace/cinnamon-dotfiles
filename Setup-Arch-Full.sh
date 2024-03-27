@@ -57,7 +57,7 @@ packages=(
     "celluloid"
     "eog"
     "evince"
-    "gedit"
+    #"gedit"
     "gnome-calculator"
     "gnome-screenshot"
     "gnome-system-monitor"
@@ -88,6 +88,7 @@ packages=(
     "noto-fonts"
     "noto-fonts-emoji"
     "xclip"
+    "xed"
     # For NvChad
     "gcc"
     "make"

@@ -354,3 +354,31 @@ start-with-sidebar=true
 
 [org/x/apps/portal]
 color-scheme='prefer-dark'
+
+[org/x/editor/plugins]
+active-plugins=['time', 'textsize', 'spell', 'sort', 'modelines', 'joinlines', 'filebrowser', 'docinfo', 'open-uri-context-menu', 'bracketcompletion']
+
+[org/x/editor/plugins/filebrowser/on-load]
+root='file:///'
+tree-view=false
+virtual-root='file:///home/f16poom/Share/cinnamon-dotfiles'
+
+[org/x/editor/preferences/editor]
+bracket-matching=true
+display-line-numbers=true
+display-right-margin=false
+draw-whitespace=false
+highlight-current-line=true
+prefer-dark-theme=true
+scheme='gruvbox-dark'
+
+[org/x/editor/preferences/ui]
+minimap-visible=false
+statusbar-visible=true
+
+[org/x/editor/state/window]
+bottom-panel-size=140
+side-panel-active-page=827629879
+side-panel-size=200
+size=(960, 990)
+state=76672

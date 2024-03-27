@@ -55,6 +55,7 @@ packages=(
     "celluloid"
     "eog"
     "evince"
+    #"gedit"
     "gnome-calculator"
     "gnome-screenshot"
     "gnome-system-monitor"

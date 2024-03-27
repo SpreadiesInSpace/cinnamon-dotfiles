@@ -90,11 +90,11 @@ sudo cp -vprf .config/qt5ct/ /root/.config/
 sudo mv /root/.config/qt6ct/qt6ct.conf /root/.config/qt6ct/qt6ct.conf.old
 sudo cp -vprf .config/qt6ct/ /root/.config/
 
-# Copies Gedit Theme to appropriate directory
-mkdir -p ~/.local/share/gedit/styles
-cp -vnpr gruvbox-dark.xml ~/.local/share/gedit/styles/
-sudo mkdir -p /root/.local/share/gedit/styles
-sudo cp -vprf gruvbox-dark.xml /root/.local/share/gedit/styles/
+# Copies xed Theme to appropriate directory
+mkdir -p ~/.local/share/xed/styles
+cp -vnpr gruvbox-dark.xml ~/.local/share/xed/styles/
+sudo mkdir -p /root/.local/share/xed/styles
+sudo cp -vprf gruvbox-dark.xml /root/.local/share/xed/styles/
 
 # Copies Menu Preferences to appropriate directory
 mkdir -p ~/.config/menus/old
@@ -138,9 +138,9 @@ dconf load / < Arch.dconf
 # sed -i "91s|\"value\": \"/home/f16poom/NixOS-Start.png\"|\"value\": \"${home_dir}/NixOS-Start.png\"|g" $json_file
 
 # Sets Default Apps
-chmod +x Default-Apps.sh
-./Default-Apps.sh
-sudo ./Default-Apps.sh
+chmod +x Default-Apps-xed.sh.sh
+./Default-Apps-openSUSE.sh
+sudo ./Default-Apps-xed.sh.sh
 
 # Sets Wallpaper
 gsettings set org.cinnamon.desktop.background picture-uri file://${HOME}/wallpapers/Desktop_Wallpaper.png
