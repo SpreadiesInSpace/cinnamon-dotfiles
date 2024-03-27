@@ -26,12 +26,3 @@ alias updateApp='sudo xbps-install xbps && sudo xbps-install -Suvy; flatpak upda
 alias updateAll='updateApp && cleanAll'
 alias updateRestart='updateAll; sudo reboot'
 alias updateShutdown='updateAll; sudo poweroff'
-
-# Update and Cleanup
-alias UC='updateAll;sudo bleachbit;exit'
-
-##-----------------------------------------------------
-## synth-shell-prompt.sh
-if [ -f /home/f16poom/.config/synth-shell/synth-shell-prompt.sh ] && [ -n "$( echo $- | grep i )" ]; then
-	source /home/f16poom/.config/synth-shell/synth-shell-prompt.sh
-fi
