@@ -12,6 +12,9 @@ PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
 # Ignore History with Space
 HISTCONTROL=ignoreboth
 
+# Update and Cleanup
+alias UC='updateAll;sudo bleachbit;exit'
+
 # Bottom Gruvbox Color Scheme
 alias btm='btm --color gruvbox'
 
