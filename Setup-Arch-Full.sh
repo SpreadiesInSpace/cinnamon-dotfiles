@@ -76,6 +76,7 @@ packages=(
     "qt5ct"
     "qt6ct"
     # Applications
+    "bauh"
     "bleachbit"
     "brave-bin"
     "bottom"
