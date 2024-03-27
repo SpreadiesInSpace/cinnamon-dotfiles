@@ -1,0 +1,4 @@
+database:
+  expiration: 60
+suggestions:
+  expiration: 24

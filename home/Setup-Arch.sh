@@ -119,6 +119,10 @@ sudo cp -vprf .config/libreoffice/arch /root/.config/libreoffice/4
 mv ~/.face ~/.faceold 
 cp -vnpr .face ~/
 
+# Copies bauh config to appropriate directory, preserving old one
+mv ~/.config/bauh ~/.config/bauh.old
+cp -vnpr .config/bauh/ ~/.config/
+
 # Import Entire Desktop Configuration, preserving old one
 dconf dump / > Old_Desktop_Configuration.dconf
 mv Old_Desktop_Configuration.dconf ~/
