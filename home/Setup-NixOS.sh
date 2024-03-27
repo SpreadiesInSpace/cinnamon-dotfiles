@@ -140,6 +140,7 @@ sed -i "91s|\"value\": \"/home/f16poom/NixOS-Start.png\"|\"value\": \"${home_dir
 # Sets Default Apps
 chmod +x Default-Apps-NixOS.sh
 sh Default-Apps-NixOS.sh
+sudo sh Default-Apps-NixOS.sh
 
 # Sets Wallpaper
 gsettings set org.cinnamon.desktop.background picture-uri file://${HOME}/wallpapers/Desktop_Wallpaper.png

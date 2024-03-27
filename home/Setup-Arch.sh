@@ -140,6 +140,7 @@ dconf load / < Arch.dconf
 # Sets Default Apps
 chmod +x Default-Apps.sh
 ./Default-Apps.sh
+sudo ./Default-Apps.sh
 
 # Sets Wallpaper
 gsettings set org.cinnamon.desktop.background picture-uri file://${HOME}/wallpapers/Desktop_Wallpaper.png

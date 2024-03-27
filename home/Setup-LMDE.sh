@@ -140,6 +140,7 @@ sed -i "91s|\"value\": \"/home/f16poom/linuxmint-logo-filled-ring.svg\"|\"value\
 # Sets Default Apps
 chmod +x Default-Apps.sh
 ./Default-Apps.sh
+sudo ./Default-Apps.sh
 
 # Sets Wallpaper
 gsettings set org.cinnamon.desktop.background picture-uri file://${HOME}/wallpapers/Desktop_Wallpaper.png

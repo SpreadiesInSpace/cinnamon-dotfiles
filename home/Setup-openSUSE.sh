@@ -140,6 +140,7 @@ dconf load / < openSUSE.dconf
 # Sets Default Apps
 chmod +x Default-Apps-openSUSE.sh
 ./Default-Apps-openSUSE.sh
+sudo ./Default-Apps-openSUSE.sh
 
 # Sets Wallpaper
 gsettings set org.cinnamon.desktop.background picture-uri file://${HOME}/wallpapers/Desktop_Wallpaper.png
