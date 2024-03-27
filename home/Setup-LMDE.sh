@@ -67,10 +67,10 @@ mv bashrc ~/.bashrc
 # Copies neofetch config file to appropriate directory, preserving old one
 neofetch
 mv ~/.config/neofetch/config.conf ~/.config/neofetch/config.conf.old
-cp -vnpr .config/neofetch/config.conf.LMDE ~/.config/neofetch/config.conf.LMDE
+cp -vnpr .config/neofetch/config.conf.LMDE ~/.config/neofetch/config.conf
 sudo neofetch
 sudo mv /root/.config/neofetch/config.conf /root/.config/neofetch/config.conf.old
-sudo cp -vprf .config/neofetch/config.conf.LMDE /root/.config/neofetch/config.conf.LMDE
+sudo cp -vprf .config/neofetch/config.conf.LMDE /root/.config/neofetch/config.conf
 
 # Copies Kvantum Themes to appropriate directory and installs them, preserving old config
 mv ~/.config/Kvantum/kvantum.kvconfig ~/.config/Kvantum/kvantum.kvconfig.old
