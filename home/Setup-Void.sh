@@ -73,9 +73,9 @@ sudo mv /root/.config/neofetch/config.conf /root/.config/neofetch/config.conf.ol
 sudo cp -vprf .config/neofetch/config.conf.void /root/.config/neofetch/config.conf
 
 # Copies Kvantum Themes to appropriate directory and installs them, preserving old config
-mv ~/.config/Kvantum/kvantum.kvconfig ~/.config/Kvantum/kvantum.kvconfig.old
+mv ~/.config/Kvantum ~/.config/Kvantum.old
 cp -vnpr Kvantum/ ~/.config/
-sudo mv /root/.config/Kvantum/kvantum.kvconfig /root/.config/Kvantum/kvantum.kvconfig.old
+sudo mv /root/.config/Kvantum /root/.config/Kvantum.old
 sudo cp -vnpr Kvantum/ /root/.config/Kvantum
 kvantummanager --set gruvbox-fallnn
 sudo kvantummanager --set gruvbox-fallnn
