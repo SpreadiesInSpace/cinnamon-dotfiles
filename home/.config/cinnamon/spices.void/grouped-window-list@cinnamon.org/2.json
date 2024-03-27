@@ -164,10 +164,10 @@
             "org.gnome.Terminal.desktop"
         ],
         "value": [
-            "Files.desktop",
+            "Mount CIFS Share.desktop",
             "filezilla.desktop",
             "brave-browser.desktop",
-            "Mount CIFS Share.desktop",
+            "octoxbps.desktop",
             "org.bleachbit.BleachBit.desktop",
             "nemo.desktop"
         ]
