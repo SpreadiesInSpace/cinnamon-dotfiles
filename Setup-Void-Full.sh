@@ -65,6 +65,7 @@ packages=(
     "bottom"
     "GPaste"
     "libreoffice"
+    "nano"
     "neovim"
     "qbittorrent"
     "rmlint"
