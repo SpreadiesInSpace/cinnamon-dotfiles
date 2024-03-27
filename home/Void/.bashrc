@@ -12,9 +12,6 @@ PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
 # Ignore History with Space
 HISTCONTROL=ignoreboth
 
-# Update and Cleanup
-alias UC='updateAll;sudo bleachbit;exit'
-
 # Bottom Gruvbox Color Scheme
 alias btm='btm --color gruvbox'
 
@@ -29,3 +26,6 @@ alias updateApp='sudo xbps-install xbps && sudo xbps-install -Suvy; flatpak upda
 alias updateAll='updateApp && cleanAll'
 alias updateRestart='updateAll; sudo reboot'
 alias updateShutdown='updateAll; sudo poweroff'
+
+# Update and Cleanup
+alias UC='updateAll;sudo bleachbit;exit'
