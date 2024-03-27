@@ -66,7 +66,7 @@ name='Force Quit'
 
 [org/cinnamon/desktop/keybindings/custom-keybindings/custom1]
 binding=['<Super>k']
-command="gnome-terminal -- bash -c 'neofetch --ascii ${HOME}/LMDEAscii.txt;exec bash;'"
+command="gnome-terminal -- bash -c 'neofetch --ascii_distro mint;exec bash;'"
 name='Neofetch'
 
 [org/cinnamon/desktop/keybindings/custom-keybindings/custom2]
