@@ -138,9 +138,9 @@ dconf load / < openSUSE.dconf
 # sed -i "91s|\"value\": \"/home/f16poom/NixOS-Start.png\"|\"value\": \"${home_dir}/NixOS-Start.png\"|g" $json_file
 
 # Sets Default Apps
-chmod +x Default-Apps-xed.sh.sh
-./Default-Apps-openSUSE.sh
-sudo ./Default-Apps-xed.sh.sh
+chmod +x Default-Apps-xed.sh
+./Default-Apps-xed.sh
+sudo ./Default-Apps-xed.sh
 
 # Sets Wallpaper
 gsettings set org.cinnamon.desktop.background picture-uri file://${HOME}/wallpapers/Desktop_Wallpaper.png
