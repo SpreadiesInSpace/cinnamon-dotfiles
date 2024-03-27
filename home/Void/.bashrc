@@ -19,13 +19,19 @@ alias btm='btm --color gruvbox'
 alias cleanLint='bash rmlint.sh -d && rmlint'
 
 # Void Cleaning
-alias cleanAll='flatpak remove --unused; sudo xbps-remove -yOo; sudo vkpurge rm all; rm -rf ~/.cache/*; sudo rm -rf /var/cache/xbps; sudo bleachbit -c --preset && bleachbit -c --preset'
+alias cleanAll='flatpak remove --unused; sudo xbps-remove -yROo; sudo vkpurge rm all; rm -rf ~/.cache/*; sudo rm -rf /var/cache/xbps; sudo bleachbit -c --preset && bleachbit -c --preset'
  
 # Void Update
-alias updateApp='sudo xbps-install -Suy; flatpak update -y'
+alias updateApp='sudo xbps-install xbps && sudo xbps-install -Suvy; flatpak update -y'
 alias updateAll='updateApp && cleanAll'
 alias updateRestart='updateAll; sudo reboot'
 alias updateShutdown='updateAll; sudo poweroff'
 
 # Update and Cleanup
 alias UC='updateAll;sudo bleachbit;exit'
+
+##-----------------------------------------------------
+## synth-shell-prompt.sh
+if [ -f /home/f16poom/.config/synth-shell/synth-shell-prompt.sh ] && [ -n "$( echo $- | grep i )" ]; then
+	source /home/f16poom/.config/synth-shell/synth-shell-prompt.sh
+fi
