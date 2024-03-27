@@ -9,11 +9,6 @@ if ! grep -q "^max_parallel_downloads=10$" /etc/dnf/dnf.conf; then
 else
     sudo sed -i '/^#*max_parallel_downloads=10/s/^#*//' /etc/dnf/dnf.conf
 fi
-if ! grep -q "^fastestmirror=true$" /etc/dnf/dnf.conf; then
-    echo 'fastestmirror=true' | sudo tee -a /etc/dnf/dnf.conf
-else
-    sudo sed -i '/^#*fastestmirror=true/s/^#*//' /etc/dnf/dnf.conf
-fi
 
 # Update system and install git
 sudo dnf -y update
