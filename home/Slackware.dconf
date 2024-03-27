@@ -13,9 +13,10 @@ obex-enabled=false
 
 [org/cinnamon]
 alttab-switcher-delay=100
-enabled-applets=['panel1:left:0:menu@cinnamon.org:0', 'panel1:left:2:grouped-window-list@cinnamon.org:2', 'panel1:right:10:removable-drives@cinnamon.org:7', 'panel1:right:13:network@cinnamon.org:10', 'panel1:right:14:sound@cinnamon.org:11', 'panel1:right:16:calendar@cinnamon.org:13', 'panel1:right:5:gpaste-reloaded@feuerfuchs.eu:15', 'panel1:right:4:show-hide-applets@mohammad-sn:16', 'panel1:right:3:notifications@cinnamon.org:17', 'panel1:right:2:systray@cinnamon.org:18', 'panel1:right:1:xapp-status@cinnamon.org:19', 'panel1:right:0:power@cinnamon.org:20']
-favorite-apps=['virt-manager.desktop', 'grub-customizer.desktop', 'cinnamon-settings.desktop', 'org.qbittorrent.qBittorrent.desktop', 'timeshift-gtk.desktop', 'cinnamon-settings-default.desktop']
-next-applet-id=21
+enabled-applets=['panel1:left:0:menu@cinnamon.org:0', 'panel1:left:2:grouped-window-list@cinnamon.org:2', 'panel1:right:7:removable-drives@cinnamon.org:7', 'panel1:right:8:network@cinnamon.org:10', 'panel1:right:9:sound@cinnamon.org:11', 'panel1:right:10:calendar@cinnamon.org:13', 'panel1:right:5:show-hide-applets@mohammad-sn:16', 'panel1:right:4:notifications@cinnamon.org:17', 'panel1:right:3:systray@cinnamon.org:18', 'panel1:right:2:xapp-status@cinnamon.org:19', 'panel1:right:1:power@cinnamon.org:20', 'panel1:right:6:lorem@vxstorm:22']
+favorite-apps=['virt-manager.desktop', 'alacarte-made-94459108-d986-11ee-b2f3-5254002e9856.desktop', 'cinnamon-settings.desktop', 'org.qbittorrent.qBittorrent.desktop', 'timeshift-gtk.desktop', 'cinnamon-settings-default.desktop']
+next-applet-id=23
+panel-edit-mode=false
 panel-zone-symbolic-icon-sizes='[{"panelId": 1, "left": 28, "center": 28, "right": 16}]'
 panels-height=['1:46']
 
@@ -251,6 +252,12 @@ visual-bell=false
 visual-bell-type='fullscreen-flash'
 workspace-names=@as []
 
+[org/gnome/easytag]
+default-path=b'/home/f16poom/Music'
+
+[org/gnome/evolution-data-server]
+migrated=true
+
 [org/gnome/file-roller/listing]
 list-mode='as-folder'
 name-column-width=250
@@ -311,11 +318,11 @@ cursor-colors-set=true
 cursor-foreground-color='#282828282828'
 default-size-columns=94
 default-size-rows=26
+font='SauceCodePro Nerd Font 10'
 foreground-color='#EBEBDBDBB2B2'
 palette=['#282828282828', '#CCCC24241D1D', '#989897971A1A', '#D7D799992121', '#454585858888', '#B1B162628686', '#68689D9D6A6A', '#A8A899998484', '#929283837474', '#FBFB49493434', '#B8B8BBBB2626', '#FAFABDBD2F2F', '#8383A5A59898', '#D3D386869B9B', '#8E8EC0C07C7C', '#EBEBDBDBB2B2']
-font='SauceCodePro Nerd Font 10'
-use-system-font=false
 scrollbar-policy='never'
+use-system-font=false
 use-theme-background=false
 use-theme-colors=true
 use-theme-transparency=false
@@ -336,7 +343,7 @@ sort-column='name'
 sort-directories-first=false
 sort-order='ascending'
 type-format='category'
-window-position=(465, 82)
+window-position=(465, 190)
 window-size=(990, 742)
 
 [org/nemo/desktop]
@@ -362,8 +369,8 @@ active-plugins=['time', 'textsize', 'spell', 'sort', 'modelines', 'joinlines', '
 
 [org/x/editor/plugins/filebrowser/on-load]
 root='file:///'
-tree-view=false
-virtual-root='file:///home/f16poom/Share/cinnamon-dotfiles'
+tree-view=true
+virtual-root='file:///home/f16poom'
 
 [org/x/editor/preferences/editor]
 bracket-matching=true
@@ -383,4 +390,4 @@ bottom-panel-size=140
 side-panel-active-page=827629879
 side-panel-size=200
 size=(960, 990)
-state=76672
+state=87168
