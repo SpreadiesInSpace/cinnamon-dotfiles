@@ -45,7 +45,7 @@ cp -vnpr .local/share/cinnamon/applets/* ~/.local/share/cinnamon/applets/
 mv ~/.config/kdeglobals ~/.config/kdeglobals.old
 cp -vnpr .config/kdeglobals ~/.config/
 sudo mv /root/.config/kdeglobals /root/.config/kdeglobals.old
-cp -vnpr .config/kdeglobals /root/.config/
+sudo cp -vnpr .config/kdeglobals /root/.config/
 
 # Copies Cinnamon spice settings, preserving old ones
 mkdir -p ~/.config/cinnamon/spices/old
