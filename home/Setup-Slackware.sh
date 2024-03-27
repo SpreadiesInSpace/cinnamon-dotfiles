@@ -207,7 +207,7 @@ fi
 if ! grep -q "^GTK_THEME=Gruvbox-Dark-BL" /etc/environment; then
     echo 'GTK_THEME=Gruvbox-Dark-BL' | sudo tee -a /etc/environment
 fi
-
+<<com
 # Append new settings to slick-greeter.conf, preserving old one
 sudo cp /etc/lightdm/slick-greeter.conf /etc/lightdm/slick-greeter.conf.old
 echo "[Greeter]
@@ -235,3 +235,4 @@ clock-format=%a, %-e %b %-l:%M %p
 indicators=~host;~spacer;~session;~clock;~power
 user-background=false
 hide-user-image = true" | sudo tee /etc/lightdm/lightdm-gtk-greeter.conf > /dev/null
+com
