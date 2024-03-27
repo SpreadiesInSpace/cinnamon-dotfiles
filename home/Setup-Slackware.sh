@@ -188,7 +188,7 @@ nvim --headless "+MasonInstallAll" +qa
 cinnamon-dbus-command RestartCinnamon 1
 
 # Places Login Wallpaper
-sudo cp -vnr wallpapers/Login_Wallpaper.jpg /boot/
+sudo cp -vnr wallpapers/SpeedDial2_Wallpaper.png /boot/
 
 # Check if syntax highlighting configurations are already in nanorc, preserving old one
 sudo cp /etc/nanorc /etc/nanorc.old
