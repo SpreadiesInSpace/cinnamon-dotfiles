@@ -34,13 +34,8 @@ packages=(
     # "xrandr"
     # Network utilities
     "filezilla"
-    "gvfs"
-    "gvfs-afc"
-    "gvfs-gphoto2"
-    "gvfs-mtp"
-    "gvfs-nfs"
-    "gvfs-smb"
-    "kdeconnect"
+    #"gvfs"
+    #"kdeconnect"
     "samba"
     # Desktop environment and related packages
     "cinnamon"
