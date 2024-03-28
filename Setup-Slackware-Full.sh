@@ -57,6 +57,7 @@ packages=(
     "celluloid"
     "eog"
     "evince"
+    "gdm"
     "gnome-calculator"
     "gnome-screenshot"
     "gnome-system-monitor"
@@ -155,41 +156,18 @@ sudo sh /etc/rc.d/rc.libvirt start
 # sudo virsh net-autostart default
 
 # Add the current user to the necessary groups
+sudo groupadd -f libvirt
 groups=(libvirt libvirt-qemu kvm input disk video audio)
 for group in "${groups[@]}"; do
     sudo usermod -aG "$group" "$USER"
 done
-<<com
-# Backs up old lightdm.conf
-sudo cp /etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf.old
 
-# Replace specific lines in lightdm.conf
-sudo awk -i inplace '
-/^\[Seat:\*\]/ {a=1}
-a==1 && /^#?greeter-hide-users=/ {
-    print "greeter-hide-users=false"
-    next
-}
-a==1 && /^#?display-setup-script=/ {
-    print "#display-setup-script=xrandr --output Virtual-1 --mode 1920x1080 --rate 60"
-    next
-}
-a==1 && /^#?autologin-user=/ {
-    print "#autologin-user='"$username"'"
-    next
-}
-a==1 && /^#?autologin-session=/ {
-    print "autologin-session=cinnamon"
-    next
-}
-{print}
-' /etc/lightdm/lightdm.conf
+# Set up theming for gdm
+flatpak install gdm
+flatpak run io.github.realmazharhussain.GdmSettings
+# sudo cp -f ~/.config/monitors.xml ~gdm/.config/monitors.xml
+# sudo chown $(id -u gdm):$(id -g gdm) ~gdm/.config/monitors.xml
 
-# Create a new group named 'autologin' if it doesn't already exist
-sudo groupadd -f autologin
-# Add the current user to the 'autologin' group
-sudo gpasswd -a $username autologin
-com
 # Modify systemd configuration to change the default timeout for stopping services during shutdown, preserving old one
 # sudo cp /etc/systemd/system.conf /etc/systemd/system.conf.old
 # sudo sed -i 's/^#DefaultTimeoutStopSec=.*/DefaultTimeoutStopSec=15s/' /etc/systemd/system.conf
@@ -198,10 +176,10 @@ com
 # sudo systemctl daemon-reload
 
 # Run the setup script
-cd home/
-chmod +x Setup-Slackware.sh
-./Setup-Slackware.sh
-cd ..
+# cd home/
+# chmod +x Setup-Slackware.sh
+# ./Setup-Slackware.sh
+# cd ..
 
 # Reboot for the changes to take effect
 echo "Installation complete! Please reboot for the changes to take effect."
