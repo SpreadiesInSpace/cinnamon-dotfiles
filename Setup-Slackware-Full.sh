@@ -145,8 +145,9 @@ if ! grep -q "^swtpm_group = \"$username\"$" /etc/libvirt/qemu.conf; then
     echo "swtpm_group = \"$username\"" | sudo tee -a /etc/libvirt/qemu.conf
 fi
 
-# Enable and start the libvirtd service
-# sudo systemctl enable --now libvirtd.service
+# Enable and start the libvirtd and spice-vdagent service
+sudo sh /etc/rc.d/rc.spice-vdagent start
+sudo sh /etc/rc.d/rc.libvirt start
 
 # Start and autostart the default network
 # sudo virsh net-start default
