@@ -32,10 +32,10 @@
 # uncomment the lines below if that fits your circumstances, but note that
 # kernel-headers should *not* be blacklisted:
 #
-#kernel-generic.*
-#kernel-huge.*
-#kernel-modules.*
-#kernel-source
+kernel-generic.*
+kernel-huge.*
+kernel-modules.*
+kernel-source
 #
 # This one will blacklist all SBo packages:
 #[0-9]+_SBo
