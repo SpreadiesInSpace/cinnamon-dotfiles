@@ -19,9 +19,6 @@ sudo ./update_slackware
 # Install and configure sbopkg and sbotools
 sudo ./install_sbopkg_and_sbotools
 
-# Install Bottom
-
-
 # Install Neovim AppImage
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 chmod u+x nvim.appimage
@@ -37,10 +34,6 @@ cd rmlint/
 sudo scons --prefix=/usr install
 cd ..
 sudo rm -rf rmlint/
-
-# Install Xed
-git clone https://github.com/linuxmint/xed
-cd xed/
 
 # All packages
 packages=(
@@ -80,10 +73,9 @@ packages=(
     "libreoffice"
     #"neovim" 
     "qbittorrent"
-    "rmlint" #no sphinx
     "spice-vdagent"
     #"noto-fonts"
-    #"noto-fonts-emoji" (doesn't exist)
+    "noto-emoji"
     "xclip"
     # For NvChad
     #"gcc"
