@@ -38,59 +38,58 @@ packages=(
     #"kdeconnect"
     "samba"
     # Desktop environment and related packages
-    "cinnamon"
+    # "cinnamon"
     "celluloid"
-    #"eog"
-    #"evince"
-    #"gedit"
+    "eog"
+    "evince"
+    #"gedit" #compile error
     "gnome-calculator"
     "gnome-screenshot"
     "gnome-system-monitor"
     "gnome-terminal"
-    "gthumb"
-    #"gufw"
-    "kvantum"
+    # "gthumb" (doesn't exist)
+    "gui-ufw"
     "kvantum-qt5"
-    #"lightdm"
+    #"lightdm" (doesn't exist)
     #"lightdm-settings"
     #"lightdm-slick-greeter"
-    "nemo-fileroller"
-    "nemo-image-converter"
-    "nemo-preview"
-    "nemo-share"
+    #"nemo-fileroller" (doesn't exist)
+    #"nemo-image-converter"
+    #"nemo-preview"
+    #"nemo-share"
     "qt5ct"
     "qt6ct"
     # Applications
     "bleachbit"
-    "brave-bin"
-    "bottom"
+    "brave-browser"
+    #"bottom" #no rust16
     #"gpaste"
-    "libreoffice-fresh"
-    # "neovim"
+    "libreoffice"
+    #"neovim" #compile eroor
     "qbittorrent"
-    "rmlint"
+    #"rmlint" #no sphinx
     "spice-vdagent"
     "noto-fonts"
     "noto-fonts-emoji"
     "xclip"
-    "xed"
+    #"xed" #how can it not be in slackbuilds?!
     # For NvChad
-    "gcc"
-    "make"
+    #"gcc"
+    #"make"
     "ripgrep"
     # Virtualization tools
     "virt-manager"
-    "qemu-desktop"
+    "qemu"
     "libvirt"
     "edk2-ovmf"
-    "dnsmasq"
+    #"dnsmasq"
     "vde2"
-    "bridge-utils"
-    "iptables"
-    "dmidecode"
-    "libguestfs"
-    "qemu-block-gluster"
-    "qemu-block-iscsi"
+    #"bridge-utils"
+    #"iptables"
+    #"dmidecode"
+    #"libguestfs" (this and the ones below don't exist)
+    #"qemu-block-gluster" 
+    #"qemu-block-iscsi" 
 )
 
 # Update system and install packages
@@ -197,10 +196,10 @@ sudo gpasswd -a $username autologin
 # sudo systemctl daemon-reload
 
 # Run the setup script
-# cd home/
-# chmod +x Setup-Slackware.sh
-# ./Setup-Slackware.sh
-# cd ..
+cd home/
+chmod +x Setup-Slackware.sh
+./Setup-Slackware.sh
+cd ..
 
 # Reboot for the changes to take effect
 echo "Installation complete! Please reboot for the changes to take effect."
