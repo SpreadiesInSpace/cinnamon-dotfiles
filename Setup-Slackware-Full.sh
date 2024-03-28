@@ -42,7 +42,7 @@ packages=(
     "celluloid"
     "eog"
     "evince"
-    #"gedit" #compile error
+    "gedit" #compile error
     "gnome-calculator"
     "gnome-screenshot"
     "gnome-system-monitor"
@@ -62,15 +62,15 @@ packages=(
     # Applications
     "bleachbit"
     "brave-browser"
-    #"bottom" #no rust16
+    "bottom" #no rust16
     #"gpaste"
     "libreoffice"
-    #"neovim" #compile eroor
+    "neovim" #compile eroor
     "qbittorrent"
-    #"rmlint" #no sphinx
+    "rmlint" #no sphinx
     "spice-vdagent"
-    "noto-fonts"
-    "noto-fonts-emoji"
+    #"noto-fonts"
+    #"noto-fonts-emoji" (doesn't exist)
     "xclip"
     #"xed" #how can it not be in slackbuilds?!
     # For NvChad
