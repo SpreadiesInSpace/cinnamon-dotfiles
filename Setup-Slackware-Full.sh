@@ -19,13 +19,24 @@ sudo ./update_slackware
 # Install and configure sbopkg and sbotools
 sudo ./install_sbopkg_and_sbotools
 
+# Install Bottom
+
+
+# Install Neovim AppImage
+curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+chmod u+x nvim.appimage
+./nvim.appimage --appimage-extract
+./squashfs-root/AppRun --version
+sudo mv squashfs-root /
+sudo ln -s /squashfs-root/AppRun /usr/bin/nvim
+rm nvim.appimage
+
 # All packages
 packages=(
     # System utilities
     "file-roller"
     "flatpak"
     "gparted"
-    # "grub-customizer" (doesn't exist)
     "ncdu"
     #"neofetch""
     "timeshift"
@@ -47,16 +58,8 @@ packages=(
     "gnome-screenshot"
     "gnome-system-monitor"
     "gnome-terminal"
-    # "gthumb" (doesn't exist)
     "gui-ufw"
     "kvantum-qt5"
-    #"lightdm" (doesn't exist)
-    #"lightdm-settings"
-    #"lightdm-slick-greeter"
-    #"nemo-fileroller" (doesn't exist)
-    #"nemo-image-converter"
-    #"nemo-preview"
-    #"nemo-share"
     "qt5ct"
     "qt6ct"
     # Applications
@@ -65,14 +68,13 @@ packages=(
     "bottom" #no rust16
     #"gpaste"
     "libreoffice"
-    "neovim" #compile eroor
+    #"neovim" 
     "qbittorrent"
     "rmlint" #no sphinx
     "spice-vdagent"
     #"noto-fonts"
     #"noto-fonts-emoji" (doesn't exist)
     "xclip"
-    #"xed" #how can it not be in slackbuilds?!
     # For NvChad
     #"gcc"
     #"make"
