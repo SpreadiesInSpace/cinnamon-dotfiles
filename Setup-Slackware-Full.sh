@@ -31,6 +31,17 @@ sudo mv squashfs-root /
 sudo ln -s /squashfs-root/AppRun /usr/bin/nvim
 rm nvim.appimage
 
+# Install rmlint
+git clone https://github.com/sahib/rmlint.git
+cd rmlint/
+sudo scons --prefix=/usr install
+cd ..
+sudo rm -rf rmlint/
+
+# Install Xed
+git clone https://github.com/linuxmint/xed
+cd xed/
+
 # All packages
 packages=(
     # System utilities
@@ -53,7 +64,6 @@ packages=(
     "celluloid"
     "eog"
     "evince"
-    "gedit" #compile error
     "gnome-calculator"
     "gnome-screenshot"
     "gnome-system-monitor"
@@ -89,9 +99,6 @@ packages=(
     #"bridge-utils"
     #"iptables"
     #"dmidecode"
-    #"libguestfs" (this and the ones below don't exist)
-    #"qemu-block-gluster" 
-    #"qemu-block-iscsi" 
 )
 
 # Update system and install packages
