@@ -159,7 +159,7 @@ groups=(libvirt libvirt-qemu kvm input disk video audio)
 for group in "${groups[@]}"; do
     sudo usermod -aG "$group" "$USER"
 done
-
+<<com
 # Backs up old lightdm.conf
 sudo cp /etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf.old
 
@@ -189,7 +189,7 @@ a==1 && /^#?autologin-session=/ {
 sudo groupadd -f autologin
 # Add the current user to the 'autologin' group
 sudo gpasswd -a $username autologin
-
+com
 # Modify systemd configuration to change the default timeout for stopping services during shutdown, preserving old one
 # sudo cp /etc/systemd/system.conf /etc/systemd/system.conf.old
 # sudo sed -i 's/^#DefaultTimeoutStopSec=.*/DefaultTimeoutStopSec=15s/' /etc/systemd/system.conf

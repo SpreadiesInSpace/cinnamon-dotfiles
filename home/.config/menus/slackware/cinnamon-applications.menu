@@ -469,6 +469,9 @@
 		<Exclude>
 			<Filename>org.kde.kile.desktop</Filename>
 		</Exclude>
+		<Exclude>
+			<Filename>org.gnome.Evince.desktop</Filename>
+		</Exclude>
 	</Menu>
 	<Menu>
 		<Name>Administration</Name>
