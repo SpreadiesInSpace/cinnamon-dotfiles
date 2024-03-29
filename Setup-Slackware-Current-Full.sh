@@ -2,7 +2,7 @@
 
 # Get the current username
 username=$(whoami)
-
+<<com
 # Review Hostname
 sudo nano /etc/HOSTNAME
 sudo nano /etc/hosts
@@ -72,7 +72,7 @@ sudo ./build-cinnamon.sh
 cd ..
 sudo rm -rf csb/
 xwmconfig
-<<com
+com
 
 # Update sbo just to be sure
 sudo sbocheck
