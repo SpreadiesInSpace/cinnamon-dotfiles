@@ -151,17 +151,17 @@ sudo sboinstall "${packages[@]}"
 
 # Enable Flathub
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-<<com
+
 # Preserve old libvirtd configuration (for Virtual Machine Manager)
 sudo cp /etc/libvirt/libvirtd.conf /etc/libvirt/libvirtd.conf.old
 
 # Check for 'unix_sock_group' entry
-if ! grep -q "^unix_sock_group = \"libvirt\"$" /etc/libvirt/libvirtd.conf; then
-    echo 'unix_sock_group = "libvirt"' | sudo tee -a /etc/libvirt/libvirtd.conf
+if ! grep -q "^unix_sock_group = \"users\"$" /etc/libvirt/libvirtd.conf; then
+    echo 'unix_sock_group = "users"' | sudo tee -a /etc/libvirt/libvirtd.conf
 else
-    sudo sed -i '/^#*unix_sock_group = "libvirt"/s/^#*//' /etc/libvirt/libvirtd.conf
+    sudo sed -i '/^#*unix_sock_group = "users"/s/^#*//' /etc/libvirt/libvirtd.conf
 fi
-com
+
 # Check for 'unix_sock_ro_perms' entry
 if ! grep -q "^unix_sock_ro_perms = \"0777\"$" /etc/libvirt/libvirtd.conf; then
     echo 'unix_sock_ro_perms = "0777"' | sudo tee -a /etc/libvirt/libvirtd.conf
