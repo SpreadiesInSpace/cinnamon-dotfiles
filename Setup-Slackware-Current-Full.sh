@@ -117,7 +117,7 @@ packages=(
     #"make"
     "ripgrep"
     # Virtualization tools
-    "virt-manager" # Currently not working
+    #"virt-manager" # Currently not working
     #"qemu"
     #"libvirt"
     #"edk2-ovmf"
