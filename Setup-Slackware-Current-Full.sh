@@ -79,16 +79,16 @@ packages=(
     "ncdu"
     #"neofetch""
     "timeshift"
-    # "unzip" 
-    # "xkill" 
-    # "xrandr"
+    #"unzip" 
+    #"xkill" 
+    #"xrandr"
     # Network utilities
     "filezilla"
     #"gvfs"
     #"kdeconnect"
     "samba"
     # Desktop environment and related packages
-    # "cinnamon"
+    #"cinnamon"
     "celluloid"
     #"eog" #using Geeqie instead
     #"evince" #using okular instead
@@ -117,12 +117,12 @@ packages=(
     #"make"
     "ripgrep"
     # Virtualization tools
-    "virt-manager"
-    "qemu"
-    "libvirt"
-    "edk2-ovmf"
-    #"dnsmasq"
-    "vde2"
+    "virt-manager" # Currently not working
+    #"qemu"
+    #"libvirt"
+    #"edk2-ovmf"
+    #"vde2"
+    #"dnsmasq" # This package and below is already there
     #"bridge-utils"
     #"iptables"
     #"dmidecode"
