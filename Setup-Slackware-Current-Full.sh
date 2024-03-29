@@ -151,7 +151,7 @@ sudo sboinstall "${packages[@]}"
 
 # Enable Flathub
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-
+<<com
 # Preserve old libvirtd configuration (for Virtual Machine Manager)
 sudo cp /etc/libvirt/libvirtd.conf /etc/libvirt/libvirtd.conf.old
 
@@ -175,7 +175,7 @@ if ! grep -q "^unix_sock_rw_perms = \"0770\"$" /etc/libvirt/libvirtd.conf; then
 else
     sudo sed -i '/^#*unix_sock_rw_perms = "0770"/s/^#*//' /etc/libvirt/libvirtd.conf
 fi
-<<com
+
 # Preserve old QEMU configuration (for Virtual Machine Manager)
 sudo cp /etc/libvirt/qemu.conf /etc/libvirt/qemu.conf.old
 
