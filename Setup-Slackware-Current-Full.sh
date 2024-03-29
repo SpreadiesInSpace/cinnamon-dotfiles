@@ -19,7 +19,7 @@ chmod +x *.sh
 # Set Slackpkg Mirrors and update cache
 # Switch from US to China Mirror *
 sed -i 's|TARGET_MIRROR="http://mirrors.us.kernel.org/slackware/slackware64-current"|#TARGET_MIRROR="http://mirrors.us.kernel.org/slackware/slackware64-current"|g' update_mirror_and_pkgs.sh
-awk '/TARGET_MIRROR="http:\/\/mirrors.us.kernel.org\/slackware\/slackware64-current"/{print;print "TARGET_MIRROR=\"http:\/\/mirrors.ustc.edu.cn\/slackware\/slackware64-current\" # China Mirror";next}1' update_mirror_and_pkgs.sh > temp && mv temp update_mirror_and_pkgs.sh
+awk '/TARGET_MIRROR="http:\/\/mirrors.us.kernel.org\/slackware\/slackware64-current"/{print;print "TARGET_MIRROR=\"http:\/\/mirrors.ustc.edu.cn\/slackware\/slackware64-current\"";next}1' update_mirror_and_pkgs.sh > temp && mv temp update_mirror_and_pkgs.sh
 nano update_mirror_and_pkgs.sh
 sudo ./update_mirror_and_pkgs.sh
 # Run Full Update & update grubn
