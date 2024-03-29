@@ -15,7 +15,7 @@ cd slackware-scripts
 cd Current
 chmod +x *.sh
 # Set up Slackware User, init level 4
-sudo ./setup_script
+# sudo ./setup_script
 # Set Slackpkg Mirrors and update cache
 # Switch from US to China Mirror *
 sed -i 's|TARGET_MIRROR="http://mirrors.us.kernel.org/slackware/slackware64-current"|#TARGET_MIRROR="http://mirrors.us.kernel.org/slackware/slackware64-current"|g' update_mirror_and_pkgs.sh
