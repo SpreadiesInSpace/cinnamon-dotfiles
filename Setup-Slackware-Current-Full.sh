@@ -18,8 +18,8 @@ chmod +x *.sh
 # sudo ./setup_script
 # Set Slackpkg Mirrors and update cache
 # Switch from US to China Mirror *
-sed -i 's|TARGET_MIRROR="http://mirrors.us.kernel.org/slackware/slackware64-current"|#TARGET_MIRROR="http://mirrors.us.kernel.org/slackware/slackware64-current"|g' update_mirror_and_pkgs.sh
-awk '/TARGET_MIRROR="http:\/\/mirrors.us.kernel.org\/slackware\/slackware64-current"/{print;print "TARGET_MIRROR=\"http:\/\/mirrors.ustc.edu.cn\/slackware\/slackware64-current\"";next}1' update_mirror_and_pkgs.sh > temp && mv temp update_mirror_and_pkgs.sh
+# sed -i 's|TARGET_MIRROR="http://mirrors.us.kernel.org/slackware/slackware64-current"|#TARGET_MIRROR="http://mirrors.us.kernel.org/slackware/slackware64-current"|g' update_mirror_and_pkgs.sh
+# awk '/TARGET_MIRROR="http:\/\/mirrors.us.kernel.org\/slackware\/slackware64-current"/{print;print "TARGET_MIRROR=\"http:\/\/mirrors.ustc.edu.cn\/slackware\/slackware64-current\"";next}1' update_mirror_and_pkgs.sh > temp && mv temp update_mirror_and_pkgs.sh
 nano update_mirror_and_pkgs.sh
 sudo ./update_mirror_and_pkgs.sh
 # Run Full Update & update grubn
@@ -28,14 +28,14 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 # Install and configure sbopkg and sbotools
 sudo ./install_sbopkg_and_sbotools.sh
 cd ../..
-<<com
+
 rm -rf slackware-scripts/
 
 # Blacklist Ponce's repo
 if ! grep -q "^\[0-9\]+ponce$" /etc/slackpkg/blacklist; then
     echo '[0-9]+ponce' | sudo tee -a /etc/slackpkg/blacklist
 fi
-
+<<com
 # Install slackpkg+ & configure
 url="https://sourceforge.net/projects/slackpkgplus/files/slackpkg%2B-1.8.0-noarch-7mt.txz/download"
 wget -O slackpkg+.txz "$url"
