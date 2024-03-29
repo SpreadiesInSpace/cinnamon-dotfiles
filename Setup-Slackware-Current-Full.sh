@@ -38,6 +38,9 @@ sudo slackpkg update gpg
 sudo slackpkg install-new
 rm slackpkg+.txz
 
+# Install Bottom
+cargo install bottom --locked
+
 # Install Neovim AppImage
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 chmod u+x nvim.appimage
@@ -105,7 +108,6 @@ packages=(
     # Applications
     "bleachbit"
     "brave-browser"
-    "bottom" #no rust16
     "clipit"
     "libreoffice"
     "qbittorrent"
