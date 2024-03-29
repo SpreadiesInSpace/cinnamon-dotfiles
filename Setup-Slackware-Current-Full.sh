@@ -42,6 +42,7 @@ sudo installpkg slackpkg+.txz
 sudo sed -i 's/TAG_PRIORITY=off/TAG_PRIORITY=on/g' /etc/slackpkg/slackpkgplus.conf
 sudo slackpkg update gpg
 sudo slackpkg install-new
+rm slackpkg+.txz
 
 # Install Neovim AppImage
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
