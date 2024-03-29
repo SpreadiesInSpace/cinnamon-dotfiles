@@ -212,7 +212,7 @@ fi
 mv ~/monitors.xml ~/.config/
 sudo cp -f ~/.config/monitors.xml ~gdm/.config/monitors.xml
 sudo chown $(id -u gdm):$(id -g gdm) ~gdm/.config/monitors.xml
-sudo restorecon ~gdm/.config/monitors.xml <<com
+sudo restorecon ~gdm/.config/monitors.xml
 flatpak install -y io.github.realmazharhussain.GdmSettings
 flatpak run io.github.realmazharhussain.GdmSettings
 flatpak remove -y io.github.realmazharhussain.GdmSettings
