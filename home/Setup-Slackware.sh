@@ -91,10 +91,10 @@ sudo mv /root/.config/qt6ct/qt6ct.conf /root/.config/qt6ct/qt6ct.conf.old
 sudo cp -vprf .config/qt6ct/ /root/.config/
 
 # Copies xed Theme to appropriate directory
-mkdir -p ~/.local/share/xed/styles
-cp -vnpr gruvbox-dark.xml ~/.local/share/xed/styles/
-sudo mkdir -p /root/.local/share/xed/styles
-sudo cp -vprf gruvbox-dark.xml /root/.local/share/xed/styles/
+# mkdir -p ~/.local/share/xed/styles
+# cp -vnpr gruvbox-dark.xml ~/.local/share/xed/styles/
+# sudo mkdir -p /root/.local/share/xed/styles
+# sudo cp -vprf gruvbox-dark.xml /root/.local/share/xed/styles/
 
 # Copies Menu Preferences to appropriate directory
 mkdir -p ~/.config/menus/old
@@ -142,9 +142,9 @@ dconf load / < Slackware.dconf
 # sed -i "91s|\"value\": \"/home/f16poom/NixOS-Start.png\"|\"value\": \"${home_dir}/NixOS-Start.png\"|g" $json_file
 
 # Sets Default Apps
-chmod +x Default-Apps-xed.sh
-./Default-Apps-xed.sh
-sudo ./Default-Apps-xed.sh
+chmod +x Default-Apps-Slackware.sh
+./Default-Apps-Slackware.sh
+sudo ./Default-Apps-Slackware.sh
 
 # Sets Wallpaper
 gsettings set org.cinnamon.desktop.background picture-uri file://${HOME}/wallpapers/Desktop_Wallpaper.png
@@ -188,7 +188,7 @@ nvim --headless "+MasonInstallAll" +qa
 cinnamon-dbus-command RestartCinnamon 1
 
 # Places Login Wallpaper
-sudo cp -vnr wallpapers/SpeedDial2_Wallpaper.png /boot/
+# sudo cp -vnr wallpapers/SpeedDial2_Wallpaper.png /boot/
 
 # Check if syntax highlighting configurations are already in nanorc, preserving old one
 sudo cp /etc/nanorc /etc/nanorc.old

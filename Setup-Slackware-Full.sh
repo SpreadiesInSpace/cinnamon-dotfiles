@@ -3,21 +3,43 @@
 # Get the current username
 username=$(whoami)
 
+# Review Hostname
+sudo nano /etc/HOSTNAME
+sudo nano /etc/hosts
+
 # Grab Slackware Setup Scripts by gosh-its-arch-linux
 git clone https://gitlab.com/gosh-its-arch-linux/slackware-scripts.git
 cd slackware-scripts
 # Can do either Current or Slackware 15.0
-cd Current
 # cd Slackware15
+cd Current
 chmod +x *.sh
-# Set up Slackware User, init level 4, xwmconfig to KDE
+# Set up Slackware User, init level 4
 sudo ./setup_script
-# Set Slackpkg US Mirrors and update cache
-sudo ./update_mirror_and_pkgs
-# Run Full Update
-sudo ./update_slackware
+# Set Slackpkg Mirrors and update cache
+# Switch from US to China Mirror *
+sed -i 's|TARGET_MIRROR="http://mirrors.us.kernel.org/slackware/slackware64-current"|#TARGET_MIRROR="http://mirrors.us.kernel.org/slackware/slackware64-current"|g' update_mirror_and_pkgs.sh
+awk '/TARGET_MIRROR="http:\/\/mirrors.us.kernel.org\/slackware\/slackware64-current"/{print;print "TARGET_MIRROR=\"http:\/\/mirrors.ustc.edu.cn\/slackware\/slackware64-current\" # China Mirror";next}1' update_mirror_and_pkgs.sh > temp && mv temp update_mirror_and_pkgs.sh
+nano update_mirror_and_pkgs.sh
+sudo ./update_mirror_and_pkgs.sh
+# Run Full Update & update grubn
+sudo ./update_slackware.sh
+sudo grub-mkconfig -o /boot/grub/grub.cfg
 # Install and configure sbopkg and sbotools
-sudo ./install_sbopkg_and_sbotools
+sudo ./install_sbopkg_and_sbotools.sh
+cd ../..
+rm -rf slackware-scripts/
+
+# Blacklist Ponce's repo
+if ! grep -q "^\[0-9\]+ponce$" /etc/slackpkg/blacklist; then
+    echo '[0-9]+ponce' | sudo tee -a /etc/slackpkg/blacklist
+fi
+
+# Install slackpkg+ & configure
+url="https://sourceforge.net/projects/slackpkgplus/files/slackpkg%2B-1.8.0-noarch-7mt.txz/download"
+wget -O slackpkg+.txz "$url"
+sudo installpkg slackpkg+.txz
+sudo sed -i 's/TAG_PRIORITY=off/TAG_PRIORITY=on/g' /etc/slackpkg/slackpkgplus.conf
 
 # Install Cinnamon
 git clone https://github.com/CinnamonSlackBuilds/csb
@@ -30,6 +52,7 @@ fi
 sudo ./build-cinnamon.sh
 cd ..
 sudo rm -rf csb/
+xwmconfig
 
 # Install Neovim AppImage
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
@@ -67,10 +90,10 @@ packages=(
     # Desktop environment and related packages
     # "cinnamon"
     "celluloid"
-    "eog"
-    "evince"
+    #"eog" #using Geeqie instead
+    #"evince" #using okular instead
     "gdm"
-    "gnome-calculator"
+    #"gnome-calculator" #using kcalc instead
     "gnome-screenshot"
     "gnome-system-monitor"
     "gnome-terminal"
@@ -158,7 +181,7 @@ if ! grep -q "^swtpm_group = \"$username\"$" /etc/libvirt/qemu.conf; then
     echo "swtpm_group = \"$username\"" | sudo tee -a /etc/libvirt/qemu.conf
 fi
 
-# Enable and start the libvirtd and spice-vdagent service*
+# Enable and start the libvirtd and spice-vdagent service *
 sudo sh /etc/rc.d/rc.spice-vdagent start
 sudo sh /etc/rc.d/rc.libvirt start
 

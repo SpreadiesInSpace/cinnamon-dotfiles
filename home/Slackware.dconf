@@ -21,7 +21,7 @@ panel-zone-symbolic-icon-sizes='[{"panelId": 1, "left": 28, "center": 28, "right
 panels-height=['1:46']
 
 [org/cinnamon/desktop/applications/calculator]
-exec='gnome-calculator'
+exec='kcalc'
 
 [org/cinnamon/desktop/applications/terminal]
 exec='gnome-terminal'
