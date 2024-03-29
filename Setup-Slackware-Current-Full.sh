@@ -22,7 +22,7 @@ chmod +x *.sh
 # awk '/TARGET_MIRROR="http:\/\/mirrors.us.kernel.org\/slackware\/slackware64-current"/{print;print "TARGET_MIRROR=\"http:\/\/mirrors.ustc.edu.cn\/slackware\/slackware64-current\"";next}1' update_mirror_and_pkgs.sh > temp && mv temp update_mirror_and_pkgs.sh
 nano update_mirror_and_pkgs.sh
 sudo ./update_mirror_and_pkgs.sh
-# Run Full Update & update grubn
+# Run Full Update & update grub
 sudo ./update_slackware.sh
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 # Install and configure sbopkg and sbotools
