@@ -216,10 +216,10 @@ echo -e "[Manager]\nDefaultTimeoutStopSec=15s" | sudo tee /etc/systemd/system.co
 sudo systemctl daemon-reload
 
 # Run the setup script
-cd home/
-chmod +x Setup-openSUSE.sh
-./Setup-openSUSE.sh
-cd ..
+# cd home/
+# chmod +x Setup-openSUSE.sh
+# ./Setup-openSUSE.sh
+# cd ..
 
 # Reboot for the changes to take effect
-echo "Installation complete! Please reboot for the changes to take effect."
+echo "Installation complete! Please reboot for the changes to take effect. Then run Setup-openSUSE.sh in cinnamon/home for theming."

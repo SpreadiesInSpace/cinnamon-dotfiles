@@ -255,4 +255,4 @@ fi
 # cd ..
 
 # Reboot for the changes to take effect
-echo "Installation complete! Please reboot for the changes to take effect."
+echo "Installation complete! Please reboot for the changes to take effect. Then run Setup-Slackware.sh in cinnamon/home for theming."
