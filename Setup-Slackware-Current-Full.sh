@@ -28,6 +28,7 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 # Install and configure sbopkg and sbotools
 sudo ./install_sbopkg_and_sbotools.sh
 cd ../..
+<<com
 rm -rf slackware-scripts/
 
 # Blacklist Ponce's repo
