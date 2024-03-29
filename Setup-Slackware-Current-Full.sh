@@ -40,6 +40,8 @@ url="https://sourceforge.net/projects/slackpkgplus/files/slackpkg%2B-1.8.0-noarc
 wget -O slackpkg+.txz "$url"
 sudo installpkg slackpkg+.txz
 sudo sed -i 's/TAG_PRIORITY=off/TAG_PRIORITY=on/g' /etc/slackpkg/slackpkgplus.conf
+sudo slackpkg update gpg
+sudo slackpkg install-new
 <<com
 # Install Cinnamon
 git clone https://github.com/CinnamonSlackBuilds/csb
