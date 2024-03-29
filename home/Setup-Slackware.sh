@@ -1,5 +1,5 @@
 #!/bin/bash
-sudo echo
+sudo echo <<com
 # Copies icons and themes to appropriate directories
 mv .icons/*.zip ${PWD}
 unzip Capitaine\ Cursors\ \(Gruvbox\)\ -\ White.zip
@@ -207,12 +207,12 @@ fi
 if ! grep -q "^GTK_THEME=Gruvbox-Dark-BL" /etc/environment; then
     echo 'GTK_THEME=Gruvbox-Dark-BL' | sudo tee -a /etc/environment
 fi
-
+com
 # Set up theming for gdm
 mv ~/monitors.xml ~/.config/
 sudo cp -f ~/.config/monitors.xml ~gdm/.config/monitors.xml
 sudo chown $(id -u gdm):$(id -g gdm) ~gdm/.config/monitors.xml
-sudo restorecon ~gdm/.config/monitors.xml
+sudo restorecon ~gdm/.config/monitors.xml <<com
 flatpak install -y io.github.realmazharhussain.GdmSettings
 flatpak run io.github.realmazharhussain.GdmSettings
 flatpak remove -y io.github.realmazharhussain.GdmSettings

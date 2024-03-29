@@ -2,7 +2,7 @@
 
 # Get the current username
 username=$(whoami)
-<<com
+
 # Review Hostname
 sudo nano /etc/HOSTNAME
 sudo nano /etc/hosts
@@ -10,8 +10,6 @@ sudo nano /etc/hosts
 # Grab Slackware Setup Scripts by gosh-its-arch-linux
 git clone https://gitlab.com/gosh-its-arch-linux/slackware-scripts.git
 cd slackware-scripts
-# Can do either Current or Slackware 15.0
-# cd Slackware15
 cd Current
 chmod +x *.sh
 # Set up Slackware User, init level 4
@@ -68,7 +66,6 @@ sudo ./build-cinnamon.sh
 cd ..
 sudo rm -rf csb/
 xwmconfig
-com
 
 # Update sbo just to be sure
 sudo sbocheck
