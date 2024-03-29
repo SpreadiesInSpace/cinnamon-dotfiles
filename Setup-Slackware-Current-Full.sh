@@ -28,20 +28,19 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 # Install and configure sbopkg and sbotools
 sudo ./install_sbopkg_and_sbotools.sh
 cd ../..
-
 rm -rf slackware-scripts/
 
 # Blacklist Ponce's repo
 if ! grep -q "^\[0-9\]+ponce$" /etc/slackpkg/blacklist; then
     echo '[0-9]+ponce' | sudo tee -a /etc/slackpkg/blacklist
 fi
-<<com
+
 # Install slackpkg+ & configure
 url="https://sourceforge.net/projects/slackpkgplus/files/slackpkg%2B-1.8.0-noarch-7mt.txz/download"
 wget -O slackpkg+.txz "$url"
 sudo installpkg slackpkg+.txz
 sudo sed -i 's/TAG_PRIORITY=off/TAG_PRIORITY=on/g' /etc/slackpkg/slackpkgplus.conf
-
+<<com
 # Install Cinnamon
 git clone https://github.com/CinnamonSlackBuilds/csb
 cd csb/
