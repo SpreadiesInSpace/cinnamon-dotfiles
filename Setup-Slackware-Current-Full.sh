@@ -111,7 +111,6 @@ packages=(
     "clipit"
     "libreoffice"
     "qbittorrent"
-    "spice-vdagent"
     #"noto-fonts"
     "noto-emoji"
     "xclip"
@@ -120,11 +119,27 @@ packages=(
     #"make"
     "ripgrep"
     # Virtualization tools
-    #"virt-manager" # Currently not working
-    #"qemu"
-    #"libvirt"
-    #"edk2-ovmf"
-    #"vde2"
+    "libslirp"
+    "libiscsi"
+    "libcacard"
+    "spice"
+    "spice-vdagent"
+    "usbredir"
+    "virglrenderer"
+    "libnfs"
+    "snappy"
+    "device-tree-compiler"
+    "glusterfs"
+    "vde2"
+    "qemu"
+    "spice-gtk"
+    "gtk-vnc"
+    "libvirt"
+    "libvirt-glib"
+    "libvirt-python"
+    "libosinfo"
+    "edk2-ovmf"
+    "virt-manager" # Currently not working
     #"dnsmasq" # This package and below is already there
     #"bridge-utils"
     #"iptables"
@@ -136,7 +151,7 @@ sudo sboinstall "${packages[@]}"
 
 # Enable Flathub
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-
+<<com
 # Preserve old libvirtd configuration (for Virtual Machine Manager)
 sudo cp /etc/libvirt/libvirtd.conf /etc/libvirt/libvirtd.conf.old
 
@@ -146,7 +161,7 @@ if ! grep -q "^unix_sock_group = \"libvirt\"$" /etc/libvirt/libvirtd.conf; then
 else
     sudo sed -i '/^#*unix_sock_group = "libvirt"/s/^#*//' /etc/libvirt/libvirtd.conf
 fi
-
+com
 # Check for 'unix_sock_ro_perms' entry
 if ! grep -q "^unix_sock_ro_perms = \"0777\"$" /etc/libvirt/libvirtd.conf; then
     echo 'unix_sock_ro_perms = "0777"' | sudo tee -a /etc/libvirt/libvirtd.conf
@@ -160,7 +175,7 @@ if ! grep -q "^unix_sock_rw_perms = \"0770\"$" /etc/libvirt/libvirtd.conf; then
 else
     sudo sed -i '/^#*unix_sock_rw_perms = "0770"/s/^#*//' /etc/libvirt/libvirtd.conf
 fi
-
+<<com
 # Preserve old QEMU configuration (for Virtual Machine Manager)
 sudo cp /etc/libvirt/qemu.conf /etc/libvirt/qemu.conf.old
 
@@ -183,7 +198,7 @@ fi
 if ! grep -q "^swtpm_group = \"$username\"$" /etc/libvirt/qemu.conf; then
     echo "swtpm_group = \"$username\"" | sudo tee -a /etc/libvirt/qemu.conf
 fi
-
+com
 # Enable and start the libvirtd and spice-vdagent service *
 sudo sh /etc/rc.d/rc.spice-vdagent start
 sudo sh /etc/rc.d/rc.libvirt start
@@ -193,7 +208,7 @@ sudo sh /etc/rc.d/rc.libvirt start
 # sudo virsh net-autostart default
 
 # Add the current user to the necessary groups
-groups=(libvirt libvirt-qemu kvm input disk video audio)
+groups=(libvirt libvirt-qemu kvm input disk video audio users)
 for group in "${groups[@]}"; do
     sudo usermod -aG "$group" "$USER"
 done
