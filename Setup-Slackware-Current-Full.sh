@@ -81,7 +81,7 @@ packages=(
     "flatpak"
     "gparted"
     "ncdu"
-    #"neofetch""
+    #"neofetch"
     "timeshift"
     #"unzip" 
     #"xkill" 
