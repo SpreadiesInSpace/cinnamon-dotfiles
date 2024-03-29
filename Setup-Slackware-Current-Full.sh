@@ -42,19 +42,6 @@ sudo installpkg slackpkg+.txz
 sudo sed -i 's/TAG_PRIORITY=off/TAG_PRIORITY=on/g' /etc/slackpkg/slackpkgplus.conf
 sudo slackpkg update gpg
 sudo slackpkg install-new
-<<com
-# Install Cinnamon
-git clone https://github.com/CinnamonSlackBuilds/csb
-cd csb/
-# Check if the Mint entries exist in the build-cinnamon.sh file
-if grep -q "mint-y-icons\|mint-l-icons\|mint-themes\|mint-cursor-themes" build-cinnamon.sh; then
-    # Remove the Mint entries
-    sed -i '/mint-y-icons\|mint-l-icons\|mint-themes\|mint-cursor-themes/d' build-cinnamon.sh
-fi
-sudo ./build-cinnamon.sh
-cd ..
-sudo rm -rf csb/
-xwmconfig
 
 # Install Neovim AppImage
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
@@ -71,6 +58,20 @@ cd rmlint/
 sudo scons --prefix=/usr install
 cd ..
 sudo rm -rf rmlint/
+
+# Install Cinnamon
+git clone https://github.com/CinnamonSlackBuilds/csb
+cd csb/
+# Check if the Mint entries exist in the build-cinnamon.sh file
+if grep -q "mint-y-icons\|mint-l-icons\|mint-themes\|mint-cursor-themes" build-cinnamon.sh; then
+    # Remove the Mint entries
+    sed -i '/mint-y-icons\|mint-l-icons\|mint-themes\|mint-cursor-themes/d' build-cinnamon.sh
+fi
+sudo ./build-cinnamon.sh
+cd ..
+sudo rm -rf csb/
+xwmconfig
+<<com
 
 # All packages
 packages=(
