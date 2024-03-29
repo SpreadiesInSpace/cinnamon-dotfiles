@@ -16,11 +16,7 @@ cd Current
 chmod +x *.sh
 # Set up Slackware User, init level 4
 # sudo ./setup_script
-# Set Slackpkg Mirrors and update cache
-# Switch from US to China Mirror *
-# sed -i 's|TARGET_MIRROR="http://mirrors.us.kernel.org/slackware/slackware64-current"|#TARGET_MIRROR="http://mirrors.us.kernel.org/slackware/slackware64-current"|g' update_mirror_and_pkgs.sh
-# awk '/TARGET_MIRROR="http:\/\/mirrors.us.kernel.org\/slackware\/slackware64-current"/{print;print "TARGET_MIRROR=\"http:\/\/mirrors.ustc.edu.cn\/slackware\/slackware64-current\"";next}1' update_mirror_and_pkgs.sh > temp && mv temp update_mirror_and_pkgs.sh
-# nano update_mirror_and_pkgs.sh
+# Set Slackpkg Mirrors to US and update cache
 sudo ./update_mirror_and_pkgs.sh
 # Run Full Update & update grub
 sudo ./update_slackware.sh
@@ -94,7 +90,7 @@ packages=(
     "filezilla"
     #"gvfs"
     #"kdeconnect"
-    "samba"
+    #"samba"
     # Desktop environment and related packages
     #"cinnamon"
     "celluloid"
@@ -203,51 +199,20 @@ for group in "${groups[@]}"; do
     sudo usermod -aG "$group" "$USER"
 done
 
-# Set up theming for gdm
-flatpak install -y io.github.realmazharhussain.GdmSettings
-flatpak run io.github.realmazharhussain.GdmSettings
-flatpak remove -y io.github.realmazharhussain.GdmSettings
-flatpak remove -y --unused
-<< #autologin
-sudo cp -f home/Slackware/monitors.xml ~gdm/.config/monitors.xml
-sudo chown $(id -u gdm):$(id -g gdm) ~gdm/.config/monitors.xml
-sudo restorecon ~gdm/.config/monitors.xml
+<<#autologin
 # Backs up old gdm custom.conf
 sudo cp /etc/gdm/custom.conf /etc/gdm/custom.conf.old
 # Use awk to add the configuration under the [daemon] section
 sudo awk -i inplace '
 BEGIN { RS=""; FS="\n" }
 /^\[daemon\]/ {
-    a=1
     print
-    next
-}
-a==1 && /^#?AutomaticLoginEnable=/ {
-    print "AutomaticLoginEnable=True"
-    a=0
-    next
-}
-a==1 && /^#?AutomaticLogin=/ {
-    print "AutomaticLogin='"$username"'"
-    a=0
-    next
-}
-a==1 {
     print "AutomaticLoginEnable=True"
     print "AutomaticLogin='"$username"'"
-    a=0
     next
 }
 {print}
 ' "/etc/gdm/custom.conf"
-
-# Check if the entries were added, if not, append them
-if ! grep -q "AutomaticLoginEnable=True" "/etc/gdm/custom.conf"; then
-    echo "AutomaticLoginEnable=True" | sudo tee -a "/etc/gdm/custom.conf"
-fi
-if ! grep -q "AutomaticLogin='"$username"'" "/etc/gdm/custom.conf"; then
-    echo "AutomaticLogin='"$username"'" | sudo tee -a "/etc/gdm/custom.conf"
-fi
 #autologin
 # Modify systemd configuration to change the default timeout for stopping services during shutdown, preserving old one
 # sudo cp /etc/systemd/system.conf /etc/systemd/system.conf.old
