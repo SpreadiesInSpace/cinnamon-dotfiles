@@ -217,3 +217,18 @@ flatpak install -y io.github.realmazharhussain.GdmSettings
 flatpak run io.github.realmazharhussain.GdmSettings
 flatpak remove -y io.github.realmazharhussain.GdmSettings
 flatpak remove -y --unused
+
+<<autologin
+# Backs up old gdm custom.conf
+sudo cp /etc/gdm/custom.conf /etc/gdm/custom.conf.old
+# Use awk to add the configuration under the [daemon] section
+sudo awk -i inplace '
+BEGIN { RS=""; FS="\n" }
+/^\[daemon\]/ {
+    print
+    print "AutomaticLoginEnable=True"
+    print "AutomaticLogin='"$username"'"
+    next
+}
+{print}
+' "/etc/gdm/custom.conf"

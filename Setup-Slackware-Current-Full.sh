@@ -213,21 +213,6 @@ for group in "${groups[@]}"; do
     sudo usermod -aG "$group" "$USER"
 done
 
-<<#autologin
-# Backs up old gdm custom.conf
-sudo cp /etc/gdm/custom.conf /etc/gdm/custom.conf.old
-# Use awk to add the configuration under the [daemon] section
-sudo awk -i inplace '
-BEGIN { RS=""; FS="\n" }
-/^\[daemon\]/ {
-    print
-    print "AutomaticLoginEnable=True"
-    print "AutomaticLogin='"$username"'"
-    next
-}
-{print}
-' "/etc/gdm/custom.conf"
-#autologin
 # Modify systemd configuration to change the default timeout for stopping services during shutdown, preserving old one
 # sudo cp /etc/systemd/system.conf /etc/systemd/system.conf.old
 # sudo sed -i 's/^#DefaultTimeoutStopSec=.*/DefaultTimeoutStopSec=15s/' /etc/systemd/system.conf
