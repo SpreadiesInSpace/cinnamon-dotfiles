@@ -73,6 +73,10 @@ sudo rm -rf csb/
 xwmconfig
 <<com
 
+# Update sbo just to be sure
+sudo sbocheck
+sudo sboupgrade --all
+
 # All packages
 packages=(
     # System utilities
