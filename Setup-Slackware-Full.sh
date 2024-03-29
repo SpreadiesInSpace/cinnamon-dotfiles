@@ -19,6 +19,18 @@ sudo ./update_slackware
 # Install and configure sbopkg and sbotools
 sudo ./install_sbopkg_and_sbotools
 
+# Install Cinnamon
+git clone https://github.com/CinnamonSlackBuilds/csb
+cd csb/
+# Check if the Mint entries exist in the build-cinnamon.sh file
+if grep -q "mint-y-icons\|mint-l-icons\|mint-themes\|mint-cursor-themes" build-cinnamon.sh; then
+    # Remove the Mint entries
+    sed -i '/mint-y-icons\|mint-l-icons\|mint-themes\|mint-cursor-themes/d' build-cinnamon.sh
+fi
+sudo ./build-cinnamon.sh
+cd ..
+sudo rm -rf csb/
+
 # Install Neovim AppImage
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 chmod u+x nvim.appimage
@@ -70,9 +82,8 @@ packages=(
     "bleachbit"
     "brave-browser"
     "bottom" #no rust16
-    #"gpaste"
+    "clipit"
     "libreoffice"
-    #"neovim" 
     "qbittorrent"
     "spice-vdagent"
     #"noto-fonts"
@@ -147,7 +158,7 @@ if ! grep -q "^swtpm_group = \"$username\"$" /etc/libvirt/qemu.conf; then
     echo "swtpm_group = \"$username\"" | sudo tee -a /etc/libvirt/qemu.conf
 fi
 
-# Enable and start the libvirtd and spice-vdagent service
+# Enable and start the libvirtd and spice-vdagent service*
 sudo sh /etc/rc.d/rc.spice-vdagent start
 sudo sh /etc/rc.d/rc.libvirt start
 
@@ -156,18 +167,57 @@ sudo sh /etc/rc.d/rc.libvirt start
 # sudo virsh net-autostart default
 
 # Add the current user to the necessary groups
-sudo groupadd -f libvirt
 groups=(libvirt libvirt-qemu kvm input disk video audio)
 for group in "${groups[@]}"; do
     sudo usermod -aG "$group" "$USER"
 done
 
 # Set up theming for gdm
-flatpak install gdm
+flatpak install -y io.github.realmazharhussain.GdmSettings
 flatpak run io.github.realmazharhussain.GdmSettings
-# sudo cp -f ~/.config/monitors.xml ~gdm/.config/monitors.xml
-# sudo chown $(id -u gdm):$(id -g gdm) ~gdm/.config/monitors.xml
+flatpak remove -y io.github.realmazharhussain.GdmSettings
+flatpak remove -y --unused
+<< #autologin
+sudo cp -f home/Slackware/monitors.xml ~gdm/.config/monitors.xml
+sudo chown $(id -u gdm):$(id -g gdm) ~gdm/.config/monitors.xml
+sudo restorecon ~gdm/.config/monitors.xml
+# Backs up old gdm custom.conf
+sudo cp /etc/gdm/custom.conf /etc/gdm/custom.conf.old
+# Use awk to add the configuration under the [daemon] section
+sudo awk -i inplace '
+BEGIN { RS=""; FS="\n" }
+/^\[daemon\]/ {
+    a=1
+    print
+    next
+}
+a==1 && /^#?AutomaticLoginEnable=/ {
+    print "AutomaticLoginEnable=True"
+    a=0
+    next
+}
+a==1 && /^#?AutomaticLogin=/ {
+    print "AutomaticLogin='"$username"'"
+    a=0
+    next
+}
+a==1 {
+    print "AutomaticLoginEnable=True"
+    print "AutomaticLogin='"$username"'"
+    a=0
+    next
+}
+{print}
+' "/etc/gdm/custom.conf"
 
+# Check if the entries were added, if not, append them
+if ! grep -q "AutomaticLoginEnable=True" "/etc/gdm/custom.conf"; then
+    echo "AutomaticLoginEnable=True" | sudo tee -a "/etc/gdm/custom.conf"
+fi
+if ! grep -q "AutomaticLogin='"$username"'" "/etc/gdm/custom.conf"; then
+    echo "AutomaticLogin='"$username"'" | sudo tee -a "/etc/gdm/custom.conf"
+fi
+#autologin
 # Modify systemd configuration to change the default timeout for stopping services during shutdown, preserving old one
 # sudo cp /etc/systemd/system.conf /etc/systemd/system.conf.old
 # sudo sed -i 's/^#DefaultTimeoutStopSec=.*/DefaultTimeoutStopSec=15s/' /etc/systemd/system.conf
