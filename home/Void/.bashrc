@@ -22,7 +22,8 @@ alias cleanLint='bash rmlint.sh -d && rmlint'
 alias cleanAll='flatpak remove --unused; sudo xbps-remove -yROo; sudo vkpurge rm all; rm -rf ~/.cache/*; sudo rm -rf /var/cache/xbps; sudo bleachbit -c --preset && bleachbit -c --preset'
  
 # Void Update
-alias updateApp='sudo xbps-install xbps && sudo xbps-install -Suvy; flatpak update -y'
+alias updateBrave='${HOME}/brave_updates.sh'
+alias updateApp='sudo xbps-install -Su xbps && sudo xbps-install -Suvy; updateBrave; flatpak update -y'
 alias updateAll='updateApp && cleanAll'
 alias updateRestart='updateAll; sudo reboot'
 alias updateShutdown='updateAll; sudo poweroff'
