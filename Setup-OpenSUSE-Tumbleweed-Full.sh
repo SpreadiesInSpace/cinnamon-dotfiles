@@ -81,6 +81,7 @@ packages=(
     "libreoffice"
     "libreoffice-gtk3"
     "neovim"
+    "opi"
     "qbittorrent"
     "spice-vdagent"
     "google-noto-coloremoji-fonts"
