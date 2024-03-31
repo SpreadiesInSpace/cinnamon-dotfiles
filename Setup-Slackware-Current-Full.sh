@@ -84,6 +84,10 @@ xwmconfig
 sudo sbocheck
 sudo sboupgrade --all
 
+# For pcsc-lite dependency that gets called in
+sudo groupadd -g 257 pcscd
+sudo useradd -u 257 -g pcscd -d /var/run/pcscd -s /bin/false pcscd
+
 # All packages
 packages=(
     # System utilities
