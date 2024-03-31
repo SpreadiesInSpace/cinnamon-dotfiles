@@ -10,8 +10,8 @@ sudo nano /etc/hosts
 # Grab Slackware Setup Scripts by gosh-its-arch-linux
 git clone https://gitlab.com/gosh-its-arch-linux/slackware-scripts.git
 cd slackware-scripts
-cd Current
-#cd Slackware15
+#cd Current
+cd Slackware15
 chmod +x *.sh
 # Set up Slackware User, init level 4
 # sudo ./setup_script
@@ -107,7 +107,7 @@ packages=(
     #"gnome-calculator" #using kcalc instead
     "gnome-screenshot"
     "gnome-system-monitor"
-    "gnome-terminal"
+    #"gnome-terminal"
     "gui-ufw"
     "kvantum-qt5"
     "qt5ct"

@@ -218,7 +218,7 @@ flatpak run io.github.realmazharhussain.GdmSettings
 flatpak remove -y io.github.realmazharhussain.GdmSettings
 flatpak remove -y --unused
 
-<<#autologin
+#autologin
 # Backs up old gdm custom.conf
 sudo cp /etc/gdm/custom.conf /etc/gdm/custom.conf.old
 # Use awk to add the configuration under the [daemon] section
