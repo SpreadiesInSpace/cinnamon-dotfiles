@@ -22,7 +22,8 @@ alias cleanAll='sudo find /var/log -type f -name "*.log" -exec truncate -s 0 {} 
 # Slackware Update
 alias updateApp='sudo slackpkg update; sudo slackpkg install-new; sudo slackpkg upgrade-all; sudo sbocheck; sudo sboupgrade --all; sudo grub-mkconfig -o /boot/grub/grub.cfg;flatpak update -y'
 alias updateAll='updateApp && cleanAll'
-
+alias updateRestart='updateAll; sudo reboot'
+alias updateShutdown='updateAll; sudo poweroff'
 echo
 
 ##-----------------------------------------------------
