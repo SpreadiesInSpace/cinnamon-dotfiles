@@ -107,7 +107,7 @@ packages=(
     #"gnome-calculator" #using kcalc instead
     "gnome-screenshot"
     "gnome-system-monitor"
-    #"gnome-terminal"
+    "gnome-terminal"
     "gui-ufw"
     "kvantum-qt5"
     "qt5ct"
