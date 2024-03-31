@@ -25,7 +25,7 @@ alias cleanLint='bash rmlint.sh -d && rmlint'
 alias cleanAll='flatpak remove --unused;sudo zypper clean -a;sudo zypper purge-kernels; sudo snapper delete 1-100; rm -rf ~/.cache/*; sudo rm /tmp/* -rf; sudo journalctl --vacuum-size=50M; sudo journalctl --vacuum-time=4weeks; SystemMaxUse=50M; sudo bleachbit -c --preset && bleachbit -c --preset; sudo -E bleachbit; exit'
 
 # openSUSE Update
-alias updateApp='sudo zypper ref; sudo zypper dup;flatpak update -y'
+alias updateApp='sudo zypper ref; sudo zypper dup --allow-vendor-change;flatpak update -y'
 alias updateAll='updateApp && cleanAll'
 alias updateRestart='updateAll; systemctl reboot'
 alias updateShutdown='updateAll; systemctl poweroff'

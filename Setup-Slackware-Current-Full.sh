@@ -10,7 +10,8 @@ sudo nano /etc/hosts
 # Grab Slackware Setup Scripts by gosh-its-arch-linux
 git clone https://gitlab.com/gosh-its-arch-linux/slackware-scripts.git
 cd slackware-scripts
-cd Current
+#cd Current
+cd Slackware15
 chmod +x *.sh
 # Set up Slackware User, init level 4
 # sudo ./setup_script
@@ -24,9 +25,15 @@ sudo ./install_sbopkg_and_sbotools.sh
 cd ../..
 rm -rf slackware-scripts/
 
-# Blacklist Ponce's repo
+# Blacklist Ponce's repo & SBo packages
+if ! grep -q "^\[0-9\]+_SBo$" /etc/slackpkg/blacklist; then
+    echo '[0-9]+_SBo' | sudo tee -a /etc/slackpkg/blacklist
+fi
 if ! grep -q "^\[0-9\]+ponce$" /etc/slackpkg/blacklist; then
     echo '[0-9]+ponce' | sudo tee -a /etc/slackpkg/blacklist
+fi
+if ! grep -q "^\[0-9\]+_csb$" /etc/slackpkg/blacklist; then
+    echo '[0-9]+_csb' | sudo tee -a /etc/slackpkg/blacklist
 fi
 
 # Install slackpkg+ & configure
@@ -139,7 +146,7 @@ packages=(
     "libvirt-python"
     "libosinfo"
     "edk2-ovmf"
-    "virt-manager" # Currently not working
+    "virt-manager"
     #"dnsmasq" # This package and below is already there
     #"bridge-utils"
     #"iptables"
