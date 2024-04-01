@@ -14,7 +14,7 @@ obex-enabled=false
 [org/cinnamon]
 alttab-switcher-delay=100
 enabled-applets=['panel1:left:0:menu@cinnamon.org:0', 'panel1:left:2:grouped-window-list@cinnamon.org:2', 'panel1:right:7:removable-drives@cinnamon.org:7', 'panel1:right:8:network@cinnamon.org:10', 'panel1:right:9:sound@cinnamon.org:11', 'panel1:right:10:calendar@cinnamon.org:13', 'panel1:right:5:show-hide-applets@mohammad-sn:16', 'panel1:right:4:notifications@cinnamon.org:17', 'panel1:right:3:systray@cinnamon.org:18', 'panel1:right:2:xapp-status@cinnamon.org:19', 'panel1:right:1:power@cinnamon.org:20', 'panel1:right:6:lorem@vxstorm:21']
-favorite-apps=['virt-manager.desktop', 'grub-config.desktop', 'cinnamon-settings.desktop', 'org.qbittorrent.qBittorrent.desktop', 'timeshift-gtk.desktop', 'cinnamon-settings-default.desktop']
+favorite-apps=['virt-manager.desktop', 'grub-customizer.desktop', 'cinnamon-settings.desktop', 'org.qbittorrent.qBittorrent.desktop', 'timeshift-gtk.desktop', 'cinnamon-settings-default.desktop']
 next-applet-id=22
 panel-edit-mode=false
 panel-zone-symbolic-icon-sizes='[{"panelId": 1, "left": 28, "center": 28, "right": 16}]'
@@ -283,7 +283,7 @@ bottom-panel-size=140
 side-panel-active-page='GeditWindowDocumentsPanel'
 side-panel-size=200
 size=(960, 984)
-state=76672
+state=87168
 
 [org/gnome/gnome-screenshot]
 delay=3

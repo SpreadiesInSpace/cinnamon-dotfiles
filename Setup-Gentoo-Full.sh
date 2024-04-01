@@ -34,7 +34,7 @@ packages=(
     "sys-block/gparted"
     "app-admin/grub-customizer" #guru ~amd64
     "sys-fs/ncdu"
-    "app/miscneofetch"
+    "app-misc/neofetch"
     "app-backup/timeshift" #guru ~amd64
     "app-arch/unzip"
     "x11-apps/xkill"
