@@ -9,6 +9,10 @@ sudo eselect repository add brave-overlay git https://gitlab.com/jason.oliveira/
 sudo emerge --sync brave-overlay
 sudo emerge www-client/brave-bin::brave-overlay
 
+# Enable Guru Overlay
+sudo eselect repository enable guru
+sudo emaint sync -r guru
+
 # Install rmlint
 git clone https://github.com/sahib/rmlint.git
 cd rmlint/
@@ -16,9 +20,11 @@ sudo scons --prefix=/usr install
 cd ..
 sudo rm -rf rmlint/
 
-# Enable Guru Overlay
-sudo eselect repository enable guru
-sudo emaint sync -r guru
+# Allow select unstable packages to be merged
+echo "x11-misc/copyq ~amd64" | sudo tee /etc/portage/package.accept_keywords/copyq
+echo "app-admin/grub-customizer ~amd64" | sudo tee /etc/portage/package.accept_keywords/grub-customizer
+echo "x11-themes/kvantum ~amd64" | sudo tee /etc/portage/package.accept_keywords/kvantum
+echo "app-backup/timeshift ~amd64" | sudo tee /etc/portage/package.accept_keywords/timeshift
 
 # All packages
 packages=(
