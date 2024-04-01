@@ -63,8 +63,10 @@ sudo cp Gentoo/.bashrc /root/.bashrc
 cp ~/.bashrc ~/.bashrc.old
 cat Gentoo/.bashrc > bashrc
 mv bashrc ~/.bashrc
+rm -rf ~/etc/
 
 # Autostart CopyQ
+mkdir -p ~/.config/autostart/
 cp -vnpr .config/autostart/freebsd/*  ~/.config/autostart/
 
 # Copies neofetch config file to appropriate directory, preserving old one
