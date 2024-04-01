@@ -11,7 +11,7 @@ sudo cp etc/portage/make.conf /etc/portage/make.conf
 # sudo emaint -a sync
 
 # Install CFG Update to process config file changes
-sudo emerge -qun app-portage/cfg-update
+sudo emerge -quN app-portage/cfg-update app-eselect/eselect-repository dev-vcs/git
 
 # Enable Guru Overlay
 sudo eselect repository enable guru
@@ -59,7 +59,6 @@ sudo cfg-update -u
 sudo emerge -aqDuN --with-bdeps=y "${desktop_environment[@]}"
 
 # Install Brave
-sudo emerge -aquN app-eselect/eselect-repository dev-vcs/git
 sudo eselect repository add brave-overlay git https://gitlab.com/jason.oliveira/brave-overlay.git
 sudo emerge --sync brave-overlay
 sudo emerge --ask www-client/brave-bin::brave-overlay
