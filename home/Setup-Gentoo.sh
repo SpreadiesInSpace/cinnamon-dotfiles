@@ -195,9 +195,9 @@ sudo cp /etc/nanorc /etc/nanorc.old
 if ! grep -q "^include \"/usr/share/nano/\*.nanorc\"" /etc/nanorc; then
     echo 'include "/usr/share/nano/*.nanorc"' | sudo tee -a /etc/nanorc
 fi
-if ! grep -q "^include \"/usr/share/nano/extra/\*.nanorc\"" /etc/nanorc; then
-    echo 'include "/usr/share/nano/extra/*.nanorc"' | sudo tee -a /etc/nanorc
-fi
+# if ! grep -q "^include \"/usr/share/nano/extra/\*.nanorc\"" /etc/nanorc; then
+#    echo 'include "/usr/share/nano/extra/*.nanorc"' | sudo tee -a /etc/nanorc
+# fi
 
 # Check if environment variables for QT & Additional Theming are already set, preserving old one
 sudo cp /etc/environment /etc/environment.old
