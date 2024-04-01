@@ -3,6 +3,13 @@
 # Get the current username
 username=$(whoami)
 
+# Copy my make.conf file to /etc/portage, preserving old one
+sudo mv /etc/portage/make.conf /etc/portage/make.conf.old
+sudo cp etc/portage/make.conf /etc/portage/make.conf
+
+# Sync Repository
+sudo emaint -a sync
+
 # Install Brave
 sudo emerge app-eselect/eselect-repository dev-vcs/git
 sudo eselect repository add brave-overlay git https://gitlab.com/jason.oliveira/brave-overlay.git
