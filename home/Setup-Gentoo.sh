@@ -65,8 +65,7 @@ cat Gentoo/.bashrc > bashrc
 mv bashrc ~/.bashrc
 
 # Autostart CopyQ
-# rm -rf ~/.config/autostart/*
-cp -vnpr .config/autostart/freebsd/  ~/.config/autostart/
+cp -vnpr .config/autostart/freebsd/*  ~/.config/autostart/
 
 # Copies neofetch config file to appropriate directory, preserving old one
 neofetch
