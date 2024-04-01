@@ -63,6 +63,7 @@ sudo cp Slackware/.bashrc /root/.bashrc
 cp ~/.bashrc ~/.bashrc.old
 cat Slackware/.bashrc > bashrc
 mv bashrc ~/.bashrc
+rm -rf ~/etc/
 
 # Copies neofetch config file to appropriate directory, preserving old one
 neofetch

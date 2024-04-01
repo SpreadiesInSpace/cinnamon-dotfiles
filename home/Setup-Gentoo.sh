@@ -67,7 +67,7 @@ rm -rf ~/etc/
 
 # Autostart CopyQ
 mkdir -p ~/.config/autostart/
-cp -vnpr .config/autostart/freebsd/*  ~/.config/autostart/
+cp -vnpr .config/autostart/gentoo/*  ~/.config/autostart/
 
 # Copies neofetch config file to appropriate directory, preserving old one
 neofetch
