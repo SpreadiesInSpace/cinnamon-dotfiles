@@ -29,10 +29,12 @@ echo "app-backup/timeshift ~amd64" | sudo tee /etc/portage/package.accept_keywor
 # Update system and install packages (split them to prevent slot conflicts)
 # System utilities
 system_utilities=(
+    "app-portage/cfg-update"
     "app-arch/file-roller"
     "sys-apps/flatpak"
     "sys-block/gparted"
     "app-admin/grub-customizer"
+    "dev-util/meld"
     "sys-fs/ncdu"
     "app-misc/neofetch"
     "app-backup/timeshift"
@@ -40,7 +42,7 @@ system_utilities=(
     "x11-apps/xkill"
     "x11-apps/xrandr"
 )
-sudo emerge -aqDuN --with-bdeps=y "${system_utilities[@]}"
+sudo emerge -avDuN --with-bdeps=y "${system_utilities[@]}"
 
 # Network utilities
 network_utilities=(
@@ -49,7 +51,7 @@ network_utilities=(
     "kde-misc/kdeconnect"
     "net-fs/samba"
 )
-sudo emerge -aqDuN --with-bdeps=y "${network_utilities[@]}"
+sudo emerge -avDuN --with-bdeps=y "${network_utilities[@]}"
 
 # Desktop environment and related packages
 desktop_environment=(
@@ -72,7 +74,7 @@ desktop_environment=(
     "x11-misc/qt5ct"
     "gui-apps/qt6ct"
 )
-sudo emerge -aqDuN --with-bdeps=y "${desktop_environment[@]}"
+sudo emerge -avDuN --with-bdeps=y "${desktop_environment[@]}"
 
 # Applications
 applications=(
@@ -87,7 +89,7 @@ applications=(
     "media-fonts/noto-emoji"
     "x11-misc/xclip"
 )
-sudo emerge -aqDuN --with-bdeps=y "${applications[@]}"
+sudo emerge -avDuN --with-bdeps=y "${applications[@]}"
 
 # For NvChad
 nvchad=(
@@ -95,7 +97,7 @@ nvchad=(
     "dev-build/make"
     "sys-apps/ripgrep"
 )
-sudo emerge -aqDuN --with-bdeps=y "${nvchad[@]}"
+sudo emerge -avDuN --with-bdeps=y "${nvchad[@]}"
 
 # Virtualization tools
 virtualization_tools=(
@@ -112,7 +114,7 @@ virtualization_tools=(
     "sys-cluster/glusterfs"
     "net-libs/libiscsi"
 )
-sudo emerge -aqDuN --with-bdeps=y "${virtualization_tools[@]}"
+sudo emerge -avDuN --with-bdeps=y "${virtualization_tools[@]}"
 
 # Enable Flathub
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
