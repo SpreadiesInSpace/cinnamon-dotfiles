@@ -26,25 +26,33 @@ echo "app-admin/grub-customizer ~amd64" | sudo tee /etc/portage/package.accept_k
 echo "x11-themes/kvantum ~amd64" | sudo tee /etc/portage/package.accept_keywords/kvantum
 echo "app-backup/timeshift ~amd64" | sudo tee /etc/portage/package.accept_keywords/timeshift
 
-# All packages
-packages=(
-    # System utilities
+# Update system and install packages (split them to prevent slot conflicts)
+# System utilities
+system_utilities=(
     "app-arch/file-roller"
     "sys-apps/flatpak"
     "sys-block/gparted"
-    "app-admin/grub-customizer" #guru ~amd64
+    "app-admin/grub-customizer"
     "sys-fs/ncdu"
     "app-misc/neofetch"
-    "app-backup/timeshift" #guru ~amd64
+    "app-backup/timeshift"
     "app-arch/unzip"
     "x11-apps/xkill"
     "x11-apps/xrandr"
-    # Network utilities
+)
+sudo emerge -aqDuN --with-bdeps=y "${system_utilities[@]}"
+
+# Network utilities
+network_utilities=(
     "net-ftp/filezilla"
-    "gnome-base/gvfs" #flags: afp gphoto2 mtp nfs samba
+    "gnome-base/gvfs"
     "kde-misc/kdeconnect"
     "net-fs/samba"
-    # Desktop environment and related packages
+)
+sudo emerge -aqDuN --with-bdeps=y "${network_utilities[@]}"
+
+# Desktop environment and related packages
+desktop_environment=(
     "gnome-extra/cinnamon"
     "media-video/celluloid"
     "media-gfx/eog"
@@ -56,17 +64,21 @@ packages=(
     "x11-terms/gnome-terminal"
     "media-gfx/gthumb"
     "net-firewall/ufw"
-    "x11-themes/kvantum" #~amd64
+    "x11-themes/kvantum"
     "x11-misc/lightdm"
     "x11-misc/lightdm-gtk-greeter"
     "gnome-extra/nemo"
     "gnome-extra/nemo-fileroller"
     "x11-misc/qt5ct"
     "gui-apps/qt6ct"
-    # Applications
+)
+sudo emerge -aqDuN --with-bdeps=y "${desktop_environment[@]}"
+
+# Applications
+applications=(
     "sys-apps/bleachbit"
     "sys-process/bottom"
-    "x11-misc/copyq" #~amd64
+    "x11-misc/copyq"
     "app-office/libreoffice-bin"
     "app-editors/neovim"
     "net-p2p/qbittorrent"
@@ -74,11 +86,19 @@ packages=(
     "media-fonts/noto"
     "media-fonts/noto-emoji"
     "x11-misc/xclip"
-    # For NvChad
+)
+sudo emerge -aqDuN --with-bdeps=y "${applications[@]}"
+
+# For NvChad
+nvchad=(
     "sys-devel/gcc"
     "dev-build/make"
     "sys-apps/ripgrep"
-    # Virtualization tools
+)
+sudo emerge -aqDuN --with-bdeps=y "${nvchad[@]}"
+
+# Virtualization tools
+virtualization_tools=(
     "app-emulation/virt-manager"
     "app-emulation/qemu"
     "app-emulation/libvirt"
@@ -92,9 +112,7 @@ packages=(
     "sys-cluster/glusterfs"
     "net-libs/libiscsi"
 )
-
-# Update system and install packages
-sudo emerge -aqDuN --with-bdeps=y "${packages[@]}"
+sudo emerge -aqDuN --with-bdeps=y "${virtualization_tools[@]}"
 
 # Enable Flathub
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
