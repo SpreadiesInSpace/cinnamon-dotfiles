@@ -8,13 +8,16 @@ sudo mv /etc/portage/make.conf /etc/portage/make.conf.old
 sudo cp etc/portage/make.conf /etc/portage/make.conf
 
 # Sync Repository
-sudo emaint -a sync
+# sudo emaint -a sync
+
+# Install CFG Update to process config file changes
+sudo emerge -avg app-portage/cfg-update
 
 # Install Brave
-sudo emerge app-eselect/eselect-repository dev-vcs/git
+sudo emerge --ask app-eselect/eselect-repository dev-vcs/git
 sudo eselect repository add brave-overlay git https://gitlab.com/jason.oliveira/brave-overlay.git
 sudo emerge --sync brave-overlay
-sudo emerge www-client/brave-bin::brave-overlay
+sudo emerge --ask www-client/brave-bin::brave-overlay
 
 # Enable Guru Overlay
 sudo eselect repository enable guru
@@ -32,7 +35,7 @@ echo "x11-misc/copyq ~amd64" | sudo tee /etc/portage/package.accept_keywords/cop
 echo "app-admin/grub-customizer ~amd64" | sudo tee /etc/portage/package.accept_keywords/grub-customizer
 echo "x11-themes/kvantum ~amd64" | sudo tee /etc/portage/package.accept_keywords/kvantum
 echo "app-backup/timeshift ~amd64" | sudo tee /etc/portage/package.accept_keywords/timeshift
-
+<<com
 # Update system and install packages (split them to prevent slot conflicts)
 # System utilities
 system_utilities=(
@@ -41,7 +44,6 @@ system_utilities=(
     "sys-apps/flatpak"
     "sys-block/gparted"
     "app-admin/grub-customizer"
-    "dev-util/meld"
     "sys-fs/ncdu"
     "app-misc/neofetch"
     "app-backup/timeshift"
