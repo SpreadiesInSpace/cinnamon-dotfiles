@@ -217,10 +217,10 @@ sudo sed -i 's/^#DefaultTimeoutStopSec=.*/DefaultTimeoutStopSec=15s/' /etc/syste
 sudo systemctl daemon-reload
 
 # Run the setup script
-cd home/
-chmod +x Setup-Gentoo.sh
-./Setup-Gentoo.sh
-cd ..
+# cd home/
+# chmod +x Setup-Gentoo.sh
+# ./Setup-Gentoo.sh
+# cd ..
 
 # Reboot for the changes to take effect
-echo "Installation complete! Please reboot for the changes to take effect."
+echo "Installation complete! Please reboot for the changes to take effect. Then run Setup-Gentoo.sh in cinnamon/home for theming."
