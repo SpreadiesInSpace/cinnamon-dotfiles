@@ -63,7 +63,6 @@ sudo cp Gentoo/.bashrc /root/.bashrc
 cp ~/.bashrc ~/.bashrc.old
 cat Gentoo/.bashrc > bashrc
 mv bashrc ~/.bashrc
-rm -rf ~/etc/
 
 # Autostart CopyQ
 mkdir -p ~/.config/autostart/
