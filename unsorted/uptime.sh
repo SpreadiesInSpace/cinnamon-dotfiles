@@ -2,6 +2,6 @@
 
 while true; do
     clear
-    neofetch uptime
+    uptime -p
     sleep 60
 done

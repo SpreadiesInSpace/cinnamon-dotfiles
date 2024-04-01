@@ -6,9 +6,11 @@ username=$(whoami)
 # Copy my make.conf file to /etc/portage, preserving old one
 sudo mv /etc/portage/make.conf /etc/portage/make.conf.old
 sudo cp etc/portage/make.conf /etc/portage/make.conf
+# Review make.conf file
+sudo nano /etc/portage/make.conf
 
 # Sync Repository
-# sudo emaint -a sync
+sudo emaint -a sync
 
 # Install CFG Update to process config file changes and eselect to handle overlays
 sudo emerge -quN app-portage/cfg-update app-eselect/eselect-repository dev-vcs/git
@@ -16,122 +18,26 @@ sudo emerge -quN app-portage/cfg-update app-eselect/eselect-repository dev-vcs/g
 # Select 23.0 gnome desktop systemd profile for Cinnamon
 sudo eselect profile set default/linux/amd64/23.0/desktop/gnome/systemd
 # Emerge changes and cleanup
-sudo emerge -avDuN @world
-#sudo cfg-update -u
-#sudo emerge -avDuN @world
-sudo emerge -ad
+sudo emerge -qDuN @world
+sudo emerge --depclean
 
 # Update system and install packages (split them to prevent slot conflicts)
-# Desktop environment and related packages
+# Desktop environment and display manager
 desktop_environment=(
+    "x11-base/xorg-server"
     "gnome-extra/cinnamon"
     "x11-misc/lightdm"
     "x11-misc/lightdm-gtk-greeter"
 )
-sudo emerge -aqDuN --with-bdeps=y "${desktop_environment[@]}"
-sudo cfg-update -u
-sudo emerge -aqDuN --with-bdeps=y "${desktop_environment[@]}"
-<<com
-# Desktop environment and related packages
-desktop_environment_extra=(
-    "media-video/celluloid"
-    "media-gfx/eog"
-    "app-text/evince"
-    "app-editors/gedit"
-    "gnome-extra/gnome-calculator"
-    "media-gfx/gnome-screenshot"
-    "gnome-extra/gnome-system-monitor"
-    "x11-terms/gnome-terminal"
-    "media-gfx/gthumb"
-    "net-firewall/ufw"
-    "gnome-extra/nemo"
-    "gnome-extra/nemo-fileroller"
-    "x11-misc/qt5ct"
-    "gui-apps/qt6ct"
-    "x11-base/xorg-server"
-)
-sudo emerge -aqDuN --with-bdeps=y "${desktop_environment_extra[@]}"
-sudo cfg-update -u
-sudo emerge -aqDuN --with-bdeps=y "${desktop_environment_extra[@]}"
+sudo emerge -qDuN --with-bdeps=y "${desktop_environment[@]}"
 
-# System utilities
-system_utilities=(
-    "app-arch/file-roller"
-    "sys-apps/flatpak"
-    "sys-block/gparted"
-    "sys-fs/ncdu"
-    "app-misc/neofetch"
-    "app-arch/unzip"
-    "x11-apps/xkill"
-    "x11-apps/xrandr"
-)
-sudo emerge -aqDuN --with-bdeps=y "${system_utilities[@]}"
-sudo cfg-update -u
-sudo emerge -aqDuN --with-bdeps=y "${system_utilities[@]}"
-
-# Network utilities
-network_utilities=(
-    "net-ftp/filezilla"
-    "gnome-base/gvfs"
-    "kde-misc/kdeconnect"
-    "net-fs/samba"
-)
-sudo emerge -aqDuN --with-bdeps=y "${network_utilities[@]}"
-sudo cfg-update -u
-sudo emerge -aqDuN --with-bdeps=y "${network_utilities[@]}"
-
-# Applications
-applications=(
-    "sys-apps/bleachbit"
-    "sys-process/bottom"
-    "app-office/libreoffice-bin"
-    "app-editors/neovim"
-    "net-p2p/qbittorrent"
-    "app-emulation/spice-vdagent"
-    "media-fonts/noto"
-    "media-fonts/noto-emoji"
-    "x11-misc/xclip"
-)
-sudo emerge -aqDuN --with-bdeps=y "${applications[@]}"
-sudo cfg-update -u
-sudo emerge -aqDuN --with-bdeps=y "${applications[@]}"
-
-# For NvChad
-nvchad=(
-    "sys-devel/gcc"
-    "dev-build/make"
-    "sys-apps/ripgrep"
-)
-sudo emerge -aqDuN --with-bdeps=y "${nvchad[@]}"
-sudo cfg-update -u
-sudo emerge -aqDuN --with-bdeps=y "${nvchad[@]}"
-
-# Virtualization tools
-virtualization_tools=(
-    "app-emulation/virt-manager"
-    "app-emulation/qemu"
-    "app-emulation/libvirt"
-    "sys-firmware/edk2-ovmf-bin"
-    "net-dns/dnsmasq"
-    "net-misc/vde"
-    "net-misc/bridge-utils"
-    "net-firewall/iptables"
-    "sys-apps/dmidecode"
-    "app-emulation/libguestfs"
-    "sys-cluster/glusterfs"
-    "net-libs/libiscsi"
-)
-sudo emerge -aqDuN --with-bdeps=y "${virtualization_tools[@]}"
-sudo cfg-update -u
-sudo emerge -aqDuN --with-bdeps=y "${virtualization_tools[@]}"
-
-# Install Brave
-sudo eselect repository add brave-overlay git https://gitlab.com/jason.oliveira/brave-overlay.git
-sudo emerge --sync brave-overlay
-sudo emerge --ask www-client/brave-bin::brave-overlay
+# Install Brave *
+# sudo eselect repository add brave-overlay git https://gitlab.com/jason.oliveira/brave-overlay.git
+# sudo emerge --sync brave-overlay
+# sudo emerge --ask www-client/brave-bin::brave-overlay
 
 # Install rmlint
-sudo emerge -quN scons dev-libs/glib
+sudo emerge -quN dev-build/scons dev-libs/glib
 git clone https://github.com/sahib/rmlint.git
 cd rmlint/
 sudo scons --prefix=/usr install
@@ -155,9 +61,82 @@ unstable_packages=(
     "x11-themes/kvantum"
     "app-backup/timeshift"
 )
-sudo emerge -aqDuN --with-bdeps=y "${unstable_packages[@]}"
+sudo emerge -qDuN --with-bdeps=y "${unstable_packages[@]}"
+
+# Desktop environment related packages
+desktop_environment_extra=(
+    "media-video/celluloid"
+    "media-gfx/eog"
+    "app-text/evince"
+    "app-editors/gedit"
+    "gnome-extra/gnome-calculator"
+    "media-gfx/gnome-screenshot"
+    "gnome-extra/gnome-system-monitor"
+    "x11-terms/gnome-terminal"
+    "media-gfx/gthumb"
+    "gnome-extra/nemo"
+    "gnome-extra/nemo-fileroller"
+    "x11-misc/qt5ct"
+    "gui-apps/qt6ct"
+)
+sudo emerge -qDuN --with-bdeps=y "${desktop_environment_extra[@]}"
+
+# System utilities
+system_utilities=(
+    "app-arch/file-roller"
+    "sys-apps/flatpak"
+    "sys-apps/xdg-desktop-portal-gtk"
+    "sys-block/gparted"
+    "sys-fs/ncdu"
+    "app-misc/neofetch"
+    "net-firewall/ufw"    
+    "app-arch/unzip"
+    "x11-apps/xkill"
+    "x11-apps/xrandr"
+    # Network utilities
+    "net-ftp/filezilla"
+    "gnome-base/gvfs"
+    "kde-misc/kdeconnect"
+    "net-fs/samba"
+)
+sudo emerge -qDuN --with-bdeps=y "${system_utilities[@]}"
+
+# Applications
+applications=(
+    "sys-apps/bleachbit"
+    "sys-process/bottom"
+    "app-office/libreoffice"
+    "app-editors/neovim"
+    "net-p2p/qbittorrent"
+    "app-emulation/spice-vdagent"
+    "media-fonts/noto"
+    "media-fonts/noto-emoji"
+    "x11-misc/xclip"
+    # For NvChad
+    "sys-devel/gcc"
+    "dev-build/make"
+    "sys-apps/ripgrep"   
+)
+sudo emerge -qDuN --with-bdeps=y "${applications[@]}"
+
+# Virtualization tools
+virtualization_tools=(
+    "app-emulation/virt-manager"
+    "app-emulation/qemu"
+    "app-emulation/libvirt"
+    "sys-firmware/edk2-ovmf-bin"
+    "net-dns/dnsmasq"
+    "net-misc/vde"
+    "net-misc/bridge-utils"
+    "net-firewall/iptables"
+    "sys-apps/dmidecode"
+    "app-emulation/libguestfs"
+    "sys-cluster/glusterfs"
+    "net-libs/libiscsi"
+)
+sudo emerge -qDuN --with-bdeps=y "${virtualization_tools[@]}"
 sudo cfg-update -u
-sudo emerge -aqDuN --with-bdeps=y "${unstable_packages[@]}"
+sudo emerge -qDuN --with-bdeps=y "${virtualization_tools[@]}"
 
 # Enable Flathub
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
