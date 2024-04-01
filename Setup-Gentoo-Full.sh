@@ -10,32 +10,30 @@ sudo cp etc/portage/make.conf /etc/portage/make.conf
 # Sync Repository
 # sudo emaint -a sync
 
-# Install CFG Update to process config file changes
+# Install CFG Update to process config file changes and eselect to handle overlays
 sudo emerge -quN app-portage/cfg-update app-eselect/eselect-repository dev-vcs/git
 
-# Enable Guru Overlay
-sudo eselect repository enable guru
-sudo emaint sync -r guru
-
-# Install rmlint
-sudo emerge -qun scons glib
-git clone https://github.com/sahib/rmlint.git
-cd rmlint/
-sudo scons --prefix=/usr install
-cd ..
-sudo rm -rf rmlint/
-
-# Allow select unstable packages to be merged
-echo "x11-misc/copyq ~amd64" | sudo tee /etc/portage/package.accept_keywords/copyq
-echo "app-admin/grub-customizer ~amd64" | sudo tee /etc/portage/package.accept_keywords/grub-customizer
-echo "x11-themes/kvantum ~amd64" | sudo tee /etc/portage/package.accept_keywords/kvantum
-echo "app-backup/timeshift ~amd64" | sudo tee /etc/portage/package.accept_keywords/timeshift
+# Select 23.0 gnome desktop systemd profile for Cinnamon
+sudo eselect profile set default/linux/amd64/23.0/desktop/gnome/systemd
+# Emerge changes and cleanup
+sudo emerge -avDuN @world
+#sudo cfg-update -u
+#sudo emerge -avDuN @world
+sudo emerge -ad
 
 # Update system and install packages (split them to prevent slot conflicts)
-
 # Desktop environment and related packages
 desktop_environment=(
     "gnome-extra/cinnamon"
+    "x11-misc/lightdm"
+    "x11-misc/lightdm-gtk-greeter"
+)
+sudo emerge -aqDuN --with-bdeps=y "${desktop_environment[@]}"
+sudo cfg-update -u
+sudo emerge -aqDuN --with-bdeps=y "${desktop_environment[@]}"
+<<com
+# Desktop environment and related packages
+desktop_environment_extra=(
     "media-video/celluloid"
     "media-gfx/eog"
     "app-text/evince"
@@ -46,36 +44,29 @@ desktop_environment=(
     "x11-terms/gnome-terminal"
     "media-gfx/gthumb"
     "net-firewall/ufw"
-    "x11-themes/kvantum"
-    "x11-misc/lightdm"
-    "x11-misc/lightdm-gtk-greeter"
     "gnome-extra/nemo"
     "gnome-extra/nemo-fileroller"
     "x11-misc/qt5ct"
     "gui-apps/qt6ct"
+    "x11-base/xorg-server"
 )
-sudo emerge -aqDuN --with-bdeps=y "${desktop_environment[@]}"
+sudo emerge -aqDuN --with-bdeps=y "${desktop_environment_extra[@]}"
 sudo cfg-update -u
-sudo emerge -aqDuN --with-bdeps=y "${desktop_environment[@]}"
+sudo emerge -aqDuN --with-bdeps=y "${desktop_environment_extra[@]}"
 
-# Install Brave
-sudo eselect repository add brave-overlay git https://gitlab.com/jason.oliveira/brave-overlay.git
-sudo emerge --sync brave-overlay
-sudo emerge --ask www-client/brave-bin::brave-overlay
-<<com
 # System utilities
 system_utilities=(
     "app-arch/file-roller"
     "sys-apps/flatpak"
     "sys-block/gparted"
-    "app-admin/grub-customizer"
     "sys-fs/ncdu"
     "app-misc/neofetch"
-    "app-backup/timeshift"
     "app-arch/unzip"
     "x11-apps/xkill"
     "x11-apps/xrandr"
 )
+sudo emerge -aqDuN --with-bdeps=y "${system_utilities[@]}"
+sudo cfg-update -u
 sudo emerge -aqDuN --with-bdeps=y "${system_utilities[@]}"
 
 # Network utilities
@@ -86,12 +77,13 @@ network_utilities=(
     "net-fs/samba"
 )
 sudo emerge -aqDuN --with-bdeps=y "${network_utilities[@]}"
+sudo cfg-update -u
+sudo emerge -aqDuN --with-bdeps=y "${network_utilities[@]}"
 
 # Applications
 applications=(
     "sys-apps/bleachbit"
     "sys-process/bottom"
-    "x11-misc/copyq"
     "app-office/libreoffice-bin"
     "app-editors/neovim"
     "net-p2p/qbittorrent"
@@ -101,6 +93,8 @@ applications=(
     "x11-misc/xclip"
 )
 sudo emerge -aqDuN --with-bdeps=y "${applications[@]}"
+sudo cfg-update -u
+sudo emerge -aqDuN --with-bdeps=y "${applications[@]}"
 
 # For NvChad
 nvchad=(
@@ -108,6 +102,8 @@ nvchad=(
     "dev-build/make"
     "sys-apps/ripgrep"
 )
+sudo emerge -aqDuN --with-bdeps=y "${nvchad[@]}"
+sudo cfg-update -u
 sudo emerge -aqDuN --with-bdeps=y "${nvchad[@]}"
 
 # Virtualization tools
@@ -126,6 +122,42 @@ virtualization_tools=(
     "net-libs/libiscsi"
 )
 sudo emerge -aqDuN --with-bdeps=y "${virtualization_tools[@]}"
+sudo cfg-update -u
+sudo emerge -aqDuN --with-bdeps=y "${virtualization_tools[@]}"
+
+# Install Brave
+sudo eselect repository add brave-overlay git https://gitlab.com/jason.oliveira/brave-overlay.git
+sudo emerge --sync brave-overlay
+sudo emerge --ask www-client/brave-bin::brave-overlay
+
+# Install rmlint
+sudo emerge -quN scons dev-libs/glib
+git clone https://github.com/sahib/rmlint.git
+cd rmlint/
+sudo scons --prefix=/usr install
+cd ..
+sudo rm -rf rmlint/
+
+# Enable Guru Overlay
+sudo eselect repository enable guru
+sudo emaint sync -r guru
+
+# Allow select unstable packages to be merged
+echo "x11-misc/copyq ~amd64" | sudo tee /etc/portage/package.accept_keywords/copyq
+echo "app-admin/grub-customizer ~amd64" | sudo tee /etc/portage/package.accept_keywords/grub-customizer
+echo "x11-themes/kvantum ~amd64" | sudo tee /etc/portage/package.accept_keywords/kvantum
+echo "app-backup/timeshift ~amd64" | sudo tee /etc/portage/package.accept_keywords/timeshift
+
+# Unstable Packages
+unstable_packages=(
+    "x11-misc/copyq"
+    "app-admin/grub-customizer"
+    "x11-themes/kvantum"
+    "app-backup/timeshift"
+)
+sudo emerge -aqDuN --with-bdeps=y "${unstable_packages[@]}"
+sudo cfg-update -u
+sudo emerge -aqDuN --with-bdeps=y "${unstable_packages[@]}"
 
 # Enable Flathub
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
