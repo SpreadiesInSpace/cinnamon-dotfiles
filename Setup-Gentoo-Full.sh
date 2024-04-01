@@ -94,7 +94,7 @@ packages=(
 )
 
 # Update system and install packages
-sudo emerge -avDuN --with-bdeps=y "${packages[@]}"
+sudo emerge -aqDuN --with-bdeps=y "${packages[@]}"
 
 # Enable Flathub
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
