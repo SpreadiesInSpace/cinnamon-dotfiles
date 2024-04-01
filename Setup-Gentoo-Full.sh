@@ -11,19 +11,14 @@ sudo cp etc/portage/make.conf /etc/portage/make.conf
 # sudo emaint -a sync
 
 # Install CFG Update to process config file changes
-sudo emerge -avg app-portage/cfg-update
-
-# Install Brave
-sudo emerge --ask app-eselect/eselect-repository dev-vcs/git
-sudo eselect repository add brave-overlay git https://gitlab.com/jason.oliveira/brave-overlay.git
-sudo emerge --sync brave-overlay
-sudo emerge --ask www-client/brave-bin::brave-overlay
+sudo emerge -qun app-portage/cfg-update
 
 # Enable Guru Overlay
 sudo eselect repository enable guru
 sudo emaint sync -r guru
 
 # Install rmlint
+sudo emerge -qun scons glib
 git clone https://github.com/sahib/rmlint.git
 cd rmlint/
 sudo scons --prefix=/usr install
@@ -35,32 +30,8 @@ echo "x11-misc/copyq ~amd64" | sudo tee /etc/portage/package.accept_keywords/cop
 echo "app-admin/grub-customizer ~amd64" | sudo tee /etc/portage/package.accept_keywords/grub-customizer
 echo "x11-themes/kvantum ~amd64" | sudo tee /etc/portage/package.accept_keywords/kvantum
 echo "app-backup/timeshift ~amd64" | sudo tee /etc/portage/package.accept_keywords/timeshift
-<<com
-# Update system and install packages (split them to prevent slot conflicts)
-# System utilities
-system_utilities=(
-    "app-portage/cfg-update"
-    "app-arch/file-roller"
-    "sys-apps/flatpak"
-    "sys-block/gparted"
-    "app-admin/grub-customizer"
-    "sys-fs/ncdu"
-    "app-misc/neofetch"
-    "app-backup/timeshift"
-    "app-arch/unzip"
-    "x11-apps/xkill"
-    "x11-apps/xrandr"
-)
-sudo emerge -avDuN --with-bdeps=y "${system_utilities[@]}"
 
-# Network utilities
-network_utilities=(
-    "net-ftp/filezilla"
-    "gnome-base/gvfs"
-    "kde-misc/kdeconnect"
-    "net-fs/samba"
-)
-sudo emerge -avDuN --with-bdeps=y "${network_utilities[@]}"
+# Update system and install packages (split them to prevent slot conflicts)
 
 # Desktop environment and related packages
 desktop_environment=(
@@ -83,7 +54,39 @@ desktop_environment=(
     "x11-misc/qt5ct"
     "gui-apps/qt6ct"
 )
-sudo emerge -avDuN --with-bdeps=y "${desktop_environment[@]}"
+sudo emerge -aqDuN --with-bdeps=y "${desktop_environment[@]}"
+sudo cfg-update -u
+sudo emerge -aqDuN --with-bdeps=y "${desktop_environment[@]}"
+
+# Install Brave
+sudo emerge -aquN app-eselect/eselect-repository dev-vcs/git
+sudo eselect repository add brave-overlay git https://gitlab.com/jason.oliveira/brave-overlay.git
+sudo emerge --sync brave-overlay
+sudo emerge --ask www-client/brave-bin::brave-overlay
+<<com
+# System utilities
+system_utilities=(
+    "app-arch/file-roller"
+    "sys-apps/flatpak"
+    "sys-block/gparted"
+    "app-admin/grub-customizer"
+    "sys-fs/ncdu"
+    "app-misc/neofetch"
+    "app-backup/timeshift"
+    "app-arch/unzip"
+    "x11-apps/xkill"
+    "x11-apps/xrandr"
+)
+sudo emerge -aqDuN --with-bdeps=y "${system_utilities[@]}"
+
+# Network utilities
+network_utilities=(
+    "net-ftp/filezilla"
+    "gnome-base/gvfs"
+    "kde-misc/kdeconnect"
+    "net-fs/samba"
+)
+sudo emerge -aqDuN --with-bdeps=y "${network_utilities[@]}"
 
 # Applications
 applications=(
@@ -98,7 +101,7 @@ applications=(
     "media-fonts/noto-emoji"
     "x11-misc/xclip"
 )
-sudo emerge -avDuN --with-bdeps=y "${applications[@]}"
+sudo emerge -aqDuN --with-bdeps=y "${applications[@]}"
 
 # For NvChad
 nvchad=(
@@ -106,7 +109,7 @@ nvchad=(
     "dev-build/make"
     "sys-apps/ripgrep"
 )
-sudo emerge -avDuN --with-bdeps=y "${nvchad[@]}"
+sudo emerge -aqDuN --with-bdeps=y "${nvchad[@]}"
 
 # Virtualization tools
 virtualization_tools=(
@@ -123,7 +126,7 @@ virtualization_tools=(
     "sys-cluster/glusterfs"
     "net-libs/libiscsi"
 )
-sudo emerge -avDuN --with-bdeps=y "${virtualization_tools[@]}"
+sudo emerge -aqDuN --with-bdeps=y "${virtualization_tools[@]}"
 
 # Enable Flathub
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
