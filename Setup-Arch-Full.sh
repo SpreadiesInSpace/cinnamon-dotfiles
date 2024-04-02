@@ -172,7 +172,7 @@ sudo systemctl enable --now libvirtd.service
 # Add the current user to the necessary groups
 groups=(libvirt libvirt-qemu kvm input disk video audio)
 for group in "${groups[@]}"; do
-    sudo usermod -aG "$group" "$USER"
+    sudo usermod -aG "$group" "$username"
 done
 
 # Backs up old lightdm.conf
