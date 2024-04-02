@@ -160,12 +160,13 @@
         "default": [
             "nemo.desktop",
             "firefox.desktop",
+            "mozilla-thunderbird.desktop",
             "org.gnome.Terminal.desktop"
         ],
         "value": [
             "Mount CIFS Share.desktop",
             "filezilla.desktop",
-            "brave-bin.desktop",
+            "brave-browser.desktop",
             "Files.desktop",
             "org.bleachbit.BleachBit.desktop",
             "nemo.desktop"
@@ -355,5 +356,5 @@
         "description": "Window opacity",
         "value": 100
     },
-    "__md5__": "6f73ea938aeb5481595a809eb6cbe8e3"
+    "__md5__": "4a0c74552caed86efd88e44d5597c0f2"
 }
