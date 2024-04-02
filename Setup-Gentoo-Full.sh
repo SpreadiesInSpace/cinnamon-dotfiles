@@ -31,7 +31,7 @@ desktop_environment=(
 )
 sudo emerge -qDuN --with-bdeps=y "${desktop_environment[@]}"
 
-# Install Brave *
+# Install Brave
 sudo eselect repository enable gentoo-zh
 sudo emaint sync -r gentoo-zh
 sudo emerge -qDuN www-client/brave-bin
