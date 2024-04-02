@@ -248,9 +248,9 @@ done
 
 # Run the setup script
 # cd home/
-# chmod +x Setup-Slackware.sh
-# ./Setup-Slackware.sh
+# chmod +x Setup-Slackware-Theme.sh
+# ./Setup-Slackware-Theme.sh
 # cd ..
 
 # Reboot for the changes to take effect
-echo "Installation complete! Please reboot for the changes to take effect. Then run Setup-Slackware.sh in cinnamon/home for theming."
+echo "Installation complete! Please reboot for the changes to take effect. Then run Setup-Slackware-Theme.sh in cinnamon/home for theming."

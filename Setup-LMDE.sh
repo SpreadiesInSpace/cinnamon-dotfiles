@@ -3,35 +3,33 @@
 # Get the current username
 username=$(whoami)
 
-# Install base-devel and git, then install yay from AUR
-sudo pacman -S --needed base-devel git
-git clone https://aur.archlinux.org/yay.git
-cd yay
-makepkg -si --noconfirm
-cd ..
-rm -rf yay
+# Update system and install sudo, git and curl
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y sudo git curl
 
-# Install Reflector to find the fastest mirrors
-sudo pacman -S --needed --noconfirm reflector
+# Install Bottom
+curl -LO https://github.com/ClementTsang/bottom/releases/download/0.9.6/bottom_0.9.6_amd64.deb
+sudo dpkg -i bottom_0.9.6_amd64.deb
 
-# Use Reflector to update the mirrorlist with the 10 most recently synchronized HTTP or HTTPS mirrors sorted by download rate
-sudo reflector --latest 10 --protocol http --protocol https --sort rate --save /etc/pacman.d/mirrorlist
+# Install Brave Browser
+sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+sudo apt update
+sudo apt install -y brave-browser
 
-# Check if Color, ParallelDownloads, and ILoveCandy are already in yay config
-# Define the options to be added
-declare -A options=(["Color"]="Color" ["ParallelDownloads"]="ParallelDownloads = 5" ["ILoveCandy"]="ILoveCandy")
-# Loop over the options
-for key in "${!options[@]}"; do
-    # Check if the option is already in the file
-    if ! grep -q "^$key" /etc/pacman.conf; then
-        # If not, add it under the # Misc options section
-        sudo sed -i "/^# Misc options/a ${options[$key]}" /etc/pacman.conf
-    fi
-done
+# Install Neovim AppImage
+curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+chmod u+x nvim.appimage
+./nvim.appimage --appimage-extract
+./squashfs-root/AppRun --version
+sudo mv squashfs-root /
+sudo ln -s /squashfs-root/AppRun /usr/bin/nvim
+rm nvim.appimage
 
 # All packages
 packages=(
     # System utilities
+    "build-essential"
     "file-roller"
     "flatpak"
     "gparted"
@@ -40,77 +38,66 @@ packages=(
     "neofetch"
     "timeshift"
     "unzip"
-    "xorg-xkill"
-    "xorg-xrandr"
+    "x11-xserver-utils"
     # Network utilities
     "filezilla"
     "gvfs"
-    "gvfs-afc"
-    "gvfs-gphoto2"
-    "gvfs-mtp"
-    "gvfs-nfs"
-    "gvfs-smb"
+    "gvfs-backends"
     "kdeconnect"
     "samba"
     # Desktop environment and related packages
     "cinnamon"
+    "dconf-cli"
+    "lightdm"
+    "lightdm-settings"
+    "slick-greeter"
     "celluloid"
     "eog"
     "evince"
-    #"gedit"
+    "gedit"
     "gnome-calculator"
     "gnome-screenshot"
     "gnome-system-monitor"
     "gnome-terminal"
     "gthumb"
     "gufw"
-    "kvantum"
-    "kvantum-qt5"
-    "lightdm"
-    "lightdm-settings"
-    "lightdm-slick-greeter"
+    "nemo"
     "nemo-fileroller"
-    "nemo-image-converter"
-    "nemo-preview"
-    "nemo-share"
+    "qt5-style-kvantum"
+    "qt5-style-kvantum-themes"
     "qt5ct"
     "qt6ct"
     # Applications
-    "bauh"
     "bleachbit"
-    "brave-bin"
-    "bottom"
-    "gpaste"
-    "libreoffice-fresh"
-    "neovim"
+    "gir1.2-gpaste-2"
+    "gpaste-2"
+    "libreoffice"
     "qbittorrent"
     "rmlint"
     "spice-vdagent"
-    "noto-fonts"
-    "noto-fonts-emoji"
+    "fonts-noto-core"
+    "fonts-noto-color-emoji"
     "xclip"
-    "xed"
     # For NvChad
     "gcc"
     "make"
     "ripgrep"
     # Virtualization tools
     "virt-manager"
-    "qemu-desktop"
-    "libvirt"
-    "edk2-ovmf"
-    "dnsmasq"
-    "vde2"
+    "qemu-system"
+    "qemu-utils"
+    "libvirt-clients"
+    "libvirt-daemon-system"
+    "libvirt-daemon"
     "bridge-utils"
+    "virtinst"
     "iptables"
     "dmidecode"
-    "libguestfs"
-    "qemu-block-gluster"
-    "qemu-block-iscsi"
+    "libguestfs-tools"
 )
 
 # Update system and install packages
-yay -Syu --needed --noconfirm "${packages[@]}"
+sudo apt install -y "${packages[@]}"
 
 # Enable Flathub
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
@@ -214,8 +201,8 @@ sudo systemctl daemon-reload
 
 # Run the setup script
 cd home/
-chmod +x Setup-Arch.sh
-./Setup-Arch.sh
+chmod +x Setup-LMDE-Theme.sh
+./Setup-LMDE-Theme.sh
 cd ..
 
 # Reboot for the changes to take effect

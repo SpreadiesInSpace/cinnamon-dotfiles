@@ -210,8 +210,8 @@ sudo systemctl daemon-reload
 
 # Run the setup script
 cd home/
-chmod +x Setup-Fedora.sh
-./Setup-Fedora.sh
+chmod +x Setup-Fedora-Theme.sh
+./Setup-Fedora-Theme.sh
 cd ..
 
 # Reboot for the changes to take effect

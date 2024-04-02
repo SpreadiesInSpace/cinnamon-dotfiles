@@ -3,33 +3,22 @@
 # Get the current username
 username=$(whoami)
 
-# Update system and install sudo, git and curl
-sudo apt update && sudo apt upgrade -y
-sudo apt install -y sudo git curl
+# Install base-devel, git, and other dependencies
+sudo xbps-install -Syu git xtools
 
-# Install Bottom
-curl -LO https://github.com/ClementTsang/bottom/releases/download/0.9.6/bottom_0.9.6_amd64.deb
-sudo dpkg -i bottom_0.9.6_amd64.deb
+# Install xmirror utility
+sudo xbps-install -Sy xmirror
 
-# Install Brave Browser
-sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
-echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
-sudo apt update
-sudo apt install -y brave-browser
+# Use xmirror to select the fastest mirrors
+sudo xmirror -s https://repo-fastly.voidlinux.org/
 
-# Install Neovim AppImage
-curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
-chmod u+x nvim.appimage
-./nvim.appimage --appimage-extract
-./squashfs-root/AppRun --version
-sudo mv squashfs-root /
-sudo ln -s /squashfs-root/AppRun /usr/bin/nvim
-rm nvim.appimage
+# Install multilib and nonfree repos
+sudo xbps-install -Sy void-repo-nonfree void-repo-multilib void-repo-multilib-nonfree
+sudo xbps-install -Syu
 
-# All packages
+# All packages (adapt package names as needed for Void Linux)
 packages=(
     # System utilities
-    "build-essential"
     "file-roller"
     "flatpak"
     "gparted"
@@ -38,19 +27,19 @@ packages=(
     "neofetch"
     "timeshift"
     "unzip"
-    "x11-xserver-utils"
+    "xkill"
+    "xrandr"
     # Network utilities
     "filezilla"
     "gvfs"
-    "gvfs-backends"
+    "gvfs-afc"
+    "gvfs-gphoto2"
+    "gvfs-mtp"
+    "gvfs-smb"
     "kdeconnect"
     "samba"
     # Desktop environment and related packages
     "cinnamon"
-    "dconf-cli"
-    "lightdm"
-    "lightdm-settings"
-    "slick-greeter"
     "celluloid"
     "eog"
     "evince"
@@ -61,22 +50,28 @@ packages=(
     "gnome-terminal"
     "gthumb"
     "gufw"
-    "nemo"
+    "kvantum"
+    "lightdm"
+    "lightdm-gtk-greeter-settings"
+    "lightdm-gtk3-greeter"
     "nemo-fileroller"
-    "qt5-style-kvantum"
-    "qt5-style-kvantum-themes"
+    "nemo-image-converter"
+    "nemo-preview"
+    #"nemo-share"
     "qt5ct"
     "qt6ct"
     # Applications
     "bleachbit"
-    "gir1.2-gpaste-2"
-    "gpaste-2"
+    "bottom"
+    "GPaste"
     "libreoffice"
+    "nano"
+    "neovim"
     "qbittorrent"
     "rmlint"
     "spice-vdagent"
-    "fonts-noto-core"
-    "fonts-noto-color-emoji"
+    "noto-fonts-ttf"
+    "noto-fonts-emoji"
     "xclip"
     # For NvChad
     "gcc"
@@ -84,20 +79,25 @@ packages=(
     "ripgrep"
     # Virtualization tools
     "virt-manager"
-    "qemu-system"
-    "qemu-utils"
-    "libvirt-clients"
-    "libvirt-daemon-system"
-    "libvirt-daemon"
+    "qemu"
+    "libvirt"
+    "edk2-ovmf"
+    "dnsmasq"
+    "vde2"
     "bridge-utils"
-    "virtinst"
     "iptables"
     "dmidecode"
-    "libguestfs-tools"
+    "libguestfs"
 )
 
 # Update system and install packages
-sudo apt install -y "${packages[@]}"
+sudo xbps-install -Syu "${packages[@]}"
+
+# Install Brave
+cd home/Void
+chmod +x brave_updates.sh
+./brave_updates.sh
+cd ..
 
 # Enable Flathub
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
@@ -149,8 +149,10 @@ if ! grep -q "^swtpm_group = \"$username\"$" /etc/libvirt/qemu.conf; then
     echo "swtpm_group = \"$username\"" | sudo tee -a /etc/libvirt/qemu.conf
 fi
 
-# Enable and start the libvirtd service
-sudo systemctl enable --now libvirtd.service
+# Enable and start services for Virt Manager
+sudo ln -s /etc/sv/libvirtd /var/service/
+sudo ln -s /etc/sv/virtlockd/ /var/service/
+sudo ln -s /etc/sv/virtlogd/ /var/service/
 
 # Start and autostart the default network
 # sudo virsh net-start default
@@ -193,16 +195,16 @@ sudo groupadd -f autologin
 sudo gpasswd -a $username autologin
 
 # Modify systemd configuration to change the default timeout for stopping services during shutdown, preserving old one
-sudo cp /etc/systemd/system.conf /etc/systemd/system.conf.old
-sudo sed -i 's/^#DefaultTimeoutStopSec=.*/DefaultTimeoutStopSec=15s/' /etc/systemd/system.conf
+# sudo cp /etc/systemd/system.conf /etc/systemd/system.conf.old
+# sudo sed -i 's/^#DefaultTimeoutStopSec=.*/DefaultTimeoutStopSec=15s/' /etc/systemd/system.conf
 
 # Reload the systemd configuration
-sudo systemctl daemon-reload
+# sudo systemctl daemon-reload
 
 # Run the setup script
 cd home/
-chmod +x Setup-LMDE.sh
-./Setup-LMDE.sh
+chmod +x Setup-Void-Theme.sh
+./Setup-Void-Theme.sh
 cd ..
 
 # Reboot for the changes to take effect

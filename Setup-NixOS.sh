@@ -20,8 +20,8 @@ sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flat
 
 # Run the setup script
 cd home/
-chmod +x Setup-NixOS.sh
-sh Setup-NixOS.sh
+chmod +x Setup-NixOS-Theme.sh
+sh Setup-NixOS-Theme.sh
 cd ..
 
 # Logout and log back in for the changes to take effect

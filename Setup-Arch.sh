@@ -3,20 +3,33 @@
 # Get the current username
 username=$(whoami)
 
-# Install base-devel, git, and other dependencies
-sudo xbps-install -Syu git xtools
+# Install base-devel and git, then install yay from AUR
+sudo pacman -S --needed base-devel git
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si --noconfirm
+cd ..
+rm -rf yay
 
-# Install xmirror utility
-sudo xbps-install -Sy xmirror
+# Install Reflector to find the fastest mirrors
+sudo pacman -S --needed --noconfirm reflector
 
-# Use xmirror to select the fastest mirrors
-sudo xmirror -s https://repo-fastly.voidlinux.org/
+# Use Reflector to update the mirrorlist with the 10 most recently synchronized HTTP or HTTPS mirrors sorted by download rate
+sudo reflector --latest 10 --protocol http --protocol https --sort rate --save /etc/pacman.d/mirrorlist
 
-# Install multilib and nonfree repos
-sudo xbps-install -Sy void-repo-nonfree void-repo-multilib void-repo-multilib-nonfree
-sudo xbps-install -Syu
+# Check if Color, ParallelDownloads, and ILoveCandy are already in yay config
+# Define the options to be added
+declare -A options=(["Color"]="Color" ["ParallelDownloads"]="ParallelDownloads = 5" ["ILoveCandy"]="ILoveCandy")
+# Loop over the options
+for key in "${!options[@]}"; do
+    # Check if the option is already in the file
+    if ! grep -q "^$key" /etc/pacman.conf; then
+        # If not, add it under the # Misc options section
+        sudo sed -i "/^# Misc options/a ${options[$key]}" /etc/pacman.conf
+    fi
+done
 
-# All packages (adapt package names as needed for Void Linux)
+# All packages
 packages=(
     # System utilities
     "file-roller"
@@ -27,14 +40,15 @@ packages=(
     "neofetch"
     "timeshift"
     "unzip"
-    "xkill"
-    "xrandr"
+    "xorg-xkill"
+    "xorg-xrandr"
     # Network utilities
     "filezilla"
     "gvfs"
     "gvfs-afc"
     "gvfs-gphoto2"
     "gvfs-mtp"
+    "gvfs-nfs"
     "gvfs-smb"
     "kdeconnect"
     "samba"
@@ -43,7 +57,7 @@ packages=(
     "celluloid"
     "eog"
     "evince"
-    "gedit"
+    #"gedit"
     "gnome-calculator"
     "gnome-screenshot"
     "gnome-system-monitor"
@@ -51,35 +65,38 @@ packages=(
     "gthumb"
     "gufw"
     "kvantum"
+    "kvantum-qt5"
     "lightdm"
-    "lightdm-gtk-greeter-settings"
-    "lightdm-gtk3-greeter"
+    "lightdm-settings"
+    "lightdm-slick-greeter"
     "nemo-fileroller"
     "nemo-image-converter"
     "nemo-preview"
-    #"nemo-share"
+    "nemo-share"
     "qt5ct"
     "qt6ct"
     # Applications
+    "bauh"
     "bleachbit"
+    "brave-bin"
     "bottom"
-    "GPaste"
-    "libreoffice"
-    "nano"
+    "gpaste"
+    "libreoffice-fresh"
     "neovim"
     "qbittorrent"
     "rmlint"
     "spice-vdagent"
-    "noto-fonts-ttf"
+    "noto-fonts"
     "noto-fonts-emoji"
     "xclip"
+    "xed"
     # For NvChad
     "gcc"
     "make"
     "ripgrep"
     # Virtualization tools
     "virt-manager"
-    "qemu"
+    "qemu-desktop"
     "libvirt"
     "edk2-ovmf"
     "dnsmasq"
@@ -88,16 +105,12 @@ packages=(
     "iptables"
     "dmidecode"
     "libguestfs"
+    "qemu-block-gluster"
+    "qemu-block-iscsi"
 )
 
 # Update system and install packages
-sudo xbps-install -Syu "${packages[@]}"
-
-# Install Brave
-cd home/Void
-chmod +x brave_updates.sh
-./brave_updates.sh
-cd ..
+yay -Syu --needed --noconfirm "${packages[@]}"
 
 # Enable Flathub
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
@@ -149,10 +162,8 @@ if ! grep -q "^swtpm_group = \"$username\"$" /etc/libvirt/qemu.conf; then
     echo "swtpm_group = \"$username\"" | sudo tee -a /etc/libvirt/qemu.conf
 fi
 
-# Enable and start services for Virt Manager
-sudo ln -s /etc/sv/libvirtd /var/service/
-sudo ln -s /etc/sv/virtlockd/ /var/service/
-sudo ln -s /etc/sv/virtlogd/ /var/service/
+# Enable and start the libvirtd service
+sudo systemctl enable --now libvirtd.service
 
 # Start and autostart the default network
 # sudo virsh net-start default
@@ -195,16 +206,16 @@ sudo groupadd -f autologin
 sudo gpasswd -a $username autologin
 
 # Modify systemd configuration to change the default timeout for stopping services during shutdown, preserving old one
-# sudo cp /etc/systemd/system.conf /etc/systemd/system.conf.old
-# sudo sed -i 's/^#DefaultTimeoutStopSec=.*/DefaultTimeoutStopSec=15s/' /etc/systemd/system.conf
+sudo cp /etc/systemd/system.conf /etc/systemd/system.conf.old
+sudo sed -i 's/^#DefaultTimeoutStopSec=.*/DefaultTimeoutStopSec=15s/' /etc/systemd/system.conf
 
 # Reload the systemd configuration
-# sudo systemctl daemon-reload
+sudo systemctl daemon-reload
 
 # Run the setup script
 cd home/
-chmod +x Setup-Void.sh
-./Setup-Void.sh
+chmod +x Setup-Arch-Theme.sh
+./Setup-Arch-Theme.sh
 cd ..
 
 # Reboot for the changes to take effect

@@ -260,9 +260,9 @@ systemctl daemon-reload
 
 # Run the setup script
 # cd home/
-# chmod +x Setup-Gentoo.sh
-# ./Setup-Gentoo.sh
+# chmod +x Setup-Gentoo-Theme.sh
+# ./Setup-Gentoo-Theme.sh
 # cd ..
 
 # Reboot for the changes to take effect
-echo "Installation complete! Please reboot for the changes to take effect. Then run Setup-Gentoo.sh in cinnamon/home for theming."
+echo "Installation complete! Please reboot for the changes to take effect. Then run Setup-Gentoo-Theme.sh in cinnamon/home for theming."
