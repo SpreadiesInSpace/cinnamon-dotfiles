@@ -65,7 +65,6 @@ sudo emerge -qDuN --with-bdeps=y "${unstable_packages[@]}"
 
 # Desktop environment related packages
 desktop_environment_extra=(
-    "media-video/celluloid"
     "media-gfx/eog"
     "app-text/evince"
     "app-editors/gedit"
@@ -74,6 +73,7 @@ desktop_environment_extra=(
     "gnome-extra/gnome-system-monitor"
     "x11-terms/gnome-terminal"
     "media-gfx/gthumb"
+    "media-video/mpv"
     "gnome-extra/nemo"
     "gnome-extra/nemo-fileroller"
     "x11-misc/qt5ct"
