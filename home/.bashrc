@@ -64,7 +64,7 @@ alias cleanKernel='sudo eclean-kernel -a'
 # Gentoo Update
 alias updateSync='sudo emaint -a sync;'
 alias updatePortage='sudo emerge --oneshot sys-apps/portage'
-alias updateApp='sudo emerge -avDuN --with-bdeps=y @world; flatpak update -y;sudo grub-mkconfig -o /boot/grub/grub.cfg'
+alias updateApp='sudo emerge --binpkg-respect-use=y -aqDuN --with-bdeps=y @world; flatpak update -y;sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias updateAll='updateApp && cleanAll'
 alias updateRestart='updateAll; systemctl reboot'
 alias updateShutdown='updateAll; systemctl poweroff'
