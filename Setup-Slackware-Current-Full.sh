@@ -107,7 +107,6 @@ packages=(
     #"samba"
     # Desktop environment and related packages
     #"cinnamon"
-    "celluloid"
     #"eog" #using Geeqie instead
     #"evince" #using okular instead
     "gdm"
@@ -117,6 +116,7 @@ packages=(
     "gnome-terminal"
     "gui-ufw"
     "kvantum-qt5"
+    "mpv"
     "qt5ct"
     "qt6ct"
     # Applications

@@ -123,31 +123,31 @@ xdg-mime default mpv.desktop video/x-ms-asx
 xdg-mime default mpv.desktop video/x-ms-wvx
 xdg-mime default mpv.desktop video/x-ms-wvxvideo
 
-# Photos - Geeqie
-xdg-mime default org.geeqie.Geeqie.desktop image/bmp
-xdg-mime default org.geeqie.Geeqie.desktop image/gif
-xdg-mime default org.geeqie.Geeqie.desktop image/jpeg
-xdg-mime default org.geeqie.Geeqie.desktop image/jpg
-xdg-mime default org.geeqie.Geeqie.desktop image/pjpeg
-xdg-mime default org.geeqie.Geeqie.desktop image/png
-xdg-mime default org.geeqie.Geeqie.desktop image/svg+xml
-xdg-mime default org.geeqie.Geeqie.desktop image/svg+xml-compressed
-xdg-mime default org.geeqie.Geeqie.desktop image/tiff
-xdg-mime default org.geeqie.Geeqie.desktop image/vnd.wap.wbmp
-xdg-mime default org.geeqie.Geeqie.desktop image/webp
-xdg-mime default org.geeqie.Geeqie.desktop image/x-bmp
-xdg-mime default org.geeqie.Geeqie.desktop image/x-gray
-xdg-mime default org.geeqie.Geeqie.desktop image/x-icb
-xdg-mime default org.geeqie.Geeqie.desktop image/x-icns
-xdg-mime default org.geeqie.Geeqie.desktop image/x-ico
-xdg-mime default org.geeqie.Geeqie.desktop image/x-pcx
-xdg-mime default org.geeqie.Geeqie.desktop image/x-png
-xdg-mime default org.geeqie.Geeqie.desktop image/x-portable-anymap
-xdg-mime default org.geeqie.Geeqie.desktop image/x-portable-bitmap
-xdg-mime default org.geeqie.Geeqie.desktop image/x-portable-graymap
-xdg-mime default org.geeqie.Geeqie.desktop image/x-portable-pixmap
-xdg-mime default org.geeqie.Geeqie.desktop image/x-xbitmap
-xdg-mime default org.geeqie.Geeqie.desktop image/x-xpixmap
+# Photos - Eye of GNOME
+xdg-mime default org.gnome.eog.desktop image/bmp
+xdg-mime default org.gnome.eog.desktop image/gif
+xdg-mime default org.gnome.eog.desktop image/jpeg
+xdg-mime default org.gnome.eog.desktop image/jpg
+xdg-mime default org.gnome.eog.desktop image/pjpeg
+xdg-mime default org.gnome.eog.desktop image/png
+xdg-mime default org.gnome.eog.desktop image/svg+xml
+xdg-mime default org.gnome.eog.desktop image/svg+xml-compressed
+xdg-mime default org.gnome.eog.desktop image/tiff
+xdg-mime default org.gnome.eog.desktop image/vnd.wap.wbmp
+xdg-mime default org.gnome.eog.desktop image/webp
+xdg-mime default org.gnome.eog.desktop image/x-bmp
+xdg-mime default org.gnome.eog.desktop image/x-gray
+xdg-mime default org.gnome.eog.desktop image/x-icb
+xdg-mime default org.gnome.eog.desktop image/x-icns
+xdg-mime default org.gnome.eog.desktop image/x-ico
+xdg-mime default org.gnome.eog.desktop image/x-pcx
+xdg-mime default org.gnome.eog.desktop image/x-png
+xdg-mime default org.gnome.eog.desktop image/x-portable-anymap
+xdg-mime default org.gnome.eog.desktop image/x-portable-bitmap
+xdg-mime default org.gnome.eog.desktop image/x-portable-graymap
+xdg-mime default org.gnome.eog.desktop image/x-portable-pixmap
+xdg-mime default org.gnome.eog.desktop image/x-xbitmap
+xdg-mime default org.gnome.eog.desktop image/x-xpixmap
 
 # Word - LibreOffice Writer
 xdg-mime default libreoffice-writer.desktop application/msword
@@ -163,40 +163,40 @@ xdg-mime default libreoffice-writer.desktop application/x-abiword
 # Spreadsheet - LibreOffice Calc
 xdg-mime default libreoffice-calc.desktop application/msexcel
 
-# PDF - Document Viewer (okular)
-xdg-mime default org.kde.okular.desktop application/pdf
+# PDF - Document Viewer (evince)
+xdg-mime default org.gnome.Evince.desktop application/pdf
 
-# Source Code - kate
-xdg-mime default org.kde.kate.desktop application/javascript
-xdg-mime default org.kde.kate.desktop application/x-httpd-php3
-xdg-mime default org.kde.kate.desktop application/x-httpd-php4
-xdg-mime default org.kde.kate.desktop application/x-httpd-php5
-xdg-mime default org.kde.kate.desktop application/x-m4
-xdg-mime default org.kde.kate.desktop application/x-php
-xdg-mime default org.kde.kate.desktop application/x-ruby
-xdg-mime default org.kde.kate.desktop application/x-shellscript
-xdg-mime default org.kde.kate.desktop application/xml
-xdg-mime default org.kde.kate.desktop text/css
-xdg-mime default org.kde.kate.desktop text/turtle
-xdg-mime default org.kde.kate.desktop text/x-c++hdr
-xdg-mime default org.kde.kate.desktop text/x-c++src
-xdg-mime default org.kde.kate.desktop text/x-chdr
-xdg-mime default org.kde.kate.desktop text/x-csharp
-xdg-mime default org.kde.kate.desktop text/x-csrc
-xdg-mime default org.kde.kate.desktop text/x-diff
-xdg-mime default org.kde.kate.desktop text/x-dsrc
-xdg-mime default org.kde.kate.desktop text/x-fortran
-xdg-mime default org.kde.kate.desktop text/x-java
-xdg-mime default org.kde.kate.desktop text/x-makefile
-xdg-mime default org.kde.kate.desktop text/x-pascal
-xdg-mime default org.kde.kate.desktop text/x-perl
-xdg-mime default org.kde.kate.desktop text/x-python
-xdg-mime default org.kde.kate.desktop text/x-sql
-xdg-mime default org.kde.kate.desktop text/x-vb
-xdg-mime default org.kde.kate.desktop text/yaml
+# Source Code - gedit
+xdg-mime default org.gnome.gedit.desktop application/javascript
+xdg-mime default org.gnome.gedit.desktop application/x-httpd-php3
+xdg-mime default org.gnome.gedit.desktop application/x-httpd-php4
+xdg-mime default org.gnome.gedit.desktop application/x-httpd-php5
+xdg-mime default org.gnome.gedit.desktop application/x-m4
+xdg-mime default org.gnome.gedit.desktop application/x-php
+xdg-mime default org.gnome.gedit.desktop application/x-ruby
+xdg-mime default org.gnome.gedit.desktop application/x-shellscript
+xdg-mime default org.gnome.gedit.desktop application/xml
+xdg-mime default org.gnome.gedit.desktop text/css
+xdg-mime default org.gnome.gedit.desktop text/turtle
+xdg-mime default org.gnome.gedit.desktop text/x-c++hdr
+xdg-mime default org.gnome.gedit.desktop text/x-c++src
+xdg-mime default org.gnome.gedit.desktop text/x-chdr
+xdg-mime default org.gnome.gedit.desktop text/x-csharp
+xdg-mime default org.gnome.gedit.desktop text/x-csrc
+xdg-mime default org.gnome.gedit.desktop text/x-diff
+xdg-mime default org.gnome.gedit.desktop text/x-dsrc
+xdg-mime default org.gnome.gedit.desktop text/x-fortran
+xdg-mime default org.gnome.gedit.desktop text/x-java
+xdg-mime default org.gnome.gedit.desktop text/x-makefile
+xdg-mime default org.gnome.gedit.desktop text/x-pascal
+xdg-mime default org.gnome.gedit.desktop text/x-perl
+xdg-mime default org.gnome.gedit.desktop text/x-python
+xdg-mime default org.gnome.gedit.desktop text/x-sql
+xdg-mime default org.gnome.gedit.desktop text/x-vb
+xdg-mime default org.gnome.gedit.desktop text/yaml
 
 # File Manager - Nemo
 xdg-mime default nemo.desktop inode/directory
 
-# Plain Text - kate
-xdg-mime default org.kde.kate.desktop text/plain
+# Plain Text - gedit
+xdg-mime default org.gnome.gedit.desktop text/plain

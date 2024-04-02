@@ -142,9 +142,9 @@ dconf load / < Gentoo.dconf
 # sed -i "91s|\"value\": \"/home/f16poom/NixOS-Start.png\"|\"value\": \"${home_dir}/NixOS-Start.png\"|g" $json_file
 
 # Sets Default Apps
-chmod +x Default-Apps.sh
-./Default-Apps.sh
-sudo ./Default-Apps.sh
+chmod +x Default-Apps-Gentoo.sh
+./Default-Apps-Gentoo.sh
+sudo ./Default-Apps-Gentoo.sh
 
 # Sets Wallpaper
 gsettings set org.cinnamon.desktop.background picture-uri file://${HOME}/wallpapers/Desktop_Wallpaper.png
