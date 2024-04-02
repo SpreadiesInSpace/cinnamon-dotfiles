@@ -2,7 +2,7 @@
 
 # Check if script is run as root
 if [ "$EUID" -ne 0 ]; then
-  echo "Please run the script using sudo. Do not run this script from the root account."
+  echo "Please run the script using sudo."
   exit
 fi
 
