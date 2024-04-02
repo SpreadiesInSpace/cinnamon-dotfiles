@@ -2,7 +2,7 @@
 
 # Get the current username
 username=$(whoami)
-
+sudo -v
 # Review Hostname
 sudo nano /etc/HOSTNAME
 sudo nano /etc/hosts
@@ -239,6 +239,6 @@ done
 # chmod +x Setup-Slackware.sh
 # ./Setup-Slackware.sh
 # cd ..
-
+sudo -k
 # Reboot for the changes to take effect
 echo "Installation complete! Please reboot for the changes to take effect. Then run Setup-Slackware.sh in cinnamon/home for theming."
