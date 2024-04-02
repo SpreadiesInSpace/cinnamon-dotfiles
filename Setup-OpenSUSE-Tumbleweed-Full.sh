@@ -1,36 +1,48 @@
 #!/bin/bash
 
+# Check if script is run as root
+if [ "$EUID" -ne 0 ]; then
+  echo "Please run the script using sudo."
+  exit
+fi
+
+# Check if the script is run from the root account
+if [ "$SUDO_USER" = "" ]; then
+  echo "Please do not run this script from the root account. Use sudo instead."
+  exit
+fi
+
 # Get the current username
-username=$(whoami)
+username=$SUDO_USER
 
 # Update system and install packages
-sudo zypper refresh
-sudo zypper dist-upgrade -y
+zypper refresh
+zypper dist-upgrade -y
 
 # Install and run mirrorsorcerer for faster mirrors
-sudo zypper install -y mirrorsorcerer
-sudo mirrorsorcerer -x
-sudo systemctl enable mirrorsorcerer
+zypper install -y mirrorsorcerer
+mirrorsorcerer -x
+systemctl enable mirrorsorcerer
 
 # Install git
-sudo zypper install -y git
+zypper install -y git
 
 # Install Media Codecs
-sudo zypper ar -cfp 90 --no-gpgcheck 'https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/Essentials/' packman-essentials
-sudo zypper refresh
-sudo zypper dup --from packman-essentials --allow-vendor-change -y
-sudo zypper install --from packman-essentials -y ffmpeg gstreamer-plugins-{good,bad,ugly,libav} libavcodec-full vlc-codecs
+zypper ar -cfp 90 --no-gpgcheck 'https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/Essentials/' packman-essentials
+zypper refresh
+zypper dup --from packman-essentials --allow-vendor-change -y
+zypper install --from packman-essentials -y ffmpeg gstreamer-plugins-{good,bad,ugly,libav} libavcodec-full vlc-codecs
 
 # Install Brave
-sudo zypper install -y curl
-sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
-sudo zypper addrepo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
-sudo zypper install -y brave-browser
+zypper install -y curl
+rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
+zypper addrepo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
+zypper install -y brave-browser
 
 # Install rmlint
-sudo zypper addrepo --no-gpgcheck https://download.opensuse.org/repositories/home:darix:apps/openSUSE_Tumbleweed/home:darix:apps.repo
-sudo zypper refresh
-sudo zypper install -y rmlint
+zypper addrepo --no-gpgcheck https://download.opensuse.org/repositories/home:darix:apps/openSUSE_Tumbleweed/home:darix:apps.repo
+zypper refresh
+zypper install -y rmlint
 
 # All packages
 packages=(
@@ -99,86 +111,86 @@ packages=(
 
 # Install packages
 for package in "${packages[@]}"; do
-    sudo zypper install -y $package
+    zypper install -y $package
 done
 
 # Install Cinnamon Control Center (needs to be seperate according to openSUSE wiki)
-sudo zypper install cinnamon-control-center
+zypper install cinnamon-control-center
 
 # Install Additional Tools for Virt Manager
-sudo zypper install -y -t pattern kvm_server kvm_tools
+zypper install -y -t pattern kvm_server kvm_tools
 
 # Enable Flathub
-sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
 # Preserve old libvirtd configuration (for Virtual Machine Manager)
-sudo cp /etc/libvirt/libvirtd.conf /etc/libvirt/libvirtd.conf.old
+cp /etc/libvirt/libvirtd.conf /etc/libvirt/libvirtd.conf.old
 
 # Check for 'unix_sock_group' entry
 if ! grep -q "^unix_sock_group = \"libvirt\"$" /etc/libvirt/libvirtd.conf; then
-    echo 'unix_sock_group = "libvirt"' | sudo tee -a /etc/libvirt/libvirtd.conf
+    echo 'unix_sock_group = "libvirt"' | tee -a /etc/libvirt/libvirtd.conf
 else
-    sudo sed -i '/^#*unix_sock_group = "libvirt"/s/^#*//' /etc/libvirt/libvirtd.conf
+    sed -i '/^#*unix_sock_group = "libvirt"/s/^#*//' /etc/libvirt/libvirtd.conf
 fi
 
 # Check for 'unix_sock_ro_perms' entry
 if ! grep -q "^unix_sock_ro_perms = \"0777\"$" /etc/libvirt/libvirtd.conf; then
-    echo 'unix_sock_ro_perms = "0777"' | sudo tee -a /etc/libvirt/libvirtd.conf
+    echo 'unix_sock_ro_perms = "0777"' | tee -a /etc/libvirt/libvirtd.conf
 else
-    sudo sed -i '/^#*unix_sock_ro_perms = "0777"/s/^#*//' /etc/libvirt/libvirtd.conf
+    sed -i '/^#*unix_sock_ro_perms = "0777"/s/^#*//' /etc/libvirt/libvirtd.conf
 fi
 
 # Check for 'unix_sock_rw_perms' entry
 if ! grep -q "^unix_sock_rw_perms = \"0770\"$" /etc/libvirt/libvirtd.conf; then
-    echo 'unix_sock_rw_perms = "0770"' | sudo tee -a /etc/libvirt/libvirtd.conf
+    echo 'unix_sock_rw_perms = "0770"' | tee -a /etc/libvirt/libvirtd.conf
 else
-    sudo sed -i '/^#*unix_sock_rw_perms = "0770"/s/^#*//' /etc/libvirt/libvirtd.conf
+    sed -i '/^#*unix_sock_rw_perms = "0770"/s/^#*//' /etc/libvirt/libvirtd.conf
 fi
 
 # Preserve old QEMU configuration (for Virtual Machine Manager)
-sudo cp /etc/libvirt/qemu.conf /etc/libvirt/qemu.conf.old
+cp /etc/libvirt/qemu.conf /etc/libvirt/qemu.conf.old
 
 # Check for 'user' entry
 if ! grep -q "^user = \"$username\"$" /etc/libvirt/qemu.conf; then
-    echo "user = \"$username\"" | sudo tee -a /etc/libvirt/qemu.conf
+    echo "user = \"$username\"" | tee -a /etc/libvirt/qemu.conf
 fi
 
 # Check for 'group' entry
 if ! grep -q "^group = \"$username\"$" /etc/libvirt/qemu.conf; then
-    echo "group = \"$username\"" | sudo tee -a /etc/libvirt/qemu.conf
+    echo "group = \"$username\"" | tee -a /etc/libvirt/qemu.conf
 fi
 
 # Check for 'swtpm_user' entry
 if ! grep -q "^swtpm_user = \"$username\"$" /etc/libvirt/qemu.conf; then
-    echo "swtpm_user = \"$username\"" | sudo tee -a /etc/libvirt/qemu.conf
+    echo "swtpm_user = \"$username\"" | tee -a /etc/libvirt/qemu.conf
 fi
 
 # Check for 'swtpm_group' entry
 if ! grep -q "^swtpm_group = \"$username\"$" /etc/libvirt/qemu.conf; then
-    echo "swtpm_group = \"$username\"" | sudo tee -a /etc/libvirt/qemu.conf
+    echo "swtpm_group = \"$username\"" | tee -a /etc/libvirt/qemu.conf
 fi
 
 # Enable and start the libvirtd service
-sudo systemctl enable --now libvirtd.service
+systemctl enable --now libvirtd.service
 
 # Start and autostart the default network
-# sudo virsh net-start default
-# sudo virsh net-autostart default
+# virsh net-start default
+# virsh net-autostart default
 
 # Add the current user to the necessary groups
 groups=(libvirt libvirt-qemu kvm input disk video audio)
 for group in "${groups[@]}"; do
-    sudo usermod -aG "$group" "$USER"
+    usermod -aG "$group" "$username"
 done
 
 # Backs up old lightdm.conf
-sudo cp /etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf.old
+cp /etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf.old
 
 # Copies example lightdm.conf
-sudo cp /usr/share/doc/packages/lightdm/lightdm.conf.example /etc/lightdm/lightdm.conf
+cp /usr/share/doc/packages/lightdm/lightdm.conf.example /etc/lightdm/lightdm.conf
 
 # Replace specific lines in lightdm.conf
-sudo awk -i inplace '
+awk -i inplace '
 /^\[Seat:\*\]/ {a=1}
 a==1 && /^#?greeter-hide-users=/ {
     print "greeter-hide-users=false"
@@ -204,17 +216,17 @@ a==1 && /^#?autologin-session=/ {
 ' /etc/lightdm/lightdm.conf
 
 # Create a new group named 'autologin' if it doesn't already exist
-sudo groupadd -f autologin
+groupadd -f autologin
 # Add the current user to the 'autologin' group
-sudo gpasswd -a $username autologin
+gpasswd -a $username autologin
 
 # Modify systemd configuration to change the default timeout for stopping services during shutdown, preserving old one
-sudo cp /etc/systemd/system.conf.d/timeout.conf /etc/systemd/system.conf.d/timeout.conf.old
-sudo mkdir -p /etc/systemd/system.conf.d/
-echo -e "[Manager]\nDefaultTimeoutStopSec=15s" | sudo tee /etc/systemd/system.conf.d/timeout.conf
+cp /etc/systemd/system.conf.d/timeout.conf /etc/systemd/system.conf.d/timeout.conf.old
+mkdir -p /etc/systemd/system.conf.d/
+echo -e "[Manager]\nDefaultTimeoutStopSec=15s" | tee /etc/systemd/system.conf.d/timeout.conf
 
 # Reload the systemd configuration
-sudo systemctl daemon-reload
+systemctl daemon-reload
 
 # Run the setup script
 # cd home/
