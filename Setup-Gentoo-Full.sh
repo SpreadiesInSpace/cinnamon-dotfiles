@@ -18,7 +18,7 @@ sudo emerge -quN app-eselect/eselect-repository app-editors/nano dev-vcs/git
 # Select 23.0 gnome desktop systemd profile for Cinnamon
 sudo eselect profile set default/linux/amd64/23.0/desktop/gnome/systemd
 # Emerge changes and cleanup
-sudo emerge -qDuN @world
+sudo emerge --binpkg-respect-use=y -qDuN @world
 sudo emerge --depclean
 
 # Update system and install packages (split them to prevent slot conflicts)
@@ -29,12 +29,12 @@ desktop_environment=(
     "x11-misc/lightdm"
     "x11-misc/lightdm-gtk-greeter"
 )
-sudo emerge -qDuN --with-bdeps=y "${desktop_environment[@]}"
+sudo emerge --binpkg-respect-use=y -qDuN --with-bdeps=y "${desktop_environment[@]}"
 
 # Install Brave *
 sudo eselect repository enable gentoo-zh
 sudo emaint sync -r gentoo-zh
-sudo emerge -qDuN www-client/brave-bin
+sudo emerge --binpkg-respect-use=y -qDuN www-client/brave-bin
 
 # Enable Guru Overlay
 sudo eselect repository enable guru
@@ -61,7 +61,7 @@ unstable_packages=(
     "x11-themes/kvantum"
     "app-backup/timeshift"
 )
-sudo emerge -qDuN --with-bdeps=y "${unstable_packages[@]}"
+sudo emerge --binpkg-respect-use=y -qDuN --with-bdeps=y "${unstable_packages[@]}"
 
 # Desktop environment related packages
 desktop_environment_extra=(
@@ -79,7 +79,7 @@ desktop_environment_extra=(
     "x11-misc/qt5ct"
     "gui-apps/qt6ct"
 )
-sudo emerge -qDuN --with-bdeps=y "${desktop_environment_extra[@]}"
+sudo emerge --binpkg-respect-use=y -qDuN --with-bdeps=y "${desktop_environment_extra[@]}"
 
 # System utilities
 system_utilities=(
@@ -99,7 +99,7 @@ system_utilities=(
     "kde-misc/kdeconnect"
     "net-fs/samba"
 )
-sudo emerge -qDuN --with-bdeps=y "${system_utilities[@]}"
+sudo emerge --binpkg-respect-use=y -qDuN --with-bdeps=y "${system_utilities[@]}"
 
 # Applications
 applications=(
@@ -117,7 +117,7 @@ applications=(
     "dev-build/make"
     "sys-apps/ripgrep"   
 )
-sudo emerge -qDuN --with-bdeps=y "${applications[@]}"
+sudo emerge --binpkg-respect-use=y -qDuN --with-bdeps=y "${applications[@]}"
 
 # Virtualization tools
 virtualization_tools=(
@@ -135,9 +135,9 @@ virtualization_tools=(
     "net-libs/libiscsi"
 )
 sudo touch /etc/portage/package.accept_keywords/zzz_autounmask
-sudo emerge -qDuN --with-bdeps=y "${virtualization_tools[@]}" --autounmask-write --autounmask
+sudo emerge --binpkg-respect-use=y -qDuN --with-bdeps=y "${virtualization_tools[@]}" --autounmask-write --autounmask
 sudo dispatch-conf -u
-sudo emerge -qDuN --with-bdeps=y "${virtualization_tools[@]}"
+sudo emerge --binpkg-respect-use=y -qDuN --with-bdeps=y "${virtualization_tools[@]}"
 
 # Enable Flathub
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
