@@ -227,6 +227,10 @@ a==1 && /^#?autologin-session=/ {
     print "autologin-session=cinnamon"
     next
 }
+a==1 && /^#?user-session=/ {
+    print "user-session=cinnamon"
+    next
+}
 {print}
 ' /etc/lightdm/lightdm.conf
 
