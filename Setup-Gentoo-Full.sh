@@ -2,7 +2,7 @@
 
 # Get the current username
 username=$(whoami)
-sudo -v
+
 # Copy my make.conf file to /etc/portage, preserving old one
 sudo mv /etc/portage/make.conf /etc/portage/make.conf.old
 sudo cp etc/portage/make.conf /etc/portage/make.conf
@@ -251,6 +251,6 @@ sudo systemctl daemon-reload
 # chmod +x Setup-Gentoo.sh
 # ./Setup-Gentoo.sh
 # cd ..
-sudo -k
+
 # Reboot for the changes to take effect
 echo "Installation complete! Please reboot for the changes to take effect. Then run Setup-Gentoo.sh in cinnamon/home for theming."

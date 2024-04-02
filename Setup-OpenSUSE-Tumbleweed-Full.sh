@@ -2,7 +2,7 @@
 
 # Get the current username
 username=$(whoami)
-sudo -v
+
 # Update system and install packages
 sudo zypper refresh
 sudo zypper dist-upgrade -y
@@ -221,6 +221,6 @@ sudo systemctl daemon-reload
 # chmod +x Setup-openSUSE.sh
 # ./Setup-openSUSE.sh
 # cd ..
-sudo -k
+
 # Reboot for the changes to take effect
 echo "Installation complete! Please reboot for the changes to take effect. Then run Setup-openSUSE.sh in cinnamon/home for theming."
