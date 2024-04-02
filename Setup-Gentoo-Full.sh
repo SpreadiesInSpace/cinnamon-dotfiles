@@ -30,7 +30,7 @@ desktop_environment=(
     "x11-misc/lightdm-gtk-greeter"
 )
 sudo emerge --binpkg-respect-use=y -qDuN --with-bdeps=y "${desktop_environment[@]}"
-
+<<com
 # Install Brave *
 sudo eselect repository enable gentoo-zh
 sudo emaint sync -r gentoo-zh
