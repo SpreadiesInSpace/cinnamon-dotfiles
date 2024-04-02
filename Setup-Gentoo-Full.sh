@@ -136,7 +136,7 @@ virtualization_tools=(
 )
 sudo touch /etc/portage/package.accept_keywords/zzz_autounmask
 sudo emerge -qDuN --with-bdeps=y "${virtualization_tools[@]}" --autounmask-write --autounmask
-sudo dispatch-conf -u
+sudo dispatch-conf
 sudo emerge -qDuN --with-bdeps=y "${virtualization_tools[@]}"
 
 # Enable Flathub
