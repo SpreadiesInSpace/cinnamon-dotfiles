@@ -12,8 +12,8 @@ sudo nano /etc/portage/make.conf
 # Sync Repository
 sudo emaint -a sync
 
-# Install CFG Update to process config file changes and eselect to handle overlays
-sudo emerge -quN app-portage/cfg-update app-eselect/eselect-repository dev-vcs/git
+# Install Essentials 
+sudo emerge -quN app-portage/cfg-update app-eselect/eselect-repository app-editors/nano dev-vcs/git
 
 # Select 23.0 gnome desktop systemd profile for Cinnamon
 sudo eselect profile set default/linux/amd64/23.0/desktop/gnome/systemd
