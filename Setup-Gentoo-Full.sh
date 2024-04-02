@@ -1,31 +1,25 @@
 #!/bin/bash
 
-# Check if script is run as root
-if [ "$EUID" -ne 0 ]; then
-  echo "Please run the script as root."
-  exit
-fi
-
 # Get the current username
 username=$(whoami)
 
 # Copy my make.conf file to /etc/portage, preserving old one
-mv /etc/portage/make.conf /etc/portage/make.conf.old
-cp etc/portage/make.conf /etc/portage/make.conf
+sudo mv /etc/portage/make.conf /etc/portage/make.conf.old
+sudo cp etc/portage/make.conf /etc/portage/make.conf
 # Review make.conf file
-nano /etc/portage/make.conf
+sudo nano /etc/portage/make.conf
 
 # Sync Repository
-emaint -a sync
+sudo emaint -a sync
 
 # Install Essentials 
-emerge -quN app-portage/cfg-update app-eselect/eselect-repository app-editors/nano dev-vcs/git
+sudo emerge -quN app-eselect/eselect-repository app-editors/nano dev-vcs/git
 
 # Select 23.0 gnome desktop systemd profile for Cinnamon
-eselect profile set default/linux/amd64/23.0/desktop/gnome/systemd
+sudo eselect profile set default/linux/amd64/23.0/desktop/gnome/systemd
 # Emerge changes and cleanup
-emerge -qDuN @world
-emerge --depclean
+sudo emerge -qDuN @world
+sudo emerge --depclean
 
 # Update system and install packages (split them to prevent slot conflicts)
 # Desktop environment and display manager
@@ -35,30 +29,30 @@ desktop_environment=(
     "x11-misc/lightdm"
     "x11-misc/lightdm-gtk-greeter"
 )
-emerge -qDuN --with-bdeps=y "${desktop_environment[@]}"
+sudo emerge -qDuN --with-bdeps=y "${desktop_environment[@]}"
 
 # Install Brave *
-eselect repository enable gentoo-zh
-emaint sync -r gentoo-zh
-emerge -qDuN www-client/brave-bin
+sudo eselect repository enable gentoo-zh
+sudo emaint sync -r gentoo-zh
+sudo emerge -qDuN www-client/brave-bin
 
 # Enable Guru Overlay
-eselect repository enable guru
-emaint sync -r guru
+sudo eselect repository enable guru
+sudo emaint sync -r guru
 
 # Install rmlint
-emerge -quN dev-build/scons dev-libs/glib
+sudo emerge -quN dev-build/scons dev-libs/glib
 git clone https://github.com/sahib/rmlint.git
 cd rmlint/
-scons --prefix=/usr install
+sudo scons --prefix=/usr install
 cd ..
-rm -rf rmlint/
+sudo rm -rf rmlint/
 
 # Allow select unstable packages to be merged
-echo "x11-misc/copyq ~amd64" | tee /etc/portage/package.accept_keywords/copyq
-echo "app-admin/grub-customizer ~amd64" | tee /etc/portage/package.accept_keywords/grub-customizer
-echo "x11-themes/kvantum ~amd64" | tee /etc/portage/package.accept_keywords/kvantum
-echo "app-backup/timeshift ~amd64" | tee /etc/portage/package.accept_keywords/timeshift
+echo "x11-misc/copyq ~amd64" | sudo tee /etc/portage/package.accept_keywords/copyq
+echo "app-admin/grub-customizer ~amd64" | sudo tee /etc/portage/package.accept_keywords/grub-customizer
+echo "x11-themes/kvantum ~amd64" | sudo tee /etc/portage/package.accept_keywords/kvantum
+echo "app-backup/timeshift ~amd64" | sudo tee /etc/portage/package.accept_keywords/timeshift
 
 # Unstable Packages
 unstable_packages=(
@@ -67,7 +61,7 @@ unstable_packages=(
     "x11-themes/kvantum"
     "app-backup/timeshift"
 )
-emerge -qDuN --with-bdeps=y "${unstable_packages[@]}"
+sudo emerge -qDuN --with-bdeps=y "${unstable_packages[@]}"
 
 # Desktop environment related packages
 desktop_environment_extra=(
@@ -85,7 +79,7 @@ desktop_environment_extra=(
     "x11-misc/qt5ct"
     "gui-apps/qt6ct"
 )
-emerge -qDuN --with-bdeps=y "${desktop_environment_extra[@]}"
+sudo emerge -qDuN --with-bdeps=y "${desktop_environment_extra[@]}"
 
 # System utilities
 system_utilities=(
@@ -105,7 +99,7 @@ system_utilities=(
     "kde-misc/kdeconnect"
     "net-fs/samba"
 )
-emerge -qDuN --with-bdeps=y "${system_utilities[@]}"
+sudo emerge -qDuN --with-bdeps=y "${system_utilities[@]}"
 
 # Applications
 applications=(
@@ -123,7 +117,7 @@ applications=(
     "dev-build/make"
     "sys-apps/ripgrep"   
 )
-emerge -qDuN --with-bdeps=y "${applications[@]}"
+sudo emerge -qDuN --with-bdeps=y "${applications[@]}"
 
 # Virtualization tools
 virtualization_tools=(
@@ -140,81 +134,82 @@ virtualization_tools=(
     "sys-cluster/glusterfs"
     "net-libs/libiscsi"
 )
-emerge -qDuN --with-bdeps=y "${virtualization_tools[@]}"
-cfg-update -u
-emerge -qDuN --with-bdeps=y "${virtualization_tools[@]}"
+sudo touch /etc/portage/package.accept_keywords/zzz_autounmask
+sudo emerge -qDuN --with-bdeps=y "${virtualization_tools[@]}" --autounmask-write --autounmask
+sudo dispatch-conf -u
+sudo emerge -qDuN --with-bdeps=y "${virtualization_tools[@]}"
 
 # Enable Flathub
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
 # Preserve old libvirtd configuration (for Virtual Machine Manager)
-cp /etc/libvirt/libvirtd.conf /etc/libvirt/libvirtd.conf.old
+sudo cp /etc/libvirt/libvirtd.conf /etc/libvirt/libvirtd.conf.old
 
 # Check for 'unix_sock_group' entry
 if ! grep -q "^unix_sock_group = \"libvirt\"$" /etc/libvirt/libvirtd.conf; then
-    echo 'unix_sock_group = "libvirt"' | tee -a /etc/libvirt/libvirtd.conf
+    echo 'unix_sock_group = "libvirt"' | sudo tee -a /etc/libvirt/libvirtd.conf
 else
     sed -i '/^#*unix_sock_group = "libvirt"/s/^#*//' /etc/libvirt/libvirtd.conf
 fi
 
 # Check for 'unix_sock_ro_perms' entry
 if ! grep -q "^unix_sock_ro_perms = \"0777\"$" /etc/libvirt/libvirtd.conf; then
-    echo 'unix_sock_ro_perms = "0777"' | tee -a /etc/libvirt/libvirtd.conf
+    echo 'unix_sock_ro_perms = "0777"' | sudo tee -a /etc/libvirt/libvirtd.conf
 else
     sed -i '/^#*unix_sock_ro_perms = "0777"/s/^#*//' /etc/libvirt/libvirtd.conf
 fi
 
 # Check for 'unix_sock_rw_perms' entry
 if ! grep -q "^unix_sock_rw_perms = \"0770\"$" /etc/libvirt/libvirtd.conf; then
-    echo 'unix_sock_rw_perms = "0770"' | tee -a /etc/libvirt/libvirtd.conf
+    echo 'unix_sock_rw_perms = "0770"' | sudo tee -a /etc/libvirt/libvirtd.conf
 else
     sed -i '/^#*unix_sock_rw_perms = "0770"/s/^#*//' /etc/libvirt/libvirtd.conf
 fi
 
 # Preserve old QEMU configuration (for Virtual Machine Manager)
-cp /etc/libvirt/qemu.conf /etc/libvirt/qemu.conf.old
+sudo cp /etc/libvirt/qemu.conf /etc/libvirt/qemu.conf.old
 
 # Check for 'user' entry
 if ! grep -q "^user = \"$username\"$" /etc/libvirt/qemu.conf; then
-    echo "user = \"$username\"" | tee -a /etc/libvirt/qemu.conf
+    echo "user = \"$username\"" | sudo tee -a /etc/libvirt/qemu.conf
 fi
 
 # Check for 'group' entry
 if ! grep -q "^group = \"$username\"$" /etc/libvirt/qemu.conf; then
-    echo "group = \"$username\"" | tee -a /etc/libvirt/qemu.conf
+    echo "group = \"$username\"" | sudo tee -a /etc/libvirt/qemu.conf
 fi
 
 # Check for 'swtpm_user' entry
 if ! grep -q "^swtpm_user = \"$username\"$" /etc/libvirt/qemu.conf; then
-    echo "swtpm_user = \"$username\"" | tee -a /etc/libvirt/qemu.conf
+    echo "swtpm_user = \"$username\"" | sudo tee -a /etc/libvirt/qemu.conf
 fi
 
 # Check for 'swtpm_group' entry
 if ! grep -q "^swtpm_group = \"$username\"$" /etc/libvirt/qemu.conf; then
-    echo "swtpm_group = \"$username\"" | tee -a /etc/libvirt/qemu.conf
+    echo "swtpm_group = \"$username\"" | sudo tee -a /etc/libvirt/qemu.conf
 fi
 
 # Enable and start services service
-systemctl enable --now libvirtd.service
-systemctl enable --now lightdm.service
-systemctl enable --now NetworkManager.service
-systemctl --global enable pulseaudio.service pulseaudio.socket
+sudo systemctl enable libvirtd.service
+sudo systemctl enable lightdm.service
+sudo systemctl enable NetworkManager.service
+sudo systemctl --global enable pulseaudio.service pulseaudio.socket
 
 # Start and autostart the default network
-# virsh net-start default
-# virsh net-autostart default
+# sudo virsh net-start default
+# sudo virsh net-autostart default
 
 # Add the current user to the necessary groups
 groups=(libvirt libvirt-qemu kvm input disk video audio)
 for group in "${groups[@]}"; do
-    usermod -aG "$group" "$USER"
+    sudo usermod -aG "$group" "$USER"
 done
 
 # Backs up old lightdm.conf
-cp /etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf.old
+sudo cp /etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf.old
 
 # Replace specific lines in lightdm.conf
-awk -i inplace '
+sudo awk -i inplace '
 /^\[Seat:\*\]/ {a=1}
 a==1 && /^#?greeter-hide-users=/ {
     print "greeter-hide-users=false"
@@ -236,16 +231,16 @@ a==1 && /^#?autologin-session=/ {
 ' /etc/lightdm/lightdm.conf
 
 # Create a new group named 'autologin' if it doesn't already exist
-groupadd -f autologin
+sudo groupadd -f autologin
 # Add the current user to the 'autologin' group
-gpasswd -a $username autologin
+sudo gpasswd -a $username autologin
 
 # Modify systemd configuration to change the default timeout for stopping services during shutdown, preserving old one
-cp /etc/systemd/system.conf /etc/systemd/system.conf.old
-sed -i 's/^#DefaultTimeoutStopSec=.*/DefaultTimeoutStopSec=15s/' /etc/systemd/system.conf
+sudo cp /etc/systemd/system.conf /etc/systemd/system.conf.old
+sudo sed -i 's/^#DefaultTimeoutStopSec=.*/DefaultTimeoutStopSec=15s/' /etc/systemd/system.conf
 
 # Reload the systemd configuration
-systemctl daemon-reload
+sudo systemctl daemon-reload
 
 # Run the setup script
 # cd home/
