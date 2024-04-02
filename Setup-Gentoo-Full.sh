@@ -32,8 +32,8 @@ desktop_environment=(
 sudo emerge -qDuN --with-bdeps=y "${desktop_environment[@]}"
 
 # Install Brave *
-# sudo eselect repository add brave-overlay git https://gitlab.com/jason.oliveira/brave-overlay.git
-# sudo emerge --sync brave-overlay
+sudo eselect repository add brave-overlay git https://gitlab.com/jason.oliveira/brave-overlay.git
+sudo emerge --sync brave-overlay
 # sudo emerge --ask www-client/brave-bin::brave-overlay
 
 # Install rmlint
