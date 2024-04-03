@@ -96,9 +96,11 @@ emerge -qDuN --with-bdeps=y "${desktop_environment_extra[@]}"
 
 # System utilities
 system_utilities=(
+    "app-admin/eclean-kernel"
     "app-arch/file-roller"
     "sys-apps/flatpak"
     "sys-apps/xdg-desktop-portal-gtk"
+    "app-portage/gentoolkit"
     "sys-block/gparted"
     "sys-fs/ncdu"
     "app-misc/neofetch"
