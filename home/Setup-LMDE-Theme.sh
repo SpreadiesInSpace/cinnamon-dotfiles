@@ -138,9 +138,9 @@ json_file="${home_dir}/.config/cinnamon/spices/menu@cinnamon.org/0.json"
 sed -i "91s|\"value\": \"/home/f16poom/linuxmint-logo-filled-ring.svg\"|\"value\": \"${home_dir}/linuxmint-logo-filled-ring.svg\"|g" $json_file
 
 # Sets Default Apps
-chmod +x Default-Apps.sh
-./Default-Apps.sh
-sudo ./Default-Apps.sh
+chmod +x Default-Apps-Mint.sh
+./Default-Apps-Mint.sh
+sudo ./Default-Apps-Mint.sh
 
 # Sets Wallpaper
 gsettings set org.cinnamon.desktop.background picture-uri file://${HOME}/wallpapers/Desktop_Wallpaper.png
