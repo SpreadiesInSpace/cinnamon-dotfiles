@@ -88,7 +88,7 @@ in
     systemPackages = with pkgs.gnome // pkgs.libsForQt5 // pkgs; ([
       bleachbit bottom brave celluloid clipit filezilla gcc gedit git gnome-system-monitor
       gparted libreoffice-fresh ncdu neofetch unstable.neovim qbittorrent qt5ct ripgrep rmlint
-      timeshift unzip virt-manager wget xclip xorg.xkill qtstyleplugin-kvantum
+      rhythmbox timeshift unzip virt-manager wget xclip xorg.xkill qtstyleplugin-kvantum
     ]);
     cinnamon.excludePackages = with pkgs.cinnamon // pkgs.gnome // pkgs; ([
       bulky gnome-calendar hexchat mint-artwork mint-cursor-themes mint-l-icons mint-l-theme mint-themes

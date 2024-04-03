@@ -81,6 +81,7 @@ packages=(
     "nemo-extensions"
     "qt5ct"
     "qt6ct"
+    "rhythmbox"
     # Applications
     "bleachbit"
     "gpaste"

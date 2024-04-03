@@ -131,6 +131,7 @@ packages=(
     "mpv"
     "qt5ct"
     "qt6ct"
+    "rhythmbox"
     # Applications
     "bleachbit"
     "brave-browser"

@@ -90,6 +90,7 @@ desktop_environment_extra=(
     "gnome-extra/nemo-fileroller"
     "x11-misc/qt5ct"
     "gui-apps/qt6ct"
+    "media-sound/rhythmbox"
 )
 emerge -qDuN --with-bdeps=y "${desktop_environment_extra[@]}"
 

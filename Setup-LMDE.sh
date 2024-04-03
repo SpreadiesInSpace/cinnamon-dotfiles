@@ -67,6 +67,7 @@ packages=(
     "qt5-style-kvantum-themes"
     "qt5ct"
     "qt6ct"
+    "rhythmbox"
     # Applications
     "bleachbit"
     "gir1.2-gpaste-2"

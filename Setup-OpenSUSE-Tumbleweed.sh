@@ -85,6 +85,7 @@ packages=(
     "nemo-extension-share"
     "qt5ct"
     "qt6ct"
+    "rhythmbox"
     # Applications
     "bleachbit"
     "bottom"

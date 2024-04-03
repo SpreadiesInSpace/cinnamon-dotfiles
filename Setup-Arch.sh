@@ -75,6 +75,7 @@ packages=(
     "nemo-share"
     "qt5ct"
     "qt6ct"
+    "rhythmbox"
     # Applications
     "bauh"
     "bleachbit"
