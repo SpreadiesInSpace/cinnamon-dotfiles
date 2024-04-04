@@ -231,9 +231,9 @@ systemctl daemon-reload
 
 # Run the setup script
 # cd home/
-# chmod +x Setup-openSUSE-Theme.sh
-# ./Setup-openSUSE-Theme.sh
+# chmod +x Setup-OpenSUSE-Theme.sh
+# ./Setup-OpenSUSE-Theme.sh
 # cd ..
 
 # Reboot for the changes to take effect
-echo "Installation complete! Please reboot for the changes to take effect. Then run Setup-openSUSE-Theme.sh in cinnamon/home for theming."
+echo "Installation complete! Please reboot for the changes to take effect. Then run Setup-OpenSUSE-Theme.sh in cinnamon/home for theming."
