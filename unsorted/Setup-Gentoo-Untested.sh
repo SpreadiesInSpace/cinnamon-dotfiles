@@ -84,7 +84,7 @@ unstable_packages=(
     "x11-themes/kvantum"
     "app-backup/timeshift"
 )
-#emergeAndUpdate "${unstable_packages[@]}"
+emergeAndUpdate "${unstable_packages[@]}"
 
 # Desktop environment related packages
 desktop_environment_extra=(
@@ -103,7 +103,7 @@ desktop_environment_extra=(
     "gui-apps/qt6ct"
     "media-sound/rhythmbox"
 )
-#emergeAndUpdate "${desktop_environment_extra[@]}"
+emergeAndUpdate "${desktop_environment_extra[@]}"
 
 # System utilities
 system_utilities=(
@@ -144,7 +144,7 @@ applications=(
     "dev-build/make"
     "sys-apps/ripgrep"   
 )
-#emergeAndUpdate "${applications[@]}"
+emergeAndUpdate "${applications[@]}"
 
 # Virtualization tools
 virtualization_tools=(
