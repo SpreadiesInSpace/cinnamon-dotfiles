@@ -24,7 +24,6 @@ alias updateApp='sudo slackpkg update; sudo slackpkg install-new; sudo slackpkg 
 alias updateAll='updateApp && cleanAll'
 alias updateRestart='updateAll; sudo reboot'
 alias updateShutdown='updateAll; sudo poweroff'
-echo
 
 ##-----------------------------------------------------
 ## synth-shell-prompt.sh
