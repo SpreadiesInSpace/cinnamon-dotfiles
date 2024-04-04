@@ -102,6 +102,7 @@ system_utilities=(
     "sys-apps/xdg-desktop-portal-gtk"
     "app-portage/gentoolkit"
     "sys-block/gparted"
+    "app-portage/mirrorselect"
     "sys-fs/ncdu"
     "app-misc/neofetch"
     "net-firewall/ufw"    
