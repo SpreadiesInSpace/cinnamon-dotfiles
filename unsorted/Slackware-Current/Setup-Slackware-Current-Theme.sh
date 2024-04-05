@@ -142,9 +142,9 @@ dconf load / < Slackware.dconf
 # sed -i "91s|\"value\": \"/home/f16poom/NixOS-Start.png\"|\"value\": \"${home_dir}/NixOS-Start.png\"|g" $json_file
 
 # Sets Default Apps
-chmod +x Default-Apps-Slackware.sh
-./Default-Apps-Slackware.sh
-sudo ./Default-Apps-Slackware.sh
+chmod +x Default-Apps-Slackware-Current.sh
+./Default-Apps-Slackware-Current.sh
+sudo ./Default-Apps-Slackware-Current.sh
 
 # Sets Wallpaper
 gsettings set org.cinnamon.desktop.background picture-uri file://${HOME}/wallpapers/Desktop_Wallpaper.png
