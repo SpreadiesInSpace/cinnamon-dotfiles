@@ -95,7 +95,7 @@ useradd -u 257 -g pcscd -d /var/run/pcscd -s /bin/false pcscd
 # For Virt-Manager & accessing samba shares
 slackpkg install dnsmasq samba
 cp /etc/samba/smb.conf-sample /etc/samba/smb.conf
-# sh /etc/rc.d/rc.samba start
+sh /etc/rc.d/rc.samba start
 
 # All packages
 packages=(
