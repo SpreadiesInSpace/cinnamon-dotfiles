@@ -27,6 +27,8 @@ sudo flatpak override --filesystem=$HOME/.themes
 sudo flatpak override --filesystem=$HOME/.icons
 sudo flatpak override --env=GTK_THEME=Gruvbox-Dark-BL 
 sudo flatpak override --env=ICON_THEME=gruvbox-dark-icons-gtk
+sudo flatpak override --filesystem=xdg-config/Kvantum:ro
+sudo flatpak override --env=QT_STYLE_OVERRIDE=kvantum
 
 # Copies fonts to appropriate directories
 cp -vnpr .fonts/ ~/
