@@ -2,7 +2,7 @@
 
 [Desktop Entry]
 Name=Mount CIFS Share
-Exec=xfce4-terminal -x bash -c 'mkdir -p ${HOME}/Share;chmod 777 ${HOME}/Share;sudo mount -t 9p -o trans=virtio /sharepoint ${HOME}/Share;clear;neofetch;exec bash;'
+Exec=xfce4-terminal -x bash -c 'mkdir -p ${HOME}/Share;chmod 777 ${HOME}/Share;sudo mount -t 9p -o trans=virtio /sharepoint ${HOME}/Share;clear;neofetch;echo;exec bash;'
 Comment=
 Terminal=false
 Icon=krusader_root
