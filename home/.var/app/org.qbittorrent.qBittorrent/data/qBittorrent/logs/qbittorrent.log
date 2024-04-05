@@ -327,3 +327,50 @@
 (I) 2024-04-05T22:48:36 - Detected external IP. IP: "184.82.210.151"
 (N) 2024-04-05T22:48:39 - qBittorrent termination initiated
 (N) 2024-04-05T22:48:40 - qBittorrent is now ready to exit
+(N) 2024-04-05T23:01:01 - qBittorrent v4.6.4 started
+(N) 2024-04-05T23:01:01 - Using config directory: /home/f16poom/.var/app/org.qbittorrent.qBittorrent/config/qBittorrent
+(N) 2024-04-05T23:01:01 - Trying to listen on the following list of IP addresses: "0.0.0.0:65516,[::]:65516"
+(I) 2024-04-05T23:01:01 - Peer ID: "-qB4640-"
+(I) 2024-04-05T23:01:01 - HTTP User-Agent: "qBittorrent/4.6.4"
+(I) 2024-04-05T23:01:01 - Distributed Hash Table (DHT) support: ON
+(I) 2024-04-05T23:01:01 - Local Peer Discovery support: ON
+(I) 2024-04-05T23:01:01 - Peer Exchange (PeX) support: ON
+(I) 2024-04-05T23:01:01 - Anonymous mode: OFF
+(I) 2024-04-05T23:01:01 - Encryption support: ON
+(I) 2024-04-05T23:01:01 - UPnP/NAT-PMP support: ON
+(I) 2024-04-05T23:01:01 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/65516"
+(I) 2024-04-05T23:01:01 - Successfully listening on IP. IP: "127.0.0.1". Port: "UDP/65516"
+(I) 2024-04-05T23:01:01 - Successfully listening on IP. IP: "192.168.122.131". Port: "TCP/65516"
+(I) 2024-04-05T23:01:01 - Successfully listening on IP. IP: "192.168.122.131". Port: "UDP/65516"
+(I) 2024-04-05T23:01:01 - Successfully listening on IP. IP: "::1". Port: "TCP/65516"
+(I) 2024-04-05T23:01:01 - Successfully listening on IP. IP: "::1". Port: "UDP/65516"
+(I) 2024-04-05T23:01:01 - Successfully listening on IP. IP: "fe80::a1e4:9894:438a:b3cd%eth0". Port: "TCP/65516"
+(I) 2024-04-05T23:01:01 - Successfully listening on IP. IP: "fe80::a1e4:9894:438a:b3cd%eth0". Port: "UDP/65516"
+(I) 2024-04-05T23:01:01 - IP geolocation database loaded. Type: DBIP-Country-Lite. Build time: Mon Apr 1 07:25:20 2024.
+(I) 2024-04-05T23:01:02 - Detected external IP. IP: "184.82.210.151"
+(N) 2024-04-05T23:01:52 - qBittorrent termination initiated
+(N) 2024-04-05T23:01:52 - qBittorrent is now ready to exit
+(N) 2024-04-05T23:10:09 - qBittorrent v4.6.4 started
+(N) 2024-04-05T23:10:09 - Using config directory: /home/f16poom/.var/app/org.qbittorrent.qBittorrent/config/qBittorrent
+(N) 2024-04-05T23:10:09 - Trying to listen on the following list of IP addresses: "0.0.0.0:65516,[::]:65516"
+(I) 2024-04-05T23:10:09 - Peer ID: "-qB4640-"
+(I) 2024-04-05T23:10:09 - HTTP User-Agent: "qBittorrent/4.6.4"
+(I) 2024-04-05T23:10:09 - Distributed Hash Table (DHT) support: ON
+(I) 2024-04-05T23:10:09 - Local Peer Discovery support: ON
+(I) 2024-04-05T23:10:09 - Peer Exchange (PeX) support: ON
+(I) 2024-04-05T23:10:09 - Anonymous mode: OFF
+(I) 2024-04-05T23:10:09 - Encryption support: ON
+(I) 2024-04-05T23:10:09 - Successfully listening on IP. IP: "127.0.0.1". Port: "TCP/65516"
+(I) 2024-04-05T23:10:09 - Successfully listening on IP. IP: "127.0.0.1". Port: "UDP/65516"
+(I) 2024-04-05T23:10:09 - Successfully listening on IP. IP: "192.168.122.131". Port: "TCP/65516"
+(I) 2024-04-05T23:10:09 - Successfully listening on IP. IP: "192.168.122.131". Port: "UDP/65516"
+(I) 2024-04-05T23:10:09 - Successfully listening on IP. IP: "::1". Port: "TCP/65516"
+(I) 2024-04-05T23:10:09 - Successfully listening on IP. IP: "::1". Port: "UDP/65516"
+(I) 2024-04-05T23:10:09 - Successfully listening on IP. IP: "fe80::a1e4:9894:438a:b3cd%eth0". Port: "TCP/65516"
+(I) 2024-04-05T23:10:09 - Successfully listening on IP. IP: "fe80::a1e4:9894:438a:b3cd%eth0". Port: "UDP/65516"
+(I) 2024-04-05T23:10:09 - UPnP/NAT-PMP support: ON
+(I) 2024-04-05T23:10:09 - IP geolocation database loaded. Type: DBIP-Country-Lite. Build time: Mon Apr 1 07:25:20 2024.
+(I) 2024-04-05T23:10:09 - Detected external IP. IP: "184.82.210.151"
+(N) 2024-04-05T23:11:30 - Options saved.
+(N) 2024-04-05T23:11:58 - qBittorrent termination initiated
+(N) 2024-04-05T23:11:58 - qBittorrent is now ready to exit
