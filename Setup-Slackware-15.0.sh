@@ -244,8 +244,8 @@ for group in "${groups[@]}"; do
 done
 
 # Replace specific liness in sddm.conf
-# sudo sed -i "/\[Autologin\]/,/User=/ s/User=.*/User=$username/" /etc/sddm.conf
-# sudo sed -i "/\[Autologin\]/,/Session=/ s/Session=.*/Session=cinnamon/" /etc/sddm.conf
+# sed -i "/\[Autologin\]/,/User=/ s/User=.*/User=$username/" /etc/sddm.conf
+# sed -i "/\[Autologin\]/,/Session=/ s/Session=.*/Session=cinnamon/" /etc/sddm.conf
 
 # Modify systemd configuration to change the default timeout for stopping services during shutdown, preserving old one
 # cp /etc/systemd/system.conf /etc/systemd/system.conf.old
