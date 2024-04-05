@@ -14,7 +14,7 @@ obex-enabled=false
 [org/cinnamon]
 alttab-switcher-delay=100
 enabled-applets=['panel1:left:0:menu@cinnamon.org:0', 'panel1:left:2:grouped-window-list@cinnamon.org:2', 'panel1:right:7:removable-drives@cinnamon.org:7', 'panel1:right:8:network@cinnamon.org:10', 'panel1:right:9:sound@cinnamon.org:11', 'panel1:right:10:calendar@cinnamon.org:13', 'panel1:right:5:show-hide-applets@mohammad-sn:16', 'panel1:right:4:notifications@cinnamon.org:17', 'panel1:right:3:systray@cinnamon.org:18', 'panel1:right:2:xapp-status@cinnamon.org:19', 'panel1:right:1:power@cinnamon.org:20', 'panel1:right:6:lorem@vxstorm:22']
-favorite-apps=['virt-manager.desktop', 'alacarte-made-94459108-d986-11ee-b2f3-5254002e9856.desktop', 'cinnamon-settings.desktop', 'org.qbittorrent.qBittorrent.desktop', 'timeshift-gtk.desktop', 'cinnamon-settings-default.desktop']
+favorite-apps=['virt-manager.desktop', 'alacarte-made-94459108-d986-11ee-b2f3-5254002e9856.desktop', 'cinnamon-settings.desktop', 'org.qbittorrent.qBittorrent.desktop:flatpak', 'timeshift-gtk.desktop', 'cinnamon-settings-default.desktop']
 next-applet-id=23
 panel-edit-mode=false
 panel-zone-symbolic-icon-sizes='[{"panelId": 1, "left": 28, "center": 28, "right": 16}]'
@@ -24,7 +24,7 @@ panels-height=['1:46']
 exec='kcalc'
 
 [org/cinnamon/desktop/applications/terminal]
-exec='gnome-terminal'
+exec='xfce4-terminal'
 exec-arg='--'
 
 [org/cinnamon/desktop/background]
@@ -56,7 +56,7 @@ name='Force Quit'
 
 [org/cinnamon/desktop/keybindings/custom-keybindings/custom1]
 binding=['<Super>k']
-command="gnome-terminal -- bash -c 'neofetch;echo;exec bash;'"
+command="xfce4-terminal -x bash -c 'neofetch;echo;exec bash;'"
 name='Neofetch'
 
 [org/cinnamon/desktop/keybindings/custom-keybindings/custom2]
@@ -304,6 +304,39 @@ window-state=(640, 500, 643, 294)
 col-6-visible=true
 col-6-width=0
 
+[org/gnome/rhythmbox]
+maximized=true
+position=(0, 0)
+size=(1920, 990)
+
+[org/gnome/rhythmbox/library/source]
+show-browser=true
+
+[org/gnome/rhythmbox/player]
+volume=1.0
+
+[org/gnome/rhythmbox/plugins]
+active-plugins=['rb', 'power-manager', 'notification', 'mtpdevice', 'mpris', 'mmkeys', 'iradio', 'ipod', 'generic-player', 'dbus-media-server', 'audioscrobbler', 'audiocd', 'artsearch', 'android']
+seen-plugins=['rb', 'webremote', 'soundcloud', 'sendto', 'replaygain', 'rbzeitgeist', 'pythonconsole', 'notification', 'mtpdevice', 'mpris', 'magnatune', 'lyrics', 'ipod', 'im-status', 'fmradio', 'dbus-media-server', 'audioscrobbler', 'artsearch']
+
+[org/gnome/rhythmbox/plugins/audioscrobbler/Last.fm]
+scrobbling-enabled=true
+
+[org/gnome/rhythmbox/plugins/audioscrobbler/Libre.fm]
+scrobbling-enabled=true
+
+[org/gnome/rhythmbox/plugins/iradio]
+initial-stations-loaded=true
+
+[org/gnome/rhythmbox/plugins/iradio/source]
+show-browser=true
+
+[org/gnome/rhythmbox/podcast/source]
+show-browser=true
+
+[org/gnome/rhythmbox/rhythmdb]
+locations=['file:///home/f16poom']
+
 [org/gnome/terminal/legacy/profiles:]
 default='f1479fe0-0607-4d89-995f-e22c38773a93'
 list=['f1479fe0-0607-4d89-995f-e22c38773a93']
@@ -329,13 +362,13 @@ use-theme-transparency=false
 visible-name='Gruvbox Dark'
 
 [org/gtk/settings/color-chooser]
-custom-colors=[(0.93333333333333335, 0.87450980392156863, 0.71372549019607845, 1.0)]
-selected-color=(true, 0.93333333333333335, 0.87450980392156863, 0.71372549019607845, 1.0)
+custom-colors=[(0.0, 6.9533239729783527e-310, 6.9533239729767717e-310, 6.9533239729783527e-310), (0.97647058823529409, 0.96078431372549022, 0.84313725490196079, 1.0), (0.92156862745098034, 0.85882352941176465, 0.69803921568627447, 1.0), (0.80000000000000004, 0.14117647058823532, 0.11372549019607847, 1.0), (0.66666666666666663, 0.0, 0.0, 1.0), (0.11372549019607843, 0.11372549019607843, 0.11372549019607843, 1.0), (0.15686274509803921, 0.15686274509803921, 0.15686274509803921, 1.0), (0.93333333333333335, 0.87450980392156863, 0.71372549019607845, 1.0)]
+selected-color=(true, 0.92156862745098034, 0.85882352941176465, 0.69803921568627447, 1.0)
 
 [org/gtk/settings/file-chooser]
 date-format='regular'
 location-mode='path-bar'
-show-hidden=false
+show-hidden=true
 show-size-column=true
 show-type-column=true
 sidebar-width=159
@@ -343,7 +376,7 @@ sort-column='name'
 sort-directories-first=false
 sort-order='ascending'
 type-format='category'
-window-position=(465, 190)
+window-position=(455, 110)
 window-size=(990, 742)
 
 [org/nemo/desktop]
@@ -360,6 +393,18 @@ thumbnail-limit=uint64 68719476736
 maximized=true
 sidebar-bookmark-breakpoint=0
 start-with-sidebar=true
+
+[org/virt-manager/virt-manager]
+manager-window-height=473
+manager-window-width=960
+
+[org/virt-manager/virt-manager/connections]
+autoconnect=['qemu:///system']
+uris=['qemu:///system']
+
+[org/virt-manager/virt-manager/vmlist-fields]
+disk-usage=false
+network-traffic=false
 
 [org/x/apps/portal]
 color-scheme='prefer-dark'

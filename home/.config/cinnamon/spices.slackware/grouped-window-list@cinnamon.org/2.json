@@ -160,12 +160,11 @@
         "default": [
             "nemo.desktop",
             "firefox.desktop",
-            "mozilla-thunderbird.desktop",
             "org.gnome.Terminal.desktop"
         ],
         "value": [
             "Mount CIFS Share.desktop",
-            "filezilla.desktop",
+            "org.filezillaproject.Filezilla.desktop:flatpak",
             "brave-browser.desktop",
             "alacarte-made-528735ce-ec36-11ee-862f-5254002e9856.desktop",
             "org.bleachbit.BleachBit.desktop",
@@ -356,5 +355,5 @@
         "description": "Window opacity",
         "value": 100
     },
-    "__md5__": "4a0c74552caed86efd88e44d5597c0f2"
+    "__md5__": "6f73ea938aeb5481595a809eb6cbe8e3"
 }

@@ -179,6 +179,7 @@ flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.f
 # Install additional apps via Flathub
 flatpak install -y org.filezillaproject.Filezilla
 flatpak install -y org.qbittorrent.qBittorrent
+flatpak install -y runtime/org.kde.KStyle.Kvantum/x86_64/5.15-23.08
 
 <<com
 # Preserve old libvirtd configuration (for Virtual Machine Manager)

@@ -11,7 +11,7 @@ HISTCONTROL=ignoreboth
 alias UC='updateAll;sudo bleachbit;exit'
 
 # Bottom Gruvbox Color Scheme
-alias btm='${HOME}/.cargo/bin/btm --color gruvbox'
+alias btm='btm --color gruvbox'
 
 # Rmlint Cleaning
 alias cleanLint='bash rmlint.sh -d && rmlint'
@@ -24,9 +24,3 @@ alias updateApp='sudo slackpkg update; sudo slackpkg install-new; sudo slackpkg 
 alias updateAll='updateApp && cleanAll'
 alias updateRestart='updateAll; sudo reboot'
 alias updateShutdown='updateAll; sudo poweroff'
-
-##-----------------------------------------------------
-## synth-shell-prompt.sh
-if [ -f /home/f16poom/.config/synth-shell/synth-shell-prompt.sh ] && [ -n "$( echo $- | grep i )" ]; then
-	source /home/f16poom/.config/synth-shell/synth-shell-prompt.sh
-fi

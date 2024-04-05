@@ -369,6 +369,9 @@
 		<Exclude>
 			<Filename>distccmon-gnome.desktop</Filename>
 		</Exclude>
+		<Exclude>
+			<Filename>org.kde.cuttlefish.desktop</Filename>
+		</Exclude>
 	</Menu>
 	<Menu>
 		<Name>Universal Access</Name>

@@ -39,7 +39,7 @@ cp -vnpr sounds/ ~/
 cp -vnpr wallpapers/ ~/
 
 # Copies applets to appropriate directories
-cp -vnpr .local/share/cinnamon/applets/* ~/.local/share/cinnamon/applets/
+cp -vnpr .local/share/cinnamon/applets.slackware/* ~/.local/share/cinnamon/applets/
 
 # Copies KDE Global Cinnamon defaults to ~/.config, preserving old one
 mv ~/.config/kdeglobals ~/.config/kdeglobals.old
@@ -67,10 +67,10 @@ mv bashrc ~/.bashrc
 # Copies neofetch config file to appropriate directory, preserving old one
 neofetch
 mv ~/.config/neofetch/config.conf ~/.config/neofetch/config.conf.old
-cp -vnpr .config/neofetch/config.conf ~/.config/neofetch/config.conf
+cp -vnpr .config/neofetch/config.conf.slackware ~/.config/neofetch/config.conf
 sudo neofetch
 sudo mv /root/.config/neofetch/config.conf /root/.config/neofetch/config.conf.old
-sudo cp -vprf .config/neofetch/config.conf /root/.config/neofetch/config.conf
+sudo cp -vprf .config/neofetch/config.conf.slackware /root/.config/neofetch/config.conf
 
 # Copies Kvantum Themes to appropriate directory and installs them, preserving old config
 mv ~/.config/Kvantum ~/.config/Kvantum.old
@@ -90,6 +90,10 @@ sudo cp -vprf .config/qt5ct/ /root/.config/
 sudo mv /root/.config/qt6ct/qt6ct.conf /root/.config/qt6ct/qt6ct.conf.old
 sudo cp -vprf .config/qt6ct/ /root/.config/
 
+# Copies xfce4 config to appropriate directories, preserving old one
+mv ~/.config/xfce4 ~/.config/xfce4.old
+cp -vnpr .config/xfce4/ ~/.config/
+
 # Copies xed Theme to appropriate directory
 # mkdir -p ~/.local/share/xed/styles
 # cp -vnpr gruvbox-dark.xml ~/.local/share/xed/styles/
@@ -104,7 +108,7 @@ cp -vnpr .config/menus/slackware/* ~/.config/menus/
 # Copies Qbittorent config to appropriate directory, preserving old one
 mv ~/.config/qBittorrent/qBittorrent.conf ~/.config/qBittorrent/qBittorrent.conf.old
 mkdir -p ~/.config/qBittorrent/
-cp -vnpr .config/qBittorrent/qBittorrent.conf.arch ~/.config/qBittorrent/qBittorrent.conf
+cp -vnpr .config/qBittorrent/qBittorrent.conf.slackware ~/.config/qBittorrent/qBittorrent.conf
 cp -vnpr mumble-dark.qbtheme ~/.config/qBittorrent/
 
 # Copies LibreOffice config to appropriate directory, preserving old ones
@@ -202,7 +206,10 @@ fi
 # Check if environment variables for QT & Additional Theming are already set, preserving old one
 sudo cp /etc/environment /etc/environment.old
 if ! grep -q "^QT_QPA_PLATFORMTHEME=qt5ct" /etc/environment; then
-    echo 'QT_QPA_PLATFORMTHEME=qt5ct' | sudo tee -a /etc/environment
+    echo '#QT_QPA_PLATFORMTHEME=qt5ct' | sudo tee -a /etc/environment
+fi
+if ! grep -q "^QT_QPA_PLATFORMTHEME=qt5ct" /etc/environment; then
+    echo 'QT_STYLE_OVERRIDE=kvantum' | sudo tee -a /etc/environment
 fi
 if ! grep -q "^GTK_THEME=Gruvbox-Dark-BL" /etc/environment; then
     echo 'GTK_THEME=Gruvbox-Dark-BL' | sudo tee -a /etc/environment

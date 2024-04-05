@@ -46,6 +46,8 @@
             "type": "section",
             "title": "Layout and content",
             "keys": [
+                "restrict-menu-height",
+                "menu-height",
                 "show-category-icons",
                 "category-icon-size",
                 "show-application-icons",
@@ -54,8 +56,7 @@
                 "fav-icon-size",
                 "show-places",
                 "show-recents",
-                "menu-editor-button",
-                "reset-menu-size-button"
+                "menu-editor-button"
             ]
         },
         "menu-behave": {
@@ -76,14 +77,14 @@
     },
     "menu-custom": {
         "type": "switch",
-        "default": false,
+        "default": true,
         "description": "Use a custom icon and label",
         "tooltip": "Check this to specify a custom icon and label",
         "value": true
     },
     "menu-icon": {
         "type": "iconfilechooser",
-        "default": "cinnamon-symbolic",
+        "default": "slackware-logo",
         "description": "Icon",
         "tooltip": "Select an icon to show in the panel.",
         "default_icon": "cinnamon-symbolic",
@@ -108,6 +109,24 @@
         "tooltip": "Enter custom text to show in the panel.",
         "dependency": "menu-custom",
         "value": ""
+    },
+    "restrict-menu-height": {
+        "type": "switch",
+        "default": false,
+        "description": "Use a fixed menu height",
+        "tooltip": "Keep the size of the menu the same no matter how many favorites or categories there are.",
+        "value": false
+    },
+    "menu-height": {
+        "type": "spinbutton",
+        "default": 550,
+        "min": 300,
+        "max": 2000,
+        "step": 10,
+        "units": "px",
+        "description": "Menu height",
+        "dependency": "restrict-menu-height",
+        "value": 550
     },
     "show-category-icons": {
         "type": "switch",
@@ -244,20 +263,5 @@
         "callback": "_launch_editor",
         "tooltip": "Press this button to customize your menu entries."
     },
-    "popup-width": {
-        "type": "generic",
-        "default": 590,
-        "value": 500
-    },
-    "popup-height": {
-        "type": "generic",
-        "default": 515,
-        "value": 477
-    },
-    "reset-menu-size-button": {
-        "type": "button",
-        "description": "Restore the menu to its original size",
-        "callback": "_reset_menu_size"
-    },
-    "__md5__": "4795fe5ccdb24e51e3d4434908c26bd5"
+    "__md5__": "411e5b2e1ff656911e676809e944e11c"
 }
