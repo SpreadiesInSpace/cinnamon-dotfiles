@@ -107,11 +107,9 @@ mkdir -p ~/.config/menus/old
 mv ~/.config/menus/*.menu ~/.config/menus/old
 cp -vnpr .config/menus/slackware/* ~/.config/menus/
 
-# Copies Qbittorent config to appropriate directory, preserving old one
-mv ~/.config/qBittorrent/qBittorrent.conf ~/.config/qBittorrent/qBittorrent.conf.old
-mkdir -p ~/.config/qBittorrent/
-cp -vnpr .config/qBittorrent/qBittorrent.conf.slackware ~/.config/qBittorrent/qBittorrent.conf
-cp -vnpr mumble-dark.qbtheme ~/.config/qBittorrent/
+# Copies flatpak apps configs to appropriate directories, preserving old ones
+mv ~/.var ~/.var.old
+cp -vnpr .var/ ~/
 
 # Copies LibreOffice config to appropriate directory, preserving old ones
 mkdir -p ~/.config/libreoffice
