@@ -92,6 +92,10 @@ useradd -u 214 -g 214 -c Avahi -d /dev/null -s /bin/false avahi
 groupadd -g 257 pcscd
 useradd -u 257 -g pcscd -d /var/run/pcscd -s /bin/false pcscd
 
+# For Virt-Manager & accessing samba shares
+slackpkg install dnsmasq smb
+cp /etc/samba/smb.conf-sample /etc/samba/smb.conf
+
 # All packages
 packages=(
     # System utilities
@@ -167,9 +171,6 @@ packages=(
     #"dmidecode"
 )
 
-# For Virt-Manager
-slackpkg install dnsmasq
-
 # Update system and install packages
 sboinstall "${packages[@]}"
 
@@ -234,7 +235,7 @@ sh /etc/rc.d/rc.spice-vdagent start
 sh /etc/rc.d/rc.libvirt start
 
 # Start and autostart the default network
-# virsh net-start default
+virsh net-start default
 # virsh net-autostart default
 
 # Add the current user to the necessary groups
