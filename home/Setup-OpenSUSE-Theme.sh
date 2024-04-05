@@ -22,7 +22,7 @@ cp -vnpr .themes/* ~/.themes/
 mv 1670604530-Gruvbox-Dark-BL.zip .themes/
 rm -rf .themes/Gruvbox-Dark-BL/
 
-# Uncomment to enable GTK Flatpak Theming Override (QT is already accounted for)
+# Enable GTK & QT Flatpak Theming Override
 sudo flatpak override --filesystem=$HOME/.themes
 sudo flatpak override --filesystem=$HOME/.icons
 sudo flatpak override --env=GTK_THEME=Gruvbox-Dark-BL 
