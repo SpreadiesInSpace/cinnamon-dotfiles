@@ -188,7 +188,7 @@ nvim --headless "+MasonInstallAll" +qa
 cinnamon-dbus-command RestartCinnamon 1
 
 # Places Login Wallpaper
-sudo cp -vnr wallpapers/SpeedDial2_Wallpaper.png /boot/
+# sudo cp -vnr wallpapers/SpeedDial2_Wallpaper.png /boot/
 
 # Check if syntax highlighting configurations are already in nanorc, preserving old one
 sudo cp /etc/nanorc /etc/nanorc.old
@@ -208,5 +208,28 @@ if ! grep -q "^GTK_THEME=Gruvbox-Dark-BL" /etc/environment; then
     echo 'GTK_THEME=Gruvbox-Dark-BL' | sudo tee -a /etc/environment
 fi
 
-# Set up theming for sddt
+# Set up theming for gdm
+mv ~/monitors.xml ~/.config/
+sudo cp -f ~/.config/monitors.xml ~gdm/.config/monitors.xml
+sudo chown $(id -u gdm):$(id -g gdm) ~gdm/.config/monitors.xml
+sudo restorecon ~gdm/.config/monitors.xml
+flatpak install -y io.github.realmazharhussain.GdmSettings
+flatpak run io.github.realmazharhussain.GdmSettings
+flatpak remove -y io.github.realmazharhussain.GdmSettings
+flatpak remove -y --unused
 
+<<#autologin
+username=$(whoami)
+# Backs up old gdm custom.conf
+sudo cp /etc/gdm/custom.conf /etc/gdm/custom.conf.old
+# Use awk to add the configuration under the [daemon] section
+sudo awk -i inplace '
+BEGIN { RS=""; FS="\n" }
+/^\[daemon\]/ {
+    print
+    print "AutomaticLoginEnable=True"
+    print "AutomaticLogin='"$username"'"
+    next
+}
+{print}
+' "/etc/gdm/custom.conf"
