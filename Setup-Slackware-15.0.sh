@@ -95,6 +95,7 @@ useradd -u 257 -g pcscd -d /var/run/pcscd -s /bin/false pcscd
 # For Virt-Manager & accessing samba shares
 slackpkg install dnsmasq smb
 cp /etc/samba/smb.conf-sample /etc/samba/smb.conf
+# sh /etc/rc.d/rc.samba start
 
 # All packages
 packages=(
@@ -112,7 +113,7 @@ packages=(
     #"filezilla" flatpak this, it takes long to compile
     #"gvfs"
     #"kdeconnect"
-    #"samba"
+    #"samba" # this package is patched, need to explicitly reinstall
     # Desktop environment and related packages
     #"cinnamon"
     #"eog" #using Geeqie instead
@@ -165,7 +166,7 @@ packages=(
     "libosinfo"
     "edk2-ovmf"
     "virt-manager"
-    #"dnsmasq" this package is for some reason uninstalled in Slackware 15.0
+    #"dnsmasq" # this package is patched, need to explicitly reinstall
     #"bridge-utils" # This package and below is already there
     #"iptables"
     #"dmidecode"
