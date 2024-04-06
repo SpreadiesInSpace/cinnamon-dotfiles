@@ -1,0 +1,23 @@
+# goes between gnome-system-monitor and before gnome-terminal
+
+[org/gnome/rhythmbox]
+maximized=true
+position=(0, 0)
+size=(1920, 990)
+
+# goes right after nemo
+
+[org/virt-manager/virt-manager]
+manager-window-height=473
+manager-window-width=960
+xmleditor-enabled=true
+
+[org/virt-manager/virt-manager/confirm]
+delete-storage=false
+forcepoweroff=false
+unapplied-dev=true
+
+[org/virt-manager/virt-manager/console]
+auto-redirect=false
+scaling=2
+

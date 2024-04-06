@@ -117,6 +117,10 @@ sudo mkdir -p /root/.config/libreoffice
 sudo mv /root/.config/libreoffice/4 /root/.config/libreoffice/4_old
 sudo cp -vprf .config/libreoffice/arch /root/.config/libreoffice/4
 
+# Copies Filezilla config to appropriate directory, preserving old one
+mv ~/.config/filezilla/ ~/.config/filezilla.old
+cp -vnpr .config/filezilla/ ~/.config/
+
 # Copies Profile Picture to home directory, preserving old one
 mv ~/.face ~/.faceold 
 cp -vnpr .face ~/

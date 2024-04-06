@@ -297,6 +297,11 @@ window-state=(640, 500, 643, 294)
 col-6-visible=true
 col-6-width=0
 
+[org/gnome/rhythmbox]
+maximized=true
+position=(0, 0)
+size=(1920, 990)
+
 [org/gnome/terminal/legacy/profiles:]
 default='f1479fe0-0607-4d89-995f-e22c38773a93'
 list=['f1479fe0-0607-4d89-995f-e22c38773a93']
@@ -351,6 +356,20 @@ thumbnail-limit=uint64 68719476736
 maximized=true
 sidebar-bookmark-breakpoint=0
 start-with-sidebar=true
+
+[org/virt-manager/virt-manager]
+manager-window-height=473
+manager-window-width=960
+xmleditor-enabled=true
+
+[org/virt-manager/virt-manager/confirm]
+delete-storage=false
+forcepoweroff=false
+unapplied-dev=true
+
+[org/virt-manager/virt-manager/console]
+auto-redirect=false
+scaling=2
 
 [org/x/apps/portal]
 color-scheme='prefer-dark'
