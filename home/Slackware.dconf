@@ -309,34 +309,6 @@ maximized=true
 position=(0, 0)
 size=(1920, 990)
 
-[org/gnome/rhythmbox/library/source]
-show-browser=true
-
-[org/gnome/rhythmbox/player]
-volume=1.0
-
-[org/gnome/rhythmbox/plugins]
-active-plugins=['rb', 'power-manager', 'notification', 'mtpdevice', 'mpris', 'mmkeys', 'iradio', 'ipod', 'generic-player', 'dbus-media-server', 'audioscrobbler', 'audiocd', 'artsearch', 'android']
-seen-plugins=['rb', 'webremote', 'soundcloud', 'sendto', 'replaygain', 'rbzeitgeist', 'pythonconsole', 'notification', 'mtpdevice', 'mpris', 'magnatune', 'lyrics', 'ipod', 'im-status', 'fmradio', 'dbus-media-server', 'audioscrobbler', 'artsearch']
-
-[org/gnome/rhythmbox/plugins/audioscrobbler/Last.fm]
-scrobbling-enabled=true
-
-[org/gnome/rhythmbox/plugins/audioscrobbler/Libre.fm]
-scrobbling-enabled=true
-
-[org/gnome/rhythmbox/plugins/iradio]
-initial-stations-loaded=true
-
-[org/gnome/rhythmbox/plugins/iradio/source]
-show-browser=true
-
-[org/gnome/rhythmbox/podcast/source]
-show-browser=true
-
-[org/gnome/rhythmbox/rhythmdb]
-locations=['file:///home/f16poom']
-
 [org/gnome/terminal/legacy/profiles:]
 default='f1479fe0-0607-4d89-995f-e22c38773a93'
 list=['f1479fe0-0607-4d89-995f-e22c38773a93']
@@ -393,14 +365,16 @@ start-with-sidebar=true
 [org/virt-manager/virt-manager]
 manager-window-height=473
 manager-window-width=960
+xmleditor-enabled=true
 
-[org/virt-manager/virt-manager/connections]
-autoconnect=['qemu:///system']
-uris=['qemu:///system']
+[org/virt-manager/virt-manager/confirm]
+delete-storage=false
+forcepoweroff=false
+unapplied-dev=true
 
-[org/virt-manager/virt-manager/vmlist-fields]
-disk-usage=false
-network-traffic=false
+[org/virt-manager/virt-manager/console]
+auto-redirect=false
+scaling=2
 
 [org/x/apps/portal]
 color-scheme='prefer-dark'

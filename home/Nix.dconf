@@ -199,6 +199,11 @@ window-state=(637, 495, 639, 305)
 col-6-visible=true
 col-6-width=0
 
+[org/gnome/rhythmbox]
+maximized=true
+position=(0, 0)
+size=(1920, 990)
+
 [org/gnome/nm-applet]
 disable-connected-notifications=true
 
@@ -259,16 +264,21 @@ sidebar-bookmark-breakpoint=0
 start-with-sidebar=true
 
 [org/virt-manager/virt-manager]
-manager-window-height=990
+manager-window-height=473
 manager-window-width=960
+xmleditor-enabled=true
 
-[org/virt-manager/virt-manager/connections]
-autoconnect=['qemu:///system']
-uris=['qemu:///system']
+[org/virt-manager/virt-manager/confirm]
+delete-storage=false
+forcepoweroff=false
+unapplied-dev=true
 
-[org/virt-manager/virt-manager/vmlist-fields]
-disk-usage=false
-network-traffic=false
+[org/virt-manager/virt-manager/console]
+auto-redirect=false
+scaling=2
+
+[org/x/apps/portal]
+color-scheme='prefer-dark'
 
 [org/x/warpinator/preferences]
 ask-for-send-permission=true
