@@ -36,12 +36,12 @@ alias btm='btm --color gruvbox'
 alias cleanLint='bash rmlint.sh -d && rmlint'
 
 # Fedora Cleaning
-alias cleanGuestFS='sudo rm -rf /var/tmp/.guestfs-1000/*'
-alias cleanAll='flatpak remove --unused;yes | sudo dnf clean all | cleanGuestFS | rm -rf ~/.cache/* | sudo journalctl --vacuum-size=50M | sudo journalctl --vacuum-time=4weeks | SystemMaxUse=50M | sudo bleachbit -c --preset && bleachbit -c --preset'
+alias cleanAll='flatpak remove --unused;yes | sudo dnf clean all | rm -rf ~/.cache/* | sudo journalctl --vacuum-size=50M | sudo journalctl --vacuum-time=4weeks | SystemMaxUse=50M | sudo bleachbit -c --preset && bleachbit -c --preset'
 alias cleanKernel='sudo dnf remove $(dnf repoquery --installonly --latest-limit=-1 -q)'
  
 # Fedora Update
-alias updateApp='yes | sudo dnf upgrade && yes | sudo dnf autoremove; flatpak update -y'
+alias updateNeovim='nvim --headless "+Lazy! sync" +qa'
+alias updateApp='yes | sudo dnf upgrade && yes | sudo dnf autoremove; flatpak update -y; updateNeovim'
 alias updateAll='updateApp && cleanAll'
 alias updateRestart='updateAll; systemctl reboot'
 alias updateShutdown='updateAll; systemctl poweroff'

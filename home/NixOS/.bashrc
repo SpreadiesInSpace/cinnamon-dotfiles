@@ -17,7 +17,8 @@ alias cleanLint='bash rmlint.sh -d && rmlint'
 alias cleanAll='flatpak remove --unused;rm -rf ~/.cache/*; sudo rm /nix/var/nix/gcroots/auto/*; sudo nix-collect-garbage -d; nix-collect-garbage -d; sudo nix-store --optimise; nix-store --optimise; sudo nix-env -p /nix/var/nix/profiles/system --delete-generations old; sudo nix-env --delete-generations old; nix-env --delete-generations old; sudo journalctl --flush --rotate;sudo journalctl --vacuum-time=1s; sudo bleachbit -c --preset && bleachbit -c --preset'
 
 # NixOS Update
-alias updateApp='sudo nixos-rebuild switch --upgrade; flatpak update -y'
+alias updateNeovim='nvim --headless "+Lazy! sync" +qa'
+alias updateApp='sudo nixos-rebuild switch --upgrade; flatpak update -y; updateNeovim'
 alias updateAll='updateApp && cleanAll'
 alias updateRestart='updateAll; reboot'
 alias updateShutdown='updateAll; poweroff'
