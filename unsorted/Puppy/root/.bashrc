@@ -10,12 +10,15 @@ HISTCONTROL=ignoreboth
 # Bottom Gruvbox Color Scheme
 alias btm='btm --color gruvbox'
 
+# Rmlint Cleaning
+alias cleanLint='bash rmlint.sh -d && rmlint'
+
 # Puppy Cleaning
-alias cleanLint='bash rmlint.sh -d;rm -rf ./rmlint.*'
-alias cleanAll='yes | apt clean && yes | apt autoclean && yes | apt autoremove && yes | rm -rf ~/.cache/* | rm -rf ~/.history | sudo journalctl --vacuum-size=50M | sudo journalctl --vacuum-time=4weeks | SystemMaxUse=50M | rmlint | run-as-spot bleachbit -c --preset && bleachbit -c --preset && cleanLint'
+alias cleanAll='flatpak remove --unused;yes | apt clean && yes | apt autoclean && yes | apt autoremove && yes | rm -rf ~/.cache/* | rm -rf ~/.history | sudo journalctl --vacuum-size=50M | sudo journalctl --vacuum-time=4weeks | SystemMaxUse=50M | sudo bleachbit -c --preset && bleachbit -c --preset'
 
 # Puppy Update
-alias updateApp='yes | apt update && yes | apt full-upgrade'
+alias updateNeovim='nvim --headless "+Lazy! sync" +qa'
+alias updateApp='yes | apt update && yes | apt full-upgrade; flatpak update -y; updateNeovim'
 alias updateAll='updateApp && cleanAll'
 alias updateRestart='updateAll; reboot'
 alias updateShutdown='updateAll; poweroff'
