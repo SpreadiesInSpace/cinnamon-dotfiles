@@ -377,6 +377,17 @@ unapplied-dev=true
 auto-redirect=false
 scaling=2
 
+[org/x/apps/portal]
+color-scheme='prefer-dark'
+
+[org/x/editor/plugins]
+active-plugins=['time', 'textsize', 'spell', 'sort', 'modelines', 'joinlines', 'filebrowser', 'docinfo', 'open-uri-context-menu', 'bracketcompletion']
+
+[org/x/editor/plugins/filebrowser/on-load]
+root='file:///'
+tree-view=false
+virtual-root='file:///home/f16poom/Share/cinnamon-dotfiles'
+
 [org/x/editor/preferences/editor]
 bracket-matching=true
 display-line-numbers=true
