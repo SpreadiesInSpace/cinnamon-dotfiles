@@ -71,10 +71,10 @@ cd ..
 # Copies neofetch config file to appropriate directory, preserving old one
 neofetch
 mv ~/.config/neofetch/config.conf ~/.config/neofetch/config.conf.old
-cp -vnpr .config/neofetch/config.conf ~/.config/neofetch/config.conf
+cp -vnpr .config/neofetch/config.conf.slackware ~/.config/neofetch/config.conf
 sudo neofetch
 sudo mv /root/.config/neofetch/config.conf /root/.config/neofetch/config.conf.old
-sudo cp -vprf .config/neofetch/config.conf /root/.config/neofetch/config.conf
+sudo cp -vprf .config/neofetch/config.conf.slackware /root/.config/neofetch/config.conf
 
 # Copies Kvantum Themes to appropriate directory and installs them, preserving old config
 mv ~/.config/Kvantum ~/.config/Kvantum.old
@@ -93,6 +93,10 @@ sudo mv /root/.config/qt5ct/qt5ct.conf /root/.config/qt5ct/qt5ct.conf.old
 sudo cp -vprf .config/qt5ct/ /root/.config/
 sudo mv /root/.config/qt6ct/qt6ct.conf /root/.config/qt6ct/qt6ct.conf.old
 sudo cp -vprf .config/qt6ct/ /root/.config/
+
+# Copies xfce4 config to appropriate directories, preserving old one
+mv ~/.config/xfce4 ~/.config/xfce4.old
+cp -vnpr .config/xfce4/ ~/.config/
 
 # Copies xed Theme to appropriate directory
 # mkdir -p ~/.local/share/xed/styles
@@ -123,13 +127,13 @@ sudo mkdir -p /root/.config/libreoffice
 sudo mv /root/.config/libreoffice/4 /root/.config/libreoffice/4_old
 sudo cp -vprf .config/libreoffice/arch /root/.config/libreoffice/4
 
+# Copies Filezilla config to appropriate directory, preserving old one
+mv ~/.config/filezilla/ ~/.config/filezilla.old
+cp -vnpr .config/filezilla/ ~/.config/
+
 # Copies Profile Picture to home directory, preserving old one
 mv ~/.face ~/.faceold 
 cp -vnpr .face ~/
-
-# Copies bauh config to appropriate directory, preserving old one
-mv ~/.config/bauh ~/.config/bauh.old
-cp -vnpr .config/bauh/ ~/.config/
 
 # Import Entire Desktop Configuration, preserving old one
 cd theming/Slackware/
