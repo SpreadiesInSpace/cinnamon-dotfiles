@@ -237,7 +237,7 @@ sh /etc/rc.d/rc.libvirt start
 
 # Start and autostart the default network
 virsh net-start default
-# virsh net-autostart default
+virsh net-autostart default
 
 # Add the current user to the necessary groups
 groups=(libvirt libvirt-qemu kvm input disk video audio users)

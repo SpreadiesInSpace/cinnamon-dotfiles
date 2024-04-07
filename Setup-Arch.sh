@@ -167,8 +167,8 @@ fi
 sudo systemctl enable --now libvirtd.service
 
 # Start and autostart the default network
-# sudo virsh net-start default
-# sudo virsh net-autostart default
+sudo virsh net-start default
+sudo virsh net-autostart default
 
 # Add the current user to the necessary groups
 groups=(libvirt libvirt-qemu kvm input disk video audio)
