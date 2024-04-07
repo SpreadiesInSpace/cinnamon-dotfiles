@@ -204,3 +204,4 @@ if ! grep -q "^GTK_THEME=Gruvbox-Dark-BL" /etc/environment; then
 fi
 
 # Set up theming for sddt
+
