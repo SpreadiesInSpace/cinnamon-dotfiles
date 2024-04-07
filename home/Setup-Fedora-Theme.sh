@@ -131,9 +131,9 @@ mv Old_Desktop_Configuration.dconf ~/
 dconf load / < Fedora.dconf
 
 # Sets Default Apps
-chmod +x Default-Apps.sh
-./Default-Apps.sh
-sudo ./Default-Apps.sh
+chmod +x Default-Apps-Fedora.sh
+./Default-Apps-Fedora.sh
+sudo ./Default-Apps-Fedora.sh
 
 # Sets Wallpaper
 gsettings set org.cinnamon.desktop.background picture-uri file://${HOME}/wallpapers/Desktop_Wallpaper.png
