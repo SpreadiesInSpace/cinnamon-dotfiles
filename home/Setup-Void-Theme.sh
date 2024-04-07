@@ -130,13 +130,6 @@ dconf dump / > Old_Desktop_Configuration.dconf
 mv Old_Desktop_Configuration.dconf ~/
 dconf load / < Void.dconf
 
-# Define the home directory (For Menu Applet Icon)
-# home_dir="${HOME}"
-# Define the path to JSON file
-# json_file="${home_dir}/.config/cinnamon/spices/menu@cinnamon.org/0.json"
-# Use sed to replace /home/f16poom with the home directory in the value field on line 91
-# sed -i "91s|\"value\": \"/home/f16poom/NixOS-Start.png\"|\"value\": \"${home_dir}/NixOS-Start.png\"|g" $json_file
-
 # Sets Default Apps
 chmod +x Default-Apps-Void.sh
 ./Default-Apps-Void.sh
