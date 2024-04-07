@@ -20,7 +20,7 @@ alias cleanLint='bash rmlint.sh -d && rmlint'
 alias cleanAll='sudo find /var/log -type f -name "*.log" -exec truncate -s 0 {} \; ; sudo sboclean -d ; sudo sboclean -w ; flatpak uninstall --unused ; rm -rf ~/.cache/*; sudo bleachbit -c --preset && bleachbit -c --preset'
 
 # Slackware Update
-alias updateNeovim='nvim --headless "+Lazy! sync" +qa'
+alias updateNeovim='${HOME}/update_neovim.sh;nvim --headless "+Lazy! sync" +qa'
 alias updateApp='sudo slackpkg update; sudo slackpkg install-new; sudo slackpkg upgrade-all; sudo sbocheck; sudo sboupgrade --all; sudo grub-mkconfig -o /boot/grub/grub.cfg; flatpak update -y; updateNeovim'
 alias updateAll='updateApp && cleanAll'
 alias updateRestart='updateAll; sudo reboot'
