@@ -128,7 +128,7 @@ cp -vnpr .face ~/
 # Import Entire Desktop Configuration, preserving old one
 dconf dump / > Old_Desktop_Configuration.dconf
 mv Old_Desktop_Configuration.dconf ~/
-dconf load / < Nix.dconf
+dconf load / < NixOS.dconf
 
 # Define the home directory (For Menu Applet Icon)
 home_dir="${HOME}"
