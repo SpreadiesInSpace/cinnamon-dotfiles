@@ -59,12 +59,14 @@ mkdir -p ~/.local/share/applications
 cp -vnpr .local/share/applications/fedora/* ~/.local/share/applications/
 
 # Copies .bashrc to home directory, preserving old one
+cd theming/
 cp -vnpr Fedora/* ~/
 sudo cp /root/.bashrc /root/.bashrc.old
 sudo cp Fedora/.bashrc /root/.bashrc
 cp ~/.bashrc ~/.bashrc.old
 cat Fedora/.bashrc > bashrc
 mv bashrc ~/.bashrc
+cd ..
 
 # Copies neofetch config file to appropriate directory, preserving old one
 neofetch
@@ -126,6 +128,7 @@ mv ~/.face ~/.faceold
 cp -vnpr .face ~/
 
 # Import Entire Desktop Configuration, preserving old one
+cd theming/Fedora/
 dconf dump / > Old_Desktop_Configuration.dconf
 mv Old_Desktop_Configuration.dconf ~/
 dconf load / < Fedora.dconf
@@ -134,6 +137,7 @@ dconf load / < Fedora.dconf
 chmod +x Default-Apps-Fedora.sh
 ./Default-Apps-Fedora.sh
 sudo ./Default-Apps-Fedora.sh
+cd ../..
 
 # Sets Wallpaper
 gsettings set org.cinnamon.desktop.background picture-uri file://${HOME}/wallpapers/Desktop_Wallpaper.png

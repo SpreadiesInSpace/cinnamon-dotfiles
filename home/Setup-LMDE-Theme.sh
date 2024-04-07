@@ -52,19 +52,21 @@ sudo cp -vnpr .config/kdeglobals /root/.config/
 # Copies Cinnamon spice settings, preserving old ones
 mkdir -p ~/.config/cinnamon/spices/old
 mv ~/.config/cinnamon/spices/* ~/.config/cinnamon/spices/old
-cp -vnpr .config/cinnamon/spices.debian/* ~/.config/cinnamon/spices/
+cp -vnpr .config/cinnamon/spices.lmde/* ~/.config/cinnamon/spices/
 
 # Copies My Personal Shortcuts
 mkdir -p ~/.local/share/applications
-cp -vnpr .local/share/applications/debian/* ~/.local/share/applications/
+cp -vnpr .local/share/applications/lmde/* ~/.local/share/applications/
 
 # Copies .bashrc to home directory, preserving old one
-cp -vnpr Debian/* ~/
+cd theming/
+cp -vnpr LMDE/* ~/
 sudo cp /root/.bashrc /root/.bashrc.old
-sudo cp Debian/.bashrc /root/.bashrc
+sudo cp LMDE/.bashrc /root/.bashrc
 cp ~/.bashrc ~/.bashrc.old
-cat Debian/.bashrc > bashrc
+cat LMDE/.bashrc > bashrc
 mv bashrc ~/.bashrc
+cd ..
 
 # Copies neofetch config file to appropriate directory, preserving old one
 neofetch
@@ -101,7 +103,7 @@ sudo cp -vprf gruvbox-dark.xml /root/.local/share/gedit/styles/
 # Copies Menu Preferences to appropriate directory
 mkdir -p ~/.config/menus/old
 mv ~/.config/menus/*.menu ~/.config/menus/old
-cp -vnpr .config/menus/debian/* ~/.config/menus/
+cp -vnpr .config/menus/lmde/* ~/.config/menus/
 
 # Copies Qbittorent config to appropriate directory, preserving old one
 mv ~/.config/qBittorrent/qBittorrent.conf ~/.config/qBittorrent/qBittorrent.conf.old
@@ -126,6 +128,7 @@ mv ~/.face ~/.faceold
 cp -vnpr .face ~/
 
 # Import Entire Desktop Configuration, preserving old one
+cd theming/LMDE/
 dconf dump / > Old_Desktop_Configuration.dconf
 mv Old_Desktop_Configuration.dconf ~/
 dconf load / < LMDE.dconf
@@ -141,6 +144,7 @@ sed -i "91s|\"value\": \"/home/f16poom/linuxmint-logo-filled-ring.svg\"|\"value\
 chmod +x Default-Apps-LMDE.sh
 ./Default-Apps-LMDE.sh
 sudo ./Default-Apps-LMDE.sh
+cd ../..
 
 # Sets Wallpaper
 gsettings set org.cinnamon.desktop.background picture-uri file://${HOME}/wallpapers/Desktop_Wallpaper.png
@@ -163,7 +167,7 @@ rm -rf synth-shell-prompt/
 # Places My Synth-Shell Config, preserving old ones
 mkdir -p ~/.config/synth-shell/old
 cp -vnpr ~/.config/synth-shell/* ~/.config/synth-shell/old
-cp -vprf .config/synth-shell/debian/* ~/.config/synth-shell/
+cp -vprf .config/synth-shell/lmde/* ~/.config/synth-shell/
 sudo mkdir -p /root/.config/synth-shell/old
 sudo cp -vnpr /root/.config/synth-shell/* /root/.config/synth-shell/old
 sudo cp -vprf .config/synth-shell/root-synth-shell-prompt.config /root/.config/synth-shell/synth-shell-prompt.config

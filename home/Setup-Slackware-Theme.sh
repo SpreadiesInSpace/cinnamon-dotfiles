@@ -59,12 +59,14 @@ mkdir -p ~/.local/share/applications
 cp -vnpr .local/share/applications/slackware/* ~/.local/share/applications/
 
 # Copies .bashrc to home directory, preserving old one
+cd theming/
 cp -vnpr Slackware/* ~/
 sudo cp /root/.bashrc /root/.bashrc.old
 sudo cp Slackware/.bashrc /root/.bashrc
 cp ~/.bashrc ~/.bashrc.old
 cat Slackware/.bashrc > bashrc
 mv bashrc ~/.bashrc
+cd ..
 
 # Copies neofetch config file to appropriate directory, preserving old one
 neofetch
@@ -134,6 +136,7 @@ mv ~/.face ~/.faceold
 cp -vnpr .face ~/
 
 # Import Entire Desktop Configuration, preserving old one
+cd theming/Slackware/
 dconf dump / > Old_Desktop_Configuration.dconf
 mv Old_Desktop_Configuration.dconf ~/
 dconf load / < Slackware.dconf
@@ -142,6 +145,7 @@ dconf load / < Slackware.dconf
 chmod +x Default-Apps-Slackware.sh
 ./Default-Apps-Slackware.sh
 sudo ./Default-Apps-Slackware.sh
+cd ../..
 
 # Sets Wallpaper
 gsettings set org.cinnamon.desktop.background picture-uri file://${HOME}/wallpapers/Desktop_Wallpaper.png

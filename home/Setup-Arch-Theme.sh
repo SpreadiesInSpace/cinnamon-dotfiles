@@ -59,12 +59,14 @@ mkdir -p ~/.local/share/applications
 cp -vnpr .local/share/applications/arch/* ~/.local/share/applications/
 
 # Copies .bashrc to home directory, preserving old one
+cd theming/
 cp -vnpr Arch/* ~/
 sudo cp /root/.bashrc /root/.bashrc.old
 sudo cp Arch/.bashrc /root/.bashrc
 cp ~/.bashrc ~/.bashrc.old
 cat Arch/.bashrc > bashrc
 mv bashrc ~/.bashrc
+cd ..
 
 # Copies neofetch config file to appropriate directory, preserving old one
 neofetch
@@ -130,6 +132,7 @@ mv ~/.config/bauh ~/.config/bauh.old
 cp -vnpr .config/bauh/ ~/.config/
 
 # Import Entire Desktop Configuration, preserving old one
+cd theming/Arch/
 dconf dump / > Old_Desktop_Configuration.dconf
 mv Old_Desktop_Configuration.dconf ~/
 dconf load / < Arch.dconf
@@ -138,6 +141,7 @@ dconf load / < Arch.dconf
 chmod +x Default-Apps-Arch.sh
 ./Default-Apps-Arch.sh
 sudo ./Default-Apps-Arch.sh
+cd ../..
 
 # Sets Wallpaper
 gsettings set org.cinnamon.desktop.background picture-uri file://${HOME}/wallpapers/Desktop_Wallpaper.png

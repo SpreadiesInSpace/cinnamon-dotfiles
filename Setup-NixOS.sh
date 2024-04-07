@@ -7,7 +7,7 @@ username=$(whoami)
 sudo cp /etc/nixos/configuration.nix /etc/nixos/configuration.nix.old
 
 # Appends configuration.nix with needed options
-sudo cp ./home/NixOS/configuration.nix.vm /etc/nixos/configuration.nix
+sudo cp ./home/theming/NixOS/configuration.nix.vm /etc/nixos/configuration.nix
 
 # Replace the placeholder with the actual username
 sudo sed -i "s/USERNAME_PLACEHOLDER/$username/g" /etc/nixos/configuration.nix

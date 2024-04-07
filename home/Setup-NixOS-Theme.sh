@@ -59,12 +59,14 @@ mkdir -p ~/.local/share/applications
 cp -vnpr .local/share/applications/nixos/* ~/.local/share/applications/
 
 # Copies Start Menu Icon, Neofetch ASCII & .bashrc to home directory, preserving old one
+cd theming/
 cp -vnpr NixOS/* ~/;rm ~/configuration.nix ~/configuration.nix.vm
 sudo cp /root/.bashrc /root/.bashrc.old
 sudo cp NixOS/.bashrc.root /root/.bashrc;sudo cp NixOS/NixOS-Start.png /root/
 cp ~/.bashrc ~/.bashrc.old
 cat NixOS/.bashrc > bashrc
 mv bashrc ~/.bashrc
+cd ..
 
 # Copies neofetch config file to appropriate directory, preserving old one
 neofetch
@@ -126,6 +128,7 @@ mv ~/.face ~/.faceold
 cp -vnpr .face ~/
 
 # Import Entire Desktop Configuration, preserving old one
+cd theming/NixOS/
 dconf dump / > Old_Desktop_Configuration.dconf
 mv Old_Desktop_Configuration.dconf ~/
 dconf load / < NixOS.dconf
@@ -141,6 +144,7 @@ sed -i "91s|\"value\": \"/home/f16poom/NixOS-Start.png\"|\"value\": \"${home_dir
 chmod +x Default-Apps-NixOS.sh
 sh Default-Apps-NixOS.sh
 sudo sh Default-Apps-NixOS.sh
+cd ../..
 
 # Sets Wallpaper
 gsettings set org.cinnamon.desktop.background picture-uri file://${HOME}/wallpapers/Desktop_Wallpaper.png

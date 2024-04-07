@@ -59,12 +59,14 @@ mkdir -p ~/.local/share/applications
 cp -vnpr .local/share/applications/gentoo/* ~/.local/share/applications/
 
 # Copies .bashrc to home directory, preserving old one
+cd theming/
 cp -vnpr Gentoo/* ~/
 sudo cp /root/.bashrc /root/.bashrc.old
 sudo cp Gentoo/.bashrc /root/.bashrc
 cp ~/.bashrc ~/.bashrc.old
 cat Gentoo/.bashrc > bashrc
 mv bashrc ~/.bashrc
+cd ..
 
 # Autostart CopyQ
 mkdir -p ~/.config/autostart/
@@ -130,6 +132,7 @@ mv ~/.face ~/.faceold
 cp -vnpr .face ~/
 
 # Import Entire Desktop Configuration, preserving old one
+cd theming/Gentoo/
 dconf dump / > Old_Desktop_Configuration.dconf
 mv Old_Desktop_Configuration.dconf ~/
 dconf load / < Gentoo.dconf
@@ -138,6 +141,7 @@ dconf load / < Gentoo.dconf
 chmod +x Default-Apps-Gentoo.sh
 ./Default-Apps-Gentoo.sh
 sudo ./Default-Apps-Gentoo.sh
+cd ../..
 
 # Sets Wallpaper
 gsettings set org.cinnamon.desktop.background picture-uri file://${HOME}/wallpapers/Desktop_Wallpaper.png

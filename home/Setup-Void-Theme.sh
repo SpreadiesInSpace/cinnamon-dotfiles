@@ -59,12 +59,14 @@ mkdir -p ~/.local/share/applications
 cp -vnpr .local/share/applications/void/* ~/.local/share/applications/
 
 # Copies .bashrc to home directory, preserving old one
+cd theming/
 cp -vnpr Void/* ~/
 sudo cp /root/.bashrc /root/.bashrc.old
 sudo cp Void/.bashrc /root/.bashrc
 cp ~/.bashrc ~/.bashrc.old
 cat Void/.bashrc > bashrc
 mv bashrc ~/.bashrc
+cd ..
 
 # Copies neofetch config file to appropriate directory, preserving old one
 neofetch
@@ -126,6 +128,7 @@ mv ~/.face ~/.faceold
 cp -vnpr .face ~/
 
 # Import Entire Desktop Configuration, preserving old one
+cd theming/Void/
 dconf dump / > Old_Desktop_Configuration.dconf
 mv Old_Desktop_Configuration.dconf ~/
 dconf load / < Void.dconf
@@ -134,6 +137,7 @@ dconf load / < Void.dconf
 chmod +x Default-Apps-Void.sh
 ./Default-Apps-Void.sh
 sudo ./Default-Apps-Void.sh
+cd ../..
 
 # Sets Wallpaper
 gsettings set org.cinnamon.desktop.background picture-uri file://${HOME}/wallpapers/Desktop_Wallpaper.png
@@ -156,7 +160,7 @@ rm -rf synth-shell-prompt/
 # Places My Synth-Shell Config, preserving old ones
 mkdir -p ~/.config/synth-shell/old
 cp -vnpr ~/.config/synth-shell/* ~/.config/synth-shell/old
-cp -vprf .config/synth-shell/debian/* ~/.config/synth-shell/
+cp -vprf .config/synth-shell/lmde/* ~/.config/synth-shell/
 sudo mkdir -p /root/.config/synth-shell/old
 sudo cp -vnpr /root/.config/synth-shell/* /root/.config/synth-shell/old
 sudo cp -vprf .config/synth-shell/root-synth-shell-prompt.config /root/.config/synth-shell/synth-shell-prompt.config
