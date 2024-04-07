@@ -118,7 +118,6 @@ packages=(
     #"cinnamon"
     #"eog" #using Geeqie instead
     #"evince" #using okular instead
-    #"gdm" I don't want to compile webkit2gtk
     #"gnome-calculator" #using kcalc instead
     "gnome-screenshot"
     "gnome-system-monitor"

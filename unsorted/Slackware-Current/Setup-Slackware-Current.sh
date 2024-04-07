@@ -60,9 +60,6 @@ slackpkg update gpg
 slackpkg install-new
 rm slackpkg+.txz
 
-# Install Bottom
-cargo install bottom --locked
-
 # Install Neovim AppImage
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 chmod u+x nvim.appimage
@@ -71,13 +68,6 @@ chmod u+x nvim.appimage
 mv squashfs-root /
 ln -s /squashfs-root/AppRun /usr/bin/nvim
 rm nvim.appimage
-
-# Install rmlint
-git clone https://github.com/sahib/rmlint.git
-cd rmlint/
-scons --prefix=/usr install
-cd ..
-rm -rf rmlint/
 
 # Install Cinnamon
 git clone https://github.com/CinnamonSlackBuilds/csb
@@ -113,7 +103,7 @@ packages=(
     #"xkill" 
     #"xrandr"
     # Network utilities
-    "filezilla"
+    #"filezilla" flatpak this, it takes long to compile
     #"gvfs"
     #"kdeconnect"
     #"samba"
@@ -121,7 +111,6 @@ packages=(
     #"cinnamon"
     #"eog" #using Geeqie instead
     #"evince" #using okular instead
-    "gdm"
     #"gnome-calculator" #using kcalc instead
     "gnome-screenshot"
     "gnome-system-monitor"
@@ -137,9 +126,10 @@ packages=(
     "brave-browser"
     "clipit"
     "libreoffice"
-    "qbittorrent"
+    #"qbittorrent" flatpak this, it takes long to compile
     #"noto-fonts"
     "noto-emoji"
+    "rmlint"
     "xclip"
     # For NvChad
     #"gcc"
@@ -231,8 +221,8 @@ sh /etc/rc.d/rc.spice-vdagent start
 sh /etc/rc.d/rc.libvirt start
 
 # Start and autostart the default network
-# virsh net-start default
-# virsh net-autostart default
+virsh net-start default
+virsh net-autostart default
 
 # Add the current user to the necessary groups
 groups=(libvirt libvirt-qemu kvm input disk video audio users)
@@ -240,17 +230,14 @@ for group in "${groups[@]}"; do
     usermod -aG "$group" "$username"
 done
 
-# Modify systemd configuration to change the default timeout for stopping services during shutdown, preserving old one
-# cp /etc/systemd/system.conf /etc/systemd/system.conf.old
-# sed -i 's/^#DefaultTimeoutStopSec=.*/DefaultTimeoutStopSec=15s/' /etc/systemd/system.conf
-
-# Reload the systemd configuration
-# systemctl daemon-reload
+# Replace specific liness in sddm.conf
+# sed -i "/\[Autologin\]/,/User=/ s/User=.*/User=$username/" /etc/sddm.conf
+# sed -i "/\[Autologin\]/,/Session=/ s/Session=.*/Session=cinnamon/" /etc/sddm.conf
 
 # Run the setup script
 # cd home/
-# chmod +x Setup-Slackware-Theme.sh
-# ./Setup-Slackware-Theme.sh
+# chmod +x Setup-Slackware-Current-Theme.sh
+# ./Setup-Slackware-Current-Theme.sh
 # cd ..
 
 # Reboot for the changes to take effect

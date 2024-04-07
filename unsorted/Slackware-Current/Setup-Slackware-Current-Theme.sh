@@ -57,12 +57,14 @@ mkdir -p ~/.local/share/applications
 cp -vnpr .local/share/applications/slackware/* ~/.local/share/applications/
 
 # Copies .bashrc to home directory, preserving old one
+cd theming/
 cp -vnpr Slackware/* ~/
 sudo cp /root/.bashrc /root/.bashrc.old
 sudo cp Slackware/.bashrc /root/.bashrc
 cp ~/.bashrc ~/.bashrc.old
 cat Slackware/.bashrc > bashrc
 mv bashrc ~/.bashrc
+cd ..
 
 # Copies neofetch config file to appropriate directory, preserving old one
 neofetch
@@ -107,6 +109,10 @@ mkdir -p ~/.config/qBittorrent/
 cp -vnpr .config/qBittorrent/qBittorrent.conf.arch ~/.config/qBittorrent/qBittorrent.conf
 cp -vnpr mumble-dark.qbtheme ~/.config/qBittorrent/
 
+# Copies flatpak apps configs to appropriate directories, preserving old ones
+mv ~/.var ~/.var.old
+cp -vnpr .var/ ~/
+
 # Copies LibreOffice config to appropriate directory, preserving old ones
 mkdir -p ~/.config/libreoffice
 mv ~/.config/libreoffice/4 ~/.config/libreoffice/4_old
@@ -124,27 +130,16 @@ mv ~/.config/bauh ~/.config/bauh.old
 cp -vnpr .config/bauh/ ~/.config/
 
 # Import Entire Desktop Configuration, preserving old one
+cd theming/Slackware/
 dconf dump / > Old_Desktop_Configuration.dconf
 mv Old_Desktop_Configuration.dconf ~/
 dconf load / < Slackware.dconf
 
-# Define the path to .desktop file
-# desktop_file_path="${HOME}/.local/share/applications/authy.desktop"
-# Sets Authy Icon
-# cp -vnpr .icons/authy.png ~/
-# sed -i "s|Icon=.*|Icon=${HOME}/authy.png|g" $desktop_file_path
-
-# Define the home directory (For Menu Applet Icon)
-# home_dir="${HOME}"
-# Define the path to JSON file
-# json_file="${home_dir}/.config/cinnamon/spices/menu@cinnamon.org/0.json"
-# Use sed to replace /home/f16poom with the home directory in the value field on line 91
-# sed -i "91s|\"value\": \"/home/f16poom/NixOS-Start.png\"|\"value\": \"${home_dir}/NixOS-Start.png\"|g" $json_file
-
 # Sets Default Apps
-chmod +x Default-Apps-Slackware-Current.sh
-./Default-Apps-Slackware-Current.sh
-sudo ./Default-Apps-Slackware-Current.sh
+chmod +x Default-Apps-Slackware.sh
+./Default-Apps-Slackware.sh
+sudo ./Default-Apps-Slackware.sh
+cd ../..
 
 # Sets Wallpaper
 gsettings set org.cinnamon.desktop.background picture-uri file://${HOME}/wallpapers/Desktop_Wallpaper.png
@@ -188,7 +183,7 @@ nvim --headless "+MasonInstallAll" +qa
 cinnamon-dbus-command RestartCinnamon 1
 
 # Places Login Wallpaper
-# sudo cp -vnr wallpapers/SpeedDial2_Wallpaper.png /boot/
+sudo cp -vnr wallpapers/SpeedDial2_Wallpaper.png /boot/
 
 # Check if syntax highlighting configurations are already in nanorc, preserving old one
 sudo cp /etc/nanorc /etc/nanorc.old
@@ -208,28 +203,4 @@ if ! grep -q "^GTK_THEME=Gruvbox-Dark-BL" /etc/environment; then
     echo 'GTK_THEME=Gruvbox-Dark-BL' | sudo tee -a /etc/environment
 fi
 
-# Set up theming for gdm
-mv ~/monitors.xml ~/.config/
-sudo cp -f ~/.config/monitors.xml ~gdm/.config/monitors.xml
-sudo chown $(id -u gdm):$(id -g gdm) ~gdm/.config/monitors.xml
-sudo restorecon ~gdm/.config/monitors.xml
-flatpak install -y io.github.realmazharhussain.GdmSettings
-flatpak run io.github.realmazharhussain.GdmSettings
-flatpak remove -y io.github.realmazharhussain.GdmSettings
-flatpak remove -y --unused
-
-<<#autologin
-username=$(whoami)
-# Backs up old gdm custom.conf
-sudo cp /etc/gdm/custom.conf /etc/gdm/custom.conf.old
-# Use awk to add the configuration under the [daemon] section
-sudo awk -i inplace '
-BEGIN { RS=""; FS="\n" }
-/^\[daemon\]/ {
-    print
-    print "AutomaticLoginEnable=True"
-    print "AutomaticLogin='"$username"'"
-    next
-}
-{print}
-' "/etc/gdm/custom.conf"
+# Set up theming for sddt
