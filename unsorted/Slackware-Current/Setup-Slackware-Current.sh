@@ -168,54 +168,12 @@ sboinstall "${packages[@]}"
 
 # Enable Flathub
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-<<com
-# Preserve old libvirtd configuration (for Virtual Machine Manager)
-cp /etc/libvirt/libvirtd.conf /etc/libvirt/libvirtd.conf.old
 
-# Check for 'unix_sock_group' entry
-if ! grep -q "^unix_sock_group = \"users\"$" /etc/libvirt/libvirtd.conf; then
-    echo 'unix_sock_group = "users"' | tee -a /etc/libvirt/libvirtd.conf
-else
-    sed -i '/^#*unix_sock_group = "users"/s/^#*//' /etc/libvirt/libvirtd.conf
-fi
+# Install additional apps via Flathub
+flatpak install -y org.filezillaproject.Filezilla
+flatpak install -y org.qbittorrent.qBittorrent
+flatpak install -y runtime/org.kde.KStyle.Kvantum/x86_64/5.15-23.08
 
-# Check for 'unix_sock_ro_perms' entry
-if ! grep -q "^unix_sock_ro_perms = \"0777\"$" /etc/libvirt/libvirtd.conf; then
-    echo 'unix_sock_ro_perms = "0777"' | tee -a /etc/libvirt/libvirtd.conf
-else
-    sed -i '/^#*unix_sock_ro_perms = "0777"/s/^#*//' /etc/libvirt/libvirtd.conf
-fi
-
-# Check for 'unix_sock_rw_perms' entry
-if ! grep -q "^unix_sock_rw_perms = \"0770\"$" /etc/libvirt/libvirtd.conf; then
-    echo 'unix_sock_rw_perms = "0770"' | tee -a /etc/libvirt/libvirtd.conf
-else
-    sed -i '/^#*unix_sock_rw_perms = "0770"/s/^#*//' /etc/libvirt/libvirtd.conf
-fi
-
-# Preserve old QEMU configuration (for Virtual Machine Manager)
-cp /etc/libvirt/qemu.conf /etc/libvirt/qemu.conf.old
-
-# Check for 'user' entry
-if ! grep -q "^user = \"$username\"$" /etc/libvirt/qemu.conf; then
-    echo "user = \"$username\"" | tee -a /etc/libvirt/qemu.conf
-fi
-
-# Check for 'group' entry
-if ! grep -q "^group = \"$username\"$" /etc/libvirt/qemu.conf; then
-    echo "group = \"$username\"" | tee -a /etc/libvirt/qemu.conf
-fi
-
-# Check for 'swtpm_user' entry
-if ! grep -q "^swtpm_user = \"$username\"$" /etc/libvirt/qemu.conf; then
-    echo "swtpm_user = \"$username\"" | tee -a /etc/libvirt/qemu.conf
-fi
-
-# Check for 'swtpm_group' entry
-if ! grep -q "^swtpm_group = \"$username\"$" /etc/libvirt/qemu.conf; then
-    echo "swtpm_group = \"$username\"" | tee -a /etc/libvirt/qemu.conf
-fi
-com
 # Enable and start the libvirtd and spice-vdagent service *
 sh /etc/rc.d/rc.spice-vdagent start
 sh /etc/rc.d/rc.libvirt start
