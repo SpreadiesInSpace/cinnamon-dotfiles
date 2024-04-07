@@ -134,12 +134,6 @@ dconf dump / > Old_Desktop_Configuration.dconf
 mv Old_Desktop_Configuration.dconf ~/
 dconf load / < Arch.dconf
 
-# Define the path to .desktop file
-# desktop_file_path="${HOME}/.local/share/applications/authy.desktop"
-# Sets Authy Icon
-# cp -vnpr .icons/authy.png ~/
-# sed -i "s|Icon=.*|Icon=${HOME}/authy.png|g" $desktop_file_path
-
 # Define the home directory (For Menu Applet Icon)
 # home_dir="${HOME}"
 # Define the path to JSON file
