@@ -139,7 +139,7 @@ cp -vnpr .face ~/
 cd theming/Slackware/
 dconf dump / > Old_Desktop_Configuration.dconf
 mv Old_Desktop_Configuration.dconf ~/
-dconf load / < Slackware.dconf
+dconf load / < Slackware-Current.dconf
 
 # Sets Default Apps
 chmod +x Default-Apps-Slackware.sh
