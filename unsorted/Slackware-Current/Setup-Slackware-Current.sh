@@ -87,8 +87,8 @@ sbocheck
 sboupgrade --all
 
 # For libdaemon dependency that gets called in
-groupadd -g 214 avahi
-useradd -u 214 -g 214 -c Avahi -d /dev/null -s /bin/false avahi
+# groupadd -g 214 avahi
+# useradd -u 214 -g 214 -c Avahi -d /dev/null -s /bin/false avahi
 
 # For pcsc-lite dependency that gets called in
 groupadd -g 257 pcscd
