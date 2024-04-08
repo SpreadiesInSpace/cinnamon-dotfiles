@@ -52,7 +52,7 @@ sudo cp -vnpr .config/kdeglobals /root/.config/
 # Copies Cinnamon spice settings, preserving old ones
 mkdir -p ~/.config/cinnamon/spices/old
 mv ~/.config/cinnamon/spices/* ~/.config/cinnamon/spices/old
-cp -vnpr .config/cinnamon/spices.slackware/* ~/.config/cinnamon/spices/
+cp -vnpr .config/cinnamon/spices.slackware.current/* ~/.config/cinnamon/spices/
 
 # Copies My Personal Shortcuts
 mkdir -p ~/.local/share/applications
@@ -139,7 +139,7 @@ cp -vnpr .face ~/
 cd theming/Slackware/
 dconf dump / > Old_Desktop_Configuration.dconf
 mv Old_Desktop_Configuration.dconf ~/
-dconf load / < Slackware-Current.dconf
+dconf load / < Slackware.dconf
 
 # Sets Default Apps
 chmod +x Default-Apps-Slackware.sh

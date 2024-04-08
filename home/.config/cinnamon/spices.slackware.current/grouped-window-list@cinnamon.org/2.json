@@ -165,7 +165,7 @@
         ],
         "value": [
             "Mount CIFS Share.desktop",
-            "filezilla.desktop",
+            "org.filezillaproject.Filezilla.desktop:flatpak",
             "brave-browser.desktop",
             "alacarte-made-528735ce-ec36-11ee-862f-5254002e9856.desktop",
             "org.bleachbit.BleachBit.desktop",
