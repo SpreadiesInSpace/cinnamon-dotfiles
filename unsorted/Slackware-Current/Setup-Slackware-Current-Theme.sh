@@ -140,11 +140,13 @@ cd theming/Slackware/
 dconf dump / > Old_Desktop_Configuration.dconf
 mv Old_Desktop_Configuration.dconf ~/
 dconf load / < Slackware.dconf
+rm ~/Slackware.dconf
 
 # Sets Default Apps
 chmod +x Default-Apps-Slackware.sh
 ./Default-Apps-Slackware.sh
 sudo ./Default-Apps-Slackware.sh
+rm ~/Default-Apps-Slackware.sh
 cd ../..
 
 # Sets Wallpaper
