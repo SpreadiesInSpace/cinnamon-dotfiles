@@ -40,6 +40,9 @@ rm -rf slackware-scripts/
 if ! grep -q "^\[0-9\]+_SBo$" /etc/slackpkg/blacklist; then
     echo '[0-9]+_SBo' | tee -a /etc/slackpkg/blacklist
 fi
+if ! grep -q "^\[0-9\]+_wsr$" /etc/slackpkg/blacklist; then
+    echo '[0-9]+_wsr' | tee -a /etc/slackpkg/blacklist
+fi
 if ! grep -q "^\[0-9\]+ponce$" /etc/slackpkg/blacklist; then
     echo '[0-9]+ponce' | tee -a /etc/slackpkg/blacklist
 fi
