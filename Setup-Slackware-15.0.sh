@@ -148,7 +148,7 @@ packages=(
     "libiscsi"
     "libcacard"
     "spice"
-    #"spice-vdagent"
+    "spice-vdagent"
     "usbredir"
     "virglrenderer"
     "libnfs"

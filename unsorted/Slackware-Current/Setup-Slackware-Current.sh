@@ -114,8 +114,8 @@ packages=(
     #"gnome-calculator" #using kcalc instead
     "gnome-screenshot"
     "gnome-system-monitor"
-    "gnome-terminal"
-    "gui-ufw"
+    #"gnome-terminal" again webkit2gtk
+    "ufw"
     "kvantum-qt5"
     "mpv"
     "qt5ct"
