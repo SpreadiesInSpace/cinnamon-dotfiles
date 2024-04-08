@@ -72,6 +72,13 @@ mv squashfs-root /
 ln -s /squashfs-root/AppRun /usr/bin/nvim
 rm nvim.appimage
 
+# Install rmlint
+git clone https://github.com/sahib/rmlint.git
+cd rmlint/
+scons --prefix=/usr install
+cd ..
+rm -rf rmlint/
+
 # Install Cinnamon
 git clone https://github.com/CinnamonSlackBuilds/csb
 cd csb/
@@ -142,7 +149,7 @@ packages=(
     #"qbittorrent" flatpak this, it takes long to compile
     #"noto-fonts"
     "noto-emoji"
-    "rmlint"
+    #"rmlint" compiling via SBo fails on Slackware Current
     "xclip"
     # For NvChad
     #"gcc"
