@@ -156,7 +156,7 @@ packages=(
     "device-tree-compiler"
     "glusterfs"
     "vde2"
-    "qemu" # TARGET=x86_64-softmmu
+    "qemu" # TARGETS=x86_64-softmmu
     "spice-gtk"
     "gtk-vnc"
     "libvirt"
