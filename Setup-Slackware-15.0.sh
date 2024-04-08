@@ -102,7 +102,7 @@ packages=(
     # System utilities
     "file-roller"
     "flatpak"
-    "gparted"
+    #"gparted"
     "ncdu"
     #"neofetch"
     "timeshift"

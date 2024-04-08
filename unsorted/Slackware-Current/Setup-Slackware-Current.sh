@@ -86,9 +86,18 @@ xwmconfig
 sbocheck
 sboupgrade --all
 
+# For libdaemon dependency that gets called in
+groupadd -g 214 avahi
+useradd -u 214 -g 214 -c Avahi -d /dev/null -s /bin/false avahi
+
 # For pcsc-lite dependency that gets called in
 groupadd -g 257 pcscd
 useradd -u 257 -g pcscd -d /var/run/pcscd -s /bin/false pcscd
+
+# For Virt-Manager & accessing samba shares
+# slackpkg install dnsmasq samba
+cp /etc/samba/smb.conf-sample /etc/samba/smb.conf
+sh /etc/rc.d/rc.samba start
 
 # All packages
 packages=(
@@ -123,6 +132,7 @@ packages=(
     "rhythmbox"
     # Applications
     "bleachbit"
+    "bottom"
     "brave-browser"
     "clipit"
     "libreoffice"
@@ -199,4 +209,4 @@ done
 # cd ..
 
 # Reboot for the changes to take effect
-echo "Installation complete! Please reboot for the changes to take effect. Then run Setup-Slackware-Theme.sh in cinnamon/home for theming."
+echo "Installation complete! Please reboot for the changes to take effect. Then run Setup-Slackware-Current-Theme.sh in cinnamon/home for theming."
