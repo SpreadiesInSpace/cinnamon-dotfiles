@@ -30,10 +30,6 @@ exec-arg='--'
 picture-options='stretched'
 picture-uri='file:///home/f16poom/wallpapers/Desktop_Wallpaper.png'
 
-[org/cinnamon/desktop/background/slideshow]
-delay=15
-image-source='directory:///home/f16poom/Temp Files'
-
 [org/cinnamon/desktop/interface]
 clock-use-24h=false
 cursor-blink-time=1200
