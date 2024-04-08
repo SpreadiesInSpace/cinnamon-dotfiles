@@ -146,7 +146,8 @@ home_dir="${HOME}"
 # Define the path to JSON file
 json_file="${home_dir}/.config/cinnamon/spices/menu@cinnamon.org/0.json"
 # Use sed to replace /home/f16poom with the home directory in the value field on line 91
-sed -i "91s|\"value\": \"/home/f16poom/NixOS-Start.png\"|\"value\": \"${home_dir}/NixOS-Start.png\"|g" $json_file
+sed -i "91s|\"value\": \"/home/f16poom/NixOS-Start.png\"|\"value\": \"${home_dir}/.icons/NixOS-Start.png\"|g" $json_file
+mv ~/NixOS-Start.png ~/.icons/
 
 # Sets Wallpaper
 gsettings set org.cinnamon.desktop.background picture-uri file://${HOME}/wallpapers/Desktop_Wallpaper.png
