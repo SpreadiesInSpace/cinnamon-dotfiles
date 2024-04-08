@@ -132,11 +132,13 @@ cd theming/Fedora/
 dconf dump / > Old_Desktop_Configuration.dconf
 mv Old_Desktop_Configuration.dconf ~/
 dconf load / < Fedora.dconf
+rm ~/Fedora.dconf
 
 # Sets Default Apps
 chmod +x Default-Apps-Fedora.sh
 ./Default-Apps-Fedora.sh
 sudo ./Default-Apps-Fedora.sh
+rm ~/Default-Apps-Fedora.sh
 cd ../..
 
 # Sets Wallpaper

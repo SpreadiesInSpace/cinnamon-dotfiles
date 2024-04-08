@@ -132,6 +132,14 @@ cd theming/NixOS/
 dconf dump / > Old_Desktop_Configuration.dconf
 mv Old_Desktop_Configuration.dconf ~/
 dconf load / < NixOS.dconf
+rm ~/NixOS.dconf
+
+# Sets Default Apps
+chmod +x Default-Apps-NixOS.sh
+sh Default-Apps-NixOS.sh
+sudo sh Default-Apps-NixOS.sh
+rm ~/Default-Apps-NixOS.sh
+cd ../..
 
 # Define the home directory (For Menu Applet Icon)
 home_dir="${HOME}"
@@ -139,12 +147,6 @@ home_dir="${HOME}"
 json_file="${home_dir}/.config/cinnamon/spices/menu@cinnamon.org/0.json"
 # Use sed to replace /home/f16poom with the home directory in the value field on line 91
 sed -i "91s|\"value\": \"/home/f16poom/NixOS-Start.png\"|\"value\": \"${home_dir}/NixOS-Start.png\"|g" $json_file
-
-# Sets Default Apps
-chmod +x Default-Apps-NixOS.sh
-sh Default-Apps-NixOS.sh
-sudo sh Default-Apps-NixOS.sh
-cd ../..
 
 # Sets Wallpaper
 gsettings set org.cinnamon.desktop.background picture-uri file://${HOME}/wallpapers/Desktop_Wallpaper.png

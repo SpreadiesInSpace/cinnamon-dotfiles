@@ -132,11 +132,13 @@ cd theming/openSUSE/
 dconf dump / > Old_Desktop_Configuration.dconf
 mv Old_Desktop_Configuration.dconf ~/
 dconf load / < openSUSE.dconf
+rm ~/openSUSE.dconf
 
 # Sets Default Apps
 chmod +x Default-Apps-openSUSE.sh
 ./Default-Apps-openSUSE.sh
 sudo ./Default-Apps-openSUSE.sh
+rm ~/Default-Apps-openSUSE.sh
 cd ../..
 
 # Sets Wallpaper

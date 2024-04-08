@@ -136,11 +136,13 @@ cd theming/Arch/
 dconf dump / > Old_Desktop_Configuration.dconf
 mv Old_Desktop_Configuration.dconf ~/
 dconf load / < Arch.dconf
+rm ~/Arch.dconf
 
 # Sets Default Apps
 chmod +x Default-Apps-Arch.sh
 ./Default-Apps-Arch.sh
 sudo ./Default-Apps-Arch.sh
+rm ~/Default-Apps-Arch.sh
 cd ../..
 
 # Sets Wallpaper

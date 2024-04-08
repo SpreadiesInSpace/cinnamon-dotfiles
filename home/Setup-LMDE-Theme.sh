@@ -132,6 +132,14 @@ cd theming/LMDE/
 dconf dump / > Old_Desktop_Configuration.dconf
 mv Old_Desktop_Configuration.dconf ~/
 dconf load / < LMDE.dconf
+rm ~/LMDE.dconf
+
+# Sets Default Apps
+chmod +x Default-Apps-LMDE.sh
+./Default-Apps-LMDE.sh
+sudo ./Default-Apps-LMDE.sh
+rm ~/Default-Apps-LMDE.sh
+cd ../..
 
 # Define the home directory (For Menu Applet Icon)
 home_dir="${HOME}"
@@ -139,12 +147,6 @@ home_dir="${HOME}"
 json_file="${home_dir}/.config/cinnamon/spices/menu@cinnamon.org/0.json"
 # Use sed to replace /home/f16poom with the home directory in the value field on line 91
 sed -i "91s|\"value\": \"/home/f16poom/linuxmint-logo-filled-ring.svg\"|\"value\": \"${home_dir}/linuxmint-logo-filled-ring.svg\"|g" $json_file
-
-# Sets Default Apps
-chmod +x Default-Apps-LMDE.sh
-./Default-Apps-LMDE.sh
-sudo ./Default-Apps-LMDE.sh
-cd ../..
 
 # Sets Wallpaper
 gsettings set org.cinnamon.desktop.background picture-uri file://${HOME}/wallpapers/Desktop_Wallpaper.png

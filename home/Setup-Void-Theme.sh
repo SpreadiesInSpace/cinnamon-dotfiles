@@ -132,11 +132,13 @@ cd theming/Void/
 dconf dump / > Old_Desktop_Configuration.dconf
 mv Old_Desktop_Configuration.dconf ~/
 dconf load / < Void.dconf
+rm ~/Void.dconf
 
 # Sets Default Apps
 chmod +x Default-Apps-Void.sh
 ./Default-Apps-Void.sh
 sudo ./Default-Apps-Void.sh
+rm ~/Default-Apps-Void.sh
 cd ../..
 
 # Sets Wallpaper

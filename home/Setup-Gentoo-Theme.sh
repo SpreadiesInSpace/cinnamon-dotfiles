@@ -136,11 +136,13 @@ cd theming/Gentoo/
 dconf dump / > Old_Desktop_Configuration.dconf
 mv Old_Desktop_Configuration.dconf ~/
 dconf load / < Gentoo.dconf
+rm ~/Gentoo.dconf
 
 # Sets Default Apps
 chmod +x Default-Apps-Gentoo.sh
 ./Default-Apps-Gentoo.sh
 sudo ./Default-Apps-Gentoo.sh
+rm ~/Default-Apps-Gentoo.sh
 cd ../..
 
 # Sets Wallpaper
