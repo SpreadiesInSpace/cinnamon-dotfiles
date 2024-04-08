@@ -41,7 +41,7 @@ cp -vnpr sounds/ ~/
 cp -vnpr wallpapers/ ~/
 
 # Copies applets to appropriate directories
-cp -vnpr .local/share/cinnamon/applets.slackware/* ~/.local/share/cinnamon/applets/
+cp -vnpr .local/share/cinnamon/applets.568/* ~/.local/share/cinnamon/applets/
 
 # Copies KDE Global Cinnamon defaults to ~/.config, preserving old one
 mv ~/.config/kdeglobals ~/.config/kdeglobals.old
