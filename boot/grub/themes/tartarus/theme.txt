@@ -17,7 +17,7 @@ terminal-border: "0"
 + image {
 	left = 50%-128
 	top = 50%-256
-    file = "gruvboxlogo2.png"
+    file = "gruvboxlogo3.png"
 }
 
 # Show the boot menu
