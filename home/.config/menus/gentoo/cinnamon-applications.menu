@@ -69,5 +69,8 @@
 		<Exclude>
 			<Filename>qdbusviewer6-qttools-6.desktop</Filename>
 		</Exclude>
+		<Exclude>
+			<Filename>org.gnome.Sysprof.desktop</Filename>
+		</Exclude>
 	</Menu>
 </Menu>

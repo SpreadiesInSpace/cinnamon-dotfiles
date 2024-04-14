@@ -60,8 +60,13 @@ scons --prefix=/usr install
 cd ..
 rm -rf rmlint/
 
+# Enable sunny-overlay for GPaste
+eselect repository add sunny-overlay git https://github.com/dguglielmi/sunny-overlay.git
+emaint sync -r sunny-overlay
+
 # Allow select unstable packages to be merged
-echo "x11-misc/copyq ~amd64" | tee /etc/portage/package.accept_keywords/copyq
+# echo "x11-misc/copyq ~amd64" | tee /etc/portage/package.accept_keywords/copyq
+echo "x11-misc/gpaste ~amd64" | tee /etc/portage/package.accept_keywords/gpaste
 echo "app-admin/grub-customizer ~amd64" | tee /etc/portage/package.accept_keywords/grub-customizer
 echo "x11-apps/lightdm-gtk-greeter-settings ~amd64" | tee /etc/portage/package.accept_keywords/lightdm-gtk-greeter-settings
 echo "x11-themes/kvantum ~amd64" | tee /etc/portage/package.accept_keywords/kvantum
@@ -69,7 +74,8 @@ echo "app-backup/timeshift ~amd64" | tee /etc/portage/package.accept_keywords/ti
 
 # Unstable Packages
 unstable_packages=(
-    "x11-misc/copyq"
+    #"x11-misc/copyq"
+    "x11-misc/gpaste"
     "app-admin/grub-customizer"
     "x11-apps/lightdm-gtk-greeter-settings"
     "x11-themes/kvantum"

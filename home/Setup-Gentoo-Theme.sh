@@ -69,8 +69,8 @@ mv bashrc ~/.bashrc
 cd ..
 
 # Autostart CopyQ
-mkdir -p ~/.config/autostart/
-cp -vnpr .config/autostart/gentoo/*  ~/.config/autostart/
+# mkdir -p ~/.config/autostart/
+# cp -vnpr .config/autostart/gentoo/*  ~/.config/autostart/
 
 # Copies neofetch config file to appropriate directory, preserving old one
 neofetch
