@@ -38,7 +38,8 @@ cp -vnpr .fonts/ ~/
 cp -vnpr sounds/ ~/
 
 # Copies wallpapers to home directory
-cp -vnpr wallpapers/ ~/
+mkdir -p ~/Pictures
+cp -vnpr wallpapers/* ~/Pictures
 
 # Copies applets to appropriate directories
 cp -vnpr .local/share/cinnamon/applets/* ~/.local/share/cinnamon/applets/
@@ -150,7 +151,7 @@ sed -i "91s|\"value\": \"/home/f16poom/NixOS-Start.png\"|\"value\": \"${home_dir
 mv ~/NixOS-Start.png ~/.icons/
 
 # Sets Wallpaper
-gsettings set org.cinnamon.desktop.background picture-uri file://${HOME}/wallpapers/Desktop_Wallpaper.png
+gsettings set org.cinnamon.desktop.background picture-uri file://${HOME}/Pictures/Desktop_Wallpaper.png
 
 # Sets Login Sounds
 gsettings set org.cinnamon.sounds login-enabled true
