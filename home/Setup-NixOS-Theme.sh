@@ -151,6 +151,9 @@ mv ~/NixOS-Start.png ~/.icons/
 
 # Sets Wallpaper
 gsettings set org.cinnamon.desktop.background picture-uri file://${HOME}/wallpapers/Desktop_Wallpaper.png
+mkdir -p ~/Pictures
+ln -s ~/wallpapers/* ~/Pictures
+gsettings set org.cinnamon.desktop.background.slideshow image-source directory://${HOME}/Pictures
 
 # Sets Login Sounds
 gsettings set org.cinnamon.sounds login-enabled true
