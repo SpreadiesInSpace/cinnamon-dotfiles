@@ -145,6 +145,7 @@ secondary-click-time=1.2
 [org/gnome/desktop/interface]
 clock-format='12h'
 toolkit-accessibility=false
+monospace-font-name='SauceCodePro Nerd Font 10'
 
 [org/gnome/evolution-data-server]
 migrated=true

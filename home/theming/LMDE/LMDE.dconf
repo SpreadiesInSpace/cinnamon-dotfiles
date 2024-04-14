@@ -228,6 +228,7 @@ toolbar-detachable=false
 toolbar-icons-size='large'
 toolbar-style='both-horiz'
 toolkit-accessibility=false
+monospace-font-name='SauceCodePro Nerd Font 10'
 
 [org/gnome/desktop/peripherals/mouse]
 accel-profile='default'
