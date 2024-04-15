@@ -111,12 +111,10 @@ sh /etc/rc.d/rc.samba start
 
 # All Slackpkg packages
 packages= (
-    kdeconnect-kde
     gdm-settings
     gnome
     gtk-vnc
     gpaste
-    unzip
 )
 
 # Install Slackpkg packages
@@ -131,7 +129,7 @@ sbopackages=(
     "ncdu"
     #"neofetch"
     "timeshift"
-    #"unzip" #Not in GFS, probably not in SBo either
+    #"unzip" #In GFS but symlinked
     #"xkill" 
     #"xrandr"
     # Network utilities
@@ -208,6 +206,11 @@ flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.f
 flatpak install -y org.filezillaproject.Filezilla
 flatpak install -y org.qbittorrent.qBittorrent
 flatpak install -y runtime/org.kde.KStyle.Kvantum/x86_64/5.15-23.08
+
+# Enable KDE's flatpak repo
+flatpak remote-add kdeapps https://distribute.kde.org/kdeapps.flatpakrepo
+flatpak update --appstream -y
+flatpak install -y kdeapps org.kde.kdeconnect
 
 # Enable and start the libvirtd and spice-vdagent service *
 sh /etc/rc.d/rc.spice-vdagent start
