@@ -109,8 +109,21 @@ useradd -u 257 -g pcscd -d /var/run/pcscd -s /bin/false pcscd
 cp /etc/samba/smb.conf-sample /etc/samba/smb.conf
 sh /etc/rc.d/rc.samba start
 
-# All packages
-packages=(
+# All Slackpkg packages
+packages= (
+    kdeconnect-kde
+    gdm-settings
+    gnome
+    gtk-vnc
+    gpaste
+    unzip
+)
+
+# Install Slackpkg packages
+slackpkg install "${sbopackages[@]}"
+
+# All Slackbuild packages
+sbopackages=(
     # System utilities
     #"file-roller" #GFS
     #"flatpak" #GFS
@@ -118,20 +131,20 @@ packages=(
     "ncdu"
     #"neofetch"
     "timeshift"
-    #"unzip" 
+    #"unzip" #Not in GFS, probably not in SBo either
     #"xkill" 
     #"xrandr"
     # Network utilities
     #"filezilla" flatpak this, it takes long to compile
     #"gvfs"
-    #"kdeconnect"
+    #"kdeconnect" #Not installed in GFS
     #"samba"
     # Desktop environment and related packages
     #"cinnamon"
     #"eog" #GFS
     #"evince" #GFS
     #"gdm" #GFS
-    #"gdm-settings" #GFS
+    #"gdm-settings" #Not installed in GFS 
     #"gnome-calculator" #GFS
     "gnome-screenshot"
     #"gnome-system-monitor" #GFS
@@ -146,7 +159,7 @@ packages=(
     "bleachbit"
     "bottom"
     "brave-browser"
-    #"gpaste" #GFS
+    #"gpaste" #Not installed in GFS
     "libreoffice"
     #"qbittorrent" flatpak this, it takes long to compile
     #"noto-fonts"
@@ -158,7 +171,7 @@ packages=(
     #"make"
     "ripgrep"
     # Virtualization tools
-    "libslirp"
+    #"libslirp" #GFS
     "libiscsi"
     #"libcacard" #GFS
     #"spice" #GFS
@@ -171,22 +184,22 @@ packages=(
     "glusterfs"
     #"vde2" #GFS
     #"qemu" #GFS
-    #"spice-gtk" #GFS
-    "gtk-vnc"
+    "spice-gtk"
+    #"gtk-vnc" #Not installed in GFS
     #"libvirt" #GFS
     #"libvirt-glib" #GFS
     #"libvirt-python" #GFS
     #"libosinfo" #GFS
     "edk2-ovmf"
-    #"virt-manager" #GFS
-    #"dnsmasq" # This package and below is already there
+    "virt-manager" 
+    #"dnsmasq"
     #"bridge-utils"
     #"iptables"
     #"dmidecode"
 )
 
-# Update system and install packages
-sboinstall "${packages[@]}"
+# Install SBo packages
+sboinstall "${sbopackages[@]}"
 
 # Enable Flathub
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
