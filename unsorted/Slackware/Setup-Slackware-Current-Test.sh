@@ -46,9 +46,9 @@ fi
 if ! grep -q "^\[0-9\]+ponce$" /etc/slackpkg/blacklist; then
     echo '[0-9]+ponce' | tee -a /etc/slackpkg/blacklist
 fi
-if ! grep -q "^\[0-9\]+_csb$" /etc/slackpkg/blacklist; then
-    echo '[0-9]+_csb' | tee -a /etc/slackpkg/blacklist
-fi
+# if ! grep -q "^\[0-9\]+_csb$" /etc/slackpkg/blacklist; then
+#     echo '[0-9]+_csb' | tee -a /etc/slackpkg/blacklist
+# fi
 
 # Point sbopkg to current repo
 sed -i "s/REPO_BRANCH=\${REPO_BRANCH:-15.0}/REPO_BRANCH=\${REPO_BRANCH:-current}/g" /etc/sbopkg/sbopkg.conf
@@ -78,7 +78,7 @@ cd rmlint/
 scons --prefix=/usr install
 cd ..
 rm -rf rmlint/
-
+<<csb
 # Install Cinnamon
 git clone https://github.com/CinnamonSlackBuilds/csb
 cd csb/
@@ -91,7 +91,7 @@ fi
 cd ..
 rm -rf csb/
 xwmconfig
-
+csb
 # Update sbo just to be sure
 sbocheck
 sboupgrade --all
