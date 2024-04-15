@@ -27,8 +27,9 @@ chmod +x *.sh
 # Set up Slackware User, init level 4
 # ./setup_script
 # Set Slackpkg Mirrors to US and update cache
-./update_mirror_and_pkgs.sh
+#./update_mirror_and_pkgs.sh
 # Run Full Update & update grub
+nano /etc/slackpkg/mirrors
 ./update_slackware.sh
 grub-mkconfig -o /boot/grub/grub.cfg
 # Install and configure sbopkg and sbotools
@@ -46,22 +47,24 @@ fi
 if ! grep -q "^\[0-9\]+ponce$" /etc/slackpkg/blacklist; then
     echo '[0-9]+ponce' | tee -a /etc/slackpkg/blacklist
 fi
-# if ! grep -q "^\[0-9\]+_csb$" /etc/slackpkg/blacklist; then
-#     echo '[0-9]+_csb' | tee -a /etc/slackpkg/blacklist
-# fi
+if ! grep -q "^\[0-9\]+_lngn$" /etc/slackpkg/blacklist; then
+     echo '[0-9]+_lngn' | tee -a /etc/slackpkg/blacklist
+fi
 
 # Point sbopkg to current repo
 sed -i "s/REPO_BRANCH=\${REPO_BRANCH:-15.0}/REPO_BRANCH=\${REPO_BRANCH:-current}/g" /etc/sbopkg/sbopkg.conf
 sed -i "s/REPO_NAME=\${REPO_NAME:-SBo}/REPO_NAME=\${REPO_NAME:-SBo-git}/g" /etc/sbopkg/sbopkg.conf
 
 # Install slackpkg+ & configure
-url="https://sourceforge.net/projects/slackpkgplus/files/slackpkg%2B-1.8.0-noarch-7mt.txz/download"
-wget -O slackpkg+.txz "$url"
-installpkg slackpkg+.txz
-sed -i 's/TAG_PRIORITY=off/TAG_PRIORITY=on/g' /etc/slackpkg/slackpkgplus.conf
+#url="https://sourceforge.net/projects/slackpkgplus/files/slackpkg%2B-1.8.0-noarch-7mt.txz/download"
+#wget -O slackpkg+.txz "$url"
+#installpkg slackpkg+.txz
+#sed -i 's/TAG_PRIORITY=off/TAG_PRIORITY=on/g' /etc/slackpkg/slackpkgplus.conf
+#MIRRORPLUS['csb']https://slackware.uk/csb/current/x86_64/
+nano /etc/slackpkg/slackpkgplus.conf
 slackpkg update gpg
 slackpkg install-new
-rm slackpkg+.txz
+#rm slackpkg+.txz
 
 # Install Neovim AppImage
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
@@ -112,7 +115,6 @@ sh /etc/rc.d/rc.samba start
 # All Slackpkg packages
 packages= (
     gdm-settings
-    gnome
     gtk-vnc
     gpaste
 )
@@ -124,7 +126,7 @@ slackpkg install "${sbopackages[@]}"
 sbopackages=(
     # System utilities
     #"file-roller" #GFS
-    #"flatpak" #GFS
+    #"flatpak" #GFS borked, dev haven't recompiled
     #"gparted"
     "ncdu"
     #"neofetch"
@@ -144,11 +146,11 @@ sbopackages=(
     #"gdm" #GFS
     #"gdm-settings" #Not installed in GFS 
     #"gnome-calculator" #GFS
-    "gnome-screenshot"
+    #"gnome-screenshot" #GFS
     #"gnome-system-monitor" #GFS
     #"gnome-terminal" #GFS
     "ufw"
-    "kvantum-qt5"
+    "kvantum-qt5" #doesn't compile...no KDE
     "mpv"
     "qt5ct"
     "qt6ct"
@@ -206,11 +208,6 @@ flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.f
 flatpak install -y org.filezillaproject.Filezilla
 flatpak install -y org.qbittorrent.qBittorrent
 flatpak install -y runtime/org.kde.KStyle.Kvantum/x86_64/5.15-23.08
-
-# Enable KDE's flatpak repo
-flatpak remote-add kdeapps https://distribute.kde.org/kdeapps.flatpakrepo
-flatpak update --appstream -y
-flatpak install -y kdeapps org.kde.kdeconnect
 
 # Enable and start the libvirtd and spice-vdagent service *
 sh /etc/rc.d/rc.spice-vdagent start
