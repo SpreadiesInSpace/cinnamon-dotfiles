@@ -146,7 +146,7 @@ packages=(
     "bleachbit"
     "bottom"
     "brave-browser"
-    "clipit"
+    #"gpaste" #GFS
     "libreoffice"
     #"qbittorrent" flatpak this, it takes long to compile
     #"noto-fonts"
