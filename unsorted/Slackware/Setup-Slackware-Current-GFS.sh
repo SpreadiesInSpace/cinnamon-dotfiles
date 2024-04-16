@@ -150,7 +150,7 @@ sbopackages=(
     #"gnome-system-monitor" #GFS
     #"gnome-terminal" #GFS
     "ufw"
-    "kvantum-qt5" #doesn't compile...no KDE
+    #"kvantum-qt5" #use snuk
     "mpv"
     "qt5ct"
     "qt6ct"
