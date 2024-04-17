@@ -94,11 +94,11 @@ sudo cp -vprf .config/qt5ct/ /root/.config/
 sudo mv /root/.config/qt6ct/qt6ct.conf /root/.config/qt6ct/qt6ct.conf.old
 sudo cp -vprf .config/qt6ct/ /root/.config/
 
-# Copies xed Theme to appropriate directory
-mkdir -p ~/.local/share/xed/styles
-cp -vnpr gruvbox-dark.xml ~/.local/share/xed/styles/
-sudo mkdir -p /root/.local/share/xed/styles
-sudo cp -vprf gruvbox-dark.xml /root/.local/share/xed/styles/
+# Copies Gedit Theme to appropriate directory
+mkdir -p ~/.local/share/gedit/styles
+cp -vnpr gruvbox-dark-gedit46.xml ~/.local/share/gedit/styles/
+sudo mkdir -p /root/.local/share/gedit/styles
+sudo cp -vprf gruvbox-dark-gedit46.xml /root/.local/share/gedit/styles/
 
 # Copies Menu Preferences to appropriate directory
 mkdir -p ~/.config/menus/old

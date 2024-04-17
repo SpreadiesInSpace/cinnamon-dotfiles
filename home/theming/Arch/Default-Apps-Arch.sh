@@ -166,37 +166,37 @@ xdg-mime default libreoffice-calc.desktop application/msexcel
 # PDF - Document Viewer (evince)
 xdg-mime default org.gnome.Evince.desktop application/pdf
 
-# Source Code - xed
-xdg-mime default xed.desktop application/javascript
-xdg-mime default xed.desktop application/x-httpd-php3
-xdg-mime default xed.desktop application/x-httpd-php4
-xdg-mime default xed.desktop application/x-httpd-php5
-xdg-mime default xed.desktop application/x-m4
-xdg-mime default xed.desktop application/x-php
-xdg-mime default xed.desktop application/x-ruby
-xdg-mime default xed.desktop application/x-shellscript
-xdg-mime default xed.desktop application/xml
-xdg-mime default xed.desktop text/css
-xdg-mime default xed.desktop text/turtle
-xdg-mime default xed.desktop text/x-c++hdr
-xdg-mime default xed.desktop text/x-c++src
-xdg-mime default xed.desktop text/x-chdr
-xdg-mime default xed.desktop text/x-csharp
-xdg-mime default xed.desktop text/x-csrc
-xdg-mime default xed.desktop text/x-diff
-xdg-mime default xed.desktop text/x-dsrc
-xdg-mime default xed.desktop text/x-fortran
-xdg-mime default xed.desktop text/x-java
-xdg-mime default xed.desktop text/x-makefile
-xdg-mime default xed.desktop text/x-pascal
-xdg-mime default xed.desktop text/x-perl
-xdg-mime default xed.desktop text/x-python
-xdg-mime default xed.desktop text/x-sql
-xdg-mime default xed.desktop text/x-vb
-xdg-mime default xed.desktop text/yaml
+# Source Code - gedit
+xdg-mime default org.gnome.gedit.desktop application/javascript
+xdg-mime default org.gnome.gedit.desktop application/x-httpd-php3
+xdg-mime default org.gnome.gedit.desktop application/x-httpd-php4
+xdg-mime default org.gnome.gedit.desktop application/x-httpd-php5
+xdg-mime default org.gnome.gedit.desktop application/x-m4
+xdg-mime default org.gnome.gedit.desktop application/x-php
+xdg-mime default org.gnome.gedit.desktop application/x-ruby
+xdg-mime default org.gnome.gedit.desktop application/x-shellscript
+xdg-mime default org.gnome.gedit.desktop application/xml
+xdg-mime default org.gnome.gedit.desktop text/css
+xdg-mime default org.gnome.gedit.desktop text/turtle
+xdg-mime default org.gnome.gedit.desktop text/x-c++hdr
+xdg-mime default org.gnome.gedit.desktop text/x-c++src
+xdg-mime default org.gnome.gedit.desktop text/x-chdr
+xdg-mime default org.gnome.gedit.desktop text/x-csharp
+xdg-mime default org.gnome.gedit.desktop text/x-csrc
+xdg-mime default org.gnome.gedit.desktop text/x-diff
+xdg-mime default org.gnome.gedit.desktop text/x-dsrc
+xdg-mime default org.gnome.gedit.desktop text/x-fortran
+xdg-mime default org.gnome.gedit.desktop text/x-java
+xdg-mime default org.gnome.gedit.desktop text/x-makefile
+xdg-mime default org.gnome.gedit.desktop text/x-pascal
+xdg-mime default org.gnome.gedit.desktop text/x-perl
+xdg-mime default org.gnome.gedit.desktop text/x-python
+xdg-mime default org.gnome.gedit.desktop text/x-sql
+xdg-mime default org.gnome.gedit.desktop text/x-vb
+xdg-mime default org.gnome.gedit.desktop text/yaml
 
 # File Manager - Nemo
 xdg-mime default nemo.desktop inode/directory
 
-# Plain Text - xed
-xdg-mime default xed.desktop text/plain
+# Plain Text - gedit
+xdg-mime default org.gnome.gedit.desktop text/plain
