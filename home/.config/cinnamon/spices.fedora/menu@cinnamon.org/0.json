@@ -88,7 +88,7 @@
         "tooltip": "Select an icon to show in the panel.",
         "default_icon": "cinnamon-symbolic",
         "dependency": "menu-custom",
-        "value": "goa-account-fedora"
+        "value": "fedora-logo-icon"
     },
     "menu-icon-size": {
         "type": "spinbutton",
