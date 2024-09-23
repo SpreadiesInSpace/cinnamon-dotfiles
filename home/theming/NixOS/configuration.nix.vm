@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  user = "USERNAME_PLACEHOLDER";
+  user = "f16poom";
   nixpkgs_23_05 = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-23.05.tar.gz") {};
   theme = {
     package = nixpkgs_23_05.gruvbox-gtk-theme;
@@ -34,10 +34,10 @@ in
 
   services.xserver = {
     enable = true;
-    layout = "us";
-    xkbVariant = "";
+    xkb.layout = "us";
+    xkb.variant = "";
     desktopManager.cinnamon.enable = true;
-    # desktopManager.cinnamon.sessionPath = [ pkgs.gnome.gpaste ];
+    desktopManager.cinnamon.sessionPath = [ pkgs.gnome.gpaste ];
     displayManager = {
       lightdm = {
         enable = true;
@@ -50,13 +50,12 @@ in
           extraConfig = "clock-format=%a, %-e %b %-l:%M %p ";
         };
       };
-      autoLogin = {
-        enable = true;
-        user = user;
-      };
     };
   };
-
+  services.displayManager.autoLogin = {
+    enable = true;
+    user = user;
+  };
   sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -81,12 +80,13 @@ in
     # permittedInsecurePackages = [ "electron-9.4.4" ]; # For Authy
     packageOverrides = pkgs: {
       unstable = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz") {};
+      tapir = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-23.11.tar.gz") {};
     };
   };
 
   environment = {
     systemPackages = with pkgs.gnome // pkgs.libsForQt5 // pkgs; ([
-      bleachbit bottom brave celluloid clipit filezilla gcc gedit git gnome-system-monitor
+      bleachbit bottom brave celluloid filezilla gcc tapir.gedit git gnome-system-monitor
       gparted libreoffice-fresh ncdu neofetch unstable.neovim qbittorrent qt5ct ripgrep rmlint
       rhythmbox timeshift unzip virt-manager wget xclip xorg.xkill qtstyleplugin-kvantum
     ]);
@@ -110,7 +110,7 @@ in
     dconf.enable = true;
     geary.enable = false;
     gnome-disks.enable = false;
-    # gpaste.enable = true;
+    gpaste.enable = true;
   };
 
   xdg.portal.enable = true;
