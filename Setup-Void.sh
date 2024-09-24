@@ -96,7 +96,7 @@ sudo xbps-install -Syu "${packages[@]}"
 
 # Install Brave
 cd home/theming/Void
-chmod +x brave_updates.sh
+chmod +x update_brave.sh
 ./update_brave.sh
 cd ..
 
