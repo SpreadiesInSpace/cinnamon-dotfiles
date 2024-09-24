@@ -269,6 +269,7 @@ virtual-root='file:///home/f16poom/.config'
 background-pattern='grid'
 highlight-current-line=false
 scheme='gruvbox-dark'
+style-scheme-for-dark-theme-variant='gruvbox-dark'
 wrap-last-split-mode='word'
 
 [org/gnome/gedit/state/window]
