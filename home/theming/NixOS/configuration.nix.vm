@@ -80,13 +80,13 @@ in
     # permittedInsecurePackages = [ "electron-9.4.4" ]; # For Authy
     packageOverrides = pkgs: {
       unstable = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz") {};
-      tapir = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-23.11.tar.gz") {};
+      # tapir = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-23.11.tar.gz") {};
     };
   };
 
   environment = {
     systemPackages = with pkgs.gnome // pkgs.libsForQt5 // pkgs; ([
-      bleachbit bottom brave celluloid filezilla gcc tapir.gedit git gnome-system-monitor
+      bleachbit bottom brave celluloid filezilla gcc gedit git gnome-system-monitor
       gparted libreoffice-fresh ncdu neofetch unstable.neovim qbittorrent qt5ct ripgrep rmlint
       rhythmbox timeshift unzip virt-manager wget xclip xorg.xkill qtstyleplugin-kvantum
     ]);
