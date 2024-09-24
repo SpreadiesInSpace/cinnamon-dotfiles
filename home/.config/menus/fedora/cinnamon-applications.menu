@@ -43,4 +43,11 @@
 		</Exclude>
 		<AppDir>/home/f16poom/.local/share/applications</AppDir>
 	</Menu>
+	<Menu>
+		<Name>Science</Name>
+		<Exclude>
+			<Filename>libreoffice-math.desktop</Filename>
+		</Exclude>
+		<AppDir>/home/f16poom/.local/share/applications</AppDir>
+	</Menu>
 </Menu>
