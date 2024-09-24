@@ -151,6 +151,7 @@ if ! grep -q "^swtpm_group = \"$username\"$" /etc/libvirt/qemu.conf; then
 fi
 
 # Enable and start services for Virt Manager
+sudo ln -s /etc/sv/spice-vdagentd /var/service
 sudo ln -s /etc/sv/libvirtd /var/service/
 sudo ln -s /etc/sv/virtlockd/ /var/service/
 sudo ln -s /etc/sv/virtlogd/ /var/service/
