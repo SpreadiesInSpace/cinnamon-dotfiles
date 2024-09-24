@@ -97,7 +97,7 @@ sudo xbps-install -Syu "${packages[@]}"
 # Install Brave
 cd home/theming/Void
 chmod +x brave_updates.sh
-./brave_updates.sh
+./update_brave.sh
 cd ..
 
 # Enable Flathub
