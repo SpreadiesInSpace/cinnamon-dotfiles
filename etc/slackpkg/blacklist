@@ -39,4 +39,7 @@ kernel-source
 #
 # This one will blacklist all SBo packages:
 #[0-9]+_SBo
+[0-9]+_SBo
+[0-9]+_wsr
 [0-9]+ponce
+[0-9]+_csb
