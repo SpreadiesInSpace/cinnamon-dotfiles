@@ -1,4 +1,3 @@
-#!/usr/bin/env xdg-open
 #
 # This file is part of the LibreOffice project.
 #
@@ -23,7 +22,7 @@ NoDisplay=false
 Icon=libreoffice
 Type=Application
 Categories=Office;X-Red-Hat-Base;X-SuSE-Core-Office;
-Exec=libreoffice24.2 %U
+Exec=libreoffice24.8 %U
 MimeType=application/vnd.openofficeorg.extension;x-scheme-handler/vnd.libreoffice.cmis;x-scheme-handler/vnd.sun.star.webdav;x-scheme-handler/vnd.sun.star.webdavs;x-scheme-handler/vnd.libreoffice.command;x-scheme-handler/ms-word;x-scheme-handler/ms-powerpoint;x-scheme-handler/ms-excel;x-scheme-handler/ms-visio;x-scheme-handler/ms-access;
 Name=LibreOffice
 GenericName=Office
@@ -166,7 +165,7 @@ Comment[ca_valencia]=Inicieu aplicacions per a crear documents de text, fulls de
 Comment[ckb]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
 Comment[cs]=Spouští aplikace pro vytváření textových dokumentů, sešitů, prezentací, kreseb, vzorců a databází nebo otevírá naposledy otevřené dokumenty.
 Comment[cy]=Agor rhaglenni er mwyn creu dogfennau testun, taenlenni, cyflwyniadau, lluniadau, fformiwlâu a chronfeydd data neu agor dogfennau a ddefnyddiwyd yn ddiweddar.
-Comment[da]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
+Comment[da]=Start programmer til at oprette tekstdokumenter, regneark, præsentationer, tegninger, formler og databaser, eller åbn nyligt brugte dokumenter.
 Comment[de]=Starten Sie Anwendungen, um Textdokumente, Tabellendokumente, Präsentationen, Zeichnungen, Formeln und Datenbanken zu erstellen, oder öffnen Sie kürzlich verwendete Dokumente.
 Comment[dgo]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
 Comment[dsb]=Startujśo nałoženja, aby tekstowe dokumenty, tabelowe dokumenty, prezentacije, kreslanki, formule a datowe banki napórał, abo wócyńśo rowno wužyte dokumenty.
@@ -199,7 +198,7 @@ Comment[id]=Meluncurkan aplikasi untuk membuat dokumen teks, lembar sebar, prese
 Comment[is]=Keyrðu forrit til að útbúa textaskjöl, töflureikna, kynningar, teikningar, formúlur og gagnagrunna, eða opnaðu nýleg skjöl.
 Comment[it]=Avvia applicazioni per creare documenti di testo, fogli di calcolo, presentazioni, disegni, formule e database, oppure apri i documenti recenti.
 Comment[ja]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
-Comment[ka]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
+Comment[ka]=გაუშვით აპლიკაციები ტექსტური დოკუმენტების, ელცხრილების, პრეზენტაციების, ნახაზების, ფორმულების და მონაცემთა ბაზების შესაქმნელად ან ახლახან გამოყენებული დოკუმენტების გასახსნელად.
 Comment[kab]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
 Comment[kk]=Мәтіндік құжаттар, электрондық кестелер, презентациялар, сызбалар, формулалар және дерекқорларды жасау үшін қолданбаларды жөнелту немесе жуырда пайдаланылған құжаттарды ашу.
 Comment[km]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
@@ -243,7 +242,7 @@ Comment[sid]=Launch applications to create text documents, spreadsheets, present
 Comment[sk]=Spúšťa aplikácie na vytváranie textových a tabuľkových dokumentov, prezentácií, kresieb, vzorcov a databáz alebo otvára naposledy otvorené dokumenty.
 Comment[sl]=Zaženite programe, s katerimi lahko ustvarite besedilne dokumente, preglednice, predstavitve, risbe, formule in zbirke podatkov ali pa odprete nedavno uporabljene dokumente.
 Comment[sq]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
-Comment[sr]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
+Comment[sr]=Покрените апликације да направите текстуалне документе, таблице, презентације, цртеже, формуле и базе података или да отворите недавно коришћене документе.
 Comment[sr_Latn]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
 Comment[ss]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
 Comment[st]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
@@ -263,7 +262,7 @@ Comment[uk]=Запуск програм для створення текстов
 Comment[uz]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
 Comment[ve]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
 Comment[vec]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
-Comment[vi]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
+Comment[vi]=Khởi chạy các ứng dụng để tạo tài liệu văn bản, bảng tính, bản trình bày, bản vẽ, công thức, và cơ sở dữ liệu, hoặc mở các tài liệu được sử dụng gần đây.
 Comment[xh]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
 Comment[zh_CN]=启动应用程序以创建文本文档、电子表格、演示文稿、绘图、公式和数据库，或者打开最近使用过的文档。
 Comment[zh_TW]=啟動應用程式以建立文字文件、試算表、簡報、繪圖、公式與資料庫，或是開啟最近使用的文件。
@@ -279,26 +278,26 @@ PrefersNonDefaultGPU=false
 
 [Desktop Action Writer]
 Name=Writer
-Exec=libreoffice24.2 --writer
+Exec=libreoffice24.8 --writer
 
 [Desktop Action Calc]
 Name=Calc
-Exec=libreoffice24.2 --calc
+Exec=libreoffice24.8 --calc
 
 [Desktop Action Impress]
 Name=Impress
-Exec=libreoffice24.2 --impress
+Exec=libreoffice24.8 --impress
 
 [Desktop Action Draw]
 Name=Draw
-Exec=libreoffice24.2 --draw
+Exec=libreoffice24.8 --draw
 
 [Desktop Action Base]
 Name=Base
-Exec=libreoffice24.2 --base
+Exec=libreoffice24.8 --base
 
 [Desktop Action Math]
 Name=Math
-Exec=libreoffice24.2 --math
+Exec=libreoffice24.8 --math
 
 ##End of actions menu

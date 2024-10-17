@@ -1,4 +1,3 @@
-#!/usr/bin/env xdg-open
 #
 # This file is part of the LibreOffice project.
 #
@@ -22,7 +21,7 @@ Terminal=false
 Icon=libreoffice-base
 Type=Application
 Categories=Office;Database;X-Red-Hat-Base;
-Exec=libreoffice24.2 --base %U
+Exec=libreoffice24.8 --base %U
 MimeType=application/vnd.oasis.opendocument.base;application/vnd.sun.xml.base;
 Name=LibreOffice Base
 GenericName=Database Development
@@ -77,7 +76,7 @@ GenericName[id]=Pengembangan Basis Data
 GenericName[is]=Hönnun gagnagrunna
 GenericName[it]=Sviluppo di database
 GenericName[ja]=データベース開発
-GenericName[ka]=Database Development
+GenericName[ka]=მონაცემთა ბაზები
 GenericName[kab]=Taneflit n uzadur n isefka
 GenericName[kk]=Дерекқор
 GenericName[km]=ការ​អភិវឌ្ឍន៍​មូលដ្ឋាន​ទិន្នន័យ
@@ -165,7 +164,7 @@ Comment[ca_valencia]=Gestioneu bases de dades i creeu consultes i informes per f
 Comment[ckb]=Manage databases, create queries and reports to track and manage your information.
 Comment[cs]=Umožňuje vytvářet a spravovat databáze a vytvářet dotazy a sestavy pro sledování a správu informací.
 Comment[cy]=Rheoli cronfeydd data, creu ymholiadau ac adroddiadau er mwyn olrhain a rheoli eich gwybodaeth.
-Comment[da]=Manage databases, create queries and reports to track and manage your information.
+Comment[da]=Administrér databaser, opret forespørgsler og rapporter for at spore og administrere dine oplysninger.
 Comment[de]=Verwalten Sie Datenbanken, erstellen Sie Abfragen und Berichte, um Ihre Informationen zu verfolgen und zu verwalten.
 Comment[dgo]=Manage databases, create queries and reports to track and manage your information.
 Comment[dsb]=Zastojśo datowe banki, napórajśo wótpšašowanja a rozpšawy, aby swóje informacije slědował a zastojał.
@@ -197,8 +196,8 @@ Comment[hy]=Կառավարեք տվյալների բազաները, ստեղծե
 Comment[id]=Mengelola basis data, membuat kuiri, dan laporan untuk melacak dan mengelola informasi Anda.
 Comment[is]=Meðhöndlðu gagnagrunna, búðu til fyrirspurnir og skýrslur til að hafa stjórn á upplýsingaflæði.
 Comment[it]=Gestisci i database e crea ricerche e rapporti per monitorare e organizzare le informazioni.
-Comment[ja]=Manage databases, create queries and reports to track and manage your information.
-Comment[ka]=Manage databases, create queries and reports to track and manage your information.
+Comment[ja]=データベースの管理、情報の追跡と管理を行うクエリーやレポートの作成などを行います。
+Comment[ka]=მართეთ მონაცემთა ბაზები, შექმენით მოთხოვნები და ანგარიშები თქვენი ინფორმაციის სამართავად.
 Comment[kab]=Manage databases, create queries and reports to track and manage your information.
 Comment[kk]=Ақпаратыңызды бақылау және басқару үшін дерекқорларды басқару, сұраулар мен есептерді жасау.
 Comment[km]=Manage databases, create queries and reports to track and manage your information.
@@ -242,7 +241,7 @@ Comment[sid]=Manage databases, create queries and reports to track and manage yo
 Comment[sk]=Umožňuje vytvárať a spravovať databázy a vytvárať dotazy a zostavy na sledovanie a správu informácií.
 Comment[sl]=Upravljajte z zbirkami podatkov, ustvarjajte poizvedbe in poročila za sledenje in upravljanje s podatki.
 Comment[sq]=Manage databases, create queries and reports to track and manage your information.
-Comment[sr]=Manage databases, create queries and reports to track and manage your information.
+Comment[sr]=Уредите базе податка, направите упите и извештаје како би могли да пратите и управљате вашим подацима.
 Comment[sr_Latn]=Manage databases, create queries and reports to track and manage your information.
 Comment[ss]=Manage databases, create queries and reports to track and manage your information.
 Comment[st]=Manage databases, create queries and reports to track and manage your information.
@@ -399,4 +398,4 @@ Name[zh_CN]=新建数据库
 Name[zh_TW]=新增資料庫
 Name[zu]=Idatabheysi Entsha
 Icon=document-new
-Exec=libreoffice24.2 --base
+Exec=libreoffice24.8 --base

@@ -372,6 +372,9 @@
 		<Exclude>
 			<Filename>org.kde.cuttlefish.desktop</Filename>
 		</Exclude>
+		<Exclude>
+			<Filename>vulkanCapsViewer.desktop</Filename>
+		</Exclude>
 	</Menu>
 	<Menu>
 		<Name>Universal Access</Name>
@@ -546,5 +549,42 @@
 			<Filename>virt-manager.desktop</Filename>
 			<Merge type="files"/>
 		</Layout>
+	</Menu>
+	<Menu>
+		<Name>Science</Name>
+		<Exclude>
+			<Filename>org.kde.cantor.desktop</Filename>
+		</Exclude>
+		<AppDir>/home/f16poom/.local/share/applications</AppDir>
+		<Exclude>
+			<Filename>org.kde.kalgebra.desktop</Filename>
+		</Exclude>
+		<Exclude>
+			<Filename>org.kde.kalgebramobile.desktop</Filename>
+		</Exclude>
+		<Exclude>
+			<Filename>org.kde.marble.desktop</Filename>
+		</Exclude>
+		<Exclude>
+			<Filename>org.kde.kstars.desktop</Filename>
+		</Exclude>
+		<Exclude>
+			<Filename>org.kde.kalzium.desktop</Filename>
+		</Exclude>
+		<Exclude>
+			<Filename>org.kde.labplot2.desktop</Filename>
+		</Exclude>
+		<Exclude>
+			<Filename>libreoffice-math.desktop</Filename>
+		</Exclude>
+		<Exclude>
+			<Filename>org.kde.marble-qt.desktop</Filename>
+		</Exclude>
+		<Exclude>
+			<Filename>org.kde.rocs.desktop</Filename>
+		</Exclude>
+		<Exclude>
+			<Filename>xaos.desktop</Filename>
+		</Exclude>
 	</Menu>
 </Menu>
