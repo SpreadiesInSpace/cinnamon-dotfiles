@@ -230,7 +230,7 @@
 # http://mirror.its.dal.ca/slackware/slackware64-current/
 # CHINA (CN)
 # http://mirrors.163.com/slackware/slackware64-current/
-http://mirrors.ustc.edu.cn/slackware/slackware64-current/
+# http://mirrors.ustc.edu.cn/slackware/slackware64-current/
 # COSTA RICA (CR)
 # ftp://mirrors.ucr.ac.cr/slackware/slackware64-current/
 # http://mirrors.ucr.ac.cr/slackware/slackware64-current/
@@ -330,7 +330,7 @@ http://mirrors.ustc.edu.cn/slackware/slackware64-current/
 # http://mirror.bytemark.co.uk/slackware/slackware64-current/
 # UNITED STATES (US)
 # ftp://mirror.cs.princeton.edu/pub/mirrors/slackware/slackware64-current/
-# http://mirrors.us.kernel.org/slackware/slackware64-current/
+http://mirrors.us.kernel.org/slackware/slackware64-current/
 # ftp://mirrors.xmission.com/slackware/slackware64-current/
 # http://mirrors.xmission.com/slackware/slackware64-current/
 # https://mirror.slackbuilds.org/slackware/slackware64-current/
