@@ -18,6 +18,56 @@ sudo xbps-install -Syu
 
 # All packages (adapt package names as needed for Void Linux)
 packages=(
+    # Void Builds Cinnamon packages
+    "dialog"
+    "cryptsetup"
+    "lvm2"
+    "mdadm"
+    "libxcrypt-compat"
+    "xorg-minimal"
+    "xorg-input-drivers"
+    "xorg-video-drivers"
+    #"intel-ucode"
+    "setxkbmap"
+    "xauth"
+    "font-misc-misc"
+    "alsa-plugins-pulseaudio"
+    "gptfdisk"
+    "gettext"
+    "elogind"
+    "dbus-elogind"
+    "dbus-elogind-x11"
+    "exfat-utils"
+    "fuse-exfat"
+    "wget"
+    "xdg-utils"
+    "xdg-desktop-portal"
+    "xdg-desktop-portal-gtk"
+    "xdg-desktop-portal-kde"
+    "xdg-user-dirs"
+    "xdg-user-dirs-gtk"
+    "AppStream"
+    "libvdpau-va-gl"
+    "vdpauinfo"
+    "pipewire"
+    "wireplumber"
+    "gstreamer1-pipewire"
+    "upower"
+    "dtrx"
+    "unzip"
+    "p7zip"
+    "bash-completion"
+    "colord"
+    "alsa-utils"
+    "pavucontrol"
+    "udisks2"
+    "ntfs-3g"
+    "gnome-keyring"
+    "network-manager-applet"
+    "adwaita-icon-theme"
+    "rsync"
+    "psmisc"
+    "dkms"
     # System utilities
     "file-roller"
     "flatpak"
@@ -197,10 +247,10 @@ sudo groupadd -f autologin
 sudo gpasswd -a $username autologin
 
 # Run the setup script
-cd home/
-chmod +x Setup-Void-Theme.sh
-./Setup-Void-Theme.sh
-cd ..
+# cd home/
+# chmod +x Setup-Void-Theme.sh
+# ./Setup-Void-Theme.sh
+# cd ..
 
 # Reboot for the changes to take effect
-echo "Installation complete! Please reboot for the changes to take effect."
+echo "Installation complete! Please reboot for the changes to take effect. Then run Setup-Void-Theme.sh in cinnamon/home for theming."
