@@ -51,7 +51,7 @@ packages=(
     "xdg-desktop-portal-kde"
     "xdg-user-dirs"
     "xdg-user-dirs-gtk"
-    #libappindicator
+    #"libappindicator"
     "AppStream"
     "libvdpau-va-gl"
     "vdpauinfo"
@@ -61,7 +61,7 @@ packages=(
     "upower"
     "dtrx"
     "p7zip"
-    #unrar
+    #"unrar"
     "bash-completion"
     "colord"
     "alsa-utils"
