@@ -31,7 +31,7 @@ packages=(
     "xorg-minimal"
     "xorg-input-drivers"
     "xorg-video-drivers"
-    #intel-ucode
+    #"intel-ucode"
     "setxkbmap"
     "xauth"
     "font-misc-misc"
