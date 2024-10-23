@@ -67,7 +67,7 @@ packages=(
     "celluloid"
     "eog"
     "evince"
-    #"gedit"
+    "gedit"
     "gnome-calculator"
     "gnome-screenshot"
     "gnome-system-monitor"
@@ -100,7 +100,6 @@ packages=(
     "google-noto-coloremoji-fonts"
     "google-noto-sans-fonts"
     "xclip"
-    "xed"
     # For NvChad
     "gcc"
     "make"
@@ -116,7 +115,7 @@ for package in "${packages[@]}"; do
 done
 
 # Install Cinnamon Control Center (needs to be seperate according to openSUSE wiki)
-zypper install cinnamon-control-center
+# zypper install cinnamon-control-center
 
 # Install Additional Tools for Virt Manager
 zypper install -y -t pattern kvm_server kvm_tools
