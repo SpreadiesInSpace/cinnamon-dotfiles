@@ -7,6 +7,10 @@
 	<MergeFile type="parent">/etc/xdg/menus/cinnamon-applications.menu</MergeFile>
 	<Menu>
 		<Name>Other</Name>
+		<Exclude>
+			<Filename>gnome-online-accounts-gtk.desktop</Filename>
+		</Exclude>
+		<AppDir>/home/f16poom/.local/share/applications</AppDir>
 	</Menu>
 	<Menu>
 		<Name>Administration</Name>
