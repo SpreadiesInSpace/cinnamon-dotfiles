@@ -25,6 +25,8 @@ packages=(
     "lvm2"
     "mdadm"
     "libxcrypt-compat"
+    "grub-btrfs"
+    "btrfs-progs"
     # X PACKAGES
     "xorg-minimal"
     "xorg-input-drivers"
