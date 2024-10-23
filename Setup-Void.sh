@@ -118,6 +118,7 @@ packages=(
     "libreoffice"
     "nano"
     "neovim"
+    "octoxbps"
     "qbittorrent"
     "rmlint"
     "spice-vdagent"
