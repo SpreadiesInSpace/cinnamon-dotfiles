@@ -98,12 +98,14 @@ echo Gentoo > /etc/hostname
 # Systemd Setup
 systemd-machine-id-setup
 systemd-firstboot --prompt
-systemctl preset-all
+systemctl preset-all --preset-mode=enable-only
 
 # Networking
 emerge -aq net-misc/networkmanager gnome-extra/nm-applet
-systemctl enable NetworkManager
-
+systemctl disable systemd-networkd
+ln -sf ../run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+systemctl enable --now systemd-resolved.service
+systemctl enable --now NetworkManager
 
 # Gentoo Install - Installing System Tools
 emerge -aq sys-apps/mlocate app-shells/bash-completion sys-fs/xfsprogs sys-fs/e2fsprogs sys-fs/dosfstools sys-fs/btrfs-progs sys-fs/zfs sys-fs/jfsutils sys-block/io-scheduler-udev-rules
