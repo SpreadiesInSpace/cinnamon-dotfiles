@@ -29,10 +29,13 @@ xchroot /mnt /bin/bash
 # New Chroot Environment
 xbps-install -Su
 xbps-install git xtools xmirror nano
+
 # Set Hostname
 echo Void > /etc/hostname
+
 # Set Timezone
 ln -s /usr/share/zoninfo/Asia/Bangkok /etc/localtime
+
 # Locale Generation (uncomment en_US.UTF-8 UTF-8)
 nano /etc/default/libc-locales
 xbps-reconfigure -f glibc-locales
@@ -41,6 +44,8 @@ xbps-reconfigure -f glibc-locales
 passwd
 useradd -m -G users,wheel,audio,plugdev -s /bin/bash f16poom 
 passwd f16poom
+
+# Setting up Sudo
 xbps-install sudo
 # Comment out %wheel ALL=(ALL:ALL) ALL
 EDITOR=nano visudo
