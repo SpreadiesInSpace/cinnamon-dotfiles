@@ -26,6 +26,7 @@ PS1="\[\033]0;\u@\h: \w\007\][\u@\h:\W]\$ "
 HISTCONTROL=ignoreboth
 
 # Update and Cleanup
+alias netFix='sudo nmcli networking off & sudo nmcli networking on'
 alias UC='updateAll;sudo bleachbit;exit'
 
 # Bottom Gruvbox Color Scheme
