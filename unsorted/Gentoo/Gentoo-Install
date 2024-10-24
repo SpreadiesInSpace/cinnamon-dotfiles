@@ -128,3 +128,4 @@ rm /stage3-*.tar.*
 # Clone My Repo
 emerge -aq dev-vcs/git
 git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles
+cd cinnamon-dotfiles
