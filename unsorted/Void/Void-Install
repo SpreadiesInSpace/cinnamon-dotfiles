@@ -3,7 +3,7 @@ sudo chsh root -s /bin/bash
 sudo su
 
 # BTRFS Subvolumes (for Timeshift) - Preparing the Disks
-mkfs.vfat /dev/vd1
+mkfs.vfat /dev/vda1
 mkfs.btrfs -f /dev/vda2
 mount /dev/vda2 /mnt
 btrfs su cr /mnt/@
