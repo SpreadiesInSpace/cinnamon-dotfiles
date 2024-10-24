@@ -19,7 +19,7 @@ alias btm='btm --color gruvbox'
 alias cleanLint='bash rmlint.sh -d && rmlint'
 
 # Void Cleaning
-alias cleanAll='flatpak remove --unused; sudo xbps-remove -yROo; sudo vkpurge rm all; rm -rf ~/.cache/*; sudo rm -rf /var/cache/xbps; sudo bleachbit -c --preset && bleachbit -c --preset'
+alias cleanAll='flatpak remove --unused; sudo flatpak repair; sudo xbps-remove -yROo; sudo vkpurge rm all; rm -rf ~/.cache/*; sudo rm -rf /var/cache/xbps; sudo bleachbit -c --preset && bleachbit -c --preset'
  
 # Void Update
 alias updateBrave='${HOME}/update_brave.sh'

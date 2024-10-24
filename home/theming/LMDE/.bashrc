@@ -128,7 +128,7 @@ alias btm='btm --color gruvbox'
 alias cleanLint='bash rmlint.sh -d && rmlint'
 
 # Debian Cleaning
-alias cleanAll='flatpak remove --unused;yes | sudo apt clean && yes | sudo apt autoclean && yes | sudo apt autoremove && yes | rm -rf ~/.cache/* | sudo journalctl --vacuum-size=50M | sudo journalctl --vacuum-time=4weeks | SystemMaxUse=50M | sudo bleachbit -c --preset && bleachbit -c --preset'
+alias cleanAll='flatpak remove --unused; sudo flatpak repair; yes | sudo apt clean && yes | sudo apt autoclean && yes | sudo apt autoremove && yes | rm -rf ~/.cache/* | sudo journalctl --vacuum-size=50M | sudo journalctl --vacuum-time=4weeks | SystemMaxUse=50M | sudo bleachbit -c --preset && bleachbit -c --preset'
 
 # Debian Update (Tien)
 alias updateNeovim='${HOME}/update_neovim.sh;nvim --headless "+Lazy! sync" +qa'

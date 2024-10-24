@@ -20,7 +20,7 @@ alias cleanLint='bash rmlint.sh -d && rmlint'
 
 # Arch Cleaning
 alias cleanCache='sudo pacman -Rns $(pacman -Qtdq)'
-alias cleanAll='flatpak remove --unused;yes | sudo pacman -Scc && yes | rm -rf ~/.cache/* | sudo journalctl --vacuum-size=50M | sudo journalctl --vacuum-time=4weeks | SystemMaxUse=50M | sudo bleachbit -c --preset && bleachbit -c --preset && cleanCache'
+alias cleanAll='flatpak remove --unused; sudo flatpak repair; yes | sudo pacman -Scc && yes | rm -rf ~/.cache/* | sudo journalctl --vacuum-size=50M | sudo journalctl --vacuum-time=4weeks | SystemMaxUse=50M | sudo bleachbit -c --preset && bleachbit -c --preset && cleanCache'
 
 # Arch Update
 alias updateNeovim='nvim --headless "+Lazy! sync" +qa'

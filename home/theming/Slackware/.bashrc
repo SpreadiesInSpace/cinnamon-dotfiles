@@ -17,7 +17,7 @@ alias btm='btm --color gruvbox'
 alias cleanLint='bash rmlint.sh -d && rmlint'
 
 # Slackware Cleaning
-alias cleanAll='sudo find /var/log -type f -name "*.log" -exec truncate -s 0 {} \; ; sudo sboclean -d ; sudo sboclean -w ; flatpak uninstall --unused ; rm -rf ~/.cache/*; sudo bleachbit -c --preset && bleachbit -c --preset'
+alias cleanAll='sudo find /var/log -type f -name "*.log" -exec truncate -s 0 {} \;; sudo sboclean -d; sudo sboclean -w; flatpak uninstall --unused; sudo flatpak repair; rm -rf ~/.cache/*; sudo bleachbit -c --preset && bleachbit -c --preset'
 
 # Slackware Update
 alias updateNeovim='${HOME}/update_neovim.sh;nvim --headless "+Lazy! sync" +qa'
