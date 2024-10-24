@@ -125,5 +125,6 @@ EDITOR=nano visudo
 # Cleanup
 rm /stage3-*.tar.*
 
-
-
+# Clone My Repo
+emerge -aq dev-vcs/git
+git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles
