@@ -81,6 +81,9 @@ unstable_packages=(
     "x11-themes/kvantum"
     "app-backup/timeshift"
 )
+touch /etc/portage/package.accept_keywords/zzz_autounmask
+emerge -qDuN --with-bdeps=y "${unstable_packages[@]}" --autounmask-write --autounmask
+dispatch-conf
 emerge -qDuN --with-bdeps=y "${unstable_packages[@]}"
 
 # Desktop environment related packages
@@ -148,7 +151,7 @@ virtualization_tools=(
     "app-emulation/virt-manager"
     "app-emulation/qemu"
     "app-emulation/libvirt"
-    "sys-firmware/edk2-ovmf-bin"
+    "sys-firmware/edk2-bin"
     "net-dns/dnsmasq"
     "net-misc/vde"
     "net-misc/bridge-utils"

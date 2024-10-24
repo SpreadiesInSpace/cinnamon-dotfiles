@@ -1,0 +1,128 @@
+# BTRFS Subvolumes (for Timeshift) - Preparing the Disks
+mkfs.vfat /dev/vd1
+mkfs.btrfs -f /dev/vda2
+mount /dev/vda2 /mnt
+btrfs su cr /mnt/@
+btrfs su cr /mnt/@home
+umount /mnt
+mkdir /mnt/gentoo
+mount -o noatime,compress=zstd,space_cache=v2,subvol=@ /dev/vda2 /mnt/gentoo 
+mkdir -p /mnt/gentoo/home
+mount -o noatime,compress-zstd,space_cache_v2,subvol=@home /dev/vda2 /mnt/gentoo/home 
+mkdir -p /mnt/gentoo/efi
+mount /dev/vda1 /mnt/gentoo/efi
+
+# Gentoo Install - The Stage File
+cd /mnt/gentoo
+# chronyd -q # Set Date Via Calendar Widget
+# Stage 3 Desktop Profile Systemd
+# https://www.gentoo.org/downloads/#other-arches
+wget https://distfiles.gentoo.org/releases/amd64/autobuilds/20241020T170324Z/stage3-amd64-desktop-systemd-20241020T170324Z.tar.xz
+tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner -C /mnt/gentoo
+# set use flags, jobs, licenses, binpkg, mirrors etc
+# https://github.com/SpreadiesInSpace/cinnamon-dotfiles/blob/main/etc/portage/make.conf
+nano /mnt/gentoo/etc/portage/make.conf
+
+# Gentoo Install - Installing the Gentoo Base System
+# Copy Network Info 
+cp --dereference /etc/resolv.conf /mnt/gentoo/etc/
+# Mount Filesystems
+mount --types proc /proc /mnt/gentoo/proc
+mount --rbind /sys /mnt/gentoo/sys
+mount --make-rslave /mnt/gentoo/sys
+mount --rbind /dev /mnt/gentoo/dev
+mount --make-rslave /mnt/gentoo/dev
+mount --bind /run /mnt/gentoo/run
+mount --make-slave /mnt/gentoo/run
+# Extra Mounts for Non-Gentoo Media
+test -L /dev/shm && rm /dev/shm && mkdir /dev/shm
+mount --types tmpfs --options nosuid,nodev,noexec shm /dev/shm   
+chmod 1777 /dev/shm /run/shm
+# Entering Chroot
+chroot /mnt/gentoo /bin/bash
+# New Chroot Environment
+source /etc/profile
+export PS1="(chroot) ${PS1}"
+# Sync Snapshot
+emerge-webrsync
+# Setting Binary Packages
+# https://github.com/SpreadiesInSpace/cinnamon-dotfiles/blob/main/etc/portage/binrepos.conf/gentoo.conf
+echo "[binhost]
+priority = 9999
+sync-uri = http://download.nus.edu.sg/mirror/gentoo/releases/amd64/binpackages/23.0/x86-64-v3/
+#sync-uri = https://distfiles.gentoo.org/releases/amd64/binpackages/23.0/x86-64-v3/
+" > /etc/portage/binrepos.conf/gentoo.conf
+# GPG verify fail fix
+rm -rf /etc/portage/gnupg/
+getuto
+emerge -aq mirrorselect
+# Update Sync
+emerge --sync -q
+# eselect news list
+eselect news read
+# Select 23.0 gnome desktop systemd profile for Cinnamon
+eselect profile set default/linux/amd64/23.0/desktop/gnome/systemd
+# CPU Flags
+emerge -aq --oneshot app-portage/cpuid2cpuflags
+echo "*/* $(cpuid2cpuflags)" > /etc/portage/package.use/00cpu-flags
+# Update World Set
+emerge -aqDuN @world
+# Remove Obselete Packages
+emerge -aq --depclean
+# Locale Generation (uncomment en_US.UTF-8 UTF-8)
+nano /etc/locale.gen
+locale-gen
+# Select Locale
+# eselect locale list
+eselect locale set en_US.utf8
+# Reload Environment
+env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
+
+# Gentoo Install - Configuring the Linux Kernel
+# emerge -aq sys-kernel/linux-firmware # No Need for Virtual Machines
+emerge -aq sys-firmware/intel-microcode # No Need for AMD Systems
+# Using GRUB & Initramfs
+echo "sys-kernel/installkernel grub
+sys-kernel/installkernel dracut" > /etc/portage/package.use/installkernel
+
+# Install Kernel
+emerge -aq sys-kernel/gentoo-kernel-bin
+
+# Gentoo Install - Configuring the System
+# Generate Fstab
+emerge -aq genfstab
+genfstab -U / >> /etc/fstab
+nano /etc/fstab
+# Hostname
+echo Gentoo > /etc/hostname
+# Systemd Setup
+systemd-machine-id-setup
+systemd-firstboot --prompt
+systemctl preset-all
+
+# Networking
+emerge -aq net-misc/networkmanager gnome-extra/nm-applet
+systemctl enable NetworkManager
+
+
+# Gentoo Install - Installing System Tools
+emerge -aq sys-apps/mlocate app-shells/bash-completion sys-fs/xfsprogs sys-fs/e2fsprogs sys-fs/dosfstools sys-fs/btrfs-progs sys-fs/zfs sys-fs/jfsutils sys-block/io-scheduler-udev-rules
+
+# Gentoo Install - Configuring the Bootloader
+grub-install --efi-directory=/efi
+# mount -o remount,rw,nosuid,nodev,noexec --types efivarfs efivarfs /sys/firmware/efi/efivars
+grub-mkconfig -o /boot/grub/grub.cfg
+
+# Gentoo Install - Finalizing
+# User Accounts
+passwd
+useradd -m -G users,wheel,audio,plugdev -s /bin/bash f16poom 
+passwd f16poom
+emerge -aq app-admin/sudo
+# Comment out %wheel ALL=(ALL:ALL) ALL
+EDITOR=nano visudo
+# Cleanup
+rm /stage3-*.tar.*
+
+
+
