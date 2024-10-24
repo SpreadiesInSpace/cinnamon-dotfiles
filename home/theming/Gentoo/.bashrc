@@ -25,8 +25,10 @@ PS1="\[\033]0;\u@\h: \w\007\][\u@\h:\W]\$ "
 # Ignore History with Space
 HISTCONTROL=ignoreboth
 
-# Update and Cleanup
+# virsh net-autostart default --disable
 alias netFix='sudo nmcli networking off & sudo nmcli networking on'
+
+# Update and Cleanup
 alias UC='updateAll;sudo bleachbit;exit'
 
 # Bottom Gruvbox Color Scheme

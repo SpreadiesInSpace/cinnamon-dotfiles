@@ -1,0 +1,53 @@
+# BTRFS Subvolumes (for Timeshift) - Preparing the Disks
+mkfs.vfat /dev/vd1
+mkfs.btrfs -f /dev/vda2
+mount /dev/vda2 /mnt
+btrfs su cr /mnt/@
+btrfs su cr /mnt/@home
+umount /mnt
+mount -o noatime,compress=zstd,space_cache=v2,subvol=@ /dev/vda2 /mnt/ 
+mkdir -p /mnt/home
+mount -o noatime,compress-zstd,space_cache_v2,subvol=@home /dev/vda2 /mnt/home 
+mkdir -p /mnt/boot/efi
+mount /dev/vda1 /mnt/boot/efi
+
+# Install Base System
+REPO=https://repo-fastly.voidlinux.org/current
+ARCH=x86_64 
+mkdir -p /mnt/var/db/xbps/keys
+cp /var/db/xbps/keys/* /mnt/var/db/xbps/keys/
+XBPS_ARCH=$ARCH xbps-install -S -r /mnt -R "$REPO" base-system
+
+# Entering Chroot
+xbps-install xtools
+xchroot /mnt /bin/bash
+# New Chroot Environment
+xbps-install -Su
+xbps-install git xtools xmirror nano
+# Set Hostname
+echo Void > /etc/hostname
+# Set Timezone
+ln -s /usr/share/zoninfo/Asia/Bangkok /etc/localtime
+# Locale Generation (uncomment en_US.UTF-8 UTF-8)
+nano /etc/default/libc-locales
+xbps-reconfigure -f glibc-locales
+
+# User Accounts
+passwd
+useradd -m -G users,wheel,audio,plugdev -s /bin/bash f16poom 
+passwd f16poom
+xbps-install sudo
+# Comment out %wheel ALL=(ALL:ALL) ALL
+EDITOR=nano visudo
+
+# Generate fstab
+
+# Installing Grub
+xbps-install grub-x86_64-efi
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="Void"
+
+# Reconfigure System
+xbps-reconfigure -fa
+
+
+
