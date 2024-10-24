@@ -129,3 +129,4 @@ rm /stage3-*.tar.*
 emerge -aq dev-vcs/git
 git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles
 cd cinnamon-dotfiles
+bash Setup-Gentoo.sh

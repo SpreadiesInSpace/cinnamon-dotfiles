@@ -68,3 +68,4 @@ xbps-reconfigure -fa
 xbps-install git bash-completion
 git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles
 cd cinnamon-dotfiles
+bash Setup-Void.sh
