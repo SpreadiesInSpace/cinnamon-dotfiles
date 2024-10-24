@@ -67,7 +67,7 @@ xbps-reconfigure -fa
 # Clone My Repo
 xbps-install git bash-completion
 su f16poom
-cd
+cd /home/f16poom
 git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles
 cd cinnamon-dotfiles
 bash Setup-Void.sh
