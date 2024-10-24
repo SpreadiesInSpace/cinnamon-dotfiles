@@ -207,6 +207,11 @@ sudo ln -s /etc/sv/libvirtd /var/service/
 sudo ln -s /etc/sv/virtlockd/ /var/service/
 sudo ln -s /etc/sv/virtlogd/ /var/service/
 
+# Enable and start services for LightDM & Cinnamon
+sudo ln -s /etc/sv/dbus /var/service
+sudo ln -s /etc/sv/lightdm/ /var/service
+sudo ln -s /etc/sv/NetworkManager/ /var/service
+
 # Start and autostart the default network
 sudo virsh net-start default
 sudo virsh net-autostart default
