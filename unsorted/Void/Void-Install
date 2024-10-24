@@ -46,6 +46,13 @@ xbps-install sudo
 EDITOR=nano visudo
 
 # Generate fstab
+cp /proc/mounts /etc/fstab
+# delete dev cgroup and other termporary mounts and add
+# tmpfs /tmp tmpfs defaults,nosuid,nodev 0 0
+# change last column value to 1 (file system error corrected) for / and 2 (system should be rebooted) for others
+nano /etc/fstab
+
+
 
 # Installing Grub
 xbps-install grub-x86_64-efi
