@@ -102,9 +102,8 @@ systemctl preset-all --preset-mode=enable-only
 
 # Networking
 emerge -aq net-misc/networkmanager gnome-extra/nm-applet
-systemctl disable systemd-networkd
-ln -sf ../run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
-systemctl enable --now systemd-resolved.service
+systemctl disable --now systemd-networkd
+systemctl disable --now systemd-resolved.service
 systemctl enable --now NetworkManager
 
 # Gentoo Install - Installing System Tools
