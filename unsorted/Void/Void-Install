@@ -1,3 +1,7 @@
+# Change to Bash shell & Switch to Root
+sudo chsh root -s /bin/bash
+sudo su
+
 # BTRFS Subvolumes (for Timeshift) - Preparing the Disks
 mkfs.vfat /dev/vd1
 mkfs.btrfs -f /dev/vda2
