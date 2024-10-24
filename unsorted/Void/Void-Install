@@ -65,5 +65,5 @@ grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="Void
 xbps-reconfigure -fa
 
 # Clone My Repo
-xbps-install git
+xbps-install git bash-completion
 git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles
