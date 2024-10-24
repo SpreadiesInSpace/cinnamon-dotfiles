@@ -21,6 +21,7 @@ XBPS_ARCH=$ARCH xbps-install -S -r /mnt -R "$REPO" base-system
 # Entering Chroot
 xbps-install xtools
 xchroot /mnt /bin/bash
+
 # New Chroot Environment
 xbps-install -Su
 xbps-install git xtools xmirror nano
