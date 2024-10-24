@@ -52,8 +52,6 @@ cp /proc/mounts /etc/fstab
 # change last column value to 1 (file system error corrected) for / and 2 (system should be rebooted) for others
 nano /etc/fstab
 
-
-
 # Installing Grub
 xbps-install grub-x86_64-efi
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="Void"
