@@ -59,7 +59,6 @@ packages=(
     "gvfs-nfs"
     "gvfs-smb"
     "kde-connect"
-    "kf6-qqc2-desktop-style"
     "samba"
     # Desktop environment and related packages
     "cinnamon"
