@@ -127,7 +127,7 @@ in
       neofetch
       unstable.neovim
       qbittorrent
-      qtstyleplugin-kvantum
+      # qtstyleplugin-kvantum
       # qt5ct
       ripgrep
       # rmlint
@@ -162,9 +162,15 @@ in
       warpinator
     ];
     variables = {
-      QT_STYLE_OVERRIDE = lib.mkForce "kvantum";
+      # QT_STYLE_OVERRIDE = lib.mkForce "kvantum";
       GTK_THEME = theme.name;
     };
+  };
+  
+  qt = {
+    enable = true;
+    style = "kvantum";
+    platformTheme = "qt5ct";
   };
   
   programs = {

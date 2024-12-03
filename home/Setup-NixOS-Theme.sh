@@ -95,6 +95,9 @@ sudo ln -s ~/.config/neofetch/config.conf /root/.config/neofetch/config.conf
 # Copies Kvantum Themes to appropriate directory and installs them, preserving old config
 mv ~/.config/Kvantum ~/.config/Kvantum.old
 cp -vnpr .config/Kvantum/ ~/.config/
+echo "" >> ~/.config/Kvantum/kvantum.kvconfig
+echo "[Applications]
+Gruvbox-Dark-Brown=kdeconnect-app" >> ~/.config/Kvantum/kvantum.kvconfig
 sudo mv /root/.config/Kvantum /root/.config/Kvantum.old
 # sudo cp -vnpr .config/Kvantum/ /root/.config/Kvantum
 kvantummanager --set gruvbox-fallnn
