@@ -62,6 +62,14 @@ cp -vnpr .config/kdeglobals ~/.config/
 # mv /root/.config/kdeglobals /root/.config/kdeglobals.old
 # cp -vnpr .config/kdeglobals /root/.config/
 
+# Symlink kdeglobals to color-schemes for KDE applications like haruna
+mkdir -p /usr/share/color-schemes/
+ln -sf ~/.config/kdeglobals /usr/share/color-schemes/gruvbox-dark.colors
+
+# Copies haruna config to appropriate directory, preserving old config
+mv ~/.config/haruna ~/.config/haruna.old
+cp -vnpr .config/haruna/ ~/.config/
+
 # Copies Cinnamon spice settings, preserving old ones
 mkdir -p ~/.config/cinnamon/spices/old
 mv ~/.config/cinnamon/spices/* ~/.config/cinnamon/spices/old

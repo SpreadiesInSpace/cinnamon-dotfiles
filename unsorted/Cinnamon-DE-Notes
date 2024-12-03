@@ -39,7 +39,7 @@ sudo nano /etc/apt/sources.list
 deb [trusted=yes] https://mirror.kku.ac.th/linuxmint-packages una main upstream import backport
 
 # Mint Bloat
-baobab bulky drawing firefox gnome-calendar gnome-disk-utility hexchat hypnotix mint-artwork mint-backgrounds* mintbackup mintstick mintupdate numix* papirus-icon-theme pix pppoeconf redshift simple-scan thingy thunderbird transmission-gtk warpinator webapp-manager xed xreader xviewer mint-L* mint-x* mint-y* 
+baobab bulky celluloid drawing firefox gnome-calendar gnome-disk-utility hexchat hypnotix mint-artwork mint-backgrounds* mintbackup mintstick mintupdate numix* papirus-icon-theme pix pppoeconf redshift simple-scan thingy thunderbird transmission-gtk warpinator webapp-manager xed xreader xviewer mint-L* mint-x* mint-y* 
 
 # Fedora Bloat
 eom google-noto-seriff* ibus paper-icon-theme pidgin shotwell tracker-miners xawtv xfburn
