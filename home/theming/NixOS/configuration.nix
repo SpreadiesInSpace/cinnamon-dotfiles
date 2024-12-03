@@ -119,7 +119,7 @@ in
       git
       gnome-system-monitor
       gparted
-      guestfs-tools
+      # guestfs-tools
       libreoffice
       ncdu
       neofetch
