@@ -17,6 +17,7 @@ sudo sed -i '/^\(\s*\)#\s*grub = {/,/^\(\s*\)#};/ {
   s/^\(\s*\)#\s*efiSupport = /\1efiSupport = /
   s/^\(\s*\)#\s*device = /\1device = /
   s/^\(\s*\)#\s*theme = /\1theme = /
+  s/^\(\s*\)#\s*splashImage = /\1splashImage = /
   s/^\(\s*\)#\s*gfxmodeEfi = /\1gfxmodeEfi = /
   s/^\(\s*\)#\s*};/\1};/
 }' "$CONFIG_FILE"

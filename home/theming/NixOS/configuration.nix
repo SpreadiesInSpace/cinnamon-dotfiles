@@ -31,6 +31,7 @@ in
       # efiSupport = true;
       # device = "nodev";
       # theme = "/boot/grub/themes/gruvbox-dark";
+      # splashImage = null;
       # gfxmodeEfi = "1920x1080";
     # };
   };
