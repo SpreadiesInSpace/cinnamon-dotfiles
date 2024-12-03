@@ -67,6 +67,7 @@ sudo mkdir -p /root/.config/
 sudo ln -s ~/.config/kdeglobals /root/.config/
 
 # Symlink kdeglobals to color-schemes for KDE applications like haruna
+sudo mkdir -p /usr/share/color-schemes/
 sudo ln -sf ~/.config/kdeglobals /usr/share/color-schemes/gruvbox-dark.colors
 
 # Copies haruna config to appropriate directory, preserving old config
