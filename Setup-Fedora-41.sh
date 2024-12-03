@@ -69,7 +69,6 @@ packages=(
     "samba"
     # Desktop environment and related packages
     "cinnamon"
-    "celluloid"
     "eog"
     "evince"
     "ffmpegthumbnailer"
@@ -80,6 +79,7 @@ packages=(
     "gnome-system-monitor"
     "gnome-terminal"
     "gthumb"
+    "haruna"
     "ufw"
     "kvantum"
     "kvantum-qt6"
