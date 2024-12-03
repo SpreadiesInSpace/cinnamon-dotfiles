@@ -1,6 +1,6 @@
 #!/bin/bash
 sudo echo
-./icons-and-fonts.sh
+sh icons-and-fonts.sh
 # Copies icons and themes to appropriate directories
 mv .icons/*.zip ${PWD}
 unzip Capitaine\ Cursors\ \(Gruvbox\)\ -\ White.zip
