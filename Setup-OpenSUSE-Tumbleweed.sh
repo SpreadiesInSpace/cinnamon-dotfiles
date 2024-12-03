@@ -68,7 +68,6 @@ packages=(
     "samba"
     # Desktop environment and related packages
     "cinnamon"
-    "celluloid"
     "dconf"
     "gsettings-backend-dconf"
     "eog"
@@ -81,6 +80,7 @@ packages=(
     "gnome-system-monitor"
     "gnome-terminal"
     "gthumb"
+    "haruna"
     "kvantum-manager"
     "kvantum-qt5"
     "kvantum-qt6"
