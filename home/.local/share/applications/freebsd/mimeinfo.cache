@@ -1,0 +1,7 @@
+[MIME Cache]
+application/xhtml+xml=linux-brave.desktop;
+text/html=linux-brave.desktop;
+text/xml=linux-brave.desktop;
+x-scheme-handler/ftp=linux-brave.desktop;
+x-scheme-handler/http=linux-brave.desktop;
+x-scheme-handler/https=linux-brave.desktop;

@@ -1,0 +1,11 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=Files (root)
+Exec=sudo -E nemo
+Comment=
+Terminal=true
+PrefersNonDefaultGPU=false
+Icon=software
+Type=Application
+Categories=System;FileTools
+Name[en_US]=Files (root)

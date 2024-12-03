@@ -1,0 +1,60 @@
+# For SSH
+passwd
+dhcpcd
+/etc/rc.d/rc.dropbear start
+
+# BTRFS Subvolumes (for Timeshift) - Preparing the Disks
+mkfs.vfat /dev/vda1
+mkfs.btrfs -f /dev/vda2
+mount /dev/vda2 /mnt
+btrfs su cr /mnt/@
+btrfs su cr /mnt/@home
+umount /mnt
+mount -o noatime,compress=zstd,space_cache=v2,subvol=@ /dev/vda2 /mnt/ 
+mkdir -p /mnt/home
+mount -o noatime,compress=zstd,space_cache=v2,subvol=@home /dev/vda2 /mnt/home 
+mkdir -p /mnt/boot/efi
+mount /dev/vda1 /mnt/boot/efi
+
+# Setup
+# Don't accidentally format partition
+# Don't install (E)LILO
+# Enable rc.samba
+# Hardware Clock to UTC
+# Select XFCE as DE
+# Drop to Shell
+setup
+
+# Copy Network Info 
+cp --dereference /etc/resolv.conf /mnt/etc/
+# Entering Chroot
+cd /mnt
+chroot /mnt /bin/bash
+
+# New Chroot
+source /etc/profile
+# Install Grub
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=grub
+grub-mkconfig -o /boot/grub/grub.cfg
+# Edit fstab for Timeshift
+# noatime,compress=zstd,space_cache=v2,subvol=@ for /
+# noatime,compress=zstd,space_cache=v2,subvol=@home for /home
+nano /etc/fstab
+# Add User
+useradd -m -g users -G wheel,audio,video,plugdev,netdev,lp,scanner -s /bin/bash f16poom
+passwd f16poom
+# Setting up Sudo
+# Uncomment %wheel ALL=(ALL:ALL) ALL
+EDITOR=nano visudo
+# Select XFCE as DE
+# xwmconfig
+# Set Run Level to 4
+nano /etc/inittab
+
+# Switch to User
+su f16poom
+# Clone my Repo
+cd
+git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles
+cd cinnamon-dotfiles
+bash sudo Setup-Slackware-Current.sh

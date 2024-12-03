@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=SBO Package
+Exec=sudo sbopkg
+Comment=
+Terminal=true
+PrefersNonDefaultGPU=false
+Icon=software
+Type=Application
+Categories=System;FileTools

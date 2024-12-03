@@ -1,0 +1,83 @@
+<?xml version="1.0" ?>
+<!DOCTYPE Menu
+  PUBLIC '-//freedesktop//DTD Menu 1.0//EN'
+  'http://standards.freedesktop.org/menu-spec/menu-1.0.dtd'>
+<Menu>
+	<Name>Applications</Name>
+	<MergeFile type="parent">/etc/xdg/menus/cinnamon-applications.menu</MergeFile>
+	<Menu>
+		<Name>Office</Name>
+		<Exclude>
+			<Filename>org.gnome.Evince.desktop</Filename>
+		</Exclude>
+		<AppDir>/home/f16poom/.local/share/applications</AppDir>
+	</Menu>
+	<Menu>
+		<Name>Other</Name>
+		<DirectoryDir>/home/f16poom/.local/share/desktop-directories</DirectoryDir>
+	</Menu>
+	<Menu>
+		<Name>Education</Name>
+		<DirectoryDir>/home/f16poom/.local/share/desktop-directories</DirectoryDir>
+		<Exclude>
+			<Filename>libreoffice-math.desktop</Filename>
+		</Exclude>
+		<AppDir>/home/f16poom/.local/share/applications</AppDir>
+	</Menu>
+	<Menu>
+		<Name>Administration</Name>
+		<Include>
+			<Filename>alacarte-made-d0e30a40-da59-11ee-ba0e-5254009afa34.desktop</Filename>
+		</Include>
+		<Include>
+			<Filename>alacarte-made-e7a32586-e6f1-11ee-b316-5254009afa34.desktop</Filename>
+		</Include>
+		<Layout>
+			<Merge type="menus"/>
+			<Filename>org.bleachbit.BleachBit.desktop</Filename>
+			<Filename>cinnamon.desktop</Filename>
+			<Filename>cinnamon2d.desktop</Filename>
+			<Filename>gcm-picker.desktop</Filename>
+			<Filename>org.gnome.ColorProfileViewer.desktop</Filename>
+			<Filename>gparted.desktop</Filename>
+			<Filename>gcm-import.desktop</Filename>
+			<Filename>gkbd-keyboard-display.desktop</Filename>
+			<Filename>cups.desktop</Filename>
+			<Filename>Mount Virtio Share.desktop</Filename>
+			<Filename>Gentoo-system-config-printer.desktop</Filename>
+			<Filename>shredder.desktop</Filename>
+			<Filename>gnome-system-monitor.desktop</Filename>
+			<Filename>org.gnome.Tecla.desktop</Filename>
+			<Filename>org.gnome.Terminal.desktop</Filename>
+			<Filename>org.gnome.Terminal.Preferences.desktop</Filename>
+			<Filename>cinnamon-settings-users.desktop</Filename>
+			<Filename>virt-manager.desktop</Filename>
+			<Filename>alacarte-made-d0e30a40-da59-11ee-ba0e-5254009afa34.desktop</Filename>
+			<Filename>timeshift-gtk.desktop</Filename>
+			<Merge type="files"/>
+		</Layout>
+	</Menu>
+	<Menu>
+		<Name>Development</Name>
+		<Exclude>
+			<Filename>assistant6-qttools-6.desktop</Filename>
+		</Exclude>
+		<AppDir>/home/f16poom/.local/share/applications</AppDir>
+		<Exclude>
+			<Filename>linguist6-qttools-6.desktop</Filename>
+		</Exclude>
+		<Exclude>
+			<Filename>qdbusviewer6-qttools-6.desktop</Filename>
+		</Exclude>
+		<Exclude>
+			<Filename>org.gnome.Sysprof.desktop</Filename>
+		</Exclude>
+	</Menu>
+	<Menu>
+		<Name>Science</Name>
+		<Exclude>
+			<Filename>libreoffice-math.desktop</Filename>
+		</Exclude>
+		<AppDir>/home/f16poom/.local/share/applications</AppDir>
+	</Menu>
+</Menu>

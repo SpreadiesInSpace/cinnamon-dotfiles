@@ -1,0 +1,12 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Name=Environment Settings
+Exec=nano ~/.profile
+Comment=
+Terminal=true
+Icon=timeshift
+Type=Application
+Name[C]=Environment Settings
+Hidden=false
+NoDisplay=false

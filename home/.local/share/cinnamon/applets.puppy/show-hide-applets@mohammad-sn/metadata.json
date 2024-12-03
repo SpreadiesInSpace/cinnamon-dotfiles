@@ -1,0 +1,8 @@
+{
+    "max-instances": "1",
+    "description": "hide a few applet to have a neater panel, and make them show up again by a click",
+    "uuid": "show-hide-applets@mohammad-sn",
+    "name": "Drawer (show/hide applets)",
+    "author": "mohammad-sn",
+    "last-edited": 1683827772
+}

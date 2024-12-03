@@ -1,0 +1,17 @@
+# This is a blacklist file. Any packages listed here won't be
+# upgraded, removed, or installed by slpkg.
+
+# Warning: Ignoring packages from being building, installing or upgraded
+# might break the proceeded sometimes. Please be cautious! Don't do this
+# unless it is absolutely necessary.
+
+# You can add packages using regular expressions.
+# Example to blacklist all python2 packages:
+# "python2"
+
+# To blacklist only one package using regex pattern:
+# "^package_name$"
+
+# Example: PACKAGES = ["python2", "^python3-build$"].
+
+PACKAGES = ["mint"]

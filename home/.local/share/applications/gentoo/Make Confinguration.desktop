@@ -1,0 +1,11 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=Make Configuration
+Exec=sudo nano /etc/portage/make.conf
+Comment=
+Terminal=true
+PrefersNonDefaultGPU=false
+Icon=software
+Type=Application
+Categories=System;FileTools
+Name[en_US]=Make Confinguration

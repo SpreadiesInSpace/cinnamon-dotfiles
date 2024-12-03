@@ -1,0 +1,9 @@
+# required by app-emulation/virt-manager-4.1.0-r1::gentoo[gui,-test]
+# required by app-emulation/virt-manager (argument)
+>=net-misc/spice-gtk-0.42-r4 usbredir
+# required by app-editors/gedit-plugins-46.0-r1::gentoo[git]
+# required by app-editors/gedit-plugins (argument)
+>=dev-libs/libgit2-glib-1.2.0 python
+# required by app-backup/timeshift-23.07.1::guru
+# required by app-backup/timeshift (argument)
+>=x11-libs/xapp-2.8.5 vala

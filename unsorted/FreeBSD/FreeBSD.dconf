@@ -1,0 +1,380 @@
+[desktop/ibus/general]
+preload-engines=['xkb:us::eng']
+version='1.5.27'
+
+[desktop/ibus/panel]
+show-icon-on-systray=false
+
+[io/github/celluloid-player/celluloid/window-state]
+loop-playlist=false
+maximized=true
+playlist-width=250
+show-playlist=false
+volume=1.0
+
+[org/cinnamon]
+alttab-switcher-delay=100
+enabled-applets=['panel1:left:0:menu@cinnamon.org:0', 'panel1:left:2:grouped-window-list@cinnamon.org:2', 'panel1:right:4:notifications@cinnamon.org:5', 'panel1:right:7:removable-drives@cinnamon.org:7', 'panel1:right:9:sound@cinnamon.org:11', 'panel1:right:10:calendar@cinnamon.org:13', 'panel1:right:6:lorem@vxstorm:15', 'panel1:right:5:show-hide-applets@mohammad-sn:16', 'panel1:right:3:systray@cinnamon.org:17', 'panel1:right:2:xapp-status@cinnamon.org:18', 'panel1:right:8:trash@cinnamon.org:19', 'panel1:right:0:power@cinnamon.org:20']
+favorite-apps=['virt-manager.desktop', 'Boot Options.desktop', 'cinnamon-settings.desktop', 'org.qbittorrent.qBittorrent.desktop', 'Environment Settings.desktop', 'cinnamon-settings-default.desktop']
+next-applet-id=21
+panel-edit-mode=false
+panel-zone-symbolic-icon-sizes='[{"panelId": 1, "left": 28, "center": 28, "right": 16}]'
+panels-height=['1:46']
+
+[org/cinnamon/desktop/a11y/keyboard]
+bouncekeys-delay=300
+mousekeys-accel-time=300
+mousekeys-init-delay=300
+mousekeys-max-speed=10
+slowkeys-delay=300
+
+[org/cinnamon/desktop/a11y/mouse]
+dwell-threshold=10
+dwell-time=1.2
+secondary-click-time=1.2
+
+[org/cinnamon/desktop/applications/calculator]
+exec='gnome-calculator'
+
+[org/cinnamon/desktop/applications/terminal]
+exec='gnome-terminal'
+
+[org/cinnamon/desktop/background]
+picture-options='stretched'
+picture-uri='file:///home/f16poom/wallpapers/Desktop_Wallpaper.png'
+
+[org/cinnamon/desktop/background/slideshow]
+delay=15
+image-source='directory:///home/f16poom/Temp Files'
+
+[org/cinnamon/desktop/interface]
+clock-use-24h=false
+cursor-blink-time=1200
+cursor-theme='Capitaine Cursors (Gruvbox) - White'
+font-name='Noto Sans 9'
+gtk-theme='Gruvbox-Dark-BL'
+icon-theme='gruvbox-dark-icons-gtk'
+text-scaling-factor=1.0
+
+[org/cinnamon/desktop/keybindings]
+custom-list=['custom4', 'custom2', '__dummy__', 'custom0', 'custom1', 'custom3']
+looking-glass-keybinding=@as []
+
+[org/cinnamon/desktop/keybindings/custom-keybindings/custom0]
+binding=['<Super>Escape']
+command='xkill'
+name='Force Quit'
+
+[org/cinnamon/desktop/keybindings/custom-keybindings/custom1]
+binding=['<Super>k']
+command="gnome-terminal -- bash -c 'neofetch;exec bash;'"
+name='Neofetch'
+
+[org/cinnamon/desktop/keybindings/custom-keybindings/custom2]
+binding=['<Shift><Super>s']
+command='gnome-screenshot -i'
+name='Screenshot'
+
+[org/cinnamon/desktop/keybindings/custom-keybindings/custom3]
+binding=['<Primary><Shift>Escape']
+command='gnome-system-monitor'
+name='System Monitor'
+
+[org/cinnamon/desktop/keybindings/custom-keybindings/custom4]
+binding=['<Super>F4']
+command='cinnamon-session-quit --power-off'
+name='Shutdown Menu'
+
+[org/cinnamon/desktop/keybindings/media-keys]
+logout=['<Primary><Alt>End']
+screensaver=['<Super>l', 'XF86ScreenSaver']
+shutdown=['XF86PowerOff']
+
+[org/cinnamon/desktop/media-handling]
+autorun-never=false
+
+[org/cinnamon/desktop/notifications]
+bottom-notifications=true
+
+[org/cinnamon/desktop/peripherals/keyboard]
+delay=uint32 500
+repeat-interval=uint32 30
+
+[org/cinnamon/desktop/peripherals/mouse]
+double-click=400
+drag-threshold=8
+speed=0.0
+
+[org/cinnamon/desktop/peripherals/touchpad]
+natural-scroll=false
+speed=0.0
+tap-to-click=true
+
+[org/cinnamon/desktop/screensaver]
+date-format=' %A %B %-e'
+time-format='%-l:%M %p'
+use-custom-format=true
+
+[org/cinnamon/desktop/session]
+idle-delay=uint32 0
+
+[org/cinnamon/desktop/sound]
+event-sounds=false
+volume-sound-enabled=true
+volume-sound-file='/home/f16poom/sounds/volume.oga'
+
+[org/cinnamon/desktop/wm/preferences]
+button-layout=':minimize,maximize,close'
+min-window-opacity=30
+titlebar-font='Noto Sans Bold 10'
+
+[org/cinnamon/muffin]
+center-new-windows=true
+draggable-border-width=10
+tile-maximize=true
+
+[org/cinnamon/settings-daemon/peripherals/keyboard]
+numlock-state='off'
+
+[org/cinnamon/settings-daemon/plugins/power]
+sleep-display-ac=0
+
+[org/cinnamon/sounds]
+login-enabled=true
+login-file='/home/f16poom/sounds/login.oga'
+logout-enabled=true
+logout-file='/home/f16poom/sounds/logout.ogg'
+
+[org/cinnamon/theme]
+name='Gruvbox-Dark-BL'
+
+[org/gnome/calculator]
+accuracy=9
+angle-units='degrees'
+base=10
+button-mode='basic'
+number-format='automatic'
+show-thousands=false
+show-zeroes=false
+source-currency=''
+source-units='degree'
+target-currency=''
+target-units='radian'
+word-size=64
+
+[org/gnome/control-center]
+last-panel='applications'
+window-state=(980, 640, false)
+
+[org/gnome/desktop/a11y/applications]
+screen-keyboard-enabled=false
+screen-reader-enabled=false
+
+[org/gnome/desktop/a11y/mouse]
+dwell-click-enabled=false
+dwell-threshold=10
+dwell-time=1.2
+secondary-click-enabled=false
+secondary-click-time=1.2
+
+[org/gnome/desktop/app-folders]
+folder-children=['Utilities', 'YaST']
+
+[org/gnome/desktop/app-folders/folders/Utilities]
+apps=['gnome-abrt.desktop', 'gnome-system-log.desktop', 'nm-connection-editor.desktop', 'org.gnome.baobab.desktop', 'org.gnome.Connections.desktop', 'org.gnome.DejaDup.desktop', 'org.gnome.Dictionary.desktop', 'org.gnome.DiskUtility.desktop', 'org.gnome.eog.desktop', 'org.gnome.Evince.desktop', 'org.gnome.FileRoller.desktop', 'org.gnome.fonts.desktop', 'org.gnome.seahorse.Application.desktop', 'org.gnome.tweaks.desktop', 'org.gnome.Usage.desktop', 'vinagre.desktop']
+categories=['X-GNOME-Utilities']
+name='X-GNOME-Utilities.directory'
+translate=true
+
+[org/gnome/desktop/app-folders/folders/YaST]
+categories=['X-SuSE-YaST']
+name='suse-yast.directory'
+translate=true
+
+[org/gnome/desktop/input-sources]
+sources=[('xkb', 'us')]
+xkb-options=@as []
+
+[org/gnome/desktop/interface]
+clock-format='12h'
+monospace-font-name='Source Code Pro 10'
+toolkit-accessibility=false
+
+[org/gnome/evolution-data-server]
+migrated=true
+
+[org/gnome/file-roller/listing]
+list-mode='as-folder'
+name-column-width=250
+show-path=false
+sort-method='name'
+sort-type='ascending'
+
+[org/gnome/file-roller/ui]
+sidebar-width=200
+window-height=480
+window-width=600
+
+[org/gnome/gedit/plugins/filebrowser]
+root='file:///'
+tree-view=true
+virtual-root='file:///home/f16poom/cinnamon-dotfiles/home/.cinnamon/configs.freebsd/grouped-window-list@cinnamon.org'
+
+[org/gnome/gedit/preferences/editor]
+background-pattern='grid'
+scheme='gruvbox-dark'
+wrap-last-split-mode='word'
+
+[org/gnome/gedit/state/window]
+bottom-panel-size=140
+side-panel-active-page='GeditWindowDocumentsPanel'
+side-panel-size=200
+size=(960, 984)
+state=87168
+
+[org/gnome/gnome-screenshot]
+delay=3
+include-pointer=false
+last-save-directory='smb://192.168.1.127/share/Screenshots'
+
+[org/gnome/gnome-system-monitor]
+current-tab='processes'
+maximized=false
+network-total-in-bits=false
+show-dependencies=false
+show-whose-processes='user'
+window-state=(644, 496, 630, 299)
+
+[org/gnome/gnome-system-monitor/disktreenew]
+col-6-visible=true
+col-6-width=0
+
+[org/gnome/nautilus/preferences]
+default-folder-viewer='icon-view'
+search-filter-time-type='last_modified'
+
+[org/gnome/nautilus/window-state]
+initial-size=(890, 550)
+maximized=false
+
+[org/gnome/shell]
+welcome-dialog-last-shown-version='42.4'
+
+[org/gnome/terminal/legacy/profiles:]
+list=['b1dcc9dd-5262-4d8d-a863-c897e6d979b9']
+
+[org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
+audible-bell=false
+background-color='rgb(0,0,0)'
+default-size-rows=23
+font='SauceCodePro Nerd Font 10'
+foreground-color='rgb(255,255,255)'
+palette=['rgb(40,40,40)', 'rgb(204,36,29)', 'rgb(152,151,26)', 'rgb(215,153,33)', 'rgb(69,133,136)', 'rgb(177,98,134)', 'rgb(104,157,106)', 'rgb(168,153,132)', 'rgb(146,131,116)', 'rgb(251,73,52)', 'rgb(184,187,38)', 'rgb(250,189,47)', 'rgb(131,165,152)', 'rgb(211,134,155)', 'rgb(142,192,124)', 'rgb(235,219,178)']
+scrollbar-policy='never'
+use-system-font=false
+use-theme-colors=true
+visible-name='Gruvbox Dark'
+
+[org/gnome/terminal/legacy/profiles:/:ccdbf470-dadd-11ee-9829-25e4556bc829]
+allow-bold=true
+background-color='#282828282828'
+bold-color='#EBEBDBDBB2B2'
+bold-color-same-as-fg=true
+cursor-background-color='#EBEBDBDBB2B2'
+cursor-colors-set=true
+cursor-foreground-color='#282828282828'
+default-size-rows=23
+foreground-color='#EBEBDBDBB2B2'
+palette=['#282828282828', '#CCCC24241D1D', '#989897971A1A', '#D7D799992121', '#454585858888', '#B1B162628686', '#68689D9D6A6A', '#A8A899998484', '#929283837474', '#FBFB49493434', '#B8B8BBBB2626', '#FAFABDBD2F2F', '#8383A5A59898', '#D3D386869B9B', '#8E8EC0C07C7C', '#EBEBDBDBB2B2']
+scrollbar-policy='never'
+use-theme-background=false
+use-theme-colors=false
+use-theme-transparency=false
+visible-name='Gruvbox Dark'
+
+[org/gnome/terminal/legacy/profiles:/:d6690a6a-dadd-11ee-9829-25e4556bc829]
+allow-bold=true
+background-color='#282828282828'
+bold-color='#EBEBDBDBB2B2'
+bold-color-same-as-fg=true
+cursor-background-color='#EBEBDBDBB2B2'
+cursor-colors-set=true
+cursor-foreground-color='#282828282828'
+default-size-rows=23
+foreground-color='#EBEBDBDBB2B2'
+palette=['#282828282828', '#CCCC24241D1D', '#989897971A1A', '#D7D799992121', '#454585858888', '#B1B162628686', '#68689D9D6A6A', '#A8A899998484', '#929283837474', '#FBFB49493434', '#B8B8BBBB2626', '#FAFABDBD2F2F', '#8383A5A59898', '#D3D386869B9B', '#8E8EC0C07C7C', '#EBEBDBDBB2B2']
+scrollbar-policy='never'
+use-theme-background=false
+use-theme-colors=false
+use-theme-transparency=false
+visible-name='Gruvbox Dark'
+
+[org/gtk/gtk4/settings/file-chooser]
+date-format='regular'
+location-mode='path-bar'
+show-hidden=false
+show-size-column=true
+show-type-column=true
+sidebar-width=140
+sort-column='name'
+sort-directories-first=true
+sort-order='ascending'
+type-format='category'
+view-type='list'
+window-size=(841, 328)
+
+[org/gtk/settings/color-chooser]
+custom-colors=[(0.92156862745098034, 0.85882352941176465, 0.69803921568627447, 1.0), (0.55686274509803924, 0.75294117647058822, 0.48627450980392151, 1.0), (0.20000000000000001, 0.7803921568627451, 0.87058823529411766, 1.0), (0.82745098039215681, 0.52549019607843139, 0.60784313725490191, 1.0), (0.51372549019607838, 0.6470588235294118, 0.59607843137254901, 1.0), (0.16470588235294117, 0.4823529411764706, 0.87058823529411766, 1.0), (0.98039215686274506, 0.74117647058823521, 0.18431372549019612, 1.0), (0.9137254901960784, 0.67843137254901964, 0.047058823529411764, 1.0)]
+selected-color=(true, 0.92156862745098034, 0.85882352941176465, 0.69803921568627447, 1.0)
+
+[org/gtk/settings/file-chooser]
+date-format='regular'
+location-mode='path-bar'
+show-hidden=false
+show-size-column=true
+show-type-column=true
+sidebar-width=156
+sort-column='name'
+sort-directories-first=false
+sort-order='ascending'
+type-format='category'
+window-position=(465, 234)
+window-size=(990, 742)
+
+[org/mate/caja/window-state]
+geometry='800x550+560+243'
+maximized=false
+start-with-sidebar=true
+start-with-status-bar=true
+start-with-toolbar=true
+
+[org/mate/engrampa/general]
+unar-open-zip=false
+
+[org/mate/engrampa/listing]
+list-mode='as-folder'
+name-column-width=250
+show-path=false
+sort-method='name'
+sort-type='ascending'
+
+[org/mate/engrampa/ui]
+sidebar-width=200
+window-height=480
+window-width=600
+
+[org/nemo/desktop]
+font='Noto Sans 10'
+
+[org/nemo/preferences]
+inherit-show-thumbnails=true
+show-hidden-files=true
+show-image-thumbnails='always'
+show-location-entry=true
+thumbnail-limit=uint64 68719476736
+
+[org/nemo/window-state]
+geometry='960x990+960+0'
+maximized=true
+sidebar-bookmark-breakpoint=0
+start-with-sidebar=true

@@ -1,0 +1,67 @@
+[AddNewTorrentDialog]
+Attached=false
+Enabled=true
+TopLevel=true
+
+[Application]
+FileLogger\Age=1
+FileLogger\AgeType=1
+FileLogger\Backup=true
+FileLogger\DeleteOld=true
+FileLogger\Enabled=true
+FileLogger\MaxSizeBytes=66560
+FileLogger\Path=/home/f16poom/.local/share/qBittorrent/logs
+GUI\Notifications\TorrentAdded=false
+
+[BitTorrent]
+Session\Port=13096
+Session\QueueingSystemEnabled=false
+
+[Core]
+AutoDeleteAddedTorrentFile=Never
+
+[GUI]
+DownloadTrackerFavicon=false
+Log\Enabled=false
+MainWindow\FiltersSidebarWidth=196
+Qt6\TorrentProperties\FilesListState=@ByteArray(\0\0\0\xff\0\0\0\0\0\0\0\x1\0\0\0\0\0\0\0\0\x1\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\x2X\0\0\0\x6\x1\x1\0\x1\0\0\0\0\0\0\0\0\0\0\0\0\x64\xff\xff\xff\xff\0\0\0\x81\0\0\0\0\0\0\0\x6\0\0\0\x64\0\0\0\x1\0\0\0\0\0\0\0\x64\0\0\0\x1\0\0\0\0\0\0\0\x64\0\0\0\x1\0\0\0\0\0\0\0\x64\0\0\0\x1\0\0\0\0\0\0\0\x64\0\0\0\x1\0\0\0\0\0\0\0\x64\0\0\0\x1\0\0\0\0\0\0\x3\xe8\0\0\0\0\x64\0\0\0\0)
+Qt6\TorrentProperties\PeerListState=@ByteArray(\0\0\0\xff\0\0\0\0\0\0\0\x1\0\0\0\x1\0\0\0\0\x1\0\0\0\0\0\0\0\0\0\0\0\xf@@\0\0\0\x2\0\0\0\xe\0\0\0\x64\0\0\0\x6\0\0\0\x64\0\0\x5\x14\0\0\0\xf\x1\x1\0\0\0\0\0\0\0\0\0\0\0\0\0\0\x64\xff\xff\xff\xff\0\0\0\x81\0\0\0\0\0\0\0\xf\0\0\0\x64\0\0\0\x1\0\0\0\0\0\0\0\x64\0\0\0\x1\0\0\0\0\0\0\0\x64\0\0\0\x1\0\0\0\0\0\0\0\x64\0\0\0\x1\0\0\0\0\0\0\0\x64\0\0\0\x1\0\0\0\0\0\0\0\x64\0\0\0\x1\0\0\0\0\0\0\0\0\0\0\0\x1\0\0\0\0\0\0\0\x64\0\0\0\x1\0\0\0\0\0\0\0\x64\0\0\0\x1\0\0\0\0\0\0\0\x64\0\0\0\x1\0\0\0\0\0\0\0\x64\0\0\0\x1\0\0\0\0\0\0\0\x64\0\0\0\x1\0\0\0\0\0\0\0\x64\0\0\0\x1\0\0\0\0\0\0\0\x64\0\0\0\x1\0\0\0\0\0\0\0\0\0\0\0\x1\0\0\0\0\0\0\x3\xe8\0\xff\xff\xff\xff\0\0\0\0)
+Qt6\TorrentProperties\TrackerListState=@ByteArray(\0\0\0\xff\0\0\0\0\0\0\0\x1\0\0\0\x1\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\x3 \0\0\0\b\x1\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\x64\xff\xff\xff\xff\0\0\0\x81\0\0\0\0\0\0\0\b\0\0\0\x64\0\0\0\x1\0\0\0\0\0\0\0\x64\0\0\0\x1\0\0\0\0\0\0\0\x64\0\0\0\x1\0\0\0\0\0\0\0\x64\0\0\0\x1\0\0\0\0\0\0\0\x64\0\0\0\x1\0\0\0\0\0\0\0\x64\0\0\0\x1\0\0\0\0\0\0\0\x64\0\0\0\x1\0\0\0\0\0\0\0\x64\0\0\0\x1\0\0\0\0\0\0\x3\xe8\0\0\0\0\x64\0\0\0\0)
+Qt6\TransferList\HeaderState=@ByteArray(\0\0\0\xff\0\0\0\0\0\0\0\x1\0\0\0\x1\0\0\0\0\x1\0\0\0\0\0\0\0\0\0\0\0\"\t\xc0\xff\xbf\x3\0\0\0\x15\0\0\0\xe\0\0\0\x64\0\0\0!\0\0\0\x64\0\0\0\x16\0\0\0\x64\0\0\0\xf\0\0\0\x64\0\0\0 \0\0\0\x64\0\0\0\x14\0\0\0\x64\0\0\0\x1c\0\0\0\x64\0\0\0\x3\0\0\0\x64\0\0\0\x15\0\0\0\x64\0\0\0\x12\0\0\0\x64\0\0\0\0\0\0\0\x64\0\0\0\x18\0\0\0\x64\0\0\0\x10\0\0\0\x64\0\0\0\x13\0\0\0\x64\0\0\0\x17\0\0\0\x64\0\0\0\x1a\0\0\0\x64\0\0\0\x1d\0\0\0\x64\0\0\0\x1f\0\0\0\x64\0\0\0\x1b\0\0\0\x64\0\0\0\x19\0\0\0\x64\0\0\0\x11\0\0\0\x64\0\0\x5\x14\0\0\0\"\x1\x1\0\0\0\0\0\0\0\0\0\0\0\0\0\0\x64\xff\xff\xff\xff\0\0\0\x81\0\0\0\0\0\0\0\"\0\0\0\0\0\0\0\x1\0\0\0\0\0\0\0\x64\0\0\0\x1\0\0\0\0\0\0\0\x64\0\0\0\x1\0\0\0\0\0\0\0\0\0\0\0\x1\0\0\0\0\0\0\0\x64\0\0\0\x1\0\0\0\0\0\0\0\x64\0\0\0\x1\0\0\0\0\0\0\0\x64\0\0\0\x1\0\0\0\0\0\0\0\x64\0\0\0\x1\0\0\0\0\0\0\0\x64\0\0\0\x1\0\0\0\0\0\0\0\x64\0\0\0\x1\0\0\0\0\0\0\0\x64\0\0\0\x1\0\0\0\0\0\0\0\x64\0\0\0\x1\0\0\0\0\0\0\0\x64\0\0\0\x1\0\0\0\0\0\0\0\x64\0\0\0\x1\0\0\0\0\0\0\0\0\0\0\0\x1\0\0\0\0\0\0\0\0\0\0\0\x1\0\0\0\0\0\0\0\0\0\0\0\x1\0\0\0\0\0\0\0\0\0\0\0\x1\0\0\0\0\0\0\0\0\0\0\0\x1\0\0\0\0\0\0\0\0\0\0\0\x1\0\0\0\0\0\0\0\0\0\0\0\x1\0\0\0\0\0\0\0\0\0\0\0\x1\0\0\0\0\0\0\0\0\0\0\0\x1\0\0\0\0\0\0\0\0\0\0\0\x1\0\0\0\0\0\0\0\0\0\0\0\x1\0\0\0\0\0\0\0\0\0\0\0\x1\0\0\0\0\0\0\0\0\0\0\0\x1\0\0\0\0\0\0\0\0\0\0\0\x1\0\0\0\0\0\0\0\0\0\0\0\x1\0\0\0\0\0\0\0\0\0\0\0\x1\0\0\0\0\0\0\0\x64\0\0\0\x1\0\0\0\0\0\0\0\0\0\0\0\x1\0\0\0\0\0\0\0\0\0\0\0\x1\0\0\0\0\0\0\0\0\0\0\0\x1\0\0\0\0\0\0\x3\xe8\0\0\0\0\x64\0\0\0\0)
+StartUpWindowState=Normal
+
+[LegalNotice]
+Accepted=true
+
+[MainWindow]
+geometry="@ByteArray(\x1\xd9\xd0\xcb\0\x3\0\0\0\0\0\0\0\0\0\0\0\0\a\x7f\0\0\x4\t\0\0\0\0\0\0\0,\0\0\a\x7f\0\0\x2\x4\0\0\0\0\x2\0\0\0\a\x80\0\0\0\0\0\0\0,\0\0\a\x7f\0\0\x4\t)"
+
+[Meta]
+MigrationVersion=6
+
+[Network]
+Cookies=@Invalid()
+
+[OptionsDialog]
+HorizontalSplitterSizes=123, 630
+LastViewedPage=0
+Size=@Size(779 591)
+
+[Preferences]
+Advanced\useSystemIconTheme=true
+General\CloseToTrayNotified=true
+General\CustomUIThemePath=/home/f16poom/.config/qBittorrent/mumble-dark.qbtheme
+General\Locale=en
+General\UseCustomUITheme=true
+
+[RSS]
+AutoDownloader\DownloadRepacks=true
+AutoDownloader\SmartEpisodeFilter=s(\\d+)e(\\d+), (\\d+)x(\\d+), "(\\d{4}[.\\-]\\d{1,2}[.\\-]\\d{1,2})", "(\\d{1,2}[.\\-]\\d{1,2}[.\\-]\\d{4})"
+
+[TorrentProperties]
+CurrentTab=0
+SplitterSizes="508,386"
+Visible=true
+
+[TransferListFilters]
+selectedFilterIndex=1

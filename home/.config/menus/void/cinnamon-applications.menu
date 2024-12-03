@@ -1,0 +1,83 @@
+<?xml version="1.0" ?>
+<!DOCTYPE Menu
+  PUBLIC '-//freedesktop//DTD Menu 1.0//EN'
+  'http://standards.freedesktop.org/menu-spec/menu-1.0.dtd'>
+<Menu>
+	<Name>Applications</Name>
+	<MergeFile type="parent">/etc/xdg/menus/cinnamon-applications.menu</MergeFile>
+	<Menu>
+		<Name>Education</Name>
+		<DirectoryDir>/home/f16poom/.local/share/desktop-directories</DirectoryDir>
+		<Exclude>
+			<Filename>libreoffice-math.desktop</Filename>
+		</Exclude>
+		<AppDir>/home/f16poom/.local/share/applications</AppDir>
+	</Menu>
+	<Menu>
+		<Name>Development</Name>
+		<DirectoryDir>/home/f16poom/.local/share/desktop-directories</DirectoryDir>
+		<Exclude>
+			<Filename>org.gtk.IconBrowser4.desktop</Filename>
+		</Exclude>
+		<AppDir>/home/f16poom/.local/share/applications</AppDir>
+		<Exclude>
+			<Filename>assistant-qt5.desktop</Filename>
+		</Exclude>
+		<Exclude>
+			<Filename>designer-qt5.desktop</Filename>
+		</Exclude>
+		<Exclude>
+			<Filename>linguist-qt5.desktop</Filename>
+		</Exclude>
+		<Exclude>
+			<Filename>qdbusviewer-qt5.desktop</Filename>
+		</Exclude>
+	</Menu>
+	<Menu>
+		<Name>Internet</Name>
+	</Menu>
+	<Menu>
+		<Name>Other</Name>
+	</Menu>
+	<Menu>
+		<Name>Administration</Name>
+		<Include>
+			<Filename>Mount CIFS Share.desktop</Filename>
+		</Include>
+		<AppDir>/home/f16poom/.local/share/applications</AppDir>
+		<Include>
+			<Filename>alacarte-made-737b27e9-e6ef-11ee-a961-52540027617f.desktop</Filename>
+		</Include>
+		<Layout>
+			<Merge type="menus"/>
+			<Filename>org.bleachbit.BleachBit.desktop</Filename>
+			<Filename>cinnamon.desktop</Filename>
+			<Filename>cinnamon2d.desktop</Filename>
+			<Filename>gparted.desktop</Filename>
+			<Filename>grub-customizer.desktop</Filename>
+			<Filename>htop.desktop</Filename>
+			<Filename>gkbd-keyboard-display.desktop</Filename>
+			<Filename>lightdm-gtk-greeter-settings.desktop</Filename>
+			<Filename>Mount CIFS Share.desktop</Filename>
+			<Filename>octoxbps.desktop</Filename>
+			<Filename>octoxbps-notifier.desktop</Filename>
+			<Filename>shredder.desktop</Filename>
+			<Filename>gnome-system-monitor.desktop</Filename>
+			<Filename>org.gnome.Terminal.desktop</Filename>
+			<Filename>org.gnome.Terminal.Preferences.desktop</Filename>
+			<Filename>timeshift-gtk.desktop</Filename>
+			<Filename>uxterm.desktop</Filename>
+			<Filename>cinnamon-settings-users.desktop</Filename>
+			<Filename>virt-manager.desktop</Filename>
+			<Filename>xterm.desktop</Filename>
+			<Merge type="files"/>
+		</Layout>
+	</Menu>
+	<Menu>
+		<Name>Office</Name>
+		<Exclude>
+			<Filename>org.gnome.Evince.desktop</Filename>
+		</Exclude>
+		<AppDir>/home/f16poom/.local/share/applications</AppDir>
+	</Menu>
+</Menu>

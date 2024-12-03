@@ -1,0 +1,2 @@
+sys-kernel/installkernel grub
+sys-kernel/installkernel dracut
