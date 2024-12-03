@@ -123,48 +123,48 @@ xdg-mime default io.github.celluloid_player.Celluloid.desktop video/x-ms-asx
 xdg-mime default io.github.celluloid_player.Celluloid.desktop video/x-ms-wvx
 xdg-mime default io.github.celluloid_player.Celluloid.desktop video/x-ms-wvxvideo
 
-# Photos - Image Viewer (Xviewer)
-xdg-mime default xviewer.desktop image/bmp
-xdg-mime default xviewer.desktop image/gif
-xdg-mime default xviewer.desktop image/jpeg
-xdg-mime default xviewer.desktop image/jpg
-xdg-mime default xviewer.desktop image/pjpeg
-xdg-mime default xviewer.desktop image/png
-xdg-mime default xviewer.desktop image/svg+xml
-xdg-mime default xviewer.desktop image/svg+xml-compressed
-xdg-mime default xviewer.desktop image/tiff
-xdg-mime default xviewer.desktop image/vnd.wap.wbmp
-xdg-mime default xviewer.desktop image/webp
-xdg-mime default xviewer.desktop image/x-bmp
-xdg-mime default xviewer.desktop image/x-gray
-xdg-mime default xviewer.desktop image/x-icb
-xdg-mime default xviewer.desktop image/x-icns
-xdg-mime default xviewer.desktop image/x-ico
-xdg-mime default xviewer.desktop image/x-pcx
-xdg-mime default xviewer.desktop image/x-png
-xdg-mime default xviewer.desktop image/x-portable-anymap
-xdg-mime default xviewer.desktop image/x-portable-bitmap
-xdg-mime default xviewer.desktop image/x-portable-graymap
-xdg-mime default xviewer.desktop image/x-portable-pixmap
-xdg-mime default xviewer.desktop image/x-xbitmap
-xdg-mime default xviewer.desktop image/x-xpixmap
+# Photos - Eye of GNOME
+xdg-mime default org.gnome.eog.desktop image/bmp
+xdg-mime default org.gnome.eog.desktop image/gif
+xdg-mime default org.gnome.eog.desktop image/jpeg
+xdg-mime default org.gnome.eog.desktop image/jpg
+xdg-mime default org.gnome.eog.desktop image/pjpeg
+xdg-mime default org.gnome.eog.desktop image/png
+xdg-mime default org.gnome.eog.desktop image/svg+xml
+xdg-mime default org.gnome.eog.desktop image/svg+xml-compressed
+xdg-mime default org.gnome.eog.desktop image/tiff
+xdg-mime default org.gnome.eog.desktop image/vnd.wap.wbmp
+xdg-mime default org.gnome.eog.desktop image/webp
+xdg-mime default org.gnome.eog.desktop image/x-bmp
+xdg-mime default org.gnome.eog.desktop image/x-gray
+xdg-mime default org.gnome.eog.desktop image/x-icb
+xdg-mime default org.gnome.eog.desktop image/x-icns
+xdg-mime default org.gnome.eog.desktop image/x-ico
+xdg-mime default org.gnome.eog.desktop image/x-pcx
+xdg-mime default org.gnome.eog.desktop image/x-png
+xdg-mime default org.gnome.eog.desktop image/x-portable-anymap
+xdg-mime default org.gnome.eog.desktop image/x-portable-bitmap
+xdg-mime default org.gnome.eog.desktop image/x-portable-graymap
+xdg-mime default org.gnome.eog.desktop image/x-portable-pixmap
+xdg-mime default org.gnome.eog.desktop image/x-xbitmap
+xdg-mime default org.gnome.eog.desktop image/x-xpixmap
 
 # Word - LibreOffice Writer
-xdg-mime default libreoffice-writer.desktop application/msword
-xdg-mime default libreoffice-writer.desktop application/rtf
-xdg-mime default libreoffice-writer.desktop application/vnd.ms-works
-xdg-mime default libreoffice-writer.desktop application/vnd.oasis.opendocument.text
-xdg-mime default libreoffice-writer.desktop application/vnd.oasis.opendocument.text-template
-xdg-mime default libreoffice-writer.desktop application/vnd.openxmlformats-officedocument.wordprocessingml.document
-xdg-mime default libreoffice-writer.desktop application/vnd.stardivision.writer
-xdg-mime default libreoffice-writer.desktop application/vnd.wordperfect
-xdg-mime default libreoffice-writer.desktop application/x-abiword
+xdg-mime default writer.desktop application/msword
+xdg-mime default writer.desktop application/rtf
+xdg-mime default writer.desktop application/vnd.ms-works
+xdg-mime default writer.desktop application/vnd.oasis.opendocument.text
+xdg-mime default writer.desktop application/vnd.oasis.opendocument.text-template
+xdg-mime default writer.desktop application/vnd.openxmlformats-officedocument.wordprocessingml.document
+xdg-mime default writer.desktop application/vnd.stardivision.writer
+xdg-mime default writer.desktop application/vnd.wordperfect
+xdg-mime default writer.desktop application/x-abiword
 
 # Spreadsheet - LibreOffice Calc
-xdg-mime default libreoffice-calc.desktop application/msexcel
+xdg-mime default calc.desktop application/msexcel
 
-# PDF - Document Viewer (Xreader)
-xdg-mime default xreader.desktop application/pdf
+# PDF - Document Viewer (evince)
+xdg-mime default org.gnome.Evince.desktop application/pdf
 
 # Source Code - gedit
 xdg-mime default org.gnome.gedit.desktop application/javascript

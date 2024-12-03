@@ -112,6 +112,8 @@ in
       bottom
       brave
       celluloid
+      evince
+      eog
       ffmpegthumbnailer
       filezilla
       gcc
@@ -155,6 +157,8 @@ in
       sound-theme-freedesktop
       xed-editor
       xplayer
+      xreader
+      xviewer
       warpinator
     ];
     variables = {
