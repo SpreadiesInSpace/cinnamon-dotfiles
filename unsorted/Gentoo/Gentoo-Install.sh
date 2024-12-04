@@ -122,7 +122,7 @@ eselect repository enable gentoo
 rm -rf /var/db/repos/gentoo
 # Sync Repository
 emaint sync -r gentoo
-emerge --oneshot sys-apps/portage
+emerge -qv --oneshot sys-apps/portage
 # eselect news list
 # eselect news read
 # Select 23.0 gnome desktop systemd profile for Cinnamon
@@ -150,7 +150,7 @@ echo "sys-kernel/installkernel grub
 sys-kernel/installkernel dracut" > /etc/portage/package.use/installkernel
 # Install Kernel
 emerge -qv sys-kernel/gentoo-kernel-bin
-# emerge -qv sys-kernel/linux-firmware # No Need for Virtual Machines
+emerge -qv sys-kernel/linux-firmware # No Need for Virtual Machines
 # emerge -qv sys-firmware/intel-microcode # For Intel. USE flag changes
 
 # Gentoo Install - Configuring the System
