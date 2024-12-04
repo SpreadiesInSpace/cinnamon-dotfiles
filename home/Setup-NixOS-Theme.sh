@@ -105,7 +105,7 @@ mv ~/.config/Kvantum ~/.config/Kvantum.old
 cp -vnpr .config/Kvantum/ ~/.config/
 echo "" >> ~/.config/Kvantum/kvantum.kvconfig
 echo "[Applications]
-Gruvbox-Dark-Brown=kdeconnect-app" >> ~/.config/Kvantum/kvantum.kvconfig
+Gruvbox-Dark-Brown=kdeconnect-app, kdeconnect-sms" >> ~/.config/Kvantum/kvantum.kvconfig
 sudo mv /root/.config/Kvantum /root/.config/Kvantum.old
 # sudo cp -vnpr .config/Kvantum/ /root/.config/Kvantum
 kvantummanager --set gruvbox-fallnn
