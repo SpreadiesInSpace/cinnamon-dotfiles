@@ -71,8 +71,8 @@ sudo mkdir -p /usr/share/color-schemes/
 sudo ln -sf ~/.config/kdeglobals /usr/share/color-schemes/gruvbox-dark.colors
 
 # Copies haruna config to appropriate directory, preserving old config
-# mv ~/.config/haruna ~/.config/haruna.old
-# cp -vnpr .config/haruna/ ~/.config/
+mv ~/.config/haruna ~/.config/haruna.old
+cp -vnpr .config/haruna/ ~/.config/
 
 # Copies Cinnamon spice settings, preserving old ones
 mkdir -p ~/.config/cinnamon/spices/old

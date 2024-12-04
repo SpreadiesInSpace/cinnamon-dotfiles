@@ -117,13 +117,13 @@ eselect repository add sunny-overlay git https://github.com/dguglielmi/sunny-ove
 emaint sync -r sunny-overlay
 
 # Enable nest overlay for haruna
-# eselect repository add nest git https://github.com/gentoo-mirror/nest.git
-# emaint sync -r nest
+eselect repository add nest git https://github.com/gentoo-mirror/nest.git
+emaint sync -r nest
 
 # Allow select unstable packages to be merged
 echo "x11-misc/gpaste ~amd64" | tee /etc/portage/package.accept_keywords/gpaste
 echo "app-admin/grub-customizer ~amd64" | tee /etc/portage/package.accept_keywords/grub-customizer
-# echo "media-video/haruna ~amd64" | tee /etc/portage/package.accept_keywords/haruna
+echo "media-video/haruna ~amd64" | tee /etc/portage/package.accept_keywords/haruna
 echo "x11-apps/lightdm-gtk-greeter-settings ~amd64" | tee /etc/portage/package.accept_keywords/lightdm-gtk-greeter-settings
 echo "x11-themes/kvantum ~amd64" | tee /etc/portage/package.accept_keywords/kvantum
 echo "app-backup/timeshift ~amd64" | tee /etc/portage/package.accept_keywords/timeshift
@@ -151,7 +151,7 @@ packages=(
     "gnome-extra/gnome-system-monitor"
     "x11-terms/gnome-terminal"
     "media-gfx/gthumb"
-    "media-video/celluloid"
+    "media-video/haruna"
     "gnome-extra/nemo"
     "gnome-extra/nemo-fileroller"
     "x11-misc/qt5ct"
