@@ -4,7 +4,7 @@ let
   user = "f16poom";
   unstable = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz") { config = config.nixpkgs.config; };
   # nixpkgs_23_05 = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-23.05.tar.gz") { config = config.nixpkgs.config; };
-  nixpkgs_23_05 = import (builtins.fetchGit {
+  nixpkgs_23_05 = import (fetchGit {
     name = "nixos-2305";
     url = "https://github.com/nixos/nixpkgs/";
     ref = "refs/heads/release-23.05";
