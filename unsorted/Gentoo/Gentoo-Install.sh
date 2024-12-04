@@ -133,7 +133,7 @@ echo "*/* $(cpuid2cpuflags)" > /etc/portage/package.use/00cpu-flags
 # Update World Set
 emerge -vqDuN @world
 # Remove Obselete Packages
-emerge -qv --depclean
+emerge -q --depclean
 # Setting Timezone
 ln -sf ../usr/share/zoneinfo/Asia/Bangkok /etc/localtime
 # Locale Generation (uncomment en_US.UTF-8 UTF-8 in /etc/locale.gen)
