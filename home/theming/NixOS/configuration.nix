@@ -17,7 +17,7 @@ let
     name = "Gruvbox-Dark-BL";
   };
   iconTheme = {
-    package = nixpkgs_23_05.pkgs.gruvbox-dark-icons-gtk;
+    package = pkgs.gruvbox-dark-icons-gtk;
     name = "oomox-gruvbox-dark";
   };
   cursorTheme = {
@@ -114,7 +114,7 @@ in
   };
 
   environment = {
-    systemPackages = with pkgs.gnome // pkgs.kdePackages // pkgs; [
+    systemPackages = with pkgs.gnome // pkgs; [
       bleachbit
       bottom
       brave
@@ -134,8 +134,6 @@ in
       neofetch
       unstable.neovim
       qbittorrent
-      # qtstyleplugin-kvantum
-      # qt5ct
       ripgrep
       # rmlint
       rhythmbox
@@ -169,7 +167,6 @@ in
       warpinator
     ];
     variables = {
-      # QT_STYLE_OVERRIDE = lib.mkForce "kvantum";
       GTK_THEME = theme.name;
     };
   };
