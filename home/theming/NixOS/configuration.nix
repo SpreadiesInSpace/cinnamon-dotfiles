@@ -4,12 +4,6 @@ let
   user = "f16poom";
   unstable = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz") { config = config.nixpkgs.config; };
   nixpkgs_23_05 = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-23.05.tar.gz") { config = config.nixpkgs.config; };
-  # nixpkgs_23_05 = import (builtins.fetchGit {
-    # name = "nixos-2305";
-    # url = "https://github.com/nixos/nixpkgs/";
-    # ref = "refs/heads/release-23.05";
-    # rev = "19ae60662f76e44299514483c1247937e55cd910";
-  # }) { config = config.nixpkgs.config; };
   # unstable = import <nixos-unstable> { config = config.nixpkgs.config; };
   # nixpkgs_23_05 = import <nixos-23.05> { config = config.nixpkgs.config; };
   theme = {
