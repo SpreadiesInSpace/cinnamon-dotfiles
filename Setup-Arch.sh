@@ -35,6 +35,7 @@ sudo sed -i 's/^#*\s*MAKEFLAGS=.*/MAKEFLAGS="--jobs=$(nproc)"/' /etc/makepkg.con
 # All packages
 packages=(
     # System utilities
+    "bash-completion"
     "file-roller"
     "flatpak"
     "gparted"
