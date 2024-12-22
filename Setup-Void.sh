@@ -154,6 +154,7 @@ sudo rm -rf /usr/share/fonts/noto/
 sudo git clone --depth=1 https://github.com/SpreadiesInSpace/noto-debian /usr/share/fonts/noto
 sudo rm -rf /usr/share/fonts/noto/.git
 
+<<LANCZOS
 # Apply ANTIALIAS to LANCZOS patch for cinnamon-settings backgrounds
 # List of files to update
 files=(
@@ -172,6 +173,7 @@ for file in "${files[@]}"; do
     fi
 done
 echo "cinnamon-settings backgrounds LANCZOS patch complete!"
+LANCZOS
 
 # Install Brave
 cd home/theming/Void
