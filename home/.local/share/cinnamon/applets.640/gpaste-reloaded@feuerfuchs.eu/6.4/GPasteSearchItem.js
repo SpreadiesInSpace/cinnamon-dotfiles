@@ -1,13 +1,26 @@
+const Lang      = imports.lang;
 const St        = imports.gi.St;
 const PopupMenu = imports.ui.popupMenu;
 
-const _         = require('./__init__')._;
+let _;
+if (typeof require !== 'undefined') {
+    _                        = require('./__init__')._;
+} else {
+    const AppletDir          = imports.ui.appletManager.applets['gpaste-reloaded@feuerfuchs.eu'];
+    _                        = AppletDir.__init__._;
+}
 
 // ------------------------------------------------------------------------------------------------------
 
-class GPasteSearchItem extends PopupMenu.PopupBaseMenuItem {
-    constructor() {
-        super({
+function GPasteSearchItem() {
+    this._init();
+}
+
+GPasteSearchItem.prototype = {
+    __proto__: PopupMenu.PopupBaseMenuItem.prototype,
+
+    _init: function() {
+        PopupMenu.PopupBaseMenuItem.prototype._init.call(this, {
             activate: false,
             reactive: true,
             hover:    true
@@ -46,27 +59,27 @@ class GPasteSearchItem extends PopupMenu.PopupBaseMenuItem {
         //
         //
 
-        this.entry.clutter_text.connect('text-changed', this._onTextChanged.bind(this));
+        this.entry.clutter_text.connect('text-changed', Lang.bind(this, this._onTextChanged));
 
         //
         // Binding ID of the remove icon
 
         this.iconClearClickedID = 0;
-    }
+    },
 
     /*
      * Reset search field
      */
-    reset() {
+    reset: function() {
         this.entry.set_text("");
-    }
+    },
 
     /*
      * Get current input
      */
-    getText() {
+    getText: function() {
         return this.entry.get_text();
-    }
+    },
 
     //
     // Events
@@ -75,12 +88,12 @@ class GPasteSearchItem extends PopupMenu.PopupBaseMenuItem {
     /*
      * Search string has changed
      */
-    _onTextChanged(se, prop) {
+    _onTextChanged: function(se, prop) {
         const text = this.entry.get_text();
         if (text !== '') {
             if (this.iconClearClickedID == 0) {
                 this.entry.set_secondary_icon(this.iconClear);
-                this.iconClearClickedID = this.entry.connect('secondary-icon-clicked', () => this.reset());
+                this.iconClearClickedID = this.entry.connect('secondary-icon-clicked', Lang.bind(this, this.reset));
             }
         }
         else {
@@ -91,19 +104,19 @@ class GPasteSearchItem extends PopupMenu.PopupBaseMenuItem {
             }
         }
         this.emit('text-changed', text);
-    }
+    },
 
     /*
      * The search field was selected via keyboard
      */
-    _onKeyFocusIn(actor) {
+    _onKeyFocusIn: function (actor) {
         global.stage.set_key_focus(this.entry);
-    }
+    },
 
     /*
      * The search field was selected via mouse hover
      */
-    _onHoverChanged(actor) {
+    _onHoverChanged: function (actor) {
         global.stage.set_key_focus(this.entry);
     }
 };

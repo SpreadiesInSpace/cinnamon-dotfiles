@@ -25,7 +25,7 @@ const GPasteNotInstalledDialog = require('./GPasteNotInstalledDialog');
 function main(metadata, orientation, panel_height, instance_id) {
     try {
         GPaste = imports.gi.GPaste;
-
+        
         return new GPasteApplet(orientation, panel_height, instance_id);
     } catch(e) {
         return new GPasteFallbackApplet(orientation, panel_height, instance_id);
@@ -36,23 +36,19 @@ function main(metadata, orientation, panel_height, instance_id) {
 // Debug logging
 // ------------------------------------------------------------------------------------------------------
 function debugLog(...args) {
-    // Un-comment the line blow to enable debug logging
-    // global.log(...args);
- }
-
-//
-// Fallback-Applet
-// ------------------------------------------------------------------------------------------------------
+   // Un-comment the line blow to enable debug logging
+   //global.log(...args);
+}
 
 class GPasteFallbackApplet extends Applet.TextApplet {
     constructor(orientation, panel_height, instance_id) {
         super(orientation, panel_height, instance_id);
-
+        
         try {
             //
             // Applet icon
 
-            this._applet_label.set_text(_("[GPaste is not installed]"));
+            this.set_applet_label(_("[GPaste is not installed]"));
 
             //
             // Dialogs
@@ -77,7 +73,7 @@ class GPasteFallbackApplet extends Applet.TextApplet {
 class GPasteApplet extends Applet.IconApplet {
     constructor(orientation, panel_height, instance_id) {
         super(orientation, panel_height, instance_id);
-
+        
         try {
             //
             // Applet icon
@@ -107,7 +103,7 @@ class GPasteApplet extends Applet.IconApplet {
             this.mitemTrack.connect('toggled', () => this.toggleDaemon());
 
             this.mitemSearch          = new GPasteSearchItem.GPasteSearchItem();
-            this.mitemSearch.connect('text-changed', (a, text) => this.search(text));
+            this.mitemSearch.connect('text-changed', (a, text) =>  this.search(text));
 
             this.msepTop              = new PopupMenu.PopupSeparatorMenuItem();
 
@@ -144,6 +140,7 @@ class GPasteApplet extends Applet.IconApplet {
 
             this._appletSettings = new Settings.AppletSettings(this, uuid, instance_id);
 
+            this._appletSettings.bind("always-show-icon",      "alwaysShowIcon",      this._onDisplaySettingsUpdated);
             this._appletSettings.bind("display-track-switch",  "displayTrackSwitch",  this._onDisplaySettingsUpdated);
             this._appletSettings.bind("display-new-item",      "displayNewItem",      this._onDisplaySettingsUpdated);
             this._appletSettings.bind("display-searchbar",     "displaySearchBar",    this._onDisplaySettingsUpdated);
@@ -158,7 +155,7 @@ class GPasteApplet extends Applet.IconApplet {
 
             this._clientSettings   = new GPaste.Settings();
             this._searchResults    = [];
-            this._historyName      = "";
+            this._historyName      = "Testing";
             this._historyItems     = [];
             this._historyListItems = [];
             this._signalManager    = new SignalManager.SignalManager(null);
@@ -206,10 +203,14 @@ class GPasteApplet extends Applet.IconApplet {
                     if (this.displaySearchBar) {
                         global.stage.set_key_focus(this.mitemSearch.entry);
                     }
+                    this.actor.visible = true;
                 } else {
                     this.mitemSearch.reset();
+                    this.actor.visible = this.alwaysShowIcon;
                 }
             });
+            
+            global.settings.connect('changed::panel-edit-mode', () => this._on_panel_edit_mode_changed());
         }
         catch (e) {
             global.logError(e);
@@ -242,6 +243,7 @@ class GPasteApplet extends Applet.IconApplet {
     _onDisplaySettingsUpdated() {
         this.mitemSearch.reset();
 
+        this.actor.visible = this.alwaysShowIcon;
         this.mitemTrack.actor.visible        = this.displayTrackSwitch;
         this.msepTop.actor.visible           = this.displayTrackSwitch;
         this.mitemSearch.actor.visible       = this.displaySearchBar;
@@ -257,7 +259,7 @@ class GPasteApplet extends Applet.IconApplet {
     /*
      * Generate the required number of history items (or delete excessive ones)
      */
-    _createHistoryItems(){
+    _createHistoryItems() {
         const oldSize = this._historyItems.length;
         const newSize = this._clientSettings.get_max_displayed_history_size();
 
@@ -323,7 +325,7 @@ class GPasteApplet extends Applet.IconApplet {
         this._onDisplaySettingsUpdated();
     }
     
-    _onKeybindingUpdated() {
+    _onKeybindingUpdated () {
         Main.keybindingManager.addHotKey("show-history-" + this.instance_id, this.kbShowHistory, () => {
             if (!Main.overview.visible && !Main.expo.visible) {
                 this.menu.toggle();
@@ -349,7 +351,7 @@ class GPasteApplet extends Applet.IconApplet {
     /*
      * Refresh the history items
      */
-    refresh(startID) {
+    refresh (startID) {
         if (this._searchResults.length > 0) { // Search field isn't empty
             this.search(this.mitemSearch.getText());
         } else {
@@ -422,7 +424,7 @@ class GPasteApplet extends Applet.IconApplet {
     /*
      * Toggle GPaste's tracking status
      */
-    toggleDaemon() {
+    toggleDaemon () {
         this._client.track(this.mitemTrack.state, null);
     }
 
@@ -504,7 +506,7 @@ class GPasteApplet extends Applet.IconApplet {
             delete this._historyListItems[n];
         }
 
-        histories.forEach((name, index) =>{
+        histories.forEach((name, index) => {
             if (name == "") return;
 
             const item = new GPasteHistoryListItem.GPasteHistoryListItem(this, name);
@@ -589,4 +591,11 @@ class GPasteApplet extends Applet.IconApplet {
     on_applet_clicked(event) {
         this.menu.toggle();
     }
-}
+
+    /*
+     * Panel edit mode has been toggled
+     */
+    _on_panel_edit_mode_changed() {
+        this.actor.visible = global.settings.get_boolean('panel-edit-mode') || this.alwaysShowIcon;
+    }
+};

@@ -20,4 +20,5 @@ Finally, make sure that the GPaste daemon is running. You can either use the GPa
 
 GPaste Github page: https://github.com/Keruspe/GPaste
 
-Use cinnamon applets settings to install the applet or download the .zip file and extract or copy the folder `gpaste-reloaded@feuerfuchs.eu` to `~/.local/share/cinnamon/applets/`. If the applet doesn't appear in the applet list, you should restart Cinnamon by pressing Alt+F2, typing 'r' (without ') and hitting enter.
+To install the applet itself, execute the `install.sh` script. If the applet doesn't appear in the applet list, you should restart Cinnamon by pressing Alt+F2, typing 'r' (without ') and hitting enter.
+To remove the applet, just run `install.sh -r`.

@@ -2,13 +2,19 @@ const PopupMenu = imports.ui.popupMenu;
 
 // ------------------------------------------------------------------------------------------------------
 
-class GPasteHistoryListItem extends PopupMenu.PopupMenuItem {
-    constructor(applet, name) {
-        super(name, {});
+function GPasteHistoryListItem(text, index) {
+    this._init(text, index);
+}
+
+GPasteHistoryListItem.prototype = {
+    __proto__: PopupMenu.PopupMenuItem.prototype,
+
+    _init: function(applet, name, params) {
+        PopupMenu.PopupMenuItem.prototype._init.call(this, name, params);
 
         this._applet   = applet;
         this._histName = name;
-    }
+    },
 
     //
     // Overrides
@@ -17,8 +23,8 @@ class GPasteHistoryListItem extends PopupMenu.PopupMenuItem {
     /*
      * Select history item
      */
-    activate(event) {
+    activate: function(event) {
         this._applet.selectHistory(this._histName);
         this._applet.contextMenu.close(true);
-    }
+    },
 };
