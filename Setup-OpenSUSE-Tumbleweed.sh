@@ -130,6 +130,12 @@ sudo rm -rf /usr/share/fonts/noto/.git
 # Protect neofetch from being replaced by neowofetch
 zypper al neofetch
 
+# Apply gedit-plugins fix
+cd unsorted/openSUSE/
+chmod +x gedit-plugins-fix.sh
+./gedit-plugins-fix.sh
+cd ../..
+
 # Install OBS Package Installer (seperated for confirmation dialog)
 zypper install opi
 
