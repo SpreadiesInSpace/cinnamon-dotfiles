@@ -358,6 +358,7 @@ window-size=(990, 742)
 
 [org/nemo/desktop]
 computer-icon-visible=false
+font='Noto Sans 10'
 home-icon-visible=false
 trash-icon-visible=false
 
