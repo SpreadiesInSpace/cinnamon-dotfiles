@@ -23,6 +23,7 @@ sudo cp -vnr home/wallpapers/Login_Wallpaper.jpg /boot/
 # Add Nix Unstable and 23.05 Channels (for Neovim, icons and themes)
 sudo nix-channel --add https://nixos.org/channels/nixos-unstable nixos
 sudo nix-channel --add https://nixos.org/channels/nixos-23.05 nixos-23.05
+sudo nix-channel --update
 
 # Reconfigures system
 # sudo nixos-rebuild switch
