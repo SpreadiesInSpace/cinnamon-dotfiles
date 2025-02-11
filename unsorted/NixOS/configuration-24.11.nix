@@ -2,7 +2,7 @@
 
 let
   user = "f16poom";
-  # unstable = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz") { config = config.nixpkgs.config; };
+  unstable = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz") { config = config.nixpkgs.config; };
   nixpkgs_23_05 = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-23.05.tar.gz") { config = config.nixpkgs.config; };
   # unstable = import <nixos-unstable> { config = config.nixpkgs.config; };
   # nixpkgs_23_05 = import <nixos-23.05> { config = config.nixpkgs.config; };
@@ -92,7 +92,7 @@ in
   systemd.extraConfig = "DefaultTimeoutStopSec=15s\n";
   
   # sound.enable = true;
-  # hardware.pulseaudio.enable = false;
+  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
 
   users.users.${user} = {
@@ -126,8 +126,7 @@ in
       libreoffice
       ncdu
       neofetch
-      neovim
-      # unstable.neovim
+      unstable.neovim
       qbittorrent
       ripgrep
       # rmlint
@@ -139,7 +138,7 @@ in
       xclip
       xorg.xkill
     ];
-    cinnamon.excludePackages = with pkgs.gnome // pkgs; [
+    cinnamon.excludePackages = with pkgs.cinnamon // pkgs.gnome // pkgs; [
       bulky
       gnome-calendar
       hexchat
@@ -156,7 +155,7 @@ in
       pix
       sound-theme-freedesktop
       xed-editor
-      # xplayer
+      xplayer
       xreader
       xviewer
       warpinator
@@ -183,8 +182,7 @@ in
   fonts.packages = with pkgs; [
     noto-fonts
     noto-fonts-emoji
-    nerd-fonts.sauce-code-pro
-    # (nerdfonts.override { fonts = [ "SourceCodePro" ]; })
+    (nerdfonts.override { fonts = [ "SourceCodePro" ]; })
   ];
 
   system.stateVersion = "22.05";
