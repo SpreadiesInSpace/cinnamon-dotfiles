@@ -15,7 +15,7 @@ highlight-current-line=true
 scheme='gruvbox-dark'
 style-scheme-for-dark-theme-variant='gruvbox-dark'
 style-scheme-for-light-theme-variant='gruvbox-dark'
-use-default-font=true
+use-default-font=false
 wrap-last-split-mode='word'
 
 [org/gnome/gedit/preferences/ui]
