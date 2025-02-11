@@ -94,8 +94,8 @@ packages=(
     "qbittorrent"
     # "rmlint"
     "spice-vdagent"
-    # "noto-fonts"
-    # "noto-fonts-emoji"
+    "noto-fonts"
+    "noto-fonts-emoji"
     "xclip"
     # For NvChad
     "gcc"
@@ -120,9 +120,9 @@ packages=(
 yay -Syu --needed --noconfirm "${packages[@]}"
 
 # Install Noto Fonts
-sudo rm -rf /usr/share/fonts/noto/
-sudo git clone --depth=1 https://github.com/SpreadiesInSpace/noto-debian /usr/share/fonts/noto
-sudo rm -rf /usr/share/fonts/noto/.git
+# sudo rm -rf /usr/share/fonts/noto/
+# sudo git clone --depth=1 https://github.com/SpreadiesInSpace/noto-debian /usr/share/# fonts/noto
+# sudo rm -rf /usr/share/fonts/noto/.git
 
 # Enable Flathub
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo

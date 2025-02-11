@@ -104,7 +104,7 @@ packages=(
     "neovim"
     "qbittorrent"
     "spice-vdagent"
-    # "google-noto-coloremoji-fonts"
+    "google-noto-coloremoji-fonts"
     "google-noto-sans-fonts"
     "xclip"
     # For NvChad
@@ -123,9 +123,9 @@ done
 # zypper install -y "${packages[@]}"
 
 # Install Noto Fonts
-sudo rm -rf /usr/share/fonts/noto/
-sudo git clone --depth=1 https://github.com/SpreadiesInSpace/noto-debian /usr/share/fonts/noto
-sudo rm -rf /usr/share/fonts/noto/.git
+# sudo rm -rf /usr/share/fonts/noto/
+# sudo git clone --depth=1 https://github.com/SpreadiesInSpace/noto-debian /usr/share/fonts/noto
+# sudo rm -rf /usr/share/fonts/noto/.git
 
 # Protect neofetch from being replaced by neowofetch
 zypper al neofetch

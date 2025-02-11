@@ -184,8 +184,8 @@ packages=(
     "app-editors/neovim"
     "net-p2p/qbittorrent"
     "app-emulation/spice-vdagent"
-    # "media-fonts/noto"
-    # "media-fonts/noto-emoji"
+    "media-fonts/noto"
+    "media-fonts/noto-emoji"
     "x11-misc/xclip"
     # For NvChad
     "sys-devel/gcc"
@@ -221,9 +221,9 @@ FEATURES="-getbinpkg" emerge -1Dvq dev-ml/ppxlib
 emerge -vq --keep-going app-emulation/guestfs-tools 
 
 # Install Noto Fonts
-sudo rm -rf /usr/share/fonts/noto/
-sudo git clone --depth=1 https://github.com/SpreadiesInSpace/noto-debian /usr/share/fonts/noto
-sudo rm -rf /usr/share/fonts/noto/.git
+# sudo rm -rf /usr/share/fonts/noto/
+# sudo git clone --depth=1 https://github.com/SpreadiesInSpace/noto-debian /usr/share/fonts/noto
+# sudo rm -rf /usr/share/fonts/noto/.git
 
 # Enable Flathub
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo

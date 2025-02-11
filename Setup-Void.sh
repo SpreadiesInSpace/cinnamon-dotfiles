@@ -126,8 +126,8 @@ packages=(
     "qbittorrent"
     # "rmlint"
     "spice-vdagent"
-    # "noto-fonts-ttf"
-    # "noto-fonts-emoji"
+    "noto-fonts-ttf"
+    "noto-fonts-emoji"
     "xclip"
     # For NvChad
     "gcc"
@@ -150,9 +150,9 @@ packages=(
 sudo xbps-install -Syu "${packages[@]}"
 
 # Install Noto Fonts
-sudo rm -rf /usr/share/fonts/noto/
-sudo git clone --depth=1 https://github.com/SpreadiesInSpace/noto-debian /usr/share/fonts/noto
-sudo rm -rf /usr/share/fonts/noto/.git
+# sudo rm -rf /usr/share/fonts/noto/
+# sudo git clone --depth=1 https://github.com/SpreadiesInSpace/noto-debian /usr/share/fonts/noto
+# sudo rm -rf /usr/share/fonts/noto/.git
 
 <<LANCZOS
 # Apply ANTIALIAS to LANCZOS patch for cinnamon-settings backgrounds
