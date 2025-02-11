@@ -2,10 +2,10 @@
 
 let
   user = "f16poom";
-  # unstable = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz") { config = config.nixpkgs.config; };
-  # nixpkgs_23_05 = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-23.05.tar.gz") { config = config.nixpkgs.config; };
+  unstable = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz") { config = config.nixpkgs.config; };
+  nixpkgs_23_05 = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-23.05.tar.gz") { config = config.nixpkgs.config; };
   # unstable = import <nixos-unstable> { config = config.nixpkgs.config; };
-  nixpkgs_23_05 = import <nixos-23.05> { config = config.nixpkgs.config; };
+  # nixpkgs_23_05 = import <nixos-23.05> { config = config.nixpkgs.config; };
   theme = {
     package = nixpkgs_23_05.gruvbox-gtk-theme;
     name = "Gruvbox-Dark-BL";
@@ -126,8 +126,7 @@ in
       libreoffice
       ncdu
       neofetch
-      neovim
-      # unstable.neovim
+      unstable.neovim
       qbittorrent
       ripgrep
       # rmlint
