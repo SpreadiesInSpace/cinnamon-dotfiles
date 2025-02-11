@@ -589,5 +589,11 @@
 		<Exclude>
 			<Filename>xaos.desktop</Filename>
 		</Exclude>
+		<Exclude>
+			<Filename>qalculate-gtk.desktop</Filename>
+		</Exclude>
+		<Exclude>
+			<Filename>io.github.Qalculate.qalculate-qt.desktop</Filename>
+		</Exclude>
 	</Menu>
 </Menu>
