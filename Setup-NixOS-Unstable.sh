@@ -26,7 +26,7 @@ sudo nix-channel --add https://nixos.org/channels/nixos-23.05 nixos-23.05
 
 # Reconfigures system
 # sudo nixos-rebuild switch
-sudo nix-rebuild switch --upgrade
+sudo nixos-rebuild switch --upgrade
 
 # Enable Flathub
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
