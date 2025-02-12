@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=LightDM GTK+ Greeter settings
+Comment=Configure LightDM GTK+ Greeter
+Categories=GNOME;GTK;Settings;System;Utility;X-XFCE-SettingsDialog;X-XFCE-SystemSettings;
+Keywords=Configuration;Utility;
+Exec=sudo lightdm-gtk-greeter-settings-pkexec
+Icon=lightdm-gtk-greeter-settings
+Terminal=true
+Type=Application
+PrefersNonDefaultGPU=false
