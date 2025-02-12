@@ -207,6 +207,7 @@ packages=(
     "sys-apps/dmidecode"
     "sys-cluster/glusterfs"
     "net-libs/libiscsi"
+    "app-emulation/guestfs-tools"
 )
 # Automatically accept USE changes and update config files
 touch /etc/portage/package.use/zzz_autounmask
@@ -218,7 +219,7 @@ dispatch-conf <<< $(echo -e 'y')
 emerge -vqDuN --with-bdeps=y --keep-going "${packages[@]}"
 
 # lwt dependency fails to compile because ppxlib is pulled in as a binary
-emerge -vq --keep-going app-emulation/guestfs-tools 
+# emerge -vq --keep-going app-emulation/guestfs-tools 
 # re-emerge dev/ppxlib from source
 # FEATURES="-getbinpkg" emerge -1Dvq dev-ml/ppxlib
 # lwt will now compile properly, allowing guestfs-tools to finish compiling
