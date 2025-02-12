@@ -100,8 +100,8 @@ desktop_environment=(
 emerge -vqDuN --with-bdeps=y "${desktop_environment[@]}"
 
 # Install Brave
-# eselect repository enable gentoo-zh
-# emaint sync -r gentoo-zh
+eselect repository enable gentoo-zh
+emaint sync -r gentoo-zh
 emerge -vqDuN www-client/brave-bin
 
 # Enable Guru Overlay
@@ -220,9 +220,9 @@ emerge -vqDuN --with-bdeps=y --keep-going "${packages[@]}"
 # lwt dependency fails to compile because ppxlib is pulled in as a binary
 emerge -vq --keep-going app-emulation/guestfs-tools 
 # re-emerge dev/ppxlib from source
-FEATURES="-getbinpkg" emerge -1Dvq dev-ml/ppxlib
+# FEATURES="-getbinpkg" emerge -1Dvq dev-ml/ppxlib
 # lwt will now compile properly, allowing guestfs-tools to finish compiling
-emerge -vq --keep-going app-emulation/guestfs-tools 
+# emerge -vq --keep-going app-emulation/guestfs-tools 
 
 # Install Noto Fonts
 # sudo rm -rf /usr/share/fonts/noto/
