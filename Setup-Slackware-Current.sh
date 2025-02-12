@@ -248,6 +248,11 @@ sbo_packages=(
 # Update system and install packages
 slpkg install -y "${sbo_packages[@]}"
 
+# Install Noto Fonts
+# sudo rm -rf /usr/share/fonts/noto/
+# sudo git clone --depth=1 https://github.com/SpreadiesInSpace/noto /usr/share/fonts/noto
+# sudo rm -rf /usr/share/fonts/noto/.git
+
 # Install Additional gnome packages
 slpkg install -y eog evince gedit -o gnome
 slpkg install -y gnome-terminal -o gnome -O

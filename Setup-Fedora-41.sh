@@ -113,6 +113,11 @@ packages=(
 # Update install packages
 sudo dnf -y install "${packages[@]}"
 
+# Install Noto Fonts
+sudo rm -rf /usr/share/fonts/noto/
+sudo git clone --depth=1 https://github.com/SpreadiesInSpace/noto /usr/share/fonts/noto
+sudo rm -rf /usr/share/fonts/noto/.git
+
 # Disable Problem Reporting
 sudo systemctl disable abrtd.service
 
