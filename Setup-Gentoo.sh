@@ -96,9 +96,13 @@ desktop_environment=(
     "gnome-extra/cinnamon"
     "x11-misc/lightdm"
     "x11-misc/lightdm-gtk-greeter"
-    "www-client/brave-bin"
 )
 emerge -vqDuN --with-bdeps=y "${desktop_environment[@]}"
+
+# Install Brave
+# eselect repository enable gentoo-zh
+# emaint sync -r gentoo-zh
+emerge -vqDuN www-client/brave-bin
 
 # Enable Guru Overlay
 eselect repository enable guru
