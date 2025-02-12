@@ -85,6 +85,10 @@ echo "media-sound/pulseaudio -daemon" | tee /etc/portage/package.use/pulseaudio
 emerge -vqDuN @world
 emerge -q --depclean
 
+# Install djs_overlay for Cinnamon 6.4 & Brave
+eselect repository enable djs_overlay
+emaint sync -r djs_overlay
+
 # Update system and install packages (split them to prevent slot conflicts)
 # Desktop environment and display manager
 desktop_environment=(
@@ -92,13 +96,9 @@ desktop_environment=(
     "gnome-extra/cinnamon"
     "x11-misc/lightdm"
     "x11-misc/lightdm-gtk-greeter"
+    "www-client/brave-bin"
 )
 emerge -vqDuN --with-bdeps=y "${desktop_environment[@]}"
-
-# Install Brave
-eselect repository enable gentoo-zh
-emaint sync -r gentoo-zh
-emerge -vqDuN www-client/brave-bin
 
 # Enable Guru Overlay
 eselect repository enable guru
@@ -117,7 +117,7 @@ eselect repository add sunny-overlay git https://github.com/dguglielmi/sunny-ove
 emaint sync -r sunny-overlay
 
 # Enable nest overlay for haruna
-eselect repository add nest git https://github.com/gentoo-mirror/nest.git
+eselect repository enable nest
 emaint sync -r nest
 
 # Allow select unstable packages to be merged
