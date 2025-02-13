@@ -73,7 +73,7 @@
     "reload": false,
     "reversemousewheeldirection": false,
     "selectquality": true,
-    "selectqualityfullscreenoff": false,
+    "selectqualityfullscreenoff": true,
     "selectqualityfullscreenon": false,
     "speed": 1,
     "speedvariation": 0.1,
