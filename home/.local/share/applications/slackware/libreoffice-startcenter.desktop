@@ -22,10 +22,11 @@ NoDisplay=false
 Icon=libreoffice
 Type=Application
 Categories=Office;X-Red-Hat-Base;X-SuSE-Core-Office;
-Exec=libreoffice24.8 %U
+Exec=libreoffice25.2 %U
 MimeType=application/vnd.openofficeorg.extension;x-scheme-handler/vnd.libreoffice.cmis;x-scheme-handler/vnd.sun.star.webdav;x-scheme-handler/vnd.sun.star.webdavs;x-scheme-handler/vnd.libreoffice.command;x-scheme-handler/ms-word;x-scheme-handler/ms-powerpoint;x-scheme-handler/ms-excel;x-scheme-handler/ms-visio;x-scheme-handler/ms-access;
 Name=LibreOffice
 GenericName=Office
+GenericName[ab]=Аофис
 GenericName[af]=Kantoor
 GenericName[am]=ቢሮ
 GenericName[ar]=مكتب
@@ -115,6 +116,7 @@ GenericName[ru]=Офис
 GenericName[rw]=Ofise
 GenericName[sa_IN]=ऑफिस
 GenericName[sat]=ओफिसऑफिस
+GenericName[sat_Olck]=ᱳᱯᱷᱤᱥᱟᱹᱯᱷᱤᱥ
 GenericName[sd]=آفيس 
 GenericName[si]=කාර්‍යයාලීය
 GenericName[sid]=Ofiise
@@ -132,6 +134,7 @@ GenericName[ta]=அலுவலகம்
 GenericName[te]=కార్యాలయం
 GenericName[tg]=Офис
 GenericName[th]=ที่ทำงาน
+GenericName[tl]=Opisina
 GenericName[tn]=Kantoro/Ofisi
 GenericName[tr]=Ofis
 GenericName[ts]=Ofisi
@@ -147,6 +150,7 @@ GenericName[zh_CN]=办公
 GenericName[zh_TW]=辦公
 GenericName[zu]=Ihhovisi
 Comment=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
+Comment[ab]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
 Comment[af]=Begin toepassings om teksdokumente, spreiblaaie, aanbiedings, sketse, formules en databasisse te skep, of maak onlangs gebruikte dokumente oop.
 Comment[am]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
 Comment[ar]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
@@ -172,7 +176,7 @@ Comment[dsb]=Startujśo nałoženja, aby tekstowe dokumenty, tabelowe dokumenty,
 Comment[dz]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
 Comment[el]=Εκκίνηση εφαρμογών για τη δημιουργία εγγράφων κειμένου, υπολογιστικών φύλλων, παρουσιάσεων, σχεδίων, τύπων και βάσεων δεδομένων ή άνοιγμα εγγράφων που χρησιμοποιήθηκαν πρόσφατα.
 Comment[en]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
-Comment[en_GB]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
+Comment[en_GB]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulae, and databases, or open recently used documents.
 Comment[en_ZA]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
 Comment[eo]=Lanĉi aplikaĵojn por krei tekstajn dokumentojn, kalkultabelojn, prezentaĵojn, desegnaĵojn, formulojn, ka datumbazojn, aŭ malfermi lastatempe uzitajn dokumentojn.
 Comment[es]=Inicie aplicaciones para crear documentos de texto, hojas de cálculo, presentaciones, dibujos, fórmulas y bases de datos, o abra documentos usados recientemente.
@@ -204,7 +208,7 @@ Comment[kk]=Мәтіндік құжаттар, электрондық кесте
 Comment[km]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
 Comment[kmr_Latn]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
 Comment[kn]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
-Comment[ko]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
+Comment[ko]=애플리케이션을 실행하여 텍스트 문서, 스프레드시트, 프레젠테이션, 드로잉, 수식, 데이터베이스를 만들거나 최근에 사용한 문서를 엽니다.
 Comment[kok]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
 Comment[ks]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
 Comment[lb]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
@@ -236,6 +240,7 @@ Comment[ru]=Запуск приложений для создания текст
 Comment[rw]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
 Comment[sa_IN]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
 Comment[sat]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
+Comment[sat_Olck]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
 Comment[sd]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
 Comment[si]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
 Comment[sid]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
@@ -253,6 +258,7 @@ Comment[ta]=Launch applications to create text documents, spreadsheets, presenta
 Comment[te]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
 Comment[tg]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
 Comment[th]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
+Comment[tl]=Ilunsad ang mga application para gumawa ng mga text na dokumento, spreadsheet, presentasyon, drawing, formula, at database, o magbukas ng mga kamakailang ginamit na dokumento.
 Comment[tn]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
 Comment[tr]=Metin belgeleri, hesap tabloları, sunumlar, çizimler, formüller ve veritabanları oluşturmak veya son kullanılan belgeleri açmak için uygulamaları başlatın.
 Comment[ts]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
@@ -278,26 +284,26 @@ PrefersNonDefaultGPU=false
 
 [Desktop Action Writer]
 Name=Writer
-Exec=libreoffice24.8 --writer
+Exec=libreoffice25.2 --writer
 
 [Desktop Action Calc]
 Name=Calc
-Exec=libreoffice24.8 --calc
+Exec=libreoffice25.2 --calc
 
 [Desktop Action Impress]
 Name=Impress
-Exec=libreoffice24.8 --impress
+Exec=libreoffice25.2 --impress
 
 [Desktop Action Draw]
 Name=Draw
-Exec=libreoffice24.8 --draw
+Exec=libreoffice25.2 --draw
 
 [Desktop Action Base]
 Name=Base
-Exec=libreoffice24.8 --base
+Exec=libreoffice25.2 --base
 
 [Desktop Action Math]
 Name=Math
-Exec=libreoffice24.8 --math
+Exec=libreoffice25.2 --math
 
 ##End of actions menu
