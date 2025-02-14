@@ -199,6 +199,11 @@ packages=(
     #"bridge-utils"
     #"iptables"
     #"dmidecode"
+    "spice-vdagent"
+    "libvirt"
+    "libvirt-glib"
+    "libvirt-python"
+    "virt-manager"
 )
 
 # Install packages from Conraid over SBo to reduce compile times
@@ -237,12 +242,12 @@ sbo_packages=(
     "brave-browser"
     "ripgrep"
     "libiscsi"
-    "spice-vdagent"
+    # "spice-vdagent"
     "glusterfs"
-    "libvirt"
-    "libvirt-glib"
-    "libvirt-python"
-    "virt-manager"
+    # "libvirt"
+    # "libvirt-glib"
+    # "libvirt-python"
+    # "virt-manager"
 )
 
 # Update system and install packages
