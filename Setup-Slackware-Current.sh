@@ -175,6 +175,7 @@ packages=(
     "bleachbit"
     #"noto-fonts"
     #"rmlint" # compiling via SBo fails on Slackware Current
+    "ufw"
     "xclip"
     # For NvChad
     #"gcc"
@@ -234,7 +235,7 @@ sbo_packages=(
     "kvantum-qt5"
     "haruna"
     "qt6ct"
-    "ufw"
+    # "ufw"
     "libuchardet" # for rhythmbox
     "totem-pl-parser" # for rhythmbox
     "libpeas" # for rhythmbox
