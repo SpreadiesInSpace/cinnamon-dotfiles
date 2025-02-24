@@ -121,8 +121,8 @@ eselect repository add sunny-overlay git https://github.com/dguglielmi/sunny-ove
 emaint sync -r sunny-overlay
 
 # Enable nest overlay for haruna
-eselect repository enable nest
-emaint sync -r nest
+# eselect repository enable nest
+# emaint sync -r nest
 
 # Allow select unstable packages to be merged
 echo "x11-misc/gpaste ~amd64" | tee /etc/portage/package.accept_keywords/gpaste
