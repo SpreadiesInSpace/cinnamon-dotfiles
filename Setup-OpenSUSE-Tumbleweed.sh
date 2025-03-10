@@ -55,7 +55,7 @@ packages=(
     "flatpak"
     "gparted"
     "ncdu"
-    "neofetch"
+    # "neofetch"
     "timeshift"
     "unzip"
     "xkill"
@@ -126,6 +126,11 @@ done
 # sudo rm -rf /usr/share/fonts/noto/
 # sudo git clone --depth=1 https://github.com/SpreadiesInSpace/noto /usr/share/fonts/noto
 # sudo rm -rf /usr/share/fonts/noto/.git
+
+# Install neofetch
+zypper addrepo https://download.opensuse.org/repositories/utilities/openSUSE_Factory/utilities.repo
+zypper refresh
+zypper install -y neofetch
 
 # Protect neofetch from being replaced by neowofetch
 zypper al neofetch
