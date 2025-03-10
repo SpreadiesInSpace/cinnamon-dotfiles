@@ -86,8 +86,11 @@ emerge -vqDuN @world
 emerge -q --depclean
 
 # Install djs_overlay for Cinnamon 6.4 & Brave
-eselect repository enable djs_overlay
-emaint sync -r djs_overlay
+# eselect repository enable djs_overlay
+# emaint sync -r djs_overlay
+
+# Allow Unstable Cinnamon 6.4 to be installed
+echo "gnome-extra/cinnamon ~amd64" | tee /etc/portage/package.accept_keywords/cinnamon
 
 # Update system and install packages (split them to prevent slot conflicts)
 # Desktop environment and display manager
