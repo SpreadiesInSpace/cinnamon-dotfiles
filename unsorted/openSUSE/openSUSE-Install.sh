@@ -43,8 +43,8 @@ mount --bind /run /mnt/run
 mount --make-slave /mnt/run
 
 # Installing the Base System
-ZYPP_CURL2=1 zypper ref
-ZYPP_PCK_PRELOAD=1 zypper in -y zypper
+# ZYPP_CURL2=1 zypper ref
+# ZYPP_PCK_PRELOAD=1 zypper in -y zypper
 ZYPP_PCK_PRELOAD=1 zypper --root /mnt ar --no-gpgcheck --refresh https://download.opensuse.org/tumbleweed/repo/oss/ oss
 ZYPP_PCK_PRELOAD=1 zypper --root /mnt in -y kernel-default grub2-x86_64-efi shim zypper bash man shadow util-linux btrfsprogs sudo nano bash-completion arch-install-scripts git
 

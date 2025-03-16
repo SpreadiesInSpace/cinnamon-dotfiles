@@ -20,33 +20,33 @@ echo "set enable-bracketed-paste" >> /home/$username/.inputrc
 echo "set enable-bracketed-paste" >> /root/.inputrc
 
 # Update system and install packages
-zypper refresh
-zypper dist-upgrade -y
+ZYPP_CURL2=1 zypper ref
+ZYPP_PCK_PRELOAD=1 zypper dup -y
 
 # Install and run mirrorsorcerer for faster mirrors
-# zypper install -y mirrorsorcerer
+# ZYPP_PCK_PRELOAD=1 zypper in -y mirrorsorcerer
 # mirrorsorcerer -x
 # systemctl enable mirrorsorcerer
 
 # Install git
-zypper install -y git
+zypper in -y git
 
 # Install Media Codecs
 zypper ar -cfp 90 --no-gpgcheck 'https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/Essentials/' packman-essentials
-zypper refresh
-zypper dup --from packman-essentials --allow-vendor-change -y
-zypper install --from packman-essentials -y ffmpeg gstreamer-plugins-{good,bad,ugly,libav} libavcodec-full vlc-codecs
+ZYPP_CURL2=1 zypper ref
+ZYPP_PCK_PRELOAD=1 zypper dup --from packman-essentials --allow-vendor-change -y
+ZYPP_PCK_PRELOAD=1 zypper in --from packman-essentials -y ffmpeg gstreamer-plugins-{good,bad,ugly,libav} libavcodec-full vlc-codecs
 
 # Install Brave
-zypper install -y curl
+ZYPP_PCK_PRELOAD=1 zypper in -y curl
 rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
 zypper addrepo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
-zypper install -y brave-browser
+ZYPP_PCK_PRELOAD=1 zypper in -y brave-browser
 
 # Install rmlint
 # zypper addrepo --no-gpgcheck https://download.opensuse.org/repositories/home:FireNewt/openSUSE_Tumbleweed/home:FireNewt.repo
-# zypper refresh
-# zypper install -y rmlint
+# ZYPP_CURL2=1 zypper ref
+# ZYPP_PCK_PRELOAD=1 zypper in -y rmlint
 
 # All packages
 packages=(
@@ -116,11 +116,13 @@ packages=(
     "libvirt"
 )
 
-# Install packages
+<<old
 for package in "${packages[@]}"; do
-    zypper install -y $package
+    zypper in -y $package
 done
-# zypper install -y "${packages[@]}"
+old
+# Install packages
+ZYPP_PCK_PRELOAD=1 zypper in -y "${packages[@]}"
 
 # Install Noto Fonts
 # sudo rm -rf /usr/share/fonts/noto/
@@ -129,8 +131,8 @@ done
 
 # Install neofetch
 zypper addrepo https://download.opensuse.org/repositories/utilities/openSUSE_Factory/utilities.repo
-zypper refresh
-zypper install -y neofetch
+ZYPP_CURL2=1 zypper ref
+ZYPP_PCK_PRELOAD=1 zypper in -y neofetch
 
 # Protect neofetch from being replaced by neowofetch
 zypper al neofetch
@@ -142,10 +144,10 @@ chmod +x gedit-plugins-fix.sh
 cd ../..
 
 # Install OBS Package Installer (seperated for confirmation dialog)
-zypper install opi
+ZYPP_PCK_PRELOAD=1 zypper in opi
 
 # Install Additional Tools for Virt Manager
-zypper install -y -t pattern kvm_server kvm_tools
+ZYPP_PCK_PRELOAD=1 zypper in -y -t pattern kvm_server kvm_tools
 
 # Enable Flathub
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
