@@ -212,9 +212,9 @@ slpkg install -y "${packages[@]}" --repository=conraid
 
 # GFS packages
 gnome_packages=(
-    "font-noto-emoji"
+    #"noto-emoji"
     "gpaste"
-    "rhythmbox"
+    #"rhythmbox"
 )
 
 # Install packages from GFS over SBo to reduce compile times
@@ -225,10 +225,10 @@ sbo_packages=(
     "file-roller"
     "ncdu"
     "timeshift"
-    "libgedit-amtk" # for gedit
-    "libgedit-gtksourceview" # for gedit
-    "libpeas" # for gedit
-    "tepl" # for gedit
+    #"libgedit-amtk" # for gedit
+    #"libgedit-gtksourceview" # for gedit
+    #"libpeas" # for gedit
+    #"tepl" # for gedit
     "gnome-calculator"
     "gnome-screenshot"
     "gnome-system-monitor"
@@ -236,9 +236,9 @@ sbo_packages=(
     "haruna"
     "qt6ct"
     # "ufw"
-    "libuchardet" # for rhythmbox
-    "totem-pl-parser" # for rhythmbox
-    "libpeas" # for rhythmbox
+    #"libuchardet" # for rhythmbox
+    #"totem-pl-parser" # for rhythmbox
+    #"libpeas" # for rhythmbox
     "bottom"
     "brave-browser"
     "ripgrep"
@@ -260,9 +260,9 @@ slpkg install -y "${sbo_packages[@]}"
 # sudo rm -rf /usr/share/fonts/noto/.git
 
 # Install Additional gnome packages
-slpkg install -y eog evince gedit -o gnome
+slpkg install -y eog evince -o gnome
 slpkg install -y gnome-terminal -o gnome -O
-slpkg install -y gedit-plugins
+# slpkg install -y gedit-plugins
 
 # Install Cinnamon
 slpkg install -y "*" --repository=csb
