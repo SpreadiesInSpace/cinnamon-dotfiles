@@ -43,10 +43,10 @@ mount --bind /run /mnt/run
 mount --make-slave /mnt/run
 
 # Installing the Base System
-zypper --root /mnt ar --no-gpgcheck --refresh https://download.opensuse.org/tumbleweed/repo/oss/ oss
-zypper --root /mnt in -y kernel-default grub2-x86_64-efi shim zypper bash man shadow util-linux btrfsprogs sudo nano bash-completion arch-install-scripts git
-zypper --root /mnt in -y -t pattern basic_desktop
-zypper --root /mnt in -y --no-recommends NetworkManager
+ZYPP_CURL2=1 zypper ref
+ZYPP_PCK_PRELOAD=1 zypper in -y zypper
+ZYPP_PCK_PRELOAD=1 zypper --root /mnt ar --no-gpgcheck --refresh https://download.opensuse.org/tumbleweed/repo/oss/ oss
+ZYPP_PCK_PRELOAD=1 zypper --root /mnt in -y kernel-default grub2-x86_64-efi shim zypper bash man shadow util-linux btrfsprogs sudo nano bash-completion arch-install-scripts git
 
 # Copy Repos
 cp /etc/zypp/repos.d/* /mnt/etc/zypp/repos.d/
@@ -62,7 +62,7 @@ source /etc/profile
 export PS1="(chroot) ${PS1}"
 
 # Sync Repos
-zypper refresh
+ZYPP_CURL2=1 zypper ref
 
 # Editing Fstab
 genfstab -U / >> /etc/fstab
@@ -79,7 +79,10 @@ grub2-install --efi-directory=/boot/efi
 grub2-mkconfig -o /boot/grub2/grub.cfg
 
 # Install Cinnamon Desktop Environment
-zypper in cinnamon lightdm
+ZYPP_PCK_PRELOAD=1 zypper in -y -t pattern basic_desktop
+zypper rm -y MozillaFirefox*
+# ZYPP_PCK_PRELOAD=1 zypper in -y --no-recommends NetworkManager
+ZYPP_PCK_PRELOAD=1 zypper in cinnamon lightdm
 # Configure lightdm
 systemctl set-default graphical
 # update-alternatives --config default-displaymanager
