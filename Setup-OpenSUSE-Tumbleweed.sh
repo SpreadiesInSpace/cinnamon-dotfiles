@@ -29,7 +29,7 @@ ZYPP_PCK_PRELOAD=1 zypper dup -y
 # systemctl enable mirrorsorcerer
 
 # Install git
-zypper in -y git
+ZYPP_PCK_PRELOAD=1 zypper in -y git
 
 # Install Media Codecs
 zypper ar -cfp 90 --no-gpgcheck 'https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/Essentials/' packman-essentials
@@ -130,7 +130,7 @@ ZYPP_PCK_PRELOAD=1 zypper in -y "${packages[@]}"
 # sudo rm -rf /usr/share/fonts/noto/.git
 
 # Install neofetch
-zypper addrepo https://download.opensuse.org/repositories/utilities/openSUSE_Factory/utilities.repo
+zypper addrepo --no-gpgcheck https://download.opensuse.org/repositories/utilities/openSUSE_Factory/utilities.repo
 ZYPP_CURL2=1 zypper ref
 ZYPP_PCK_PRELOAD=1 zypper in -y neofetch
 
