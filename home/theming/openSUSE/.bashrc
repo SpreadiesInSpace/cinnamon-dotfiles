@@ -26,7 +26,7 @@ alias cleanAll='sudo zypper rm *-lang *-doc; flatpak remove --unused; sudo flatp
 
 # openSUSE Update
 alias updateNeovim='nvim --headless "+Lazy! sync" +qa'
-alias updateApp='sudo ZYPP_CURL2=1 zypper ref; sudo ZYPP_PCK_PRELOAD=1 zypper dup; flatpak update -y; updateNeovim'
+alias updateApp='sudo zypper ref; sudo zypper dup; flatpak update -y; updateNeovim'
 alias updateAll='updateApp && cleanAll'
 alias updateRestart='updateAll; systemctl reboot'
 alias updateShutdown='updateAll; systemctl poweroff'
