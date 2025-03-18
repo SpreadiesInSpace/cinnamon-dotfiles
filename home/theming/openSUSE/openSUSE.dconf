@@ -294,7 +294,8 @@ bottom-panel-active-page='GeditTerminalPanel'
 bottom-panel-size=76
 side-panel-active-page='GeditFileBrowserPanel'
 side-panel-size=271
-size=(960, 984)
+height=984
+width=960
 state=76672
 
 [org/gnome/gnome-screenshot]
