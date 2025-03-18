@@ -48,7 +48,7 @@ mount --make-slave /mnt/run
 
 # Installing the Base System
 zypper --root /mnt ar --no-gpgcheck --refresh https://download.opensuse.org/tumbleweed/repo/oss/ oss
-zypper --root /mnt in -y kernel-default grub2-x86_64-efi shim zypper bash man shadow util-linux btrfsprogs sudo nano bash-completion arch-install-scripts git
+zypper --root /mnt in -y kernel-default grub2-x86_64-efi shim zypper bash man shadow util-linux nano arch-install-scripts
 
 # Copy Repos
 cp /etc/zypp/repos.d/* /mnt/etc/zypp/repos.d/
@@ -81,9 +81,10 @@ grub2-install --efi-directory=/boot/efi
 grub2-mkconfig -o /boot/grub2/grub.cfg
 
 # Install Basic Desktop
+zypper in -y btrfsprogs sudo bash-completion git
 zypper in -y -t pattern basic_desktop
 # Install Cinnamon Desktop Environment
-zyper al mint-x-icon-theme mint-y-icon-theme
+zypper al mint-x-icon-theme mint-y-icon-theme
 zypper in cinnamon lightdm
 # Install Recommended Packages (excluding Snapper & Firefox)
 zypper al snapper*
