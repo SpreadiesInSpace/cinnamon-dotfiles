@@ -303,9 +303,6 @@ done
 # sed -i "/\[Autologin\]/,/Session=/ s/Session=.*/Session=cinnamon/" /etc/sddm.conf
 # echo "xrandr --output Virtual-1 --mode 1920x1080 --rate 60" >> /usr/share/sddm/scripts/Xsetup
 
-# Disable Cinnamon 6.4's built in polkit
-sudo -u "$SUDO_USER" dconf write /org/cinnamon/enable-polkit-agent "false"
-
 # Run the setup script
 # cd home/
 # chmod +x Setup-Slackware-Current-Theme.sh
