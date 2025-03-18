@@ -257,6 +257,9 @@ echo "DefaultTimeoutStopSec=15s" | tee -a /etc/systemd/system.conf.d/override.co
 # Reload the systemd configuration
 systemctl daemon-reload
 
+# Disable Cinnamon 6.4's built in polkit
+sudo -u "$SUDO_USER" dconf write /org/cinnamon/enable-polkit-agent "false"
+
 # Run the setup script
 # cd home/
 # chmod +x Setup-OpenSUSE-Theme.sh

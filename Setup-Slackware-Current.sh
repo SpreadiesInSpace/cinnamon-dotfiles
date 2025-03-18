@@ -88,8 +88,7 @@ useradd -u 257 -g pcscd -d /var/run/pcscd -s /bin/false pcscd
 cp /etc/samba/smb.conf-sample /etc/samba/smb.conf
 sh /etc/rc.d/rc.samba start
 
-# Install slpkg & replace configs# Disable Cinnamon 6.4's built in polkit
-sudo -u "$SUDO_USER" dconf write /org/cinnamon/enable-polkit-agent "false"
+# Install slpkg & replace configs
 sboinstall slpkg
 # Define the URL and local path pairs in an associative array
 declare -A files=(
