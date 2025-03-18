@@ -83,12 +83,13 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 # Install Basic Desktop
 zypper in -y -t pattern basic_desktop
 # Install Cinnamon Desktop Environment
+zyper al mint-x-icon-theme mint-y-icon-theme
 zypper in cinnamon lightdm
 # Install Recommended Packages (excluding Snapper & Firefox)
-zypper addlock snapper*
+zypper al snapper*
 zypper inr -y
-zypper removelock snapper*
-zypper rm -y MozillaFirefox*
+zypper rm -y MozillaFirefox* *-lang *-doc
+zypper al *-lang *-doc
 # Configure lightdm
 systemctl set-default graphical
 # update-alternatives --config default-displaymanager
