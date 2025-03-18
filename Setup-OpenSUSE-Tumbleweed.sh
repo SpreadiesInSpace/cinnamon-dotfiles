@@ -68,6 +68,10 @@ packages=(
     "samba"
     # Desktop environment and related packages
     "cinnamon"
+    "python313-configobj" # for cinnamon-settings
+    "python313-linux-procfs" # for cinnamon-settings
+    "python313-pyudev" # for cinnamon-settings
+    "python313-six" # for cinnamon-settings
     "dconf"
     "gsettings-backend-dconf"
     "eog"
