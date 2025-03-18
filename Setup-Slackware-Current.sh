@@ -88,7 +88,8 @@ useradd -u 257 -g pcscd -d /var/run/pcscd -s /bin/false pcscd
 cp /etc/samba/smb.conf-sample /etc/samba/smb.conf
 sh /etc/rc.d/rc.samba start
 
-# Install slpkg & replace configs
+# Install slpkg & replace configs# Disable Cinnamon 6.4's built in polkit
+sudo -u "$SUDO_USER" dconf write /org/cinnamon/enable-polkit-agent "false"
 sboinstall slpkg
 # Define the URL and local path pairs in an associative array
 declare -A files=(
@@ -302,6 +303,9 @@ done
 # sed -i "/\[Autologin\]/,/User=/ s/User=.*/User=$username/" /etc/sddm.conf
 # sed -i "/\[Autologin\]/,/Session=/ s/Session=.*/Session=cinnamon/" /etc/sddm.conf
 # echo "xrandr --output Virtual-1 --mode 1920x1080 --rate 60" >> /usr/share/sddm/scripts/Xsetup
+
+# Disable Cinnamon 6.4's built in polkit
+sudo -u "$SUDO_USER" dconf write /org/cinnamon/enable-polkit-agent "false"
 
 # Run the setup script
 # cd home/

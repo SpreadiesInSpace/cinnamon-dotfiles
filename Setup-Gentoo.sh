@@ -340,6 +340,9 @@ echo "DefaultTimeoutStopSec=15s" | sudo tee -a /etc/systemd/system.conf.d/overri
 # Reload the systemd configuration
 systemctl daemon-reload
 
+# Disable Cinnamon 6.4's built in polkit
+sudo -u "$SUDO_USER" dconf write /org/cinnamon/enable-polkit-agent "false"
+
 # Run the setup script
 # cd home/
 # chmod +x Setup-Gentoo-Theme.sh

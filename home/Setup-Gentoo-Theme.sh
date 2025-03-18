@@ -25,9 +25,6 @@ cp -vnpr .themes/* ~/.themes/
 mv 1670604530-Gruvbox-Dark-BL.zip .themes/
 rm -rf .themes/Gruvbox-Dark-BL/
 
-# Disable Cinnamon 6.4's built in polkit
-dconf write /org/cinnamon/enable-polkit-agent "false"
-
 # Override Cursor Theme for QT Apps
 rm -rf ~/.icons/default
 sudo mkdir -p /usr/share/icons/default
