@@ -128,6 +128,12 @@ old
 # Install packages
 ZYPP_PCK_PRELOAD=1 zypper in -y "${packages[@]}"
 
+# Install recommended packages for any missing functionality
+ZYPP_PCK_PRELOAD=1 zypper inr -y
+
+# Remove Snapper (using Timeshift)
+zypper rm -y snapper*
+
 # Install Noto Fonts
 # sudo rm -rf /usr/share/fonts/noto/
 # sudo git clone --depth=1 https://github.com/SpreadiesInSpace/noto /usr/share/fonts/noto
