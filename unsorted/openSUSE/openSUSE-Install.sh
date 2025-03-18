@@ -87,9 +87,9 @@ zyper al mint-x-icon-theme mint-y-icon-theme
 zypper in cinnamon lightdm
 # Install Recommended Packages (excluding Snapper & Firefox)
 zypper al snapper*
-zypper inr -y
+zypper inr
 zypper rm -y MozillaFirefox* *-lang *-doc
-zypper al *-lang *-doc
+zypper al MozillaFirefox* *-lang *-doc
 # Configure lightdm
 systemctl set-default graphical
 # update-alternatives --config default-displaymanager
