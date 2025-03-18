@@ -6,6 +6,10 @@ if [ "$EUID" -ne 0 ]; then
   exit
 fi
 
+# Zypper Enable Parallel Downloads
+export ZYPP_CURL2=1
+export ZYPP_PCK_PRELOAD=1
+
 # Fix openSUSE's line break paste
 echo "set enable-bracketed-paste" >> .inputrc
 
@@ -42,9 +46,6 @@ mount --make-rslave /mnt/dev
 mount --bind /run /mnt/run
 mount --make-slave /mnt/run
 
-# Zypper Enable Parallel Downloads
-alias zypper='ZYPP_CURL2=1 ZYPP_PCK_PRELOAD=1 zypper'
-
 # Installing the Base System
 zypper --root /mnt ar --no-gpgcheck --refresh https://download.opensuse.org/tumbleweed/repo/oss/ oss
 zypper --root /mnt in -y kernel-default grub2-x86_64-efi shim zypper bash man shadow util-linux btrfsprogs sudo nano bash-completion arch-install-scripts git
@@ -79,11 +80,15 @@ dracut -f --regenerate-all
 grub2-install --efi-directory=/boot/efi
 grub2-mkconfig -o /boot/grub2/grub.cfg
 
-# Install Cinnamon Desktop Environment
+# Install Basic Desktop
 zypper in -y -t pattern basic_desktop
-zypper rm -y MozillaFirefox*
-# zypper in -y --no-recommends NetworkManager
+# Install Cinnamon Desktop Environment
 zypper in cinnamon lightdm
+# Install Recommended Packages (excluding Snapper & Firefox)
+zypper addlock snapper*
+zypper inr -y
+zypper removelock snapper*
+zypper rm -y MozillaFirefox*
 # Configure lightdm
 systemctl set-default graphical
 # update-alternatives --config default-displaymanager
