@@ -21,9 +21,6 @@ alias btm='btm --theme gruvbox'
 # Rmlint Cleaning
 # alias cleanLint='bash rmlint.sh -d && rmlint'
 
-# Zypper Enable Parallel Downloads
-alias sudo_zypper='sudo ZYPP_CURL2=1 ZYPP_PCK_PRELOAD=1 zypper' 
-
 # openSUSE Cleaning
 alias cleanAll='sudo zypper rm *-lang *-doc; flatpak remove --unused; sudo flatpak repair; sudo zypper clean -a;sudo zypper purge-kernels; sudo snapper delete 1-100; rm -rf ~/.cache/*; sudo rm /tmp/* -rf; sudo journalctl --vacuum-size=50M; sudo journalctl --vacuum-time=4weeks; SystemMaxUse=50M; sudo bleachbit -c --preset && bleachbit -c --preset; sudo -E bleachbit; exit'
 

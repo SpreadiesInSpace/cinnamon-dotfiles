@@ -258,6 +258,12 @@ fi
 if ! grep -q "^GTK_THEME=Gruvbox-Dark-BL" /etc/environment; then
     echo 'GTK_THEME=Gruvbox-Dark-BL' | sudo tee -a /etc/environment
 fi
+if ! grep -q "^ZYPP_CURL2=1" /etc/environment; then
+    echo 'ZYPP_CURL2=1' | sudo tee -a /etc/environment
+fi
+if ! grep -q "^ZYPP_PCK_PRELOAD=1" /etc/environment; then
+    echo 'ZYPP_PCK_PRELOAD=1' | sudo tee -a /etc/environment
+fi
 
 # Append new settings to slick-greeter.conf, preserving old one
 sudo cp /etc/lightdm/slick-greeter.conf /etc/lightdm/slick-greeter.conf.old
