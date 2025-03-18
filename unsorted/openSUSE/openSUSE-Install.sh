@@ -43,7 +43,7 @@ mount --bind /run /mnt/run
 mount --make-slave /mnt/run
 
 # Zypper Enable Parallel Downloads
-alias zypper='ZYPP_CURL2=1 zypper'
+alias zypper='ZYPP_CURL2=1 ZYPP_PCK_PRELOAD=1 zypper'
 
 # Installing the Base System
 zypper --root /mnt ar --no-gpgcheck --refresh https://download.opensuse.org/tumbleweed/repo/oss/ oss
