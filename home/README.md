@@ -68,11 +68,16 @@
  - [ ] qbittorrent
  - [ ] timeshift
  - [ ] virt-manager
+ 
+**Brave Theming**
+
+> The Brave gruvbox profile is NOT applied in the script. The theme is located
+> in extra/brave-gruvbox.sh
 
 **Grub Theming**
 
-> The Grub theme is NOT applied in the script. The theme is located in
-> /boot/grub/themes/gruvbox-dark
+> The Grub theme is NOT applied in the script. The profile is located in
+> boot/grub/themes/gruvbox-dark
 
 **Grub-Btrfs & Theming Setup**
 
