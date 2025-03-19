@@ -36,19 +36,19 @@ zypper dup -y
 zypper in -y git
 
 # Install Media Codecs
-zypper ar -cfp 90 --no-gpgcheck 'https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/' packman
+zypper ar -cfp 90 --no-gpgcheck 'https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/Essentials/' packman-essentials
 zypper ref
-zypper dup --from packman --allow-vendor-change
-zypper in --from packman -y ffmpeg gstreamer-plugins-{good,bad,ugly,libav} libavcodec
+zypper dup --from packman-essentials --allow-vendor-change
+zypper in --from packman-essentials -y ffmpeg gstreamer-plugins-{good,bad,ugly,libav} libavcodec
 
 # Install Brave
 zypper in -y curl
 rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
-zypper addrepo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
+zypper ar https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
 zypper in -y brave-browser
 
 # Install rmlint
-# zypper addrepo --no-gpgcheck https://download.opensuse.org/repositories/home:FireNewt/openSUSE_Tumbleweed/home:FireNewt.repo
+# zypper ar --no-gpgcheck https://download.opensuse.org/repositories/home:FireNewt/openSUSE_Tumbleweed/home:FireNewt.repo
 # zypper ref
 # zypper in -y rmlint
 
@@ -129,7 +129,7 @@ packages=(
 zypper in -y "${packages[@]}"
 
 # Install neofetch
-zypper addrepo --no-gpgcheck https://download.opensuse.org/repositories/utilities/openSUSE_Factory/utilities.repo
+zypper ar --no-gpgcheck https://download.opensuse.org/repositories/utilities/openSUSE_Factory/utilities.repo
 zypper ref
 zypper in -y neofetch
 
