@@ -149,11 +149,6 @@ packages=(
 # Update system and install packages
 sudo xbps-install -Syu "${packages[@]}"
 
-# Install Noto Fonts
-# sudo rm -rf /usr/share/fonts/noto/
-# sudo git clone --depth=1 https://github.com/SpreadiesInSpace/noto /usr/share/fonts/noto
-# sudo rm -rf /usr/share/fonts/noto/.git
-
 <<LANCZOS
 # Apply ANTIALIAS to LANCZOS patch for cinnamon-settings backgrounds
 # List of files to update

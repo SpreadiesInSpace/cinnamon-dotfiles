@@ -225,11 +225,6 @@ emerge -vqDuN --with-bdeps=y --keep-going "${packages[@]}"
 # lwt will now compile properly, allowing guestfs-tools to finish compiling
 # emerge -vq --keep-going app-emulation/guestfs-tools 
 
-# Install Noto Fonts
-# sudo rm -rf /usr/share/fonts/noto/
-# sudo git clone --depth=1 https://github.com/SpreadiesInSpace/noto /usr/share/fonts/noto
-# sudo rm -rf /usr/share/fonts/noto/.git
-
 # Enable Flathub
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 

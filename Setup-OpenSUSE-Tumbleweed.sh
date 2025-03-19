@@ -128,11 +128,6 @@ old
 # Install packages
 zypper in -y "${packages[@]}"
 
-# Install Noto Fonts
-# sudo rm -rf /usr/share/fonts/noto/
-# sudo git clone --depth=1 https://github.com/SpreadiesInSpace/noto /usr/share/fonts/noto
-# sudo rm -rf /usr/share/fonts/noto/.git
-
 # Install neofetch
 zypper addrepo --no-gpgcheck https://download.opensuse.org/repositories/utilities/openSUSE_Factory/utilities.repo
 zypper ref

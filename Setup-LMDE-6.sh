@@ -112,11 +112,6 @@ packages=(
 # Update system and install packages
 sudo apt install -y "${packages[@]}"
 
-# Install Noto Fonts
-sudo rm -rf /usr/share/fonts/noto/
-sudo git clone --depth=1 https://github.com/SpreadiesInSpace/noto /usr/share/fonts/noto
-sudo rm -rf /usr/share/fonts/noto/.git
-
 # Enable Flathub
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
