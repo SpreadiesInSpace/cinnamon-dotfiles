@@ -66,6 +66,9 @@ export PS1="(chroot) ${PS1}"
 # Sync Repos
 zypper ref
 
+# Remove Dangling Repo (repo-oss and others are generated at this point)
+zypper rr oss
+
 # Editing Fstab
 genfstab -U / >> /etc/fstab
 
