@@ -124,11 +124,6 @@ packages=(
     "libvirt"
 )
 
-<<old
-for package in "${packages[@]}"; do
-    zypper in -y $package
-done
-old
 # Install packages
 zypper in -y "${packages[@]}"
 
