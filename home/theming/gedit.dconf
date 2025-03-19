@@ -4,7 +4,9 @@ active-plugins=['terminal', 'git', 'bracketcompletion', 'spell', 'sort', 'quicko
 [org/gnome/gedit/plugins/filebrowser]
 filter-mode=@as []
 filter-pattern=''
+root='file:///'
 tree-view=true
+virtual-root='file:///root/'
 
 [org/gnome/gedit/preferences/editor]
 background-pattern='grid'

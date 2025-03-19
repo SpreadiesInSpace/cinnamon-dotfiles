@@ -4,7 +4,9 @@ active-plugins=['terminal', 'git', 'bracketcompletion', 'spell', 'sort', 'quicko
 [org/gnome/gedit/plugins/filebrowser]
 filter-mode=@as []
 filter-pattern=''
+root='file:///'
 tree-view=true
+virtual-root='file:///root/'
 
 [org/gnome/gedit/preferences/editor]
 background-pattern='grid'
@@ -29,8 +31,9 @@ open-recent=false
 [org/gnome/gedit/state/window]
 bottom-panel-active-page='GeditTerminalPanel'
 bottom-panel-size=76
+height=984
 side-panel-active-page='GeditFileBrowserPanel'
 side-panel-size=271
-height=984
-width=960
+size=(960, 984)
 state=76672
+width=960
