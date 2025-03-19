@@ -81,16 +81,15 @@ grub2-install --efi-directory=/boot/efi
 grub2-mkconfig -o /boot/grub2/grub.cfg
 
 # Install Basic Desktop
-zypper in -y btrfsprogs sudo bash-completion git
 zypper in -y -t pattern basic_desktop
 # Install Cinnamon Desktop Environment
 zypper al mint-x-icon-theme mint-y-icon-theme
 zypper rm -y busybox-which
-zypper in -y cinnamon lightdm
+zypper in -y cinnamon lightdm-slick-greeter btrfsprogs sudo bash-completion git
 # Install Recommended Packages (excluding Snapper & Firefox)
 zypper al snapper*
 zypper inr
-zypper rm -y MozillaFirefox* *-lang *-doc
+zypper rm -y MozillaFirefox* *-lang *-doc lightdm-gtk-greeter
 zypper al MozillaFirefox* *-lang *-doc
 # Configure lightdm
 systemctl set-default graphical
