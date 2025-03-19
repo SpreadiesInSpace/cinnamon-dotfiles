@@ -52,6 +52,9 @@ zypper in -y brave-browser
 # zypper ref
 # zypper in -y rmlint
 
+# For Cinnamon and Opi
+zypper rm -y busybox-which busybox-diffutils
+
 # All packages
 packages=(
     # System utilities
@@ -106,6 +109,7 @@ packages=(
     "libreoffice"
     "libreoffice-gtk3"
     "neovim"
+    "opi"
     "qbittorrent"
     "spice-vdagent"
     "google-noto-coloremoji-fonts"
@@ -141,9 +145,6 @@ cd unsorted/openSUSE/
 chmod +x gedit-plugins-fix.sh
 ./gedit-plugins-fix.sh
 cd ../..
-
-# Install OBS Package Installer (seperated for confirmation dialog)
-zypper in opi
 
 # Install Additional Tools for Virt Manager
 zypper in -y -t pattern kvm_server kvm_tools
