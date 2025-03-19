@@ -36,7 +36,8 @@ alias btm='btm --color gruvbox'
 # alias cleanLint='bash rmlint.sh -d && rmlint'
 
 # Fedora Cleaning
-alias cleanAll='flatpak remove --unused; sudo flatpak repair; yes | sudo dnf clean all | rm -rf ~/.cache/* | sudo journalctl --vacuum-size=50M | sudo journalctl --vacuum-time=4weeks | SystemMaxUse=50M | sudo bleachbit -c --preset && bleachbit -c --preset'
+alias cleanExtra='sudo rpm -e --nodeps cinnamon-themes mint-x-icons mint-y-icons mint-y-theme mint-themes mint-themes-gtk3 mint-themes-gtk4; sudo rm -rf /var/lib/systemd/coredump/*; sudo rm -rf /var/tmp/.guestfs-1000/*'
+alias cleanAll='flatpak remove --unused; sudo flatpak repair; cleanExtra; yes | sudo dnf clean all | rm -rf ~/.cache/* | sudo journalctl --vacuum-size=50M | sudo journalctl --vacuum-time=4weeks | SystemMaxUse=50M | sudo bleachbit -c --preset && bleachbit -c --preset'
 alias cleanKernel='sudo dnf remove $(dnf repoquery --installonly --latest-limit=-1 -q)'
  
 # Fedora Update
@@ -53,4 +54,3 @@ alias UC='updateAll;sudo bleachbit;exit'
 if [[ $(tty) == /dev/tty[0-9]* ]]; then
   return
 fi
-
