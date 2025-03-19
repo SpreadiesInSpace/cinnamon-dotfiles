@@ -44,7 +44,7 @@
 2. Set qt5ct and qt6ct to kvantum
 3. Set QT_QPA_PLATFORMTHEME=qt5ct to /etc/environment
 4. Set GTK_THEME=Gruvbox-Dark-BL to /etc/environment
-5. Set Default font to Noto Sans Regulat,  Document font to Cantarell Regular, and Monospace font to SauceCodePro Nerd Font Regular
+5. Set Default font to Noto Sans Regular,  Document font to Cantarell Regular, and Monospace font to SauceCodePro Nerd Font Regular
 6. Set Icon Theme to Gruvbox-Dark (oomox-gruvbox-dark for NixOS)
 
 *Note:  This is taken care of in the script.*
