@@ -170,6 +170,8 @@ active-plugins=['terminal', 'git', 'bracketcompletion', 'spell', 'sort', 'quicko
 filter-mode=@as []
 filter-pattern=''
 tree-view=true
+root='file:///'
+virtual-root='file:///home/f16poom'
 
 [org/gnome/gedit/preferences/editor]
 background-pattern='grid'
