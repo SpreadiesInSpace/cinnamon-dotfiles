@@ -14,8 +14,8 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 # Prompt for root password
-read -sp "Enter new root password: " rootpasswd
-echo
+# read -sp "Enter new root password: " rootpasswd
+# echo
 
 # Prompt for new user details
 read -p "Enter new username: " username
@@ -57,35 +57,27 @@ source /etc/profile
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=grub
 grub-mkconfig -o /boot/grub/grub.cfg
 
-# Install sbopkg (for sbotools)
-wget https://github.com/sbopkg/sbopkg/releases/download/0.38.2/sbopkg-0.38.2-noarch-1_wsr.tgz
-installpkg sbopkg-0.38.2-noarch-1_wsr.tgz
-rm sbopkg-0.38.2-noarch-1_wsr.tgz
-# Point sbopkg to current repo & sync
-sed -i "s/REPO_BRANCH=\${REPO_BRANCH:-15.0}/REPO_BRANCH=\${REPO_BRANCH:-current}/g" /etc/sbopkg/sbopkg.conf
-sed -i "s/REPO_NAME=\${REPO_NAME:-SBo}/REPO_NAME=\${REPO_NAME:-SBo-git}/g" /etc/sbopkg/sbopkg.conf
-# Sync repo
-sbopkg -r
-
-# Install sbotools (for slpkg)
-sbopkg -i sbotools
-sboconfig -r https://github.com/Ponce/slackbuilds.git
-# Sync repo
-sbosnap fetch
-# Update MAKEFLAGS in /etc/sbotools/sbotools.conf to match CPU cores
-sboconfig -j $(nproc)
-sboinstall arch-install-scripts
-
 # Edit fstab for Timeshift
 # noatime,compress=zstd,space_cache=v2,subvol=@ for /
 # noatime,compress=zstd,space_cache=v2,subvol=@home for /home
 # nano /etc/fstab
 
+# Install arch-install-scripts for fstab 
+wget https://gitlab.archlinux.org/archlinux/arch-install-scripts/-/archive/v29/arch-install-scripts-v29.tar.gz
+wget https://slackbuilds.org/slackbuilds/15.0/system/arch-install-scripts.tar.gz
+tar xvf arch-install-scripts.tar.gz
+mv arch-install-scripts-v29.tar.gz arch-install-scripts/
+cd arch-install-scripts/
+./arch-install-scripts.SlackBuild
+installpkg /tmp/arch-install-scripts-29-noarch-1_SBo.tgz
+cd ..
+rm -rf arch-install-scripts*
+
 # Generate Fstab
 genfstab -U / >> /etc/fstab
 
 # Add User - Set password for root and user with responses from the start
-echo "root:$rootpasswd" | chpasswd
+# echo "root:$rootpasswd" | chpasswd
 useradd -m -g users -G wheel,audio,video,plugdev,netdev,lp,scanner -s /bin/bash $username
 echo "$username:$userpasswd" | chpasswd
 
