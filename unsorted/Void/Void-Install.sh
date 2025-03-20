@@ -8,6 +8,8 @@ fi
 
 # Refresh (for older ISOs)
 xbps-install -Sy
+
+# Install tools
 xbps-install -y parted xtools
 
 # Prompt for root password
