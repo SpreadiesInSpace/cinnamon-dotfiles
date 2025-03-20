@@ -90,16 +90,30 @@ grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=grub
 sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub
 grub-mkconfig -o /boot/grub/grub.cfg
 
-# Install arch-install-scripts for fstab 
-wget https://gitlab.archlinux.org/archlinux/arch-install-scripts/-/archive/v29/arch-install-scripts-v29.tar.gz
-wget https://slackbuilds.org/slackbuilds/15.0/system/arch-install-scripts.tar.gz
-tar xvf arch-install-scripts.tar.gz
-mv arch-install-scripts-v29.tar.gz arch-install-scripts/
-cd arch-install-scripts/
-./arch-install-scripts.SlackBuild
-installpkg /tmp/arch-install-scripts-29-noarch-1_SBo.tgz
-cd ..
-rm -rf arch-install-scripts*
+# Function to install arch-install-scripts
+install_arch_install_scripts() {
+  echo "Installing arch-install-scripts..."
+
+  # Download necessary files
+  wget -q https://gitlab.archlinux.org/archlinux/arch-install-scripts/-/archive/v29/arch-install-scripts-v29.tar.gz -O arch-install-scripts-v29.tar.gz
+  wget -q https://slackbuilds.org/slackbuilds/15.0/system/arch-install-scripts.tar.gz -O arch-install-scripts-slackbuild.tar.gz
+
+  # Extract files
+  tar -xf arch-install-scripts-slackbuild.tar.gz
+  mv arch-install-scripts-v29.tar.gz arch-install-scripts/
+  cd arch-install-scripts || exit
+
+  # Build and install the package
+  ./arch-install-scripts.SlackBuild
+  installpkg /tmp/arch-install-scripts-29-noarch-1_SBo.tgz
+
+  # Clean up
+  cd ..
+  rm -rf arch-install-scripts*
+}
+
+# Call the function
+install_arch_install_scripts
 
 # Edit /etc/fstab for Timeshift
 # noatime,compress=zstd,space_cache=v2,subvol=@ for /
