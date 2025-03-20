@@ -19,7 +19,7 @@ echo
 read -p "Enter hostname: " hostname
 
 # Prompt for drive to partition
-read -p "Enter drive to use (e.g., /dev/vda): " drive
+read -p "Enter drive to use (e.g., /dev/sda, /dev/vda, /dev/nvme0n1, /dev/mmcblk0): " drive
 
 # Partition the drive
 echo "Partitioning $drive..."
@@ -29,19 +29,38 @@ parted -s "$drive" set 1 esp on
 parted -s "$drive" mkpart primary btrfs 513MiB 100%
 
 # Format the partitions
-mkfs.vfat "${drive}1"
-mkfs.btrfs -f "${drive}2"
+if [[ "$drive" == *"nvme"* ]] || [[ "$drive" == *"mmcblk"* ]]; then
+  mkfs.vfat "${drive}p1"
+  mkfs.btrfs -f "${drive}p2"
+else
+  mkfs.vfat "${drive}1"
+  mkfs.btrfs -f "${drive}2"
+fi
 
 # Mount the partitions and create BTRFS subvolumes
-mount "${drive}2" /mnt
+if [[ "$drive" == *"nvme"* ]] || [[ "$drive" == *"mmcblk"* ]]; then
+  mount "${drive}p2" /mnt
+else
+  mount "${drive}2" /mnt
+fi
+
 btrfs su cr /mnt/@
 btrfs su cr /mnt/@home
 umount /mnt
-mount -o noatime,compress=zstd,space_cache=v2,subvol=@ "${drive}2" /mnt
-mkdir -p /mnt/home
-mount -o noatime,compress=zstd,space_cache=v2,subvol=@home "${drive}2" /mnt/home
-mkdir -p /mnt/boot/efi
-mount "${drive}1" /mnt/boot/efi
+
+if [[ "$drive" == *"nvme"* ]] || [[ "$drive" == *"mmcblk"* ]]; then
+  mount -o noatime,compress=zstd,space_cache=v2,subvol=@ "${drive}p2" /mnt
+  mkdir -p /mnt/home
+  mount -o noatime,compress=zstd,space_cache=v2,subvol=@home "${drive}p2" /mnt/home
+  mkdir -p /mnt/boot/efi
+  mount "${drive}p1" /mnt/boot/efi
+else
+  mount -o noatime,compress=zstd,space_cache=v2,subvol=@ "${drive}2" /mnt
+  mkdir -p /mnt/home
+  mount -o noatime,compress=zstd,space_cache=v2,subvol=@home "${drive}2" /mnt/home
+  mkdir -p /mnt/boot/efi
+  mount "${drive}1" /mnt/boot/efi
+fi
 
 # Install Essential packages
 pacstrap -K /mnt base linux linux-firmware sudo bash-completion grub efibootmgr git networkmanager nano
@@ -92,4 +111,3 @@ cd cinnamon-dotfiles
 echo "Reboot and run Setup-Arch.sh in cinnamon-dotfiles located in $username's home folder."
 EOUSR
 EOF
-
