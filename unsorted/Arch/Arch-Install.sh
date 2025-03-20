@@ -15,62 +15,81 @@ read -p "Enter new username: " username
 read -sp "Enter password for $username: " userpasswd
 echo
 
-# Set Keyboard Layout
-loadkeys us
-# Sync Time
-timedatectl
+# Prompt for hostname
+read -p "Enter hostname: " hostname
 
-# BTRFS Subvolumes (for Timeshift) - Preparing the Disks
-mkfs.vfat /dev/vda1
-mkfs.btrfs -f /dev/vda2
-mount /dev/vda2 /mnt
+# Prompt for drive to partition
+read -p "Enter drive to use (e.g., /dev/vda): " drive
+
+# Partition the drive
+echo "Partitioning $drive..."
+parted -s "$drive" mklabel gpt
+parted -s "$drive" mkpart primary fat32 1MiB 513MiB
+parted -s "$drive" set 1 esp on
+parted -s "$drive" mkpart primary btrfs 513MiB 100%
+
+# Format the partitions
+mkfs.vfat "${drive}1"
+mkfs.btrfs -f "${drive}2"
+
+# Mount the partitions and create BTRFS subvolumes
+mount "${drive}2" /mnt
 btrfs su cr /mnt/@
 btrfs su cr /mnt/@home
 umount /mnt
-mount -o noatime,compress=zstd,space_cache=v2,subvol=@ /dev/vda2 /mnt/ 
+mount -o noatime,compress=zstd,space_cache=v2,subvol=@ "${drive}2" /mnt
 mkdir -p /mnt/home
-mount -o noatime,compress=zstd,space_cache=v2,subvol=@home /dev/vda2 /mnt/home 
+mount -o noatime,compress=zstd,space_cache=v2,subvol=@home "${drive}2" /mnt/home
 mkdir -p /mnt/boot/efi
-mount /dev/vda1 /mnt/boot/efi
+mount "${drive}1" /mnt/boot/efi
 
 # Install Essential packages
-pacstrap -K /mnt base linux linux-firmware sudo bash-completion grub efibootmgr git networkmanager nano #intel-ucode
+pacstrap -K /mnt base linux linux-firmware sudo bash-completion grub efibootmgr git networkmanager nano
+
 # Generate Fstab
 genfstab -U /mnt >> /mnt/etc/fstab
+
 # Entering Chroot
 cat << EOF | arch-chroot /mnt
 
 # Set Timezone
 ln -sf /usr/share/zoneinfo/Asia/Bangkok /etc/localtime
-# Sync to Hardware Clock
 hwclock --systohc
-# Locale Generation (uncomment en_US.UTF-8 UTF-8 in /etc/locale.gen)
+
+# Locale Generation
 echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
 locale-gen
+
 # Set Locale
-echo "LANG=en_US.UTF-8" >> /etc/locale.conf
-echo "KEYMAP="us"" >> /etc/vconsole.conf
-# Hostname
-echo Arch > /etc/hostname
+echo "LANG=en_US.UTF-8" > /etc/locale.conf
+echo "KEYMAP=us" > /etc/vconsole.conf
+
+# Set Hostname
+echo "$hostname" > /etc/hostname
+
 # Enable Networking
 systemctl enable NetworkManager
-# Configuring the Bootloader
+
+# Configure GRUB Bootloader
 grub-install --target=x86_64-efi --efi-directory=/boot/efi
+# Set GRUB timeout to 0
+sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub
 grub-mkconfig -o /boot/grub/grub.cfg
-# Setup Sudo by uncommenting %wheel ALL=(ALL:ALL) with visudo
+
+# Setup Sudo
 sed -i 's/^#\s*\(%wheel ALL=(ALL:ALL) ALL\)/\1/' /etc/sudoers
 
-# Set password for root and user with responses from the start
+# Set passwords and add user
 echo "root:$rootpasswd" | chpasswd
-useradd -m -G users,wheel,audio,video -s /bin/bash $username 
+useradd -m -G users,wheel,audio,video -s /bin/bash $username
 echo "$username:$userpasswd" | chpasswd
 
-# Clone My Repo as the new user
+# Clone repo as the new user
 cat << EOUSR | su - $username
 cd
 git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles
 cd cinnamon-dotfiles
-# sudo bash Setup-Arch.sh
 echo "Reboot and run Setup-Arch.sh in cinnamon-dotfiles located in $username's home folder."
 EOUSR
 EOF
+
