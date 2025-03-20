@@ -15,19 +15,52 @@ read -p "Enter new username: " username
 read -sp "Enter password for $username: " userpasswd
 echo
 
-# BTRFS Subvolumes (for Timeshift) - Preparing the Disks
-mkfs.vfat /dev/vda1
-mkfs.btrfs -f /dev/vda2
-mount /dev/vda2 /mnt
+# Prompt for hostname
+read -p "Enter hostname: " hostname
+
+# Prompt for drive to partition
+read -p "Enter drive to use (e.g., /dev/sda, /dev/vda, /dev/nvme0n1, /dev/mmcblk0): " drive
+
+# Partition the drive
+echo "Partitioning $drive..."
+parted -s "$drive" mklabel gpt
+parted -s "$drive" mkpart primary fat32 1MiB 513MiB
+parted -s "$drive" set 1 esp on
+parted -s "$drive" mkpart primary btrfs 513MiB 100%
+
+# Format the partitions
+if [[ "$drive" == *"nvme"* ]] || [[ "$drive" == *"mmcblk"* ]]; then
+  mkfs.vfat "${drive}p1"
+  mkfs.btrfs -f "${drive}p2"
+else
+  mkfs.vfat "${drive}1"
+  mkfs.btrfs -f "${drive}2"
+fi
+
+# Mount the partitions and create BTRFS subvolumes
+if [[ "$drive" == *"nvme"* ]] || [[ "$drive" == *"mmcblk"* ]]; then
+  mount "${drive}p2" /mnt
+else
+  mount "${drive}2" /mnt
+fi
+
 btrfs su cr /mnt/@
 btrfs su cr /mnt/@home
 umount /mnt
 mkdir /mnt/gentoo
-mount -o noatime,compress=zstd,space_cache=v2,subvol=@ /dev/vda2 /mnt/gentoo 
-mkdir -p /mnt/gentoo/home
-mount -o noatime,compress=zstd,space_cache=v2,subvol=@home /dev/vda2 /mnt/gentoo/home 
-mkdir -p /mnt/gentoo/efi
-mount /dev/vda1 /mnt/gentoo/efi
+if [[ "$drive" == *"nvme"* ]] || [[ "$drive" == *"mmcblk"* ]]; then
+  mount -o noatime,compress=zstd,space_cache=v2,subvol=@ "${drive}p2" /mnt/gentoo
+  mkdir -p /mnt/gentoo/home
+  mount -o noatime,compress=zstd,space_cache=v2,subvol=@home "${drive}p2" /mnt/gentoo/home
+  mkdir -p /mnt/gentoo/efi
+  mount "${drive}p1" /mnt/gentoo/efi
+else
+  mount -o noatime,compress=zstd,space_cache=v2,subvol=@ "${drive}2" /mnt/gentoo
+  mkdir -p /mnt/gentoo/home
+  mount -o noatime,compress=zstd,space_cache=v2,subvol=@home "${drive}2" /mnt/gentoo/home
+  mkdir -p /mnt/gentoo/efi
+  mount "${drive}1" /mnt/gentoo/efi
+fi
 
 # Gentoo Install - The Stage File
 cd /mnt/gentoo
@@ -158,8 +191,8 @@ emerge -qv sys-kernel/linux-firmware # No Need for Virtual Machines
 emerge -qv genfstab
 genfstab -U / >> /etc/fstab
 # nano /etc/fstab
-# Hostname
-echo Gentoo > /etc/hostname
+# Set Hostname
+echo "$hostname" > /etc/hostname
 # Systemd Setup
 systemd-machine-id-setup
 # systemd-firstboot --prompt
@@ -177,7 +210,8 @@ emerge -vq sys-apps/mlocate app-shells/bash-completion sys-fs/xfsprogs sys-fs/e2
 
 # Gentoo Install - Configuring the Bootloader
 grub-install --efi-directory=/efi
-# mount -o remount,rw,nosuid,nodev,noexec --types efivarfs efivarfs /sys/firmware/efi/efivars
+# Set GRUB timeout to 0
+sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub
 grub-mkconfig -o /boot/grub/grub.cfg
 
 # Gentoo Install - Finalizing

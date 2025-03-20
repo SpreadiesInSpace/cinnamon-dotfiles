@@ -1,6 +1,19 @@
 # Bash Scripts
 https://pastebin.com/3KEhUUzF
 
+# BTRFS Subvolumes (for Timeshift) - Preparing the Disks
+mkfs.vfat /dev/vda1
+mkfs.btrfs -f /dev/vda2
+mount /dev/vda2 /mnt
+btrfs su cr /mnt/@
+btrfs su cr /mnt/@home
+umount /mnt
+mount -o noatime,compress=zstd,space_cache=v2,subvol=@ /dev/vda2 /mnt/ 
+mkdir -p /mnt/home
+mount -o noatime,compress=zstd,space_cache=v2,subvol=@home /dev/vda2 /mnt/home 
+mkdir -p /mnt/boot/efi
+mount /dev/vda1 /mnt/boot/efi
+
 # Mount Shared Folder
 chmod 777 Share
 
