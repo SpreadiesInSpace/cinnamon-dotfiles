@@ -6,6 +6,10 @@ if [ "$EUID" -ne 0 ]; then
   exit
 fi
 
+# Update keyring
+echo "Updating keyring..."
+pacman -Sy --noconfirm archlinux-keyring
+
 # Prompt for root password
 read -sp "Enter new root password: " rootpasswd
 echo
