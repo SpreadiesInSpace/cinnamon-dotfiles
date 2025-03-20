@@ -92,6 +92,10 @@ else
   echo "/etc/inittab file not found. Skipping the run level change."
 fi
 
+# Review Hostname
+nano /etc/HOSTNAME
+nano /etc/hosts
+
 # Clone My Repo as the new user
 cat << EOUSR | su - $username
 cd

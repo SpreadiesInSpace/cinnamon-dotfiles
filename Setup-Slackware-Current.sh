@@ -15,10 +15,6 @@ fi
 # Get the current username
 username=$SUDO_USER
 
-# Review Hostname
-nano /etc/HOSTNAME
-nano /etc/hosts
-
 # Install sbopkg (for sbotools)
 wget https://github.com/sbopkg/sbopkg/releases/download/0.38.2/sbopkg-0.38.2-noarch-1_wsr.tgz
 installpkg sbopkg-0.38.2-noarch-1_wsr.tgz
