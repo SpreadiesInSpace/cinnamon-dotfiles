@@ -56,10 +56,33 @@ source /etc/profile
 # Install Grub
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=grub
 grub-mkconfig -o /boot/grub/grub.cfg
+
+# Install sbopkg (for sbotools)
+wget https://github.com/sbopkg/sbopkg/releases/download/0.38.2/sbopkg-0.38.2-noarch-1_wsr.tgz
+installpkg sbopkg-0.38.2-noarch-1_wsr.tgz
+rm sbopkg-0.38.2-noarch-1_wsr.tgz
+# Point sbopkg to current repo & sync
+sed -i "s/REPO_BRANCH=\${REPO_BRANCH:-15.0}/REPO_BRANCH=\${REPO_BRANCH:-current}/g" /etc/sbopkg/sbopkg.conf
+sed -i "s/REPO_NAME=\${REPO_NAME:-SBo}/REPO_NAME=\${REPO_NAME:-SBo-git}/g" /etc/sbopkg/sbopkg.conf
+# Sync repo
+sbopkg -r
+
+# Install sbotools (for slpkg)
+sbopkg -i sbotools
+sboconfig -r https://github.com/Ponce/slackbuilds.git
+# Sync repo
+sbosnap fetch
+# Update MAKEFLAGS in /etc/sbotools/sbotools.conf to match CPU cores
+sboconfig -j $(nproc)
+sboinstall arch-install-scripts
+
 # Edit fstab for Timeshift
 # noatime,compress=zstd,space_cache=v2,subvol=@ for /
 # noatime,compress=zstd,space_cache=v2,subvol=@home for /home
-nano /etc/fstab
+# nano /etc/fstab
+
+# Generate Fstab
+genfstab -U / >> /etc/fstab
 
 # Add User - Set password for root and user with responses from the start
 echo "root:$rootpasswd" | chpasswd
@@ -68,11 +91,14 @@ echo "$username:$userpasswd" | chpasswd
 
 # Setup Sudo by uncommenting %wheel ALL=(ALL:ALL) with visudo
 sed -i 's/^#\s*\(%wheel ALL=(ALL:ALL) ALL\)/\1/' /etc/sudoers
-# EDITOR=nano visudo
-# Select XFCE as DE
-# xwmconfig
+
 # Set Run Level to 4
-nano /etc/inittab
+if [ -f "/etc/inittab" ]; then
+  sed -i 's/id:3:initdefault:/id:4:initdefault:/g' /etc/inittab
+  echo "Default run level changed to 4 in /etc/inittab"
+else
+  echo "/etc/inittab file not found. Skipping the run level change."
+fi
 
 # Clone My Repo as the new user
 cat << EOUSR | su - $username
