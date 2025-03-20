@@ -74,12 +74,12 @@ sed -i 's/^#\s*\(%wheel ALL=(ALL:ALL) ALL\)/\1/' /etc/sudoers
 # Set Run Level to 4
 nano /etc/inittab
 
-# Switch to User
+# Clone My Repo as the new user
 cat << EOUSR | su - $username
-# Clone my Repo
 cd
 git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles
 cd cinnamon-dotfiles
-bash sudo Setup-Slackware-Current.sh
+# sudo bash Setup-Slackware.sh
+echo "Reboot and run Setup-Slackware.sh in cinnamon-dotfiles located in $username's home folder."
 EOUSR
 EOF
