@@ -92,7 +92,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 # Edit /etc/fstab for Timeshift
 # noatime,compress=zstd,space_cache=v2,subvol=@ for /
-# noatime,compress=zstd,space_cache=v2,subvol=@home for /home # nano /etc/fstab
+# noatime,compress=zstd,space_cache=v2,subvol=@home for /home
 genfstab -U / > /etc/fstab
 
 # Set Hostname
