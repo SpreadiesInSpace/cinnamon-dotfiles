@@ -6,12 +6,12 @@ if [ "$EUID" -ne 0 ]; then
   exit
 fi
 
-# Refresh (for older ISOs)
-zypper ref
-
 # Enable Parallel Downloads
 export ZYPP_CURL2=1
 export ZYPP_PCK_PRELOAD=1
+
+# Refresh (for older ISOs)
+zypper ref
 
 # Fix openSUSE's line break paste issue
 echo "set enable-bracketed-paste" >> ~/.inputrc
