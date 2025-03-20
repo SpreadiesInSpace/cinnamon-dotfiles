@@ -86,6 +86,7 @@ xgenfstab -U /mnt > /mnt/etc/fstab
 cat << EOF | xchroot /mnt /bin/bash
 
 # New Chroot Environment
+source /etc/profile
 xbps-install -Syu
 xbps-install -y git xtools xmirror nano
 
@@ -129,7 +130,7 @@ cat << EOUSR | su - $username
 cd
 git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles
 cd cinnamon-dotfiles
-echo "Delete dangling entries (everything but your btrfs and vfat mounts) from /etc/fstab, reboot and run Setup-Void.sh in cinnamon-dotfiles located in $username's home folder."
+echo "Reboot and run Setup-Void.sh in cinnamon-dotfiles located in $username's home folder."
 EOUSR
 EOF
 
