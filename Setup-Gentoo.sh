@@ -64,7 +64,7 @@ set_video_card() {
 set_video_card
 
 # Review make.conf file
-# nano /etc/portage/make.conf
+nano /etc/portage/make.conf
 
 # Install Essentials 
 emerge -vquN app-eselect/eselect-repository app-editors/nano dev-vcs/git
