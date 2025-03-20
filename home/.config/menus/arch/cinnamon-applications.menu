@@ -37,4 +37,11 @@
 		</Exclude>
 		<AppDir>/home/f16poom/.local/share/applications</AppDir>
 	</Menu>
+	<Menu>
+		<Name>Development</Name>
+		<Exclude>
+			<Filename>yad-icon-browser.desktop</Filename>
+		</Exclude>
+		<AppDir>/home/Spready/.local/share/applications</AppDir>
+	</Menu>
 </Menu>
