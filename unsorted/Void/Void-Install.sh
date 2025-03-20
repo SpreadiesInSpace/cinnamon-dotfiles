@@ -15,18 +15,52 @@ read -p "Enter new username: " username
 read -sp "Enter password for $username: " userpasswd
 echo
 
-# BTRFS Subvolumes (for Timeshift) - Preparing the Disks
-mkfs.vfat /dev/vda1
-mkfs.btrfs -f /dev/vda2
-mount /dev/vda2 /mnt
+# Prompt for hostname
+read -p "Enter hostname: " hostname
+
+# Prompt for drive to partition
+read -p "Enter drive to use (e.g., /dev/vda, /dev/nvme0n1, /dev/mmcblk0): " drive
+
+# Partition the drive
+echo "Partitioning $drive..."
+parted -s "$drive" mklabel gpt
+parted -s "$drive" mkpart primary fat32 1MiB 513MiB
+parted -s "$drive" set 1 esp on
+parted -s "$drive" mkpart primary btrfs 513MiB 100%
+
+# Format the partitions
+if [[ "$drive" == *"nvme"* ]] || [[ "$drive" == *"mmcblk"* ]]; then
+  mkfs.vfat "${drive}p1"
+  mkfs.btrfs -f "${drive}p2"
+else
+  mkfs.vfat "${drive}1"
+  mkfs.btrfs -f "${drive}2"
+fi
+
+# Mount the partitions and create BTRFS subvolumes
+if [[ "$drive" == *"nvme"* ]] || [[ "$drive" == *"mmcblk"* ]]; then
+  mount "${drive}p2" /mnt
+else
+  mount "${drive}2" /mnt
+fi
+
 btrfs su cr /mnt/@
 btrfs su cr /mnt/@home
 umount /mnt
-mount -o noatime,compress=zstd,space_cache=v2,subvol=@ /dev/vda2 /mnt/ 
-mkdir -p /mnt/home
-mount -o noatime,compress=zstd,space_cache=v2,subvol=@home /dev/vda2 /mnt/home 
-mkdir -p /mnt/boot/efi
-mount /dev/vda1 /mnt/boot/efi
+
+if [[ "$drive" == *"nvme"* ]] || [[ "$drive" == *"mmcblk"* ]]; then
+  mount -o noatime,compress=zstd,space_cache=v2,subvol=@ "${drive}p2" /mnt
+  mkdir -p /mnt/home
+  mount -o noatime,compress=zstd,space_cache=v2,subvol=@home "${drive}p2" /mnt/home
+  mkdir -p /mnt/boot/efi
+  mount "${drive}p1" /mnt/boot/efi
+else
+  mount -o noatime,compress=zstd,space_cache=v2,subvol=@ "${drive}2" /mnt
+  mkdir -p /mnt/home
+  mount -o noatime,compress=zstd,space_cache=v2,subvol=@home "${drive}2" /mnt/home
+  mkdir -p /mnt/boot/efi
+  mount "${drive}1" /mnt/boot/efi
+fi
 
 # Install Base System
 # REPO=https://repo-fastly.voidlinux.org/current
@@ -39,8 +73,11 @@ XBPS_ARCH=$ARCH xbps-install -Sy -r /mnt -R "$REPO" base-system
 # Copy Network Info 
 cp --dereference /etc/resolv.conf /mnt/etc/
 
-# Entering Chroot
+# Generate fstab
 xbps-install -y xtools
+xgenfstab -U /mnt > /mnt/etc/fstab
+
+# Entering Chroot
 cat << EOF | xchroot /mnt /bin/bash
 
 # New Chroot Environment
@@ -51,7 +88,7 @@ xbps-install -y git xtools xmirror nano
 chsh -s /bin/bash
 
 # Set Hostname
-echo Void > /etc/hostname
+echo "$hostname" > /etc/hostname
 
 # Set Timezone
 ln -sf /usr/share/zoneinfo/Asia/Bangkok /etc/localtime
@@ -70,16 +107,13 @@ xbps-install -y sudo
 # Setup Sudo by uncommenting %wheel ALL=(ALL:ALL) with visudo
 sed -i 's/^#\s*\(%wheel ALL=(ALL:ALL) ALL\)/\1/' /etc/sudoers
 
-# Generate fstab
-cp /proc/mounts /etc/fstab
-# delete dev cgroup and other termporary mounts and add
-# tmpfs /tmp tmpfs defaults,nosuid,nodev 0 0
-# change last column value to 1 (file system error corrected) for / and 2 (system should be rebooted) for others
-nano /etc/fstab
-
 # Installing Grub
 xbps-install -y grub-x86_64-efi
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="Void"
+
+# Set GRUB timeout to 0
+sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub
+# grub-mkconfig -o /boot/grub/grub.cfg
 
 # Reconfigure System
 xbps-reconfigure -fa
@@ -90,7 +124,7 @@ cat << EOUSR | su - $username
 cd
 git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles
 cd cinnamon-dotfiles
-# sudo bash Setup-Void.sh
 echo "Delete dangling entries (everything but your btrfs and vfat mounts) from /etc/fstab, reboot and run Setup-Void.sh in cinnamon-dotfiles located in $username's home folder."
 EOUSR
 EOF
+
