@@ -81,7 +81,8 @@ packages=(
     "evince"
     "ffmpegthumbnailer"
     "gedit"
-    "gedit-plugins"
+    # "gedit-plugins"
+    # "gedit-plugin-*"
     "gnome-calculator"
     "gnome-screenshot"
     "gnome-system-monitor"
@@ -136,10 +137,10 @@ zypper in -y neofetch
 zypper al neofetch
 
 # Apply gedit-plugins fix
-cd unsorted/openSUSE/
-chmod +x gedit-plugins-fix.sh
-./gedit-plugins-fix.sh
-cd ../..
+# cd unsorted/openSUSE/
+# chmod +x gedit-plugins-fix.sh
+# ./gedit-plugins-fix.sh
+# cd ../..
 
 # Install Additional Tools for Virt Manager
 zypper in -y -t pattern kvm_server kvm_tools
