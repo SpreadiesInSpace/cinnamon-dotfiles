@@ -6,6 +6,10 @@ if [ "$EUID" -ne 0 ]; then
   exit
 fi
 
+# Refresh (for older ISOs)
+xbps-install -Sy
+xbps-install -y parted xtools
+
 # Prompt for root password
 read -sp "Enter new root password: " rootpasswd
 echo
@@ -74,7 +78,6 @@ XBPS_ARCH=$ARCH xbps-install -Sy -r /mnt -R "$REPO" base-system
 cp --dereference /etc/resolv.conf /mnt/etc/
 
 # Generate fstab
-xbps-install -y xtools
 xgenfstab -U /mnt > /mnt/etc/fstab
 
 # Entering Chroot
