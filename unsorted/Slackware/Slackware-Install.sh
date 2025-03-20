@@ -81,6 +81,12 @@ genfstab -U / > /etc/fstab
 useradd -m -g users -G wheel,audio,video,plugdev,netdev,lp,scanner -s /bin/bash $username
 echo "$username:$userpasswd" | chpasswd
 
+# Set Hostname
+echo Slackware > /etc/HOSTNAME
+echo "# For loopbacking.
+127.0.0.1               localhost
+::1                     localhost" | sudo tee /etc/hosts > /dev/null
+
 # Setup Sudo by uncommenting %wheel ALL=(ALL:ALL) with visudo
 sed -i 's/^#\s*\(%wheel ALL=(ALL:ALL) ALL\)/\1/' /etc/sudoers
 
@@ -91,10 +97,6 @@ if [ -f "/etc/inittab" ]; then
 else
   echo "/etc/inittab file not found. Skipping the run level change."
 fi
-
-# Review Hostname
-nano /etc/HOSTNAME
-nano /etc/hosts
 
 # Clone My Repo as the new user
 cat << EOUSR | su - $username
