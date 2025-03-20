@@ -38,7 +38,7 @@ zypper in -y git
 # Install Media Codecs
 zypper ar -cfp 90 --no-gpgcheck 'https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/Essentials/' packman-essentials
 zypper ref
-zypper dup --from packman-essentials --allow-vendor-change
+zypper dup --from packman-essentials -y --allow-vendor-change
 zypper in --from packman-essentials -y ffmpeg gstreamer-plugins-{good,bad,ugly,libav} libavcodec
 
 # Install Brave
