@@ -6,7 +6,7 @@ if [ "$EUID" -ne 0 ]; then
   exit
 fi
 
-# Update keyring
+# Update keyring (for older ISOs)
 echo "Updating keyring..."
 pacman -Sy --noconfirm archlinux-keyring
 
