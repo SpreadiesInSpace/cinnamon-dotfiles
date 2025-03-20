@@ -74,7 +74,7 @@ cd ..
 rm -rf arch-install-scripts*
 
 # Generate Fstab
-genfstab -U / >> /etc/fstab
+genfstab -U / > /etc/fstab
 
 # Add User - Set password for root and user with responses from the start
 # echo "root:$rootpasswd" | chpasswd
