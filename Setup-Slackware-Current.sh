@@ -14,6 +14,7 @@ fi
 
 # Get the current username
 username=$SUDO_USER
+user_home=$(eval echo ~"$username")
 
 # Install sbopkg (for sbotools)
 wget https://github.com/sbopkg/sbopkg/releases/download/0.38.2/sbopkg-0.38.2-noarch-1_wsr.tgz
@@ -265,9 +266,15 @@ slpkg install -y gnome-terminal -o gnome -O
 slpkg install -y "*" --repository=csb
 xwmconfig
 
-# Enable Flathub
+# Enable & Set up Flathub
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 flatpak install -y com.brave.Browser
+
+# Set Environment Variables for Flatpak
+export_line='export XDG_DATA_DIRS="/var/lib/flatpak/exports/share:/home/'"$username"'/local/share/flatpak/exports/share:$XDG_DATA_DIRS"'
+# Add to /etc/profile (for system-wide environment settings)
+profile_file="/etc/profile"
+if ! grep -Fxq
 
 # Start spice-vdagent service (it already autostarts by default)
 /etc/rc.d/rc.spice-vdagent start
