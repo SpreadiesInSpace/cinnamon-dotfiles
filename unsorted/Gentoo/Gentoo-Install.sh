@@ -1,5 +1,25 @@
 #!/bin/bash
 
+# Skip Compiling sys-kernel/linux-firmware for VMs
+echo "Select installation type:"
+echo "1) Virtual Machine"
+echo "2) Physical Machine"
+read -p "Enter your choice (1 or 2): " choice
+case $choice in
+    1)
+        echo "Virtual Machine installation selected. Skipping sys-kernel/linux-firmware..."
+        # Add any VM-specific setup here
+        ;;
+    2)
+        echo "Physical Machine installation selected. Installing sys-kernel/linux-firmware..."
+        emerge -qv sys-kernel/linux-firmware
+        ;;
+    *)
+        echo "Invalid choice. Please run the script again and select either 1 or 2."
+        exit 1
+        ;;
+esac
+
 # Check if script is run as root
 if [ "$EUID" -ne 0 ]; then
   echo "Please run the script as superuser"
@@ -211,7 +231,7 @@ emerge -vq sys-apps/mlocate app-shells/bash-completion sys-fs/xfsprogs sys-fs/e2
 # Gentoo Install - Configuring the Bootloader
 grub-install --efi-directory=/efi
 # Set GRUB timeout to 0
-sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub
+sed -i '/^#*GRUB_TIMEOUT=/s/^#*GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub
 grub-mkconfig -o /boot/grub/grub.cfg
 
 # Gentoo Install - Finalizing
