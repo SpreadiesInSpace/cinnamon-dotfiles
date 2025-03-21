@@ -154,7 +154,8 @@ slpkg install -y "${alien_packages[@]}" -o alien
 
 # All packages
 packages=(
-    # System utilities
+    # System utilitiespc
+    
     #"gparted"
     #"neofetch"
     #"unzip"
@@ -274,7 +275,12 @@ flatpak install -y com.brave.Browser
 export_line='export XDG_DATA_DIRS="/var/lib/flatpak/exports/share:/home/'"$username"'/local/share/flatpak/exports/share:$XDG_DATA_DIRS"'
 # Add to /etc/profile (for system-wide environment settings)
 profile_file="/etc/profile"
-if ! grep -Fxq
+if ! grep -Fxq "$export_line" "$profile_file"; then
+  echo "$export_line" >> "$profile_file"
+  echo "Added XDG_DATA_DIRS export to $profile_file"
+else
+  echo "The line is already present in $profile_file"
+fi
 
 # Start spice-vdagent service (it already autostarts by default)
 /etc/rc.d/rc.spice-vdagent start
