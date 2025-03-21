@@ -119,6 +119,9 @@ install_arch_install_scripts
 # noatime,compress=zstd,space_cache=v2,subvol=@ for /
 # noatime,compress=zstd,space_cache=v2,subvol=@home for /home
 genfstab -U / > /etc/fstab
+echo "proc              /proc           proc    defaults         0 0
+devpts            /dev/pts        devpts  gid=5,mode=620   0 0
+tmpfs             /dev/shm        tmpfs   defaults         0 0" >> /etc/fstab
 
 # Set Hostname
 echo "$hostname" > /etc/HOSTNAME

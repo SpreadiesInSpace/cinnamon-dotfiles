@@ -1,6 +1,5 @@
 #!/bin/bash
 # Web - Brave Web Browser
-# com.brave.Browser.desktop:flatpak
 xdg-mime default brave-browser.desktop x-scheme-handler/http
 xdg-mime default brave-browser.desktop x-scheme-handler/https
 
