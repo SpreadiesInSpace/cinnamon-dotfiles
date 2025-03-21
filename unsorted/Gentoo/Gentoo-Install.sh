@@ -184,24 +184,13 @@ sys-kernel/installkernel dracut" > /etc/portage/package.use/installkernel
 # Install Kernel
 emerge -qv sys-kernel/gentoo-kernel-bin
 # Skip Compiling sys-kernel/linux-firmware for VMs
-echo "Select installation type:"
-echo "1) Virtual Machine"
-echo "2) Physical Machine"
-read -p "Enter your choice (1 or 2): " choice
-case $choice in
-    1)
-        echo "Virtual Machine installation selected. Skipping sys-kernel/linux-firmware..."
-        # Add any VM-specific setup here
-        ;;
-    2)
-        echo "Physical Machine installation selected. Installing sys-kernel/linux-firmware..."
-        emerge -qv sys-kernel/linux-firmware
-        ;;
-    *)
-        echo "Invalid choice. Please run the script again and select either 1 or 2."
-        exit 1
-        ;;
-esac
+if [ "$1" == "vm" ]; then
+    echo "Virtual Machine installation selected. Skipping sys-kernel/linux-firmware..."
+    # Add any VM-specific setup here
+else
+    echo "Physical Machine installation selected or default behavior. Installing sys-kernel/linux-firmware..."
+    emerge -qv sys-kernel/linux-firmware
+fi
 # emerge -qv sys-firmware/intel-microcode # For Intel. USE flag changes
 
 # Gentoo Install - Configuring the System
