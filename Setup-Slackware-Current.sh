@@ -244,7 +244,7 @@ sbo_packages=(
     #"totem-pl-parser" # for rhythmbox
     #"libpeas" # for rhythmbox
     "bottom"
-    # "brave-browser"
+    "brave-browser"
     "ripgrep"
     "libiscsi"
     # "spice-vdagent"
