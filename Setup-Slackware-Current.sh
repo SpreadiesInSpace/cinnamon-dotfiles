@@ -273,8 +273,8 @@ flatpak install -y com.brave.Browser
 
 # Set Flatpak Environment Variables
 export_line='export XDG_DATA_DIRS="/var/lib/flatpak/exports/share:/home/'"$username"'/local/share/flatpak/exports/share:$XDG_DATA_DIRS"'
-# Add to /etc/profile (for system-wide environment settings)
-profile_file="/etc/profile"
+# Append to user profile
+profile_file="$user_home/.profile"
 if ! grep -Fxq "$export_line" "$profile_file"; then
   echo "$export_line" >> "$profile_file"
   echo "Added XDG_DATA_DIRS export to $profile_file"
