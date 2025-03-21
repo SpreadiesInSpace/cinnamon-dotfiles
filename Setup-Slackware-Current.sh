@@ -154,8 +154,7 @@ slpkg -iy "${alien_packages[@]}" -o alien
 
 # All packages
 packages=(
-    # System utilitiespc
-    
+    # System utilities
     #"gparted"
     #"neofetch"
     #"unzip"
