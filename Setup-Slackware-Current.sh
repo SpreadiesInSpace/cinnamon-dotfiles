@@ -161,7 +161,7 @@ packages=(
     #"xkill"
     #"xrandr"
     # Network utilities
-    #"filezilla"
+    "filezilla"
     #"flatpak"
     #"appstream" # for flatpak
     #"bubblewrap" # for flatpak
