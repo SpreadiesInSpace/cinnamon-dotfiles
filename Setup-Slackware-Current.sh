@@ -145,7 +145,7 @@ slpkg install -y bash-completion -o "slack_extra"
 alien_packages=(
     "libreoffice"
     "qbittorrent"
-    "flatpak"
+    "libostree" # for flatpak
 )
 
 # Install packages from Alien over SBo to reduce compile times
@@ -161,6 +161,12 @@ packages=(
     #"xrandr"
     # Network utilities
     "filezilla"
+    "flatpak"
+    "appstream" # for flatpak
+    "bubblewrap" # for flatpak
+    "xdg-desktop-portal-gtk" # for flatpak
+    "xdg-dbus-proxy" # for flatpak
+    "ostree" # for flatpak
     #"gvfs"
     #"kdeconnect"
     #"samba"
@@ -236,7 +242,7 @@ sbo_packages=(
     #"totem-pl-parser" # for rhythmbox
     #"libpeas" # for rhythmbox
     "bottom"
-    "brave-browser"
+    # "brave-browser"
     "ripgrep"
     "libiscsi"
     # "spice-vdagent"
@@ -261,6 +267,7 @@ xwmconfig
 
 # Enable Flathub
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak install -y com.brave.Browser
 
 # Start spice-vdagent service (it already autostarts by default)
 /etc/rc.d/rc.spice-vdagent start
