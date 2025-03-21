@@ -139,7 +139,7 @@ if ! grep -q "^\[0-9\]+cf$" /etc/slackpkg/blacklist; then
 fi
 
 # Install Bash Completion for csb
-slpkg install -y bash-completion -o "slack_extra"
+slpkg -iy bash-completion -o "slack_extra"
 
 # Alien packages
 alien_packages=(
@@ -150,7 +150,7 @@ alien_packages=(
 )
 
 # Install packages from Alien over SBo to reduce compile times
-slpkg install -y "${alien_packages[@]}" -o alien
+slpkg -iy "${alien_packages[@]}" -o alien
 
 # All packages
 packages=(
@@ -178,6 +178,7 @@ packages=(
     # Applications
     "bleachbit"
     #"noto-fonts"
+    #"noto-emoji"
     #"rmlint" # compiling via SBo fails on Slackware Current
     "ufw"
     "xclip"
@@ -212,27 +213,27 @@ packages=(
 )
 
 # Install packages from Conraid over SBo to reduce compile times
-slpkg install -y "${packages[@]}" -o conraid
+slpkg -iy "${packages[@]}" -o conraid
 
 # GFS packages
 gnome_packages=(
-    #"noto-emoji"
     "gpaste"
-    #"rhythmbox"
+    "rhythmbox"
 )
 
 # Install packages from GFS over SBo to reduce compile times
-slpkg install -y "${gnome_packages[@]}" -o gnome
+slpkg -iy "${gnome_packages[@]}" -o gnome
 
 # SBo packages
 sbo_packages=(
     "file-roller"
     "ncdu"
     "timeshift"
-    #"libgedit-amtk" # for gedit
-    #"libgedit-gtksourceview" # for gedit
-    #"libpeas" # for gedit
-    #"tepl" # for gedit
+    "libgedit-amtk" # for gedit
+    "libgedit-gtksourceview" # for gedit
+    "libpeas" # for gedit
+    "tepl" # for gedit
+    "libpeas" # for gedit
     "gnome-calculator"
     "gnome-screenshot"
     "gnome-system-monitor"
@@ -240,9 +241,8 @@ sbo_packages=(
     "haruna"
     "qt6ct"
     # "ufw"
-    #"libuchardet" # for rhythmbox
-    #"totem-pl-parser" # for rhythmbox
-    #"libpeas" # for rhythmbox
+    "libuchardet" # for rhythmbox
+    "totem-pl-parser" # for rhythmbox
     "bottom"
     "brave-browser"
     "ripgrep"
@@ -256,15 +256,15 @@ sbo_packages=(
 )
 
 # Update system and install packages
-slpkg install -y "${sbo_packages[@]}"
+slpkg -iy "${sbo_packages[@]}"
 
 # Install Additional gnome packages
-slpkg install -y eog evince -o gnome
-slpkg install -y gnome-terminal -o gnome -O
-# slpkg install -y gedit-plugins
+slpkg -iy eog evince -o gnome
+slpkg -iy gnome-terminal -o gnome -O
+# slpkg -iy gedit-plugins
 
 # Install Cinnamon
-slpkg install -y "*" -o csb
+slpkg -iy "*" -o csb
 xwmconfig
 
 # Enable Flathub
