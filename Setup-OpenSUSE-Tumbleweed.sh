@@ -141,6 +141,8 @@ zypper al neofetch
 # chmod +x gedit-plugins-fix.sh
 # ./gedit-plugins-fix.sh
 # cd ../..
+rm -rf ~/.local/share/gedit/*
+rm -rf /home/$username/.local/share/gedit/*
 
 # Install Additional Tools for Virt Manager
 zypper in -y -t pattern kvm_server kvm_tools
