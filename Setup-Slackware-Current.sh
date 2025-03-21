@@ -266,11 +266,11 @@ slpkg install -y gnome-terminal -o gnome -O
 slpkg install -y "*" --repository=csb
 xwmconfig
 
-# Enable & Set up Flathub
+# Enable Flathub
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 flatpak install -y com.brave.Browser
 
-# Set Environment Variables for Flatpak
+# Set Flatpak Environment Variables
 export_line='export XDG_DATA_DIRS="/var/lib/flatpak/exports/share:/home/'"$username"'/local/share/flatpak/exports/share:$XDG_DATA_DIRS"'
 # Add to /etc/profile (for system-wide environment settings)
 profile_file="/etc/profile"
