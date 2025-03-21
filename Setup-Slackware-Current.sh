@@ -259,9 +259,10 @@ sbo_packages=(
 slpkg -iy "${sbo_packages[@]}"
 
 # Install Additional gnome packages
-slpkg -iy eog evince -o gnome
+slpkg -iy eog evince gedit -o gnome
 slpkg -iy gnome-terminal -o gnome -O
-# slpkg -iy gedit-plugins
+slpkg -iy gedit-plugins
+slpkg -iy libpeas -o gnome
 
 # Install Cinnamon
 slpkg -iy "*" -o csb
