@@ -14,7 +14,6 @@ fi
 
 # Get the current username
 username=$SUDO_USER
-user_home=$(eval echo ~"$username")
 
 # Install sbopkg (for sbotools)
 wget https://github.com/sbopkg/sbopkg/releases/download/0.38.2/sbopkg-0.38.2-noarch-1_wsr.tgz
@@ -146,7 +145,8 @@ slpkg install -y bash-completion -o "slack_extra"
 alien_packages=(
     "libreoffice"
     "qbittorrent"
-    "libostree" # for flatpak
+    "flatpak"
+    #"libostree" # for flatpak
 )
 
 # Install packages from Alien over SBo to reduce compile times
@@ -162,13 +162,13 @@ packages=(
     #"xkill"
     #"xrandr"
     # Network utilities
-    "filezilla"
-    "flatpak"
-    "appstream" # for flatpak
-    "bubblewrap" # for flatpak
-    "xdg-desktop-portal-gtk" # for flatpak
-    "xdg-dbus-proxy" # for flatpak
-    "ostree" # for flatpak
+    #"filezilla"
+    #"flatpak"
+    #"appstream" # for flatpak
+    #"bubblewrap" # for flatpak
+    #"xdg-desktop-portal-gtk" # for flatpak
+    #"xdg-dbus-proxy" # for flatpak
+    #"ostree" # for flatpak
     #"gvfs"
     #"kdeconnect"
     #"samba"
@@ -269,18 +269,6 @@ xwmconfig
 
 # Enable Flathub
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-flatpak install -y com.brave.Browser
-
-# Set Flatpak Environment Variables
-export_line='export XDG_DATA_DIRS="/var/lib/flatpak/exports/share:/home/'"$username"'/local/share/flatpak/exports/share:$XDG_DATA_DIRS"'
-# Append to user profile
-profile_file="$user_home/.profile"
-if ! grep -Fxq "$export_line" "$profile_file"; then
-  echo "$export_line" >> "$profile_file"
-  echo "Added XDG_DATA_DIRS export to $profile_file"
-else
-  echo "The line is already present in $profile_file"
-fi
 
 # Start spice-vdagent service (it already autostarts by default)
 /etc/rc.d/rc.spice-vdagent start
