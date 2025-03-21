@@ -150,7 +150,7 @@ alien_packages=(
 )
 
 # Install packages from Alien over SBo to reduce compile times
-slpkg install -y "${alien_packages[@]}" --repository=alien
+slpkg install -y "${alien_packages[@]}" -o alien
 
 # All packages
 packages=(
@@ -211,7 +211,7 @@ packages=(
 )
 
 # Install packages from Conraid over SBo to reduce compile times
-slpkg install -y "${packages[@]}" --repository=conraid
+slpkg install -y "${packages[@]}" -o conraid
 
 # GFS packages
 gnome_packages=(
@@ -221,7 +221,7 @@ gnome_packages=(
 )
 
 # Install packages from GFS over SBo to reduce compile times
-slpkg install -y "${gnome_packages[@]}" --repository=gnome
+slpkg install -y "${gnome_packages[@]}" -o gnome
 
 # SBo packages
 sbo_packages=(
@@ -263,7 +263,7 @@ slpkg install -y gnome-terminal -o gnome -O
 # slpkg install -y gedit-plugins
 
 # Install Cinnamon
-slpkg install -y "*" --repository=csb
+slpkg install -y "*" -o csb
 xwmconfig
 
 # Enable Flathub
