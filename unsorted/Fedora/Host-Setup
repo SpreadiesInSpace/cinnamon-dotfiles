@@ -1,6 +1,3 @@
-# Remove Bloat
-sudo dnf remove -y bulky drawing firefox gnome-calendar hexchat hypnotix mint-artwork mint-backgrounds* mintbackup mintstick mintupdate numix* papirus-icon-theme pix pppoeconf redshift simple-scan thingy thunderbird transmission-gtk warpinator webapp-manager xed xreader xviewer ibus paper-icon-theme pidgin shotwell tracker-miners xawtv xfburn
-
 # Additional Packages for Host
 sudo dnf install -y baobab cool-retro-term dconf-editor gh gnome-disk-utility gsmartcontrol kdiskmark meld ssh solaar
 
@@ -29,6 +26,9 @@ sudo systemctl enable --now smb nmb
 git config --global user.name 'Spready'
 git config --global user.email my@email.com
 gh auth login
+
+# Push Git Repo
+alias gpush='cd "/home/f16poom/Share/cinnamon-dotfiles" && git add . && git commit -m "Setup Script Fixes" && git push'
 
 # QT HiDPI
 if ! grep -q "^QT_AUTO_SCREEN_SCALE_FACTOR=1" /etc/environment; then
