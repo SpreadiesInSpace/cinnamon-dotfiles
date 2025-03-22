@@ -112,7 +112,6 @@ in
       bleachbit
       bottom
       brave
-      celluloid
       evince
       eog
       ffmpegthumbnailer
@@ -123,6 +122,7 @@ in
       gnome-system-monitor
       gparted
       # guestfs-tools
+      haruna
       libreoffice
       ncdu
       neofetch
