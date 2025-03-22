@@ -39,6 +39,7 @@ clock-use-24h=false
 cursor-blink-time=1200
 cursor-size=24
 cursor-theme='Capitaine Cursors (Gruvbox) - White'
+document-font-name='Cantarell 11'
 font-name='Noto Sans 9'
 gtk-theme='Gruvbox-Dark-BL'
 icon-theme='gruvbox-dark-icons-gtk'
