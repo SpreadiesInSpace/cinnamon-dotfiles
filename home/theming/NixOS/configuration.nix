@@ -141,6 +141,7 @@ in
     ];
     cinnamon.excludePackages = with pkgs.gnome // pkgs; [
       bulky
+      celluloid
       gnome-calendar
       hexchat
       mint-artwork
