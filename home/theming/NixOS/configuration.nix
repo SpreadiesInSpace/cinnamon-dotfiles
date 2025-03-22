@@ -181,6 +181,7 @@ in
   };
 
   fonts.packages = with pkgs; [
+    cantarell-fonts
     noto-fonts
     noto-fonts-emoji
     nerd-fonts.sauce-code-pro
