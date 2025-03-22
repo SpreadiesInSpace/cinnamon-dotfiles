@@ -176,6 +176,18 @@
     color: #a89984; /* GTK muted text */ }
   .prompt-dialog-error-label {
     color: #ea6962; /* Gruvbox Material Red */ }
+    
+.prompt-dialog-password-entry {
+  padding: 6px 10px;
+  height: 1.8em;
+  border-radius: 12px;
+  background-color: #1d2021;
+  color: #f9f5d7;
+  border: 1px solid #3c3836; }
+  .prompt-dialog-password-entry:focus {
+    border: 2px solid #eee0b7;
+    background-color: rgba(249, 245, 215, 0.08);
+    color: #f9f5d7; }
 
 /* Additional Polkit Tweaks */
 .polkit-dialog-user-layout {
