@@ -1,10 +1,11 @@
+#!/usr/bin/env xdg-open
 [Desktop Entry]
 Version=1.1
 Type=Application
 Name=NixOS Configuration
-Comment=Nix Configuration Tool
+Comment=
 GenericName=Nix Configuration
-Exec=gnome-terminal -- bash -c 'sudo nano /etc/nixos/configuration.nix; exit; exec bash;'
+Exec=gedit admin:///etc/nixos/configuration.nix
 Icon=grub-customizer
 Categories=System;FileTools;GTK;
 Keywords=cache;clean;free;performance;privacy;
@@ -12,3 +13,4 @@ StartupNotify=true
 X-GNOME-UsesNotifications=true
 Name[en_US]=Nix Configuration
 Terminal=false
+PrefersNonDefaultGPU=false
