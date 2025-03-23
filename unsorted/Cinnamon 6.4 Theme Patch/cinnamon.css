@@ -60,6 +60,34 @@
 }
 /* workspace-switch-osd end */
 
+/* new .audio-device-selection-dialog */
+.audio-device-selection-dialog .audio-selection-box .audio-selection-device, .polkit-dialog-user-combo, .sound-player StButton:small {
+  color: #f9f5d7; /* GTK foreground */
+  background-color: #242424; 
+  border-radius: 8px; /* Add rounded corners */ }
+  .audio-device-selection-dialog .audio-selection-box .audio-selection-device:focus, .polkit-dialog-user-combo:focus, .sound-player StButton:focus:small {
+    color: #f9f5d7; /* GTK foreground */
+    background-color: #242424;
+    box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, 0.4);
+    border-radius: 8px; }
+  .audio-device-selection-dialog .audio-selection-box .audio-selection-device:hover, .polkit-dialog-user-combo:hover, .sound-player StButton:hover:small {
+    color: #eee0b7; /* GTK accent */
+    background-color: #32302f; /* Slightly lighter background */
+    border-radius: 8px; }
+  .audio-device-selection-dialog .audio-selection-box .audio-selection-device:insensitive, .polkit-dialog-user-combo:insensitive, .sound-player StButton:insensitive:small {
+    color: #a89984; /* GTK muted text */
+    background-color: #242424;
+    border-radius: 8px; }
+  .audio-device-selection-dialog .audio-selection-box .audio-selection-device:selected, .polkit-dialog-user-combo:selected, .sound-player StButton:selected:small, .audio-device-selection-dialog .audio-selection-box .audio-selection-device:active, .polkit-dialog-user-combo:active, .sound-player StButton:active:small {
+    color: #f9f5d7; /* GTK foreground */
+    background-color: #656565;
+    border-radius: 8px; }
+  .audio-device-selection-dialog .audio-selection-box .audio-selection-device:checked, .polkit-dialog-user-combo:checked, .sound-player StButton:checked:small {
+    color: #f9f5d7; /* GTK foreground */
+    background-color: #656565;
+    border-radius: 8px; }
+/* new .audio-device-selection-dialog end*/
+
 /* .modal-dialog --> .dialog */
 .dialog .dialog-button, .dialog .dialog-button:destructive-action, .dialog .dialog-button:default {
   font-weight: bold;
