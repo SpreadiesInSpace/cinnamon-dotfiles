@@ -186,13 +186,13 @@ rm ~/Default-Apps-openSUSE.sh
 cd ../..
 
 # Apply Gedit-Plugins Fix
-cd ..
-cd unsorted/openSUSE/
-chmod +x gedit-plugins-fix.sh
-./gedit-plugins-fix.sh
-sudo ./gedit-plugins-fix.sh
-cd ../..
-cd home/
+# cd ..
+# cd unsorted/openSUSE/
+# chmod +x gedit-plugins-fix.sh
+# ./gedit-plugins-fix.sh
+# sudo ./gedit-plugins-fix.sh
+# cd ../..
+# cd home/
 
 # Sets Wallpaper
 gsettings set org.cinnamon.desktop.background picture-uri file://${HOME}/wallpapers/Desktop_Wallpaper.png
