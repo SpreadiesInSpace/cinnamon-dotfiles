@@ -23,6 +23,7 @@ echo
 read -p "Enter hostname: " hostname
 
 # Prompt for drive to partition
+lsblk
 read -p "Enter drive to use (e.g., /dev/sda, /dev/vda, /dev/nvme0n1, /dev/mmcblk0): " drive
 
 # Partition the drive
