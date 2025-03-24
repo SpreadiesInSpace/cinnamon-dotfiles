@@ -38,7 +38,7 @@
         "description": "Date format for tooltip",
         "dependency": "use-custom-format",
         "tooltip": "Set your custom tooltip format here.",
-        "value": "%A, %B %e, %H:%M"
+        "value": "%A, %B %e  %-l:%M %p"
     },
     "format-button": {
         "type": "button",
