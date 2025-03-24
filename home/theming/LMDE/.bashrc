@@ -128,7 +128,7 @@ alias btm='btm --theme gruvbox'
 # alias cleanLint='bash rmlint.sh -d && rmlint'
 
 # Debian Cleaning
-alias cleanAll='flatpak remove --unused; sudo flatpak repair; yes | sudo apt clean && yes | sudo apt autoclean && yes | sudo apt autoremove && yes | rm -rf ~/.cache/* | sudo journalctl --vacuum-size=50M | sudo journalctl --vacuum-time=4weeks | SystemMaxUse=50M | sudo bleachbit -c --preset && bleachbit -c --preset'
+alias cleanAll='flatpak remove --unused; sudo flatpak repair; yes | sudo rm -rf /var/lib/systemd/coredump/* | sudo apt clean && yes | sudo apt autoclean && yes | sudo apt autoremove && yes | rm -rf ~/.cache/* | sudo journalctl --vacuum-size=50M | sudo journalctl --vacuum-time=4weeks | SystemMaxUse=50M | sudo bleachbit -c --preset && bleachbit -c --preset'
 alias cleanKernel="sudo apt-get purge \$(dpkg-query -W -f'\${Package}\\n' 'linux-*' | sed -nr 's/.*-([0-9]+(\\.[0-9]+){2}-[^-]+).*/\\1 &/p' | linux-version sort | awk '(\$1==c){exit} {print \$2}' c=\$(uname -r | cut -f1,2 -d-))"
 
 # Debian Update (Tien)
