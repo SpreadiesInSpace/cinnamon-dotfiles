@@ -45,9 +45,11 @@ sudo flatpak override --env=QT_STYLE_OVERRIDE=kvantum
 
 # Copies BleachBit config to appropriate directories, preserving old one
 mv ~/.config/bleachbit/bleachbit.ini ~/.config/bleachbit/bleachbit.ini.old
-cp -vnpr .config/bleachbit/bleachbit.ini.arch ~/.config/bleachbit.ini
+mkdir -p ~/.config/bleachbit/
+cp -vnpr .config/bleachbit/bleachbit.ini.arch ~/.config/bleachbit/bleachbit.ini
 sudo mv /root/.config/bleachbit/bleachbit.ini /root/.config/bleachbit/bleachbit.ini.old
-sudo cp -vprf .config/bleachbit/bleachbit.ini.arch /root/.config/
+sudo mkdir -p /root/.config/bleachbit/
+sudo cp -vprf .config/bleachbit/bleachbit.ini.arch /root/.config/bleachbit/bleachbit.ini
 
 # Copies fonts to appropriate directories
 # cp -vnpr .fonts/ ~/
