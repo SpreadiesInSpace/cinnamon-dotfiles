@@ -27,6 +27,8 @@ en = True
 [tree]
 bash = True
 bash.history = True
+evolution = True
+evolution.cache = True
 journald = True
 journald.clean = True
 libreoffice = True
