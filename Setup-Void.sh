@@ -150,7 +150,7 @@ packages=(
 sudo xbps-install -Syu "${packages[@]}"
 
 # Protect neofetch from being removed
-xbps-pkgdb -m hold neofetch
+sudo xbps-pkgdb -m hold neofetch
 
 <<LANCZOS
 # Apply ANTIALIAS to LANCZOS patch for cinnamon-settings backgrounds
