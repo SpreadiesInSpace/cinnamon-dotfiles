@@ -180,6 +180,7 @@ cursor-blink-time=1200
 cursor-blink-timeout=10
 cursor-size=24
 cursor-theme='Capitaine Cursors (Gruvbox) - White'
+document-font-name='Cantarell 11'
 enable-animations=true
 font-name='Noto Sans 9'
 gtk-color-palette='black:white:gray50:red:purple:blue:light blue:green:yellow:orange:lavender:brown:goldenrod4:dodger blue:pink:light green:gray10:gray30:gray75:gray90'
