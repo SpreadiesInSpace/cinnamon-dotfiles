@@ -135,6 +135,7 @@ echo "app-backup/timeshift ~amd64" | tee /etc/portage/package.accept_keywords/ti
 # Enable Extra Use Flags
 echo "app-editors/gedit-plugins charmap git terminal" | tee /etc/portage/package.use/gedit-plugins
 echo "media-video/ffmpegthumbnailer gnome" | tee /etc/portage/package.use/ffmpegthumbnailer
+echo "gnome-extra/nemo tracker" | tee /etc/portage/package.use/nemo
 echo "app-emulation/qemu glusterfs iscsi pipewire spice usbredir vde virgl virtfs zstd" | tee /etc/portage/package.use/qemu
 
 # Temporary 7zip fix
