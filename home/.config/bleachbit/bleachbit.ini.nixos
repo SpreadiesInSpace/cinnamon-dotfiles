@@ -26,6 +26,8 @@ hashsalt = f7bb313a72925b0c71bce5f7f192095620e3520c32897b8e9c120ba9571b3b37cc9b9
 en = True
 
 [tree]
+bash = True
+bash.history = True
 evolution = True
 evolution.cache = True
 journald = True
