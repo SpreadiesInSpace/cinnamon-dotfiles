@@ -38,7 +38,7 @@ alias btm='btm --theme gruvbox'
 # alias cleanLint='bash rmlint.sh -d && rmlint'
 
 # Gentoo Cleaning
-alias cleanAll='sudo emerge -aq --depclean; flatpak remove --unused; sudo flatpak repair; yes | sudo rm -rf /var/lib/systemd/coredump/* | rm -rf ~/.cache/* | sudo rm -rf /var/tmp/portage/ | sudo rm -rf /var/cache/distfiles/ | sudo rm -rf /var/cache/binpkgs/ | sudo eclean-dist --destructive | sudo eclean-pkg | sudo journalctl --vacuum-size=50M | sudo journalctl --vacuum-time=4weeks | SystemMaxUse=50M | sudo bleachbit -c --preset && bleachbit -c --preset'
+alias cleanAll='sudo emerge -aq --depclean; flatpak remove --unused; sudo flatpak repair; sudo rm -rf /var/lib/systemd/coredump/*; yes | rm -rf ~/.cache/* | sudo rm -rf /var/tmp/portage/ | sudo rm -rf /var/cache/distfiles/ | sudo rm -rf /var/cache/binpkgs/ | sudo eclean-dist --destructive | sudo eclean-pkg | sudo journalctl --vacuum-size=50M | sudo journalctl --vacuum-time=4weeks | SystemMaxUse=50M | sudo bleachbit -c --preset && bleachbit -c --preset'
 alias cleanKernel='sudo eclean-kernel -a'
  
 # Gentoo Update
