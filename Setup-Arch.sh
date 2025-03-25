@@ -62,7 +62,7 @@ packages=(
     "evince"
     "ffmpegthumbnailer"
     "gedit"
-    #"gedit-plugins"
+    "gedit-plugins"
     "gnome-calculator"
     "gnome-keyring"
     "gnome-screenshot"
