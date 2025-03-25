@@ -137,6 +137,9 @@ echo "app-editors/gedit-plugins charmap git terminal" | tee /etc/portage/package
 echo "media-video/ffmpegthumbnailer gnome" | tee /etc/portage/package.use/ffmpegthumbnailer
 echo "app-emulation/qemu glusterfs iscsi pipewire spice usbredir vde virgl virtfs zstd" | tee /etc/portage/package.use/qemu
 
+# Temporary 7zip fix
+emerge -1vq app-arch/p7zip
+
 # All Packages
 packages=(
     "x11-misc/gpaste"
