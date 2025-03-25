@@ -46,6 +46,14 @@ sudo flatpak override --env=QT_STYLE_OVERRIDE=kvantum
 # mv ~/.config/BraveSoftware ~/.config/BraveSoftware.old
 # cp -vnpr .config/BraveSoftware/ ~/.config/
 
+# Copies BleachBit config to appropriate directories, preserving old one
+mv ~/.config/bleachbit/bleachbit.ini ~/.config/bleachbit/bleachbit.ini.old
+mkdir -p ~/.config/bleachbit/
+cp -vnpr .config/bleachbit/bleachbit.ini.openSUSE ~/.config/bleachbit/bleachbit.ini
+sudo mv /root/.config/bleachbit/bleachbit.ini /root/.config/bleachbit/bleachbit.ini.old
+sudo mkdir -p /root/.config/bleachbit/
+sudo cp -vprf .config/bleachbit/bleachbit.ini.openSUSE /root/.config/bleachbit/bleachbit.ini
+
 # Copies fonts to appropriate directories
 # cp -vnpr .fonts/ ~/
 sudo cp -vnpr .fonts/* /usr/share/fonts/
