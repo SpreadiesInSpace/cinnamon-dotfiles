@@ -139,7 +139,7 @@ echo "gnome-extra/nemo tracker" | tee /etc/portage/package.use/nemo
 echo "app-emulation/qemu glusterfs iscsi pipewire spice usbredir vde virgl virtfs zstd" | tee /etc/portage/package.use/qemu
 
 # Temporary 7zip fix
-emerge -1vq app-arch/p7zip
+# emerge -1vq app-arch/p7zip
 
 # All Packages
 packages=(
