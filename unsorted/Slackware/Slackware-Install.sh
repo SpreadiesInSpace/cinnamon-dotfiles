@@ -87,6 +87,10 @@ cat << EOF | chroot /mnt /bin/bash
 # New Chroot
 source /etc/profile
 
+# Set Timezone
+ln -sf /usr/share/zoneinfo/Asia/Bangkok /etc/localtime
+hwclock --systohc
+
 # Install Grub
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=grub
 # Set GRUB timeout to 0
