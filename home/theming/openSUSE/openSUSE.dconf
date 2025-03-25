@@ -179,6 +179,7 @@ cursor-blink-time=1200
 cursor-blink-timeout=10
 cursor-size=24
 cursor-theme='Capitaine Cursors (Gruvbox) - White'
+document-font-name='Cantarell 11'
 enable-animations=true
 font-name='Noto Sans 9'
 gtk-color-palette='black:white:gray50:red:purple:blue:light blue:green:yellow:orange:lavender:brown:goldenrod4:dodger blue:pink:light green:gray10:gray30:gray75:gray90'
@@ -195,13 +196,13 @@ icon-theme='gruvbox-dark-icons-gtk'
 menubar-accel='F10'
 menubar-detachable=false
 menus-have-tearoff=false
+monospace-font-name='SauceCodePro Nerd Font 10'
 scaling-factor=uint32 0
 text-scaling-factor=1.0
 toolbar-detachable=false
 toolbar-icons-size='large'
 toolbar-style='both-horiz'
 toolkit-accessibility=false
-monospace-font-name='SauceCodePro Nerd Font 10'
 
 [org/gnome/desktop/peripherals/mouse]
 accel-profile='default'
