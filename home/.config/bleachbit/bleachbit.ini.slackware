@@ -40,4 +40,6 @@ system.tmp = True
 system.trash = True
 thumbnails = True
 thumbnails.cache = True
+x11 = True
+x11.debug_logs = True
 
