@@ -89,8 +89,8 @@ ForegroundPositive=39,174,96
 ForegroundVisited=127,140,141
 
 [General]
-ColorScheme=GruvboxColors
-Name=GruvboxColors
+ColorScheme=Gruvbox-Dark-Alt
+Name=Gruvbox-Dark-Alt
 shadeSortColumn=true
 
 [KDE]
