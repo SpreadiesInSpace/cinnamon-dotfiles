@@ -42,6 +42,8 @@
 [0-9]+_SBo
 [0-9]+_wsr
 [0-9]+ponce
+[0-9]+alien
+[0-9]+cf
 #[0-9]+_csb
 [0-9]+_gfs
 mint-cursor-themes*

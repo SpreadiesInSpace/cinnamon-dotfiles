@@ -33,41 +33,6 @@ sbosnap fetch
 # Update MAKEFLAGS in /etc/sbotools/sbotools.conf to match CPU cores
 sboconfig -j $(nproc)
 
-# Replace blacklist and slackpkgplus.conf for csb and gfs
-# Define the URL and local path pairs in an associative array
-declare -A files=(
-    ["https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/etc/slackpkg/blacklist"]="/etc/slackpkg/blacklist"
-)
-
-for url in "${!files[@]}"; do
-    local_path="${files[$url]}"
-    
-    # Backup the existing local file
-    cp "$local_path" "${local_path}.old"
-    
-    # Download the new file
-    curl -o "$local_path" "$url"
-    
-    # Verify the download was successful
-    if [ $? -eq 0 ]; then
-        echo "File $local_path updated successfully."
-    else
-        echo "Failed to update the file $local_path."
-        mv "${local_path}.old" "$local_path"
-    fi
-done
-
-<<neovim
-# Install Neovim AppImage
-curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
-chmod u+x nvim.appimage
-./nvim.appimage --appimage-extract
-./squashfs-root/AppRun --version
-mv squashfs-root /
-ln -s /squashfs-root/AppRun /usr/bin/nvim
-rm nvim.appimage
-neovim
-
 # Install rmlint
 # git clone https://github.com/sahib/rmlint.git
 # cd rmlint/
@@ -75,22 +40,19 @@ neovim
 # cd ..
 # rm -rf rmlint/
 
-# For pcsc-lite dependency that gets called in
-# groupadd -g 257 pcscd
-# useradd -u 257 -g pcscd -d /var/run/pcscd -s /bin/false pcscd
-
 # For Virt-Manager & accessing samba shares
 # slackpkg install dnsmasq samba
 cp /etc/samba/smb.conf-sample /etc/samba/smb.conf
 sh /etc/rc.d/rc.samba start
 
-# Install slpkg & replace configs
+# Install slpkg & replace slpkg and slackpkg configs
 sboinstall slpkg
 # Define the URL and local path pairs in an associative array
 declare -A files=(
     ["https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/etc/slpkg/repositories.toml"]="/etc/slpkg/repositories.toml"
     ["https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/etc/slpkg/slpkg.toml"]="/etc/slpkg/slpkg.toml"
     ["https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/etc/slpkg/blacklist.toml"]="/etc/slpkg/blacklist.toml"
+    ["https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/etc/slackpkg/blacklist"]="/etc/slackpkg/blacklist"
 )
 
 for url in "${!files[@]}"; do
@@ -130,14 +92,6 @@ slpkg -Uy -o "slack_extra"
 # Update Grub
 grub-mkconfig -o /boot/grub/grub.cfg
 
-# Blacklist alien & conraid packages
-if ! grep -q "^\[0-9\]+alien$" /etc/slackpkg/blacklist; then
-    echo '[0-9]+alien' | tee -a /etc/slackpkg/blacklist
-fi
-if ! grep -q "^\[0-9\]+cf$" /etc/slackpkg/blacklist; then
-    echo '[0-9]+cf' | tee -a /etc/slackpkg/blacklist
-fi
-
 # Install Bash Completion for csb
 slpkg -iy bash-completion -o "slack_extra"
 
@@ -145,7 +99,6 @@ slpkg -iy bash-completion -o "slack_extra"
 alien_packages=(
     "libreoffice"
     "qbittorrent"
-    "flatpak"
 )
 
 # Install packages from Alien over SBo to reduce compile times
@@ -219,7 +172,10 @@ gnome_packages=(
     "eog"
     "evince"
     "file-roller"
-    "libportal" # for fileroller
+    "flatpak"
+    "malcontent" # for flatpak
+    "appstream-glib" # for file-roller
+    "libportal" # for file-roller
     "gedit"
     "libgedit-amtk" # for gedit
     "libgedit-gtksourceview" # for gedit
