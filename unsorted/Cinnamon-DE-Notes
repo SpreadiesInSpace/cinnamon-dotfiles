@@ -1,13 +1,15 @@
 # Bash Scripts
 https://pastebin.com/3KEhUUzF
 
-# BTRFS Subvolumes (for Timeshift) - Preparing the Disks
+# BTRFS Subvolumes (for Timeshift) - 512MB EFI + Remaining BTRFS
 mkfs.vfat /dev/vda1
 mkfs.btrfs -f /dev/vda2
 mount /dev/vda2 /mnt
 btrfs su cr /mnt/@
 btrfs su cr /mnt/@home
 umount /mnt
+
+# BTRFS Mounts
 mount -o noatime,compress=zstd,space_cache=v2,subvol=@ /dev/vda2 /mnt/ 
 mkdir -p /mnt/home
 mount -o noatime,compress=zstd,space_cache=v2,subvol=@home /dev/vda2 /mnt/home 
