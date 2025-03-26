@@ -146,7 +146,6 @@ alien_packages=(
     "libreoffice"
     "qbittorrent"
     "flatpak"
-    #"libostree" # for flatpak
 )
 
 # Install packages from Alien over SBo to reduce compile times
@@ -162,12 +161,7 @@ packages=(
     #"xrandr"
     # Network utilities
     "filezilla"
-    #"flatpak"
-    #"appstream" # for flatpak
-    #"bubblewrap" # for flatpak
-    #"xdg-desktop-portal-gtk" # for flatpak
-    #"xdg-dbus-proxy" # for flatpak
-    #"ostree" # for flatpak
+    "libmspack" # for filezilla
     #"gvfs"
     #"kdeconnect"
     #"samba"
@@ -219,14 +213,13 @@ gnome_packages=(
     "eog"
     "evince"
     "file-roller"
-    "gdm"
+    "libportal" # for fileroller
     "gedit"
     "libgedit-amtk" # for gedit
     "libgedit-gtksourceview" # for gedit
     "libpeas" # for gedit
     "gnome-calculator"
     "gnome-system-monitor"
-    "gnome-terminal"
     "gpaste"
     "rhythmbox"
     "totem-pl-parser" # for rhythmbox
@@ -257,7 +250,7 @@ slpkg -iy "${sbo_packages[@]}"
 
 # Install Additional gnome packages
 # slpkg -iy eog evince gedit -o gnome
-# slpkg -iy gnome-terminal -o gnome -O
+slpkg -iy gnome-terminal -o gnome -O
 # slpkg -iy libpeas gedit-plugins
 # slpkg -iy libpeas -o gnome
 
