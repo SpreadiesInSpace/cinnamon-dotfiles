@@ -152,8 +152,8 @@ useradd -m -g users -G wheel,audio,video,plugdev,netdev,lp,scanner -s /bin/bash 
 echo "$username:$userpasswd" | chpasswd
 
 # Set Autologin and SDDM Session to xfce
-sed -i "/\[Autologin\]/,/User=/ s/User=.*/User=$username/" /etc/sddm.conf
-sed -i "/\[Autologin\]/,/Session=/ s/Session=.*/Session=xfce/" /etc/sddm.conf
+# sed -i "/\[Autologin\]/,/User=/ s/User=.*/User=$username/" /etc/sddm.conf
+# sed -i "/\[Autologin\]/,/Session=/ s/Session=.*/Session=xfce/" /etc/sddm.conf
 
 # Clone My Repo as the new user
 cat << EOUSR | su - $username

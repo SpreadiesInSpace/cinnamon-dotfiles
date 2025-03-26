@@ -76,8 +76,8 @@ neovim
 # rm -rf rmlint/
 
 # For pcsc-lite dependency that gets called in
-groupadd -g 257 pcscd
-useradd -u 257 -g pcscd -d /var/run/pcscd -s /bin/false pcscd
+# groupadd -g 257 pcscd
+# useradd -u 257 -g pcscd -d /var/run/pcscd -s /bin/false pcscd
 
 # For Virt-Manager & accessing samba shares
 # slackpkg install dnsmasq samba
