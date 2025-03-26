@@ -161,7 +161,10 @@ packages=(
     #"xrandr"
     # Network utilities
     "filezilla"
+    "libfilezilla" # for filezilla
     "libmspack" # for filezilla
+    "pugixml" # for filezilla
+    "wxwidgets" # for filezilla
     #"gvfs"
     #"kdeconnect"
     #"samba"
@@ -179,6 +182,9 @@ packages=(
     #"gcc"
     #"make"
     "neovim"
+    "luv" # for neovim
+    "lua-lpeg" # for neovim
+    "unibilium" # for neovim
     # Virtualization tools
     "libslirp"
     "libcacard"
@@ -238,7 +244,6 @@ sbo_packages=(
     "haruna"
     "qt6ct"
     "libuchardet" # for rhythmbox
-    "bottom"
     "brave-browser"
     "ripgrep"
     "libiscsi"
@@ -248,9 +253,10 @@ sbo_packages=(
 # Update system and install packages
 slpkg -iy "${sbo_packages[@]}"
 
-# Install Additional gnome packages
+# Install Additional packages
+slpkg -iy bottom # prevent download timeout
+slpkg -iy gnome-terminal -o gnome -O # this avoids pulling in gnome-shell
 # slpkg -iy eog evince gedit -o gnome
-slpkg -iy gnome-terminal -o gnome -O
 # slpkg -iy libpeas gedit-plugins
 # slpkg -iy libpeas -o gnome
 
