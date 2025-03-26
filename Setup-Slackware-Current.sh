@@ -216,8 +216,20 @@ slpkg -iy "${packages[@]}" -o conraid
 
 # GFS packages
 gnome_packages=(
+    "eog"
+    "evince"
+    "file-roller"
+    "gdm"
+    "gedit"
+    "libgedit-amtk" # for gedit
+    "libgedit-gtksourceview" # for gedit
+    "libpeas" # for gedit
+    "gnome-calculator"
+    "gnome-system-monitor"
+    "gnome-terminal"
     "gpaste"
     "rhythmbox"
+    "totem-pl-parser" # for rhythmbox
 )
 
 # Install packages from GFS over SBo to reduce compile times
@@ -225,46 +237,34 @@ slpkg -iy "${gnome_packages[@]}" -o gnome
 
 # SBo packages
 sbo_packages=(
-    "file-roller"
     "ncdu"
     "timeshift"
-    "libgedit-amtk" # for gedit
-    "libgedit-gtksourceview" # for gedit
-    "libpeas" # for gedit
     "tepl" # for gedit
-    "libpeas" # for gedit
-    "gnome-calculator"
     "gnome-screenshot"
-    "gnome-system-monitor"
     "kvantum-qt5"
     "haruna"
     "qt6ct"
-    # "ufw"
     "libuchardet" # for rhythmbox
-    "totem-pl-parser" # for rhythmbox
     "bottom"
     "brave-browser"
     "ripgrep"
     "libiscsi"
-    # "spice-vdagent"
     "glusterfs"
-    # "libvirt"
-    # "libvirt-glib"
-    # "libvirt-python"
-    # "virt-manager"
 )
 
 # Update system and install packages
 slpkg -iy "${sbo_packages[@]}"
 
 # Install Additional gnome packages
-slpkg -iy eog evince gedit -o gnome
-slpkg -iy gnome-terminal -o gnome -O
-slpkg -iy gedit-plugins
-slpkg -iy libpeas -o gnome
+# slpkg -iy eog evince gedit -o gnome
+# slpkg -iy gnome-terminal -o gnome -O
+# slpkg -iy libpeas gedit-plugins
+# slpkg -iy libpeas -o gnome
 
 # Install Cinnamon
 slpkg -iy "*" -o csb
+
+# Set Default DE to Cinnamon
 xwmconfig
 
 # Enable Flathub

@@ -186,4 +186,3 @@ flatpak
 # doesn't have:
 gparted
 kdeconnect-kde
-

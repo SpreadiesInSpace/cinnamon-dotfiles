@@ -150,10 +150,10 @@ sudo mv /root/.config/xfce4 /root/.config/xfce4.old
 sudo cp -vnpr .config/xfce4/ /root/.config/
 
 # Copies Gedit Theme to appropriate directory
-mkdir -p ~/.local/share/gedit/styles
-cp -vnpr gruvbox-dark.xml ~/.local/share/gedit/styles/
-sudo mkdir -p /root/.local/share/gedit/styles
-sudo cp -vprf gruvbox-dark.xml /root/.local/share/gedit/styles/
+mkdir -p ~/.local/share/libgedit-gtksourceview-300/styles
+cp -vnpr gruvbox-dark-gedit46.xml ~/.local/share/libgedit-gtksourceview-300/styles
+sudo mkdir -p /root/.local/share/libgedit-gtksourceview-300/styles
+sudo cp -vprf gruvbox-dark-gedit46.xml /root/.local/share/libgedit-gtksourceview-300/styles
 
 # Copies Menu Preferences to appropriate directory
 mkdir -p ~/.config/menus/old
