@@ -172,10 +172,10 @@ gnome_packages=(
     "eog"
     "evince"
     "file-roller"
-    "flatpak"
-    "malcontent" # for flatpak
     "appstream-glib" # for file-roller
+    "flatpak"
     "libportal" # for file-roller
+    "malcontent" # for flatpak
     "gedit"
     "libgedit-amtk" # for gedit
     "libgedit-gtksourceview" # for gedit
@@ -183,8 +183,8 @@ gnome_packages=(
     "gnome-calculator"
     "gnome-system-monitor"
     "gpaste"
-    "rhythmbox"
-    "totem-pl-parser" # for rhythmbox
+    #"rhythmbox" # using Elisa instead
+    #"totem-pl-parser" # for rhythmbox
 )
 
 # Install packages from GFS over SBo to reduce compile times
@@ -199,7 +199,7 @@ sbo_packages=(
     "kvantum-qt5"
     "haruna"
     "qt6ct"
-    "libuchardet" # for rhythmbox
+    #"libuchardet" # for rhythmbox
     "brave-browser"
     "ripgrep"
     "libiscsi"
