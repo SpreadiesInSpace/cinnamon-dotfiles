@@ -1,9 +1,9 @@
 #!/usr/bin/env xdg-open
 [Desktop Entry]
 Name=Make Configuration
-Exec=sudo nano /etc/portage/make.conf
+Exec=gedit admin:///etc/portage/make.conf
 Comment=
-Terminal=true
+Terminal=false
 PrefersNonDefaultGPU=false
 Icon=software
 Type=Application
