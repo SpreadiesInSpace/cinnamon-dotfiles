@@ -1,30 +1,42 @@
 #!/bin/bash
 
+# Check if script is run as root
+if [ "$EUID" -ne 0 ]; then
+  echo "Please run the script using sudo."
+  exit
+fi
+
+# Check if the script is run from the root account
+if [ "$SUDO_USER" = "" ]; then
+  echo "Please do not run this script from the root account. Use sudo instead."
+  exit
+fi
+
 # Get the current username
-username=$(whoami)
+username=$SUDO_USER
 
 # Backs up old configuration.nix
-sudo cp /etc/nixos/configuration.nix /etc/nixos/configuration.nix.old
+cp /etc/nixos/configuration.nix /etc/nixos/configuration.nix.old
 
 # Appends configuration.nix with needed options
-sudo cp ./home/theming/NixOS/configuration.nix /etc/nixos/configuration.nix
+cp ./home/theming/NixOS/configuration.nix /etc/nixos/configuration.nix
 
 # Replace the placeholder with the actual username
-sudo sed -i "s/f16poom/$username/g" /etc/nixos/configuration.nix
+sed -i "s/f16poom/$username/g" /etc/nixos/configuration.nix
 
 # Places Login Wallpaper
-sudo cp -vnr home/wallpapers/Login_Wallpaper.jpg /boot/
+cp -vnr home/wallpapers/Login_Wallpaper.jpg /boot/
 
 # Add Nix Unstable and 23.05 Channels (for Neovim, icons and themes)
-sudo nix-channel --add https://nixos.org/channels/nixos-unstable nixos
-# sudo nix-channel --add https://nixos.org/channels/nixos-23.05 nixos-23.05
-sudo nix-channel --update
+nix-channel --add https://nixos.org/channels/nixos-unstable nixos
+# nix-channel --add https://nixos.org/channels/nixos-23.05 nixos-23.05
+nix-channel --update
 
 # Reconfigures system
-sudo nixos-rebuild switch --upgrade
+nixos-rebuild switch --upgrade
 
 # Enable Flathub
-sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
 # Run the setup script
 # cd home/
