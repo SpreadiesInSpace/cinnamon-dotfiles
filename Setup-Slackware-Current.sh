@@ -16,9 +16,9 @@ fi
 username=$SUDO_USER
 
 # Install sbopkg (for sbotools)
-wget https://github.com/sbopkg/sbopkg/releases/download/0.38.2/sbopkg-0.38.2-noarch-1_wsr.tgz
-installpkg sbopkg-0.38.2-noarch-1_wsr.tgz
-rm sbopkg-0.38.2-noarch-1_wsr.tgz
+wget https://github.com/sbopkg/sbopkg/releases/download/0.38.3/sbopkg-0.38.3-noarch-1_wsr.tgz
+installpkg sbopkg-0.38.3-noarch-1_wsr.tgz
+rm sbopkg-0.38.3-noarch-1_wsr.tgz
 # Point sbopkg to current repo & sync
 sed -i "s/REPO_BRANCH=\${REPO_BRANCH:-15.0}/REPO_BRANCH=\${REPO_BRANCH:-current}/g" /etc/sbopkg/sbopkg.conf
 sed -i "s/REPO_NAME=\${REPO_NAME:-SBo}/REPO_NAME=\${REPO_NAME:-SBo-git}/g" /etc/sbopkg/sbopkg.conf
