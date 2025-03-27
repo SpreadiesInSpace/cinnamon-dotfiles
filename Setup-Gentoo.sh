@@ -138,8 +138,9 @@ echo "media-video/ffmpegthumbnailer gnome" | tee /etc/portage/package.use/ffmpeg
 echo "gnome-extra/nemo tracker" | tee /etc/portage/package.use/nemo
 echo "app-emulation/qemu glusterfs iscsi pipewire spice usbredir vde virgl virtfs zstd" | tee /etc/portage/package.use/qemu
 
-# Temporary 7zip fix
-# emerge -1vq app-arch/p7zip
+# Mask select djs_overlay packages
+echo "app-editors/neovim::djs_overlay" | tee /etc/portage/package.mask/neovim
+echo "www-client/brave-bin::djs_overlay" | tee /etc/portage/package.mask/brave
 
 # All Packages
 packages=(
