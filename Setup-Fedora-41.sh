@@ -97,7 +97,6 @@ packages=(
     "libreoffice"
     "neovim"
     "qbittorrent"
-    # "rmlint"
     "spice-vdagent"
     "google-noto-fonts-common"
     "google-noto-emoji-fonts"

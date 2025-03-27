@@ -27,11 +27,6 @@ echo "set enable-bracketed-paste" >> /root/.inputrc
 zypper ref
 zypper dup -y
 
-# Install and run mirrorsorcerer for faster mirrors
-# zypper in -y mirrorsorcerer
-# mirrorsorcerer -x
-# systemctl enable mirrorsorcerer
-
 # Install git
 zypper in -y git
 
@@ -46,11 +41,6 @@ zypper in -y curl
 rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
 zypper ar https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
 zypper in -y brave-browser
-
-# Install rmlint
-# zypper ar --no-gpgcheck https://download.opensuse.org/repositories/home:FireNewt/openSUSE_Tumbleweed/home:FireNewt.repo
-# zypper ref
-# zypper in -y rmlint
 
 # For Cinnamon and Opi
 zypper rm -y busybox-which busybox-diffutils

@@ -86,7 +86,6 @@ packages=(
     "libreoffice"
     "libreoffice-style-elementary"
     "qbittorrent"
-    # "rmlint"
     "spice-vdagent"
     "fonts-noto-core"
     "fonts-noto-color-emoji"

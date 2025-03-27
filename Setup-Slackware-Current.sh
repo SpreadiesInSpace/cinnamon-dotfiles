@@ -33,37 +33,26 @@ sbosnap fetch
 # Update MAKEFLAGS in /etc/sbotools/sbotools.conf to match CPU cores
 sboconfig -j $(nproc)
 
-# Install rmlint
-# git clone https://github.com/sahib/rmlint.git
-# cd rmlint/
-# scons --prefix=/usr install
-# cd ..
-# rm -rf rmlint/
-
-# For Virt-Manager & accessing samba shares
-# slackpkg install dnsmasq samba
+# For Virt-Manager & accessing samba shares (15.0 needs dnsmasq and samba)
 cp /etc/samba/smb.conf-sample /etc/samba/smb.conf
 sh /etc/rc.d/rc.samba start
 
-# Install slpkg & replace slpkg and slackpkg configs
+# Install slpkg
 sboinstall slpkg
-# Define the URL and local path pairs in an associative array
+
+# Replace slpkg and slackpkg configs
 declare -A files=(
     ["https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/etc/slpkg/repositories.toml"]="/etc/slpkg/repositories.toml"
     ["https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/etc/slpkg/slpkg.toml"]="/etc/slpkg/slpkg.toml"
     ["https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/etc/slpkg/blacklist.toml"]="/etc/slpkg/blacklist.toml"
     ["https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/etc/slackpkg/blacklist"]="/etc/slackpkg/blacklist"
 )
-
 for url in "${!files[@]}"; do
     local_path="${files[$url]}"
-    
     # Backup the existing local file
-    cp "$local_path" "${local_path}.old"
-    
+    cp "$local_path" "${local_path}.old"    
     # Download the new file
-    curl -o "$local_path" "$url"
-    
+    curl -o "$local_path" "$url"    
     # Verify the download was successful
     if [ $? -eq 0 ]; then
         echo "File $local_path updated successfully."
@@ -89,7 +78,7 @@ touch /var/log/slpkg/deps.log
 slpkg -Uy -o "slack"
 slpkg -Uy -o "slack_extra"
 
-# Update Grub
+# Update Grub (in case Kernel Gets Updated)
 grub-mkconfig -o /boot/grub/grub.cfg
 
 # Install Bash Completion for csb
@@ -128,7 +117,6 @@ packages=(
     "bleachbit"
     #"noto-fonts"
     #"noto-emoji"
-    #"rmlint" # compiling via SBo fails on Slackware Current
     "ufw"
     "xclip"
     # For NvChad
@@ -190,6 +178,8 @@ gnome_packages=(
 slpkg -iy "${gnome_packages[@]}" -o gnome
 # Replace Slackware Current's appstream-glib with gfs for file-roller
 slpkg -iy appstream-glib -o gnome
+# this avoids pulling in the entirety of gnome DE
+slpkg -iy gnome-terminal -o gnome -O
 
 # SBo packages
 sbo_packages=(
@@ -209,11 +199,9 @@ sbo_packages=(
 
 # Update system and install packages
 slpkg -iy "${sbo_packages[@]}"
-
-# Install Additional packages
 slpkg -iy bottom # prevent download timeout
-slpkg -iy gnome-terminal -o gnome -O # this avoids pulling in gnome-shell
-# slpkg -iy eog evince gedit -o gnome
+
+# Workaround for gedit-plugins to compile (broken)
 # slpkg -iy libpeas gedit-plugins
 # slpkg -iy libpeas -o gnome
 

@@ -11,12 +11,6 @@ makepkg -si --noconfirm
 cd ..
 rm -rf yay
 
-# Install Reflector to find the fastest mirrors
-# sudo pacman -S --needed --noconfirm reflector
-
-# Use Reflector to update the mirrorlist with the 10 most recently synchronized HTTP or HTTPS mirrors sorted by download rate
-# sudo reflector --latest 10 --protocol http --protocol https --sort rate --save /etc/pacman.d/mirrorlist
-
 # Check if Color, ParallelDownloads, and ILoveCandy are already in yay config
 # Define the options to be added
 declare -A options=(["Color"]="Color" ["ParallelDownloads"]="ParallelDownloads = 5" ["ILoveCandy"]="ILoveCandy")
@@ -93,7 +87,6 @@ packages=(
     "neovim"
     "qbittorrent"
     "reflector-simple"
-    # "rmlint"
     "spice-vdagent"
     "noto-fonts"
     "noto-fonts-emoji"

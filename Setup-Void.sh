@@ -124,7 +124,6 @@ packages=(
     "neovim"
     "octoxbps"
     "qbittorrent"
-    # "rmlint"
     "spice-vdagent"
     "noto-fonts-ttf"
     "noto-fonts-emoji"

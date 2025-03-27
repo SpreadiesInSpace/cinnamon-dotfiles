@@ -73,56 +73,16 @@ emerge -vquN app-eselect/eselect-repository app-editors/nano dev-vcs/git
 eselect repository disable gentoo
 eselect repository enable gentoo
 rm -rf /var/db/repos/gentoo
-# Sync Repository
-emaint sync -r gentoo
 
-# Select 23.0 gnome desktop systemd profile for Cinnamon
-eselect profile set default/linux/amd64/23.0/desktop/gnome/systemd
-# Enable Sound (Pipewire)
-echo "media-video/pipewire sound-server" | tee /etc/portage/package.use/pipewire
-echo "media-sound/pulseaudio -daemon" | tee /etc/portage/package.use/pulseaudio
-# Emerge changes and cleanup
-emerge -vqDuN @world
-emerge -q --depclean
+# Enable Additional Overlays
+eselect repository add sunny-overlay git https://github.com/dguglielmi/sunny-overlay.git # for GPaste
+eselect repository enable guru # for unstable packages
+eselect repository enable gentoo-zh # for Brave
+eselect repository enable djs_overlay # for Cinnamon 6.4
 
-# Install djs_overlay for Cinnamon 6.4 & Brave
-eselect repository enable djs_overlay
-emaint sync -r djs_overlay
-
-# Update system and install packages (split them to prevent slot conflicts)
-# Desktop environment and display manager
-desktop_environment=(
-    "x11-base/xorg-server"
-    "gnome-extra/cinnamon"
-    "x11-misc/lightdm"
-    "x11-misc/lightdm-gtk-greeter"
-)
-emerge -vqDuN --with-bdeps=y "${desktop_environment[@]}"
-
-# Install Brave
-eselect repository enable gentoo-zh
-emaint sync -r gentoo-zh
-emerge -vqDuN www-client/brave-bin
-
-# Enable Guru Overlay
-eselect repository enable guru
-emaint sync -r guru
-
-# Install rmlint
-# emerge -quN dev-build/scons dev-libs/glib
-# git clone https://github.com/sahib/rmlint.git
-# cd rmlint/
-# scons --prefix=/usr install
-# cd ..
-# rm -rf rmlint/
-
-# Enable sunny-overlay for GPaste
-eselect repository add sunny-overlay git https://github.com/dguglielmi/sunny-overlay.git
-emaint sync -r sunny-overlay
-
-# Enable nest overlay for haruna
-# eselect repository enable nest
-# emaint sync -r nest
+# Mask select djs_overlay packages
+echo "app-editors/neovim::djs_overlay" | tee /etc/portage/package.mask/neovim
+echo "www-client/brave-bin::djs_overlay" | tee /etc/portage/package.mask/brave
 
 # Allow select unstable packages to be merged
 echo "x11-misc/gpaste ~amd64" | tee /etc/portage/package.accept_keywords/gpaste
@@ -138,9 +98,27 @@ echo "media-video/ffmpegthumbnailer gnome" | tee /etc/portage/package.use/ffmpeg
 echo "gnome-extra/nemo tracker" | tee /etc/portage/package.use/nemo
 echo "app-emulation/qemu glusterfs iscsi pipewire spice usbredir vde virgl virtfs zstd" | tee /etc/portage/package.use/qemu
 
-# Mask select djs_overlay packages
-echo "app-editors/neovim::djs_overlay" | tee /etc/portage/package.mask/neovim
-echo "www-client/brave-bin::djs_overlay" | tee /etc/portage/package.mask/brave
+# Sync Repository + All Overlays
+emaint sync -a sync
+
+# Select 23.0 gnome desktop systemd profile for Cinnamon
+eselect profile set default/linux/amd64/23.0/desktop/gnome/systemd
+# Enable Sound (Pipewire)
+echo "media-video/pipewire sound-server" | tee /etc/portage/package.use/pipewire
+echo "media-sound/pulseaudio -daemon" | tee /etc/portage/package.use/pulseaudio
+# Emerge changes and cleanup
+emerge -vqDuN @world
+emerge -q --depclean
+
+# Update system and install Cinnamon (split them to prevent slot conflicts)
+desktop_environment=(
+    "x11-base/xorg-server"
+    "gnome-extra/cinnamon"
+    "x11-misc/lightdm"
+    "x11-misc/lightdm-gtk-greeter"
+    "www-client/brave-bin" # for verifying gentoo-zh > djs_brave override
+)
+emerge -vqDuN --with-bdeps=y "${desktop_environment[@]}"
 
 # All Packages
 packages=(
