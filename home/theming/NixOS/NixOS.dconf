@@ -144,16 +144,91 @@ dwell-time=1.2
 secondary-click-enabled=false
 secondary-click-time=1.2
 
-[org/cinnamon/desktop/interface]
-clock-use-24h=false
+[org/gnome/desktop/input-sources]
+current=uint32 0
+show-all-sources=false
+sources=@a(ss) []
+xkb-options=@as []
+
+[org/gnome/desktop/interface]
+can-change-accels=false
+clock-show-date=false
+clock-show-seconds=false
+cursor-blink=true
 cursor-blink-time=1200
+cursor-blink-timeout=10
+cursor-size=24
 cursor-theme='Capitaine Cursors (Gruvbox) - White'
 document-font-name='Cantarell 11'
+enable-animations=true
 font-name='Noto Sans 9'
+gtk-color-palette='black:white:gray50:red:purple:blue:light blue:green:yellow:orange:lavender:brown:goldenrod4:dodger blue:pink:light green:gray10:gray30:gray75:gray90'
+gtk-color-scheme=''
+gtk-enable-primary-paste=true
+gtk-im-module=''
+gtk-im-preedit-style='callback'
+gtk-im-status-style='callback'
+gtk-key-theme='Default'
 gtk-theme='Gruvbox-Dark-BL'
+gtk-timeout-initial=200
+gtk-timeout-repeat=20
 icon-theme='oomox-gruvbox-dark'
+menubar-accel='F10'
+menubar-detachable=false
+menus-have-tearoff=false
+monospace-font-name='SauceCodePro Nerd Font 10'
+scaling-factor=uint32 0
 text-scaling-factor=1.0
+toolbar-detachable=false
+toolbar-icons-size='large'
+toolbar-style='both-horiz'
 toolkit-accessibility=false
+
+[org/gnome/desktop/peripherals/mouse]
+accel-profile='default'
+double-click=400
+drag-threshold=8
+left-handed=false
+middle-click-emulation=false
+natural-scroll=false
+speed=0.0
+
+[org/gnome/desktop/privacy]
+disable-camera=false
+disable-microphone=false
+disable-sound-output=false
+old-files-age=uint32 30
+recent-files-max-age=7
+remember-recent-files=true
+remove-old-temp-files=false
+remove-old-trash-files=false
+
+[org/gnome/desktop/sound]
+event-sounds=false
+input-feedback-sounds=false
+theme-name='LinuxMint'
+
+[org/gnome/desktop/wm/preferences]
+action-double-click-titlebar='toggle-maximize'
+action-middle-click-titlebar='lower'
+action-right-click-titlebar='menu'
+audible-bell=false
+auto-raise=false
+auto-raise-delay=500
+button-layout=':minimize,maximize,close'
+disable-workarounds=false
+focus-mode='click'
+focus-new-windows='smart'
+mouse-button-modifier='<Alt>'
+num-workspaces=4
+raise-on-click=true
+resize-with-right-button=true
+theme='Mint-Y'
+titlebar-font='Noto Sans Bold 10'
+titlebar-uses-system-font=false
+visual-bell=false
+visual-bell-type='fullscreen-flash'
+workspace-names=@as []
 
 [org/gnome/evolution-data-server]
 migrated=true
@@ -184,10 +259,11 @@ virtual-root='file:///home/f16poom'
 background-pattern='grid'
 display-line-numbers=true
 display-right-margin=false
+editor-font='SauceCodePro Nerd Font 10'
 highlight-current-line=true
 scheme='gruvbox-dark'
 style-scheme-for-dark-theme-variant='gruvbox-dark'
-use-default-font=true
+use-default-font=false
 wrap-last-split-mode='word'
 
 [org/gnome/gedit/preferences/ui]
@@ -201,6 +277,7 @@ open-recent=false
 [org/gnome/gedit/state/window]
 bottom-panel-active-page='GeditTerminalPanel'
 bottom-panel-size=76
+maximized=false
 side-panel-active-page='GeditFileBrowserPanel'
 side-panel-size=271
 size=(960, 984)
