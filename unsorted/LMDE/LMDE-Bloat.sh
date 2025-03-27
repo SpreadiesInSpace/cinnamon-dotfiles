@@ -6,12 +6,6 @@ if [ "$EUID" -ne 0 ]; then
   exit
 fi
 
-# Check if the script is run from the root account
-if [ "$SUDO_USER" = "" ]; then
-  echo "Please do not run this script from the root account. Use sudo instead."
-  exit
-fi
-
 # Set GRUB timeout to 0
 sed -i '/^#*GRUB_TIMEOUT=/s/^#*GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub
 grub-mkconfig -o /boot/grub/grub.cfg
