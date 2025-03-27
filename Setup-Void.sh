@@ -1,21 +1,33 @@
 #!/bin/bash
 
+# Check if script is run as root
+if [ "$EUID" -ne 0 ]; then
+  echo "Please run the script using sudo."
+  exit
+fi
+
+# Check if the script is run from the root account
+if [ "$SUDO_USER" = "" ]; then
+  echo "Please do not run this script from the root account. Use sudo instead."
+  exit
+fi
+
 # Get the current username
-username=$(whoami)
+username=$SUDO_USER
 
 # Install base-devel, git, and other dependencies
-sudo xbps-install -Syu git xtools
+xbps-install -Syu git xtools
 
 # Install xmirror utility
-sudo xbps-install -Sy xmirror
+xbps-install -Sy xmirror
 
 # Use xmirror to select the fastest mirrors
-# sudo xmirror -s https://repo-fastly.voidlinux.org/
-sudo xmirror -s https://mirror.vofr.net/voidlinux/
+# xmirror -s https://repo-fastly.voidlinux.org/
+xmirror -s https://mirror.vofr.net/voidlinux/
 
 # Install multilib and nonfree repos
-sudo xbps-install -Sy void-repo-nonfree void-repo-multilib void-repo-multilib-nonfree
-sudo xbps-install -Syu
+xbps-install -Sy void-repo-nonfree void-repo-multilib void-repo-multilib-nonfree
+xbps-install -Syu
 
 # All packages (adapt package names as needed for Void Linux)
 packages=(
@@ -146,10 +158,10 @@ packages=(
 )
 
 # Update system and install packages
-sudo xbps-install -Syu "${packages[@]}"
+xbps-install -Syu "${packages[@]}"
 
 # Protect neofetch from being removed
-sudo xbps-pkgdb -m hold neofetch
+xbps-pkgdb -m hold neofetch
 
 <<LANCZOS
 # Apply ANTIALIAS to LANCZOS patch for cinnamon-settings backgrounds
@@ -163,7 +175,7 @@ files=(
 # Iterate over each file and replace 'ANTIALIAS' with 'LANCZOS'
 for file in "${files[@]}"; do
     if [ -f "$file" ]; then
-        sudo sed -i 's/ANTIALIAS/LANCZOS/g' "$file"
+        sed -i 's/ANTIALIAS/LANCZOS/g' "$file"
         echo "Updated $file"
     else
         echo "File $file not found"
@@ -179,82 +191,82 @@ chmod +x update_brave.sh
 cd ..
 
 # Enable Flathub
-sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
 # Preserve old libvirtd configuration (for Virtual Machine Manager)
-sudo cp /etc/libvirt/libvirtd.conf /etc/libvirt/libvirtd.conf.old
+cp /etc/libvirt/libvirtd.conf /etc/libvirt/libvirtd.conf.old
 
 # Check for 'unix_sock_group' entry
 if ! grep -q "^unix_sock_group = \"libvirt\"$" /etc/libvirt/libvirtd.conf; then
-    echo 'unix_sock_group = "libvirt"' | sudo tee -a /etc/libvirt/libvirtd.conf
+    echo 'unix_sock_group = "libvirt"' | tee -a /etc/libvirt/libvirtd.conf
 else
-    sudo sed -i '/^#*unix_sock_group = "libvirt"/s/^#*//' /etc/libvirt/libvirtd.conf
+    sed -i '/^#*unix_sock_group = "libvirt"/s/^#*//' /etc/libvirt/libvirtd.conf
 fi
 
 # Check for 'unix_sock_ro_perms' entry
 if ! grep -q "^unix_sock_ro_perms = \"0777\"$" /etc/libvirt/libvirtd.conf; then
-    echo 'unix_sock_ro_perms = "0777"' | sudo tee -a /etc/libvirt/libvirtd.conf
+    echo 'unix_sock_ro_perms = "0777"' | tee -a /etc/libvirt/libvirtd.conf
 else
-    sudo sed -i '/^#*unix_sock_ro_perms = "0777"/s/^#*//' /etc/libvirt/libvirtd.conf
+    sed -i '/^#*unix_sock_ro_perms = "0777"/s/^#*//' /etc/libvirt/libvirtd.conf
 fi
 
 # Check for 'unix_sock_rw_perms' entry
 if ! grep -q "^unix_sock_rw_perms = \"0770\"$" /etc/libvirt/libvirtd.conf; then
-    echo 'unix_sock_rw_perms = "0770"' | sudo tee -a /etc/libvirt/libvirtd.conf
+    echo 'unix_sock_rw_perms = "0770"' | tee -a /etc/libvirt/libvirtd.conf
 else
-    sudo sed -i '/^#*unix_sock_rw_perms = "0770"/s/^#*//' /etc/libvirt/libvirtd.conf
+    sed -i '/^#*unix_sock_rw_perms = "0770"/s/^#*//' /etc/libvirt/libvirtd.conf
 fi
 
 # Preserve old QEMU configuration (for Virtual Machine Manager)
-sudo cp /etc/libvirt/qemu.conf /etc/libvirt/qemu.conf.old
+cp /etc/libvirt/qemu.conf /etc/libvirt/qemu.conf.old
 
 # Check for 'user' entry
 if ! grep -q "^user = \"$username\"$" /etc/libvirt/qemu.conf; then
-    echo "user = \"$username\"" | sudo tee -a /etc/libvirt/qemu.conf
+    echo "user = \"$username\"" | tee -a /etc/libvirt/qemu.conf
 fi
 
 # Check for 'group' entry
 if ! grep -q "^group = \"$username\"$" /etc/libvirt/qemu.conf; then
-    echo "group = \"$username\"" | sudo tee -a /etc/libvirt/qemu.conf
+    echo "group = \"$username\"" | tee -a /etc/libvirt/qemu.conf
 fi
 
 # Check for 'swtpm_user' entry
 if ! grep -q "^swtpm_user = \"$username\"$" /etc/libvirt/qemu.conf; then
-    echo "swtpm_user = \"$username\"" | sudo tee -a /etc/libvirt/qemu.conf
+    echo "swtpm_user = \"$username\"" | tee -a /etc/libvirt/qemu.conf
 fi
 
 # Check for 'swtpm_group' entry
 if ! grep -q "^swtpm_group = \"$username\"$" /etc/libvirt/qemu.conf; then
-    echo "swtpm_group = \"$username\"" | sudo tee -a /etc/libvirt/qemu.conf
+    echo "swtpm_group = \"$username\"" | tee -a /etc/libvirt/qemu.conf
 fi
 
 # Enable and start services for Virt Manager
-sudo ln -s /etc/sv/spice-vdagentd /var/service
-sudo ln -s /etc/sv/libvirtd /var/service
-sudo ln -s /etc/sv/virtlockd /var/service
-sudo ln -s /etc/sv/virtlogd /var/service
+ln -s /etc/sv/spice-vdagentd /var/service
+ln -s /etc/sv/libvirtd /var/service
+ln -s /etc/sv/virtlockd /var/service
+ln -s /etc/sv/virtlogd /var/service
 
 # Enable and start services for LightDM & Cinnamon
-sudo ln -s /etc/sv/dbus /var/service
-sudo ln -s /etc/sv/lightdm /var/service
-sudo ln -s /etc/sv/NetworkManager /var/service
-sudo rm /var/service/dhcpcd
+ln -s /etc/sv/dbus /var/service
+ln -s /etc/sv/lightdm /var/service
+ln -s /etc/sv/NetworkManager /var/service
+rm /var/service/dhcpcd
 
 # Start and autostart the default network
-sudo virsh net-start default
-sudo virsh net-autostart default
+virsh net-start default
+virsh net-autostart default
 
 # Add the current user to the necessary groups
 groups=(libvirt libvirt-qemu kvm input disk video audio)
 for group in "${groups[@]}"; do
-    sudo usermod -aG "$group" "$username"
+    usermod -aG "$group" "$username"
 done
 
 # Backs up old lightdm.conf
-sudo cp /etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf.old
+cp /etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf.old
 
 # Replace specific lines in lightdm.conf
-sudo awk -i inplace '
+awk -i inplace '
 /^\[Seat:\*\]/ {a=1}
 a==1 && /^#?greeter-hide-users=/ {
     print "greeter-hide-users=false"
@@ -276,9 +288,9 @@ a==1 && /^#?autologin-session=/ {
 ' /etc/lightdm/lightdm.conf
 
 # Create a new group named 'autologin' if it doesn't already exist
-sudo groupadd -f autologin
+groupadd -f autologin
 # Add the current user to the 'autologin' group
-sudo gpasswd -a $username autologin
+gpasswd -a $username autologin
 
 # Run the setup script
 # cd home/

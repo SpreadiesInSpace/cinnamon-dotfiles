@@ -5,11 +5,11 @@ username=$(whoami)
 
 # Install base-devel and git, then install yay from AUR
 sudo pacman -S --needed --noconfirm base-devel git
-git clone https://aur.archlinux.org/yay.git
-cd yay
+git clone https://aur.archlinux.org/yay-bin.git
+cd yay-bin
 makepkg -si --noconfirm
 cd ..
-rm -rf yay
+rm -rf yay-bin
 
 # Check if Color, ParallelDownloads, and ILoveCandy are already in yay config
 # Define the options to be added
