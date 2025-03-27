@@ -97,7 +97,7 @@ packages=(
     "evince"
     "ffmpegthumbnailer"
     "gedit"
-    "gedit-plugins"
+    #"gedit-plugins"
     "gnome-calculator"
     "gnome-screenshot"
     "gnome-system-monitor"
