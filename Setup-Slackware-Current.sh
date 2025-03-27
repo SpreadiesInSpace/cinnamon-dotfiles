@@ -172,7 +172,6 @@ gnome_packages=(
     "eog"
     "evince"
     "file-roller"
-    "appstream-glib" # for file-roller
     "flatpak"
     "libportal" # for file-roller
     "malcontent" # for flatpak
@@ -189,6 +188,8 @@ gnome_packages=(
 
 # Install packages from GFS over SBo to reduce compile times
 slpkg -iy "${gnome_packages[@]}" -o gnome
+# Replace Slackware Current's appstream-glib with gfs for file-roller
+slpkg -iy appstream-glib -o gnome
 
 # SBo packages
 sbo_packages=(
