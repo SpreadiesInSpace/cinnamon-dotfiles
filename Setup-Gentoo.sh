@@ -99,7 +99,7 @@ echo "gnome-extra/nemo tracker" | tee /etc/portage/package.use/nemo
 echo "app-emulation/qemu glusterfs iscsi pipewire spice usbredir vde virgl virtfs zstd" | tee /etc/portage/package.use/qemu
 
 # Sync Repository + All Overlays
-emaint sync -a sync
+emaint sync -a
 
 # Select 23.0 gnome desktop systemd profile for Cinnamon
 eselect profile set default/linux/amd64/23.0/desktop/gnome/systemd
