@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Check if the script is run as root
+if [ "$EUID" -eq 0 ]; then
+  echo "This script must NOT be run as root. Please execute it as a regular user."
+  exit
+fi
+
 # Get the current username
 username=$(whoami)
 
