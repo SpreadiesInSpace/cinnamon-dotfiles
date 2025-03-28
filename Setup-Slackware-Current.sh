@@ -168,6 +168,7 @@ gnome_packages=(
     "libgedit-gtksourceview" # for gedit
     "libpeas" # for gedit
     "gnome-calculator"
+    "gnome-disk-utility"
     "gnome-system-monitor"
     "gpaste"
     #"rhythmbox" # using Elisa instead

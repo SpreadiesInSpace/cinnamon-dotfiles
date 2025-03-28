@@ -119,6 +119,7 @@ in
       gcc
       gedit
       git
+      gnome-disk-utility
       gnome-system-monitor
       gparted
       # guestfs-tools

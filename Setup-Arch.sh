@@ -64,6 +64,7 @@ packages=(
     "gedit"
     "gedit-plugins"
     "gnome-calculator"
+    "gnome-disk-utility"
     "gnome-keyring"
     "gnome-screenshot"
     "gnome-system-monitor"

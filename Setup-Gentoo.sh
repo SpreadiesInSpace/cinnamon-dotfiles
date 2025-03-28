@@ -134,6 +134,7 @@ packages=(
     "app-editors/gedit"
     "app-editors/gedit-plugins"
     "gnome-extra/gnome-calculator"
+    "sys-apps/gnome-disk-utility"
     "media-gfx/gnome-screenshot"
     "gnome-extra/gnome-system-monitor"
     "x11-terms/gnome-terminal"

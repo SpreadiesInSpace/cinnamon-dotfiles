@@ -74,6 +74,7 @@ packages=(
     # "gedit-plugins"
     # "gedit-plugin-*"
     "gnome-calculator"
+    "gnome-disk-utility"
     "gnome-screenshot"
     "gnome-system-monitor"
     "gnome-terminal"

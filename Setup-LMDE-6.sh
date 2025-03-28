@@ -78,6 +78,7 @@ packages=(
     "gedit"
     "gedit-plugins"
     "gnome-calculator"
+    "gnome-disk-utility"
     "gnome-screenshot"
     "gnome-system-monitor"
     "gnome-terminal"
