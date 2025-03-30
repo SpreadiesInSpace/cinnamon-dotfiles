@@ -91,13 +91,16 @@ cat << EOF | xchroot /mnt /bin/bash
 # New Chroot Environment
 source /etc/profile
 xbps-install -Syu
-xbps-install -y git xtools xmirror nano
+xbps-install -y git xtools xmirror nano NetworkManager
 
 # Change shell to bash
 chsh -s /bin/bash
 
 # Set Hostname
 echo "$hostname" > /etc/hostname
+
+# Enable Networking
+ln -s /etc/sv/NetworkManager /var/service
 
 # Set Timezone
 ln -sf /usr/share/zoneinfo/Asia/Bangkok /etc/localtime
