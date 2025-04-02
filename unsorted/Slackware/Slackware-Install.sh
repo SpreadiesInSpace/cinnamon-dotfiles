@@ -72,7 +72,7 @@ fi
 echo "Follow these steps during 'setup':
 - Do not format partitions accidentally
 - Do not install (E)LILO
-- Enable rc.samba
+- Enable rc.samba & rc.sshd
 - Set hardware clock to UTC
 - Select XFCE as DE
 - Drop to Shell after installation"

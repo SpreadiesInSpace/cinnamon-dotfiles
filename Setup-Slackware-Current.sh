@@ -181,9 +181,8 @@ gnome_packages=(
 # Install packages from GFS over SBo to reduce compile times
 slpkg -iy "${gnome_packages[@]}" -o gnome
 # Replace Slackware Current's appstream-glib with gfs for file-roller
-slpkg -iy appstream-glib -o gnome
-# this avoids pulling in the entirety of gnome DE
-slpkg -iy gnome-terminal -o gnome -O
+# -O avoids pulling in dependencies like the entire Gnome DE
+slpkg -iy appstream-glib gnome-terminal -o gnome -O
 
 # SBo packages
 sbo_packages=(
