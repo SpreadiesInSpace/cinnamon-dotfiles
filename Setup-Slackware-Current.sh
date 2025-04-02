@@ -149,6 +149,9 @@ packages=(
     "libvirt"
     "libvirt-glib"
     "libvirt-python"
+    "audit"
+    "virtiofsd"    
+    "yajl"
     "virt-manager"
 )
 
