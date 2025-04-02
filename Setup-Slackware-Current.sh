@@ -87,7 +87,6 @@ slpkg -iy bash-completion -o "slack_extra"
 # Alien packages
 alien_packages=(
     "libreoffice"
-    "qbittorrent"
 )
 
 # Install packages from Alien over SBo to reduce compile times
@@ -117,6 +116,7 @@ packages=(
     "bleachbit"
     #"noto-fonts"
     #"noto-emoji"
+    "qbittorrent"
     "ufw"
     "xclip"
     # For NvChad
@@ -136,7 +136,7 @@ packages=(
     "snappy"
     "device-tree-compiler"
     "vde2"
-    "qemu" # TARGETS=x86_64-softmmu
+    #"qemu" # TARGETS=x86_64-softmmu
     "spice-gtk"
     "gtk-vnc"
     "libosinfo"
@@ -196,6 +196,7 @@ sbo_packages=(
     #"libuchardet" # for rhythmbox
     "brave-browser"
     "ripgrep"
+    "qemu"
     "libiscsi"
     "glusterfs"
 )
@@ -203,6 +204,14 @@ sbo_packages=(
 # Update system and install packages
 slpkg -iy "${sbo_packages[@]}"
 slpkg -iy bottom # prevent download timeout
+
+# Slint packages
+slint_packages=(
+    "kvantum-qt6" # for qBittorrent
+)
+
+# Install packages from Slint over SBo to reduce compile times
+slpkg -iy "${slint_packages[@]}" -o slint
 
 # Workaround for gedit-plugins to compile (broken)
 # slpkg -iy libpeas gedit-plugins

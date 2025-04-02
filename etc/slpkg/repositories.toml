@@ -120,7 +120,7 @@ ENABLE = false
 MIRROR = "http://www.slackel.gr/repo/x86_64/current/"
 
 [SLINT]
-ENABLE = false
+ENABLE = true
 MIRROR = "https://slackware.uk/slint/x86_64/slint-15.0/"
 
 [PPRKUT]
