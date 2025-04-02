@@ -69,9 +69,9 @@ fi
 cd /mnt/gentoo
 # Sync Time
 hwclock --systohc --utc
-# Grab the Latest Systemd Stage 3 Desktop Profile with wget
+# Grab the Latest Systemd Stage 3 Desktop Profile
 # https://www.gentoo.org/downloads/#other-arches
-GENTOO_MIRROR="https://distfiles.gentoo.org" GENTOO_ARCH="amd64" STAGE3_BASENAME="stage3-amd64-desktop-systemd" STAGE3_RELEASES="$GENTOO_MIRROR/releases/$GENTOO_ARCH/autobuilds/current-$STAGE3_BASENAME/" CURRENT_STAGE3=$(curl -s "$STAGE3_RELEASES" | python3 -c 'import sys, urllib.parse; print(urllib.parse.unquote(sys.stdin.read()))' | grep -o "\"${STAGE3_BASENAME}-[0-9A-Z]*.tar.xz\"" | sort -u | head -1 | sed 's/"//g') && wget "$STAGE3_RELEASES/$CURRENT_STAGE3"
+GENTOO_MIRROR="https://distfiles.gentoo.org" GENTOO_ARCH="amd64" STAGE3_BASENAME="stage3-amd64-desktop-systemd" STAGE3_RELEASES="$GENTOO_MIRROR/releases/$GENTOO_ARCH/autobuilds/current-$STAGE3_BASENAME/" CURRENT_STAGE3=$(curl -s "$STAGE3_RELEASES" | python3 -c 'import sys, urllib.parse; print(urllib.parse.unquote(sys.stdin.read()))' | grep -o "\"${STAGE3_BASENAME}-[0-9A-Z]*.tar.xz\"" | sort -u | head -1 | sed 's/"//g') && wget --no-clobber --timeout=10 --tries=10 "$STAGE3_RELEASES/$CURRENT_STAGE3"
 # Extract Stage 3 tarball
 tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner -C /mnt/gentoo
 # Pull make.conf with use flags, jobs, licenses, mirrors, etc already set
