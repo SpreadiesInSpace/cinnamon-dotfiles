@@ -136,7 +136,6 @@ packages=(
     "snappy"
     "device-tree-compiler"
     "vde2"
-    #"qemu" # TARGETS=x86_64-softmmu
     "spice-gtk"
     "gtk-vnc"
     "libosinfo"
@@ -196,7 +195,7 @@ sbo_packages=(
     #"libuchardet" # for rhythmbox
     "brave-browser"
     "ripgrep"
-    "qemu"
+    "qemu" # TARGETS=x86_64-softmmu
     "libiscsi"
     "glusterfs"
 )
