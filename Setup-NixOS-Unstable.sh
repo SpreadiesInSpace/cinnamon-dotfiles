@@ -24,6 +24,10 @@ cp ./home/theming/NixOS/configuration.nix /etc/nixos/configuration.nix
 # Replace the placeholder with the actual username
 sed -i "s/f16poom/$username/g" /etc/nixos/configuration.nix
 
+# Prompt the user for hostname
+read -p "Enter the hostname for your system: " hostname
+sed -i "s/hostName = .*;/hostName = \"$hostname\";/g" /etc/nixos/configuration.nix
+
 # Places Login Wallpaper
 cp -vnr home/wallpapers/Login_Wallpaper.jpg /boot/
 
