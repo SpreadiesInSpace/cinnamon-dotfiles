@@ -48,7 +48,3 @@ thumbnails.cache = True
 x11 = True
 x11.debug_logs = True
 
-[list/shred_drives]
-0 = /home/f16poom/.cache
-1 = /tmp
-
