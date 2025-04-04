@@ -196,7 +196,7 @@ sbo_packages=(
     #"libuchardet" # for rhythmbox
     "brave-browser"
     "ripgrep"
-    "qemu" # TARGETS=x86_64-softmmu
+    #"qemu" # TARGETS=x86_64-softmmu
     "libiscsi"
     "glusterfs"
 )
@@ -204,6 +204,13 @@ sbo_packages=(
 # Update system and install packages
 slpkg -iy "${sbo_packages[@]}"
 slpkg -iy bottom # prevent download timeout
+
+# Install Self-Compiled qemu from SBo
+git clone https://github.com/spreadiesinspace/tmp
+cd tmp/
+./install.sh
+cd ..
+rm -rf tmp/
 
 # Slint packages
 slint_packages=(
