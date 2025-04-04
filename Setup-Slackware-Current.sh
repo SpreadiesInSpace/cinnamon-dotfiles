@@ -206,11 +206,11 @@ slpkg -iy "${sbo_packages[@]}"
 slpkg -iy bottom # prevent download timeout
 
 # Install Self-Compiled qemu from SBo
-git clone https://github.com/spreadiesinspace/tmp
-cd tmp/
+git clone https://github.com/spreadiesinspace/qemu
+cd qemu/
 ./install.sh
 cd ..
-rm -rf tmp/
+rm -rf qemu/
 
 # Slint packages
 slint_packages=(
