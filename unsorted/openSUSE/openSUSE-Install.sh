@@ -32,7 +32,7 @@ read -p "Enter hostname: " hostname
 echo
 lsblk
 echo
-read -p "Enter drive to use (e.g., /dev/sda, /dev/vda, /dev/nvme0n1, /dev/mmcblk0): " drive
+read -p "Enter drive to use (e.g., /dev/sda, /dev/nvme0n1, /dev/mmcblk0): " drive
 
 # Partition the drive
 echo "Partitioning $drive..."
