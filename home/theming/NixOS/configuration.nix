@@ -119,7 +119,6 @@ in
       gcc
       gedit
       git
-      gnome-disk-utility
       gnome-system-monitor
       gparted
       # guestfs-tools
@@ -178,7 +177,7 @@ in
     kdeconnect.enable = true;
     dconf.enable = true;
     geary.enable = false;
-    gnome-disks.enable = false;
+    gnome-disks.enable = true;
     gpaste.enable = true;
   };
 
