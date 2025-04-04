@@ -88,10 +88,11 @@ slpkg -iy bash-completion -o "slack_extra"
 # Alien packages
 alien_packages=(
     "libreoffice"
+    "openjdk17" # for libreoffice
 )
 
 # Install packages from Alien over SBo to reduce compile times
-slpkg -iy "${alien_packages[@]}" -o alien
+slpkg -iy "${alien_packages[@]}" -o alien -O
 
 # All packages
 packages=(
@@ -215,10 +216,12 @@ rm -rf qemu/
 # Slint packages
 slint_packages=(
     "kvantum-qt6" # for qBittorrent
+    "md4c" # for kvantum-qt6
+    "kwindowsystem6" # for kvantum-qt6
 )
 
 # Install packages from Slint over SBo to reduce compile times
-slpkg -iy "${slint_packages[@]}" -o slint
+slpkg -iy "${slint_packages[@]}" -o slint -O
 
 # Workaround for gedit-plugins to compile (broken)
 # slpkg -iy libpeas gedit-plugins
