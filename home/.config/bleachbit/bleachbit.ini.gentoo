@@ -12,7 +12,7 @@ shred = False
 units_iec = False
 window_maximized = False
 first_start = False
-version = 4.6.0
+version = 4.6.2
 window_x = 560
 window_y = 192
 window_width = 800
@@ -20,7 +20,6 @@ window_height = 600
 hashsalt = 02e91a1e0549ad05bcb4b4c6e0063f6ae382f305f3fb26284445e2cf0bdd7831d9ea9430b431893017a01c19b2b48ae1b6bd9a1a8f9cd8f5f21d74d8d873a13e
 
 [hashpath]
-
 
 [preserve_languages]
 en = True
@@ -48,4 +47,8 @@ thumbnails = True
 thumbnails.cache = True
 x11 = True
 x11.debug_logs = True
+
+[list/shred_drives]
+0 = /home/f16poom/.cache
+1 = /tmp
 
