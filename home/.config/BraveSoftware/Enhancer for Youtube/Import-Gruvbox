@@ -49,7 +49,7 @@
     "hidecardsendscreens": true,
     "hidechat": false,
     "hidecomments": false,
-    "hiderelated": true,
+    "hiderelated": false,
     "hideshorts": true,
     "ignoreplaylists": true,
     "ignorepopupplayer": true,
