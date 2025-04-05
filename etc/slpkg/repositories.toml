@@ -87,8 +87,8 @@ MIRROR = "https://slackware.nl/people/alien/restricted_sbrepos/current/x86_64/"
 
 [GNOME]
 ENABLE = true
-MIRROR = "https://slackware.uk/gfs/current/46.10/x86_64/"
-#MIRROR = "https://reddoglinux.ddns.net/linux/gnome/46.x/x86_64/"
+#MIRROR = "https://slackware.uk/gfs/current/46.10/x86_64/"
+MIRROR = "https://reddoglinux.ddns.net/linux/gnome/46.x/x86_64/"
 
 [MSB]
 ENABLE = false
@@ -96,8 +96,8 @@ MIRROR = "https://slackware.uk/msb/15.0/1.28/x86_64/"
 
 [CSB]
 ENABLE = true
-MIRROR = "https://slackware.uk/csb/current/x86_64/"
-#MIRROR = "https://us.slackware.nl/csb/current/x86_64/"
+#MIRROR = "https://slackware.uk/csb/current/x86_64/"
+MIRROR = "https://us.slackware.nl/csb/current/x86_64/"
 
 [CONRAID]
 ENABLE = true
