@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=Startup Manager
+Comment=Startup Manager
+Exec=bootmanager
+Terminal=false
+X-MultipleArgs=false
+Type=Application
+StartupNotify=false
+Categories=System;Settings;
+Icon=grub-customizer
+X-Ubuntu-Gettext-Domain=grub-customizer
+X-KDE-SubstituteUID=true
+Keywords=GRUB;GRUB2;BURG;configuration;settings;menu;

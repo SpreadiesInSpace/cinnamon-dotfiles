@@ -1,0 +1,20 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=YaST Software
+GenericName=Software Manager
+Comment=Install/Remove Software
+# we cannot use xdg-su -c "/sbin/yast2 sw_single %F"
+# directly here as %F must not be used inside a quoted argument
+# see https://standards.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html#exec-variables
+Exec=/usr/lib/YaST2/bin/sw_single_wrapper %F
+Icon=software
+Terminal=false
+Type=Application
+Categories=System;PackageManager;X-SuSE-ControlCenter-System;
+X-SuSE-YaST-Keywords=software,packages,rpm,installation,deletion
+MimeType=application/x-rpm;application/x-redhat-package-manager;
+NotShowIn=GNOME;MATE;
+StartupNotify=true
+PrefersNonDefaultGPU=false
+
+

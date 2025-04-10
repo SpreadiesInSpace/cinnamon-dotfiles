@@ -1,0 +1,14 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Name=Mount CIFS Share
+Exec=gnome-terminal -- bash -c 'MOUNT_POINT="${HOME}/Share"; if mountpoint -q "$MOUNT_POINT"; then sudo umount "$MOUNT_POINT"; else mkdir -p "$MOUNT_POINT"; chmod 777 "$MOUNT_POINT"; sudo mount -t 9p -o trans=virtio /sharepoint "$MOUNT_POINT"; fi; clear; neofetch; echo; exec bash;'
+Comment=
+Terminal=false
+Icon=krusader_root
+Type=Application
+Categories=System;FileTools
+Hidden=false
+NoDisplay=false
+Name[en_US]=Toggle CIFS Share
+PrefersNonDefaultGPU=false

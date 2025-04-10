@@ -1,0 +1,116 @@
+#
+# This file is part of the LibreOffice project.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+#
+# This file incorporates work covered by the following license notice:
+#
+#   Licensed to the Apache Software Foundation (ASF) under one or more
+#   contributor license agreements. See the NOTICE file distributed
+#   with this work for additional information regarding copyright
+#   ownership. The ASF licenses this file to you under the Apache
+#   License, Version 2.0 (the "License"); you may not use this file
+#   except in compliance with the License. You may obtain a copy of
+#   the License at http://www.apache.org/licenses/LICENSE-2.0 .
+#
+[Desktop Entry]
+Version=1.0
+Terminal=false
+NoDisplay=false
+Icon=libreoffice-startcenter
+Type=Application
+Categories=Office;X-Red-Hat-Base;X-SuSE-Core-Office;
+Exec=libreoffice %U
+MimeType=application/vnd.openofficeorg.extension;x-scheme-handler/vnd.libreoffice.cmis;x-scheme-handler/vnd.sun.star.webdav;x-scheme-handler/vnd.sun.star.webdavs;x-scheme-handler/vnd.libreoffice.command;x-scheme-handler/ms-word;x-scheme-handler/ms-powerpoint;x-scheme-handler/ms-excel;x-scheme-handler/ms-visio;x-scheme-handler/ms-access;
+Name=LibreOffice
+GenericName=Office
+GenericName[ar]=مكتب
+GenericName[ca]=Oficina
+GenericName[cs]=Kancelář
+GenericName[da]=Kontor
+GenericName[de]=Office
+GenericName[en]=Office
+GenericName[en_GB]=Office
+GenericName[eo]=Oficejo
+GenericName[es]=Programas de oficina
+GenericName[fi]=Toimisto
+GenericName[fr]=Bureau
+GenericName[hu]=Iroda
+GenericName[it]=Ufficio
+GenericName[ja]=Office
+GenericName[ko]=오피스
+GenericName[nl]=Kantoor
+GenericName[pl]=Biuro
+GenericName[pt]=Escritório
+GenericName[pt_BR]=Office
+GenericName[ro]=Birou
+GenericName[ru]=Офис
+GenericName[sk]=Kancelária
+GenericName[sl]=Pisarniški paket
+GenericName[tr]=Ofis
+GenericName[uk]=Офіс
+GenericName[zh_CN]=办公
+GenericName[zh_TW]=辦公
+Comment=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
+Comment[ar]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
+Comment[ca]=Inicieu aplicacions per a crear documents de text, fulls de càlcul, presentacions, dibuixos, fórmules i bases de dades, o obriu documents usats recentment.
+Comment[cs]=Spouští aplikace pro vytváření textových dokumentů, sešitů, prezentací, kreseb, vzorců a databází nebo otevírá naposledy otevřené dokumenty.
+Comment[da]=Start programmer til at oprette tekstdokumenter, regneark, præsentationer, tegninger, formler og databaser, eller åbn nyligt brugte dokumenter.
+Comment[de]=Starten Sie Anwendungen, um Textdokumente, Tabellendokumente, Präsentationen, Zeichnungen, Formeln und Datenbanken zu erstellen, oder öffnen Sie kürzlich verwendete Dokumente.
+Comment[en]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
+Comment[en_GB]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulae, and databases, or open recently used documents.
+Comment[eo]=Lanĉi aplikaĵojn por krei tekstajn dokumentojn, kalkultabelojn, prezentaĵojn, desegnaĵojn, formulojn, ka datumbazojn, aŭ malfermi lastatempe uzitajn dokumentojn.
+Comment[es]=Inicie aplicaciones para crear documentos de texto, hojas de cálculo, presentaciones, dibujos, fórmulas y bases de datos, o abra documentos usados recientemente.
+Comment[fi]=Käynnistä sovelluksia, joilla luot tekstiasiakirjoja, laskentataulukoita, esityksiä, piirroksia, kaavoja ja tietokantoja tai avaa viimeaikaisia asiakirjoja.
+Comment[fr]=Lancer des applications pour créer des documents texte, des feuilles de calcul, des présentations, des dessins, des formules et des bases de données, ou ouvrir les documents récemment utilisés.
+Comment[hu]=Alkalmazások indítása szöveges dokumentumok, táblázatok, bemutatók, rajzok, képletek és adatbázisok létrehozásához vagy a legutóbbi dokumentumok megnyitása.
+Comment[it]=Avvia applicazioni per creare documenti di testo, fogli di calcolo, presentazioni, disegni, formule e database, oppure apri i documenti recenti.
+Comment[ja]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
+Comment[ko]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
+Comment[nl]=Start applicaties om tekstdocumenten, werkbladen, presentaties, tekeningen, formules en databases te maken of recent gebruikte documenten te openen.
+Comment[pl]=Uruchamiaj aplikacje do tworzenia dokumentów tekstowych, arkuszy kalkulacyjnych, prezentacji, rysunków, formuł i baz danych lub otwieraj ostatnio używane dokumenty.
+Comment[pt]=Inicie aplicações para criar documentos de texto, folhas de cálculo, apresentações, desenhos, fórmulas e bases de dados ou abra documentos recentes.
+Comment[pt_BR]=Inicie aplicativos para criar documentos de texto, planilhas, apresentações, desenhos, fórmulas e bancos de dados ou abra documentos recém utilizados.
+Comment[ro]=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
+Comment[ru]=Запуск приложений для создания текстовых документов, электронных таблиц, презентаций, рисунков, формул и баз данных или открытия недавно использованных документов.
+Comment[sk]=Spúšťa aplikácie na vytváranie textových a tabuľkových dokumentov, prezentácií, kresieb, vzorcov a databáz alebo otvára naposledy otvorené dokumenty.
+Comment[sl]=Zaženite programe, s katerimi lahko ustvarite besedilne dokumente, preglednice, predstavitve, risbe, formule in zbirke podatkov ali pa odprete nedavno uporabljene dokumente.
+Comment[tr]=Metin belgeleri, hesap tabloları, sunumlar, çizimler, formüller ve veritabanları oluşturmak veya son kullanılan belgeleri açmak için uygulamaları başlatın.
+Comment[uk]=Запуск програм для створення текстових документів, електронних таблиць, презентацій, малюнків, формул і баз даних або відкриття нещодавно використаних документів.
+Comment[zh_CN]=启动应用程序以创建文本文档、电子表格、演示文稿、绘图、公式和数据库，或者打开最近使用过的文档。
+Comment[zh_TW]=啟動應用程式以建立文字文件、試算表、簡報、繪圖、公式與資料庫，或是開啟最近使用的文件。
+StartupNotify=true
+X-GIO-NoFuse=true
+StartupWMClass=libreoffice-startcenter
+X-KDE-Protocols=file,http,webdav,webdavs
+
+##Define Actions
+Actions=Writer;Calc;Impress;Draw;Base;Math;
+
+[Desktop Action Writer]
+Name=Writer
+Exec=libreoffice --writer
+
+[Desktop Action Calc]
+Name=Calc
+Exec=libreoffice --calc
+
+[Desktop Action Impress]
+Name=Impress
+Exec=libreoffice --impress
+
+[Desktop Action Draw]
+Name=Draw
+Exec=libreoffice --draw
+
+[Desktop Action Base]
+Name=Base
+Exec=libreoffice --base
+
+[Desktop Action Math]
+Name=Math
+Exec=libreoffice --math
+
+##End of actions menu

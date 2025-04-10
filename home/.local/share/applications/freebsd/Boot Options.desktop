@@ -1,0 +1,11 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=FreeBSD Boot Options
+Exec=sudo nano /boot/loader.conf
+Comment=
+Terminal=true
+Icon=grub-customizer
+Type=Application
+Name[C]=Boot Options
+NoDisplay=false
+Hidden=false

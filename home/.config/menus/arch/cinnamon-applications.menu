@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+<!DOCTYPE Menu
+  PUBLIC '-//freedesktop//DTD Menu 1.0//EN'
+  'http://standards.freedesktop.org/menu-spec/menu-1.0.dtd'>
+<Menu>
+	<Name>Applications</Name>
+	<MergeFile type="parent">/etc/xdg/menus/cinnamon-applications.menu</MergeFile>
+	<Menu>
+		<Name>Other</Name>
+	</Menu>
+	<Menu>
+		<Name>Administration</Name>
+		<Include>
+			<Filename>Mount CIFS Share.desktop</Filename>
+		</Include>
+		<AppDir>/home/f16poom/.local/share/applications</AppDir>
+	</Menu>
+	<Menu>
+		<Name>Education</Name>
+		<DirectoryDir>/home/f16poom/.local/share/desktop-directories</DirectoryDir>
+		<Exclude>
+			<Filename>libreoffice-math.desktop</Filename>
+		</Exclude>
+		<AppDir>/home/f16poom/.local/share/applications</AppDir>
+	</Menu>
+	<Menu>
+		<Name>Office</Name>
+		<Exclude>
+			<Filename>org.gnome.Evince.desktop</Filename>
+		</Exclude>
+		<AppDir>/home/f16poom/.local/share/applications</AppDir>
+	</Menu>
+	<Menu>
+		<Name>Science</Name>
+		<Exclude>
+			<Filename>libreoffice-math.desktop</Filename>
+		</Exclude>
+		<AppDir>/home/f16poom/.local/share/applications</AppDir>
+	</Menu>
+	<Menu>
+		<Name>Development</Name>
+		<Exclude>
+			<Filename>yad-icon-browser.desktop</Filename>
+		</Exclude>
+		<AppDir>/home/Spready/.local/share/applications</AppDir>
+	</Menu>
+</Menu>

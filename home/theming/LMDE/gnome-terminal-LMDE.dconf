@@ -1,0 +1,23 @@
+[org/gnome/terminal/legacy/profiles:]
+default='f1479fe0-0607-4d89-995f-e22c38773a93'
+list=['f1479fe0-0607-4d89-995f-e22c38773a93']
+
+[org/gnome/terminal/legacy/profiles:/:f1479fe0-0607-4d89-995f-e22c38773a93]
+allow-bold=true
+background-color='#282828282828'
+bold-color='#EBEBDBDBB2B2'
+bold-color-same-as-fg=true
+cursor-background-color='#EBEBDBDBB2B2'
+cursor-colors-set=true
+cursor-foreground-color='#282828282828'
+default-size-columns=90
+default-size-rows=26
+font='SauceCodePro Nerd Font 10'
+foreground-color='#EBEBDBDBB2B2'
+palette=['#282828282828', '#CCCC24241D1D', '#989897971A1A', '#D7D799992121', '#454585858888', '#B1B162628686', '#68689D9D6A6A', '#A8A899998484', '#929283837474', '#FBFB49493434', '#B8B8BBBB2626', '#FAFABDBD2F2F', '#8383A5A59898', '#D3D386869B9B', '#8E8EC0C07C7C', '#EBEBDBDBB2B2']
+scrollbar-policy='never'
+use-system-font=false
+use-theme-background=false
+use-theme-colors=true
+use-theme-transparency=false
+visible-name='Gruvbox Dark'

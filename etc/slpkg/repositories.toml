@@ -1,0 +1,128 @@
+# This is the general repositories configuration file of slpkg:
+# /etc/slpkg/repositories.toml
+# Updated: 29/09/2024, Version: 5.1.4
+
+# Set 'true' or 'false' to enable or disable the repository you want.
+# You can use a mirror not included in this file.
+
+# Notes: Before using a repository, make sure you have read about it.
+#        Some repositories are for -current only. Change the mirror
+#        if it is necessary. The mirror or every part of the mirror
+#        should end with a slash '/' except for git repositories.
+
+# Template to define a binary custom repository.
+# At least are required [NAME], ENABLE, MIRROR and TAG options.
+# The MIRROR should include the files ChangeLog.txt, PACKAGES.TXT,
+# and CHECKSUMS.md5. If the file ChangeLog.txt is located in
+# a different branch, it should be set a variable CHANGELOG.
+# Example:
+# [ALIEN]
+# ENABLE = true
+# MIRROR = "https://slackware.nl/people/alien/sbrepos/15.0/x86_64/"
+# CHANGELOG = "https://slackware.nl/people/alien/sbrepos/"
+# TAG = "alien"
+
+# Salix OS Distribution:
+# Replace the SLACK, SLACK_EXTRA and SLACK_PATCHES with the mirrors:
+# https://repo.greeklug.gr/data/pub/linux/salix/x86_64/slackware-15.0/
+# https://repo.greeklug.gr/data/pub/linux/salix/x86_64/slackware-15.0/extra/
+# https://repo.greeklug.gr/data/pub/linux/salix/x86_64/slackware-15.0/patches/
+
+[DEFAULT]
+# This is the DEFAULT REPOSITORY.
+# You can change it with one that you see below.
+# Make sure you have enabled it before.
+REPOSITORY = "ponce"
+
+[NEW_PACKAGES]
+# Configure the repositories that you want new packages to be added
+# when upgrading installed packages. Only useful for repositories that
+# are fully installed on the system. Example ["slack", "gnome"].
+# Normally you should see the new packages first to install.
+REPOSITORIES = ["slack"]
+
+[REMOVE_PACKAGES]
+# Configure the repositories that you want to remove installed packages
+# that no longer exist in the repository. Only useful for repositories
+# that are fully installed on the system. Example ["slack", "gnome"].
+# WARNING: Always check which packages are going to remove before proceed.
+REPOSITORIES = ["slack"]
+
+[SBO]
+ENABLE = false
+# MIRROR = "https://slackbuilds.org/slackbuilds/15.0/"
+# Alternative, you can use a git repository.
+MIRROR = "https://github.com/SlackBuildsOrg/slackbuilds.git"
+# MIRROR = "https://gitlab.com/SlackBuilds.org/slackbuilds.git"
+
+[PONCE]
+ENABLE = true
+MIRROR = "https://github.com/Ponce/slackbuilds.git"
+# Alternative, you can use the this repository.
+# MIRROR = "https://cgit.ponce.cc/slackbuilds/plain/"
+
+[SLACK]
+ENABLE = true
+MIRROR = "http://mirror.nl.leaseweb.net/slackware/slackware64-current/"
+
+[SLACK_EXTRA]
+ENABLE = true
+MIRROR = "http://mirror.nl.leaseweb.net/slackware/slackware64-current/extra/"
+
+[SLACK_PATCHES]
+ENABLE = false
+MIRROR = "http://mirror.nl.leaseweb.net/slackware/slackware64-current/patches/"
+
+[ALIEN]
+ENABLE = true
+MIRROR = "https://slackware.nl/people/alien/sbrepos/current/x86_64/"
+
+[MULTILIB]
+ENABLE = false
+MIRROR = "https://slackware.nl/people/alien/multilib/15.0/"
+
+[RESTRICTED]
+ENABLE = true
+MIRROR = "https://slackware.nl/people/alien/restricted_sbrepos/current/x86_64/"
+
+[GNOME]
+ENABLE = true
+#MIRROR = "https://slackware.uk/gfs/current/46.10/x86_64/"
+MIRROR = "https://reddoglinux.ddns.net/linux/gnome/46.x/x86_64/"
+
+[MSB]
+ENABLE = false
+MIRROR = "https://slackware.uk/msb/15.0/1.28/x86_64/"
+
+[CSB]
+ENABLE = true
+#MIRROR = "https://slackware.uk/csb/current/x86_64/"
+MIRROR = "https://us.slackware.nl/csb/current/x86_64/"
+
+[CONRAID]
+ENABLE = true
+MIRROR = "https://slackers.it/repository/slackware64-current/"
+
+[SLACKONLY]
+ENABLE = false
+MIRROR = "https://packages.slackonly.com/pub/packages/15.0-x86_64/"
+
+[SALIX]
+ENABLE = false
+MIRROR = "https://repo.greeklug.gr/data/pub/linux/salix/x86_64/15.0/"
+
+[SALIX_EXTRA]
+ENABLE = false
+MIRROR = "https://repo.greeklug.gr/data/pub/linux/salix/x86_64/extra-15.0/"
+
+[SLACKEL]
+ENABLE = false
+MIRROR = "http://www.slackel.gr/repo/x86_64/current/"
+
+[SLINT]
+ENABLE = true
+MIRROR = "https://slackware.uk/slint/x86_64/slint-15.0/"
+
+[PPRKUT]
+ENABLE = false
+MIRROR = "https://repo.liwjatan.org/pprkut/15.0/x86_64/"

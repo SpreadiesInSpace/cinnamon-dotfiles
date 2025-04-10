@@ -1,0 +1,122 @@
+#
+# This file is part of the LibreOffice project.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+#
+# This file incorporates work covered by the following license notice:
+#
+#   Licensed to the Apache Software Foundation (ASF) under one or more
+#   contributor license agreements. See the NOTICE file distributed
+#   with this work for additional information regarding copyright
+#   ownership. The ASF licenses this file to you under the Apache
+#   License, Version 2.0 (the "License"); you may not use this file
+#   except in compliance with the License. You may obtain a copy of
+#   the License at http://www.apache.org/licenses/LICENSE-2.0 .
+#
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Icon=libreoffice-impress
+Type=Application
+Categories=Office;Presentation;X-Red-Hat-Base;
+Exec=libreoffice --impress %U
+MimeType=application/mspowerpoint;application/vnd.apple.keynote;application/vnd.ms-powerpoint;application/vnd.ms-powerpoint.presentation.macroEnabled.12;application/vnd.ms-powerpoint.slideshow.macroEnabled.12;application/vnd.ms-powerpoint.template.macroEnabled.12;application/vnd.oasis.opendocument.presentation;application/vnd.oasis.opendocument.presentation-flat-xml;application/vnd.oasis.opendocument.presentation-template;application/vnd.openxmlformats-officedocument.presentationml.presentation;application/vnd.openxmlformats-officedocument.presentationml.slide;application/vnd.openxmlformats-officedocument.presentationml.slideshow;application/vnd.openxmlformats-officedocument.presentationml.template;application/vnd.stardivision.impress;application/vnd.sun.xml.impress;application/vnd.sun.xml.impress.template;application/x-iwork-keynote-sffkey;application/x-starimpress;
+Name=LibreOffice Impress
+GenericName=Presentation
+GenericName[ar]=عرض تقديمي
+GenericName[ca]=Presentació
+GenericName[cs]=Prezentace
+GenericName[da]=Præsentation
+GenericName[de]=Präsentation
+GenericName[en]=Presentation
+GenericName[en_GB]=Presentation
+GenericName[eo]=Prezentaĵo
+GenericName[es]=Presentación
+GenericName[fi]=Esitys
+GenericName[fr]=Présentation
+GenericName[hu]=Bemutató
+GenericName[it]=Presentazione
+GenericName[ja]=プレゼンテーション
+GenericName[ko]=프레젠테이션
+GenericName[nl]=Presentatie
+GenericName[pl]=Prezentacja
+GenericName[pt]=Apresentação
+GenericName[pt_BR]=Apresentação
+GenericName[ro]=Prezentare
+GenericName[ru]=Презентация
+GenericName[sk]=Prezentácia
+GenericName[sl]=Predstavitev
+GenericName[tr]=Sunum
+GenericName[uk]=Презентація
+GenericName[zh_CN]=演示文稿
+GenericName[zh_TW]=簡報
+Comment=Create and edit presentations for slideshows, meetings and Web pages.
+Comment[ar]=Create and edit presentations for slideshows, meetings and Web pages.
+Comment[ca]=Creeu i editeu presentacions per a ponències, pàgines web i conferències.
+Comment[cs]=Umožňuje vytvářet a upravovat prezentace pro přednášky, porady a webové stránky.
+Comment[da]=Opret og redigér præsentationer til diasshows, møder og websider.
+Comment[de]=Erstellen und bearbeiten Sie Präsentationen für Diashows, Meetings und Webseiten.
+Comment[en]=Create and edit presentations for slideshows, meetings and Web pages.
+Comment[en_GB]=Create and edit presentations for slideshows, meetings and Web pages.
+Comment[eo]=Krei kaj redakti prezentaĵojn por lumbildaj prezentadoj, kunvenoj kaj retpaĝoj.
+Comment[es]=Cree y edite presentaciones para ponencias, reuniones y páginas Web.
+Comment[fi]=Luo ja muokkaa esityksiä diaesityksiä, kokouksia ja verkkosivuja varten.
+Comment[fr]=Créer et modifier des présentations pour des diaporamas, des réunions et des pages Web.
+Comment[hu]=Bemutatók készítése és szerkesztése diavetítésekhez vagy a webre.
+Comment[it]=Crea e modifica presentazioni, diapositive e pagine web.
+Comment[ja]=スライドショー、ミーティング、Webページ用のプレゼンテーションの作成と編集を行います。
+Comment[ko]=Create and edit presentations for slideshows, meetings and Web pages.
+Comment[nl]=Maak en bewerk presentaties voor diavoorstellingen, vergaderingen en webpagina's.
+Comment[pl]=Twórz i edytuj prezentacje do pokazów slajdów, spotkań i na strony internetowe.
+Comment[pt]=Crie e edite apresentações para apresentações, reuniões e páginas web.
+Comment[pt_BR]=Crie e edite apresentações para slides, reuniões e páginas da internet.
+Comment[ro]=Create and edit presentations for slideshows, meetings and Web pages.
+Comment[ru]=Создание и редактирование презентаций для встреч, конференций и веб-страниц.
+Comment[sk]=Umožňuje vytvárať a upravovať prezentácie pre prednášky, porady a webové stránky.
+Comment[sl]=Ustvarjajte in urejajte predstavitve, prosojnice in spletne strani.
+Comment[tr]=Slayt gösterileri, toplantılar ve Web sayfaları için sunumlar oluşturun ve düzenleyin.
+Comment[uk]=Створення і редагування презентацій для зустрічей, конференцій і веб-сторінок.
+Comment[zh_CN]=创建和编辑幻灯片展示、会议以及网页使用的演示文稿。
+Comment[zh_TW]=建立與編輯投影片、會議與網頁的簡報。
+StartupNotify=true
+X-GIO-NoFuse=true
+Keywords=Slideshow;Slides;OpenDocument Presentation;Microsoft PowerPoint;Microsoft Works;OpenOffice Impress;odp;ppt;pptx;
+InitialPreference=5
+StartupWMClass=libreoffice-impress
+X-KDE-Protocols=file,http,webdav,webdavs
+
+Actions=NewDocument;
+NoDisplay=false
+[Desktop Action NewDocument]
+Name=New Presentation
+Name[ar]=عرض تقديمي جديد
+Name[ca]=Presentació nova
+Name[cs]=Nová prezentace
+Name[da]=Ny præsentation
+Name[de]=Neue Präsentation
+Name[en]=New Presentation
+Name[en_GB]=New Presentation
+Name[eo]=Nova prezentaĵo
+Name[es]=Presentación nueva
+Name[fi]=Uusi esitys
+Name[fr]=Nouvelle présentation
+Name[hu]=Új bemutató
+Name[it]=Nuova presentazione
+Name[ja]=新規のプレゼンテーション
+Name[ko]=새 프레젠테이션
+Name[nl]=Nieuwe presentatie
+Name[pl]=Nowa prezentacja
+Name[pt]=Nova apresentação
+Name[pt_BR]=Nova apresentação
+Name[ro]=Prezentare nouă
+Name[ru]=Создать презентацию
+Name[sk]=Nová prezentácia
+Name[sl]=Nova predstavitev
+Name[tr]=Yeni Sunum
+Name[uk]=Презентація
+Name[zh_CN]=新建演示文稿
+Name[zh_TW]=新增簡報
+Icon=document-new
+Exec=libreoffice --impress

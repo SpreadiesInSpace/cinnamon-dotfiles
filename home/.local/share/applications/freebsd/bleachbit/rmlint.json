@@ -1,0 +1,57 @@
+[
+{
+  "description": "rmlint json-dump of lint files",
+  "cwd": "/usr/home/f16poom/.local/share/applications/bleachbit/",
+  "args": "rmlint",
+  "version": "2.10.1",
+  "rev": "unknown",
+  "progress": 0,
+  "checksum_type": "blake2b",
+  "merge_directories": false
+}, {
+  "id": 459014226,
+  "type": "emptyfile",
+  "progress": 0,
+  "path": "/usr/home/f16poom/.local/share/applications/bleachbit/tests/__init__.py",
+  "size": 0,
+  "depth": 2,
+  "inode": 22089,
+  "disk_id": 15915490040787904802,
+  "is_original": false,
+  "mtime": 1636837547
+}, {
+  "id": 3411358830,
+  "type": "duplicate_file",
+  "progress": 77,
+  "checksum": "f95047e38e1c943f54324f1adbc5481b4cc38f42d54d3a00ed94178a238ad45dee298a24d7cbcd9a693582aa0a2b71ee1ea37326efdaedd8657af94585a706e5",
+  "path": "/usr/home/f16poom/.local/share/applications/bleachbit/bleachbit.egg-info/PKG-INFO",
+  "size": 527,
+  "depth": 2,
+  "inode": 20981,
+  "disk_id": 15915490040787904802,
+  "is_original": true,
+  "twins": 2,
+  "mtime": 1636837548
+}, {
+  "id": 798181546,
+  "type": "duplicate_file",
+  "progress": 100,
+  "checksum": "f95047e38e1c943f54324f1adbc5481b4cc38f42d54d3a00ed94178a238ad45dee298a24d7cbcd9a693582aa0a2b71ee1ea37326efdaedd8657af94585a706e5",
+  "path": "/usr/home/f16poom/.local/share/applications/bleachbit/PKG-INFO",
+  "size": 527,
+  "depth": 1,
+  "inode": 20943,
+  "disk_id": 15915490040787904802,
+  "is_original": false,
+  "twins": 2,
+  "mtime": 1636837548
+}, {
+  "aborted": false,
+  "progress": 100,
+  "total_files": 270,
+  "ignored_files": 0,
+  "ignored_folders": 0,
+  "duplicates": 1,
+  "duplicate_sets": 1,
+  "total_lint_size": 527
+}]

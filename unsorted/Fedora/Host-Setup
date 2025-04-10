@@ -1,0 +1,41 @@
+# Additional Packages for Host
+sudo dnf install -y baobab cool-retro-term dconf-editor gh gnome-disk-utility gsmartcontrol kdiskmark meld ssh solaar
+
+# For Proton
+wget "https://repo.protonvpn.com/fedora-$(cat /etc/fedora-release | cut -d' ' -f 3)-stable/protonvpn-stable-release/protonvpn-stable-release-1.0.2-1.noarch.rpm"
+sudo dnf install ./protonvpn-stable-release-1.0.2-1.noarch.rpm
+
+# For TeamViewer
+wget https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm
+sudo dnf install ./teamviewer.x86_64.rpm
+sudo systemctl enable --now teamviewerd.service
+
+# UFW List
+sudo ufw allow qbittorrent
+sudo ufw allow CIFS
+sudo ufw allow 20:21/tcp 
+sudo ufw allow 989:990/tcp
+
+# Samba Stuff
+sudo groupadd -r sambausers
+sudo usermod -aG sambausers f16poom
+sudo smbpasswd -a f16poom
+sudo systemctl enable --now smb nmb
+
+# Github Stuff
+git config --global user.name 'Spready'
+git config --global user.email my@email.com
+gh auth login
+
+# Push Git Repo
+alias gpush='cd "/home/f16poom/Share/cinnamon-dotfiles" && git add . && read -p "Commit Message: " msg && git commit -m "$msg" && git push'
+
+# QT HiDPI
+if ! grep -q "^QT_AUTO_SCREEN_SCALE_FACTOR=1" /etc/environment; then
+    echo 'QT_AUTO_SCREEN_SCALE_FACTOR=1' | sudo tee -a /etc/environment
+fi
+
+if ! grep -q "^QT_ENABLE_HIGHDPI_SCALING=1" /etc/environment; then
+    echo 'QT_ENABLE_HIGHDPI_SCALING=1' | sudo tee -a /etc/environment
+fi
+

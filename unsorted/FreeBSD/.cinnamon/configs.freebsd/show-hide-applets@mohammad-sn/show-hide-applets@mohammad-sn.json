@@ -1,0 +1,79 @@
+{
+    "head": {
+        "type": "header",
+        "description": "Settings for show-hide-applets@mohammad-sn"
+    },
+    "autohide": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Autohide",
+        "tooltip": "check if you want to hide applets automatically, unless you should click on applet to do so",
+        "value": true
+    },
+    "disablestarttimeautohide": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Disable start time autohide",
+        "tooltip": "if not in autohide mode",
+        "value": false
+    },
+    "hidetime": {
+        "type": "spinbutton",
+        "default": 2,
+        "min": 0.25,
+        "max": 10,
+        "step": 0.25,
+        "units": "seconds",
+        "dependency": "autohide",
+        "description": "Autohide after ",
+        "tooltip": "",
+        "value": 2
+    },
+    "hoveractivates": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Activate on hover",
+        "tooltip": "show applets on mouse hover",
+        "value": true
+    },
+    "hoveractivateshide": {
+        "type": "checkbox",
+        "default": false,
+        "dependency": "hoveractivates",
+        "description": "Hide on hovering again",
+        "tooltip": "toggle visibility of applets on mouse hover",
+        "value": false
+    },
+    "hovertime": {
+        "type": "spinbutton",
+        "default": 75,
+        "min": 10,
+        "max": 500,
+        "step": 5,
+        "units": "miliseconds",
+        "dependency": "hoveractivates",
+        "description": "Hover activates/hides after ",
+        "tooltip": "",
+        "value": 75
+    },
+    "autohiders": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Autohide reshowing applets",
+        "tooltip": "",
+        "value": true
+    },
+    "autohiderstime": {
+        "type": "spinbutton",
+        "default": 1.25,
+        "min": 0,
+        "max": 5,
+        "step": 0.25,
+        "units": "seconds",
+        "dependency": "autohiders",
+        "description": "Reshowers' autohide delay: ",
+        "tooltip": "",
+        "value": 1.25
+    },
+    "__md5__": "912b5887ae406da2d6613a37a9a2c3db"
+}
