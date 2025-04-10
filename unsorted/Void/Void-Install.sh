@@ -74,6 +74,13 @@ mkdir -p /mnt/var/db/xbps/keys
 cp /var/db/xbps/keys/* /mnt/var/db/xbps/keys/
 XBPS_ARCH=$ARCH xbps-install -Sy -r /mnt -R "$REPO" base-system
 
+# Install Packages
+xbps-install -Sy -r /mnt -R "$REPO" NetworkManager git xtools xmirror nano sudo grub-x86_64-efi bash-completion
+
+# Enable Networking
+chroot /mnt ln -sf /etc/sv/dbus /etc/runit/runsvdir/default
+chroot /mnt ln -sf /etc/sv/NetworkManager /etc/runit/runsvdir/default
+
 # Copy Network Info 
 cp --dereference /etc/resolv.conf /mnt/etc/
 
@@ -85,8 +92,6 @@ cat << EOF | xchroot /mnt /bin/bash
 
 # New Chroot Environment
 source /etc/profile
-xbps-install -Sy
-xbps-install -y git xtools xmirror nano sudo grub-x86_64-efi bash-completion NetworkManager
 
 # Change shell to bash
 chsh -s /bin/bash
@@ -96,9 +101,6 @@ echo "$hostname" > /etc/hostname
 
 # Allow Resolving the Local Hostname
 echo -e "127.0.1.1\t$hostname.localdomain\t$hostname" >> /etc/hosts
-
-# Enable Networking
-ln -sf /etc/sv/NetworkManager /var/service
 
 # Set Timezone
 ln -sf "/usr/share/zoneinfo/$timezone" /etc/localtime
