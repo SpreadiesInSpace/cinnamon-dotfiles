@@ -213,19 +213,19 @@ for key in user group swtpm_user swtpm_group; do
 done
 
 # Enable and start services for Virt Manager
-ln -s /etc/sv/spice-vdagentd /var/service
-ln -s /etc/sv/libvirtd /var/service
-ln -s /etc/sv/virtlockd /var/service
-ln -s /etc/sv/virtlogd /var/service
+ln -sf /etc/sv/spice-vdagentd /var/service
+ln -sf /etc/sv/libvirtd /var/service
+ln -sf /etc/sv/virtlockd /var/service
+ln -sf /etc/sv/virtlogd /var/service
 
 # Enable and start services for LightDM & Cinnamon
-ln -s /etc/sv/dbus /var/service
-ln -s /etc/sv/lightdm /var/service
-ln -s /etc/sv/NetworkManager /var/service
 rm /var/service/dhcpcd
+ln -sf /etc/sv/dbus /var/service
+ln -sf /etc/sv/lightdm /var/service
+ln -sf /etc/sv/NetworkManager /var/service
 
 # Let services start
-sleep 2
+sleep 5
 
 # Only enable net-autostart if in physical machine
 if [ "$is_vm" = false ]; then

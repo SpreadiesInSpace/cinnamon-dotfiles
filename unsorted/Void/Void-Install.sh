@@ -86,7 +86,7 @@ cat << EOF | xchroot /mnt /bin/bash
 # New Chroot Environment
 source /etc/profile
 xbps-install -Sy
-xbps-install -y git xtools xmirror nano sudo grub-x86_64-efi bash-completion
+xbps-install -y git xtools xmirror nano sudo grub-x86_64-efi bash-completion NetworkManager
 
 # Change shell to bash
 chsh -s /bin/bash
@@ -96,6 +96,9 @@ echo "$hostname" > /etc/hostname
 
 # Allow Resolving the Local Hostname
 echo -e "127.0.1.1\t$hostname.localdomain\t$hostname" >> /etc/hosts
+
+# Enable Networking
+ln -sf /etc/sv/NetworkManager /var/service
 
 # Set Timezone
 ln -sf "/usr/share/zoneinfo/$timezone" /etc/localtime

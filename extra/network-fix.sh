@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Check if the script is run as root
-if [ "$EUID" -eq 0 ]; then
-  echo "This script must NOT be run as root. Please execute it as a regular user."
+# Check if script is run as root
+if [ "$EUID" -ne 0 ]; then
+  echo "Please run the script using sudo."
   exit
 fi
 
@@ -10,7 +10,7 @@ fi
 virsh net-autostart default --disable
 
 # Ask the user if they want to reboot
-read -p "Do you want to reboot now? (y/n): " response
+read -p "Do you want to reboot now? [y/N]: " response
 if [[ "$response" =~ ^[Yy]$ ]]; then
   reboot
 else
