@@ -78,8 +78,9 @@ XBPS_ARCH=$ARCH xbps-install -Sy -r /mnt -R "$REPO" base-system
 xbps-install -Sy -r /mnt -R "$REPO" NetworkManager git xtools xmirror nano sudo grub-x86_64-efi bash-completion
 
 # Enable Networking
-chroot /mnt ln -sf /etc/sv/dbus /etc/runit/runsvdir/default
-chroot /mnt ln -sf /etc/sv/NetworkManager /etc/runit/runsvdir/default
+for service in dbus NetworkManager polkitd; do
+  chroot /mnt ln -sfv /etc/sv/$service /etc/runit/runsvdir/default
+done
 
 # Copy Network Info 
 cp --dereference /etc/resolv.conf /mnt/etc/

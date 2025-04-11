@@ -212,16 +212,10 @@ for key in user group swtpm_user swtpm_group; do
   fi
 done
 
-# Enable and start services for Virt Manager
-ln -sf /etc/sv/spice-vdagentd /etc/runit/runsvdir/default
-ln -sf /etc/sv/libvirtd /etc/runit/runsvdir/default
-ln -sf /etc/sv/virtlockd /etc/runit/runsvdir/default
-ln -sf /etc/sv/virtlogd /etc/runit/runsvdir/default
-
-# Enable and start services for LightDM & Cinnamon
-ln -sf /etc/sv/dbus /etc/runit/runsvdir/default
-ln -sf /etc/sv/lightdm /etc/runit/runsvdir/default
-ln -sf /etc/sv/NetworkManager /etc/runit/runsvdir/default
+# Enable and start services
+for service in dbus lightdm NetworkManager polkitd spice-vdagentd libvirtd virtlockd virtlogd; do
+  ln -sf /etc/sv/$service /etc/runit/runsvdir/default
+done
 
 # Let services start
 sleep 5
