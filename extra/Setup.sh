@@ -1,15 +1,5 @@
 #!/bin/bash
 
-# Shortened Links:
-# https://tinyurl.com/cinnamon-dotfiles-setup (this file)
-# https://tinyurl.com/cinnamon-dotfiles-ISO (Setup-ISO.sh)
-# https://tinyurl.com/cinnamon-dotfiles (this repo)
-# https://tinyurl.com/spready-arch (Arch-Install.sh)
-# https://tinyurl.com/spready-gentoo (Gentoo-Install.sh)
-# https://tinyurl.com/spready-opensuse-tumbleweed (openSUSE-Install.sh)
-# https://tinyurl.com/spready-slackware-current (Slackware-Install.sh)
-# https://tinyurl.com/spready-void (Void-Install.sh)
-
 # Check if the script is run as root
 if [ "$EUID" -eq 0 ]; then
   echo "This script must NOT be run as root. Please execute it as a regular user."
