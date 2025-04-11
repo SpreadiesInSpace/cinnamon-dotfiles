@@ -5,10 +5,10 @@
 # https://tinyurl.com/cinnamon-setup (Setup.sh)
 # https://tinyurl.com/cinnamon-dotfiles (this repo)
 
-# Check if script is run as root
+# Auto-elevate the script to run as root if it's not already
 if [ "$EUID" -ne 0 ]; then
-  echo "Please run the script using sudo."
-  exit
+  echo "This script requires root privileges. Re-running with sudo..."
+  exec sudo bash "$0" "$@"
 fi
 
 # Populate Installer Links
