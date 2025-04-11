@@ -61,22 +61,81 @@ mkdir -p /mnt/gentoo/{efi,home}
 mount -o noatime,compress=zstd,discard=async,subvol=@home "$ROOT" /mnt/gentoo/home
 mount "$BOOT" /mnt/gentoo/efi
 
-# Gentoo Install - The Stage File
+#========================== Gentoo Install - The Stage File ==========================
+
+# Move to Mounted Root Partition
 cd /mnt/gentoo
+
 # Sync Time
 hwclock --systohc --utc
+
 # Grab the Latest Systemd Stage 3 Desktop Profile
-# https://www.gentoo.org/downloads/#other-arches
-GENTOO_MIRROR="https://distfiles.gentoo.org" GENTOO_ARCH="amd64" STAGE3_BASENAME="stage3-amd64-desktop-systemd" STAGE3_RELEASES="$GENTOO_MIRROR/releases/$GENTOO_ARCH/autobuilds/current-$STAGE3_BASENAME/" CURRENT_STAGE3=$(curl -s "$STAGE3_RELEASES" | python3 -c 'import sys, urllib.parse; print(urllib.parse.unquote(sys.stdin.read()))' | grep -o "\"${STAGE3_BASENAME}-[0-9A-Z]*.tar.xz\"" | sort -u | head -1 | sed 's/"//g') && wget --no-clobber --timeout=10 --tries=10 "$STAGE3_RELEASES/$CURRENT_STAGE3"
-# Check if Tarball is There
-if [ -z "$CURRENT_STAGE3" ]; then echo "Failed to get the latest Stage 3 tarball name."; exit 1; fi
-# Extract Stage 3 tarball
+GENTOO_MIRROR="https://distfiles.gentoo.org"
+GENTOO_ARCH="amd64"
+STAGE3_BASENAME="stage3-amd64-desktop-systemd"
+RELEASES_URL="$GENTOO_MIRROR/releases/$GENTOO_ARCH/autobuilds/current-$STAGE3_BASENAME/"
+
+# Get the latest Stage 3 tarball
+STAGE3_TARBALL=$(curl -s "$RELEASES_URL" | python3 -c 'import sys, urllib.parse; print(urllib.parse.unquote(sys.stdin.read()))' | grep -o "\"${STAGE3_BASENAME}-[0-9A-Z]*.tar.xz\"" | sort -u | head -1 | sed 's/"//g')
+
+# Download the tarball and associated files
+wget --no-clobber "$RELEASES_URL/$STAGE3_TARBALL"
+wget --no-clobber "$RELEASES_URL/$STAGE3_TARBALL.DIGESTS"
+wget --no-clobber "$RELEASES_URL/$STAGE3_TARBALL.sha256"
+wget --no-clobber "$RELEASES_URL/$STAGE3_TARBALL.asc"
+wget --no-clobber "$RELEASES_URL/$STAGE3_TARBALL.CONTENTS.gz"
+
+# Import the Gentoo release key via WKD
+gpg --auto-key-locate=clear,nodefault,wkd --locate-key releng@gentoo.org
+
+# Verify GPG signatures
+gpg --verify "$STAGE3_TARBALL.asc" "$STAGE3_TARBALL"
+GPG_VERIFY_STATUS=$?
+gpg --verify "$STAGE3_TARBALL.DIGESTS"
+GPG_DIGESTS_VERIFY_STATUS=$?
+gpg --verify "$STAGE3_TARBALL.sha256"
+GPG_SHA256_VERIFY_STATUS=$?
+
+# If any GPG signature verification fails, exit
+if [ $GPG_VERIFY_STATUS -ne 0 ] || [ $GPG_DIGESTS_VERIFY_STATUS -ne 0 ] || [ $GPG_SHA256_VERIFY_STATUS -ne 0 ]; then
+  echo "GPG verification failed! Aborting..."
+  exit 1
+fi
+
+# Verify SHA512 hash with OpenSSL
+echo "Verifying SHA512 hash..."
+openssl dgst -r -sha512 "$STAGE3_TARBALL"
+SHA512_VERIFY_STATUS=$?
+grep -A1 "$STAGE3_TARBALL" "$STAGE3_TARBALL.DIGESTS" | grep SHA512
+
+# Verify BLAKE2B512 hash with OpenSSL
+echo "Verifying BLAKE2B512 hash..."
+openssl dgst -r -blake2b512 "$STAGE3_TARBALL"
+BLAKE2B_VERIFY_STATUS=$?
+grep -A1 "$STAGE3_TARBALL" "$STAGE3_TARBALL.DIGESTS" | grep BLAKE2B
+
+# Verify SHA256 using .sha256 file
+echo "Verifying SHA256 hash..."
+sha256sum --check "$STAGE3_TARBALL.sha256"
+SHA256_VERIFY_STATUS=$?
+
+# If any hash verification fails, exit
+if [ $SHA512_VERIFY_STATUS -ne 0 ] || [ $BLAKE2B_VERIFY_STATUS -ne 0 ] || [ $SHA256_VERIFY_STATUS -ne 0 ]; then
+  echo "Hash verification failed! Aborting..."
+  exit 1
+fi
+
+# If all verification passes, extract the Stage 3 tarball
+echo "All verifications passed, extracting the tarball..."
 tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner -C /mnt/gentoo
+
 # Pull make.conf with use flags, jobs, licenses, mirrors, etc already set
 # https://github.com/SpreadiesInSpace/cinnamon-dotfiles/blob/main/etc/portage/make.conf
 declare -A files=(["https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/etc/portage/make.conf"]="/mnt/gentoo/etc/portage/make.conf"); for url in "${!files[@]}"; do local_path="${files[$url]}"; cp "$local_path" "${local_path}.old"; curl -o "$local_path" "$url"; if [ $? -eq 0 ]; then echo "File $local_path updated successfully."; else echo "Failed to update the file $local_path."; mv "${local_path}.old" "$local_path"; fi; done
+
 # Update MAKEFLAGS & EMERGE_DEFAULT_OPS in /etc/portage/make.conf to match CPU cores
 cores=$(nproc) && load_limit=$((cores + 1)) && sed -i.bak "s/^MAKEOPTS=.*/MAKEOPTS=\"-j$cores -l$load_limit\"/; s/^EMERGE_DEFAULT_OPTS=.*/EMERGE_DEFAULT_OPTS=\"-j$cores -l$load_limit\"/" /mnt/gentoo/etc/portage/make.conf && echo "Updated MAKEOPTS and EMERGE_DEFAULT_OPTS in /etc/portage/make.conf to -j$cores -l$load_limit based on the number of CPU cores."
+
 # Set VIDEO_CARDS value in make.conf
 set_video_card() {
   while true; do
@@ -108,13 +167,18 @@ set_video_card() {
   sed -i "s/^VIDEO_CARDS=.*/VIDEO_CARDS=\"$video_card\"/" /mnt/gentoo/etc/portage/make.conf
   echo "Updated VIDEO_CARDS in /mnt/gentoo/etc/portage/make.conf to $video_card based on provided input."
 }
+
 # Call the function
 set_video_card
+
+# Review make.conf
 # nano /mnt/gentoo/etc/portage/make.conf
 
-# Gentoo Install - Installing the Gentoo Base System
+#================ Gentoo Install - Installing the Gentoo Base System =================
+
 # Copy Network Info 
 cp --dereference /etc/resolv.conf /mnt/gentoo/etc/
+
 # Mount Filesystems
 mount --types proc /proc /mnt/gentoo/proc
 mount --rbind /sys /mnt/gentoo/sys
@@ -123,67 +187,91 @@ mount --rbind /dev /mnt/gentoo/dev
 mount --make-rslave /mnt/gentoo/dev
 mount --bind /run /mnt/gentoo/run
 mount --make-slave /mnt/gentoo/run
+
 # Extra Mounts for Non-Gentoo Media
 test -L /dev/shm && rm /dev/shm && mkdir /dev/shm
 mount --types tmpfs --options nosuid,nodev,noexec shm /dev/shm   
 chmod 1777 /dev/shm /run/shm
+
 # Entering Chroot
 cat << EOF | chroot /mnt/gentoo /bin/bash
 
 # New Chroot Environment - Installing the Gentoo Base System (Continued)
 source /etc/profile
 export PS1="(chroot) ${PS1}"
+
 # Sync Snapshot
 emerge-webrsync
+
 # Setting Binary Packages
 echo "[binhost]
 priority = 9999
 sync-uri = http://download.nus.edu.sg/mirror/gentoo/releases/amd64/binpackages/23.0/x86-64-v3/
 #sync-uri = https://distfiles.gentoo.org/releases/amd64/binpackages/23.0/x86-64-v3/
 " > /etc/portage/binrepos.conf/gentoo.conf
+
 # Verify GPG
 rm -rf /etc/portage/gnupg/ && getuto
+
 # Suppress unsafe directories warnings
 chmod 644 /etc/portage/gnupg/pubring.kbx
 chmod 644 /etc/portage/make.conf
-# emerge -qv mirrorselect # mirrors already set in make.conf
+
+# For Selecting Mirrors (mirrors already set in make.conf)
+# emerge -qv mirrorselect
+
 # Install Essentials 
 emerge -vquN app-eselect/eselect-repository dev-vcs/git
+
 # Switch from rsync to git for faster repository sync times
 eselect repository disable gentoo
 eselect repository enable gentoo
 rm -rf /var/db/repos/gentoo
+
 # Sync Repository
 emaint sync -r gentoo
 emerge -qv --oneshot sys-apps/portage
+
+# Read the News
 # eselect news list
 # eselect news read
+
 # Select 23.0 gnome desktop systemd profile for Cinnamon
 eselect profile set default/linux/amd64/23.0/desktop/gnome/systemd
-# CPU Flags
+
+# Set CPU Flags
 emerge -qv --oneshot app-portage/cpuid2cpuflags
 echo "*/* $(cpuid2cpuflags)" > /etc/portage/package.use/00cpu-flags
+
 # Update World Set
 emerge -vqDuN @world
+
 # Remove Obselete Packages
 emerge -q --depclean
-# Setting Timezone
+
+# Set Timezone
 ln -sf "../usr/share/zoneinfo/$timezone" /etc/localtime
 hwclock --systohc
+
 # Locale Generation (uncomment en_US.UTF-8 UTF-8 in /etc/locale.gen)
 sed -i 's/^#\s*\(en_US.UTF-8 UTF-8\)/\1/' /etc/locale.gen
 locale-gen
+
 # Set Locale
 eselect locale set en_US.utf8
+
 # Reload Environment
 env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
 
-# Gentoo Install - Configuring the Linux Kernel
+#=================== Gentoo Install - Configuring the Linux Kernel ===================
+
 # Using GRUB & Initramfs
 echo "sys-kernel/installkernel grub
 sys-kernel/installkernel dracut" > /etc/portage/package.use/installkernel
+
 # Install Kernel
 emerge -qv sys-kernel/gentoo-kernel-bin
+
 # Skip firmware installation for VMs
 if ! systemd-detect-virt --vm &>/dev/null; then
   echo "Physical machine detected. Installing firmware..."
@@ -196,42 +284,57 @@ else
   echo "VM detected. Skipping firmware and microcode installation."
 fi
 
-# Gentoo Install - Configuring the System
+#====================== Gentoo Install - Configuring the System ======================
+
 # Generate fstab
 emerge -qv sys-fs/genfstab
 genfstab -U / >> /etc/fstab
+
 # Set Hostname
 echo "$hostname" > /etc/hostname
+
 # Allow Resolving the Local Hostname
 echo -e "127.0.1.1\t$hostname.localdomain\t$hostname" >> /etc/hosts
+
 # Systemd Setup
 systemd-machine-id-setup
 # systemd-firstboot --prompt
 systemctl preset-all --preset-mode=enable-only
+
 # Networking
 emerge -vq net-misc/networkmanager gnome-extra/nm-applet
 systemctl disable systemd-networkd
 systemctl disable systemd-resolved.service
 systemctl enable NetworkManager
 
-# Gentoo Install - Installing System Tools
+#===================== Gentoo Install - Installing System Tools ======================
+
+# Install System Tools
 emerge -vq sys-apps/mlocate app-shells/bash-completion sys-fs/xfsprogs sys-fs/e2fsprogs sys-fs/dosfstools sys-fs/btrfs-progs sys-fs/f2fs-tools sys-fs/ntfs3g sys-block/io-scheduler-udev-rules
+
+# No sys-fs/zfs because it pulls in zfs-kmod which takes a while to compile
+# emerge -qv sys-fs/zfs
+
 # Enable Time Synchronization
 systemctl enable systemd-timesyncd.service
-# pulls in zfs-kmod which takes a while to compile
-# emerge -qv sys-fs/zfs
 
 # Gentoo Install - Configuring the Bootloader
 grub-install --efi-directory=/efi
+
 # Set GRUB timeout to 0
 sed -i '/^#*GRUB_TIMEOUT=/s/^#*GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub
+
 # Generate Grub Config
 grub-mkconfig -o /boot/grub/grub.cfg
 
-# Gentoo Install - Finalizing
+#============================ Gentoo Install - Finalizing ============================
+
+# Install Sudo
 emerge -qv app-admin/sudo
+
 # Setup Sudo by uncommenting %wheel ALL=(ALL:ALL) with visudo
 sed -i 's/^#\s*\(%wheel ALL=(ALL:ALL) ALL\)/\1/' /etc/sudoers
+
 # Cleanup
 rm /stage3-*.tar.*
 

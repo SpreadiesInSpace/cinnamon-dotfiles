@@ -16,6 +16,14 @@ mount -o noatime,compress=zstd,discard=async,subvol=@home /dev/vda2 /mnt/home
 mkdir -p /mnt/boot/efi
 mount /dev/vda1 /mnt/boot/efi
 
+# BTRFS Mounts - Gentoo
+mkdir -p /mnt/gentoo
+mount -o noatime,compress=zstd,discard=async,subvol=@ /dev/vda2 /mnt/gentoo 
+mkdir -p /mnt/gentoo/home
+mount -o noatime,compress=zstd,discard=async,subvol=@home /dev/vda2 /mnt/gentoo/home 
+mkdir -p /mnt/gentoo/efi
+mount /dev/vda1 /mnt/gentoo/efi
+
 # Mount Shared Folder
 chmod 777 Share
 
