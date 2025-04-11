@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # Shortened Links:
-# https://tinyurl.com/cinnamon-dotfiles-setup-ISO (this Setup-ISO.sh file)
+# https://tinyurl.com/cinnamon-dotfiles-setup-ISO (this file)
+# https://tinyurl.com/cinnamon-dotfiles-setup (Setup.sh)
 # https://tinyurl.com/cinnamon-dotfiles (this repo)
 
 # Check if script is run as root

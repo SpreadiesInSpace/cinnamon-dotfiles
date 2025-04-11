@@ -1,13 +1,39 @@
 #!/bin/bash
 
+# Shortened Links:
+# https://tinyurl.com/cinnamon-dotfiles-setup (this file)
+# https://tinyurl.com/cinnamon-dotfiles-setup-ISO (Setup-ISO.sh)
+# https://tinyurl.com/cinnamon-dotfiles (this repo)
+# https://tinyurl.com/spready-arch (Arch-Install.sh)
+# https://tinyurl.com/spready-gentoo (Gentoo-Install.sh)
+# https://tinyurl.com/spready-opensuse-tumbleweed (openSUSE-Install.sh)
+# https://tinyurl.com/spready-slackware-current (Slackware-Install.sh)
+# https://tinyurl.com/spready-void (Void-Install.sh)
+
 # Check if the script is run as root
 if [ "$EUID" -eq 0 ]; then
   echo "This script must NOT be run as root. Please execute it as a regular user."
   exit
 fi
 
-# Move to main directory
-cd ..
+# Download zip archive of repo 
+REPO_URL="https://github.com/SpreadiesInSpace/cinnamon-dotfiles"
+ZIP_URL="$REPO_URL/archive/refs/heads/main.zip"
+ZIP_NAME="dotfiles.zip"
+echo "Downloading dotfiles archive..."
+if command -v curl &>/dev/null; then
+  curl -L "$ZIP_URL" -o "$ZIP_NAME"
+elif command -v wget &>/dev/null; then
+  wget "$ZIP_URL" -O "$ZIP_NAME"
+else
+  echo "Error: Neither curl nor wget is available."
+  exit 1
+fi
+
+# Unzip and move to cinnamon-dotfiles-main
+echo "Unzipping..."
+unzip -o "$ZIP_NAME" || { echo "Unzip failed. Exiting."; exit 1; }
+cd cinnamon-dotfiles-main || { echo "Directory not found. Exiting."; exit 1; }
 
 # Populate Names
 setup_names=(
