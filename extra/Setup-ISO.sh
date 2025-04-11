@@ -10,6 +10,7 @@ if [ "$EUID" -ne 0 ]; then
   exit
 fi
 
+# Populate Installer Links
 declare -A installs=(
   [1]="https://tinyurl.com/spready-arch"
   [2]="https://tinyurl.com/spready-gentoo"
@@ -18,6 +19,7 @@ declare -A installs=(
   [5]="https://tinyurl.com/spready-void"
 )
 
+# Populate Names
 declare -A names=(
   [1]="Arch-Install.sh"
   [2]="Gentoo-Install.sh"
@@ -26,10 +28,10 @@ declare -A names=(
   [5]="Void-Install.sh"
 )
 
+# Download Function
 download_file() {
   url=$1
   filename=$2
-
   if command -v curl &> /dev/null; then
     echo "Using curl to download $filename..."
     curl -sL "$url" -o "$filename"
@@ -42,6 +44,7 @@ download_file() {
   fi
 }
 
+# Installer Prompt
 echo "Which installer would you like to run?"
 echo "1) Arch Linux"
 echo "2) Gentoo"
@@ -50,17 +53,21 @@ echo "4) Slackware Current"
 echo "5) Void Linux"
 read -rp "Enter a number [1-5]: " choice
 
+# Set Variables
 url=${installs[$choice]}
 filename=${names[$choice]}
 
+# Safety Check
 if [[ -z "$url" ]]; then
   echo "Invalid choice. Exiting."
   exit 1
 fi
 
+# Download Installer
 echo "Downloading $filename..."
 download_file "$url" "$filename"
 
+# Make Installer executable and Run
 chmod +x "$filename"
 echo "Running $filename..."
 ./"$filename"

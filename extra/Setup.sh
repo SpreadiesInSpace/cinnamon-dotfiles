@@ -9,7 +9,7 @@ fi
 # Move to main directory
 cd ..
 
-# Ordered list
+# Populate Names
 setup_names=(
   "Arch"
   "Fedora-41"
@@ -21,31 +21,34 @@ setup_names=(
   "Void"
 )
 
+# Installer Prompt
 echo "Which setup script would you like to run?"
 for i in "${!setup_names[@]}"; do
   index=$((i + 1))
   echo "$index) Setup-${setup_names[$i]}.sh"
 done
-
 read -rp "Enter a number [1-${#setup_names[@]}]: " choice
 
 # Adjust index (user inputs 1-based index)
 choice=$((choice - 1))
 
-# Safety check
+# Safety Check
 if [[ -z "${setup_names[$choice]}" ]]; then
   echo "Invalid choice. Exiting."
   exit 1
 fi
 
+# Set Variables
 distro="${setup_names[$choice]}"
 script="Setup-${distro}.sh"
 
+# Abort if script isn't there
 if [[ ! -f "$script" ]]; then
   echo "Script $script not found. Exiting."
   exit 1
 fi
 
+# Make Script Executable
 if [[ ! -x "$script" ]]; then
   echo "Making $script executable..."
   chmod +x "$script"
@@ -53,10 +56,10 @@ else
   echo "$script is already executable."
 fi
 
+# Run Script
 echo "Running $script..."
 if [[ "$distro" == "Arch" ]]; then
   ./"$script"
 else
   sudo ./"$script"
 fi
-
