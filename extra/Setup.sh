@@ -2,7 +2,7 @@
 
 # Shortened Links:
 # https://tinyurl.com/cinnamon-dotfiles-setup (this file)
-# https://tinyurl.com/cinnamon-dotfiles-setup-ISO (Setup-ISO.sh)
+# https://tinyurl.com/cinnamon-dotfiles-ISO (Setup-ISO.sh)
 # https://tinyurl.com/cinnamon-dotfiles (this repo)
 # https://tinyurl.com/spready-arch (Arch-Install.sh)
 # https://tinyurl.com/spready-gentoo (Gentoo-Install.sh)
