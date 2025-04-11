@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# This file's shortened link
-# https://tinyurl.com/cinnamon-setup
+# Links to run this file:
+# bash <(curl -Ls https://tinyurl.com/cinnamon-setup)
+# bash <(wget -qO- https://tinyurl.com/cinnamon-setup)
 
 # Check if the script is run as root
 if [ "$EUID" -eq 0 ]; then

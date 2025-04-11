@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Links to run this file:
+# bash <(curl -Ls https://tinyurl.com/cinnamon-ISO)
+# bash <(wget -qO- https://tinyurl.com/cinnamon-ISO)
+
 # Shortened Links:
 # https://tinyurl.com/cinnamon-ISO (this file)
 # https://tinyurl.com/cinnamon-setup (Setup.sh)
