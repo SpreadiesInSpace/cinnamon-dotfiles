@@ -70,6 +70,9 @@ cd /mnt/gentoo
 hwclock --systohc --utc
 
 # Grab the Latest Systemd Stage 3 Desktop Profile
+# wget https://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-desktop-systemd/stage3-amd64-desktop-systemd-*.tar.xz/
+
+# Set Variables
 GENTOO_MIRROR="https://distfiles.gentoo.org"
 GENTOO_ARCH="amd64"
 STAGE3_BASENAME="stage3-amd64-desktop-systemd"
@@ -78,12 +81,10 @@ RELEASES_URL="$GENTOO_MIRROR/releases/$GENTOO_ARCH/autobuilds/current-$STAGE3_BA
 # Get the latest Stage 3 tarball
 STAGE3_TARBALL=$(curl -s "$RELEASES_URL" | python3 -c 'import sys, urllib.parse; print(urllib.parse.unquote(sys.stdin.read()))' | grep -o "\"${STAGE3_BASENAME}-[0-9A-Z]*.tar.xz\"" | sort -u | head -1 | sed 's/"//g')
 
-# Download the tarball and associated files
-wget --no-clobber "$RELEASES_URL/$STAGE3_TARBALL"
-wget --no-clobber "$RELEASES_URL/$STAGE3_TARBALL.DIGESTS"
-wget --no-clobber "$RELEASES_URL/$STAGE3_TARBALL.sha256"
-wget --no-clobber "$RELEASES_URL/$STAGE3_TARBALL.asc"
-wget --no-clobber "$RELEASES_URL/$STAGE3_TARBALL.CONTENTS.gz"
+# Download the Stage 3 tarball and its associated verification files
+for suffix in "" ".DIGESTS" ".sha256" ".asc" ".CONTENTS.gz"; do
+  wget --no-clobber --timeout=10 --tries=10 "$RELEASES_URL/$STAGE3_TARBALL$suffix"
+done
 
 # Import the Gentoo release key via WKD
 gpg --auto-key-locate=clear,nodefault,wkd --locate-key releng@gentoo.org
