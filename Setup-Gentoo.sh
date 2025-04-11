@@ -34,53 +34,64 @@ else
     is_vm=false
 fi
 
-# Copy my make.conf file to /etc/portage, preserving old one
-mv /etc/portage/make.conf /etc/portage/make.conf.old
-cp etc/portage/make.conf /etc/portage/make.conf
+# Check if custom make.conf and VIDEO_CARDS have already been set previously
+MAKECONF_FLAG="/etc/portage/.makeconf_configured"
 
-# Update MAKEFLAGS & EMERGE_DEFAULT_OPS in /etc/portage/make.conf to match CPU cores
-cores=$(nproc)
-# Calculate the load average limit (e.g., cores + 1)
-load_limit=$((cores + 1))
-# Edit make.conf to set MAKEOPTS
-sed -i "s/^MAKEOPTS=.*/MAKEOPTS=\"-j$cores -l$load_limit\"/" /etc/portage/make.conf
-# Edit make.conf to set EMERGE_DEFAULT_OPTS
-sed -i "s/^EMERGE_DEFAULT_OPTS=.*/EMERGE_DEFAULT_OPTS=\"-j$cores -l$load_limit\"/" /etc/portage/make.conf
-echo "Updated MAKEOPTS and EMERGE_DEFAULT_OPTS in /etc/portage/make.conf to -j$cores -l$load_limit based on the number of CPU cores."
+if [ -f "$MAKECONF_FLAG" ]; then
+  echo "make.conf already configured during install. Skipping..."
+else
+  echo "Configuring /etc/portage/make.conf..."
 
-# Set VIDEO_CARDS value in make.conf
-set_video_card() {
-  while true; do
-    echo "Valid values are:"
-    echo "1) amdgpu radeonsi"
-    echo "2) nvidia"
-    echo "3) intel"
-    echo "4) nouveau (open source)"
-    echo "5) virgl (QEMU/KVM)"
-    echo "6) vc4 (Raspberry Pi)"
-    echo "7) d3d12 (WSL)"
-    echo "8) other"
-    read -p "Enter the video card type number: " video_card_number
+  # Backup current make.conf & replace with custom one
+  cp /etc/portage/make.conf /etc/portage/make.conf.old
+  cp etc/portage/make.conf /etc/portage/make.conf
 
-    case $video_card_number in
-      1) video_card="amdgpu radeonsi"; break ;;
-      2) video_card="nvidia"; break ;;
-      3) video_card="intel"; break ;;
-      4) video_card="nouveau"; break ;;
-      5) video_card="virgl"; break ;;
-      6) video_card="vc4"; break ;;
-      7) video_card="d3d12"; break ;;
-      8) 
-        read -p "Enter the video card type: " video_card; break ;;
-      *) echo "Invalid selection, please try again." ;;
-    esac
-  done
-  # Edit make.conf to set VIDEO_CARDS
-  sed -i "s/^VIDEO_CARDS=.*/VIDEO_CARDS=\"$video_card\"/" /etc/portage/make.conf
-  echo "Updated VIDEO_CARDS in /etc/portage/make.conf to $video_card based on provided input."
-}
-# Call the function
-set_video_card
+  # Set MAKEOPTS and EMERGE_DEFAULT_OPTS based on CPU cores
+  cores=$(nproc)
+  load_limit=$((cores + 1))
+  sed -i "s/^MAKEOPTS=.*/MAKEOPTS=\"-j$cores -l$load_limit\"/" /etc/portage/make.conf
+  sed -i "s/^EMERGE_DEFAULT_OPTS=.*/EMERGE_DEFAULT_OPTS=\"-j$cores -l$load_limit\"/" /etc/portage/make.conf
+  echo "Updated MAKEOPTS and EMERGE_DEFAULT_OPTS to -j$cores -l$load_limit"
+
+  # Prompt for and set VIDEO_CARDS
+  set_video_card() {
+    while true; do
+      echo "Select your video card type:"
+      echo "1) amdgpu radeonsi"
+      echo "2) nvidia"
+      echo "3) intel"
+      echo "4) nouveau (open source)"
+      echo "5) virgl (QEMU/KVM)"
+      echo "6) vc4 (Raspberry Pi)"
+      echo "7) d3d12 (WSL)"
+      echo "8) other"
+      read -p "Enter the number corresponding to your video card: " video_card_number
+
+      case $video_card_number in
+        1) video_card="amdgpu radeonsi"; break ;;
+        2) video_card="nvidia"; break ;;
+        3) video_card="intel"; break ;;
+        4) video_card="nouveau"; break ;;
+        5) video_card="virgl"; break ;;
+        6) video_card="vc4"; break ;;
+        7) video_card="d3d12"; break ;;
+        8)
+          read -p "Enter your video card string: " video_card
+          break ;;
+        *) echo "Invalid selection, please try again." ;;
+      esac
+    done
+
+    sed -i "s/^VIDEO_CARDS=.*/VIDEO_CARDS=\"$video_card\"/" /etc/portage/make.conf
+    echo "Updated VIDEO_CARDS to \"$video_card\""
+  }
+  
+  # Call the function
+  set_video_card
+
+  # Drop flag so this doesn't run again
+  touch "$MAKECONF_FLAG"
+fi
 
 # Review make.conf file
 # nano /etc/portage/make.conf

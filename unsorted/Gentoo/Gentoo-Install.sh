@@ -172,6 +172,9 @@ set_video_card() {
 # Call the function
 set_video_card
 
+# Signal that make.conf was configured during install phase
+touch /mnt/gentoo/etc/portage/.makeconf_configured
+
 # Review make.conf
 # nano /mnt/gentoo/etc/portage/make.conf
 
