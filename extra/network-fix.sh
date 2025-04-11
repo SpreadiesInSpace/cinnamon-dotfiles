@@ -7,13 +7,10 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 # Disable autostart of the default network
+virsh net-destroy default
 virsh net-autostart default --disable
 
-# Ask the user if they want to reboot
-read -p "Do you want to reboot now? [y/N]: " response
-if [[ "$response" =~ ^[Yy]$ ]]; then
-  reboot
-else
-  echo "Reboot canceled. Please reboot manually when needed."
-fi
-
+# Too lazy to set conditions, just run them all
+systemctl restart libvirtd
+/etc/rc.d/rc.libvirt restart
+sv restart libvirtd

@@ -176,6 +176,7 @@ if [ "$is_vm" = false ]; then
 else
     # Disable autostart and destroy the network if running
     virsh net-autostart default --disable
+    rm -f /etc/libvirt/qemu/networks/autostart/default.xml
     if virsh net-info default | grep -q "Active:.*yes"; then
         virsh net-destroy default
     fi
