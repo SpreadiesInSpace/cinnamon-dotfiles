@@ -5,12 +5,6 @@
 # https://tinyurl.com/cinnamon-setup (Setup.sh)
 # https://tinyurl.com/cinnamon-dotfiles (this repo)
 
-# Auto-elevate the script to run as root if it's not already
-if [ "$EUID" -ne 0 ]; then
-  echo "This script requires root privileges. Re-running with sudo..."
-  exec sudo bash "$0" "$@"
-fi
-
 # Populate Installer Links
 declare -A installs=(
   [1]="https://tinyurl.com/spready-arch"
@@ -71,4 +65,4 @@ download_file "$url" "$filename"
 # Make Installer executable and Run
 chmod +x "$filename"
 echo "Running $filename..."
-./"$filename"
+sudo ./"$filename"
