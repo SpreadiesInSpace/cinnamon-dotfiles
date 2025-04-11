@@ -46,7 +46,14 @@ echo "2) Gentoo"
 echo "3) openSUSE Tumbleweed"
 echo "4) Slackware Current"
 echo "5) Void Linux"
-read -rp "Enter a number [1-5]: " choice
+echo "6) Exit"
+read -rp "Enter a number [1-6]: " choice
+
+# Handle Exit Options
+if [[ "$choice" == "0" || "$choice" == "6" ]]; then
+  echo "Exiting."
+  exit 0
+fi
 
 # Set Variables
 url=${installs[$choice]}

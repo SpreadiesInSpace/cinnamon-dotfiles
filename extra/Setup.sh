@@ -46,7 +46,14 @@ for i in "${!setup_names[@]}"; do
   index=$((i + 1))
   echo "$index) Setup-${setup_names[$i]}.sh"
 done
-read -rp "Enter a number [1-${#setup_names[@]}]: " choice
+echo "9) Exit"
+read -rp "Enter a number [1-${#setup_names[@]} or 9]: " choice
+
+# Handle Exit Options
+if [[ "$choice" == "0" || "$choice" == "9" ]]; then
+  echo "Exiting."
+  exit 0
+fi
 
 # Adjust index (user inputs 1-based index)
 choice=$((choice - 1))
