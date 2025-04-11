@@ -1,5 +1,15 @@
 #!/bin/bash
 
+# Shortened Links:
+# https://tinyurl.com/cinnamon-dotfiles-setup-ISO (this Setup-ISO.sh file)
+# https://tinyurl.com/cinnamon-dotfiles (this repo)
+
+# Check if script is run as root
+if [ "$EUID" -ne 0 ]; then
+  echo "Please run the script as superuser"
+  exit
+fi
+
 declare -A installs=(
   [1]="https://tinyurl.com/spready-arch"
   [2]="https://tinyurl.com/spready-gentoo"
@@ -16,7 +26,6 @@ declare -A names=(
   [5]="Void-Install.sh"
 )
 
-# Function to download file
 download_file() {
   url=$1
   filename=$2
@@ -55,4 +64,3 @@ download_file "$url" "$filename"
 chmod +x "$filename"
 echo "Running $filename..."
 ./"$filename"
-
