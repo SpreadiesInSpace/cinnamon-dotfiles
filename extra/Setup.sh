@@ -6,30 +6,39 @@ if [ "$EUID" -eq 0 ]; then
   exit
 fi
 
-declare -A setups=(
-  [1]="Arch"
-  [2]="Fedora-41"
-  [3]="Gentoo"
-  [4]="LMDE-6"
-  [5]="NixOS-Unstable"
-  [6]="OpenSUSE-Tumbleweed"
-  [7]="Slackware-Current"
-  [8]="Void"
+# Move to main directory
+cd ..
+
+# Ordered list
+setup_names=(
+  "Arch"
+  "Fedora-41"
+  "Gentoo"
+  "LMDE-6"
+  "NixOS-Unstable"
+  "OpenSUSE-Tumbleweed"
+  "Slackware-Current"
+  "Void"
 )
 
 echo "Which setup script would you like to run?"
-for i in "${!setups[@]}"; do
-  echo "$i) Setup-${setups[$i]}.sh"
+for i in "${!setup_names[@]}"; do
+  index=$((i + 1))
+  echo "$index) Setup-${setup_names[$i]}.sh"
 done
 
-read -rp "Enter a number [1-8]: " choice
-distro="${setups[$choice]}"
+read -rp "Enter a number [1-${#setup_names[@]}]: " choice
 
-if [[ -z "$distro" ]]; then
+# Adjust index (user inputs 1-based index)
+choice=$((choice - 1))
+
+# Safety check
+if [[ -z "${setup_names[$choice]}" ]]; then
   echo "Invalid choice. Exiting."
   exit 1
 fi
 
+distro="${setup_names[$choice]}"
 script="Setup-${distro}.sh"
 
 if [[ ! -f "$script" ]]; then
@@ -37,12 +46,11 @@ if [[ ! -f "$script" ]]; then
   exit 1
 fi
 
-# Move to main directory
-cd ..
-
 if [[ ! -x "$script" ]]; then
   echo "Making $script executable..."
   chmod +x "$script"
+else
+  echo "$script is already executable."
 fi
 
 echo "Running $script..."
@@ -51,3 +59,4 @@ if [[ "$distro" == "Arch" ]]; then
 else
   sudo ./"$script"
 fi
+
