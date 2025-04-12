@@ -26,7 +26,8 @@ fi
 
 # Unzip and move to cinnamon-dotfiles
 echo "Unzipping..."
-unzip -o "$ZIP_NAME" || { echo "Unzip failed. Exiting."; exit 1; }
+unzip -o "$ZIP_NAME" &>/dev/null || { echo "Unzip failed. Exiting."; exit 1; }
+rm $ZIP_NAME
 mv cinnamon-dotfiles-main cinnamon-dotfiles
 cd cinnamon-dotfiles || { echo "Directory not found. Exiting."; exit 1; }
 
