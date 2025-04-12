@@ -11,22 +11,6 @@ if [ "$EUID" -ne 0 ]; then
   exit
 fi
 
-# Auto-mount ISO if needed
-if ! mountpoint -q /mnt/isofiles; then
-  mkdir -p /mnt/isofiles
-  mount /dev/sr0 /mnt/isofiles >/dev/null 2>&1 || { echo "Failed to mount ISO"; exit 1; }
-fi
-
-# Required System Packages
-required_sys_packages=(
-  "a/glibc-zoneinfo" # for timezone validation
-)
-
-# Install Required System Packages
-for pkg in "${required_sys_packages[@]}"; do
-  installpkg "/mnt/isofiles/slackware64/$pkg"-*.t?z >/dev/null 2>&1
-done
-
 # Prompt for new user details
 read -p "Enter new username: " username
 if ! [[ "$username" =~ ^[a-z_][a-z0-9_-]*$ ]]; then echo "Invalid username. Use only lowercase letters, numbers, underscores or hyphens (cannot start with number or hyphen)"; exit 1; fi
@@ -40,7 +24,6 @@ if [[ ! "$hostname" =~ ^[a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?$ ]]; then e
 # Prompt for timezone
 read -p "Enter your timezone (e.g., Asia/Bangkok): " timezone
 timezone="${timezone:-Asia/Bangkok}"  # default if empty
-if [ ! -f "/usr/share/zoneinfo/$timezone" ]; then echo "Invalid timezone: $timezone"; exit 1; fi
 echo "Timezone set to: $timezone"
 
 # Prompt for drive to partition
@@ -97,6 +80,7 @@ cat << EOF | chroot /mnt /bin/bash
 source /etc/profile
 
 # Set Timezone
+if [ ! -f "/usr/share/zoneinfo/$timezone" ]; then echo "Invalid timezone: $timezone. Falling back to Asia/Bangkok."; timezone="Asia/Bangkok"; fi
 ln -sf "/usr/share/zoneinfo/$timezone" /etc/localtime
 hwclock --systohc
 
