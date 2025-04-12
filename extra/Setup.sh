@@ -77,15 +77,8 @@ if [[ ! -f "$script" ]]; then
   exit 1
 fi
 
-# Make Script Executable
-if [[ ! -x "$script" ]]; then
-  echo "Making $script executable..."
-  chmod +x "$script"
-else
-  echo "$script is already executable."
-fi
-
-# Run Script
+# Make script executable and run Script
+chmod +x "$script"
 echo "Running $script..."
 if [[ "$distro" == "Arch" ]]; then
   ./"$script"
