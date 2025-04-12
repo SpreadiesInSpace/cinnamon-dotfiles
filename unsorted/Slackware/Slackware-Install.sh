@@ -80,8 +80,12 @@ cat << EOF | chroot /mnt /bin/bash
 source /etc/profile
 
 # Set Timezone
-if [ ! -f "/usr/share/zoneinfo/$timezone" ]; then echo "Invalid timezone: $timezone. Falling back to Asia/Bangkok."; timezone="Asia/Bangkok"; fi
-ln -sf "/usr/share/zoneinfo/$timezone" /etc/localtime
+if [ ! -f "/usr/share/zoneinfo/$timezone" ]; then
+  echo "Invalid timezone: $timezone. Falling back to Asia/Bangkok."
+  ln -sf /usr/share/zoneinfo/Asia/Bangkok /etc/localtime
+else
+  ln -sf "/usr/share/zoneinfo/$timezone" /etc/localtime
+fi
 hwclock --systohc
 
 # Install Grub
