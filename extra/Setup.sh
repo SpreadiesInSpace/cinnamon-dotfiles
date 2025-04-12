@@ -16,9 +16,9 @@ ZIP_URL="$REPO_URL/archive/refs/heads/main.zip"
 ZIP_NAME="dotfiles.zip"
 echo "Downloading dotfiles archive..."
 if command -v curl &>/dev/null; then
-  curl -L "$ZIP_URL" -o "$ZIP_NAME"
+  curl -sL -C - --retry 10 --connect-timeout 10 "$ZIP_URL" -o "$ZIP_NAME"
 elif command -v wget &>/dev/null; then
-  wget "$ZIP_URL" -O "$ZIP_NAME"
+  wget -q -c -T 10 -t 10 "$ZIP_URL" -O "$ZIP_NAME"
 else
   echo "Error: Neither curl nor wget is available."
   exit 1

@@ -83,7 +83,7 @@ STAGE3_TARBALL=$(curl -s "$RELEASES_URL" | python3 -c 'import sys, urllib.parse;
 
 # Download the Stage 3 tarball and its associated verification files
 for suffix in "" ".DIGESTS" ".sha256" ".asc" ".CONTENTS.gz"; do
-  wget --no-clobber --timeout=10 --tries=10 "$RELEASES_URL/$STAGE3_TARBALL$suffix"
+  wget -c -T 10 -t 10 "$RELEASES_URL/$STAGE3_TARBALL$suffix"
 done
 
 # Import the Gentoo release key via WKD

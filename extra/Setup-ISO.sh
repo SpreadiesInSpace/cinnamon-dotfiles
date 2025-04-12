@@ -33,10 +33,10 @@ download_file() {
   filename=$2
   if command -v curl &> /dev/null; then
     echo "Using curl to download $filename..."
-    curl -sL "$url" -o "$filename"
+    curl -sL -C - --retry 10 --connect-timeout 10 "$url" -o "$filename"
   elif command -v wget &> /dev/null; then
     echo "Using wget to download $filename..."
-    wget -q "$url" -O "$filename"
+    wget -q -c -T 10 -t 10 "$url" -O "$filename"
   else
     echo "Error: Neither curl nor wget found. Exiting."
     exit 1
