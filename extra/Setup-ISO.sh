@@ -80,7 +80,7 @@ sudo ./"$filename"
 
 # Run Script
 echo "Running $filename..."
-if [[ "$choice" == "1" || "$choice" == "4" ]]; then
+if [[ "$choice" == "4" ]]; then
   ./"$script"
 else
   sudo ./"$script"
