@@ -77,3 +77,11 @@ download_file "$url" "$filename"
 chmod +x "$filename"
 echo "Running $filename..."
 sudo ./"$filename"
+
+# Run Script
+echo "Running $filename..."
+if [[ "$choice" == "1" || "$choice" == "4" ]]; then
+  ./"$script"
+else
+  sudo ./"$script"
+fi
