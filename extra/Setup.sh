@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Links to run this file:
-# bash <(curl -Ls https://tinyurl.com/cinnamon-setup)
+# bash <(curl -sL https://tinyurl.com/cinnamon-setup)
 # bash <(wget -qO- https://tinyurl.com/cinnamon-setup)
 
 # Check if the script is run as root
