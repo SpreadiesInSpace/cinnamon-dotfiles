@@ -41,8 +41,8 @@ xbps-install -Syu git xtools
 xbps-install -Sy xmirror
 
 # Use xmirror to select the fastest mirrors
-# xmirror -s https://repo-fastly.voidlinux.org/
-xmirror -s https://mirror.vofr.net/voidlinux/
+xmirror -s https://repo-fastly.voidlinux.org/
+# xmirror -s https://mirror.vofr.net/voidlinux/
 
 # Install multilib and nonfree repos
 xbps-install -Sy void-repo-nonfree void-repo-multilib void-repo-multilib-nonfree

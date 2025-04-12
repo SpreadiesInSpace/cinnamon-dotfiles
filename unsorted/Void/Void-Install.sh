@@ -67,8 +67,8 @@ mount -o noatime,compress=zstd,discard=async,subvol=@home "$ROOT" /mnt/home
 mount "$BOOT" /mnt/boot/efi
 
 # Install Base System
-# REPO=https://repo-fastly.voidlinux.org/current
-REPO=https://mirror.vofr.net/voidlinux/current
+REPO=https://repo-fastly.voidlinux.org/current
+# REPO=https://mirror.vofr.net/voidlinux/current
 ARCH=x86_64 
 mkdir -p /mnt/var/db/xbps/keys
 cp /var/db/xbps/keys/* /mnt/var/db/xbps/keys/
