@@ -128,7 +128,7 @@ fi
 
 # If all verification passes, extract the Stage 3 tarball
 echo "All verifications passed, extracting the tarball..."
-tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner -C /mnt/gentoo
+tar xpf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner -C /mnt/gentoo
 
 # Pull make.conf with use flags, jobs, licenses, mirrors, etc already set
 # https://github.com/SpreadiesInSpace/cinnamon-dotfiles/blob/main/etc/portage/make.conf
