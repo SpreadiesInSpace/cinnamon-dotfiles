@@ -207,12 +207,23 @@ export PS1="(chroot) ${PS1}"
 # Sync Snapshot
 emerge-webrsync
 
-# Setting Binary Packages
-echo "[binhost]
+# Declare Binhost Mirror
+BINHOST_BASE="http://download.nus.edu.sg/mirror/gentoo/releases/amd64/binpackages/23.0"
+
+# Detect Architecture
+if grep -q avx2 /proc/cpuinfo; then
+  ARCH_SUFFIX="x86-64-v3"
+else
+  ARCH_SUFFIX="x86-64"
+fi
+
+# Set Binhost Mirror
+cat <<EOB > /etc/portage/binrepos.conf/gentoo.conf
+[binhost]
 priority = 9999
-sync-uri = http://download.nus.edu.sg/mirror/gentoo/releases/amd64/binpackages/23.0/x86-64-v3/
-#sync-uri = https://distfiles.gentoo.org/releases/amd64/binpackages/23.0/x86-64-v3/
-" > /etc/portage/binrepos.conf/gentoo.conf
+sync-uri = ${BINHOST_BASE}/${ARCH_SUFFIX}/
+EOB
+echo "Set binhost to: ${BINHOST_BASE}/${ARCH_SUFFIX}/"
 
 # Verify GPG
 rm -rf /etc/portage/gnupg/ && getuto
@@ -232,9 +243,12 @@ eselect repository disable gentoo
 eselect repository enable gentoo
 rm -rf /var/db/repos/gentoo
 
+# Signal that repository sync is now using git during install phase
+touch /var/db/repos/.synced-git-repo
+
 # Sync Repository
 emaint sync -r gentoo
-emerge -qv --oneshot sys-apps/portage
+emerge -uqv --oneshot sys-apps/portage
 
 # Read the News
 # eselect news list

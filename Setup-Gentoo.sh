@@ -99,10 +99,18 @@ fi
 # Install Essentials 
 emerge -vquN app-eselect/eselect-repository app-editors/nano dev-vcs/git
 
-# Switch from rsync to git
-eselect repository disable gentoo
-eselect repository enable gentoo
-rm -rf /var/db/repos/gentoo
+# Switch from rsync to git for faster repository sync times
+FLAG="/var/db/repos/.synced-git-repo"
+
+if [[ ! -f "$FLAG" ]]; then
+  eselect repository disable gentoo
+  eselect repository enable gentoo
+  rm -rf /var/db/repos/gentoo
+  touch "$FLAG"
+  echo "Switched to git for repository sync."
+else
+  echo "Repository already configured for git. Skipping."
+fi
 
 # Enable Additional Overlays
 eselect repository add sunny-overlay git https://github.com/dguglielmi/sunny-overlay.git # for GPaste
