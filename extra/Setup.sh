@@ -24,10 +24,11 @@ else
   exit 1
 fi
 
-# Unzip and move to cinnamon-dotfiles-main
+# Unzip and move to cinnamon-dotfiles
 echo "Unzipping..."
 unzip -o "$ZIP_NAME" || { echo "Unzip failed. Exiting."; exit 1; }
-cd cinnamon-dotfiles-main || { echo "Directory not found. Exiting."; exit 1; }
+mv cinnamon-dotfiles-main cinnamon-dotfiles
+cd cinnamon-dotfiles || { echo "Directory not found. Exiting."; exit 1; }
 
 # Populate Names
 setup_names=(
