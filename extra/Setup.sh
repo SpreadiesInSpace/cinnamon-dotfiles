@@ -14,7 +14,7 @@ fi
 REPO_URL="https://github.com/SpreadiesInSpace/cinnamon-dotfiles"
 ZIP_URL="$REPO_URL/archive/refs/heads/main.zip"
 ZIP_NAME="dotfiles.zip"
-echo "Downloading dotfiles archive..."
+echo "Downloading cinnamon-dotfiles archive..."
 if command -v curl &>/dev/null; then
   curl -sL -C - --retry 10 --connect-timeout 10 "$ZIP_URL" -o "$ZIP_NAME"
 elif command -v wget &>/dev/null; then
