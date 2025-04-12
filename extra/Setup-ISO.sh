@@ -81,7 +81,7 @@ sudo ./"$filename"
 # Run Script
 echo "Running $filename..."
 if [[ "$choice" == "4" ]]; then
-  ./"$script"
+  ./"$filename"
 else
-  sudo ./"$script"
+  sudo ./"$filename"
 fi
