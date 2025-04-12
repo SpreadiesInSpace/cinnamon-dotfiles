@@ -102,6 +102,7 @@ emerge -vquN app-eselect/eselect-repository app-editors/nano dev-vcs/git
 # Switch from rsync to git for faster repository sync times
 FLAG="/var/db/repos/.synced-git-repo"
 
+# Skip this if run previously
 if [[ ! -f "$FLAG" ]]; then
   eselect repository disable gentoo
   eselect repository enable gentoo

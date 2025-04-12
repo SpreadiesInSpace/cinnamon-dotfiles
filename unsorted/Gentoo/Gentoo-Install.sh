@@ -229,8 +229,8 @@ echo "Set binhost to: ${BINHOST_BASE}/${ARCH_SUFFIX}/"
 rm -rf /etc/portage/gnupg/ && getuto
 
 # Suppress unsafe directories warnings
-chmod 644 /etc/portage/gnupg/pubring.kbx
-chmod 644 /etc/portage/make.conf
+# chmod 644 /etc/portage/gnupg/pubring.kbx
+# chmod 644 /etc/portage/make.conf
 
 # For Selecting Mirrors (mirrors already set in make.conf)
 # emerge -qv mirrorselect
