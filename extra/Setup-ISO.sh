@@ -76,7 +76,6 @@ download_file "$url" "$filename"
 # Make Installer executable and Run
 chmod +x "$filename"
 echo "Running $filename..."
-sudo ./"$filename"
 
 # Run Script
 echo "Running $filename..."
