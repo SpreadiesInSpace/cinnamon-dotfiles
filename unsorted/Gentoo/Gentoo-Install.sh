@@ -81,54 +81,27 @@ RELEASES_URL="$GENTOO_MIRROR/releases/$GENTOO_ARCH/autobuilds/current-$STAGE3_BA
 # Get the latest Stage 3 tarball
 STAGE3_TARBALL=$(curl -s "$RELEASES_URL" | python3 -c 'import sys, urllib.parse; print(urllib.parse.unquote(sys.stdin.read()))' | grep -o "\"${STAGE3_BASENAME}-[0-9A-Z]*.tar.xz\"" | sort -u | head -1 | sed 's/"//g')
 
-# Download the Stage 3 tarball and its associated verification files
-for suffix in "" ".DIGESTS" ".sha256" ".asc" ".CONTENTS.gz"; do
+# Download tarball and verification files
+for suffix in "" ".asc" ".DIGESTS" ".sha256"; do
   wget -c -T 10 -t 10 "$RELEASES_URL/$STAGE3_TARBALL$suffix"
 done
 
-# Import the Gentoo release key via WKD
+# Import Gentoo release key via WKD
 gpg --auto-key-locate=clear,nodefault,wkd --locate-key releng@gentoo.org
 
-# Verify GPG signatures
-gpg --verify "$STAGE3_TARBALL.asc" "$STAGE3_TARBALL"
-GPG_VERIFY_STATUS=$?
-gpg --verify "$STAGE3_TARBALL.DIGESTS"
-GPG_DIGESTS_VERIFY_STATUS=$?
-gpg --verify "$STAGE3_TARBALL.sha256"
-GPG_SHA256_VERIFY_STATUS=$?
+# Verify GPG signature files
+echo "Verifying GPG signatures..."
+for ext in asc DIGESTS sha256; do
+  echo "- Checking $STAGE3_TARBALL.$ext..."
+  if ! gpg --verify "$STAGE3_TARBALL.$ext" 2>/dev/null; then
+    echo "GPG verification of $STAGE3_TARBALL.$ext failed! Aborting..."
+    exit 1
+  fi
+done
 
-# If any GPG signature verification fails, exit
-if [ $GPG_VERIFY_STATUS -ne 0 ] || [ $GPG_DIGESTS_VERIFY_STATUS -ne 0 ] || [ $GPG_SHA256_VERIFY_STATUS -ne 0 ]; then
-  echo "GPG verification failed! Aborting..."
-  exit 1
-fi
-
-# Verify SHA512 hash with OpenSSL
-echo "Verifying SHA512 hash..."
-openssl dgst -r -sha512 "$STAGE3_TARBALL"
-SHA512_VERIFY_STATUS=$?
-grep -A1 "$STAGE3_TARBALL" "$STAGE3_TARBALL.DIGESTS" | grep SHA512
-
-# Verify BLAKE2B512 hash with OpenSSL
-echo "Verifying BLAKE2B512 hash..."
-openssl dgst -r -blake2b512 "$STAGE3_TARBALL"
-BLAKE2B_VERIFY_STATUS=$?
-grep -A1 "$STAGE3_TARBALL" "$STAGE3_TARBALL.DIGESTS" | grep BLAKE2B
-
-# Verify SHA256 using .sha256 file
-echo "Verifying SHA256 hash..."
-sha256sum --check "$STAGE3_TARBALL.sha256"
-SHA256_VERIFY_STATUS=$?
-
-# If any hash verification fails, exit
-if [ $SHA512_VERIFY_STATUS -ne 0 ] || [ $BLAKE2B_VERIFY_STATUS -ne 0 ] || [ $SHA256_VERIFY_STATUS -ne 0 ]; then
-  echo "Hash verification failed! Aborting..."
-  exit 1
-fi
-
-# If all verification passes, extract the Stage 3 tarball
-echo "All verifications passed, extracting the tarball..."
-tar xpf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner -C /mnt/gentoo
+# If all verifications passed, extract the tarball
+echo "All verifications passed. Extracting tarball..."
+tar xpf "$STAGE3_TARBALL" --xattrs-include='*.*' --numeric-owner -C /mnt/gentoo
 
 # Pull make.conf with use flags, jobs, licenses, mirrors, etc already set
 # https://github.com/SpreadiesInSpace/cinnamon-dotfiles/blob/main/etc/portage/make.conf
@@ -233,7 +206,8 @@ rm -rf /etc/portage/gnupg/ && getuto
 # chmod 644 /etc/portage/make.conf
 
 # For Selecting Mirrors (mirrors already set in make.conf)
-# emerge -qv mirrorselect
+# emerge -1qv mirrorselect
+# mirrorselect -i -o >> /etc/portage/make.conf
 
 # Install Essentials 
 emerge -vquN app-eselect/eselect-repository dev-vcs/git
@@ -248,7 +222,9 @@ touch /var/db/repos/.synced-git-repo
 
 # Sync Repository
 emaint sync -r gentoo
-emerge -uqv --oneshot sys-apps/portage
+
+# Update portage if there happens to be a new version
+emerge -1uqv sys-apps/portage 
 
 # Read the News
 # eselect news list
@@ -258,7 +234,7 @@ emerge -uqv --oneshot sys-apps/portage
 eselect profile set default/linux/amd64/23.0/desktop/gnome/systemd
 
 # Set CPU Flags
-emerge -qv --oneshot app-portage/cpuid2cpuflags
+emerge -1qv app-portage/cpuid2cpuflags
 echo "*/* $(cpuid2cpuflags)" > /etc/portage/package.use/00cpu-flags
 
 # Update World Set
