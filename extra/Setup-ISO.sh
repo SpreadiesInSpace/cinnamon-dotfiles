@@ -73,11 +73,8 @@ fi
 echo "Downloading $filename..."
 download_file "$url" "$filename"
 
-# Make Installer executable and Run
+# Make Installer executable and run Script
 chmod +x "$filename"
-echo "Running $filename..."
-
-# Run Script
 echo "Running $filename..."
 if [[ "$choice" == "4" ]]; then
   ./"$filename"
