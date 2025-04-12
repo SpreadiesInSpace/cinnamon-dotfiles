@@ -75,7 +75,7 @@ cp /var/db/xbps/keys/* /mnt/var/db/xbps/keys/
 XBPS_ARCH=$ARCH xbps-install -Sy -r /mnt -R "$REPO" base-system
 
 # Install Packages
-xbps-install -Sy -r /mnt -R "$REPO" NetworkManager git xtools xmirror nano sudo grub-x86_64-efi bash-completion
+xbps-install -Sy -r /mnt -R "$REPO" NetworkManager git xtools xmirror nano sudo grub-x86_64-efi bash-completion unzip
 
 # Enable Networking
 for service in dbus NetworkManager polkitd; do

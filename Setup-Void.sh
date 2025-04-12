@@ -108,7 +108,6 @@ packages=(
     "ncdu"
     "neofetch"
     "timeshift"
-    "unzip"
     "xkill"
     "xrandr"
     # Network utilities

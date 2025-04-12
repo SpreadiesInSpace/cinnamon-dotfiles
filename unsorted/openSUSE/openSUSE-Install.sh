@@ -139,7 +139,7 @@ zypper in -y -t pattern basic_desktop
 # Install Cinnamon Desktop Environment
 zypper al mint-x-icon-theme mint-y-icon-theme
 zypper rm -y busybox-which
-zypper in -y cinnamon lightdm-slick-greeter btrfsprogs sudo bash-completion git
+zypper in -y cinnamon lightdm-slick-greeter btrfsprogs sudo bash-completion git unzip
 
 # Install Recommended Packages (excluding Snapper & Firefox)
 zypper al snapper*

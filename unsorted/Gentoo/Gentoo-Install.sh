@@ -314,7 +314,7 @@ systemctl enable NetworkManager
 #===================== Gentoo Install - Installing System Tools ======================
 
 # Install System Tools
-emerge -vq sys-apps/mlocate app-shells/bash-completion sys-fs/xfsprogs sys-fs/e2fsprogs sys-fs/dosfstools sys-fs/btrfs-progs sys-fs/f2fs-tools sys-fs/ntfs3g sys-block/io-scheduler-udev-rules
+emerge -vq sys-apps/mlocate app-shells/bash-completion sys-fs/xfsprogs sys-fs/e2fsprogs sys-fs/dosfstools sys-fs/btrfs-progs sys-fs/f2fs-tools sys-fs/ntfs3g sys-block/io-scheduler-udev-rules app-arch/unzip
 
 # No sys-fs/zfs because it pulls in zfs-kmod which takes a while to compile
 # emerge -qv sys-fs/zfs

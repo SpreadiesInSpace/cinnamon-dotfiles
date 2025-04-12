@@ -65,7 +65,7 @@ mount -o noatime,compress=zstd,discard=async,subvol=@home "$ROOT" /mnt/home
 mount "$BOOT" /mnt/boot/efi
 
 # Install Essential packages
-pacstrap -K /mnt base linux linux-firmware sudo bash-completion grub efibootmgr git networkmanager nano
+pacstrap -K /mnt base linux linux-firmware sudo bash-completion grub efibootmgr git networkmanager nano unzip
 
 # Generate fstab
 genfstab -U /mnt >> /mnt/etc/fstab
