@@ -152,7 +152,7 @@ eselect profile set default/linux/amd64/23.0/desktop/gnome/systemd
 echo "media-video/pipewire sound-server" | tee /etc/portage/package.use/pipewire
 echo "media-sound/pulseaudio -daemon" | tee /etc/portage/package.use/pulseaudio
 
-# Set LINGUAS for localization
+# Set LINGUAS for Cinnamon Localization
 # echo "*/* LINGUAS: en" | tee /etc/portage/package.use/00localization
 
 # Emerge changes and cleanup

@@ -26,9 +26,6 @@ timezone="${timezone:-Asia/Bangkok}"  # default if empty
 if [ ! -f "/usr/share/zoneinfo/$timezone" ]; then echo "Invalid timezone: $timezone"; exit 1; fi
 echo "Timezone set to: $timezone"
 
-# Prompt for BINHOST usage
-read -rp "Use this system as a BINHOST? [y/N]: " use_binhost
-
 # Prompt for drive to partition
 echo; lsblk; echo
 read -p "Enter drive to use (e.g., /dev/sda, /dev/nvme0n1, /dev/mmcblk0): " drive
@@ -85,12 +82,12 @@ RELEASES_URL="$GENTOO_MIRROR/releases/$GENTOO_ARCH/autobuilds/current-$STAGE3_BA
 STAGE3_TARBALL=$(curl -s "$RELEASES_URL" | python3 -c 'import sys, urllib.parse; print(urllib.parse.unquote(sys.stdin.read()))' | grep -o "\"${STAGE3_BASENAME}-[0-9A-Z]*.tar.xz\"" | sort -u | head -1 | sed 's/"//g')
 
 # Download tarball and verification files
-for suffix in "" ".asc" ".DIGESTS" ".sha256"; do
+echo; for suffix in "" ".asc" ".DIGESTS" ".sha256"; do
   wget -c -T 10 -t 10 -q --show-progress "$RELEASES_URL/$STAGE3_TARBALL$suffix"
 done
 
 # Import Gentoo release key via WKD
-gpg --auto-key-locate=clear,nodefault,wkd --locate-key releng@gentoo.org
+echo; gpg --quiet --auto-key-locate=clear,nodefault,wkd --locate-key releng@gentoo.org
 
 # Verify GPG signature files
 echo "Verifying GPG signatures..."
@@ -103,7 +100,7 @@ for ext in asc DIGESTS sha256; do
 done
 
 # If all verifications passed, extract the tarball
-echo "All verifications passed. Extracting tarball..."
+echo; echo "All verifications passed. Extracting tarball..."
 tar xpf "$STAGE3_TARBALL" --xattrs-include='*.*' --numeric-owner -C /mnt/gentoo
 
 # Pull make.conf with use flags, jobs, licenses, mirrors, etc already set
@@ -249,25 +246,9 @@ emerge -1uqv sys-apps/portage
 # Select 23.0 gnome desktop systemd profile for Cinnamon
 eselect profile set default/linux/amd64/23.0/desktop/gnome/systemd
 
-# If binhost is enabled, use binpkg. If not, use -march=native and set CPU flags.
-if [[ "$use_binhost" =~ ^[Yy]$ ]]; then
-  # Set COMMON_FLAGS to "-O2 -pipe"
-  sed -i 's/^COMMON_FLAGS=".*"/COMMON_FLAGS="-O2 -pipe"/' /etc/portage/make.conf
-  # Add buildpkg
-  sed -i 's/^FEATURES=".*"/FEATURES="buildpkg parallel-fetch parallel-install getbinpkg binpkg-request-signature"/' /etc/portage/make.conf
-  echo "Set make.conf for building binary packages (BINHOST)."
-else
-  # Set COMMON_FLAGS to "-O2 -pipe -march=native"
-  sed -i 's/^COMMON_FLAGS=".*"/COMMON_FLAGS="-O2 -pipe -march=native"/' /etc/portage/make.conf
-  # Add getbinpkg for consuming binary packages
-  sed -i 's/^FEATURES=".*"/FEATURES="parallel-fetch parallel-install getbinpkg binpkg-request-signature"/' /etc/portage/make.conf
-  # Set CPU flags
-  emerge -1qv app-portage/cpuid2cpuflags
-  echo "*/* $(cpuid2cpuflags)" > /etc/portage/package.use/00cpu-flags
-  echo "Set make.conf for native compilation and applied CPU-specific USE flags."
-  # Set LINGUAS for localization
-  # echo "*/* LINGUAS: en" | tee /etc/portage/package.use/00localization
-fi
+# Set CPU Flags
+emerge -1qv app-portage/cpuid2cpuflags
+echo "*/* $(cpuid2cpuflags)" > /etc/portage/package.use/00cpu-flags
 
 # Update World Set
 emerge -vqDuN @world
