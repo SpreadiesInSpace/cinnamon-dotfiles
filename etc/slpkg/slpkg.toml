@@ -1,174 +1,186 @@
-# This is the general configuration file of slpkg:
-# /etc/slpkg/slpkg.toml
-# Updated: 28/02/2025, Version: 5.2.0
+# General configuration file for slpkg.
+# Location: /etc/slpkg/slpkg.toml
+# Last Updated: 17/03/2025
+# Version: 5.2.3
 
 [CONFIGS]
 
-# OS architecture by default.
+# Specify the default operating system architecture.
+# This is used to determine the correct package versions
+# for your system.
 OS_ARCH = "x86_64"
 
-# Where the packages download.
-# This path works only with the command download.
+# Specifies the download location for packages.
+# Note: This path is only used with the 'download' command.
 DOWNLOAD_ONLY_PATH = "/tmp/slpkg/"
 
-# File suffix for list packages.
-# Change here if you are going to use '.sqf' files.
+# Specifies the file suffix for package list files.
+# Change this value if you intend to use '.sqf' files instead.
 FILE_LIST_SUFFIX = ".pkgs"
 
-# List of suffixes for binary packages.
+# List of file suffixes for binary packages.
+# These are the supported package formats for installation.
 PACKAGE_TYPE = [".tgz", ".txz"]
 
-# Configs for displaying colorful menu. Default is true. [true/false]
+# Enable or disable colorful menu display.
+# Default is true. [true/false]
 COLORS = true
 
-# Specify the number of jobs to run concurrently. Default is '-j4'.
+# Specify the number of concurrent jobs to run during builds.
+# Default is '-j4'.
 MAKEFLAGS = "-j16"
 
-# Set for GPG verification. Default is false.
-# If you set true, you should update the repositories for GPG-KEY import.
+# Enable or disable GPG verification for package integrity.
+# Default is false. If set to true, ensure repositories are
+# updated to import GPG keys.
 GPG_VERIFICATION = false
 
-# Set for checksum md5 verification. Default is true. [true/false]
+# Enable or disable MD5 checksum verification.
+# Default is true. [true/false]
 CHECKSUM_MD5 = true
 
-# Dialog is a program that will let you present a variety of questions or
-# display messages using dialog boxes from a shell script.
-# Default is true. [true/false]
+# Enable or disable the use of dialog for interactive shell
+# scripts. Dialog allows you to display questions or messages
+# using dialog boxes. Default is true. [true/false]
 DIALOG = true
 
-# View missing dependencies as main packages from the repository.
-# Some repositories include packages as dependencies,
-# but not as main packages. Default is true. [true/false]
+# View missing dependencies as main packages from
+# the repository. Some repositories include packages only
+# as dependencies, but not as standalone main packages.
+# Default is true. [true/false]
 VIEW_MISSING_DEPS = true
 
-# There are two different methods to choose when you want to upgrade
-# your installed packages, "version" method and "package" method.
-# With the "version" method (it is by default), it will compare
-# the version and the build number of the packages following the
-# semantic versioning, and with the "package" method it will compare
-# for different package between installed and repository and this
-# means it will suggest also downgrades if the installed package
-# is newer than the repository package. Default is false. [true/false]
+# There are two different methods to choose from when upgrading
+# your installed packages: the "version" method and the
+# "package" method. Recommended for -current users.
+#
+# - The "version" method (default): This compares the version
+#   and build number of the packages, following semantic
+#   versioning rules.
+#
+# - The "package" method: This checks for differences between
+#   the installed and repository packages, which means it may
+#   also suggest downgrades if the installed package is newer
+#   than the one in the repository.
+#
+# The default value is "false". [true/false]
 PACKAGE_METHOD = false
 
-# This setting allows you to downgrade packages.
-# It works if the package method it is false.
-# Default is false. [true/false]
+# Enable or disable the ability to downgrade packages.
+# This setting only works if the 'package' method is set
+# to false. Default is false. [true/false]
 DOWNGRADE_PACKAGES = false
 
-# Delete downloaded sources after build or install packages.
-# Default is false. [true/false]
+# Delete downloaded source files after building or
+# installing packages. Default is false. [true/false]
 DELETE_SOURCES = false
 
-# Choose ascii printable characters.
-# If true, it uses the extended characters, otherwise the basic ones.
-# Default is true. [true/false].
+# Choose between basic or extended ASCII printable characters.
+# If true, extended characters are used; otherwise, basic
+# ones are used. Default is true. [true/false]
 ASCII_CHARACTERS = true
 
-# Set false to all the questions. If set false, option --yes will
-# not work. Default is true. [true/false].
+# Enable or disable interactive questions. If set to false,
+# the --yes option will not work. Default is true. [true/false]
 ASK_QUESTION = true
 
-# This config removes the kernel version from some slackbuilds custom
-# version build, like nvidia-kernel and virtualbox-kernel slackbuild packages.
-# It helps to compare install and repository versions.
-# Default is true. [true/false].
+# Remove the kernel version from custom SlackBuilds
+# (e.g., nvidia-kernel, virtualbox-kernel) to simplify version
+# comparison between installed and repository packages.
+# Default is true. [true/false]
 KERNEL_VERSION = true
 
-# Add the command you want to run after the kernel upgrade to update the bootloader.
-# Example, if you have installed GRUB: grub-mkconfig -o /boot/grub/grub.cfg.
+# Specify a command to run after a kernel upgrade to update
+# the bootloader.
+# Example for GRUB: grub-mkconfig -o /boot/grub/grub.cfg.
 BOOTLOADER_COMMAND = ""
 
-# Download sources in parallel. Default is false. [true/false]
-# Alternatively, you can use the option '--parallel'.
-PARALLEL_DOWNLOADS = true
+# Enable or disable parallel downloading of sources.
+# Default is false. [true/false]
+# Alternatively, use the '--parallel' command-line option.
+PARALLEL_DOWNLOADS = false
 
-# Specifies number of concurrent download streams. Default is 5.
+# Specify the maximum number of concurrent download streams.
+# Default is 5.
 MAXIMUM_PARALLEL = 5
 
-# If progress bar is true, it does not print the commands as they
-# are executed. Default is false. [true/false]
+# Enable or disable the progress bar. If enabled, executed
+# commands are not printed.Default is false. [true/false]
 PROGRESS_BAR = true
 
-# There are 5 predefined spinners for the progress bar.
-# Default is spinner. [spinner/pie/moon/line/pixel/ball/clock]
+# Choose a spinner style for the progress bar. Options include:
+# [spinner/pie/moon/line/pixel/ball/clock]. Default is 'spinner'.
 PROGRESS_SPINNER = "spinner"
 
-# Choose color for the progress bar spinner.
-# Default is white. [white/green/violet/yellow/blue/cyan/grey/red]
+# Choose a color for the progress bar spinner. Default is green.
+# Options: [white/green/violet/yellow/blue/cyan/grey/red]
 SPINNER_COLOR = "green"
 
-# Choose color for the border box.
+# Choose a color for the border box. Default is bold_green.
 # Bold colors: [bold_green/bold_cyan/bold_yellow/bold_red/bold_blue]
-# Colors: [white/green/cyan/yellow/red/blue]
-# Default is bold_green.
+# Regular colors: [white/green/cyan/yellow/red/blue]
 BORDER_COLOR = "bold_green"
 
-# Keep process log files on /var/log/slpkg/ folder.
+# Keep process log files in the /var/log/slpkg/ directory.
 # Default is true. [true/false]
 PROCESS_LOG = true
 
-# Slackware command for installation packages, instead, you can use
-# 'installpkg'. Normally upgradepkg only upgrades packages that are
-# already installed on the system, and will skip any packages that
-# do not already have a version installed. If --install-new is specified,
-# the behavior is modified to install new packages in addition to
-# upgrading existing ones. See manpage of the upgradepkg.
+# Specify the Slackware command for installing packages. By default,
+# 'upgradepkg' is used with the '--install-new' option to install new
+# packages alongside upgrades. See the 'upgradepkg' manpage for details.
 INSTALLPKG = "upgradepkg --install-new"
 
-# Slackware command to reinstall packages.
-# Upgradepkg usually skips packages if the exact same package
-# (matching name, version, arch, and build number) is already installed
-# on the system. Use the --reinstall option if you want to upgrade all
-# packages even if the same version is already installed.
+# Specify the Slackware command for reinstalling packages. By default,
+# 'upgradepkg' is used with the '--reinstall' option to force
+# re-installation even if the same version is already installed.
 REINSTALL = "upgradepkg --reinstall"
 
-# Slackware command to remove packages.
-# removepkg removes a previously installed Slackware package, while
-# writing a progress report to the standard output. A package may be
-# specified either by the full package name (as you'd see listed in
-# /var/lib/pkgtools/packages/), or by the base package name.
-# See manpage of the removepkg.
+# Specify the Slackware command for removing packages. By default,
+# 'removepkg' is used. See the 'removepkg' manpage for details.
 REMOVEPKG = "removepkg"
 
-# You can choose a downloader among wget, wget2, curl and lftp.
-# Default is wget. [wget/wget2/curl/lftp]
+# Choose a downloader tool. Options: [wget/wget2/curl/aria2c/lftp].
+# Default is 'wget'.
 DOWNLOADER = "wget"
 
-# Wget downloader options.
-# -c, --continue: resume getting a partially-downloaded file.
-# -q, Turn off Wget's output.
-# --show-progress, Force wget to display the progress bar in any verbosity.
+# Specify options for the Wget downloader:
+# -c, --continue: Resume partial downloads.
+# -q: Suppress Wget's output.
+# --show-progress: Force display of the progress bar.
 WGET_OPTIONS = "-c -q --progress=bar:force:noscroll --show-progress"
 
-# Curl downloader options.
+# Specify options for the Curl downloader.
 CURL_OPTIONS = ""
 
-# Lftp donwloader options.
+# Specify options for the aria2c downloader.
+# -c, --continue: Resume download started by web browsers or other programs.
+ARIA2_OPTIONS = "-c"
+
+# Specify options for the LFTP 'get' command. Default is '-c get -e'.
 LFTP_GET_OPTIONS = "-c get -e"
 
-# Lftp mirror options are used to synchronize with the SBo and
-# Ponce repositories or for the local repositories.
+# Specify options for the LFTP 'mirror' command, used for synchronizing
+# SBo and Ponce repositories or local repositories. Default is:
+# '-c mirror --parallel=100 --only-newer --delete'.
 LFTP_MIRROR_OPTIONS = "-c mirror --parallel=100 --only-newer --delete"
 
-# Instead of the lftp command to synchronize the Slackbuilds repositories
-# (sbo and ponce) you can use the git clone command, after you have also
-# changed the mirror in the repositories.toml file.
+# Use Git instead of LFTP to synchronize SlackBuilds repositories
+# (SBo and Ponce). Requires updating the 'mirror' setting
+# in repositories.toml.
 GIT_CLONE = "git clone --depth 1"
 
-# Python urllib3 settings used for checking between two changelog files.
-# Timeouts allow you to control how long (in seconds) requests are allowed
-# to run before being aborted. In simple cases, you can specify a timeout
-# as a float. By default, urllib3 will retry requests 3 times and follow
-# up to 3 redirects. For more please visit:
+# Configure Python urllib3 settings for changelog file comparisons.
+# Timeouts control how long requests are allowed to run before being
+# aborted. By default, urllib3 retries requests 3 times and follows
+# up to 3 redirects. For more details, visit:
 # https://urllib3.readthedocs.io/en/stable/user-guide.html
 URLLIB_RETRIES = false
 URLLIB_REDIRECT = false
 URLLIB_TIMEOUT = 3.0
 
-# If you are going to use a proxy server, try to fill in these variables.
-# Choose between http or socks proxy type.
-# For a sock proxy, you need to install the PySocks package.
+# Configure proxy server settings. Choose between 'http' or 'socks'
+# proxy types. For SOCKS proxies, install the PySocks package.
+# For more details, visit:
 # https://urllib3.readthedocs.io/en/stable/advanced-usage.html#socks-proxies
 PROXY_ADDRESS = ""
 PROXY_USERNAME = ""

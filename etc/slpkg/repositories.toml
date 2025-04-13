@@ -1,20 +1,25 @@
-# This is the general repositories configuration file of slpkg:
-# /etc/slpkg/repositories.toml
-# Updated: 29/09/2024, Version: 5.1.4
+# General repositories configuration file for slpkg.
+# Location: /etc/slpkg/repositories.toml
+# Last Updated: 16/03/2025
+# Version: 5.2.2
 
-# Set 'true' or 'false' to enable or disable the repository you want.
-# You can use a mirror not included in this file.
+# Enable or disable repositories by setting 'true' or 'false'.
+# You can also use custom mirrors not included in this file.
 
-# Notes: Before using a repository, make sure you have read about it.
-#        Some repositories are for -current only. Change the mirror
-#        if it is necessary. The mirror or every part of the mirror
-#        should end with a slash '/' except for git repositories.
+# Notes:
+# - Before using a repository, ensure you understand its purpose.
+# - Some repositories are designed for Slackware -current only.
+# - Ensure the mirror URL ends with a slash '/'
+# (except for Git repositories).
 
-# Template to define a binary custom repository.
-# At least are required [NAME], ENABLE, MIRROR and TAG options.
-# The MIRROR should include the files ChangeLog.txt, PACKAGES.TXT,
-# and CHECKSUMS.md5. If the file ChangeLog.txt is located in
-# a different branch, it should be set a variable CHANGELOG.
+# Template for defining a custom binary repository:
+# Required options: [NAME], ENABLE, MIRROR, and TAG.
+# The MIRROR must include the following files:
+# - ChangeLog.txt
+# - PACKAGES.TXT
+# - CHECKSUMS.md5
+# If the ChangeLog.txt is located in a different branch,
+# specify it using the CHANGELOG variable.
 # Example:
 # [ALIEN]
 # ENABLE = true
@@ -23,30 +28,42 @@
 # TAG = "alien"
 
 # Salix OS Distribution:
-# Replace the SLACK, SLACK_EXTRA and SLACK_PATCHES with the mirrors:
+# Replace the SLACK, SLACK_EXTRA, and SLACK_PATCHES mirrors with:
 # https://repo.greeklug.gr/data/pub/linux/salix/x86_64/slackware-15.0/
 # https://repo.greeklug.gr/data/pub/linux/salix/x86_64/slackware-15.0/extra/
 # https://repo.greeklug.gr/data/pub/linux/salix/x86_64/slackware-15.0/patches/
 
 [DEFAULT]
-# This is the DEFAULT REPOSITORY.
-# You can change it with one that you see below.
-# Make sure you have enabled it before.
+# Default repository used by slpkg.
+# Change this to one of the repositories listed below.
+# Ensure the desired repository is enabled before switching.
 REPOSITORY = "ponce"
 
 [NEW_PACKAGES]
-# Configure the repositories that you want new packages to be added
-# when upgrading installed packages. Only useful for repositories that
-# are fully installed on the system. Example ["slack", "gnome"].
-# Normally you should see the new packages first to install.
+# Specify repositories to check for new packages during upgrades.
+# Only applicable for repositories fully installed on the system.
+# Example: ["slack", "gnome"]
+# Note: Always review new packages before installation.
 REPOSITORIES = ["slack"]
 
 [REMOVE_PACKAGES]
-# Configure the repositories that you want to remove installed packages
-# that no longer exist in the repository. Only useful for repositories
-# that are fully installed on the system. Example ["slack", "gnome"].
-# WARNING: Always check which packages are going to remove before proceed.
+# Specify repositories to remove installed packages that no longer
+# exist in the repository. Only applicable for repositories fully
+# installed on the system.
+# Example: ["slack", "gnome"]
+# WARNING: Always review the list of packages to be removed before
+# proceeding.
 REPOSITORIES = ["slack"]
+
+[SBOSRCARCH]
+# Archive of source files linked to by .info files on SlackBuilds.org.
+# Used as an alternative download source for SBo and Ponce repositories.
+# For more information, visit: https://slackware.uk/sbosrcarch/README
+MIRROR = "https://slackware.uk/sbosrcarch/by-name/"
+
+#--------------------------------------------------------------------
+# Repositories for Slackware 15.0 and Slackware -current 15.0+
+#--------------------------------------------------------------------
 
 [SBO]
 ENABLE = false
