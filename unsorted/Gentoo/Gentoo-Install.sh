@@ -104,13 +104,30 @@ echo "All verifications passed. Extracting tarball..."
 tar xpf "$STAGE3_TARBALL" --xattrs-include='*.*' --numeric-owner -C /mnt/gentoo
 
 # Pull make.conf with use flags, jobs, licenses, mirrors, etc already set
-# https://github.com/SpreadiesInSpace/cinnamon-dotfiles/blob/main/etc/portage/make.conf
-declare -A files=(["https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/etc/portage/make.conf"]="/mnt/gentoo/etc/portage/make.conf"); for url in "${!files[@]}"; do local_path="${files[$url]}"; cp "$local_path" "${local_path}.old"; curl -o "$local_path" "$url"; if [ $? -eq 0 ]; then echo "File $local_path updated successfully."; else echo "Failed to update the file $local_path."; mv "${local_path}.old" "$local_path"; fi; done
+url="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/etc/portage/make.conf"
+path="/mnt/gentoo/etc/portage/make.conf"
 
-# Update MAKEFLAGS & EMERGE_DEFAULT_OPS in /etc/portage/make.conf to match CPU cores
-cores=$(nproc) && load_limit=$((cores + 1)) && sed -i.bak "s/^MAKEOPTS=.*/MAKEOPTS=\"-j$cores -l$load_limit\"/; s/^EMERGE_DEFAULT_OPTS=.*/EMERGE_DEFAULT_OPTS=\"-j$cores -l$load_limit\"/" /mnt/gentoo/etc/portage/make.conf && echo "Updated MAKEOPTS and EMERGE_DEFAULT_OPTS in /etc/portage/make.conf to -j$cores -l$load_limit based on the number of CPU cores."
+# Backup and exit on failure
+cp "$path" "$path.stage3"
+curl -fsSL "$url" -o "$path" || {
+  echo "Failed to fetch $url, restoring original make.conf."
+  mv "$path.stage3" "$path"
+  exit 1
+}
+echo "make.conf updated successfully from $url."
 
-# Set VIDEO_CARDS value in make.conf
+# Set MAKEOPTS based on CPU cores (load limit = cores + 1)
+cores=$(nproc)
+makeopts_load_limit=$((cores + 1))
+sed -i "s/^MAKEOPTS=.*/MAKEOPTS=\"-j$cores -l$makeopts_load_limit\"/" /mnt/gentoo/etc/portage/make.conf
+echo "Updated MAKEOPTS to -j$cores -l$makeopts_load_limit"
+
+# Set EMERGE_DEFAULT_OPTS based on CPU cores (load limit as 90% of cores)
+load_limit=$(echo "$cores * 0.9" | bc -l | awk '{printf "%.1f", $0}')
+sed -i "s/^EMERGE_DEFAULT_OPTS=.*/EMERGE_DEFAULT_OPTS=\"-j$cores -l$load_limit\"/" /mnt/gentoo/etc/portage/make.conf
+echo "Updated EMERGE_DEFAULT_OPTS to -j$cores -l$load_limit"
+
+# Set VIDEO_CARDS value in package.use
 set_video_card() {
   while true; do
     echo "Valid values are:"
@@ -137,9 +154,10 @@ set_video_card() {
       *) echo "Invalid selection, please try again." ;;
     esac
   done
-  # Edit make.conf to set VIDEO_CARDS
-  sed -i "s/^VIDEO_CARDS=.*/VIDEO_CARDS=\"$video_card\"/" /mnt/gentoo/etc/portage/make.conf
-  echo "Updated VIDEO_CARDS in /mnt/gentoo/etc/portage/make.conf to $video_card based on provided input."
+
+  # Create or update the /etc/portage/package.use/00video-cards file
+  echo "*/* VIDEO_CARDS: $video_card" | tee /mnt/gentoo/etc/portage/package.use/00video-cards
+  echo "Updated VIDEO_CARDS in /etc/portage/package.use/00video-cards to $video_card based on provided input."
 }
 
 # Call the function

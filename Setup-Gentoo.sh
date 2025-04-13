@@ -46,14 +46,18 @@ else
   cp /etc/portage/make.conf /etc/portage/make.conf.old
   cp etc/portage/make.conf /etc/portage/make.conf
 
-  # Set MAKEOPTS and EMERGE_DEFAULT_OPTS based on CPU cores
+  # Set MAKEOPTS based on CPU cores (load limit = cores + 1)
   cores=$(nproc)
-  load_limit=$((cores + 1))
-  sed -i "s/^MAKEOPTS=.*/MAKEOPTS=\"-j$cores -l$load_limit\"/" /etc/portage/make.conf
-  sed -i "s/^EMERGE_DEFAULT_OPTS=.*/EMERGE_DEFAULT_OPTS=\"-j$cores -l$load_limit\"/" /etc/portage/make.conf
-  echo "Updated MAKEOPTS and EMERGE_DEFAULT_OPTS to -j$cores -l$load_limit"
+  makeopts_load_limit=$((cores + 1))
+  sed -i "s/^MAKEOPTS=.*/MAKEOPTS=\"-j$cores -l$makeopts_load_limit\"/" /etc/portage/make.conf
+  echo "Updated MAKEOPTS to -j$cores -l$makeopts_load_limit"
 
-  # Prompt for and set VIDEO_CARDS
+  # Set EMERGE_DEFAULT_OPTS based on CPU cores (load limit as 90% of cores)
+  load_limit=$(echo "$cores * 0.9" | bc -l | awk '{printf "%.1f", $0}')
+  sed -i "s/^EMERGE_DEFAULT_OPTS=.*/EMERGE_DEFAULT_OPTS=\"-j$cores -l$load_limit\"/" /etc/portage/make.conf
+  echo "Updated EMERGE_DEFAULT_OPTS to -j$cores -l$load_limit"
+
+  # Set VIDEO_CARDS value in package.use
   set_video_card() {
     while true; do
       echo "Select your video card type:"
@@ -81,9 +85,10 @@ else
         *) echo "Invalid selection, please try again." ;;
       esac
     done
-
-    sed -i "s/^VIDEO_CARDS=.*/VIDEO_CARDS=\"$video_card\"/" /etc/portage/make.conf
-    echo "Updated VIDEO_CARDS to \"$video_card\""
+    
+    # Create or update the /etc/portage/package.use/00video-cards file
+    echo "*/* VIDEO_CARDS: $video_card" | tee /etc/portage/package.use/00video-cards
+    echo "Updated VIDEO_CARDS in /etc/portage/package.use/00video-cards to $video_card based on provided input."
   }
   
   # Call the function
@@ -145,7 +150,7 @@ eselect profile set default/linux/amd64/23.0/desktop/gnome/systemd
 # Enable Sound (Pipewire)
 echo "media-video/pipewire sound-server" | tee /etc/portage/package.use/pipewire
 echo "media-sound/pulseaudio -daemon" | tee /etc/portage/package.use/pulseaudio
-# Set Language Internationalization
+# Set Language Internationalization (for Cinnamon)
 echo "*/* LINGUAS: en" | tee /etc/portage/package.use/00localization
 # Emerge changes and cleanup
 emerge -vqDuN @world
