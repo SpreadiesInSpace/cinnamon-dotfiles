@@ -81,4 +81,3 @@ fi
 chmod +x "$script"
 echo "Running $script..."
 sudo ./"$script"
-fi
