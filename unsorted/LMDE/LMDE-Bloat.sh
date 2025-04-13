@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Check if the script is run as root
-if [ "$EUID" -eq 0 ]; then
-  echo "This script must NOT be run as root. Please execute it as a regular user."
+# Check if script is run as root
+if [ "$EUID" -ne 0 ]; then
+  echo "Please run the script using sudo."
   exit
 fi
 
