@@ -114,7 +114,7 @@ curl -fsSL "$url" -o "$path" || {
   mv "$path.stage3" "$path"
   exit 1
 }
-echo; echo "make.conf updated successfully from $url."
+echo; echo "make.conf updated successfully"
 
 # Set MAKEOPTS based on CPU cores (load limit = cores + 1)
 cores=$(nproc)
@@ -131,6 +131,7 @@ echo "Updated EMERGE_DEFAULT_OPTS to -j$cores -l$load_limit"
 set_video_card() {
   while true; do
     echo "Select your video card type:"
+    echo
     echo "1) amdgpu radeonsi"
     echo "2) nvidia"
     echo "3) intel"
@@ -213,7 +214,7 @@ else
 fi
 
 # Verify GPG
-rm -rf /etc/portage/gnupg/ && getuto
+rm -rf /etc/portage/gnupg/ && echo && getuto
 
 # Suppress unsafe directories warnings
 # chmod 644 /etc/portage/gnupg/pubring.kbx
