@@ -147,11 +147,14 @@ emaint sync -a
 
 # Select 23.0 gnome desktop systemd profile for Cinnamon
 eselect profile set default/linux/amd64/23.0/desktop/gnome/systemd
+
 # Enable Sound (Pipewire)
 echo "media-video/pipewire sound-server" | tee /etc/portage/package.use/pipewire
 echo "media-sound/pulseaudio -daemon" | tee /etc/portage/package.use/pulseaudio
-# Set Language Internationalization (for Cinnamon)
-echo "*/* LINGUAS: en" | tee /etc/portage/package.use/00localization
+
+# Set LINGUAS for localization
+# echo "*/* LINGUAS: en" | tee /etc/portage/package.use/00localization
+
 # Emerge changes and cleanup
 emerge -vqDuN @world
 emerge -q --depclean
