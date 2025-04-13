@@ -104,7 +104,7 @@ echo; echo "All verifications passed. Extracting tarball..."
 tar xpf "$STAGE3_TARBALL" --xattrs-include='*.*' --numeric-owner -C /mnt/gentoo
 
 # Pull make.conf with use flags, jobs, licenses, mirrors, etc already set
-url="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/etc/portage/make.conf"
+url="https://raw.githubusercontent.com/spreadiesinspace/cinnamon-dotfiles/main/etc/portage/make.conf"
 path="/mnt/gentoo/etc/portage/make.conf"
 
 # Backup and exit on failure
@@ -114,13 +114,13 @@ curl -fsSL "$url" -o "$path" || {
   mv "$path.stage3" "$path"
   exit 1
 }
-echo "make.conf updated successfully from $url."
+echo; echo "make.conf updated successfully from $url."
 
 # Set MAKEOPTS based on CPU cores (load limit = cores + 1)
 cores=$(nproc)
 makeopts_load_limit=$((cores + 1))
 sed -i "s/^MAKEOPTS=.*/MAKEOPTS=\"-j$cores -l$makeopts_load_limit\"/" /mnt/gentoo/etc/portage/make.conf
-echo "Updated MAKEOPTS to -j$cores -l$makeopts_load_limit"
+echo; echo "Updated MAKEOPTS to -j$cores -l$makeopts_load_limit"
 
 # Set EMERGE_DEFAULT_OPTS based on CPU cores (load limit as 90% of cores)
 load_limit=$(echo "$cores * 0.9" | bc -l | awk '{printf "%.1f", $0}')
@@ -156,12 +156,12 @@ set_video_card() {
   done
 
   # Create or update the /etc/portage/package.use/00video-cards file
-  echo "*/* VIDEO_CARDS: $video_card" | tee /mnt/gentoo/etc/portage/package.use/00video-cards
-  echo "Updated VIDEO_CARDS in /etc/portage/package.use/00video-cards to $video_card based on provided input."
+  echo "*/* VIDEO_CARDS: $video_card" | tee /mnt/gentoo/etc/portage/package.use/00video-cards >/dev/null
+  echo; echo "Updated VIDEO_CARDS in /etc/portage/package.use/00video-cards to $video_card based on provided input."
 }
 
 # Call the function
-set_video_card
+echo; set_video_card
 
 # Signal that make.conf was configured during install phase
 touch /mnt/gentoo/etc/portage/.makeconf_configured
@@ -248,7 +248,7 @@ eselect profile set default/linux/amd64/23.0/desktop/gnome/systemd
 
 # Set CPU Flags
 emerge -1qv app-portage/cpuid2cpuflags
-echo "*/* $(cpuid2cpuflags)" > /etc/portage/package.use/00cpu-flags
+echo "*/* $(cpuid2cpuflags)" | tee /etc/portage/package.use/00cpu-flags >/dev/null
 
 # Update World Set
 emerge -vqDuN @world
