@@ -139,6 +139,7 @@ set_video_card() {
     echo "6) vc4 (Raspberry Pi)"
     echo "7) d3d12 (WSL)"
     echo "8) other"
+    echo
     read -p "Enter the number corresponding to your video card: " video_card_number
 
     case $video_card_number in
@@ -157,7 +158,7 @@ set_video_card() {
 
   # Create or update the /etc/portage/package.use/00video-cards file
   echo "*/* VIDEO_CARDS: $video_card" | tee /mnt/gentoo/etc/portage/package.use/00video-cards >/dev/null
-  echo; echo "Updated VIDEO_CARDS in /etc/portage/package.use/00video-cards to $video_card based on provided input."
+  echo; echo "Updated VIDEO_CARDS in /etc/portage/package.use/00video-cards to $video_card based on provided input."; echo
 }
 
 # Call the function
@@ -246,9 +247,9 @@ emerge -1uqv sys-apps/portage
 # Select 23.0 gnome desktop systemd profile for Cinnamon
 eselect profile set default/linux/amd64/23.0/desktop/gnome/systemd
 
-# Set CPU Flags
-emerge -1qv app-portage/cpuid2cpuflags
-echo "*/* $(cpuid2cpuflags)" | tee /etc/portage/package.use/00cpu-flags >/dev/null
+# Set CPU Flags (TO DO: make it work in chroot heredoc)
+# emerge -1qv app-portage/cpuid2cpuflags
+# echo "*/* $(cpuid2cpuflags)" > /etc/portage/package.use/00cpu-flags
 
 # Update World Set
 emerge -vqDuN @world
