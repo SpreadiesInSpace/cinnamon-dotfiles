@@ -212,11 +212,10 @@ else
 fi
 
 # Set Binhost Mirror
-cat <<EOB > /etc/portage/binrepos.conf/gentoo.conf
-[binhost]
+mkdir -p /etc/portage/binrepos.conf
+echo "[binhost]
 priority = 9999
-sync-uri = ${BINHOST_BASE}/${ARCH_SUFFIX}/
-EOB
+sync-uri = ${BINHOST_BASE}/${ARCH_SUFFIX}/" > /etc/portage/binrepos.conf/gentoo.conf
 echo "Set binhost to: ${BINHOST_BASE}/${ARCH_SUFFIX}/"
 
 # Verify GPG
