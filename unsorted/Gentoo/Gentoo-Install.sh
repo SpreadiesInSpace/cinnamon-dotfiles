@@ -130,7 +130,7 @@ echo "Updated EMERGE_DEFAULT_OPTS to -j$cores -l$load_limit"
 # Set VIDEO_CARDS value in package.use
 set_video_card() {
   while true; do
-    echo "Valid values are:"
+    echo "Select your video card type:"
     echo "1) amdgpu radeonsi"
     echo "2) nvidia"
     echo "3) intel"
@@ -139,7 +139,7 @@ set_video_card() {
     echo "6) vc4 (Raspberry Pi)"
     echo "7) d3d12 (WSL)"
     echo "8) other"
-    read -p "Enter the video card type number: " video_card_number
+    read -p "Enter the number corresponding to your video card: " video_card_number
 
     case $video_card_number in
       1) video_card="amdgpu radeonsi"; break ;;
