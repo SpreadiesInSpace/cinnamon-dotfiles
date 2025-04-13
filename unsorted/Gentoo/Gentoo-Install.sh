@@ -86,7 +86,7 @@ STAGE3_TARBALL=$(curl -s "$RELEASES_URL" | python3 -c 'import sys, urllib.parse;
 
 # Download tarball and verification files
 for suffix in "" ".asc" ".DIGESTS" ".sha256"; do
-  wget -c -T 10 -t 10 "$RELEASES_URL/$STAGE3_TARBALL$suffix"
+  wget -c -T 10 -t 10 -q --show-progress "$RELEASES_URL/$STAGE3_TARBALL$suffix"
 done
 
 # Import Gentoo release key via WKD
@@ -205,11 +205,13 @@ emerge-webrsync
 echo "[binhost]
 priority = 9999" > /etc/portage/binrepos.conf/gentoo.conf
 
-# Append the sync-uri line based on CPU architecture
+# Set BINHOST sync URI based on CPU support for AVX2
 if grep -q "avx2" /proc/cpuinfo; then
   echo "sync-uri = http://download.nus.edu.sg/mirror/gentoo/releases/amd64/binpackages/23.0/x86-64-v3/" >> /etc/portage/binrepos.conf/gentoo.conf
+  echo "Use x86-64-v3 optimized binaries for AVX2-capable CPUs"
 else
   echo "sync-uri = https://distfiles.gentoo.org/releases/amd64/binpackages/23.0/x86-64/" >> /etc/portage/binrepos.conf/gentoo.conf
+  echo "Use baseline x86-64 binaries for broader compatibility"
 fi
 
 # Verify GPG
@@ -253,7 +255,7 @@ if [[ "$use_binhost" =~ ^[Yy]$ ]]; then
   sed -i 's/^COMMON_FLAGS=".*"/COMMON_FLAGS="-O2 -pipe"/' /etc/portage/make.conf
   # Add buildpkg
   sed -i 's/^FEATURES=".*"/FEATURES="buildpkg parallel-fetch parallel-install getbinpkg binpkg-request-signature"/' /etc/portage/make.conf
-  echo "Configured make.conf for building binary packages (BINHOST)."
+  echo "Set make.conf for building binary packages (BINHOST)."
 else
   # Set COMMON_FLAGS to "-O2 -pipe -march=native"
   sed -i 's/^COMMON_FLAGS=".*"/COMMON_FLAGS="-O2 -pipe -march=native"/' /etc/portage/make.conf
@@ -262,6 +264,7 @@ else
   # Set CPU flags
   emerge -1qv app-portage/cpuid2cpuflags
   echo "*/* $(cpuid2cpuflags)" > /etc/portage/package.use/00cpu-flags
+  echo "Set make.conf for native compilation and applied CPU-specific USE flags."
   # Set LINGUAS for localization
   # echo "*/* LINGUAS: en" | tee /etc/portage/package.use/00localization
 fi

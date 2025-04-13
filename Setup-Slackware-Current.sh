@@ -35,7 +35,7 @@ else
 fi
 
 # Install sbopkg (for sbotools)
-wget -c -T 10 -t 10 https://github.com/sbopkg/sbopkg/releases/download/0.38.3/sbopkg-0.38.3-noarch-1_wsr.tgz
+wget -c -T 10 -t 10 -q --show-progress https://github.com/sbopkg/sbopkg/releases/download/0.38.3/sbopkg-0.38.3-noarch-1_wsr.tgz
 installpkg sbopkg-0.38.3-noarch-1_wsr.tgz
 rm sbopkg-0.38.3-noarch-1_wsr.tgz
 # Point sbopkg to current repo & sync
