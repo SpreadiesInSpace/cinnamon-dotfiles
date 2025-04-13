@@ -201,22 +201,16 @@ export PS1="(chroot) ${PS1}"
 # Sync Snapshot
 emerge-webrsync
 
-# Declare Binhost Mirror
-BINHOST_BASE="http://download.nus.edu.sg/mirror/gentoo/releases/amd64/binpackages/23.0"
-
-# Detect Architecture
-if grep -q avx2 /proc/cpuinfo; then
-  ARCH_SUFFIX="x86-64-v3"
-else
-  ARCH_SUFFIX="x86-64"
-fi
-
-# Set Binhost Mirror
-mkdir -p /etc/portage/binrepos.conf
+# Set Binary Package Repo
 echo "[binhost]
-priority = 9999
-sync-uri = ${BINHOST_BASE}/${ARCH_SUFFIX}/" > /etc/portage/binrepos.conf/gentoo.conf
-echo "Set binhost to: ${BINHOST_BASE}/${ARCH_SUFFIX}/"
+priority = 9999" > /etc/portage/binrepos.conf/gentoo.conf
+
+# Append the sync-uri line based on CPU architecture
+if grep -q "avx2" /proc/cpuinfo; then
+  echo "sync-uri = http://download.nus.edu.sg/mirror/gentoo/releases/amd64/binpackages/23.0/x86-64-v3/" >> /etc/portage/binrepos.conf/gentoo.conf
+else
+  echo "sync-uri = https://distfiles.gentoo.org/releases/amd64/binpackages/23.0/x86-64/" >> /etc/portage/binrepos.conf/gentoo.conf
+fi
 
 # Verify GPG
 rm -rf /etc/portage/gnupg/ && getuto
