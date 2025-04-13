@@ -50,3 +50,5 @@ x11.debug_logs = True
 yum = True
 yum.clean_all = True
 yum.vacuum = True
+vim = True
+vim.history = True
