@@ -1,13 +1,19 @@
 #!/bin/bash
 
-# Check if the script is run as root
-if [ "$EUID" -eq 0 ]; then
-  echo "This script must NOT be run as root. Please execute it as a regular user."
+# Check if script is run as root
+if [ "$EUID" -ne 0 ]; then
+  echo "Please run the script using sudo."
+  exit
+fi
+
+# Check if the script is run from the root account
+if [ "$SUDO_USER" = "" ]; then
+  echo "Please do not run this script from the root account. Use sudo instead."
   exit
 fi
 
 # Get the current username
-username=$(whoami)
+username=$SUDO_USER
 
 # Autologin Prompt
 read -rp "Enable autologin for $username? [y/N]: " autologin_input
@@ -29,24 +35,27 @@ else
 fi
 
 # Install base-devel and git, then install yay from AUR
-sudo pacman -S --needed --noconfirm base-devel git
+pacman -S --needed --noconfirm base-devel git
+sudo -u "$username" bash <<'EOF'
 git clone https://aur.archlinux.org/yay-bin.git
 cd yay-bin
 makepkg -si --noconfirm
 cd ..
 rm -rf yay-bin
+EOF
 
 # Check if Color, ParallelDownloads, and ILoveCandy are already in yay config
 declare -A options=(["Color"]="Color" ["ParallelDownloads"]="ParallelDownloads = 5" ["ILoveCandy"]="ILoveCandy")
 for key in "${!options[@]}"; do
     if ! grep -q "^$key" /etc/pacman.conf; then
-        sudo sed -i "/^# Misc options/a ${options[$key]}" /etc/pacman.conf
+        sed -i "/^# Misc options/a ${options[$key]}" /etc/pacman.conf
     fi
 done
 
 # Update MAKEFLAGS /etc/makepkg.conf to match CPU cores
-sudo sed -i 's/^#*\s*MAKEFLAGS=.*/MAKEFLAGS="--jobs=$(nproc)"/' /etc/makepkg.conf
+sed -i 's/^#*\s*MAKEFLAGS=.*/MAKEFLAGS="--jobs=$(nproc)"/' /etc/makepkg.conf
 
+sudo -u "$username" bash <<'EOF'
 # All packages
 packages=(
     # System utilities
@@ -134,13 +143,14 @@ packages=(
 
 # Update system and install packages
 yay -Syu --needed --noconfirm "${packages[@]}"
+EOF
 
 # Enable Flathub
-sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
 # Preserve old configurations (for Virtual Machine Manager)
-sudo cp /etc/libvirt/libvirtd.conf /etc/libvirt/libvirtd.conf.old
-sudo cp /etc/libvirt/qemu.conf /etc/libvirt/qemu.conf.old
+cp /etc/libvirt/libvirtd.conf /etc/libvirt/libvirtd.conf.old
+cp /etc/libvirt/qemu.conf /etc/libvirt/qemu.conf.old
 
 # Set proper permissions in libvirtd.conf
 for line in \
@@ -151,48 +161,48 @@ for line in \
   # Only add the line if it's completely missing (including commented-out lines)
   if ! grep -q -E "^$key\s*=" /etc/libvirt/libvirtd.conf; then
     # Append the line if it doesn't exist in any form
-    echo "$line" | sudo tee -a /etc/libvirt/libvirtd.conf > /dev/null
+    echo "$line" | tee -a /etc/libvirt/libvirtd.conf > /dev/null
   fi
 done
 
 # Set proper permissions in qemu.conf
 for key in user group swtpm_user swtpm_group; do
   if ! grep -q "^$key = \"$username\"$" /etc/libvirt/qemu.conf; then
-    echo "$key = \"$username\"" | sudo tee -a /etc/libvirt/qemu.conf > /dev/null
+    echo "$key = \"$username\"" | tee -a /etc/libvirt/qemu.conf > /dev/null
   fi
 done
 
 # Enable and start services
-sudo systemctl enable libvirtd
-sudo systemctl enable lightdm
-sudo systemctl enable NetworkManager
+systemctl enable libvirtd
+systemctl enable lightdm
+systemctl enable NetworkManager
 
 # Only enable net-autostart if in physical machine
 if [ "$is_vm" = false ]; then
-    sudo virsh net-autostart default
-    sudo virsh net-start default
+    virsh net-autostart default
+    virsh net-start default
 else
     # Disable autostart and destroy the network if running
-    sudo virsh net-autostart default --disable
-    sudo rm -f /etc/libvirt/qemu/networks/autostart/default.xml
+    virsh net-autostart default --disable
+    rm -f /etc/libvirt/qemu/networks/autostart/default.xml
     if virsh net-info default | grep -q "Active:.*yes"; then
-        sudo virsh net-destroy default
+        virsh net-destroy default
     fi
     # Enable libvirtd service (for Virtual Machine Manager)
-    sudo systemctl restart libvirtd
+    systemctl restart libvirtd
 fi
 
 # Add user to necessary groups
 groups=(libvirt libvirt-qemu kvm input disk video audio)
 for group in "${groups[@]}"; do
-    sudo usermod -aG "$group" "$username"
+    usermod -aG "$group" "$username"
 done
 
 # Backup original LightDM config
-sudo cp /etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf.old
+cp /etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf.old
 
 # Modify lightdm.conf in-place
-sudo awk -v user="$username" -v autologin="$enable_autologin" -v vm="$is_vm" -i inplace '
+awk -v user="$username" -v autologin="$enable_autologin" -v vm="$is_vm" -i inplace '
 /^\[Seat:\*\]/ {a=1}
 a==1 && /^#?greeter-hide-users=/ {
     print "greeter-hide-users=false"
@@ -218,8 +228,8 @@ a==1 && /^#?autologin-session=/ {
 ' /etc/lightdm/lightdm.conf
 
 # Ensure autologin group exists and add user
-sudo groupadd -f autologin
-sudo gpasswd -a "$username" autologin
+groupadd -f autologin
+gpasswd -a "$username" autologin
 
 # If running in a VM, set display-setup-script in lightdm.conf
 if [ "$is_vm" = true ]; then
@@ -228,19 +238,19 @@ if [ "$is_vm" = true ]; then
     output=$(basename "$(dirname "$output_path")")
     output="${output#*-}"  # Strip 'cardX-' prefix
     if [[ -n "$output" ]]; then
-        sudo sed -i "/^\[Seat:\*\]/,/^\[.*\]/ {
+        sed -i "/^\[Seat:\*\]/,/^\[.*\]/ {
             s|^#*display-setup-script=.*|display-setup-script=xrandr --output $output --mode 1920x1080 --rate 60|
         }" /etc/lightdm/lightdm.conf
     fi
 fi
 
 # Set timeout for stopping services during shutdown via drop in file
-sudo mkdir -p /etc/systemd/system.conf.d
-echo "[Manager]" | sudo tee /etc/systemd/system.conf.d/override.conf
-echo "DefaultTimeoutStopSec=15s" | sudo tee -a /etc/systemd/system.conf.d/override.conf
+mkdir -p /etc/systemd/system.conf.d
+echo "[Manager]" | tee /etc/systemd/system.conf.d/override.conf
+echo "DefaultTimeoutStopSec=15s" | tee -a /etc/systemd/system.conf.d/override.conf
 
 # Reload the systemd configuration
-sudo systemctl daemon-reload
+systemctl daemon-reload
 
 # Run the setup script
 # cd home/

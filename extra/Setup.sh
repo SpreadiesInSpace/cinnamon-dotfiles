@@ -80,8 +80,5 @@ fi
 # Make script executable and run Script
 chmod +x "$script"
 echo "Running $script..."
-if [[ "$distro" == "Arch" ]]; then
-  ./"$script"
-else
-  sudo ./"$script"
+sudo ./"$script"
 fi
