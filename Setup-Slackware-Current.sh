@@ -145,6 +145,7 @@ packages=(
     #"noto-fonts"
     #"noto-emoji"
     "qbittorrent"
+    "libtorrent-rasterbar"
     "ufw"
     "xclip"
     # For NvChad
