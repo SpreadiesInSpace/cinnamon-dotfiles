@@ -28,11 +28,14 @@ esac
 
 # VM Prompt
 read -rp "Is this a Virtual Machine? [y/N]: " response
-if [[ "$response" =~ ^[Yy]$ ]]; then
-    is_vm=true
-else
-    is_vm=false
-fi
+case "$response" in
+    [yY][eE][sS]|[yY])
+        is_vm=true
+        ;;
+    *)
+        is_vm=false
+        ;;
+esac
 
 # Enable Parallel Downloads
 if ! grep -q "^max_parallel_downloads=10$" /etc/dnf/dnf.conf; then

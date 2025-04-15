@@ -28,11 +28,14 @@ esac
 
 # VM Prompt
 read -rp "Is this a Virtual Machine? [y/N]: " response
-if [[ "$response" =~ ^[Yy]$ ]]; then
-    is_vm=true
-else
-    is_vm=false
-fi
+case "$response" in
+    [yY][eE][sS]|[yY])
+        is_vm=true
+        ;;
+    *)
+        is_vm=false
+        ;;
+esac
 
 # Check if custom make.conf and VIDEO_CARDS have already been set previously
 MAKECONF_FLAG="/etc/portage/.makeconf_configured"

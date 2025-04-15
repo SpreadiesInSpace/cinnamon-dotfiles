@@ -28,11 +28,14 @@ esac
 
 # VM Prompt
 read -rp "Is this a Virtual Machine? [y/N]: " response
-if [[ "$response" =~ ^[Yy]$ ]]; then
-    is_vm=true
-else
-    is_vm=false
-fi
+case "$response" in
+    [yY][eE][sS]|[yY])
+        is_vm=true
+        ;;
+    *)
+        is_vm=false
+        ;;
+esac
 
 # Install sbopkg (for sbotools)
 wget -c -T 10 -t 10 -q --show-progress https://github.com/sbopkg/sbopkg/releases/download/0.38.3/sbopkg-0.38.3-noarch-1_wsr.tgz
