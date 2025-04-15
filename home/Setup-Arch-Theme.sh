@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Check if script is NOT run as root
+# Check if the script is run as root
 if [ "$EUID" -eq 0 ]; then
-  echo "Do not run this script as root."
+  echo "This script must NOT be run as root. Please execute it as a regular user."
   exit
 fi
 
