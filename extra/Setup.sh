@@ -80,4 +80,4 @@ fi
 # Make script executable and run Script
 chmod +x "$script"
 echo "Running $script..."
-sudo ./"$script"
+sudo bash "$script"
