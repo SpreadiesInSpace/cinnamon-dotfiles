@@ -40,7 +40,7 @@ done
 
 # Prompt for hostname
 while true; do
-  read -p "Enter hostname (alphanumeric, may include hyphens, no spaces): " hostname
+  read -p "Enter hostname: " hostname
   if [[ "$hostname" =~ ^[a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?$ ]] && ! [[ "$hostname" =~ \  ]]; then break; fi
   echo "Invalid hostname. Must be alphanumeric, may include hyphens, and cannot contain spaces or start/end with a hyphen."
 done
@@ -59,9 +59,15 @@ while true; do
   read -p "Enter drive to use (e.g., /dev/sda, /dev/nvme0n1, /dev/mmcblk0): " drive
   # Check if the drive is valid (not a partition) and if it's a block device
   if [[ "$drive" =~ ^/dev/[a-zA-Z0-9]+$ ]] && [ -b "$drive" ] && ! [[ "$drive" =~ [0-9p]$ ]]; then
-    break
+    # Confirm before proceeding
+    read -rp "WARNING: This will erase all data on $drive. Are you sure you want to continue? [y/N]: " confirm
+    case "$confirm" in
+      [yY][eE][sS]|[yY]) break ;;
+      *) echo "Aborting."; exit 1 ;;
+    esac
+  else
+    echo "Invalid drive: $drive. Please enter a valid drive (e.g., /dev/sda, /dev/nvme0n1) without a partition number or 'p' suffix."
   fi
-  echo "Invalid drive: $drive. Please enter a valid drive (e.g., /dev/sda, /dev/nvme0n1) without a partition number or 'p' suffix."
 done
 
 # Refresh (for older ISOs)
