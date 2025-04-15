@@ -277,9 +277,9 @@ eselect profile set default/linux/amd64/23.0/desktop/gnome/systemd
 # Set CPU Flags (TO DO: make it work in chroot heredoc)
 emerge -1uqv app-portage/cpuid2cpuflags
 # echo "*/* $(cpuid2cpuflags)" > /etc/portage/package.use/00cpu-flags
-cpu_flags=$(cpuid2cpuflags)
-if [[ -n "$cpu_flags" ]]; then
-  echo "*/* $cpu_flags" > /etc/portage/package.use/00cpu-flags
+cpuflags=$(cpuid2cpuflags)
+if [[ -n "$cpuflags" ]]; then
+  printf "*/* %s\n" "$cpuflags" > /etc/portage/package.use/00cpu-flags
 else
   echo "Warning: cpuid2cpuflags returned nothing!"
 fi
