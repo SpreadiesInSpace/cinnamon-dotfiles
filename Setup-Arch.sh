@@ -36,7 +36,7 @@ fi
 
 # Install base-devel and git, then install yay from AUR
 pacman -S --needed --noconfirm base-devel git
-cat << 'EOF' | su - "$Susername"
+cat << 'EOF' | su - "$SUDO_USER"
 git clone https://aur.archlinux.org/yay-bin.git
 cd yay-bin
 makepkg -si --noconfirm
@@ -55,7 +55,7 @@ done
 # Update MAKEFLAGS /etc/makepkg.conf to match CPU cores
 sed -i 's/^#*\s*MAKEFLAGS=.*/MAKEFLAGS="--jobs=$(nproc)"/' /etc/makepkg.conf
 
-cat << 'EOF' | su - "$username"
+cat << 'EOF' | su - "$SUDO_USER"
 # All packages
 packages=(
     # System utilities
