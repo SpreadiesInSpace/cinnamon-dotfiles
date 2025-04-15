@@ -42,6 +42,7 @@ sed -i "s/f16poom/$username/g" /etc/nixos/configuration.nix
 
 # Prompt the user for hostname
 read -p "Enter the hostname for your system: " hostname
+if [[ ! "$hostname" =~ ^[a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?$ ]]; then echo "Invalid hostname. Must be alphanumeric and may include hyphens (no leading/trailing hyphen)."; exit 1; fi
 sed -i "s/hostName = .*;/hostName = \"$hostname\";/g" /etc/nixos/configuration.nix
 
 # Places Login Wallpaper
