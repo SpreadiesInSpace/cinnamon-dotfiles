@@ -7,29 +7,55 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 # Prompt for root password
-read -sp "Enter new root password: " rootpasswd; echo
-if [ -z "$rootpasswd" ]; then echo "Root password cannot be empty."; exit 1; fi
+while true; do
+  read -sp "Enter new root password: " rootpasswd; echo
+  read -sp "Confirm root password: " rootpasswd_confirm; echo
+  if [ -z "$rootpasswd" ]; then echo "Root password cannot be empty."; continue; fi
+  if [ "$rootpasswd" != "$rootpasswd_confirm" ]; then echo "Passwords do not match. Try again."; continue; fi
+  break
+done
 
-# Prompt for new user details
-read -p "Enter new username: " username
-if ! [[ "$username" =~ ^[a-z_][a-z0-9_-]*$ ]]; then echo "Invalid username. Use only lowercase letters, numbers, underscores or hyphens (cannot start with number or hyphen)"; exit 1; fi
-read -sp "Enter password for $username: " userpasswd; echo
-if [ -z "$userpasswd" ]; then echo "User password cannot be empty."; exit 1; fi
+# Prompt for new username
+while true; do
+  read -p "Enter new username: " username
+  if [[ "$username" =~ ^[a-z_][a-z0-9_-]*$ ]]; then break; fi
+  echo "Invalid username. Use only lowercase letters, numbers, underscores or hyphens (cannot start with number or hyphen)"
+done
+
+# Prompt for new user password
+while true; do
+  read -sp "Enter password for $username: " userpasswd; echo
+  read -sp "Confirm password for $username: " userpasswd_confirm; echo
+  if [ -z "$userpasswd" ]; then echo "User password cannot be empty."; continue; fi
+  if [ "$userpasswd" != "$userpasswd_confirm" ]; then echo "Passwords do not match. Try again."; continue; fi
+  break
+done
 
 # Prompt for hostname
-read -p "Enter hostname: " hostname
-if [[ ! "$hostname" =~ ^[a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?$ ]]; then echo "Invalid hostname. Must be alphanumeric and may include hyphens (no leading/trailing hyphen)."; exit 1; fi
+while true; do
+  read -p "Enter hostname (alphanumeric, may include hyphens, no spaces): " hostname
+  if [[ "$hostname" =~ ^[a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?$ ]] && ! [[ "$hostname" =~ \  ]]; then break; fi
+  echo "Invalid hostname. Must be alphanumeric, may include hyphens, and cannot contain spaces or start/end with a hyphen."
+done
 
 # Prompt for timezone
-read -p "Enter your timezone (e.g., Asia/Bangkok): " timezone
-timezone="${timezone:-Asia/Bangkok}"  # default if empty
-if [ ! -f "/usr/share/zoneinfo/$timezone" ]; then echo "Invalid timezone: $timezone"; exit 1; fi
-echo "Timezone set to: $timezone"
+while true; do
+  read -p "Enter your timezone (e.g., Asia/Bangkok): " timezone
+  timezone="${timezone:-Asia/Bangkok}"  # default if empty
+  if [ -f "/usr/share/zoneinfo/$timezone" ]; then echo "Timezone set to: $timezone"; break; fi
+  echo "Invalid timezone: $timezone"
+done
 
 # Prompt for drive to partition
 echo; lsblk; echo
-read -p "Enter drive to use (e.g., /dev/sda, /dev/nvme0n1, /dev/mmcblk0): " drive
-if [ ! -b "$drive" ]; then echo "Invalid drive: $drive"; exit 1; fi
+while true; do
+  read -p "Enter drive to use (e.g., /dev/sda, /dev/nvme0n1, /dev/mmcblk0): " drive
+  # Check if the drive is valid (not a partition) and if it's a block device
+  if [[ "$drive" =~ ^/dev/[a-zA-Z0-9]+$ ]] && [ -b "$drive" ] && ! [[ "$drive" =~ [0-9p]$ ]]; then
+    break
+  fi
+  echo "Invalid drive: $drive. Please enter a valid drive (e.g., /dev/sda, /dev/nvme0n1) without a partition number or 'p' suffix."
+done
 
 # Refresh (for older ISOs)
 xbps-install -Sy
