@@ -1,4 +1,11 @@
 #!/bin/bash
+
+# Check if script is NOT run as root
+if [ "$EUID" -eq 0 ]; then
+  echo "Do not run this script as root."
+  exit
+fi
+
 sudo echo
 ./icons-and-fonts.sh
 # Copies icons and themes to appropriate directories
