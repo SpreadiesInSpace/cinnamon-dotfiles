@@ -98,7 +98,7 @@ BOOTLOADER_COMMAND = ""
 # Enable or disable parallel downloading of sources.
 # Default is false. [true/false]
 # Alternatively, use the '--parallel' command-line option.
-PARALLEL_DOWNLOADS = false
+PARALLEL_DOWNLOADS = true
 
 # Specify the maximum number of concurrent download streams.
 # Default is 5.
