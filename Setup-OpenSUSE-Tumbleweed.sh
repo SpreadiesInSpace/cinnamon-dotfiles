@@ -35,7 +35,7 @@ else
 fi
 
 # Zypper Enable Parallel Downloads
-export ZYPP_CURL2=1
+# export ZYPP_CURL2=1
 export ZYPP_PCK_PRELOAD=1
 
 # Fix openSUSE's line break paste
