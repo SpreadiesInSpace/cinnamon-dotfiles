@@ -258,6 +258,10 @@ slpkg -iy "${slint_packages[@]}" -o slint -O
 slpkg -iy "*" -o csb
 ln -sf /etc/X11/xinit/xinitrc.cinnamon-session /etc/X11/xinit/xinitrc
 ln -sf /etc/X11/xinit/xinitrc.cinnamon-session /etc/X11/xsession
+cp /etc/X11/xinit/xinitrc.cinnamon-session /root/.xinitrc
+cp /etc/X11/xinit/xinitrc.cinnamon-session /root/.xsession
+chmod -x /root/.xinitrc
+chmod -x /root/.xsession
 
 # Enable Flathub
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo

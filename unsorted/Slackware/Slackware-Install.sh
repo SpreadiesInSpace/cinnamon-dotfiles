@@ -145,6 +145,10 @@ echo "$username:$userpasswd" | chpasswd
 # Set Default DE to XFCE System-Wide
 ln -sf /etc/X11/xinit/xinitrc.xfce /etc/X11/xinit/xinitrc
 ln -sf /etc/X11/xinit/xinitrc.xfce /etc/X11/xsession
+cp /etc/X11/xinit/xinitrc.xfce /root/.xinitrc
+cp /etc/X11/xinit/xinitrc.xfce /root/.xsession
+chmod -x /root/.xinitrc
+chmod -x /root/.xsession
 
 # Enable Autologin
 sed -i '/^\[Autologin\]/,/^\[/ {
