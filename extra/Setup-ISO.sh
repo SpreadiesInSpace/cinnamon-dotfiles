@@ -51,13 +51,23 @@ echo "3) openSUSE Tumbleweed"
 echo "4) Slackware Current"
 echo "5) Void Linux"
 echo "6) Exit"
-read -rp "Enter a number [1-6]: " choice
 
-# Handle Exit Options
-if [[ "$choice" == "0" || "$choice" == "6" ]]; then
+# Repeatedly prompt until valid input is received
+while true; do
+  read -rp "Enter a number [1-6]: " choice
+  if [[ "$choice" =~ ^[0-9]+$ ]] && (( choice >= 1 && choice <= 6 )); then
+    break
+  else
+    echo "Invalid input. Please enter a number between 1 and 6."
+  fi
+done
+
+# Handle Exit Option
+if [[ "$choice" == "6" ]]; then
   echo "Exiting."
   exit 0
 fi
+
 
 # Set Variables
 url=${installs[$choice]}
