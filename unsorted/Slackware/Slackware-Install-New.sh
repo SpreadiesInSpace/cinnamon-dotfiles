@@ -13,38 +13,76 @@ fi
 
 # Auto-detect and mount installation media
 mount_install_media() {
+  echo "Scanning for Slackware installation media..."
   # First check if already mounted
-  if mountpoint -q /mnt/isofiles; then echo "Installation media already mounted"; return 0; fi
-  # Create mount point
+  if mountpoint -q /mnt/isofiles && [ -d "/mnt/isofiles/slackware64" ]; then
+    echo "Installation media already mounted"
+    return 0
+  fi
+  # Create mount point if needed
   mkdir -p /mnt/isofiles
   # Try to find and mount Slackware media
   local found=0
-  # Get list of potential partitions, skip already mounted ones
-  echo "Scanning for Slackware installation media..."
-  for device in $(lsblk -lno NAME,TYPE,MOUNTPOINT | grep "part" | grep -v "/boot\|/home\|/\s" | cut -d' ' -f1); do
-    echo "Trying device /dev/$device..."
-    if mount -o ro /dev/$device /mnt/isofiles >/dev/null 2>&1; then
-      # Check for Slackware directory
-      if [ -d "/mnt/isofiles/slackware64" ]; then
-        echo "Found Slackware media on /dev/$device"; found=1; break
-      else
-        umount /mnt/isofiles
-      fi
-    fi
-  done
-  # If not found on partitions, try optical drive as fallback
-  if [ $found -eq 0 ]; then
-    echo "Trying optical drive..."
-    if mount /dev/sr0 /mnt/isofiles >/dev/null 2>&1; then
-      if [ -d "/mnt/isofiles/slackware64" ]; then
-        echo "Found Slackware media on optical drive"; found=1
-      else
-        umount /mnt/isofiles
-      fi
+  # First try optical drive as it's the most common installation source
+  echo "Trying optical drive..."
+  if mount -o ro /dev/sr0 /mnt/isofiles 2>/dev/null; then
+    if [ -d "/mnt/isofiles/slackware64" ]; then
+      echo "Found Slackware media on optical drive"
+      found=1
+    else
+      umount /mnt/isofiles
     fi
   fi
+  # If not found on optical drive, try USB drives and other partitions
+  if [ $found -eq 0 ]; then
+    echo "Trying other media..."
+    # Get list of potential partitions, skip already mounted system partitions
+    for device in $(lsblk -lno NAME,TYPE,MOUNTPOINT | grep "part" | grep -v "/boot\|/home\|/\s" | cut -d' ' -f1); do
+      echo "Trying device /dev/$device..."
+      if mount -o ro /dev/$device /mnt/isofiles 2>/dev/null; then
+        if [ -d "/mnt/isofiles/slackware64" ]; then
+          echo "Found Slackware media on /dev/$device"
+          found=1
+          break
+        else
+          umount /mnt/isofiles
+        fi
+      fi
+    done
+  fi
+  # If still not found, try ISO files
+  if [ $found -eq 0 ]; then
+    echo "Searching for Slackware ISO files..."
+    mkdir -p /var/log/mntiso
+    # Look for ISO files in common locations
+    for iso in /root/*.iso /home/*/*.iso /mnt/*/*.iso /media/*/*.iso; do
+      if [ -f "$iso" ]; then
+        echo "Found ISO file: $iso, trying to mount..."
+        if mount -o loop "$iso" /var/log/mntiso 2>/dev/null; then
+          # Check if it's a Slackware ISO
+          if [ -d "/var/log/mntiso/slackware64" ]; then
+            # Use bind mount to make it available at our expected location
+            if mount --bind /var/log/mntiso/slackware64 /mnt/isofiles; then
+              echo "Successfully mounted Slackware ISO"
+              found=1
+              break
+            else
+              umount /var/log/mntiso
+            fi
+          else
+            umount /var/log/mntiso
+          fi
+        fi
+      fi
+    done
+  fi
+  
   # Check if successful
-  if [ $found -eq 0 ]; then echo "Failed to find and mount Slackware installation media"; return 1; fi
+  if [ $found -eq 0 ]; then
+    echo "Failed to find and mount Slackware installation media"
+    return 1
+  fi
+  
   return 0
 }
 
