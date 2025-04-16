@@ -27,7 +27,7 @@ fi
 # Unzip and move to cinnamon-dotfiles
 echo "Unzipping..."
 unzip -o "$ZIP_NAME" &>/dev/null || { echo "Unzip failed. Exiting."; exit 1; }
-rm $ZIP_NAME
+rm "$ZIP_NAME"
 mv cinnamon-dotfiles-main cinnamon-dotfiles
 cd cinnamon-dotfiles || { echo "Directory not found. Exiting."; exit 1; }
 
@@ -77,7 +77,15 @@ if [[ ! -f "$script" ]]; then
   exit 1
 fi
 
-# Make script executable and run Script
+# Make script executable
 chmod +x "$script"
-echo "Running $script..."
-sudo bash "$script"
+
+# NixOS special case: run in nix-shell with unzip
+if [[ "$distro" == "NixOS-Unstable" ]]; then
+  echo "Entering nix-shell to run $script with unzip..."
+  nix-shell -p unzip --run "sudo bash $script"
+else
+  echo "Running $script..."
+  sudo bash "$script"
+fi
+
