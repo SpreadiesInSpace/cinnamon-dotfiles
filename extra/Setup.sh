@@ -48,7 +48,11 @@ setup_names=(
 echo "Which setup script would you like to run?"
 for i in "${!setup_names[@]}"; do
   index=$((i + 1))
-  echo "$index) Setup-${setup_names[$i]}.sh"
+  if [[ "${setup_names[$i]}" == "Exit" ]]; then
+    echo "$index) Exit"
+  else
+    echo "$index) Setup-${setup_names[$i]}.sh"
+  fi
 done
 
 # Repeatedly prompt until valid input is received
