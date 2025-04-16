@@ -11,11 +11,45 @@ if [ "$EUID" -ne 0 ]; then
   exit
 fi
 
-# Auto-mount ISO if needed
-if ! mountpoint -q /mnt/isofiles; then
+# Auto-detect and mount installation media
+mount_install_media() {
+  # First check if already mounted
+  if mountpoint -q /mnt/isofiles; then echo "Installation media already mounted"; return 0; fi
+  # Create mount point
   mkdir -p /mnt/isofiles
-  mount /dev/sr0 /mnt/isofiles >/dev/null 2>&1 || { echo "Failed to mount ISO"; exit 1; }
-fi
+  # Try to find and mount Slackware media
+  local found=0
+  # Get list of potential partitions, skip already mounted ones
+  echo "Scanning for Slackware installation media..."
+  for device in $(lsblk -lno NAME,TYPE,MOUNTPOINT | grep "part" | grep -v "/boot\|/home\|/\s" | cut -d' ' -f1); do
+    echo "Trying device /dev/$device..."
+    if mount -o ro /dev/$device /mnt/isofiles >/dev/null 2>&1; then
+      # Check for Slackware directory
+      if [ -d "/mnt/isofiles/slackware64" ]; then
+        echo "Found Slackware media on /dev/$device"; found=1; break
+      else
+        umount /mnt/isofiles
+      fi
+    fi
+  done
+  # If not found on partitions, try optical drive as fallback
+  if [ $found -eq 0 ]; then
+    echo "Trying optical drive..."
+    if mount /dev/sr0 /mnt/isofiles >/dev/null 2>&1; then
+      if [ -d "/mnt/isofiles/slackware64" ]; then
+        echo "Found Slackware media on optical drive"; found=1
+      else
+        umount /mnt/isofiles
+      fi
+    fi
+  fi
+  # Check if successful
+  if [ $found -eq 0 ]; then echo "Failed to find and mount Slackware installation media"; return 1; fi
+  return 0
+}
+
+# Ensure installation media is mounted before package installation
+if ! mount_install_media; then echo "Cannot proceed without installation media"; exit 1; fi
 
 # Required System Packages
 required_sys_packages=(
@@ -116,9 +150,23 @@ mount --make-rslave /mnt/dev
 mount --bind /run /mnt/run
 mount --make-slave /mnt/run
 
-# Mount ISO
-mkdir -p /mnt/isofiles
-mount /dev/sr0 /mnt/isofiles >/dev/null 2>&1
+# Verify installation media is mounted and remount if needed
+ensure_media_mounted() {
+  # Check if already mounted and has the expected content
+  if mountpoint -q /mnt/isofiles && [ -d "/mnt/isofiles/slackware64" ]; then
+    echo "Installation media already mounted"; return 0
+  fi
+  # If mounted but without slackware64 directory, unmount it
+  if mountpoint -q /mnt/isofiles; then
+    echo "Mount point exists but doesn't contain Slackware - remounting"; umount /mnt/isofiles
+  fi
+  # Remount using mounting function
+  mount_install_media; return $?
+}
+
+# Ensure installation media is mounted before package installation
+echo "Verifying installation media is mounted..."
+if ! ensure_media_mounted; then echo "Cannot proceed with package installation without media"; exit 1; fi
 
 # Get list of package set directories
 pkg_dirs=( /mnt/isofiles/slackware64/* )
@@ -127,24 +175,31 @@ for dir in "${pkg_dirs[@]}"; do
   [ -d "$dir" ] && package_sets+=("$(basename "$dir")")
 done
 
+# Prepare for full installation
+echo "Starting full Slackware installation..."
+
+# Get list of package sets (sorted alphabetically)
+package_sets=(); for dir in /mnt/isofiles/slackware64/*; do [ -d "$dir" ] && package_sets+=("$(basename "$dir")"); done
+IFS=$'\n' package_sets=($(sort <<<"${package_sets[*]}")); unset IFS
+
 # Install all sets with overall progress
-total_sets=${#package_sets[@]}
-set_count=1; echo
+total_sets=${#package_sets[@]}; set_count=1; echo
 for pkg_set in "${package_sets[@]}"; do
   pkg_set_cap="${pkg_set^^}"  # Capitalize package set name
   echo "[$set_count/$total_sets] Installing package set: $pkg_set_cap"
   pkg_files=( /mnt/isofiles/slackware64/"$pkg_set"/*.t?z )
-  total_pkgs=${#pkg_files[@]}
-  pkg_count=1
+  total_pkgs=${#pkg_files[@]}; pkg_count=1
   for pkg in "${pkg_files[@]}"; do
     pkg_name=$(basename "$pkg")
     printf "\r    [%s/%s] Installing: %-60s" "$pkg_count" "$total_pkgs" "$pkg_name"
-    installpkg --root /mnt "$pkg" >/dev/null 2>&1
-    ((pkg_count++))
+    installpkg --root /mnt "$pkg" >/dev/null 2>&1; ((pkg_count++))
   done
-  echo
-  ((set_count++))
+  echo; ((set_count++))
 done; echo
+
+# Run post-installation configuration
+echo "Running ldconfig..."
+[ -x /mnt/sbin/ldconfig ] && /mnt/sbin/ldconfig -r /mnt
 
 # Run netconfig interactively before chroot
 chroot /mnt netconfig
