@@ -41,6 +41,7 @@ setup_names=(
   "OpenSUSE-Tumbleweed"
   "Slackware-Current"
   "Void"
+  "Exit"
 )
 
 # Installer Prompt
@@ -49,22 +50,24 @@ for i in "${!setup_names[@]}"; do
   index=$((i + 1))
   echo "$index) Setup-${setup_names[$i]}.sh"
 done
-echo "9) Exit"
-read -rp "Enter a number [1-${#setup_names[@]} or 9]: " choice
 
-# Handle Exit Options
-if [[ "$choice" == "0" || "$choice" == "9" ]]; then
-  echo "Exiting."
-  exit 0
-fi
+# Repeatedly prompt until valid input is received
+while true; do
+  read -rp "Enter a number [1-${#setup_names[@]}]: " choice
+  if [[ "$choice" =~ ^[0-9]+$ ]] && (( choice >= 1 && choice <= ${#setup_names[@]} )); then
+    break
+  else
+    echo "Invalid input. Please enter a number between 1 and ${#setup_names[@]}."
+  fi
+done
 
 # Adjust index (user inputs 1-based index)
 choice=$((choice - 1))
 
-# Safety Check
-if [[ -z "${setup_names[$choice]}" ]]; then
-  echo "Invalid choice. Exiting."
-  exit 1
+# Handle exit
+if [[ "${setup_names[$choice]}" == "Exit" ]]; then
+  echo "Exiting."
+  exit 0
 fi
 
 # Set Variables
@@ -80,7 +83,7 @@ fi
 # Make script executable
 chmod +x "$script"
 
-# NixOS special case: run in nix-shell with unzip
+# If running NixOS script, use nix-shell with unzip
 if [[ "$distro" == "NixOS-Unstable" ]]; then
   echo "Entering nix-shell to run $script with unzip..."
   nix-shell -p unzip --run "sudo bash $script"

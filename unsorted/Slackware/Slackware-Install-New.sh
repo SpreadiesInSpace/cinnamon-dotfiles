@@ -13,57 +13,40 @@ fi
 
 # Auto-detect and mount installation media
 mount_install_media() {
-  # Skip if already running from install media
-  if [ -d /mnt/isofiles/slackware64 ]; then
-    echo "Installation media already present at /mnt/isofiles"
-    return 0
-  fi
-
-  # If script is running from inside the media, use that path
-  script_dir=$(dirname "$(realpath "$0")")
-  if [[ "$script_dir" == *slackware64* ]]; then
-    topdir=$(echo "$script_dir" | sed -E 's|/(slackware64|slackware|packages).*||')
-    if [ -d "$topdir/slackware64" ]; then
-      echo "Running from inside installation media at $topdir"
-      mkdir -p /mnt/isofiles
-      mount --bind "$topdir" /mnt/isofiles
-      return 0
-    fi
-  fi
-
+  # First check if already mounted
+  if mountpoint -q /mnt/isofiles; then echo "Installation media already mounted"; return 0; fi
+  # Create mount point
   mkdir -p /mnt/isofiles
-  echo "Scanning devices for Slackware installation media..."
-
-  # Look for unmounted partitions
-  while read -r dev mp fstype; do
-    [ -n "$mp" ] && continue  # Skip mounted devices
-    device="/dev/$dev"
-    echo "Trying $device..."
-    if mount -o ro "$device" /mnt/isofiles >/dev/null 2>&1; then
-      if [ -d /mnt/isofiles/slackware64 ]; then
-        echo "Found Slackware media on $device"
-        return 0
+  # Try to find and mount Slackware media
+  local found=0
+  # Get list of potential partitions, skip already mounted ones
+  echo "Scanning for Slackware installation media..."
+  for device in $(lsblk -lno NAME,TYPE,MOUNTPOINT | grep "part" | grep -v "/boot\|/home\|/\s" | cut -d' ' -f1); do
+    echo "Trying device /dev/$device..."
+    if mount -o ro /dev/$device /mnt/isofiles >/dev/null 2>&1; then
+      # Check for Slackware directory
+      if [ -d "/mnt/isofiles/slackware64" ]; then
+        echo "Found Slackware media on /dev/$device"; found=1; break
+      else
+        umount /mnt/isofiles
       fi
-      umount /mnt/isofiles
     fi
-  done < <(lsblk -lno NAME,MOUNTPOINT,FSTYPE | grep -E 'part|loop')
-
-  # Fallback to optical drive
-  if [ -b /dev/sr0 ]; then
-    echo "Trying optical drive /dev/sr0..."
-    if mount -o ro /dev/sr0 /mnt/isofiles >/dev/null 2>&1; then
-      if [ -d /mnt/isofiles/slackware64 ]; then
-        echo "Found Slackware media on optical drive"
-        return 0
+  done
+  # If not found on partitions, try optical drive as fallback
+  if [ $found -eq 0 ]; then
+    echo "Trying optical drive..."
+    if mount /dev/sr0 /mnt/isofiles >/dev/null 2>&1; then
+      if [ -d "/mnt/isofiles/slackware64" ]; then
+        echo "Found Slackware media on optical drive"; found=1
+      else
+        umount /mnt/isofiles
       fi
-      umount /mnt/isofiles
     fi
   fi
-
-  echo "Could not find Slackware installation media."
-  return 1
+  # Check if successful
+  if [ $found -eq 0 ]; then echo "Failed to find and mount Slackware installation media"; return 1; fi
+  return 0
 }
-
 
 # Ensure installation media is mounted before package installation
 if ! mount_install_media; then echo "Cannot proceed without installation media"; exit 1; fi
