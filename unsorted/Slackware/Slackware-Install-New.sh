@@ -70,7 +70,7 @@ while true; do
       *) echo "Aborting."; exit 1 ;;
     esac
   else
-    echo "Invalid drive: $drive. Please enter a whole disk device like /dev/sda, /dev/nvme0n1, or /dev/mmcblk0"
+    echo "Invalid drive: $drive. Please enter a valid drive (e.g., /dev/sda, /dev/nvme0n1) without a partition number or 'p' suffix."
   fi
 done
 

@@ -50,8 +50,8 @@ done
 echo; lsblk; echo
 while true; do
   read -p "Enter drive to use (e.g., /dev/sda, /dev/nvme0n1, /dev/mmcblk0): " drive
-  # Check if the drive is valid (not a partition) and if it's a block device
-  if [[ "$drive" =~ ^/dev/[a-zA-Z0-9]+$ ]] && [ -b "$drive" ] && ! [[ "$drive" =~ [0-9p]$ ]]; then
+  # Check if the drive is a valid block device and not a partition
+  if [[ "$drive" =~ ^/dev/(sd[a-z]|nvme[0-9]+n[0-9]+|mmcblk[0-9]+)$ ]] && [ -b "$drive" ]; then
     # Confirm before proceeding
     read -rp "WARNING: This will erase all data on $drive. Are you sure you want to continue? [y/N]: " confirm
     case "$confirm" in
