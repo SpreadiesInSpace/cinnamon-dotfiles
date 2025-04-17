@@ -26,7 +26,7 @@ scripts=(
 for script in "${scripts[@]}"; do
   base="${script,,}"                             # lowercase
   flag="${base//setup-/}"                        # remove prefix
-  flag="${flag//-theme.sh/.done}"                # remove suffix and add .done
+  flag=".${flag%%-theme.sh}.done"                # trim suffix and prepend dot
   if [[ -f "$(dirname "$0")/$flag" ]]; then
     echo -e "${GREEN}Detected flag: $flag. Running $script...${NC}"
     chmod +x "$script"
@@ -37,7 +37,7 @@ done
 
 # No flags found — show prompt
 echo -e "${YELLOW}No theme flag found. Choose a theme script to run:${NC}"
-PS3="Select a number or choose Exit: "
+PS3="Select a number: "
 cd home/
 select script in "${scripts[@]}" "Exit"; do
   if [[ "$script" == "Exit" ]]; then

@@ -50,7 +50,7 @@ setup_names=(
 )
 
 echo -e "${YELLOW}Which setup script would you like to run?${NC}"
-PS3="Select a number or choose Exit: "
+PS3="Select a number: "
 
 select distro in "${setup_names[@]}" "Exit"; do
   if [[ "$distro" == "Exit" ]]; then
