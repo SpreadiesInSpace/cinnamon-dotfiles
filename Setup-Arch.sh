@@ -45,20 +45,20 @@ cd yay-bin
 makepkg -si --noconfirm
 cd ..
 rm -rf yay-bin
-EOF
+#EOF
 
 # Check if Color, ParallelDownloads, and ILoveCandy are already in yay config
 declare -A options=(["Color"]="Color" ["ParallelDownloads"]="ParallelDownloads = 5" ["ILoveCandy"]="ILoveCandy")
 for key in "${!options[@]}"; do
     if ! grep -q "^$key" /etc/pacman.conf; then
-        sed -i "/^# Misc options/a ${options[$key]}" /etc/pacman.conf
+        sudo sed -i "/^# Misc options/a ${options[$key]}" /etc/pacman.conf
     fi
 done
 
 # Update MAKEFLAGS /etc/makepkg.conf to match CPU cores
-sed -i 's/^#*\s*MAKEFLAGS=.*/MAKEFLAGS="--jobs=$(nproc)"/' /etc/makepkg.conf
+sudo sed -i 's/^#*\s*MAKEFLAGS=.*/MAKEFLAGS="--jobs=$(nproc)"/' /etc/makepkg.conf
 
-cat << 'EOF' | su - "$SUDO_USER"
+# cat << 'EOF' | su - "$SUDO_USER"
 # All packages
 packages=(
     # System utilities
