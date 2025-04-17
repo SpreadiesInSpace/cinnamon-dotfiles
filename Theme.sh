@@ -38,7 +38,7 @@ done
 # No flags found — show prompt
 echo -e "${YELLOW}No theme flag found. Choose a theme script to run:${NC}"
 PS3="Select a number or choose Exit: "
-
+cd home/
 select script in "${scripts[@]}" "Exit"; do
   if [[ "$script" == "Exit" ]]; then
     echo -e "${GREEN}Exiting.${NC}"
@@ -49,7 +49,6 @@ select script in "${scripts[@]}" "Exit"; do
       exit 1
     fi
     echo -e "${GREEN}Running $script...${NC}"
-    cd home/
     chmod +x "$script"
     bash "$script"
     break
