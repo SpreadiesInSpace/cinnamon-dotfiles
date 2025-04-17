@@ -27,7 +27,7 @@ for script in "${scripts[@]}"; do
   base="${script,,}"                             # lowercase
   flag="${base//setup-/}"                        # remove prefix
   flag="${flag//-theme.sh/.done}"                # remove suffix and add .done
-  if [[ -f ~/"$flag" ]]; then
+  if [[ -f "$(dirname "$0")/$flag" ]]; then
     echo -e "${GREEN}Detected flag: $flag. Running $script...${NC}"
     chmod +x "$script"
     bash "$script"
