@@ -24,18 +24,18 @@ scripts=(
 
 # Flag check
 for script in "${scripts[@]}"; do
-  base="${script,,}"                             # lowercase
-  flag="${base//setup-/}"                        # remove prefix
-  flag=".${flag%%-theme.sh}.done"                # trim suffix and prepend dot
+  base="${script,,}" # lowercase
+  flag="${base//setup-/}" # remove prefix
+  flag=".${flag%%-theme.sh}.done" # trim suffix and prepend dot
   if [[ -f "$(dirname "$0")/$flag" ]]; then
-    echo -e "${GREEN}Detected flag: $flag. Running $script...${NC}"
-    # Move to Theme Setup Scripts Directory
-    cd home/
+    pretty_name="$(tr '[:lower:]' '[:upper:]' <<< ${flag:1:1})${flag:2:-5}"
+    echo -e "${GREEN}Detected flag: $pretty_name. Running $script...${NC}"
     chmod +x "$script"
     bash "$script"
     exit 0
   fi
 done
+
 
 # No flags found — show prompt
 echo -e "${YELLOW}No theme flag found. Choose a theme script to run:${NC}"
