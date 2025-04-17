@@ -10,9 +10,6 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
-# Move to Theme Setup Scripts Directory
-cd home/
-
 # Theme script list
 scripts=(
   "Setup-Arch-Theme.sh"
@@ -32,6 +29,8 @@ for script in "${scripts[@]}"; do
   flag=".${flag%%-theme.sh}.done"                # trim suffix and prepend dot
   if [[ -f "$(dirname "$0")/$flag" ]]; then
     echo -e "${GREEN}Detected flag: $flag. Running $script...${NC}"
+    # Move to Theme Setup Scripts Directory
+    cd home/
     chmod +x "$script"
     bash "$script"
     exit 0
@@ -40,6 +39,8 @@ done
 
 # No flags found — show prompt
 echo -e "${YELLOW}No theme flag found. Choose a theme script to run:${NC}"
+# Move to Theme Setup Scripts Directory
+cd home/
 PS3="Select a number: "
 select script in "${scripts[@]}" "Exit"; do
   if [[ "$script" == "Exit" ]]; then
