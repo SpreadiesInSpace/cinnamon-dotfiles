@@ -37,35 +37,43 @@ case "$response" in
         ;;
 esac
 
-# Zypper Enable Parallel Downloads
-# export ZYPP_CURL2=1
-export ZYPP_PCK_PRELOAD=1
+# Enable Parallel Downloads
+if ! grep -q "^max_parallel_downloads=10$" /etc/dnf/dnf.conf; then
+    echo 'max_parallel_downloads=10' | tee -a /etc/dnf/dnf.conf
+else
+    sed -i '/^#*max_parallel_downloads=10/s/^#*//' /etc/dnf/dnf.conf
+fi
 
-# Fix openSUSE's line break paste
-echo "set enable-bracketed-paste" >> /home/$username/.inputrc
-echo "set enable-bracketed-paste" >> /root/.inputrc
+# Update system and install git
+dnf -y update
+dnf -y install git
 
-# Update system and install packages
-zypper ref
-zypper dup -y
-
-# Install git
-zypper in -y git
+# Add RPM Fusion
+dnf -y install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+dnf -y install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+dnf -y upgrade --refresh
+# dnf -y groupupdate core
 
 # Install Media Codecs
-zypper ar -cfp 90 --no-gpgcheck 'https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/Essentials/' packman-essentials
-zypper ref
-zypper dup --from packman-essentials -y --allow-vendor-change
-zypper in --from packman-essentials -y ffmpeg gstreamer-plugins-{good,bad,ugly,libav} libavcodec
+dnf -y swap 'ffmpeg-free' 'ffmpeg' --allowerasing
+dnf -y update @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin 
+dnf -y update @sound-and-video
+dnf -y install gstreamer1-plugins-{bad-\*,good-\*,base} gstreamer1-plugin-openh264 gstreamer1-libav --exclude=gstreamer1-plugins-bad-free-devel # ffmpeg gstreamer-ffmpeg
+dnf -y install lame\* --exclude=lame-devel
 
 # Install Brave
-zypper in -y curl
+dnf -y install dnf-plugins-core
+dnf config-manager addrepo --id=brave-browser --set=name='Brave Browser' --set=baseurl='https://brave-browser-rpm-release.s3.brave.com/$basearch'
 rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
-zypper ar https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
-zypper in -y brave-browser
+dnf -y install brave-browser
 
-# For Cinnamon and Opi
-zypper rm -y busybox-which busybox-diffutils
+# Install Bottom
+dnf -y copr enable atim/bottom
+dnf -y install bottom
+
+# Install Neofetch & Grub-Customizer
+dnf -y install https://dl.fedoraproject.org/pub/fedora/linux/releases/40/Everything/x86_64/os/Packages/n/neofetch-7.1.0-12.fc40.noarch.rpm
+dnf -y install https://dl.fedoraproject.org/pub/fedora/linux/releases/41/Everything/x86_64/os/Packages/g/grub-customizer-5.2.5-2.fc41.x86_64.rpm
 
 # All packages
 packages=(
@@ -73,8 +81,9 @@ packages=(
     "file-roller"
     "flatpak"
     "gparted"
+    #"grub-customizer"
     "ncdu"
-    # "neofetch"
+    #"neofetch"
     "timeshift"
     "unzip"
     "xkill"
@@ -82,19 +91,22 @@ packages=(
     # Network utilities
     "filezilla"
     "gvfs"
-    "gvfs-backends"
-    "kdeconnect-kde"
+    "gvfs-afc"
+    "gvfs-gphoto2"
+    "gvfs-mtp"
+    "gvfs-nfs"
+    "gvfs-smb"
+    "kde-connect"
+    "kf6-qqc2-desktop-style"
     "samba"
     # Desktop environment and related packages
     "cinnamon"
-    "dconf"
-    "gsettings-backend-dconf"
+    "dnfdragora"
     "eog"
     "evince"
     "ffmpegthumbnailer"
     "gedit"
-    # "gedit-plugins"
-    # "gedit-plugin-*"
+    "gedit-plugins"
     "gnome-calculator"
     "gnome-disk-utility"
     "gnome-screenshot"
@@ -102,61 +114,49 @@ packages=(
     "gnome-terminal"
     "gthumb"
     "haruna"
-    "kvantum-manager"
-    "kvantum-qt5"
+    "ufw"
+    "kvantum"
     "kvantum-qt6"
     "lightdm"
-    "lightdm-slick-greeter"
+    "lightdm-settings"
+    "slick-greeter"
     "nemo"
-    "nemo-extension-fileroller"
-    "nemo-extension-image-converter"
-    "nemo-extension-preview"
-    "nemo-extension-share"
+    "nemo-extensions"
     "qt5ct"
     "qt6ct"
     "rhythmbox"
     # Applications
     "bleachbit"
-    "bottom"
     "gpaste"
-    "typelib-1_0-GPaste-2"
     "libreoffice"
-    "libreoffice-gtk3"
     "neovim"
-    "opi"
     "qbittorrent"
     "spice-vdagent"
-    "google-noto-coloremoji-fonts"
-    "google-noto-sans-fonts"
-    "xclip"
+    "google-noto-fonts-common"
+    "google-noto-emoji-fonts"
     # For NvChad
     "gcc"
     "make"
     "ripgrep"
     # Virtualization tools
-    "yast2-vm"
-    "libvirt"
+    "guestfs-tools"
+    "@virtualization"
 )
 
-# Install packages
-zypper in -y "${packages[@]}"
+# Update install packages
+dnf -y install "${packages[@]}"
 
-# Install neofetch
-zypper ar --no-gpgcheck https://download.opensuse.org/repositories/utilities/openSUSE_Factory/utilities.repo
-zypper ref
-zypper in -y neofetch
+# Disable Problem Reporting
+systemctl disable abrtd.service
 
-# Protect neofetch from being replaced by neowofetch
-zypper al neofetch
+# Uninstall SystemD Core Dump Generator (tracker-miners)
+dnf remove -y tracker-miners
 
-# Apply gedit-plugins fix
-# cd unsorted/openSUSE/
-# chmod +x gedit-plugins-fix.sh
-# ./gedit-plugins-fix.sh
-# cd ../..
-
-# Install Additional Tools for Virt Manager
-zypper in -y -t pattern kvm_server kvm_tools
+# Replace FirewallD with UFW and allow KDE Connect through
+dnf -y remove firewalld
+systemctl daemon-reload
+ufw enable
+ufw allow "KDE Connect"
 
 # Enable Flathub
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
@@ -208,18 +208,11 @@ done
 # Backup original LightDM config
 cp /etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf.old
 
-# Copies example lightdm.conf
-cp /usr/share/doc/packages/lightdm/lightdm.conf.example /etc/lightdm/lightdm.conf
-
 # Modify lightdm.conf in-place
 awk -v user="$username" -v autologin="$enable_autologin" -v vm="$is_vm" -i inplace '
 /^\[Seat:\*\]/ {a=1}
 a==1 && /^#?greeter-hide-users=/ {
     print "greeter-hide-users=false"
-    next
-}
-a==1 && /^#?greeter-session=/ {
-    print "greeter-session=slick-greeter"
     next
 }
 a==1 && /^#?autologin-user=/ {
@@ -264,7 +257,7 @@ echo "DefaultTimeoutStopSec=15s" | tee -a /etc/systemd/system.conf.d/override.co
 systemctl daemon-reload
 
 # Add flag for Setup-Theme.sh
-touch .opensuse.done
+touch .fedora.done
 
 # Reboot for the changes to take effect
 echo "Installation complete! Please reboot for the changes to take effect. Then run Theme.sh in cinnamon-dotfiles for theming."

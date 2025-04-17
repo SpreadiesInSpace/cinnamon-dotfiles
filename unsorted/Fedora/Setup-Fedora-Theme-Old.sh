@@ -144,10 +144,10 @@ sudo mv /root/.config/qt6ct /root/.config/qt6ct.old
 sudo ln -s ~/.config/qt6ct/ /root/.config/
 
 # Copies Gedit Theme to appropriate directory
-mkdir -p ~/.local/share/libgedit-gtksourceview-300/styles
-cp -vnpr gruvbox-dark-gedit46.xml ~/.local/share/libgedit-gtksourceview-300/styles
-sudo mkdir -p /root/.local/share/libgedit-gtksourceview-300/styles
-sudo cp -vprf gruvbox-dark-gedit46.xml /root/.local/share/libgedit-gtksourceview-300/styles
+mkdir -p ~/.local/share/gedit/styles
+cp -vnpr gruvbox-dark.xml ~/.local/share/gedit/styles/
+sudo mkdir -p /root/.local/share/gedit/styles
+sudo cp -vprf gruvbox-dark.xml /root/.local/share/gedit/styles/
 
 # Copies Menu Preferences to appropriate directory
 mkdir -p ~/.config/menus/old
@@ -187,7 +187,7 @@ rm ~/Fedora.dconf
 sudo dconf load / < gnome-terminal-Fedora.dconf
 rm ~/gnome-terminal-Fedora.dconf
 cd ..
-sudo dconf load / < gedit-48.dconf
+sudo dconf load / < gedit.dconf
 cd Fedora/
 
 # Sets Default Apps

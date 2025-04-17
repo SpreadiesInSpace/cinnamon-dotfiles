@@ -40,7 +40,7 @@ cd cinnamon-dotfiles || { echo -e "${RED}Directory not found. Exiting.${NC}"; ex
 # Setup script list
 setup_names=(
   "Arch"
-  "Fedora-41"
+  "Fedora-42"
   "Gentoo"
   "LMDE-6"
   "NixOS-Unstable"
