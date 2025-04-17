@@ -12,82 +12,7 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 # Auto-detect and mount installation media
-mount_install_media() {
-  echo "Scanning for Slackware installation media..."
-  # First check if already mounted
-  if mountpoint -q /mnt/isofiles && [ -d "/mnt/isofiles/slackware64" ]; then
-    echo "Installation media already mounted"
-    return 0
-  fi
-  # Create mount point if needed
-  mkdir -p /mnt/isofiles
-  # Try to find and mount Slackware media
-  local found=0
-  # First try optical drive as it's the most common installation source
-  echo "Trying optical drive..."
-  if mount -o ro /dev/sr0 /mnt/isofiles 2>/dev/null; then
-    if [ -d "/mnt/isofiles/slackware64" ]; then
-      echo "Found Slackware media on optical drive"
-      found=1
-    else
-      umount /mnt/isofiles
-    fi
-  fi
-  # If not found on optical drive, try USB drives and other partitions
-  if [ $found -eq 0 ]; then
-    echo "Trying other media..."
-    # Get list of potential partitions, skip already mounted system partitions
-    for device in $(lsblk -lno NAME,TYPE,MOUNTPOINT | grep "part" | grep -v "/boot\|/home\|/\s" | cut -d' ' -f1); do
-      echo "Trying device /dev/$device..."
-      if mount -o ro /dev/$device /mnt/isofiles 2>/dev/null; then
-        if [ -d "/mnt/isofiles/slackware64" ]; then
-          echo "Found Slackware media on /dev/$device"
-          found=1
-          break
-        else
-          umount /mnt/isofiles
-        fi
-      fi
-    done
-  fi
-  # If still not found, try ISO files
-  if [ $found -eq 0 ]; then
-    echo "Searching for Slackware ISO files..."
-    mkdir -p /var/log/mntiso
-    # Look for ISO files in common locations
-    for iso in /root/*.iso /home/*/*.iso /mnt/*/*.iso /media/*/*.iso; do
-      if [ -f "$iso" ]; then
-        echo "Found ISO file: $iso, trying to mount..."
-        if mount -o loop "$iso" /var/log/mntiso 2>/dev/null; then
-          # Check if it's a Slackware ISO
-          if [ -d "/var/log/mntiso/slackware64" ]; then
-            # Use bind mount to make it available at our expected location
-            if mount --bind /var/log/mntiso/slackware64 /mnt/isofiles; then
-              echo "Successfully mounted Slackware ISO"
-              found=1
-              break
-            else
-              umount /var/log/mntiso
-            fi
-          else
-            umount /var/log/mntiso
-          fi
-        fi
-      fi
-    done
-  fi
-  
-  # Check if successful
-  if [ $found -eq 0 ]; then
-    echo "Failed to find and mount Slackware installation media"
-    return 1
-  fi
-  
-  return 0
-}
-
-# Ensure installation media is mounted before package installation
-if ! mount_install_media; then echo "Cannot proceed without installation media"; exit 1; fi
+SeTmedia
 
 # Required System Packages
 required_sys_packages=(
@@ -96,7 +21,7 @@ required_sys_packages=(
 
 # Install Required System Packages
 for pkg in "${required_sys_packages[@]}"; do
-  installpkg "/mnt/isofiles/slackware64/$pkg"-*.t?z >/dev/null 2>&1
+  installpkg "/var/log/mount/slackware64/$pkg"-*.t?z >/dev/null 2>&1
 done
 
 # Prompt for root password
@@ -188,26 +113,12 @@ mount --make-rslave /mnt/dev
 mount --bind /run /mnt/run
 mount --make-slave /mnt/run
 
-# Verify installation media is mounted and remount if needed
-ensure_media_mounted() {
-  # Check if already mounted and has the expected content
-  if mountpoint -q /mnt/isofiles && [ -d "/mnt/isofiles/slackware64" ]; then
-    echo "Installation media already mounted"; return 0
-  fi
-  # If mounted but without slackware64 directory, unmount it
-  if mountpoint -q /mnt/isofiles; then
-    echo "Mount point exists but doesn't contain Slackware - remounting"; umount /mnt/isofiles
-  fi
-  # Remount using mounting function
-  mount_install_media; return $?
-}
-
-# Ensure installation media is mounted before package installation
-echo "Verifying installation media is mounted..."
-if ! ensure_media_mounted; then echo "Cannot proceed with package installation without media"; exit 1; fi
+# Re-mount ISO inside chroot
+mkdir -p /mnt/var/log/mount
+mount --bind /var/log/mount /mnt/var/log/mount
 
 # Get list of package set directories
-pkg_dirs=( /mnt/isofiles/slackware64/* )
+pkg_dirs=( /var/log/mount/slackware64/* )
 package_sets=()
 for dir in "${pkg_dirs[@]}"; do
   [ -d "$dir" ] && package_sets+=("$(basename "$dir")")
@@ -217,7 +128,7 @@ done
 echo "Starting full Slackware installation..."
 
 # Get list of package sets (sorted alphabetically)
-package_sets=(); for dir in /mnt/isofiles/slackware64/*; do [ -d "$dir" ] && package_sets+=("$(basename "$dir")"); done
+package_sets=(); for dir in /var/log/mount/slackware64/*; do [ -d "$dir" ] && package_sets+=("$(basename "$dir")"); done
 IFS=$'\n' package_sets=($(sort <<<"${package_sets[*]}")); unset IFS
 
 # Install all sets with overall progress
@@ -225,7 +136,7 @@ total_sets=${#package_sets[@]}; set_count=1; echo
 for pkg_set in "${package_sets[@]}"; do
   pkg_set_cap="${pkg_set^^}"  # Capitalize package set name
   echo "[$set_count/$total_sets] Installing package set: $pkg_set_cap"
-  pkg_files=( /mnt/isofiles/slackware64/"$pkg_set"/*.t?z )
+  pkg_files=( /var/log/mount/slackware64/"$pkg_set"/*.t?z )
   total_pkgs=${#pkg_files[@]}; pkg_count=1
   for pkg in "${pkg_files[@]}"; do
     pkg_name=$(basename "$pkg")
