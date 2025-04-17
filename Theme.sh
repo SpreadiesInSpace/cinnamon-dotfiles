@@ -10,6 +10,9 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
+# Move to Theme Setup Scripts Directory
+cd home/
+
 # Theme script list
 scripts=(
   "Setup-Arch-Theme.sh"
@@ -38,7 +41,6 @@ done
 # No flags found — show prompt
 echo -e "${YELLOW}No theme flag found. Choose a theme script to run:${NC}"
 PS3="Select a number: "
-cd home/
 select script in "${scripts[@]}" "Exit"; do
   if [[ "$script" == "Exit" ]]; then
     echo -e "${GREEN}Exiting.${NC}"
