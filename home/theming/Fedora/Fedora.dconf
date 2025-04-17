@@ -268,8 +268,8 @@ active-plugins=['terminal', 'git', 'bracketcompletion', 'spell', 'sort', 'quicko
 [org/gnome/gedit/plugins/filebrowser]
 filter-mode=@as []
 filter-pattern=''
-tree-view=true
 root='file:///'
+tree-view=true
 virtual-root='file:///home/f16poom'
 
 [org/gnome/gedit/preferences/editor]
@@ -278,6 +278,7 @@ display-line-numbers=true
 display-right-margin=false
 highlight-current-line=true
 scheme='gruvbox-dark'
+style-scheme-for-dark-theme-variant='gruvbox-dark'
 use-default-font=true
 wrap-last-split-mode='word'
 
@@ -291,11 +292,14 @@ open-recent=false
 
 [org/gnome/gedit/state/window]
 bottom-panel-active-page='GeditTerminalPanel'
-bottom-panel-size=76
+bottom-panel-size=102
+height=984
+maximized=false
 side-panel-active-page='GeditFileBrowserPanel'
 side-panel-size=271
 size=(960, 984)
 state=76672
+width=960
 
 [org/gnome/gnome-screenshot]
 delay=3
