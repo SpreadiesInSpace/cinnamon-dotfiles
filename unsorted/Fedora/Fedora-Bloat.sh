@@ -11,4 +11,4 @@ sed -i '/^#*GRUB_TIMEOUT=/s/^#*GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/gru
 grub2-mkconfig -o /boot/grub2/grub.cfg
 
 # Remove Bloat
-dnf remove -y baobab bulky celluloid drawing firefox gnome-calendar gnome-software hexchat hp* hypnotix mint-artwork mint-backgrounds* mintbackup mintstick mintupdate numix* papirus-icon-theme pix pppoeconf redshift simple-scan thingy thunderbird transmission-gtk warpinator webapp-manager xed xreader xviewer eom google-noto-seriff* ibus paper-icon-theme pidgin shotwell tracker-miners xawtv xfburn
+dnf remove -y baobab bulky celluloid drawing firefox gnome-calendar gnome-software hexchat hp* hypnotix mint-artwork mint-backgrounds* mintbackup mintstick mintupdate numix* papirus-icon-theme pix pppoeconf redshift simple-scan thingy thunderbird transmission-gtk warpinator webapp-manager xed xreader xviewer eom google-noto-seriff* ibus* paper-icon-theme pidgin shotwell tecla tracker-miners xawtv xfburn
