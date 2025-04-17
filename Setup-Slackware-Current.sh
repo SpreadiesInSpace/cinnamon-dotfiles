@@ -332,11 +332,8 @@ if [ "$is_vm" = true ]; then
     fi
 fi
 
-# Run the setup script
-# cd home/
-# chmod +x Setup-Slackware-Current-Theme.sh
-# ./Setup-Slackware-Current-Theme.sh
-# cd ..
+# Add flag for Setup-Theme.sh
+touch ~/.slackware.done
 
 # Reboot for the changes to take effect
-echo "Installation complete! Please reboot for the changes to take effect. Then run Setup-Slackware-Current-Theme.sh in cinnamon/home for theming."
+echo "Installation complete! Please reboot for the changes to take effect. Then run Theme.sh in cinnamon-dotfiles for theming."

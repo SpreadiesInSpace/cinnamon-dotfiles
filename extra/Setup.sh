@@ -4,34 +4,40 @@
 # bash <(curl -sL https://tinyurl.com/cinnamon-setup)
 # bash <(wget -qO- https://tinyurl.com/cinnamon-setup)
 
-# Check if the script is run as root
+# Colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+# Root check
 if [ "$EUID" -eq 0 ]; then
-  echo "This script must NOT be run as root. Please execute it as a regular user."
-  exit
+  echo -e "${RED}This script must NOT be run as root. Please execute it as a regular user.${NC}"
+  exit 1
 fi
 
-# Download zip archive of repo 
+# Repo details
 REPO_URL="https://github.com/SpreadiesInSpace/cinnamon-dotfiles"
 ZIP_URL="$REPO_URL/archive/refs/heads/main.zip"
 ZIP_NAME="dotfiles.zip"
-echo "Downloading cinnamon-dotfiles archive..."
+
+echo -e "${YELLOW}Downloading cinnamon-dotfiles archive...${NC}"
 if command -v curl &>/dev/null; then
   curl -sL -C - --retry 10 --connect-timeout 10 "$ZIP_URL" -o "$ZIP_NAME"
 elif command -v wget &>/dev/null; then
   wget -q -c -T 10 -t 10 "$ZIP_URL" -O "$ZIP_NAME"
 else
-  echo "Error: Neither curl nor wget is available."
+  echo -e "${RED}Error: Neither curl nor wget is available.${NC}"
   exit 1
 fi
 
-# Unzip and move to cinnamon-dotfiles
-echo "Unzipping..."
-unzip -o "$ZIP_NAME" &>/dev/null || { echo "Unzip failed. Exiting."; exit 1; }
+echo -e "${YELLOW}Unzipping archive...${NC}"
+unzip -o "$ZIP_NAME" &>/dev/null || { echo -e "${RED}Unzip failed. Exiting.${NC}"; exit 1; }
 rm "$ZIP_NAME"
 mv cinnamon-dotfiles-main cinnamon-dotfiles
-cd cinnamon-dotfiles || { echo "Directory not found. Exiting."; exit 1; }
+cd cinnamon-dotfiles || { echo -e "${RED}Directory not found. Exiting.${NC}"; exit 1; }
 
-# Populate Names
+# Setup script list
 setup_names=(
   "Arch"
   "Fedora-41"
@@ -41,58 +47,32 @@ setup_names=(
   "OpenSUSE-Tumbleweed"
   "Slackware-Current"
   "Void"
-  "Exit"
 )
 
-# Installer Prompt
-echo "Which setup script would you like to run?"
-for i in "${!setup_names[@]}"; do
-  index=$((i + 1))
-  if [[ "${setup_names[$i]}" == "Exit" ]]; then
-    echo "$index) Exit"
-  else
-    echo "$index) Setup-${setup_names[$i]}.sh"
-  fi
-done
+echo -e "${YELLOW}Which setup script would you like to run?${NC}"
+PS3="Select a number or choose Exit: "
 
-# Repeatedly prompt until valid input is received
-while true; do
-  read -rp "Enter a number [1-${#setup_names[@]}]: " choice
-  if [[ "$choice" =~ ^[0-9]+$ ]] && (( choice >= 1 && choice <= ${#setup_names[@]} )); then
+select distro in "${setup_names[@]}" "Exit"; do
+  if [[ "$distro" == "Exit" ]]; then
+    echo -e "${GREEN}Exiting.${NC}"
+    exit 0
+  elif [[ -n "$distro" ]]; then
+    script="Setup-${distro}.sh"
+    if [[ ! -f "$script" ]]; then
+      echo -e "${RED}Script $script not found. Exiting.${NC}"
+      exit 1
+    fi
+
+    chmod +x "$script"
+    echo -e "${GREEN}Running $script...${NC}"
+    if [[ "$distro" == "NixOS-Unstable" ]]; then
+      nix-shell -p unzip --run "sudo bash $script"
+    else
+      sudo bash "$script"
+    fi
     break
   else
-    echo "Invalid input. Please enter a number between 1 and ${#setup_names[@]}."
+    echo -e "${RED}Invalid choice. Try again.${NC}"
   fi
 done
-
-# Adjust index (user inputs 1-based index)
-choice=$((choice - 1))
-
-# Handle exit
-if [[ "${setup_names[$choice]}" == "Exit" ]]; then
-  echo "Exiting."
-  exit 0
-fi
-
-# Set Variables
-distro="${setup_names[$choice]}"
-script="Setup-${distro}.sh"
-
-# Abort if script isn't there
-if [[ ! -f "$script" ]]; then
-  echo "Script $script not found. Exiting."
-  exit 1
-fi
-
-# Make script executable
-chmod +x "$script"
-
-# If running NixOS script, use nix-shell with unzip
-if [[ "$distro" == "NixOS-Unstable" ]]; then
-  echo "Entering nix-shell to run $script with unzip..."
-  nix-shell -p unzip --run "sudo bash $script"
-else
-  echo "Running $script..."
-  sudo bash "$script"
-fi
 

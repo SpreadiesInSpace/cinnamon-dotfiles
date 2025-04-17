@@ -263,11 +263,8 @@ echo "DefaultTimeoutStopSec=15s" | tee -a /etc/systemd/system.conf.d/override.co
 # Reload the systemd configuration
 systemctl daemon-reload
 
-# Run the setup script
-# cd home/
-# chmod +x Setup-OpenSUSE-Theme.sh
-# ./Setup-OpenSUSE-Theme.sh
-# cd ..
+# Add flag for Setup-Theme.sh
+touch ~/.opensuse.done
 
 # Reboot for the changes to take effect
-echo "Installation complete! Please reboot for the changes to take effect. Then run Setup-OpenSUSE-Theme.sh in cinnamon/home for theming."
+echo "Installation complete! Please reboot for the changes to take effect. Then run Theme.sh in cinnamon-dotfiles for theming."

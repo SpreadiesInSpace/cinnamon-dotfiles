@@ -59,11 +59,8 @@ nixos-rebuild switch --upgrade
 # Enable Flathub
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
-# Run the setup script
-# cd home/
-# chmod +x Setup-NixOS-Theme.sh
-# sh Setup-NixOS-Theme.sh
-# cd ..
+# Add flag for Setup-Theme.sh
+touch ~/.nixos.done
 
 # Reboot for the changes to take effect
-echo "Installation complete! Please reboot for the changes to take effect. Then run Setup-NixOS-Theme.sh in cinnamon/home for theming."
+echo "Installation complete! Please reboot for the changes to take effect. Then run Theme.sh in cinnamon-dotfiles for theming."

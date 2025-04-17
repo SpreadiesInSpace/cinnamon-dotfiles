@@ -9,7 +9,13 @@
 # https://tinyurl.com/cinnamon-setup (Setup.sh)
 # https://tinyurl.com/cinnamon-dotfiles (this repo)
 
-# Populate Installer Links
+# Colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+# Install script URLs and names
 declare -A installs=(
   [1]="https://tinyurl.com/spready-arch"
   [2]="https://tinyurl.com/spready-gentoo"
@@ -18,7 +24,6 @@ declare -A installs=(
   [5]="https://tinyurl.com/spready-void"
 )
 
-# Populate Names
 declare -A names=(
   [1]="Arch-Install.sh"
   [2]="Gentoo-Install.sh"
@@ -27,67 +32,54 @@ declare -A names=(
   [5]="Void-Install.sh"
 )
 
-# Download Function
-download_file() {
-  url=$1
-  filename=$2
-  if command -v curl &> /dev/null; then
-    echo "Using curl to download $filename..."
-    curl -sL -C - --retry 10 --connect-timeout 10 "$url" -o "$filename"
-  elif command -v wget &> /dev/null; then
-    echo "Using wget to download $filename..."
-    wget -q -c -T 10 -t 10 "$url" -O "$filename"
-  else
-    echo "Error: Neither curl nor wget found. Exiting."
-    exit 1
-  fi
-}
+# Prompt menu
+echo -e "${YELLOW}Which installer would you like to run?${NC}"
+options=(
+  "Arch Linux"
+  "Gentoo"
+  "openSUSE Tumbleweed"
+  "Slackware Current"
+  "Void Linux"
+  "Exit"
+)
+PS3="Select a number: "
 
-# Installer Prompt
-echo "Which installer would you like to run?"
-echo "1) Arch Linux"
-echo "2) Gentoo"
-echo "3) openSUSE Tumbleweed"
-echo "4) Slackware Current"
-echo "5) Void Linux"
-echo "6) Exit"
+select opt in "${options[@]}"; do
+  case $REPLY in
+    [1-5])
+      url="${installs[$REPLY]}"
+      filename="${names[$REPLY]}"
+      if [[ -z "$url" ]]; then
+        echo -e "${RED}Invalid choice. Exiting.${NC}"
+        exit 1
+      fi
 
-# Repeatedly prompt until valid input is received
-while true; do
-  read -rp "Enter a number [1-6]: " choice
-  if [[ "$choice" =~ ^[0-9]+$ ]] && (( choice >= 1 && choice <= 6 )); then
-    break
-  else
-    echo "Invalid input. Please enter a number between 1 and 6."
-  fi
+      echo -e "${YELLOW}Downloading $filename...${NC}"
+      if command -v curl &>/dev/null; then
+        curl -sL -C - --retry 10 --connect-timeout 10 "$url" -o "$filename"
+      elif command -v wget &>/dev/null; then
+        wget -q -c -T 10 -t 10 "$url" -O "$filename"
+      else
+        echo -e "${RED}Error: Neither curl nor wget found. Exiting.${NC}"
+        exit 1
+      fi
+
+      chmod +x "$filename"
+      echo -e "${GREEN}Running $filename...${NC}"
+
+      if [[ "$REPLY" == "4" ]]; then
+        ./"$filename"  # Slackware: run non-sudo
+      else
+        sudo ./"$filename"
+      fi
+      break
+      ;;
+    6)
+      echo -e "${GREEN}Exiting.${NC}"
+      exit 0
+      ;;
+    *)
+      echo -e "${RED}Invalid choice. Try again.${NC}"
+      ;;
+  esac
 done
-
-# Handle Exit Option
-if [[ "$choice" == "6" ]]; then
-  echo "Exiting."
-  exit 0
-fi
-
-
-# Set Variables
-url=${installs[$choice]}
-filename=${names[$choice]}
-
-# Safety Check
-if [[ -z "$url" ]]; then
-  echo "Invalid choice. Exiting."
-  exit 1
-fi
-
-# Download Installer
-echo "Downloading $filename..."
-download_file "$url" "$filename"
-
-# Make Installer executable and run Script
-chmod +x "$filename"
-echo "Running $filename..."
-if [[ "$choice" == "4" ]]; then
-  ./"$filename"
-else
-  sudo ./"$filename"
-fi

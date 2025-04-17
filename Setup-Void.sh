@@ -286,11 +286,8 @@ if [ "$is_vm" = true ]; then
     fi
 fi
 
-# Run the setup script
-# cd home/
-# chmod +x Setup-Void-Theme.sh
-# ./Setup-Void-Theme.sh
-# cd ..
+# Add flag for Setup-Theme.sh
+touch ~/.void.done
 
 # Reboot for the changes to take effect
-echo "Installation complete! Please reboot for the changes to take effect. Then run Setup-Void-Theme.sh in cinnamon/home for theming."
+echo "Installation complete! Please reboot for the changes to take effect. Then run Theme.sh in cinnamon-dotfiles for theming."

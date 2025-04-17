@@ -361,11 +361,8 @@ echo "DefaultTimeoutStopSec=15s" | tee -a /etc/systemd/system.conf.d/override.co
 # Reload the systemd configuration
 systemctl daemon-reload
 
-# Run the setup script
-# cd home/
-# chmod +x Setup-Gentoo-Theme.sh
-# ./Setup-Gentoo-Theme.sh
-# cd ..
+# Add flag for Setup-Theme.sh
+touch ~/.gentoo.done
 
 # Reboot for the changes to take effect
-echo "Installation complete! Please reboot for the changes to take effect. Then run Setup-Gentoo-Theme.sh in cinnamon/home for theming."
+echo "Installation complete! Please reboot for the changes to take effect. Then run Theme.sh in cinnamon-dotfiles for theming."

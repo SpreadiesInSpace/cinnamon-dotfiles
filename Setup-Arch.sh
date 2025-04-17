@@ -253,13 +253,10 @@ echo "[Manager]" | tee /etc/systemd/system.conf.d/override.conf
 echo "DefaultTimeoutStopSec=15s" | tee -a /etc/systemd/system.conf.d/override.conf
 
 # Reload the systemd configuration
-systemctl daemon-reload
+systemctl daemon-reload.
 
-# Run the setup script
-# cd home/
-# chmod +x Setup-Arch-Theme.sh
-# ./Setup-Arch-Theme.sh
-# cd ..
+# Add flag for Setup-Theme.sh
+touch ~/.arch.done
 
 # Reboot for the changes to take effect
-echo "Installation complete! Please reboot for the changes to take effect. Then run Setup-Arch-Theme.sh in cinnamon/home for theming."
+echo "Installation complete! Please reboot for the changes to take effect. Then run Theme.sh in cinnamon-dotfiles for theming."
