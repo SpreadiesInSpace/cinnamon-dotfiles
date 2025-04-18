@@ -52,8 +52,8 @@ dnf -y install git
 dnf -y install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 # Install Media Codecs
-dnf4 group upgrade multimedia
-dnf swap 'ffmpeg-free' 'ffmpeg' --allowerasing
+dnf4 -y group upgrade multimedia
+dnf -y swap 'ffmpeg-free' 'ffmpeg' --allowerasing
 dnf -y upgrade @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
 dnf group install -y sound-and-video
 
