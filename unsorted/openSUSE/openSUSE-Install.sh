@@ -201,6 +201,6 @@ cat << CLONE | su - "$username"
 cd; git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles
 cd cinnamon-dotfiles
 touch .opensuse-tumbleweed.done
-echo "Reboot and run Setup-OpenSUSE-Tumbleweed.sh in cinnamon-dotfiles located in $username's home folder."
+echo "Reboot and run Setup.sh in cinnamon-dotfiles located in $username's home folder."
 CLONE
 EOF
