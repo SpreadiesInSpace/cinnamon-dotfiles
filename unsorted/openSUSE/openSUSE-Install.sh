@@ -200,9 +200,7 @@ systemctl enable NetworkManager
 cat << CLONE | su - "$username"
 cd; git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles
 cd cinnamon-dotfiles
+touch .opensuse.done
 echo "Reboot and run Setup-OpenSUSE-Tumbleweed.sh in cinnamon-dotfiles located in $username's home folder."
 CLONE
-
-# Add flag for Setup.sh
-touch .opensuse.done
 EOF

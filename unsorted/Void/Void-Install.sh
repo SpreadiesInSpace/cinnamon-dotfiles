@@ -177,9 +177,7 @@ xbps-reconfigure -fa
 cat << CLONE | su - "$username"
 cd; git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles
 cd cinnamon-dotfiles
+touch .void.done
 echo "Reboot and run Setup-Void.sh in cinnamon-dotfiles located in $username's home folder."
 CLONE
-
-# Add flag for Setup.sh
-touch .void.done
 EOF

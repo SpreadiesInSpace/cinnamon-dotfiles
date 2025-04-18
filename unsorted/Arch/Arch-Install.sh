@@ -149,9 +149,7 @@ echo "$username:$userpasswd" | chpasswd
 cat << CLONE | su - "$username"
 cd; git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles
 cd cinnamon-dotfiles
+touch .arch.done
 echo "Reboot and run Setup-Arch.sh in cinnamon-dotfiles located in $username's home folder."
 CLONE
-
-# Add flag for Setup.sh
-touch .arch.done
 EOF
