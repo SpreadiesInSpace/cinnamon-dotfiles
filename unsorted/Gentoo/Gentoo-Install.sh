@@ -51,7 +51,7 @@ echo; lsblk; echo
 while true; do
   read -p "Enter drive to use (e.g., /dev/sda, /dev/nvme0n1, /dev/mmcblk0): " drive
   # Check if the drive is a valid block device and not a partition
-  if [[ "$drive" =~ ^/dev/(sd[a-z]|nvme[0-9]+n[0-9]+|mmcblk[0-9]+)$ ]] && [ -b "$drive" ]; then
+  if [[ "$drive" =~ ^/dev/(sd[a-z]|nvme[0-9]+n[0-9]+|mmcblk[0-9]+|vd[a-z])$ ]] && [ -b "$drive" ]; then
     # Confirm before proceeding
     read -rp "WARNING: This will erase all data on $drive. Are you sure you want to continue? [y/N]: " confirm
     case "$confirm" in
@@ -59,7 +59,7 @@ while true; do
       *) echo "Aborting."; exit 1 ;;
     esac
   else
-    echo "Invalid drive: $drive. Please enter a valid drive (e.g., /dev/sda, /dev/nvme0n1) without a partition number or 'p' suffix."
+    echo "Invalid drive: $drive. Please enter a valid drive (e.g., /dev/sda, /dev/nvme0n1, /dev/mmcblk0) without a partition number or 'p' suffix."
   fi
 done
 
