@@ -47,7 +47,11 @@ else
     fi
 
     echo -e "${YELLOW}Unzipping archive...${NC}"
-    unzip -n "$ZIP_NAME" &>/dev/null || { echo -e "${RED}Unzip failed. Exiting.${NC}"; exit 1; }
+    if grep -qi nixos /etc/os-release; then
+      nix-shell -p unzip --run "unzip -n '$ZIP_NAME'" &>/dev/null || { echo -e "${RED}Unzip failed (NixOS). Exiting.${NC}"; exit 1; }
+    else
+      unzip -n "$ZIP_NAME" &>/dev/null || { echo -e "${RED}Unzip failed. Exiting.${NC}"; exit 1; }
+    fi
     rm "$ZIP_NAME"
 
     mv "$EXTRACT_DIR" cinnamon-dotfiles
