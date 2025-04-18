@@ -23,10 +23,11 @@ ZIP_NAME="dotfiles.zip"
 EXTRACT_DIR="cinnamon-dotfiles-main"
 
 # Resolve real path of script
-if SCRIPT_PATH="$(readlink -f "$0" 2>/dev/null)"; then
-  SCRIPT_DIR="$(cd "$(dirname "$SCRIPT_PATH")" && pwd)"
-else
+if [[ "$0" =~ ^/dev/fd/ ]]; then
   SCRIPT_DIR="$PWD"
+else
+  SCRIPT_PATH="$(readlink -f "$0" 2>/dev/null || echo "$0")"
+  SCRIPT_DIR="$(cd "$(dirname "$SCRIPT_PATH")" && pwd)"
 fi
 TOP_DIR="$(dirname "$SCRIPT_DIR")"
 
