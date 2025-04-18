@@ -42,7 +42,7 @@ else
       exit 1
     fi
 
-    echo -e "${YELLOW}Unzipping archive (without overwriting existing files)...${NC}"
+    echo -e "${YELLOW}Unzipping archive...${NC}"
     unzip -n "$ZIP_NAME" &>/dev/null || { echo -e "${RED}Unzip failed. Exiting.${NC}"; exit 1; }
     rm "$ZIP_NAME"
 

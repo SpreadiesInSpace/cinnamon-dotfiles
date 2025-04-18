@@ -253,7 +253,7 @@ echo "[Manager]" | tee /etc/systemd/system.conf.d/override.conf
 echo "DefaultTimeoutStopSec=15s" | tee -a /etc/systemd/system.conf.d/override.conf
 
 # Reload the systemd configuration
-systemctl daemon-reload.
+systemctl daemon-reload
 
 # Add flag for Setup-Theme.sh
 touch .arch.done

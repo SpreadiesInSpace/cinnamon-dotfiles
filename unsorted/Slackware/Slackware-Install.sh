@@ -11,6 +11,28 @@ if [ "$EUID" -ne 0 ]; then
   exit
 fi
 
+# Auto-detect and mount installation media
+SeTmedia
+
+# Required System Packages
+required_sys_packages=(
+  "a/glibc-zoneinfo" # for timezone validation
+)
+
+# Install Required System Packages
+for pkg in "${required_sys_packages[@]}"; do
+  installpkg "/var/log/mount/slackware64/$pkg"-*.t?z >/dev/null 2>&1
+done
+
+# Prompt for root password
+while true; do
+  read -sp "Enter new root password: " rootpasswd; echo
+  read -sp "Confirm root password: " rootpasswd_confirm; echo
+  if [ -z "$rootpasswd" ]; then echo "Root password cannot be empty."; continue; fi
+  if [ "$rootpasswd" != "$rootpasswd_confirm" ]; then echo "Passwords do not match. Try again."; continue; fi
+  break
+done
+
 # Prompt for new username
 while true; do
   read -p "Enter new username: " username
@@ -27,17 +49,13 @@ while true; do
   break
 done
 
-# Prompt for hostname
-while true; do
-  read -p "Enter hostname: " hostname
-  if [[ "$hostname" =~ ^[a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?$ ]] && ! [[ "$hostname" =~ \  ]]; then break; fi
-  echo "Invalid hostname. Must be alphanumeric, may include hyphens, and cannot contain spaces or start/end with a hyphen."
-done
-
 # Prompt for timezone
-read -p "Enter your timezone (e.g., Asia/Bangkok): " timezone
-timezone="${timezone:-Asia/Bangkok}"  # default if empty
-echo "Timezone set to: $timezone"
+while true; do
+  read -p "Enter your timezone (e.g., Asia/Bangkok): " timezone
+  timezone="${timezone:-Asia/Bangkok}"  # default if empty
+  if [ -f "/usr/share/zoneinfo/$timezone" ]; then echo "Timezone set to: $timezone"; break; fi
+  echo "Invalid timezone: $timezone"
+done
 
 # Prompt for drive to partition
 echo; lsblk; echo
@@ -85,15 +103,59 @@ mkdir -p /mnt/{boot/efi,home}
 mount -o noatime,compress=zstd,discard=async,subvol=@home "$ROOT" /mnt/home
 mount "$BOOT" /mnt/boot/efi
 
-# Setup
-echo "Follow these steps during 'setup':
-- Do not format partitions accidentally
-- Do not install (E)LILO
-- Enable rc.samba & rc.sshd
-- Set hardware clock to UTC
-- Select XFCE as DE
-- Drop to Shell after installation"
-setup
+# Mount System Partitions
+mkdir -p /mnt/{proc,sys,dev,run}
+mount --types proc /proc /mnt/proc
+mount --rbind /sys /mnt/sys
+mount --make-rslave /mnt/sys
+mount --rbind /dev /mnt/dev
+mount --make-rslave /mnt/dev
+mount --bind /run /mnt/run
+mount --make-slave /mnt/run
+
+# Re-mount ISO inside chroot
+mkdir -p /mnt/var/log/mount
+mount --bind /var/log/mount /mnt/var/log/mount
+
+# Get list of package set directories
+pkg_dirs=( /var/log/mount/slackware64/* )
+package_sets=()
+for dir in "${pkg_dirs[@]}"; do
+  [ -d "$dir" ] && package_sets+=("$(basename "$dir")")
+done
+
+# Prepare for full installation
+echo "Starting full Slackware installation..."
+
+# Get list of package sets (sorted alphabetically)
+package_sets=(); for dir in /var/log/mount/slackware64/*; do [ -d "$dir" ] && package_sets+=("$(basename "$dir")"); done
+IFS=$'\n' package_sets=($(sort <<<"${package_sets[*]}")); unset IFS
+
+# Install all sets with overall progress
+total_sets=${#package_sets[@]}; set_count=1; echo
+for pkg_set in "${package_sets[@]}"; do
+  pkg_set_cap="${pkg_set^^}"  # Capitalize package set name
+  echo "[$set_count/$total_sets] Installing package set: $pkg_set_cap"
+  pkg_files=( /var/log/mount/slackware64/"$pkg_set"/*.t?z )
+  total_pkgs=${#pkg_files[@]}; pkg_count=1
+  for pkg in "${pkg_files[@]}"; do
+    pkg_name=$(basename "$pkg")
+    printf "\r    [%s/%s] Installing: %-60s" "$pkg_count" "$total_pkgs" "$pkg_name"
+    installpkg --root /mnt "$pkg" >/dev/null 2>&1; ((pkg_count++))
+  done
+  echo; ((set_count++))
+done; echo
+
+# Run post-installation configuration
+echo "Running ldconfig..."
+[ -x /mnt/sbin/ldconfig ] && /mnt/sbin/ldconfig -r /mnt
+
+# Run netconfig interactively before chroot
+chroot /mnt netconfig
+
+# Extract hostname without domain
+hostname=$(cat /mnt/etc/HOSTNAME)
+hostname=${hostname%%.*}
 
 # Copy Network Info
 cp --dereference /etc/resolv.conf /mnt/etc/
@@ -104,13 +166,19 @@ cat << EOF | chroot /mnt /bin/bash
 # New Chroot
 source /etc/profile
 
+# Post Install Scripts
+/var/log/setup/setup.*.mkinitrd
+/var/log/setup/setup.*.mkfontdir
+/var/log/setup/setup.*.fontconfig
+/var/log/setup/setup.*.update-desktop-database
+/var/log/setup/setup.*.update-mime-database
+/var/log/setup/setup.*.gtk-update-icon-cache
+/var/log/setup/setup.*.cacerts
+/var/log/setup/setup.cups-genppdupdate
+/var/log/setup/setup.htmlview
+
 # Set Timezone
-if [ ! -f "/usr/share/zoneinfo/$timezone" ]; then
-  echo "Invalid timezone: $timezone. Falling back to Asia/Bangkok."
-  ln -sf /usr/share/zoneinfo/Asia/Bangkok /etc/localtime
-else
-  ln -sf "/usr/share/zoneinfo/$timezone" /etc/localtime
-fi
+ln -sf "/usr/share/zoneinfo/$timezone" /etc/localtime
 hwclock --systohc
 
 # Install Grub
@@ -121,6 +189,52 @@ sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub
 
 # Generate Grub Config
 grub-mkconfig -o /boot/grub/grub.cfg
+
+# List Default Enabled Services from Setup Menu
+services=(
+  # atalk
+  atd
+  avahidaemon
+  avahidnsconfd
+  # bind
+  crond
+  # cups
+  # dnsmasq
+  # dovecot
+  fuse
+  # httpd
+  # inetd
+  # ip_forward
+  messagebus
+  networkmanager
+  # mysqld
+  # nfsd
+  # ntpd
+  # openldap
+  # openvpn
+  # pcmcia
+  # pcscd
+  # postfix
+  # rpc
+  samba # default is off
+  # saslauthd
+  # smartd
+  # snmpd
+  syslog
+  sshd
+)
+
+# Enable Selected Services (chmod only, no start)
+for svc in "${services[@]}"; do
+  # Skip commented-out entries
+  [[ "$svc" == \#* || -z "$svc" ]] && continue
+  svc_path="/etc/rc.d/rc.$svc"
+  if [ -f "$svc_path" ]; then
+    chmod +x "$svc_path"  # Just chmod, don't start
+  else
+    echo "Service script not found: $svc_path"
+  fi
+done
 
 # Download arch-install-scripts source and SlackBuild (for genfstab)
 echo "Installing arch-install-scripts..."
@@ -163,8 +277,9 @@ sed -i 's/^#\s*\(%wheel ALL=(ALL:ALL) ALL\)/\1/' /etc/sudoers
 # Set Run Level to 4
 sed -i 's/id:3:initdefault:/id:4:initdefault:/g' /etc/inittab
 
-# Create User and Set Password
+# Create User and Set Passwords
 useradd -m -g users -G wheel,audio,video,plugdev,netdev,lp,scanner -s /bin/bash "$username"
+echo "root:$rootpasswd" | chpasswd
 echo "$username:$userpasswd" | chpasswd
 
 # Set Default DE to XFCE System-Wide
