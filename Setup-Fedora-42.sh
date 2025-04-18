@@ -49,17 +49,13 @@ dnf -y update
 dnf -y install git
 
 # Add RPM Fusion
-dnf -y install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
-dnf -y install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
-dnf -y upgrade --refresh
-# dnf -y groupupdate core
+dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 # Install Media Codecs
-dnf -y swap 'ffmpeg-free' 'ffmpeg' --allowerasing
-dnf -y update @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin 
-dnf -y update @sound-and-video
-dnf -y install gstreamer1-plugins-{bad-\*,good-\*,base} gstreamer1-plugin-openh264 gstreamer1-libav --exclude=gstreamer1-plugins-bad-free-devel # ffmpeg gstreamer-ffmpeg
-dnf -y install lame\* --exclude=lame-devel
+dnf4 group upgrade multimedia
+dnf swap 'ffmpeg-free' 'ffmpeg' --allowerasing
+dnf upgrade @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
+dnf group install -y sound-and-video
 
 # Install Brave
 dnf -y install dnf-plugins-core
@@ -73,7 +69,6 @@ dnf -y install bottom
 
 # Install Neofetch
 dnf -y install https://dl.fedoraproject.org/pub/fedora/linux/releases/40/Everything/x86_64/os/Packages/n/neofetch-7.1.0-12.fc40.noarch.rpm
-# dnf -y install https://dl.fedoraproject.org/pub/fedora/linux/releases/41/Everything/x86_64/os/Packages/g/grub-customizer-5.2.5-2.fc41.x86_64.rpm
 
 # All packages
 packages=(
