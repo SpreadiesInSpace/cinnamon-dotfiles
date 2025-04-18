@@ -26,8 +26,7 @@ EXTRACT_DIR="cinnamon-dotfiles-main"
 if [[ "$0" =~ ^/dev/fd/ ]]; then
   SCRIPT_DIR="$PWD"
 else
-  SCRIPT_PATH="$(readlink -f "$0" 2>/dev/null || echo "$0")"
-  SCRIPT_DIR="$(cd "$(dirname "$SCRIPT_PATH")" && pwd)"
+  SCRIPT_DIR="$(cd "$(dirname "$(readlink -f "$0" 2>/dev/null)")" 2>/dev/null && pwd || echo "$PWD")"
 fi
 TOP_DIR="$(dirname "$SCRIPT_DIR")"
 
