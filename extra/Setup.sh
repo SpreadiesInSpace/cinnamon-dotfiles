@@ -20,52 +20,75 @@ fi
 REPO_URL="https://github.com/SpreadiesInSpace/cinnamon-dotfiles"
 ZIP_URL="$REPO_URL/archive/refs/heads/main.zip"
 ZIP_NAME="dotfiles.zip"
+EXTRACT_DIR="cinnamon-dotfiles-main"
 
-echo -e "${YELLOW}Downloading cinnamon-dotfiles archive...${NC}"
-if command -v curl &>/dev/null; then
-  curl -sL -C - --retry 10 --connect-timeout 10 "$ZIP_URL" -o "$ZIP_NAME"
-elif command -v wget &>/dev/null; then
-  wget -q -c -T 10 -t 10 "$ZIP_URL" -O "$ZIP_NAME"
+if [[ ! -d "cinnamon-dotfiles" ]]; then
+  echo -e "${YELLOW}Downloading cinnamon-dotfiles archive...${NC}"
+  if command -v curl &>/dev/null; then
+    curl -sL -C - --retry 10 --connect-timeout 10 "$ZIP_URL" -o "$ZIP_NAME"
+  elif command -v wget &>/dev/null; then
+    wget -q -c -T 10 -t 10 "$ZIP_URL" -O "$ZIP_NAME"
+  else
+    echo -e "${RED}Error: Neither curl nor wget is available.${NC}"
+    exit 1
+  fi
+
+  echo -e "${YELLOW}Unzipping archive (without overwriting existing files)...${NC}"
+  unzip -n "$ZIP_NAME" &>/dev/null || { echo -e "${RED}Unzip failed. Exiting.${NC}"; exit 1; }
+  rm "$ZIP_NAME"
+
+  mv "$EXTRACT_DIR" cinnamon-dotfiles
 else
-  echo -e "${RED}Error: Neither curl nor wget is available.${NC}"
-  exit 1
+  echo -e "${GREEN}cinnamon-dotfiles already exists. Skipping download and extraction.${NC}"
 fi
 
-echo -e "${YELLOW}Unzipping archive...${NC}"
-unzip -o "$ZIP_NAME" &>/dev/null || { echo -e "${RED}Unzip failed. Exiting.${NC}"; exit 1; }
-rm "$ZIP_NAME"
-mv cinnamon-dotfiles-main cinnamon-dotfiles
 cd cinnamon-dotfiles || { echo -e "${RED}Directory not found. Exiting.${NC}"; exit 1; }
 
 # Setup script list
-setup_names=(
-  "Arch"
-  "Fedora-42"
-  "Gentoo"
-  "LMDE-6"
-  "NixOS-Unstable"
-  "OpenSUSE-Tumbleweed"
-  "Slackware-Current"
-  "Void"
+scripts=(
+  "Setup-Arch.sh"
+  "Setup-Fedora-42.sh"
+  "Setup-Gentoo.sh"
+  "Setup-LMDE-6.sh"
+  "Setup-NixOS-Unstable.sh"
+  "Setup-OpenSUSE-Tumbleweed.sh"
+  "Setup-Slackware-Current.sh"
+  "Setup-Void.sh"
 )
 
-echo -e "${YELLOW}Which setup script would you like to run?${NC}"
-PS3="Select a number: "
+# Flag check
+for script in "${scripts[@]}"; do
+  base="${script,,}"                            # Lowercase script name
+  flag="${base//setup-/}"                       # Remove 'setup-' prefix
+  flag=".${flag%%.sh}.done"                     # Trim extension and prepend dot
+  if [[ -f "$(dirname "$0")/$flag" ]]; then
+    pretty_name="$(tr '[:lower:]' '[:upper:]' <<< ${flag:1:1})${flag:2:-5}"
+    echo -e "${GREEN}Detected flag: $pretty_name. Running $script...${NC}"
+    chmod +x "$script"
+    if [[ "$script" == "Setup-NixOS-Unstable.sh" ]]; then
+      nix-shell -p unzip --run "sudo bash $script"
+    else
+      sudo bash "$script"
+    fi
+    exit 0
+  fi
+done
 
-select distro in "${setup_names[@]}" "Exit"; do
-  if [[ "$distro" == "Exit" ]]; then
+# No flags found — show prompt
+echo -e "${YELLOW}No setup flag found. Choose a setup script to run:${NC}"
+PS3="Select a number: "
+select script in "${scripts[@]}" "Exit"; do
+  if [[ "$script" == "Exit" ]]; then
     echo -e "${GREEN}Exiting.${NC}"
     exit 0
-  elif [[ -n "$distro" ]]; then
-    script="Setup-${distro}.sh"
+  elif [[ -n "$script" ]]; then
     if [[ ! -f "$script" ]]; then
       echo -e "${RED}Script $script not found. Exiting.${NC}"
       exit 1
     fi
-
-    chmod +x "$script"
     echo -e "${GREEN}Running $script...${NC}"
-    if [[ "$distro" == "NixOS-Unstable" ]]; then
+    chmod +x "$script"
+    if [[ "$script" == "Setup-NixOS-Unstable.sh" ]]; then
       nix-shell -p unzip --run "sudo bash $script"
     else
       sudo bash "$script"

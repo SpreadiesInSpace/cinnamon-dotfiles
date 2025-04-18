@@ -151,4 +151,7 @@ cd; git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles
 cd cinnamon-dotfiles
 echo "Reboot and run Setup-Arch.sh in cinnamon-dotfiles located in $username's home folder."
 CLONE
+
+# Add flag for Setup.sh
+touch .arch.done
 EOF
