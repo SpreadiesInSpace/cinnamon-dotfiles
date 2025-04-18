@@ -22,27 +22,37 @@ ZIP_URL="$REPO_URL/archive/refs/heads/main.zip"
 ZIP_NAME="dotfiles.zip"
 EXTRACT_DIR="cinnamon-dotfiles-main"
 
-if [[ ! -d "cinnamon-dotfiles" ]]; then
-  echo -e "${YELLOW}Downloading cinnamon-dotfiles archive...${NC}"
-  if command -v curl &>/dev/null; then
-    curl -sL -C - --retry 10 --connect-timeout 10 "$ZIP_URL" -o "$ZIP_NAME"
-  elif command -v wget &>/dev/null; then
-    wget -q -c -T 10 -t 10 "$ZIP_URL" -O "$ZIP_NAME"
+# Resolve real path of script
+SCRIPT_DIR="$(cd "$(dirname "$(readlink -f "$0")")" && pwd)"
+TOP_DIR="$(dirname "$SCRIPT_DIR")"
+
+# Skip cinnamon-dotfiles download if it already exists
+if [[ "$(basename "$TOP_DIR")" == "cinnamon-dotfiles" ]]; then
+  echo -e "${GREEN}Already inside cinnamon-dotfiles. Skipping download and extraction.${NC}"
+  cd "$TOP_DIR" || { echo -e "${RED}Failed to enter directory. Exiting.${NC}"; exit 1; }
+else
+  if [[ ! -d "cinnamon-dotfiles" ]]; then
+    echo -e "${YELLOW}Downloading cinnamon-dotfiles archive...${NC}"
+    if command -v curl &>/dev/null; then
+      curl -sL -C - --retry 10 --connect-timeout 10 "$ZIP_URL" -o "$ZIP_NAME"
+    elif command -v wget &>/dev/null; then
+      wget -q -c -T 10 -t 10 "$ZIP_URL" -O "$ZIP_NAME"
+    else
+      echo -e "${RED}Error: Neither curl nor wget is available.${NC}"
+      exit 1
+    fi
+
+    echo -e "${YELLOW}Unzipping archive (without overwriting existing files)...${NC}"
+    unzip -n "$ZIP_NAME" &>/dev/null || { echo -e "${RED}Unzip failed. Exiting.${NC}"; exit 1; }
+    rm "$ZIP_NAME"
+
+    mv "$EXTRACT_DIR" cinnamon-dotfiles
   else
-    echo -e "${RED}Error: Neither curl nor wget is available.${NC}"
-    exit 1
+    echo -e "${GREEN}cinnamon-dotfiles already exists. Skipping download and extraction.${NC}"
   fi
 
-  echo -e "${YELLOW}Unzipping archive (without overwriting existing files)...${NC}"
-  unzip -n "$ZIP_NAME" &>/dev/null || { echo -e "${RED}Unzip failed. Exiting.${NC}"; exit 1; }
-  rm "$ZIP_NAME"
-
-  mv "$EXTRACT_DIR" cinnamon-dotfiles
-else
-  echo -e "${GREEN}cinnamon-dotfiles already exists. Skipping download and extraction.${NC}"
+  cd cinnamon-dotfiles || { echo -e "${RED}Directory not found. Exiting.${NC}"; exit 1; }
 fi
-
-cd cinnamon-dotfiles || { echo -e "${RED}Directory not found. Exiting.${NC}"; exit 1; }
 
 # Setup script list
 scripts=(
@@ -58,10 +68,10 @@ scripts=(
 
 # Flag check
 for script in "${scripts[@]}"; do
-  base="${script,,}"                            # Lowercase script name
-  flag="${base//setup-/}"                       # Remove 'setup-' prefix
-  flag=".${flag%%.sh}.done"                     # Trim extension and prepend dot
-  if [[ -f "$(dirname "$0")/$flag" ]]; then
+  base="${script,,}" # Lowercase script name
+  flag="${base//setup-/}" # Remove 'setup-' prefix
+  flag=".${flag%%.sh}.done" # Trim extension and prepend dot
+    if [[ -f "./$flag" ]]; then
     pretty_name="$(tr '[:lower:]' '[:upper:]' <<< ${flag:1:1})${flag:2:-5}"
     echo -e "${GREEN}Detected flag: $pretty_name. Running $script...${NC}"
     chmod +x "$script"
