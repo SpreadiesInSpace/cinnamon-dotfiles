@@ -217,6 +217,21 @@ gsettings set org.cinnamon.sounds logout-file ${HOME}/sounds/logout.ogg
 gsettings set org.cinnamon.desktop.sound volume-sound-enabled true
 gsettings set org.cinnamon.desktop.sound volume-sound-file ${HOME}/sounds/volume.oga
 
+# Disable all other Cinnamon Sound Events
+for key in \
+  switch-enabled \
+  map-enabled \
+  close-enabled \
+  minimize-enabled \
+  maximize-enabled \
+  unmaximize-enabled \
+  tile-enabled \
+  plug-enabled \
+  unplug-enabled \
+  notification-enabled; do
+  gsettings set org.cinnamon.sounds $key false
+done
+
 # Install Synth-Shell Prompt
 git clone --recursive https://github.com/andresgongora/synth-shell-prompt.git
 yes | synth-shell-prompt/setup.sh
