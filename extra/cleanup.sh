@@ -14,9 +14,6 @@ rm -rf .*.old
 rm -- "$0"
 EOF
 
-# Make it executable
-chmod +x cleanup-temp.sh
-
 # Run the cleanup script
-./cleanup-temp.sh
+bash cleanup-temp.sh
 
