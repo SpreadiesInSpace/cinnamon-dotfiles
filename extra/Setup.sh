@@ -68,10 +68,9 @@ scripts=(
 
 # Flag check
 for script in "${scripts[@]}"; do
-    base="${script,,}"  # Lowercase the script name
-    flag="${base//setup-/}"  # Remove the 'setup-' prefix
-    # Remove version suffixes and '.sh' extension, prepend a dot
-    flag=".${flag%%-[0-9]*.sh}.done"  
+  base="${script,,}" # Lowercase script name
+  flag="${base//setup-/}" # Remove 'setup-' prefix
+  flag=".${flag%%.sh}.done" # Trim extension and prepend dot
     if [[ -f "./$flag" ]]; then
     pretty_name="$(tr '[:lower:]' '[:upper:]' <<< ${flag:1:1})${flag:2:-5}"
     echo -e "${GREEN}Detected flag: $pretty_name. Running $script...${NC}"
