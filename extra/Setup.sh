@@ -23,7 +23,11 @@ ZIP_NAME="dotfiles.zip"
 EXTRACT_DIR="cinnamon-dotfiles-main"
 
 # Resolve real path of script
-SCRIPT_DIR="$(cd "$(dirname "$(readlink -f "$0" 2>/dev/null)")" 2>/dev/null && pwd)"
+if SCRIPT_PATH="$(readlink -f "$0" 2>/dev/null)"; then
+  SCRIPT_DIR="$(cd "$(dirname "$SCRIPT_PATH")" && pwd)"
+else
+  SCRIPT_DIR="$PWD"
+fi
 TOP_DIR="$(dirname "$SCRIPT_DIR")"
 
 # Skip cinnamon-dotfiles download if it already exists
