@@ -71,9 +71,9 @@ dnf -y install brave-browser
 dnf -y copr enable atim/bottom
 dnf -y install bottom
 
-# Install Neofetch & Grub-Customizer
+# Install Neofetch
 dnf -y install https://dl.fedoraproject.org/pub/fedora/linux/releases/40/Everything/x86_64/os/Packages/n/neofetch-7.1.0-12.fc40.noarch.rpm
-dnf -y install https://dl.fedoraproject.org/pub/fedora/linux/releases/41/Everything/x86_64/os/Packages/g/grub-customizer-5.2.5-2.fc41.x86_64.rpm
+# dnf -y install https://dl.fedoraproject.org/pub/fedora/linux/releases/41/Everything/x86_64/os/Packages/g/grub-customizer-5.2.5-2.fc41.x86_64.rpm
 
 # All packages
 packages=(
@@ -101,7 +101,7 @@ packages=(
     "samba"
     # Desktop environment and related packages
     "cinnamon"
-    "dnfdragora"
+    # "dnfdragora"
     "eog"
     "evince"
     "ffmpegthumbnailer"
@@ -110,6 +110,7 @@ packages=(
     "gnome-calculator"
     "gnome-disk-utility"
     "gnome-screenshot"
+    "gnome-software"
     "gnome-system-monitor"
     "gnome-terminal"
     "gthumb"

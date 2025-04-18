@@ -167,7 +167,7 @@
             "Mount CIFS Share.desktop",
             "filezilla.desktop",
             "brave-browser.desktop",
-            "org.mageia.dnfdragora.desktop",
+            "org.gnome.Software.desktop",
             "org.bleachbit.BleachBit.desktop",
             "nemo.desktop"
         ]
