@@ -3,6 +3,12 @@
         "type": "header",
         "description": "Shown entries"
     },
+    "always-show-icon": {
+        "default": true,
+        "type": "checkbox",
+        "description": "Show tray icon, even when the applet is not in use",
+        "value": true
+    },
     "display-track-switch": {
         "default": true,
         "type": "checkbox",
@@ -52,5 +58,5 @@
         "description": "GPaste Main Program",
         "callback": "openUI"
     },
-    "__md5__": "ee35d1a6f68bbd2a92cbc6a042aade04"
+    "__md5__": "de586919f2bdc5fba03d8833bd896785"
 }
