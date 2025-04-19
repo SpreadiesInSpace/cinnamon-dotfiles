@@ -19,7 +19,7 @@
         "default": true,
         "type": "checkbox",
         "description": "Display search bar",
-        "value": true
+        "value": false
     },
     "display-gpaste-ui": {
         "default": false,

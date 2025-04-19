@@ -110,8 +110,8 @@ class GPasteApplet extends Applet.IconApplet {
             this.mitemHistoryIsEmpty  = new PopupMenu.PopupMenuItem(_("(Empty)"));
             this.mitemHistoryIsEmpty.setSensitive(false);
 
-            /*this.mitemNoSearchResults = new PopupMenu.PopupMenuItem(_("(No results)"));
-            this.mitemNoSearchResults.setSensitive(false);*/
+            this.mitemNoSearchResults = new PopupMenu.PopupMenuItem(_("(No results)"));
+            this.mitemNoSearchResults.setSensitive(false);
 
             this.msepBottom           = new PopupMenu.PopupSeparatorMenuItem();
 
@@ -307,7 +307,7 @@ class GPasteApplet extends Applet.IconApplet {
             this.menu.addMenuItem(this._historyItems[i]);
         }
         this.menu.addMenuItem(this.mitemHistoryIsEmpty);
-        // this.menu.addMenuItem(this.mitemNoSearchResults);
+        this.menu.addMenuItem(this.mitemNoSearchResults);
 
         this.menu.addMenuItem(this.msepBottom);
 
@@ -406,14 +406,14 @@ class GPasteApplet extends Applet.IconApplet {
 
                 this._historyItems[0].actor.set_style(null);
 
-                /*if (results == 0) { // There aren't any results, display "(No results)"
+                if (results == 0) { // There aren't any results, display "(No results)"
                     this.mitemNoSearchResults.actor.show();
                 } else {
                     this.mitemNoSearchResults.actor.hide();
-                }*/
+                }
             });
         } else {
-            // this.mitemNoSearchResults.actor.hide();
+            this.mitemNoSearchResults.actor.hide();
 
             this._searchResults = [];
             this.refresh(0);
