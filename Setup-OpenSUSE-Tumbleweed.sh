@@ -106,7 +106,8 @@ packages=(
     "kvantum-qt5"
     "kvantum-qt6"
     "lightdm"
-    "lightdm-slick-greeter"
+    "lightdm-gtk-greeter"
+    "lightdm-gtk-greeter-settings"
     "nemo"
     "nemo-extension-fileroller"
     "nemo-extension-image-converter"
@@ -219,10 +220,6 @@ awk -v user="$username" -v autologin="$enable_autologin" -v vm="$is_vm" -i inpla
 /^\[Seat:\*\]/ {a=1}
 a==1 && /^#?greeter-hide-users=/ {
     print "greeter-hide-users=false"
-    next
-}
-a==1 && /^#?greeter-session=/ {
-    print "greeter-session=slick-greeter"
     next
 }
 a==1 && /^#?autologin-user=/ {
