@@ -240,10 +240,9 @@ a==1 && /^#?autologin-session=/ {
 {print}
 ' /etc/lightdm/lightdm.conf
 
-# Create a new group named 'autologin' if it doesn't already exist
+# Ensure autologin group exists and add user
 groupadd -f autologin
-# Add the current user to the 'autologin' group
-gpasswd -a $username autologin
+gpasswd -a "$username" autologin
 
 # If running in a VM, set display-setup-script in lightdm.conf
 if [ "$is_vm" = true ]; then
