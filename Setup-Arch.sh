@@ -39,8 +39,8 @@ esac
 
 # Install base-devel and git, then install yay from AUR
 pacman -S --needed --noconfirm base-devel git
+sudo -u "$SUDO_USER" sudo -v
 cat << 'EOF' | su - "$SUDO_USER"
-sudo -v
 git clone https://aur.archlinux.org/yay-bin.git
 cd yay-bin
 makepkg -si --noconfirm
