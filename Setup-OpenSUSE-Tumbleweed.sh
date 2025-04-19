@@ -141,6 +141,9 @@ packages=(
 # Install packages
 zypper in -y "${packages[@]}"
 
+# Remove devhelp
+zypper rm -y devhelp*
+
 # Install neofetch
 zypper ar --no-gpgcheck https://download.opensuse.org/repositories/utilities/openSUSE_Factory/utilities.repo
 zypper ref
