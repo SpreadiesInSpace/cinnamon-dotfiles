@@ -140,7 +140,11 @@ packages=(
 )
 
 # Install packages
-zypper in -y "${packages[@]}"
+if [[ -f .opensuse-tumbleweed.done ]]; then
+    zypper in -y "${packages[@]}"
+else
+    zypper in "${packages[@]}"
+fi
 
 # Remove devhelp
 zypper rm -y devhelp*
