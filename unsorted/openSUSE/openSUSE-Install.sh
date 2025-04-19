@@ -144,10 +144,6 @@ echo "$hostname" > /etc/hostname
 # Allow Resolving the Local Hostname
 echo -e "127.0.1.1\t$hostname.localdomain\t$hostname" >> /etc/hosts
 
-# Setting Timezone
-ln -sf "../usr/share/zoneinfo/$timezone" /etc/localtime
-hwclock --systohc
-
 # Set Locale
 echo "LANG=en_US.UTF-8" > /etc/locale.conf
 echo 'RC_LANG="en_US.UTF-8"' > /etc/sysconfig/language
@@ -181,6 +177,10 @@ zypper al MozillaFirefox* *-lang *-doc
 
 # Configure lightdm
 systemctl set-default graphical
+
+# Set Timezone
+ln -sf "../usr/share/zoneinfo/$timezone" /etc/localtime
+hwclock --systohc
 
 # Setup Sudo by uncommenting %wheel ALL=(ALL:ALL) with visudo
 sed -i 's/^#\s*\(%wheel ALL=(ALL:ALL) ALL\)/\1/' /usr/etc/sudoers
