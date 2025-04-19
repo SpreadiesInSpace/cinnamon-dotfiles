@@ -149,6 +149,10 @@ apt install -y "${packages[@]}"
 # Enable Flathub
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
+# Preserve old configurations (for Virtual Machine Manager)
+cp /etc/libvirt/libvirtd.conf /etc/libvirt/libvirtd.conf.old
+cp /etc/libvirt/qemu.conf /etc/libvirt/qemu.conf.old
+
 # Set proper permissions in libvirtd.conf
 for line in \
   'unix_sock_group = "libvirt"' \

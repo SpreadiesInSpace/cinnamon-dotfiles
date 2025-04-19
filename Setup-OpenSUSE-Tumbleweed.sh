@@ -140,10 +140,11 @@ packages=(
 )
 
 # Install packages
-zypper in "${packages[@]}"
+zypper in -y "${packages[@]}"
 
 # Remove devhelp
 zypper rm -y devhelp*
+zypper al devhelp*
 
 # Install neofetch
 zypper ar --no-gpgcheck https://download.opensuse.org/repositories/utilities/openSUSE_Factory/utilities.repo
@@ -153,17 +154,15 @@ zypper in -y neofetch
 # Protect neofetch from being replaced by neowofetch
 zypper al neofetch
 
-# Apply gedit-plugins fix
-# cd unsorted/openSUSE/
-# chmod +x gedit-plugins-fix.sh
-# ./gedit-plugins-fix.sh
-# cd ../..
-
 # Install Additional Tools for Virt Manager
 zypper in -y -t pattern kvm_server kvm_tools
 
 # Enable Flathub
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
+# Preserve old configurations (for Virtual Machine Manager)
+cp /etc/libvirt/libvirtd.conf /etc/libvirt/libvirtd.conf.old
+cp /etc/libvirt/qemu.conf /etc/libvirt/qemu.conf.old
 
 # Set proper permissions in libvirtd.conf
 for line in \
