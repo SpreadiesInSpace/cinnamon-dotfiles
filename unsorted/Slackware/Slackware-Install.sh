@@ -12,7 +12,7 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 # Auto-detect and mount installation media
-SeTmedia
+SeTmedia; clear
 
 # Required System Packages
 required_sys_packages=(
@@ -151,7 +151,7 @@ echo "Running ldconfig..."
 [ -x /mnt/sbin/ldconfig ] && /mnt/sbin/ldconfig -r /mnt
 
 # Run netconfig interactively before chroot
-chroot /mnt netconfig
+chroot /mnt netconfig; clear
 
 # Extract hostname without domain
 hostname=$(cat /mnt/etc/HOSTNAME)
