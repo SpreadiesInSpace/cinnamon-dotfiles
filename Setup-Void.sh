@@ -251,7 +251,7 @@ done
 cp /etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf.old
 
 # Modify lightdm.conf in-place
-awk -v user="$username" -v autologin="$enable_autologin" -v vm="$is_vm" -i inplace '
+awk -v user="$username" -v autologin="$enable_autologin" -i inplace '
 /^\[Seat:\*\]/ {a=1}
 a==1 && /^#?greeter-hide-users=/ {
     print "greeter-hide-users=false"
