@@ -140,7 +140,7 @@ packages=(
 )
 
 # Install packages
-zypper in -y "${packages[@]}"
+zypper in "${packages[@]}"
 
 # Remove devhelp
 zypper rm -y devhelp*

@@ -114,7 +114,7 @@ mount --make-slave /mnt/run
 
 # Installing the Base System
 zypper --root /mnt ar --no-gpgcheck --refresh https://download.opensuse.org/tumbleweed/repo/oss/ oss
-zypper --root /mnt in -y kernel-default grub2-x86_64-efi shim zypper bash man shadow util-linux nano arch-install-scripts
+zypper --root /mnt in -y --download-in-advance kernel-default grub2-x86_64-efi shim zypper bash man shadow util-linux nano arch-install-scripts
 
 # Copy Repos
 cp /etc/zypp/repos.d/* /mnt/etc/zypp/repos.d/
