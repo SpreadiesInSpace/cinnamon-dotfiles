@@ -12,6 +12,9 @@ if [ "$SUDO_USER" = "" ]; then
   exit
 fi
 
+# Remove passwordless sudo if script is interrupted
+trap 'rm -f /etc/sudoers.d/99_${SUDO_USER}_nopasswd' EXIT
+
 # Get the current username
 username=$SUDO_USER
 
@@ -50,6 +53,10 @@ sed -i 's/^#*\s*MAKEFLAGS=.*/MAKEFLAGS="--jobs=$(nproc)"/' /etc/makepkg.conf
 
 # Install base-devel and git
 pacman -S --needed --noconfirm base-devel git
+
+# Temporarily allow passwordless sudo for the new user
+echo "$SUDO_USER ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/99_${SUDO_USER}_nopasswd
+chmod 0440 /etc/sudoers.d/99_${SUDO_USER}_nopasswd
 
 # Install yay
 cat << 'EOF' | su - "$SUDO_USER"
@@ -147,6 +154,9 @@ packages=(
 # Install Packages
 yay -Syu --needed --noconfirm "${packages[@]}"
 EOF
+
+# Remove temporary passwordless sudo access
+rm -f /etc/sudoers.d/99_${SUDO_USER}_nopasswd
 
 # Enable Flathub
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
