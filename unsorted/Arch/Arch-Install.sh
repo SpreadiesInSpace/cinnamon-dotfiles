@@ -144,12 +144,12 @@ sed -i 's/^#\s*\(%wheel ALL=(ALL:ALL) ALL\)/\1/' /etc/sudoers
 useradd -m -G users,wheel,audio,video -s /bin/bash "$username"
 echo "root:$rootpasswd" | chpasswd
 echo "$username:$userpasswd" | chpasswd
-EOF
 
 # Clone Repo as New User
-cat << EOF | su - "$username"
+cat << 'CLONE' | su - "$username"
 cd; git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles
 cd cinnamon-dotfiles
 touch .arch.done
 echo "Reboot and run Setup.sh in cinnamon-dotfiles located in $username's home folder."
+CLONE
 EOF

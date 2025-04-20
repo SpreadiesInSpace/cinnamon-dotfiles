@@ -172,12 +172,12 @@ sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub
 
 # Reconfigure System
 xbps-reconfigure -fa
-EOF
 
 # Clone Repo as New User
-cat << EOF | su - "$username"
+cat << 'CLONE' | su - "$username"
 cd; git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles
 cd cinnamon-dotfiles
 touch .void.done
 echo "Reboot and run Setup.sh in cinnamon-dotfiles located in $username's home folder."
+CLONE
 EOF
