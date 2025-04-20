@@ -85,13 +85,13 @@ MyApplet.prototype = {
             });
             this._applet_context_menu.addMenuItem(this.panelEditMode);
 
-            let addapplets = new PopupMenu.PopupMenuItem(_("Add applets to the panel"));
+            /*let addapplets = new PopupMenu.PopupMenuItem(_("Add applets to the panel"));
             let addappletsicon = new St.Icon({icon_name: "applets", icon_size: 22, icon_type: St.IconType.FULLCOLOR });
             addapplets.connect('activate', Lang.bind(this, function() {
                 Util.spawnCommandLine("cinnamon-settings applets panel"+this.panel.panelId);
             }));
             addapplets.addActor(addappletsicon, { align: St.Align.END });
-            this._applet_context_menu.addMenuItem(addapplets);
+            this._applet_context_menu.addMenuItem(addapplets);*/
 
             this.itemAutohide = new PopupMenu.PopupSwitchMenuItem(_("Autohide"),
               this.auto_hide,
