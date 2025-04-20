@@ -147,7 +147,7 @@ echo "$username:$userpasswd" | chpasswd
 EOF
 
 # Clone Repo as New User
-cat << 'EOF' | su - "$username"
+cat << EOF | su - "$username"
 cd; git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles
 cd cinnamon-dotfiles
 touch .arch.done
