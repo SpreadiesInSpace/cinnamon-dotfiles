@@ -133,17 +133,17 @@ copy_haruna_config() {
 
 copy_cinnamon_spice_settings() {
     # Copies Cinnamon spice settings, preserving old ones
-    local arch=$1
+    local distro=$1
     mkdir -p ~/.config/cinnamon/spices/old
     mv ~/.config/cinnamon/spices/* ~/.config/cinnamon/spices/old
-    cp -vnpr .config/cinnamon/spices.${arch}/* ~/.config/cinnamon/spices/
+    cp -vnpr .config/cinnamon/spices.$distro/* ~/.config/cinnamon/spices/
 }
 
 copy_personal_shortcuts() {
     # Copies My Personal Shortcuts
-    local arch=$1
+    local distro=$1
     mkdir -p ~/.local/share/applications
-    cp -vnpr .local/share/applications/${arch}/* ~/.local/share/applications/
+    cp -vnpr .local/share/applications/$distro/* ~/.local/share/applications/
 }
 
 # NixOS Needs Seperate One
@@ -172,6 +172,7 @@ copy_neofetch_config() {
     local variant=${1:-default}  # Use "default" if no argument is passed
 
     # Copies neofetch config file to appropriate directory, preserving old one
+    neofetch
     mv ~/.config/neofetch/config.conf ~/.config/neofetch/config.conf.old
 
     # Check if the variant-specific config file exists
@@ -182,6 +183,7 @@ copy_neofetch_config() {
     fi
 
     # Preserve and replace root's neofetch config
+    sudo neofetch
     sudo mv /root/.config/neofetch/config.conf /root/.config/neofetch/config.conf.old
     sudo ln -s ~/.config/neofetch/config.conf /root/.config/neofetch/config.conf
 }
@@ -242,34 +244,34 @@ copy_gedit_old_theme() {
 
 copy_menu_preferences() {
     # Copies Menu Preferences to appropriate directory, preserving old ones
-    local distro_variant=$1
+    local distro=$1
 
     mkdir -p ~/.config/menus/old
     mv ~/.config/menus/*.menu ~/.config/menus/old
-    cp -vnpr .config/menus/$distro_variant/* ~/.config/menus/
+    cp -vnpr .config/menus/$distro/* ~/.config/menus/
 }
 
 copy_qbittorrent_config() {
     # Copies Qbittorrent config to appropriate directory, preserving old one
-    local distro_variant=$1
+    local distro=$1
 
     mv ~/.config/qBittorrent/qBittorrent.conf ~/.config/qBittorrent/qBittorrent.conf.old
     mkdir -p ~/.config/qBittorrent/
-    cp -vnpr .config/qBittorrent/qBittorrent.conf.$distro_variant ~/.config/qBittorrent/qBittorrent.conf
+    cp -vnpr .config/qBittorrent/qBittorrent.conf.$distro ~/.config/qBittorrent/qBittorrent.conf
     cp -vnpr .config/qBittorrent/mumble-dark.qbtheme ~/.config/qBittorrent/
 }
 
 copy_libreoffice_config() {
     # Copies LibreOffice config to appropriate directory, preserving old ones
-    local distro_variant=$1
+    local distro=$1
 
     mkdir -p ~/.config/libreoffice
     mv ~/.config/libreoffice/4 ~/.config/libreoffice/4_old
-    cp -vnpr .config/libreoffice/$distro_variant ~/.config/libreoffice/4
+    cp -vnpr .config/libreoffice/$distro ~/.config/libreoffice/4
 
     sudo mkdir -p /root/.config/libreoffice
     sudo mv /root/.config/libreoffice/4 /root/.config/libreoffice/4_old
-    sudo cp -vprf .config/libreoffice/$distro_variant /root/.config/libreoffice/4
+    sudo cp -vprf .config/libreoffice/$distro /root/.config/libreoffice/4
 }
 
 copy_filezilla_config() {
@@ -300,15 +302,13 @@ apply_gedit_and_gnome_terminal_config() {
     local gedit_config=$2
 
     # Apply gnome-terminal configuration to root
-    cd theming/$distro/
     sudo dbus-launch dconf load / < gnome-terminal-$distro.dconf
-    rm ~/$distro-gnome-terminal.dconf
+    rm ~/gnome-terminal-$distro.dconf
     cd ..
 
     # Apply gedit configuration to root (with given gedit config)
-    cd theming/$distro/
     sudo dbus-launch dconf load / < $gedit_config
-    cd ..
+    cd $distro/
 }
 
 set_default_apps() {
@@ -357,6 +357,7 @@ set_cinnamon_background_and_sounds() {
 
 # NixOS doesn't need this
 setup_synth_shell_config() {
+    local distro=$1
     # Clone Synth-Shell and run setup
     git clone --recursive https://github.com/andresgongora/synth-shell-prompt.git
     yes | synth-shell-prompt/setup.sh
@@ -366,7 +367,7 @@ setup_synth_shell_config() {
     # Place Synth-Shell config, preserving old ones
     mkdir -p ~/.config/synth-shell/old
     cp -vnpr ~/.config/synth-shell/* ~/.config/synth-shell/old
-    cp -vprf .config/synth-shell/$1/* ~/.config/synth-shell/
+    cp -vprf .config/synth-shell/$distro/* ~/.config/synth-shell/
 
     sudo mkdir -p /root/.config/synth-shell/old
     sudo cp -vnpr /root/.config/synth-shell/* /root/.config/synth-shell/old
@@ -384,7 +385,6 @@ install_nvchad() {
 
     # Clone NVChad starter config
     git clone https://github.com/NvChad/starter ~/.config/nvim
-    rm -rf ~/.config/nvim/.git
 
     # Backup and copy custom chadrc.lua config
     mv ~/.config/nvim/lua/chadrc.lua ~/.config/nvim/lua/chadrc.lua.old

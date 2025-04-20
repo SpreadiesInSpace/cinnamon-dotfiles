@@ -46,7 +46,7 @@ copy_personal_shortcuts "arch"
 copy_bashrc_and_etc "Arch"
 
 # Copies neofetch config file to appropriate directory, preserving old one
-copy_neofetch_config # or copy_neofetch_config "gentoo" for .conf.gentoo
+copy_neofetch_config "default"
 
 # Copies Kvantum Themes to appropriate directory and installs them, preserving old config
 copy_kvantum_themes "gruvbox-fallnn"
