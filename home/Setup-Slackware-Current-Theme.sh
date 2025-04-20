@@ -270,7 +270,7 @@ nvim --headless "+MasonInstallAll" +qa
 cinnamon-dbus-command RestartCinnamon 1
 
 # Places Login Wallpaper
-sudo cp -vnr wallpapers/SpeedDial2_Wallpaper.png /boot/
+sudo cp -vnr wallpapers/Login_Wallpaper.jpg /boot/
 
 # Check if syntax highlighting configurations are already in nanorc, preserving old one
 sudo cp /etc/nanorc /etc/nanorc.old
@@ -290,3 +290,30 @@ if ! grep -q "^GTK_THEME=Gruvbox-Dark-BL" /etc/environment; then
     echo 'GTK_THEME=Gruvbox-Dark-BL' | sudo tee -a /etc/environment
 fi
 
+# Append new settings to slick-greeter.conf, preserving old one
+sudo cp /etc/lightdm/slick-greeter.conf /etc/lightdm/slick-greeter.conf.old
+echo "[Greeter]
+show-hostname=true
+theme-name=Gruvbox-Dark-BL
+icon-theme-name=gruvbox-dark-icons-gtk
+cursor-theme-name=Capitaine Cursors (Gruvbox) - White
+clock-format=%a, %-e %b %-l:%M %p 
+background=/boot/Login_Wallpaper.jpg
+draw-user-backgrounds=false" | sudo tee /etc/lightdm/slick-greeter.conf > /dev/null
+
+# Append new settings to lightdm-gtk-greeter.conf, preserving old one
+sudo cp /etc/lightdm/lightdm-gtk-greeter.conf /etc/lightdm/lightdm-gtk-greeter.conf.old
+echo "[greeter]
+background=/boot/Login_Wallpaper.jpg
+theme-name=Gruvbox-Dark-BL
+icon-name=gruvbox-dark-icons-gtk
+cursor-theme-name=Capitaine Cursors (Gruvbox) - White
+font-name=Cantarell 11
+xft-antialias=true
+xft-dpi=96
+xft-hintstyle=hintslight
+xft-rgba=rgb
+clock-format=%a, %-e %b %-l:%M %p 
+indicators=~host;~spacer;~session;~clock;~power
+user-background=false
+hide-user-image = true" | sudo tee /etc/lightdm/lightdm-gtk-greeter.conf > /dev/null

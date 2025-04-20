@@ -212,6 +212,10 @@ slpkg -iy "${gnome_packages[@]}" -o gnome
 # -O avoids pulling in dependencies like the entire Gnome DE
 slpkg -iy appstream-glib gnome-terminal -o gnome -O
 
+# Add LightDM group
+groupadd -g 380 lightdm
+useradd -d /var/lib/lightdm -s /bin/false -u 380 -g 380 lightdm
+
 # SBo packages
 sbo_packages=(
     "file-roller"
@@ -220,6 +224,9 @@ sbo_packages=(
     "gnome-system-monitor"
     "kvantum-qt5"
     "haruna"
+    "lightdm"
+    "lightdm-settings"
+    "lightdm-slick-greeter"
     "ncdu"
     "qt6ct"
     "tepl" # for gedit
@@ -307,28 +314,54 @@ for group in "${groups[@]}"; do
     usermod -aG "$group" "$username"
 done
 
-# Set SDDM to automatically log in into the Cinnamon session (if autologin is enabled)
-if [ "$enable_autologin" = true ]; then
-    sed -i '/^\[Autologin\]/,/^\[/ {
-      s/^User=[[:space:]]*$/User='"$username"'/;
-      s/^Session=[[:space:]]*$/Session=cinnamon/;
-      s/^User=.*$/User='"$username"'/;
-      s/^Session=.*$/Session=cinnamon/;
-    }' /etc/sddm.conf
+# Backup original rc.4
+cp /etc/rc.d/rc.4 /etc/rc.d/rc.4.old
+
+# Run LightDM on Boot
+if ! grep -q 'exec /usr/bin/lightdm' /etc/rc.d/rc.4; then
+  sed -i '/# Try to use GNOME'\''s gdm session manager/i\
+# Try to use LightDM session manager:\nif [ -x /usr/bin/lightdm ]; then\n  exec /usr/bin/lightdm\nfi\n' /etc/rc.d/rc.4
 fi
 
-# If running in a VM, append display resolution setup to SDDM's Xsetup script
+# Backup original LightDM config
+cp /etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf.old
+
+# Modify lightdm.conf in-place
+awk -v user="$username" -v autologin="$enable_autologin" -i inplace '
+/^\[Seat:\*\]/ {a=1}
+a==1 && /^#?greeter-hide-users=/ {
+    print "greeter-hide-users=false"
+    next
+}
+a==1 && /^#?autologin-user=/ {
+    if (autologin == "true") {
+        print "autologin-user=" user
+    } else {
+        print "#autologin-user=" user
+    }
+    next
+}
+a==1 && /^#?autologin-session=/ {
+    print "autologin-session=cinnamon"
+    next
+}
+{print}
+' /etc/lightdm/lightdm.conf
+
+# Ensure autologin group exists and add user
+groupadd -f autologin
+gpasswd -a "$username" autologin
+
+# If running in a VM, set display-setup-script in lightdm.conf
 if [ "$is_vm" = true ]; then
     # Detect connected output using sysfs (avoids X dependency)
     output_path=$(grep -l connected /sys/class/drm/*/status | head -n1)
     output=$(basename "$(dirname "$output_path")")
     output="${output#*-}"  # Strip 'cardX-' prefix
     if [[ -n "$output" ]]; then
-        resolution_cmd="xrandr --output $output --mode 1920x1080 --rate 60"
-        # Append only if not already present
-        if ! grep -Fxq "$resolution_cmd" /usr/share/sddm/scripts/Xsetup; then
-            echo "$resolution_cmd" >> /usr/share/sddm/scripts/Xsetup
-        fi
+        sed -i "/^\[Seat:\*\]/,/^\[.*\]/ {
+            s|^#*display-setup-script=.*|display-setup-script=xrandr --output $output --mode 1920x1080 --rate 60|
+        }" /etc/lightdm/lightdm.conf
     fi
 fi
 
