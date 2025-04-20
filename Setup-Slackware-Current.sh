@@ -333,6 +333,10 @@ a==1 && /^#?greeter-hide-users=/ {
     print "greeter-hide-users=false"
     next
 }
+a==1 && /^#?greeter-session=/ {
+    print "greeter-session=lightdm-slick-greeter"
+    next
+}
 a==1 && /^#?autologin-user=/ {
     if (autologin == "true") {
         print "autologin-user=" user
