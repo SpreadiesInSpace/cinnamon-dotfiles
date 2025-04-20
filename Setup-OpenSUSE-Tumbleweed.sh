@@ -266,7 +266,9 @@ echo "DefaultTimeoutStopSec=15s" | tee -a /etc/systemd/system.conf.d/override.co
 systemctl daemon-reload
 
 # Add flag for Setup-Theme.sh
+cat << 'EOF' | su - "$SUDO_USER"
 touch .opensuse.done
+EOF
 
 # Reboot for the changes to take effect
 echo "Installation complete! Please reboot for the changes to take effect. Then run Theme.sh in cinnamon-dotfiles for theming."
