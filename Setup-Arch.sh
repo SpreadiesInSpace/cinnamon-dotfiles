@@ -48,8 +48,10 @@ done
 # Update MAKEFLAGS /etc/makepkg.conf to match CPU cores
 sed -i 's/^#*\s*MAKEFLAGS=.*/MAKEFLAGS="--jobs=$(nproc)"/' /etc/makepkg.conf
 
-# Install base-devel and git, then install yay from AUR
+# Install base-devel and git
 pacman -S --needed --noconfirm base-devel git
+
+# Install yay
 cat << 'EOF' | su - "$SUDO_USER"
 git clone https://aur.archlinux.org/yay-bin.git
 cd yay-bin
@@ -142,7 +144,7 @@ packages=(
     "qemu-block-iscsi"
 )
 
-# Update system and install packages
+# Install Packages
 yay -Syu --needed --noconfirm "${packages[@]}"
 EOF
 

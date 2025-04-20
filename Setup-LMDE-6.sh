@@ -143,7 +143,7 @@ packages=(
     "guestfs-tools"
 )
 
-# Update system and install packages
+# Install Packages
 apt install -y "${packages[@]}"
 
 # Enable Flathub

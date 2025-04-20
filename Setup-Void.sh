@@ -179,8 +179,8 @@ packages=(
     "libguestfs"
 )
 
-# Update system and install packages
-xbps-install -Syu "${packages[@]}"
+# Install Packages
+xbps-install -Sy "${packages[@]}"
 
 # Protect neofetch from being removed
 xbps-pkgdb -m hold neofetch

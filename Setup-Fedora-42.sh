@@ -139,7 +139,7 @@ packages=(
     "@virtualization"
 )
 
-# Update install packages
+# Install Packages
 dnf -y install "${packages[@]}"
 
 # Disable Problem Reporting

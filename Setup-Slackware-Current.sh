@@ -239,7 +239,7 @@ sbo_packages=(
     "glusterfs"
 )
 
-# Update system and install packages
+# Install Packages
 slpkg -iy "${sbo_packages[@]}"
 slpkg -iy bottom # prevent download timeout
 
