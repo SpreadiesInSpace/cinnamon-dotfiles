@@ -195,12 +195,12 @@ echo "$username:$userpasswd" | chpasswd
 
 # Enabling System Services
 systemctl enable NetworkManager
+EOF
 
 # Clone Repo as New User
-cat << CLONE | su - "$username"
+cat << 'EOF' | su - "$username"
 cd; git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles
 cd cinnamon-dotfiles
 touch .opensuse-tumbleweed.done
 echo "Reboot and run Setup.sh in cinnamon-dotfiles located in $username's home folder."
-CLONE
 EOF

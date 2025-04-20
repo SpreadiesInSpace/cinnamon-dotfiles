@@ -37,17 +37,7 @@ case "$response" in
         ;;
 esac
 
-# Install base-devel and git, then install yay from AUR
-pacman -S --needed --noconfirm base-devel git
-cat << 'EOF' | su - "$SUDO_USER"
-git clone https://aur.archlinux.org/yay-bin.git
-cd yay-bin
-makepkg -si --noconfirm
-cd ..
-rm -rf yay-bin
-EOF
-
-# Check if Color, ParallelDownloads, and ILoveCandy are already in yay config
+# Check if Color, ParallelDownloads, and ILoveCandy are already in /etc/pacman.conf
 declare -A options=(["Color"]="Color" ["ParallelDownloads"]="ParallelDownloads = 5" ["ILoveCandy"]="ILoveCandy")
 for key in "${!options[@]}"; do
     if ! grep -q "^$key" /etc/pacman.conf; then
@@ -58,7 +48,15 @@ done
 # Update MAKEFLAGS /etc/makepkg.conf to match CPU cores
 sed -i 's/^#*\s*MAKEFLAGS=.*/MAKEFLAGS="--jobs=$(nproc)"/' /etc/makepkg.conf
 
+# Install base-devel and git, then install yay from AUR
+pacman -S --needed --noconfirm base-devel git
 cat << 'EOF' | su - "$SUDO_USER"
+git clone https://aur.archlinux.org/yay-bin.git
+cd yay-bin
+makepkg -si --noconfirm
+cd ..
+rm -rf yay-bin
+
 # All packages
 packages=(
     # System utilities

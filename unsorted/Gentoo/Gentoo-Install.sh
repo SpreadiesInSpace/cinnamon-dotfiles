@@ -389,12 +389,12 @@ rm /stage3-*.tar.*
 useradd -m -G users,wheel,plugdev -s /bin/bash "$username"
 echo "root:$rootpasswd" | chpasswd
 echo "$username:$userpasswd" | chpasswd
+EOF
 
 # Clone Repo as New User
-cat << CLONE | su - "$username"
+cat << 'EOF' | su - "$username"
 cd; git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles
 cd cinnamon-dotfiles
 touch .gentoo.done
 echo "Reboot and run Setup.sh in cinnamon-dotfiles located in $username's home folder."
-CLONE
 EOF

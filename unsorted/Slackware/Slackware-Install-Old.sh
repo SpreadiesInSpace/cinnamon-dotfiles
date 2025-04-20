@@ -182,12 +182,12 @@ sed -i '/^\[Autologin\]/,/^\[/ {
   s/^User=.*$/User='$username'/;
   s/^Session=.*$/Session=xfce/;
 }' /etc/sddm.conf
+EOF
 
 # Clone Repo as New User
-cat << CLONE | su - $"$username"
+cat << 'EOF' | su - "$username"
 cd; git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles
 cd cinnamon-dotfiles
 touch .slackware-current.done
 echo "Reboot and run Setup.sh in cinnamon-dotfiles located in $username's home folder."
-CLONE
 EOF
