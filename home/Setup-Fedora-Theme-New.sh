@@ -15,7 +15,7 @@ override_qt_cursor_theme
 # Enable GTK & QT Flatpak Theming Override
 enable_flatpak_theme_override
 
-# Copies BleachBit config to appropriate directories, preserving old one *
+# Copies BleachBit config to appropriate directories, preserving old one
 copy_bleachbit_config "fedora"
 
 # Copies fonts to appropriate directories
