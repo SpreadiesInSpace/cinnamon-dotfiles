@@ -15,8 +15,8 @@ override_qt_cursor_theme
 # Enable GTK & QT Flatpak Theming Override
 enable_flatpak_theme_override
 
-# Copies BleachBit config to appropriate directories, preserving old one
-copy_bleachbit_config "arch"
+# Copies BleachBit config to appropriate directories, preserving old one *
+copy_bleachbit_config "fedora"
 
 # Copies fonts to appropriate directories
 copy_fonts
@@ -25,7 +25,7 @@ copy_fonts
 copy_sounds_and_wallpapers
 
 # Copies applets to appropriate directories
-copy_applets "applets.640" # applets.568 for 5.6.8 applets for 6.2.x
+copy_applets "applets.640"
 
 # Copies KDE Global Cinnamon defaults to ~/.config, preserving old one
 copy_kdeglobals
@@ -37,13 +37,13 @@ symlink_kdeglobals
 copy_haruna_config
 
 # Copies Cinnamon spice settings, preserving old ones
-copy_cinnamon_spice_settings "arch"
+copy_cinnamon_spice_settings "fedora"
 
 # Copies My Personal Shortcuts
-copy_personal_shortcuts "arch"
+copy_personal_shortcuts "fedora"
 
 # Copies .bashrc and etc to home directory, preserving old one
-copy_bashrc_and_etc "Arch"
+copy_bashrc_and_etc "Fedora"
 
 # Copies neofetch config file to appropriate directory, preserving old one
 copy_neofetch_config "default"
@@ -55,16 +55,16 @@ copy_kvantum_themes "gruvbox-fallnn"
 copy_qtct_configs
 
 # Copies Gedit Theme to appropriate directory
-copy_gedit_theme # copy_gedit_old_theme for old gedit variant
+copy_gedit_theme
 
 # Copies Menu Preferences to appropriate directory
-copy_menu_preferences "arch"
+copy_menu_preferences "fedora"
 
 # Copies Qbittorent config to appropriate directory, preserving old one
 copy_qbittorrent_config "arch"
 
 # Copies LibreOffice config to appropriate directory, preserving old ones
-copy_libreoffice_config "arch"
+copy_libreoffice_config "fedora"
 
 # Copies Filezilla config to appropriate directory, preserving old one
 copy_filezilla_config
@@ -72,24 +72,28 @@ copy_filezilla_config
 # Copies Profile Picture to home directory, preserving old one
 copy_profile_picture
 
-# Copies bauh config to appropriate directory, preserving old one
-mv ~/.config/bauh ~/.config/bauh.old
-cp -vnpr .config/bauh/ ~/.config/
-
 # Import Entire Desktop Configuration, preserving old one
-import_desktop_config "Arch"
+import_desktop_config "Fedora"
 
 # Apply gedit and gnome-terminal configuration to root
-apply_gedit_and_gnome_terminal_config "Arch" "gedit-48.dconf"
+apply_gedit_and_gnome_terminal_config "Fedora" "gedit-48.dconf"
 
 # Sets Default Apps
-set_default_apps "Arch"
+set_default_apps "Fedora"
+
+# Define the home directory (For Menu Applet Icon)
+home_dir="${HOME}"
+# Define the path to JSON file
+json_file="${home_dir}/.config/cinnamon/spices/menu@cinnamon.org/0.json"
+# Use sed to replace /home/f16poom with the home directory in the value field on line 91
+sed -i "91s|\"value\": \"/home/f16poom/goa-account-fedora.svg\"|\"value\": \"${home_dir}/.icons/goa-account-fedora.svg\"|g" $json_file
+mv ~/goa-account-fedora.svg ~/.icons/
 
 # Sets Background and Sounds
 set_cinnamon_background_and_sounds
 
 # Install Synth-Shell Prompt
-setup_synth_shell_config "arch"
+setup_synth_shell_config "fedora"
 
 # Install NVChad for neovim, preserving old configs
 install_nvchad
@@ -102,7 +106,7 @@ place_login_wallpaper
 
 # Check if syntax highlighting configurations are already in nanorc, preserving old one
 configure_nanorc_basic
-configure_nanorc_extra # Fedora and Gentoo doesn't need this
+# configure_nanorc_extra
 
 # Check if environment variables for QT & Additional Theming are already set, preserving old one
 set_qt_and_gtk_environment
