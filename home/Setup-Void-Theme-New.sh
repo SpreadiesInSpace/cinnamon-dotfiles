@@ -9,9 +9,6 @@ check_not_root
 # Install icons and themes
 install_icons_and_themes
 
-# Disable Cinnamon 6.4's built in polkit
-dconf write /org/cinnamon/enable-polkit-agent "false"
-
 # Override Cursor Theme for QT Apps
 override_qt_cursor_theme
 
@@ -32,7 +29,7 @@ sudo ln -s /usr/share/fonts/* /root/.fonts/
 copy_sounds_and_wallpapers
 
 # Copies applets to appropriate directories
-copy_applets "applets.640" # applets.568 for 5.6.8 applets for 6.2.x
+copy_applets "applets.640"
 
 # Copies KDE Global Cinnamon defaults to ~/.config, preserving old one
 copy_kdeglobals
@@ -41,19 +38,19 @@ copy_kdeglobals
 symlink_kdeglobals
 
 # Copies haruna config to appropriate directory, preserving old config
-copy_haruna_config
+# copy_haruna_config
 
 # Copies Cinnamon spice settings, preserving old ones
-copy_cinnamon_spice_settings "slackware.current"
+copy_cinnamon_spice_settings "void"
 
 # Copies My Personal Shortcuts
-copy_personal_shortcuts "slackware"
+copy_personal_shortcuts "void"
 
 # Copies .bashrc and etc to home directory, preserving old one
-copy_bashrc_and_etc "Slackware"
+copy_bashrc_and_etc "Void"
 
 # Copies neofetch config file to appropriate directory, preserving old one
-copy_neofetch_config "slackware"
+copy_neofetch_config "void"
 
 # Installs Kvantum Themes to appropriate directory, preserving old config
 copy_kvantum_themes "gruvbox-fallnn"
@@ -61,23 +58,17 @@ copy_kvantum_themes "gruvbox-fallnn"
 # Copies qt5ct & qt6ct config to appropriate directories, preserving old ones
 copy_qtct_configs
 
-# Copies xfce4 config to appropriate directories, preserving old one
-mv ~/.config/xfce4 ~/.config/xfce4.old
-cp -vnpr .config/xfce4/ ~/.config/
-sudo mv /root/.config/xfce4 /root/.config/xfce4.old
-sudo cp -vnpr .config/xfce4/ /root/.config/
-
 # Copies Gedit Theme to appropriate directory
 copy_gedit_theme
 
 # Copies Menu Preferences to appropriate directory
-copy_menu_preferences "slackware"
+copy_menu_preferences "void"
 
 # Copies Qbittorent config to appropriate directory, preserving old one
 copy_qbittorrent_config "arch"
 
 # Copies LibreOffice config to appropriate directory, preserving old ones
-copy_libreoffice_config "slackware"
+copy_libreoffice_config "arch"
 
 # Copies Filezilla config to appropriate directory, preserving old one
 copy_filezilla_config
@@ -86,19 +77,19 @@ copy_filezilla_config
 copy_profile_picture
 
 # Import Entire Desktop Configuration, preserving old one
-import_desktop_config "Slackware"
+import_desktop_config "Void"
 
 # Apply gedit and gnome-terminal configuration to root
-apply_gedit_and_gnome_terminal_config "Slackware" "gedit.dconf"
+apply_gedit_and_gnome_terminal_config "Void" "gedit-48.dconf"
 
 # Sets Default Apps
-set_default_apps "Slackware"
+set_default_apps "Void"
 
 # Sets Background and Sounds
 set_cinnamon_background_and_sounds
 
 # Install Synth-Shell Prompt
-setup_synth_shell_config "fedora"
+setup_synth_shell_config "lmde"
 
 # Install NVChad for neovim, preserving old configs
 install_nvchad
@@ -111,7 +102,7 @@ place_login_wallpaper
 
 # Check if syntax highlighting configurations are already in nanorc, preserving old one
 configure_nanorc_basic
-configure_nanorc_extra
+configure_nanorc_extra # Fedora and Gentoo doesn't need this
 
 # Check if environment variables for QT & Additional Theming are already set, preserving old one
 set_qt_and_gtk_environment
