@@ -32,7 +32,7 @@ sudo ln -s /usr/share/fonts/* /root/.fonts/
 copy_sounds_and_wallpapers
 
 # Copies applets to appropriate directories
-copy_applets "applets.640" # applets.568 for 5.6.8 applets for 6.2.x
+copy_applets "applets.640"
 
 # Copies KDE Global Cinnamon defaults to ~/.config, preserving old one
 copy_kdeglobals

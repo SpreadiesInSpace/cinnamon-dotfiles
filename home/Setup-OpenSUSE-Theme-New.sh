@@ -28,7 +28,7 @@ copy_fonts
 copy_sounds_and_wallpapers
 
 # Copies applets to appropriate directories
-copy_applets "applets.640" # applets.568 for 5.6.8 applets for 6.2.x
+copy_applets "applets.640"
 
 # Copies KDE Global Cinnamon defaults to ~/.config, preserving old one
 copy_kdeglobals
@@ -79,7 +79,11 @@ copy_profile_picture
 import_desktop_config "openSUSE"
 
 # Apply gedit and gnome-terminal configuration to root
-apply_gedit_and_gnome_terminal_config "openSUSE" "gedit-48.dconf"
+gnomesu dconf load / < gnome-terminal-openSUSE.dconf
+rm ~/gnome-terminal-openSUSE.dconf
+cd ..
+gnomesu dconf load / < gedit-48.dconf
+cd openSUSE/
 
 # Sets Default Apps
 set_default_apps "openSUSE"

@@ -297,6 +297,7 @@ import_desktop_config() {
     rm ~/$distro.dconf
 }
 
+# openSUSE Needs Seperate One
 apply_gedit_and_gnome_terminal_config() {
     local distro=$1
     local gedit_config=$2
