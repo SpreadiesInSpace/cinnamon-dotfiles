@@ -43,7 +43,7 @@ copy_cinnamon_spice_settings "lmde"
 copy_personal_shortcuts "lmde"
 
 # Copies .bashrc and etc to home directory, preserving old one
-copy_bashrc_and_etc "Arch"
+copy_bashrc_and_etc "LMDE"
 
 # Copies neofetch config file to appropriate directory, preserving old one
 copy_neofetch_config "LMDE"
@@ -93,7 +93,7 @@ mv ~/linuxmint-logo-filled-ring.svg ~/.icons/
 set_cinnamon_background_and_sounds
 
 # Install Synth-Shell Prompt
-setup_synth_shell_config "arch"
+setup_synth_shell_config "lmde"
 
 # Install NVChad for neovim, preserving old configs
 install_nvchad

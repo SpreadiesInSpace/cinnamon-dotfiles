@@ -19,7 +19,7 @@ override_qt_cursor_theme
 enable_flatpak_theme_override
 
 # Copies BleachBit config to appropriate directories, preserving old one
-copy_bleachbit_config "arch"
+copy_bleachbit_config "slackware"
 
 # Copies fonts to appropriate directories
 copy_fonts
