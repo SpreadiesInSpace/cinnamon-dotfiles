@@ -159,10 +159,10 @@ cp -vnpr .config/qBittorrent/mumble-dark.qbtheme ~/.config/qBittorrent/
 # Copies LibreOffice config to appropriate directory, preserving old ones
 mkdir -p ~/.config/libreoffice
 mv ~/.config/libreoffice/4 ~/.config/libreoffice/4_old
-cp -vpnr .config/libreoffice/fedora ~/.config/libreoffice/4
+cp -vpnr .config/libreoffice/gentoo ~/.config/libreoffice/4
 sudo mkdir -p /root/.config/libreoffice
 sudo mv /root/.config/libreoffice/4 /root/.config/libreoffice/4_old
-sudo cp -vprf .config/libreoffice/fedora /root/.config/libreoffice/4
+sudo cp -vprf .config/libreoffice/gentoo /root/.config/libreoffice/4
 
 # Copies Filezilla config to appropriate directory, preserving old one
 mv ~/.config/filezilla/ ~/.config/filezilla.old
