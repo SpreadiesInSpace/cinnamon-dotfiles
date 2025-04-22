@@ -10,13 +10,12 @@ check_not_root() {
     fi
 }
 
-# NixOS Needs Seperate One
 install_icons_and_themes() {
-    # Download Icons and Fonts
+    # Run installer
     sudo echo
-    ./icons-and-fonts.sh
+    bash icons-and-fonts.sh
 
-    # Set Filenames
+    # Set filenames
     ICON_ZIP="gruvbox-dark-icons-gtk-1.0.0.zip"
     ICON_EXTRACTED="gruvbox-dark-icons-gtk-1.0.0"
     ICON_RENAME="gruvbox-dark-icons-gtk"
@@ -25,25 +24,30 @@ install_icons_and_themes() {
     THEME_ZIP="1670604530-Gruvbox-Dark-BL.zip"
     THEME_DIR="Gruvbox-Dark-BL"
 
-    # Extract and install icons
+    # Extract icons
     mv .icons/*.zip "$PWD"
-    unzip "$CURSOR_ZIP"
     unzip "$ICON_ZIP"
+    unzip "$CURSOR_ZIP"
     mv "$ICON_EXTRACTED" ".icons/$ICON_RENAME"
     mv "$CURSOR_DIR" .icons/
-    sudo cp -vnpr .icons/* /usr/share/icons/
-    mkdir -p ~/.icons
-    cp -vnpr .icons/* ~/.icons/
 
-    # Extract and install themes
+    # Extract themes
     mv .themes/*.zip "$PWD"
     unzip "$THEME_ZIP"
     mv "$THEME_DIR" .themes/
-    sudo cp -vnpr .themes/* /usr/share/themes/
-    mkdir -p ~/.themes
+
+    # Always install to user directories
+    mkdir -p ~/.icons ~/.themes
+    cp -vnpr .icons/* ~/.icons/
     cp -vnpr .themes/* ~/.themes/
 
-    # Move ZIPs back & remove extracted ZIPs
+    # If not NixOS, also install to system-wide directories
+    if ! grep -qi "nixos" /etc/os-release; then
+        sudo cp -vnpr .icons/* /usr/share/icons/
+        sudo cp -vnpr .themes/* /usr/share/themes/
+    fi
+
+    # Move ZIPs back & clean up
     mv "$CURSOR_ZIP" "$ICON_ZIP" .icons/
     mv "$THEME_ZIP" .themes/
     rm -rf ".icons/$ICON_RENAME" ".icons/$CURSOR_DIR" ".themes/$THEME_DIR"
@@ -317,7 +321,7 @@ set_default_apps() {
 
     # Set default apps for the given distro
     chmod +x Default-Apps-$distro.sh
-    ./Default-Apps-$distro.sh
+    bash Default-Apps-$distro.sh
     sudo ./Default-Apps-$distro.sh
     rm ~/Default-Apps-$distro.sh
     cd ../..
