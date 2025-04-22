@@ -64,7 +64,7 @@ copy_menu_preferences "lmde"
 copy_qbittorrent_config "arch"
 
 # Copies LibreOffice config to appropriate directory, preserving old ones
-copy_libreoffice_config "slackware"
+copy_libreoffice_config "lmde"
 
 # Copies Filezilla config to appropriate directory, preserving old one
 copy_filezilla_config

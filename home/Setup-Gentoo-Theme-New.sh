@@ -67,7 +67,7 @@ copy_menu_preferences "gentoo"
 copy_qbittorrent_config "arch"
 
 # Copies LibreOffice config to appropriate directory, preserving old ones
-copy_libreoffice_config "fedora"
+copy_libreoffice_config "gentoo"
 
 # Copies Filezilla config to appropriate directory, preserving old one
 copy_filezilla_config
