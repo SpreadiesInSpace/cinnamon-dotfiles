@@ -46,7 +46,7 @@ copy_personal_shortcuts "nixos"
 copy_bashrc_and_etc "nixos"
 
 # Copies neofetch config file to appropriate directory, preserving old one
-copy_neofetch_config "default"
+copy_neofetch_config "nixos"
 
 # Installs Kvantum Themes to appropriate directory, preserving old config *
 copy_kvantum_themes "gruvbox-fallnn" "nixos"

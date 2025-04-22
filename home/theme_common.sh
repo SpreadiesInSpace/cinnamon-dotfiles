@@ -371,7 +371,7 @@ set_default_apps() {
     # Set default apps for the given distro
     chmod +x Default-Apps-$distro.sh
     bash Default-Apps-$distro.sh
-    sudo ./Default-Apps-$distro.sh
+    sudo bash Default-Apps-$distro.sh
     rm ~/Default-Apps-$distro.sh
     cd ../..
 }
