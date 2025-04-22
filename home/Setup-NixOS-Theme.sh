@@ -6,16 +6,11 @@ source ./theme_common.sh
 # Check if the script is run as root
 check_not_root
 
-# Install icons and themes
+# Install icons and themes *
 install_icons_and_themes
 
-# Override Cursor Theme for QT Apps
-mkdir -p ~/.icons/default
-rm -rf ~/.icons/default/*
-ln -s ~/.icons/Capitaine\ Cursors\ \(Gruvbox\)\ -\ White/* ~/.icons/default/
-sudo mkdir -p /root/.icons/default
-sudo rm -rf /root/.icons/default/*
-sudo ln -s ~/.icons/Capitaine\ Cursors\ \(Gruvbox\)\ -\ White/* /root/.icons/default/
+# Override Cursor Theme for QT Apps *
+override_qt_cursor_theme "nixos"
 
 # Enable GTK & QT Flatpak Theming Override
 enable_flatpak_theme_override
@@ -23,9 +18,8 @@ enable_flatpak_theme_override
 # Copies BleachBit config to appropriate directories, preserving old one
 copy_bleachbit_config "nixos"
 
-# Copies fonts to appropriate directories
-cp -vnpr .fonts/ ~/
-# sudo cp -vnpr .fonts/* /usr/share/fonts/
+# Copies fonts to appropriate directories *
+copy_fonts "nixos"
 
 # Copies sounds and wallpapers to home directory
 copy_sounds_and_wallpapers
@@ -36,9 +30,8 @@ copy_applets "applets.640"
 # Copies KDE Global Cinnamon defaults to ~/.config, preserving old one
 copy_kdeglobals
 
-# Symlink kdeglobals to color-schemes for KDE applications like haruna
-sudo mkdir -p ~/.local/share/color-schemes/
-sudo ln -sf ~/.config/kdeglobals ~/.local/share/color-schemes/gruvbox-dark.colors
+# Symlink kdeglobals to color-schemes for KDE applications like haruna *
+symlink_kdeglobals "nixos"
 
 # Copies haruna config to appropriate directory, preserving old config
 copy_haruna_config
@@ -49,30 +42,14 @@ copy_cinnamon_spice_settings "nixos"
 # Copies My Personal Shortcuts
 copy_personal_shortcuts "nixos"
 
-# Copies .bashrc and etc to home directory, preserving old one
-cd theming/
-cp -vnpr NixOS/* ~/;rm ~/configuration.nix
-sudo cp /root/.bashrc /root/.bashrc.old
-sudo cp NixOS/.bashrc.root /root/.bashrc;sudo cp NixOS/NixAscii.txt /root/
-cp ~/.bashrc ~/.bashrc.old
-cat NixOS/.bashrc > bashrc
-mv bashrc ~/.bashrc
-cd ..
+# Copies .bashrc and etc to home directory, preserving old one *
+copy_bashrc_and_etc "nixos"
 
 # Copies neofetch config file to appropriate directory, preserving old one
 copy_neofetch_config "default"
 
-# Copies Kvantum Themes to appropriate directory and installs them, preserving old config
-mv ~/.config/Kvantum ~/.config/Kvantum.old
-cp -vnpr .config/Kvantum/ ~/.config/
-echo "" >> ~/.config/Kvantum/kvantum.kvconfig
-echo "[Applications]
-Gruvbox-Dark-Brown=kdeconnect-app, kdeconnect-sms" >> ~/.config/Kvantum/kvantum.kvconfig
-sudo mv /root/.config/Kvantum /root/.config/Kvantum.old
-# sudo cp -vnpr .config/Kvantum/ /root/.config/Kvantum
-kvantummanager --set gruvbox-fallnn
-# sudo kvantummanager --set gruvbox-fallnn
-sudo ln -s ~/.config/Kvantum /root/.config/
+# Installs Kvantum Themes to appropriate directory, preserving old config *
+copy_kvantum_themes "gruvbox-fallnn" "nixos"
 
 # Copies qt5ct & qt6ct config to appropriate directories, preserving old ones
 copy_qtct_configs

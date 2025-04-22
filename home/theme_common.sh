@@ -1,6 +1,10 @@
 #!/bin/bash
 
-# TO DO: Make Variables for Theme Related Entries (for Light Mode)
+# TO DO: 
+# - Make Variables for Theme Related Entries (for Light Mode)
+# - Remove All Verbose Copies 
+# - Suppress All Functions' Outputs
+# - Echo Relavent Descriptions for All Functions
 
 check_not_root() {
     # Prevents script from being run as root
@@ -53,13 +57,23 @@ install_icons_and_themes() {
     rm -rf ".icons/$ICON_RENAME" ".icons/$CURSOR_DIR" ".themes/$THEME_DIR"
 }
 
-# NixOS Needs Seperate One
 override_qt_cursor_theme() {
     # Override Cursor Theme for QT Apps
-    rm -rf ~/.icons/default
-    sudo mkdir -p /usr/share/icons/default
-    sudo rm -rf /usr/share/icons/default/*
-    sudo ln -s /usr/share/icons/Capitaine\ Cursors\ \(Gruvbox\)\ -\ White/* /usr/share/icons/default/
+    local distro="$1"
+
+    if [ "$distro" = "nixos" ]; then
+        mkdir -p ~/.icons/default
+        rm -rf ~/.icons/default/*
+        ln -s ~/.icons/"Capitaine Cursors (Gruvbox) - White/"* ~/.icons/default/
+        sudo mkdir -p /root/.icons/default
+        sudo rm -rf /root/.icons/default/*
+        sudo ln -s ~/.icons/"Capitaine Cursors (Gruvbox) - White/"* /root/.icons/default/
+    else
+        rm -rf ~/.icons/default
+        sudo mkdir -p /usr/share/icons/default
+        sudo rm -rf /usr/share/icons/default/*
+        sudo ln -s "/usr/share/icons/Capitaine Cursors (Gruvbox) - White/"* /usr/share/icons/default/
+    fi
 }
 
 enable_flatpak_theme_override() {
@@ -92,12 +106,18 @@ copy_bleachbit_config() {
     sudo cp -vprf "$src_file" "$root_target"
 }
 
-# NixOS Needs Seperate One
 copy_fonts() {
   # Copies fonts to appropriate directories
-  sudo cp -vnpr .fonts/* /usr/share/fonts/
-  mkdir -p ~/.fonts
-  sudo ln -s /usr/share/fonts/* ~/.fonts/
+  local distro="$1"
+
+  # NixOS doesn’t use /usr/share/fonts/ for user fonts
+  if [ "$distro" = "nixos" ]; then
+    cp -vnpr .fonts/ ~/
+  else
+    sudo cp -vnpr .fonts/* /usr/share/fonts/
+    mkdir -p ~/.fonts
+    sudo ln -s /usr/share/fonts/* ~/.fonts/
+  fi
 }
 
 copy_sounds_and_wallpapers() {
@@ -121,11 +141,17 @@ copy_kdeglobals() {
   sudo ln -s ~/.config/kdeglobals /root/.config/
 }
 
-# NixOS Needs Seperate One
 symlink_kdeglobals() {
   # Symlink kdeglobals to color-schemes for KDE applications like haruna
-  sudo mkdir -p /usr/share/color-schemes/
-  sudo ln -sf ~/.config/kdeglobals /usr/share/color-schemes/gruvbox-dark.colors
+  local distro="$1"
+
+  if [ "$distro" = "nixos" ]; then
+    sudo mkdir -p ~/.local/share/color-schemes/
+    sudo ln -sf ~/.config/kdeglobals ~/.local/share/color-schemes/gruvbox-dark.colors
+  else
+    sudo mkdir -p /usr/share/color-schemes/
+    sudo ln -sf ~/.config/kdeglobals /usr/share/color-schemes/gruvbox-dark.colors
+  fi
 }
 
 # Void doesn't need this
@@ -150,26 +176,38 @@ copy_personal_shortcuts() {
     cp -vnpr .local/share/applications/$distro/* ~/.local/share/applications/
 }
 
-# NixOS Needs Seperate One
 copy_bashrc_and_etc() {
+    # Copies .bashrc and etc to home directory, preserving old one
     local distro=$1
 
-    # Copies distro-specific theming files to home directory
-    cp -vnpr "theming/$distro/"* ~/
+    if [ "$distro" = "nixos" ]; then
+        cd theming/
+        cp -vnpr NixOS/* ~/; rm ~/configuration.nix
+        sudo cp /root/.bashrc /root/.bashrc.old
+        sudo cp NixOS/.bashrc.root /root/.bashrc
+        sudo cp NixOS/NixAscii.txt /root/
+        cp ~/.bashrc ~/.bashrc.old
+        cat NixOS/.bashrc > bashrc
+        mv bashrc ~/.bashrc
+        cd ..
+    else
+        # Copies distro-specific theming files to home directory
+        cp -vnpr "theming/$distro/"* ~/
 
-    # Preserve old root .bashrc
-    sudo cp /root/.bashrc /root/.bashrc.old
+        # Preserve old root .bashrc
+        sudo cp /root/.bashrc /root/.bashrc.old
 
-    # Create minimal root .bashrc with tty check and source user .bashrc
-    echo 'if [[ $(tty) == /dev/tty[0-9]* ]]; then
-    return
-fi' | sudo tee /root/.bashrc
+        # Create minimal root .bashrc with tty check and source user .bashrc
+        echo 'if [[ $(tty) == /dev/tty[0-9]* ]]; then
+        return
+    fi' | sudo tee /root/.bashrc
 
-    echo "source $HOME/.bashrc" | sudo tee -a /root/.bashrc
+        echo "source $HOME/.bashrc" | sudo tee -a /root/.bashrc
 
-    # Preserve and replace user .bashrc
-    cp ~/.bashrc ~/.bashrc.old
-    cp "theming/$distro/.bashrc" ~/.bashrc
+        # Preserve and replace user .bashrc
+        cp ~/.bashrc ~/.bashrc.old
+        cp "theming/$distro/.bashrc" ~/.bashrc
+    fi
 }
 
 copy_neofetch_config() {
@@ -192,16 +230,27 @@ copy_neofetch_config() {
     sudo ln -s ~/.config/neofetch/config.conf /root/.config/neofetch/config.conf
 }
 
-# NixOS Needs Seperate One
 copy_kvantum_themes() {
-    # Copies Kvantum Themes to appropriate directory and installs them, preserving old config
+    # Installs Kvantum Themes to appropriate directory, preserving old config
     local theme_variant=$1
-    
-    mv ~/.config/Kvantum ~/.config/Kvantum.old
-    cp -vnpr .config/Kvantum/ ~/.config/
-    sudo mv /root/.config/Kvantum /root/.config/Kvantum.old
-    kvantummanager --set "$theme_variant"
-    sudo ln -s ~/.config/Kvantum /root/.config/
+    local distro=$2
+
+    if [ "$distro" = "nixos" ]; then
+        mv ~/.config/Kvantum ~/.config/Kvantum.old
+        cp -vnpr .config/Kvantum/ ~/.config/
+        echo "" >> ~/.config/Kvantum/kvantum.kvconfig
+        echo "[Applications]
+Gruvbox-Dark-Brown=kdeconnect-app, kdeconnect-sms" >> ~/.config/Kvantum/kvantum.kvconfig
+        sudo mv /root/.config/Kvantum /root/.config/Kvantum.old
+        kvantummanager --set gruvbox-fallnn
+        sudo ln -s ~/.config/Kvantum /root/.config/
+    else
+        mv ~/.config/Kvantum ~/.config/Kvantum.old
+        cp -vnpr .config/Kvantum/ ~/.config/
+        sudo mv /root/.config/Kvantum /root/.config/Kvantum.old
+        kvantummanager --set "$theme_variant"
+        sudo ln -s ~/.config/Kvantum /root/.config/
+    fi
 }
 
 copy_qtct_configs() {
