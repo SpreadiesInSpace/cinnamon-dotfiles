@@ -350,19 +350,25 @@ import_desktop_config() {
     rm ~/$distro.dconf
 }
 
-# openSUSE Needs Seperate One
 apply_gedit_and_gnome_terminal_config() {
     local distro=$1
     local gedit_config=$2
 
-    # Apply gnome-terminal configuration to root
-    sudo dbus-launch dconf load / < gnome-terminal-$distro.dconf
-    rm ~/gnome-terminal-$distro.dconf
-    cd ..
+    if [[ "$distro" == "openSUSE" ]]; then
+        # Use gnomesu for openSUSE
+        gnomesu dconf load / < "gnome-terminal-$distro.dconf"
+        rm ~/gnome-terminal-$distro.dconf
+        cd ..
+        gnomesu dconf load / < "$gedit_config"
+    else
+        # Use sudo dbus-launch for other distros
+        sudo dbus-launch dconf load / < "gnome-terminal-$distro.dconf"
+        rm ~/gnome-terminal-$distro.dconf
+        cd ..
+        sudo dbus-launch dconf load / < "$gedit_config"
+    fi
 
-    # Apply gedit configuration to root (with given gedit config)
-    sudo dbus-launch dconf load / < $gedit_config
-    cd $distro/
+    cd "$distro/"
 }
 
 set_default_apps() {

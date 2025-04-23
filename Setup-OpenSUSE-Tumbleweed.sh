@@ -37,9 +37,17 @@ case "$response" in
         ;;
 esac
 
-# Zypper Enable Parallel Downloads
+# Enable Parallel Downloads during Setup
 # export ZYPP_CURL2=1
 export ZYPP_PCK_PRELOAD=1
+
+# Enable Parallel Downloads and Faster Repo Syncing Persistantly 
+if ! grep -q "^ZYPP_CURL2=1" /etc/environment; then
+    echo 'ZYPP_CURL2=1' | tee -a /etc/environment
+fi
+if ! grep -q "^ZYPP_PCK_PRELOAD=1" /etc/environment; then
+    echo 'ZYPP_PCK_PRELOAD=1' | tee -a /etc/environment
+fi
 
 # Fix openSUSE's line break paste
 echo "set enable-bracketed-paste" >> /home/$username/.inputrc

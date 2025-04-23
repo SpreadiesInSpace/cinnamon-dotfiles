@@ -79,11 +79,7 @@ copy_profile_picture
 import_desktop_config "openSUSE"
 
 # Apply gedit and gnome-terminal configuration to root
-gnomesu dconf load / < gnome-terminal-openSUSE.dconf
-rm ~/gnome-terminal-openSUSE.dconf
-cd ..
-gnomesu dconf load / < gedit-48.dconf
-cd openSUSE/
+apply_gedit_and_gnome_terminal_config "openSUSE" "gedit-48.dconf"
 
 # Sets Default Apps
 set_default_apps "openSUSE"
@@ -109,12 +105,6 @@ configure_nanorc_extra
 
 # Check if environment variables for QT & Additional Theming are already set, preserving old one
 set_qt_and_gtk_environment
-if ! grep -q "^ZYPP_CURL2=1" /etc/environment; then
-    echo 'ZYPP_CURL2=1' | sudo tee -a /etc/environment
-fi
-if ! grep -q "^ZYPP_PCK_PRELOAD=1" /etc/environment; then
-    echo 'ZYPP_PCK_PRELOAD=1' | sudo tee -a /etc/environment
-fi
 
 # Append new settings to slick-greeter.conf, preserving old one
 append_slick_greeter_config
