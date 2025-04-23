@@ -248,9 +248,7 @@ echo "DefaultTimeoutStopSec=15s" | tee -a /etc/systemd/system.conf.d/override.co
 systemctl daemon-reload
 
 # Add flag for Setup-Theme.sh
-cat << 'EOF' | su - "$SUDO_USER"
-touch .lmde.done
-EOF
-
+CURRENT_DIR=$(pwd)
+su - "$SUDO_USER" -c "touch '$CURRENT_DIR/.lmde.done'"
 # Reboot for the changes to take effect
 echo "Installation complete! Please reboot for the changes to take effect. Then run Theme.sh in cinnamon-dotfiles for theming."
