@@ -12,9 +12,6 @@ if [ "$SUDO_USER" = "" ]; then
   exit
 fi
 
-# Remove passwordless sudo if script is interrupted
-trap 'rm -f /etc/sudoers.d/99_${SUDO_USER}_nopasswd' EXIT
-
 # Get the current username
 username=$SUDO_USER
 
@@ -54,7 +51,10 @@ sed -i 's/^#*\s*MAKEFLAGS=.*/MAKEFLAGS="--jobs=$(nproc)"/' /etc/makepkg.conf
 # Install base-devel and git
 pacman -S --needed --noconfirm base-devel git
 
-# Temporarily allow passwordless sudo for the new user
+# Remove passwordless sudo if script is interrupted
+trap 'rm -f /etc/sudoers.d/99_${SUDO_USER}_nopasswd' EXIT
+
+# Temporarily allow passwordless sudo for current user
 echo "$SUDO_USER ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/99_${SUDO_USER}_nopasswd
 chmod 0440 /etc/sudoers.d/99_${SUDO_USER}_nopasswd
 
@@ -265,10 +265,11 @@ echo "DefaultTimeoutStopSec=15s" | tee -a /etc/systemd/system.conf.d/override.co
 # Reload the systemd configuration
 systemctl daemon-reload
 
+# Save current working directory
+CURRENT_DIR=$(pwd)
+
 # Add flag for Setup-Theme.sh
-cat << 'EOF' | su - "$SUDO_USER"
-touch .arch.done
-EOF
+su - "$SUDO_USER" -c "touch '$CURRENT_DIR/.arch.done'"
 
 # Reboot for the changes to take effect
 echo "Installation complete! Please reboot for the changes to take effect. Then run Theme.sh in cinnamon-dotfiles for theming."
