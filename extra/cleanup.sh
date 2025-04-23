@@ -9,7 +9,6 @@ cd "$HOME"
 rm -rf cinnamon-dotfiles/
 rm -rf Old_Desktop_Configuration.dconf
 rm -rf .*.old
-rm -rf .*.done
 
 # Delete this script after running
 rm -- "$0"

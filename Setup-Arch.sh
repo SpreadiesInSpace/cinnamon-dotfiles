@@ -265,10 +265,8 @@ echo "DefaultTimeoutStopSec=15s" | tee -a /etc/systemd/system.conf.d/override.co
 # Reload the systemd configuration
 systemctl daemon-reload
 
-# Save current working directory
-CURRENT_DIR=$(pwd)
-
 # Add flag for Setup-Theme.sh
+CURRENT_DIR=$(pwd)
 su - "$SUDO_USER" -c "touch '$CURRENT_DIR/.arch.done'"
 
 # Reboot for the changes to take effect
