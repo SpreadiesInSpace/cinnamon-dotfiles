@@ -81,13 +81,8 @@ apply_gedit_and_gnome_terminal_config "LMDE" "gedit.dconf"
 # Sets Default Apps
 set_default_apps "LMDE"
 
-# Define the home directory (For Menu Applet Icon)
-home_dir="${HOME}"
-# Define the path to JSON file
-json_file="${home_dir}/.config/cinnamon/spices/menu@cinnamon.org/0.json"
-# Use sed to replace /home/f16poom with the home directory in the value field on line 91
-sed -i "91s|\"value\": \"/home/f16poom/linuxmint-logo-filled-ring.svg\"|\"value\": \"${home_dir}/.icons/linuxmint-logo-filled-ring.svg\"|g" $json_file
-mv ~/linuxmint-logo-filled-ring.svg ~/.icons/
+# Define the home directory (For Menu Applet Icon) *
+set_cinnamon_menu_icon "linuxmint-logo-filled-ring.svg"
 
 # Sets Background and Sounds
 set_cinnamon_background_and_sounds

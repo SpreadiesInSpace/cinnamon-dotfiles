@@ -154,7 +154,7 @@ symlink_kdeglobals() {
   fi
 }
 
-# Void doesn't need this
+# Void doesn't use this
 copy_haruna_config() {
     # Copies haruna config to appropriate directory, preserving old config
     mv ~/.config/haruna ~/.config/haruna.old
@@ -269,7 +269,7 @@ copy_qtct_configs() {
     sudo ln -s ~/.config/qt6ct/ /root/.config/
 }
 
-# Gentoo and LMDE see below
+# Gentoo/LMDE doesn't use this
 copy_gedit_theme() {
     # Copies Gedit Theme to appropriate directory
 
@@ -282,7 +282,7 @@ copy_gedit_theme() {
     sudo cp -vprf gruvbox-dark-gedit46.xml /root/.local/share/libgedit-gtksourceview-300/styles
 }
 
-# Gentoo and LMDE Needs This One
+# Gentoo/LMDE uses this
 copy_gedit_old_theme() {
     # Copies Gedit Theme to appropriate directory (for Gentoo, LMDE, and older versions)
 
@@ -376,6 +376,21 @@ set_default_apps() {
     cd ../..
 }
 
+# Only Fedora/LMDE/NixOS uses this
+set_cinnamon_menu_icon() {
+    # Replaces hardcoded Cinnamon menu icon path with $HOME-based path
+    local icon_file="$1"
+    local json_file="${HOME}/.config/cinnamon/spices/menu@cinnamon.org/0.json"
+    local original_path="/home/f16poom/${icon_file}"
+    local new_path="${HOME}/.icons/${icon_file}"
+
+    # Replace the hardcoded path with $HOME-based path on line 91
+    sed -i "91s|\"value\": \"${original_path}\"|\"value\": \"${new_path}\"|g" "$json_file"
+
+    # Move the icon file to .icons
+    mv ~/"$icon_file" ~/.icons/
+}
+
 set_cinnamon_background_and_sounds() {
     # Set Wallpaper
     gsettings set org.cinnamon.desktop.background picture-uri file://${HOME}/wallpapers/Desktop_Wallpaper.png
@@ -409,7 +424,7 @@ set_cinnamon_background_and_sounds() {
     done
 }
 
-# NixOS doesn't need this
+# NixOS doesn't use this
 setup_synth_shell_config() {
     local distro=$1
     # Clone Synth-Shell and run setup
@@ -453,13 +468,13 @@ restart_cinnamon() {
     cinnamon-dbus-command RestartCinnamon 1
 }
 
-# NixOS doesn't need this
+# NixOS doesn't use this
 place_login_wallpaper() {
     # Places Login Wallpaper
     sudo cp -vnr wallpapers/Login_Wallpaper.jpg /boot/
 }
 
-# NixOS doesn't need this
+# NixOS doesn't use this
 configure_nanorc_basic() {
     # Enables basic syntax highlighting in nano, preserving old config
     sudo cp /etc/nanorc /etc/nanorc.old
@@ -469,7 +484,7 @@ configure_nanorc_basic() {
     fi
 }
 
-# NixOS, Fedora and Gentoo doesn't need this
+# Fedora/Gentoo/NixOS doesn't use this
 configure_nanorc_extra() {
     # Adds extra nano syntax highlighting rules
     if ! grep -q '^include "/usr/share/nano/extra/\*.nanorc"' /etc/nanorc; then
@@ -477,7 +492,7 @@ configure_nanorc_extra() {
     fi
 }
 
-# NixOS doesn't need this, openSUSE needs 2 ZYPP variables
+# NixOS doesn't use this, openSUSE needs 2 ZYPP variables
 set_qt_and_gtk_environment() {
     # Sets QT and GTK theming variables, preserving old environment config
     sudo cp /etc/environment /etc/environment.old
@@ -491,7 +506,7 @@ set_qt_and_gtk_environment() {
     fi
 }
 
-# NixOS doesn't need this
+# NixOS doesn't use this
 append_slick_greeter_config() {
     # Append new settings to slick-greeter.conf, preserving old one
     sudo cp /etc/lightdm/slick-greeter.conf /etc/lightdm/slick-greeter.conf.old
@@ -506,7 +521,7 @@ logo=
 draw-user-backgrounds=false" | sudo tee /etc/lightdm/slick-greeter.conf > /dev/null
 }
 
-# NixOS doesn't need this
+# NixOS doesn't use this
 append_lightdm_gtk_greeter_config() {
     # Append new settings to lightdm-gtk-greeter.conf, preserving old one
     sudo cp /etc/lightdm/lightdm-gtk-greeter.conf /etc/lightdm/lightdm-gtk-greeter.conf.old

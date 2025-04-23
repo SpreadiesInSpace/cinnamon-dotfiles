@@ -81,13 +81,8 @@ apply_gedit_and_gnome_terminal_config "NixOS" "gedit-48.dconf"
 # Sets Default Apps
 set_default_apps "NixOS"
 
-# Define the home directory (For Menu Applet Icon)
-home_dir="${HOME}"
-# Define the path to JSON file
-json_file="${home_dir}/.config/cinnamon/spices/menu@cinnamon.org/0.json"
-# Use sed to replace /home/f16poom with the home directory in the value field on line 91
-sed -i "91s|\"value\": \"/home/f16poom/NixOS-Start.png\"|\"value\": \"${home_dir}/.icons/NixOS-Start.png\"|g" $json_file
-mv ~/NixOS-Start.png ~/.icons/
+# Define the home directory (For Menu Applet Icon) *
+set_cinnamon_menu_icon "NixOS-Start.png"
 
 # Sets Background and Sounds
 set_cinnamon_background_and_sounds
