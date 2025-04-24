@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Source common functions
-source ./theme_common.sh
+source ./Theme-Common.sh
 
 # Check if the script is run as root
 check_not_root

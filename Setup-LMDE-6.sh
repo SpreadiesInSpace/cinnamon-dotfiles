@@ -250,5 +250,6 @@ systemctl daemon-reload
 # Add flag for Setup-Theme.sh
 CURRENT_DIR=$(pwd)
 su - "$SUDO_USER" -c "touch '$CURRENT_DIR/.lmde.done'"
+
 # Reboot for the changes to take effect
 echo "Installation complete! Please reboot for the changes to take effect. Then run Theme.sh in cinnamon-dotfiles for theming."
