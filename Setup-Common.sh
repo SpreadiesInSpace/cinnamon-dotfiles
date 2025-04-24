@@ -141,6 +141,45 @@ backup_lightdm_config() {
 }
 
 # NixOS doesn't use this
+modify_lightdm_conf() {
+    # Modify lightdm.conf in-place
+    local distro=$1
+
+    awk -v user="$username" -v autologin="$enable_autologin" -v distro="$distro" -i inplace '
+    /^\[Seat:\*\]/ {a=1}
+    a==1 && /^#?greeter-hide-users=/ {
+        print "greeter-hide-users=false"
+        next
+    }
+    a==1 && /^#?greeter-session=/ {
+        if (distro == "arch" || distro == "slackware") {
+            print "greeter-session=lightdm-slick-greeter"
+            next
+        }
+    }
+    a==1 && /^#?autologin-user=/ {
+        if (autologin == "true") {
+            print "autologin-user=" user
+        } else {
+            print "#autologin-user=" user
+        }
+        next
+    }
+    a==1 && /^#?autologin-session=/ {
+        print "autologin-session=cinnamon"
+        next
+    }
+    a==1 && /^#?user-session=/ {
+        if (distro == "gentoo") {
+            print "user-session=cinnamon"
+            next
+        }
+    }
+    {print}
+    ' /etc/lightdm/lightdm.conf
+}
+
+# NixOS doesn't use this
 ensure_autologin_group() {
     # Ensure autologin group exists and add user
     groupadd -f autologin
