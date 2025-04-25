@@ -282,12 +282,8 @@ for key in user group swtpm_user swtpm_group; do
 done
 
 # Enable and start services
-systemctl enable libvirtd
-systemctl enable lightdm
-systemctl enable NetworkManager
-systemctl --global enable pipewire.service
-systemctl --global enable pipewire-pulse.socket 
-systemctl --global enable wireplumber.service
+systemctl enable libvirtd lightdm NetworkManager
+systemctl --global enable pipewire.service pipewire-pulse.socket wireplumber.service
 
 # Only enable net-autostart if in physical machine
 if [ "$is_vm" = false ]; then

@@ -186,9 +186,7 @@ for key in user group swtpm_user swtpm_group; do
 done
 
 # Enable and start services
-systemctl enable libvirtd
-systemctl enable lightdm
-systemctl enable NetworkManager
+systemctl enable libvirtd lightdm NetworkManager
 
 # Only enable net-autostart if in physical machine
 if [ "$is_vm" = false ]; then
