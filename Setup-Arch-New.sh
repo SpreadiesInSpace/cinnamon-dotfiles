@@ -155,7 +155,7 @@ set_libvirtd_permissions
 set_qemu_permissions
 
 # Enable and start services
-systemctl enable libvirtd lightdm NetworkManager
+enable_services "arch" libvirtd lightdm NetworkManager
 
 # Only enable net-autostart if in physical machine
 manage_virsh_network # has void/slackware cases

@@ -98,6 +98,29 @@ set_qemu_permissions() {
     done
 }
 
+# NixOS/Slackware/Void doesn't use this
+enable_services() {
+  # Enable and start services
+  local distro=${1:-}
+  shift
+  local services=("$@")
+
+  if [[ "$distro" == "fedora" || "$distro" == "lmde" || "$distro" == "opensuse" ]]; then
+    for svc in "${services[@]}"; do
+      systemctl enable --now "$svc"
+    done
+  else
+    for svc in "${services[@]}"; do
+      systemctl enable "$svc"
+    done
+    if [[ "$distro" == "gentoo" ]]; then
+      # Handle PipeWire-related services
+      systemctl --global disable pulseaudio.socket pulseaudio.service
+      systemctl --global enable pipewire.service pipewire-pulse.socket wireplumber.service
+    fi
+  fi
+}
+
 # NixOS doesn't use this
 manage_virsh_network() {
     # Only enable net-autostart if in physical machine
