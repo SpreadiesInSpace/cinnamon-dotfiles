@@ -169,30 +169,7 @@ add_user_to_groups libvirt libvirt-qemu kvm input disk video audio
 backup_lightdm_config
 
 # Modify lightdm.conf in-place
-awk -v user="$username" -v autologin="$enable_autologin" -i inplace '
-/^\[Seat:\*\]/ {a=1}
-a==1 && /^#?greeter-hide-users=/ {
-    print "greeter-hide-users=false"
-    next
-}
-a==1 && /^#?greeter-session=/ {
-    print "greeter-session=lightdm-slick-greeter"
-    next
-}
-a==1 && /^#?autologin-user=/ {
-    if (autologin == "true") {
-        print "autologin-user=" user
-    } else {
-        print "#autologin-user=" user
-    }
-    next
-}
-a==1 && /^#?autologin-session=/ {
-    print "autologin-session=cinnamon"
-    next
-}
-{print}
-' /etc/lightdm/lightdm.conf
+modify_lightdm_conf "arch"
 
 # Ensure autologin group exists and add user
 ensure_autologin_group
@@ -209,5 +186,5 @@ reload_systemd_daemon
 # Add flag for Setup-Theme.sh
 add_setup_theme_flag "arch"
 
-# Reboot for the changes to take effect
-echo "Installation complete! Please reboot for the changes to take effect. Then run Theme.sh in cinnamon-dotfiles for theming."
+# Display Reboot Message
+print_reboot_message

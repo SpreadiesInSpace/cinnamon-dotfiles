@@ -221,3 +221,8 @@ add_setup_theme_flag() {
     local distro=$1
     su - "$SUDO_USER" -c "touch $(pwd)/.$distro.done"
 }
+
+print_reboot_message() {
+    echo "Installation complete! Please reboot for the changes to take effect."
+    echo "Then run Theme.sh in cinnamon-dotfiles for theming."
+}
