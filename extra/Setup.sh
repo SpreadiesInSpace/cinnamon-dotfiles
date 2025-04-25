@@ -4,6 +4,11 @@
 # bash <(curl -sL https://tinyurl.com/cinnamon-setup)
 # bash <(wget -qO- https://tinyurl.com/cinnamon-setup)
 
+# Other Shortened Links:
+# https://tinyurl.com/cinnamon-setup (this file)
+# https://tinyurl.com/cinnamon-ISO (Setup-ISO.sh)
+# https://tinyurl.com/cinnamon-dotfiles (this repo)
+
 # Colors
 RED='\033[0;31m'
 GREEN='\033[0;32m'

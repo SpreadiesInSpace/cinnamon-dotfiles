@@ -21,39 +21,73 @@ prompt_for_vm
 # Display Status from Prompts
 display_status "$enable_autologin" "$is_vm"
 
-# Check if Color, ParallelDownloads, and ILoveCandy are already in /etc/pacman.conf
-declare -A options=(["Color"]="Color" ["ParallelDownloads"]="ParallelDownloads = 5" ["ILoveCandy"]="ILoveCandy")
-for key in "${!options[@]}"; do
-    if ! grep -q "^$key" /etc/pacman.conf; then
-        sed -i "/^# Misc options/a ${options[$key]}" /etc/pacman.conf
-    fi
-done
+# Install base-devel, git, and other dependencies
+xbps-install -Syu git xtools
 
-# Update MAKEFLAGS /etc/makepkg.conf to match CPU cores
-sed -i 's/^#*\s*MAKEFLAGS=.*/MAKEFLAGS="--jobs=$(nproc)"/' /etc/makepkg.conf
+# Install xmirror utility
+xbps-install -Sy xmirror
 
-# Install base-devel and git
-pacman -S --needed --noconfirm base-devel git
+# Use xmirror to select the fastest mirrors
+# xmirror -s https://repo-fastly.voidlinux.org/
+xmirror -s https://mirror.vofr.net/voidlinux/
 
-# Remove passwordless sudo if script is interrupted
-trap 'rm -f /etc/sudoers.d/99_${SUDO_USER}_nopasswd' EXIT
+# Install multilib and nonfree repos
+xbps-install -Sy void-repo-nonfree void-repo-multilib void-repo-multilib-nonfree
+xbps-install -Syu
 
-# Temporarily allow passwordless sudo for current user
-echo "$SUDO_USER ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/99_${SUDO_USER}_nopasswd
-chmod 0440 /etc/sudoers.d/99_${SUDO_USER}_nopasswd
-
-# Install yay
-cat << 'EOF' | su - "$SUDO_USER"
-git clone https://aur.archlinux.org/yay-bin.git
-cd yay-bin
-makepkg -si --noconfirm
-cd ..
-rm -rf yay-bin
-
-# All packages
+# All packages (adapt package names as needed for Void Linux)
 packages=(
-    # System utilities
+    # Void Builds Cinnamon packages
+    "dialog"
+    "cryptsetup"
+    "lvm2"
+    "mdadm"
+    "libxcrypt-compat"
+    "xorg-minimal"
+    "xorg-input-drivers"
+    "xorg-video-drivers"
+    #"intel-ucode"
+    "setxkbmap"
+    "xauth"
+    "font-misc-misc"
+    "alsa-plugins-pulseaudio"
+    "gptfdisk"
+    "gettext"
+    "elogind"
+    "dbus-elogind"
+    "dbus-elogind-x11"
+    "exfat-utils"
+    "fuse-exfat"
+    "wget"
+    "xdg-utils"
+    "xdg-desktop-portal"
+    "xdg-desktop-portal-gtk"
+    "xdg-desktop-portal-kde"
+    "xdg-user-dirs"
+    "xdg-user-dirs-gtk"
+    "AppStream"
+    "libvdpau-va-gl"
+    "vdpauinfo"
+    "pipewire"
+    "wireplumber"
+    "gstreamer1-pipewire"
+    "upower"
+    "dtrx"
+    "unzip"
+    "p7zip"
     "bash-completion"
+    "colord"
+    "alsa-utils"
+    "pavucontrol"
+    "udisks2"
+    "ntfs-3g"
+    "gnome-keyring"
+    "network-manager-applet"
+    "adwaita-icon-theme"
+    "rsync"
+    "psmisc"
+    "dkms"
+    # System utilities
     "file-roller"
     "flatpak"
     "gparted"
@@ -61,21 +95,21 @@ packages=(
     "ncdu"
     "neofetch"
     "timeshift"
-    "unzip"
-    "xorg-xkill"
-    "xorg-xrandr"
+    "xkill"
+    "xrandr"
     # Network utilities
     "filezilla"
     "gvfs"
     "gvfs-afc"
     "gvfs-gphoto2"
     "gvfs-mtp"
-    "gvfs-nfs"
     "gvfs-smb"
     "kdeconnect"
+    "kf6-sonnet"
     "samba"
     # Desktop environment and related packages
     "cinnamon"
+    "celluloid"
     "eog"
     "evince"
     "ffmpegthumbnailer"
@@ -83,37 +117,33 @@ packages=(
     "gedit-plugins"
     "gnome-calculator"
     "gnome-disk-utility"
-    "gnome-keyring"
     "gnome-screenshot"
     "gnome-system-monitor"
     "gnome-terminal"
     "gthumb"
     "gufw"
-    "haruna"
     "kvantum"
-    "kvantum-qt5"
     "lightdm"
-    "lightdm-settings"
-    "lightdm-slick-greeter"
+    "lightdm-gtk-greeter-settings"
+    "lightdm-gtk3-greeter"
     "nemo-fileroller"
     "nemo-image-converter"
     "nemo-preview"
-    "nemo-share"
+    #"nemo-share"
     "qt5ct"
     "qt6ct"
     "rhythmbox"
     # Applications
-    "bauh"
     "bleachbit"
-    "brave-bin"
     "bottom"
-    "gpaste"
-    "libreoffice-fresh"
+    "GPaste"
+    "libreoffice"
+    "nano"
     "neovim"
+    "octoxbps"
     "qbittorrent"
-    "reflector-simple"
     "spice-vdagent"
-    "noto-fonts"
+    "noto-fonts-ttf"
     "noto-fonts-emoji"
     "xclip"
     # For NvChad
@@ -122,7 +152,7 @@ packages=(
     "ripgrep"
     # Virtualization tools
     "virt-manager"
-    "qemu-desktop"
+    "qemu"
     "libvirt"
     "edk2-ovmf"
     "dnsmasq"
@@ -130,17 +160,20 @@ packages=(
     "bridge-utils"
     "iptables"
     "dmidecode"
-    "guestfs-tools"
-    "qemu-block-gluster"
-    "qemu-block-iscsi"
+    "libguestfs"
 )
 
 # Install Packages
-yay -Syu --needed --noconfirm "${packages[@]}"
-EOF
+xbps-install -Sy "${packages[@]}"
 
-# Remove temporary passwordless sudo access
-rm -f /etc/sudoers.d/99_${SUDO_USER}_nopasswd
+# Protect neofetch from being removed
+xbps-pkgdb -m hold neofetch
+
+# Install Brave
+cd home/theming/Void
+chmod +x update_brave.sh
+./update_brave.sh
+cd ..
 
 # Enable Flathub for Flatpak
 enable_flathub
@@ -155,19 +188,24 @@ set_libvirtd_permissions
 set_qemu_permissions
 
 # Enable and start services
-systemctl enable libvirtd lightdm NetworkManager
+for service in dbus lightdm NetworkManager polkitd spice-vdagentd libvirtd virtlockd virtlogd; do
+  ln -sf /etc/sv/$service /etc/runit/runsvdir/default
+done
+
+# Let services start
+sleep 5
 
 # Only enable net-autostart if in physical machine
-manage_virsh_network
+manage_virsh_network "void"
 
 # Add user to necessary groups
-add_user_to_groups libvirt libvirt-qemu kvm input disk video audio
+add_user_to_groups libvirt kvm input disk video audio
 
 # Backup original LightDM config
 backup_lightdm_config
 
 # Modify lightdm.conf in-place
-modify_lightdm_conf "arch"
+modify_lightdm_conf
 
 # Ensure autologin group exists and add user
 ensure_autologin_group
@@ -175,14 +213,8 @@ ensure_autologin_group
 # If running in a VM, set display-setup-script in lightdm.conf
 set_lightdm_display_for_vm
 
-# Set timeout for stopping services during shutdown via drop in file
-set_systemd_timeout_stop
-
-# Reload the systemd configuration
-reload_systemd_daemon
-
 # Add flag for Setup-Theme.sh
-add_setup_theme_flag "arch"
+add_setup_theme_flag "void"
 
 # Display Reboot Message
 print_reboot_message

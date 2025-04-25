@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Links to run this file:
+# bash <(curl -sL https://tinyurl.com/spready-slackware-current)
+# bash <(wget -qO- https://tinyurl.com/spready-slackware-current)
+
 # For SSH
 # passwd
 # dhcpcd

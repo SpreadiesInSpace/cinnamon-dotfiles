@@ -4,7 +4,7 @@
 # bash <(curl -sL https://tinyurl.com/cinnamon-ISO)
 # bash <(wget -qO- https://tinyurl.com/cinnamon-ISO)
 
-# Shortened Links:
+# Other Shortened Links:
 # https://tinyurl.com/cinnamon-ISO (this file)
 # https://tinyurl.com/cinnamon-setup (Setup.sh)
 # https://tinyurl.com/cinnamon-dotfiles (this repo)

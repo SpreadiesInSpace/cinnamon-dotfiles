@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Links to run this file:
+# bash <(curl -sL https://tinyurl.com/spready-arch)
+# bash <(wget -qO- https://tinyurl.com/spready-arch)
+
 # Check if script is run as root
 if [ "$EUID" -ne 0 ]; then
   echo "Please run the script as superuser"
