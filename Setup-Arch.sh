@@ -1,41 +1,25 @@
 #!/bin/bash
 
-# Check if script is run as root
-if [ "$EUID" -ne 0 ]; then
-  echo "Please run the script using sudo."
-  exit
-fi
+# Source common functions
+source ./Setup-Common.sh
+
+# Check if the script is run as root
+check_if_root
 
 # Check if the script is run from the root account
-if [ "$SUDO_USER" = "" ]; then
-  echo "Please do not run this script from the root account. Use sudo instead."
-  exit
-fi
+check_if_not_root_account
 
 # Get the current username
-username=$SUDO_USER
+get_current_username
 
 # Autologin Prompt
-read -rp "Enable autologin for $username? [y/N]: " autologin_input
-case "$autologin_input" in
-    [yY][eE][sS]|[yY])
-        enable_autologin=true
-        ;;
-    *)
-        enable_autologin=false
-        ;;
-esac
+prompt_for_autologin
 
 # VM Prompt
-read -rp "Is this a Virtual Machine? [y/N]: " response
-case "$response" in
-    [yY][eE][sS]|[yY])
-        is_vm=true
-        ;;
-    *)
-        is_vm=false
-        ;;
-esac
+prompt_for_vm
+
+# Display Status from Prompts
+display_status "$enable_autologin" "$is_vm"
 
 # Check if Color, ParallelDownloads, and ILoveCandy are already in /etc/pacman.conf
 declare -A options=(["Color"]="Color" ["ParallelDownloads"]="ParallelDownloads = 5" ["ILoveCandy"]="ILoveCandy")
@@ -158,114 +142,47 @@ EOF
 # Remove temporary passwordless sudo access
 rm -f /etc/sudoers.d/99_${SUDO_USER}_nopasswd
 
-# Enable Flathub
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+# Enable Flathub for Flatpak
+enable_flathub
 
 # Preserve old configurations (for Virtual Machine Manager)
-cp /etc/libvirt/libvirtd.conf /etc/libvirt/libvirtd.conf.old
-cp /etc/libvirt/qemu.conf /etc/libvirt/qemu.conf.old
+preserve_old_libvirt_configs
 
 # Set proper permissions in libvirtd.conf
-for line in \
-  'unix_sock_group = "libvirt"' \
-  'unix_sock_ro_perms = "0777"' \
-  'unix_sock_rw_perms = "0770"'; do
-  key=${line%% *}
-  # Only add the line if it's completely missing (including commented-out lines)
-  if ! grep -q -E "^$key\s*=" /etc/libvirt/libvirtd.conf; then
-    # Append the line if it doesn't exist in any form
-    echo "$line" | tee -a /etc/libvirt/libvirtd.conf > /dev/null
-  fi
-done
+set_libvirtd_permissions
 
 # Set proper permissions in qemu.conf
-for key in user group swtpm_user swtpm_group; do
-  if ! grep -q "^$key = \"$username\"$" /etc/libvirt/qemu.conf; then
-    echo "$key = \"$username\"" | tee -a /etc/libvirt/qemu.conf > /dev/null
-  fi
-done
+set_qemu_permissions
 
 # Enable and start services
 systemctl enable libvirtd lightdm NetworkManager
 
 # Only enable net-autostart if in physical machine
-if [ "$is_vm" = false ]; then
-    virsh net-autostart default
-    virsh net-start default
-else
-    # Disable autostart and destroy the network if running
-    virsh net-autostart default --disable
-    rm -f /etc/libvirt/qemu/networks/autostart/default.xml
-    if virsh net-info default | grep -q "Active:.*yes"; then
-        virsh net-destroy default
-    fi
-    # Enable libvirtd service (for Virtual Machine Manager)
-    systemctl restart libvirtd
-fi
+manage_virsh_network
 
 # Add user to necessary groups
-groups=(libvirt libvirt-qemu kvm input disk video audio)
-for group in "${groups[@]}"; do
-    usermod -aG "$group" "$username"
-done
+add_user_to_groups libvirt libvirt-qemu kvm input disk video audio
 
 # Backup original LightDM config
-cp /etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf.old
+backup_lightdm_config
 
 # Modify lightdm.conf in-place
-awk -v user="$username" -v autologin="$enable_autologin" -i inplace '
-/^\[Seat:\*\]/ {a=1}
-a==1 && /^#?greeter-hide-users=/ {
-    print "greeter-hide-users=false"
-    next
-}
-a==1 && /^#?greeter-session=/ {
-    print "greeter-session=lightdm-slick-greeter"
-    next
-}
-a==1 && /^#?autologin-user=/ {
-    if (autologin == "true") {
-        print "autologin-user=" user
-    } else {
-        print "#autologin-user=" user
-    }
-    next
-}
-a==1 && /^#?autologin-session=/ {
-    print "autologin-session=cinnamon"
-    next
-}
-{print}
-' /etc/lightdm/lightdm.conf
+modify_lightdm_conf "arch"
 
 # Ensure autologin group exists and add user
-groupadd -f autologin
-gpasswd -a "$username" autologin
+ensure_autologin_group
 
 # If running in a VM, set display-setup-script in lightdm.conf
-if [ "$is_vm" = true ]; then
-    # Detect connected output using sysfs (avoids X dependency)
-    output_path=$(grep -l connected /sys/class/drm/*/status | head -n1)
-    output=$(basename "$(dirname "$output_path")")
-    output="${output#*-}"  # Strip 'cardX-' prefix
-    if [[ -n "$output" ]]; then
-        sed -i "/^\[Seat:\*\]/,/^\[.*\]/ {
-            s|^#*display-setup-script=.*|display-setup-script=xrandr --output $output --mode 1920x1080 --rate 60|
-        }" /etc/lightdm/lightdm.conf
-    fi
-fi
+set_lightdm_display_for_vm
 
 # Set timeout for stopping services during shutdown via drop in file
-mkdir -p /etc/systemd/system.conf.d
-echo "[Manager]" | tee /etc/systemd/system.conf.d/override.conf
-echo "DefaultTimeoutStopSec=15s" | tee -a /etc/systemd/system.conf.d/override.conf
+set_systemd_timeout_stop
 
 # Reload the systemd configuration
-systemctl daemon-reload
+reload_systemd_daemon
 
 # Add flag for Setup-Theme.sh
-CURRENT_DIR=$(pwd)
-su - "$SUDO_USER" -c "touch '$CURRENT_DIR/.arch.done'"
+add_setup_theme_flag "arch"
 
-# Reboot for the changes to take effect
-echo "Installation complete! Please reboot for the changes to take effect. Then run Theme.sh in cinnamon-dotfiles for theming."
+# Display Reboot Message
+print_reboot_message

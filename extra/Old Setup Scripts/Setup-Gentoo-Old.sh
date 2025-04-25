@@ -1,25 +1,41 @@
 #!/bin/bash
 
-# Source common functions
-source ./Setup-Common.sh
-
-# Check if the script is run as root
-check_if_root
+# Check if script is run as root
+if [ "$EUID" -ne 0 ]; then
+  echo "Please run the script using sudo."
+  exit
+fi
 
 # Check if the script is run from the root account
-check_if_not_root_account
+if [ "$SUDO_USER" = "" ]; then
+  echo "Please do not run this script from the root account. Use sudo instead."
+  exit
+fi
 
 # Get the current username
-get_current_username
+username=$SUDO_USER
 
 # Autologin Prompt
-prompt_for_autologin
+read -rp "Enable autologin for $username? [y/N]: " autologin_input
+case "$autologin_input" in
+    [yY][eE][sS]|[yY])
+        enable_autologin=true
+        ;;
+    *)
+        enable_autologin=false
+        ;;
+esac
 
 # VM Prompt
-prompt_for_vm
-
-# Display Status from Prompts
-display_status "$enable_autologin" "$is_vm"
+read -rp "Is this a Virtual Machine? [y/N]: " response
+case "$response" in
+    [yY][eE][sS]|[yY])
+        is_vm=true
+        ;;
+    *)
+        is_vm=false
+        ;;
+esac
 
 # Check if custom make.conf and VIDEO_CARDS have already been set previously
 MAKECONF_FLAG="/etc/portage/.makeconf_configured"
@@ -238,48 +254,115 @@ dispatch-conf <<< $(echo -e 'y')
 # Resume emerge
 emerge -vqDuN --with-bdeps=y --keep-going "${packages[@]}"
 
-# Enable Flathub for Flatpak
-enable_flathub
+# Enable Flathub
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
 # Preserve old configurations (for Virtual Machine Manager)
-preserve_old_libvirt_configs
+cp /etc/libvirt/libvirtd.conf /etc/libvirt/libvirtd.conf.old
+cp /etc/libvirt/qemu.conf /etc/libvirt/qemu.conf.old
 
 # Set proper permissions in libvirtd.conf
-set_libvirtd_permissions
+for line in \
+  'unix_sock_group = "libvirt"' \
+  'unix_sock_ro_perms = "0777"' \
+  'unix_sock_rw_perms = "0770"'; do
+  key=${line%% *}
+  # Only add the line if it's completely missing (including commented-out lines)
+  if ! grep -q -E "^$key\s*=" /etc/libvirt/libvirtd.conf; then
+    # Append the line if it doesn't exist in any form
+    echo "$line" | tee -a /etc/libvirt/libvirtd.conf > /dev/null
+  fi
+done
 
 # Set proper permissions in qemu.conf
-set_qemu_permissions
+for key in user group swtpm_user swtpm_group; do
+  if ! grep -q "^$key = \"$username\"$" /etc/libvirt/qemu.conf; then
+    echo "$key = \"$username\"" | tee -a /etc/libvirt/qemu.conf > /dev/null
+  fi
+done
 
 # Enable and start services
 systemctl enable libvirtd lightdm NetworkManager
 systemctl --global enable pipewire.service pipewire-pulse.socket wireplumber.service
 
 # Only enable net-autostart if in physical machine
-manage_virsh_network
+if [ "$is_vm" = false ]; then
+    virsh net-autostart default
+    virsh net-start default
+else
+    # Disable autostart and destroy the network if running
+    virsh net-autostart default --disable
+    rm -f /etc/libvirt/qemu/networks/autostart/default.xml
+    if virsh net-info default | grep -q "Active:.*yes"; then
+        virsh net-destroy default
+    fi
+    # Restart libvirtd to ensure clean state
+    systemctl restart libvirtd
+fi
 
 # Add the current user to the necessary groups
-add_user_to_groups libvirt kvm input disk video pipewire
+groups=(libvirt kvm input disk video pipewire)
+for group in "${groups[@]}"; do
+    usermod -aG "$group" "$username"
+done
 
 # Backup original LightDM config
-backup_lightdm_config
+cp /etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf.old
 
 # Modify lightdm.conf in-place
-modify_lightdm_conf "gentoo"
+awk -v user="$username" -v autologin="$enable_autologin" -i inplace '
+/^\[Seat:\*\]/ {a=1}
+a==1 && /^#?greeter-hide-users=/ {
+    print "greeter-hide-users=false"
+    next
+}
+a==1 && /^#?autologin-user=/ {
+    if (autologin == "true") {
+        print "autologin-user=" user
+    } else {
+        print "#autologin-user=" user
+    }
+    next
+}
+a==1 && /^#?autologin-session=/ {
+    print "autologin-session=cinnamon"
+    next
+}
+a==1 && /^#?user-session=/ {
+    print "user-session=cinnamon"
+    next
+}
+{print}
+' /etc/lightdm/lightdm.conf
 
 # Ensure autologin group exists and add user
-ensure_autologin_group
+groupadd -f autologin
+gpasswd -a "$username" autologin
 
 # If running in a VM, set display-setup-script in lightdm.conf
-set_lightdm_display_for_vm
+if [ "$is_vm" = true ]; then
+    # Detect connected output using sysfs (avoids X dependency)
+    output_path=$(grep -l connected /sys/class/drm/*/status | head -n1)
+    output=$(basename "$(dirname "$output_path")")
+    output="${output#*-}"  # Strip 'cardX-' prefix
+    if [[ -n "$output" ]]; then
+        sed -i "/^\[Seat:\*\]/,/^\[.*\]/ {
+            s|^#*display-setup-script=.*|display-setup-script=xrandr --output $output --mode 1920x1080 --rate 60|
+        }" /etc/lightdm/lightdm.conf
+    fi
+fi
 
 # Set timeout for stopping services during shutdown via drop in file
-set_systemd_timeout_stop
+mkdir -p /etc/systemd/system.conf.d
+echo "[Manager]" | tee /etc/systemd/system.conf.d/override.conf
+echo "DefaultTimeoutStopSec=15s" | tee -a /etc/systemd/system.conf.d/override.conf
 
 # Reload the systemd configuration
-reload_systemd_daemon
+systemctl daemon-reload
 
 # Add flag for Setup-Theme.sh
-add_setup_theme_flag "gentoo"
+CURRENT_DIR=$(pwd)
+su - "$SUDO_USER" -c "touch '$CURRENT_DIR/.gentoo.done'"
 
-# Display Reboot Message
-print_reboot_message
+# Reboot for the changes to take effect
+echo "Installation complete! Please reboot for the changes to take effect. Then run Theme.sh in cinnamon-dotfiles for theming."

@@ -1,41 +1,25 @@
 #!/bin/bash
 
-# Check if script is run as root
-if [ "$EUID" -ne 0 ]; then
-  echo "Please run the script using sudo."
-  exit
-fi
+# Source common functions
+source ./Setup-Common.sh
+
+# Check if the script is run as root
+check_if_root
 
 # Check if the script is run from the root account
-if [ "$SUDO_USER" = "" ]; then
-  echo "Please do not run this script from the root account. Use sudo instead."
-  exit
-fi
+check_if_not_root_account
 
 # Get the current username
-username=$SUDO_USER
+get_current_username
 
 # Autologin Prompt
-read -rp "Enable autologin for $username? [y/N]: " autologin_input
-case "$autologin_input" in
-    [yY][eE][sS]|[yY])
-        enable_autologin=true
-        ;;
-    *)
-        enable_autologin=false
-        ;;
-esac
+prompt_for_autologin
 
 # VM Prompt
-read -rp "Is this a Virtual Machine? [y/N]: " response
-case "$response" in
-    [yY][eE][sS]|[yY])
-        is_vm=true
-        ;;
-    *)
-        is_vm=false
-        ;;
-esac
+prompt_for_vm
+
+# Display Status from Prompts
+display_status "$enable_autologin" "$is_vm"
 
 # Install sbopkg (for sbotools)
 wget -c -T 10 -t 10 -q --show-progress https://github.com/sbopkg/sbopkg/releases/download/0.38.3/sbopkg-0.38.3-noarch-1_wsr.tgz
@@ -273,8 +257,8 @@ cp /etc/X11/xinit/xinitrc.cinnamon-session /root/.xsession
 chmod -x /root/.xinitrc
 chmod -x /root/.xsession
 
-# Enable Flathub
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+# Enable Flathub for Flatpak
+enable_flathub
 
 # Start spice-vdagent service (it already autostarts by default)
 /etc/rc.d/rc.spice-vdagent start
@@ -294,25 +278,10 @@ chmod +x /etc/rc.d/rc.libvirt
 /etc/rc.d/rc.libvirt start
 
 # Only enable net-autostart if in physical machine
-if [ "$is_vm" = false ]; then
-    virsh net-autostart default
-    virsh net-start default
-else
-    # Disable autostart and destroy the network if running
-    virsh net-autostart default --disable
-    rm -f /etc/libvirt/qemu/networks/autostart/default.xml
-    if virsh net-info default | grep -q "Active:.*yes"; then
-        virsh net-destroy default
-    fi
-    # Restart libvirtd to ensure clean state
-    /etc/rc.d/rc.libvirt restart
-fi
+manage_virsh_network "slackware"
 
 # Add the current user to the necessary groups
-groups=(kvm input disk video audio users)
-for group in "${groups[@]}"; do
-    usermod -aG "$group" "$username"
-done
+add_user_to_groups kvm input disk video audio users
 
 # Backup original rc.4
 cp /etc/rc.d/rc.4 /etc/rc.d/rc.4.old
@@ -324,54 +293,19 @@ if ! grep -q 'exec /usr/bin/lightdm' /etc/rc.d/rc.4; then
 fi
 
 # Backup original LightDM config
-cp /etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf.old
+backup_lightdm_config
 
 # Modify lightdm.conf in-place
-awk -v user="$username" -v autologin="$enable_autologin" -i inplace '
-/^\[Seat:\*\]/ {a=1}
-a==1 && /^#?greeter-hide-users=/ {
-    print "greeter-hide-users=false"
-    next
-}
-a==1 && /^#?greeter-session=/ {
-    print "greeter-session=lightdm-slick-greeter"
-    next
-}
-a==1 && /^#?autologin-user=/ {
-    if (autologin == "true") {
-        print "autologin-user=" user
-    } else {
-        print "#autologin-user=" user
-    }
-    next
-}
-a==1 && /^#?autologin-session=/ {
-    print "autologin-session=cinnamon"
-    next
-}
-{print}
-' /etc/lightdm/lightdm.conf
+modify_lightdm_conf "slackware"
 
 # Ensure autologin group exists and add user
-groupadd -f autologin
-gpasswd -a "$username" autologin
+ensure_autologin_group
 
 # If running in a VM, set display-setup-script in lightdm.conf
-if [ "$is_vm" = true ]; then
-    # Detect connected output using sysfs (avoids X dependency)
-    output_path=$(grep -l connected /sys/class/drm/*/status | head -n1)
-    output=$(basename "$(dirname "$output_path")")
-    output="${output#*-}"  # Strip 'cardX-' prefix
-    if [[ -n "$output" ]]; then
-        sed -i "/^\[Seat:\*\]/,/^\[.*\]/ {
-            s|^#*display-setup-script=.*|display-setup-script=xrandr --output $output --mode 1920x1080 --rate 60|
-        }" /etc/lightdm/lightdm.conf
-    fi
-fi
+set_lightdm_display_for_vm
 
 # Add flag for Setup-Theme.sh
-CURRENT_DIR=$(pwd)
-su - "$SUDO_USER" -c "touch '$CURRENT_DIR/.slackware.done'"
+add_setup_theme_flag "slackware"
 
-# Reboot for the changes to take effect
-echo "Installation complete! Please reboot for the changes to take effect. Then run Theme.sh in cinnamon-dotfiles for theming."
+# Display Reboot Message
+print_reboot_message

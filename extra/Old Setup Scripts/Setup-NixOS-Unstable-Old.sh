@@ -1,25 +1,30 @@
 #!/bin/bash
 
-# Source common functions
-source ./Setup-Common.sh
-
-# Check if the script is run as root
-check_if_root
+# Check if script is run as root
+if [ "$EUID" -ne 0 ]; then
+  echo "Please run the script using sudo."
+  exit
+fi
 
 # Check if the script is run from the root account
-check_if_not_root_account
+if [ "$SUDO_USER" = "" ]; then
+  echo "Please do not run this script from the root account. Use sudo instead."
+  exit
+fi
 
 # Get the current username
-get_current_username
+username=$SUDO_USER
 
 # Autologin Prompt
-prompt_for_autologin
-
-# VM Prompt
-prompt_for_vm
-
-# Display Status from Prompts
-display_status "$enable_autologin" "$is_vm"
+read -rp "Enable autologin for $username? [y/N]: " autologin_input
+case "$autologin_input" in
+    [yY][eE][sS]|[yY])
+        enable_autologin=true
+        ;;
+    *)
+        enable_autologin=false
+        ;;
+esac
 
 # Backs up old configuration.nix
 cp /etc/nixos/configuration.nix /etc/nixos/configuration.nix.old
@@ -51,11 +56,12 @@ nix-channel --update
 # Reconfigures system
 nixos-rebuild switch --upgrade
 
-# Enable Flathub for Flatpak
-enable_flathub
+# Enable Flathub
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
 # Add flag for Setup-Theme.sh
-add_setup_theme_flag "nixos"
+CURRENT_DIR=$(pwd)
+su - "$SUDO_USER" -c "touch '$CURRENT_DIR/.nixos.done'"
 
-# Display Reboot Message
-print_reboot_message
+# Reboot for the changes to take effect
+echo "Installation complete! Please reboot for the changes to take effect. Then run Theme.sh in cinnamon-dotfiles for theming."
