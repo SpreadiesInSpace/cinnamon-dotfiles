@@ -28,6 +28,15 @@ else
     sed -i '/^#*max_parallel_downloads=10/s/^#*//' /etc/dnf/dnf.conf
 fi
 
+# Remove PackageKit cache
+rm -r /var/cache/PackageKit
+
+# Redownload metadata cache without auto updates
+pkcon refresh force -c -1
+
+# Disable Gnome Software Automatic Update Downloads
+su - "$SUDO_USER" -c "gsettings set org.gnome.software download-updates false"
+
 # Update system and install git
 dnf -y update
 dnf -y install git
