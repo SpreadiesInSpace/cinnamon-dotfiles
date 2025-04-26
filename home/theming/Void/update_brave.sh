@@ -5,15 +5,29 @@ WORKDIR="$HOME/brave_updates"
 mkdir -p "$WORKDIR"
 cd "$WORKDIR"
 
+# Function to install only missing dependencies
+install_missing_deps() {
+  REQUIRED_PKGS=(binutils tar curl xbps xz)
+  MISSING_PKGS=()
+
+  for pkg in "${REQUIRED_PKGS[@]}"; do
+    if ! xbps-query -p pkgver "$pkg" &>/dev/null; then
+      MISSING_PKGS+=("$pkg")
+    fi
+  done
+
+  if [ ${#MISSING_PKGS[@]} -gt 0 ]; then
+    echo "Installing missing packages: ${MISSING_PKGS[*]}"
+    sudo xbps-install -y "${MISSING_PKGS[@]}"
+  fi
+}
+
 # Function to install and update xdeb
 setup_xdeb() {
-  # Install dependencies
-  sudo xbps-install -Sy binutils tar curl xbps xz
+  install_missing_deps
 
   # Download the latest xdeb release
-  curl -LO $(curl -s https://api.github.com/repos/xdeb-org/xdeb/releases/latest | grep -oP '"browser_download_url": "\K(.*xdeb)(?=")')
-
-  # Set the executable bit for xdeb
+  curl -sLO $(curl -s https://api.github.com/repos/xdeb-org/xdeb/releases/latest | grep -oP '"browser_download_url": "\K(.*xdeb)(?=")')
   chmod 0744 xdeb
 }
 
@@ -26,22 +40,34 @@ check_and_download_brave() {
   VERSION=$(echo "$LATEST_RELEASE" | grep -oP '"tag_name": "\K(.*)(?=")')
   DEB_URL=$(echo "$LATEST_RELEASE" | grep -oP '"browser_download_url": "\K(.*amd64.deb)(?=")')
 
+  echo "Latest version available: $VERSION"
+
+  # Check installed Brave version
+  if command -v brave-browser-stable &>/dev/null; then
+    INSTALLED_VERSION=$(brave-browser-stable --version | grep -oP '\d+\.\d+\.\d+\.\d+' | cut -d. -f2-)
+    echo "Installed version: $INSTALLED_VERSION"
+    if [[ "$INSTALLED_VERSION" == "${VERSION#v}" ]]; then
+      echo "Brave is already up to date."
+      return 1
+    fi
+  else
+    echo "Brave is not currently installed."
+  fi
+
   # Download the .deb package
   curl -LO "$DEB_URL"
 }
 
 # Function to convert and install the Brave package
 convert_and_install_brave() {
-  # Convert the .deb package to .xbps
   ./xdeb -Sedf brave-browser*.deb
-
-  # Install the package
   sudo xbps-install -y -R ./binpkgs brave-browser
 }
 
 # Main process
 setup_xdeb
-check_and_download_brave
-convert_and_install_brave
+if check_and_download_brave; then
+  convert_and_install_brave
+fi
 
 rm -rf "$WORKDIR"
