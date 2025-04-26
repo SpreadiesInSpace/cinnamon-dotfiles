@@ -67,9 +67,11 @@ enable_flathub() {
 
 # NixOS/Slackware doesn't use this
 preserve_old_libvirt_configs() {
-    # Preserve old configurations
-    cp /etc/libvirt/libvirtd.conf /etc/libvirt/libvirtd.conf.old
-    cp /etc/libvirt/qemu.conf /etc/libvirt/qemu.conf.old
+    # Preserve old configurations with timestamp
+    local timestamp=$(date +%s)
+
+    cp /etc/libvirt/libvirtd.conf /etc/libvirt/libvirtd.conf.old.$timestamp
+    cp /etc/libvirt/qemu.conf /etc/libvirt/qemu.conf.old.$timestamp
 }
 
 # NixOS/Slackware doesn't use this
@@ -136,8 +138,9 @@ add_user_to_groups() {
 
 # NixOS doesn't use this
 backup_lightdm_config() {
-    # Backup original LightDM config
-    cp /etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf.old
+    # Backup original LightDM config with timestamp
+    local timestamp=$(date +%s)
+    cp /etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf.old.$timestamp
 }
 
 # NixOS doesn't use this

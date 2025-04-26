@@ -7,8 +7,9 @@ cat << 'EOF' > cleanup-temp.sh
 cd "$HOME"
 
 rm -rf cinnamon-dotfiles/
-rm -rf Old_Desktop_Configuration.dconf
+rm -rf Old_Desktop_Configuration*.dconf
 rm -rf .*.old
+rm -rf .*.old.*
 
 # Delete this script after running
 rm -- "$0"

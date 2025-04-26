@@ -130,13 +130,13 @@ copy_bleachbit_config() {
 
     # Backup and copy BleachBit config to appropriate directories
     if [ -f "$user_target" ]; then
-        mv "$user_target" "$user_target.$timestamp"
+        mv "$user_target" "$user_target.old.$timestamp"
     fi
     mkdir -p "$(dirname "$user_target")"
     cp -vnpr "$src_file" "$user_target"
 
     if sudo test -f "$root_target"; then
-        sudo mv "$root_target" "$root_target.$timestamp"
+        sudo mv "$root_target" "$root_target.old.$timestamp"
     fi
     sudo mkdir -p "$(dirname "$root_target")"
     sudo cp -vprf "$src_file" "$root_target"
@@ -174,12 +174,12 @@ copy_kdeglobals() {
 
   # Backup and copy KDE Global Cinnamon defaults to ~/.config
   if [ -f ~/.config/kdeglobals ]; then
-    mv ~/.config/kdeglobals ~/.config/kdeglobals.$timestamp
+    mv ~/.config/kdeglobals ~/.config/kdeglobals.old.$timestamp
   fi
   cp -vnpr .config/kdeglobals ~/.config/
 
   if sudo test -f /root/.config/kdeglobals; then
-    sudo mv /root/.config/kdeglobals /root/.config/kdeglobals.$timestamp
+    sudo mv /root/.config/kdeglobals /root/.config/kdeglobals.old.$timestamp
   fi
   sudo mkdir -p /root/.config/
   sudo ln -s ~/.config/kdeglobals /root/.config/
@@ -205,7 +205,7 @@ copy_haruna_config() {
 
     # Backup and copy Haruna config to appropriate directory
     if [ -d ~/.config/haruna ]; then
-        mv ~/.config/haruna ~/.config/haruna.$timestamp
+        mv ~/.config/haruna ~/.config/haruna.old.$timestamp
     fi
     cp -vnpr .config/haruna/ ~/.config/
 }
@@ -216,8 +216,8 @@ copy_cinnamon_spice_settings() {
     local timestamp=$(date +%s)  # Generate timestamp for backup
 
     # Create backup directory and move old settings to a timestamped backup folder
-    mkdir -p ~/.config/cinnamon/spices/old_$timestamp
-    mv ~/.config/cinnamon/spices/* ~/.config/cinnamon/spices/old_$timestamp/
+    mkdir -p ~/.config/cinnamon/spices/old.$timestamp
+    mv ~/.config/cinnamon/spices/* ~/.config/cinnamon/spices/old.$timestamp/
 
     # Copy new settings for the specified distro
     cp -vnpr .config/cinnamon/spices.$distro/* ~/.config/cinnamon/spices/
@@ -238,10 +238,10 @@ copy_bashrc_and_etc() {
     if [ "$distro" = "nixos" ]; then
         cd theming/
         cp -vnpr NixOS/* ~/; rm ~/configuration.nix
-        sudo cp /root/.bashrc /root/.bashrc.$timestamp
+        sudo cp /root/.bashrc /root/.bashrc.old.$timestamp
         sudo cp NixOS/.bashrc.root /root/.bashrc
         sudo cp NixOS/NixAscii.txt /root/
-        cp ~/.bashrc ~/.bashrc.$timestamp
+        cp ~/.bashrc ~/.bashrc.old.$timestamp
         cat NixOS/.bashrc > bashrc
         mv bashrc ~/.bashrc
         cd ..
@@ -250,7 +250,7 @@ copy_bashrc_and_etc() {
         cp -vnpr "theming/$distro/"* ~/
 
         # Preserve old root .bashrc with timestamp
-        sudo cp /root/.bashrc /root/.bashrc.$timestamp
+        sudo cp /root/.bashrc /root/.bashrc.old.$timestamp
 
         # Create minimal root .bashrc with tty check and source user .bashrc
         echo 'if [[ $(tty) == /dev/tty[0-9]* ]]; then
@@ -260,7 +260,7 @@ copy_bashrc_and_etc() {
         echo "source $HOME/.bashrc" | sudo tee -a /root/.bashrc
 
         # Preserve and replace user .bashrc with timestamp
-        cp ~/.bashrc ~/.bashrc.$timestamp
+        cp ~/.bashrc ~/.bashrc.old.$timestamp
         cp "theming/$distro/.bashrc" ~/.bashrc
     fi
 }
@@ -271,7 +271,7 @@ copy_neofetch_config() {
 
     # Backup and copy neofetch config file to appropriate directory
     neofetch
-    mv ~/.config/neofetch/config.conf ~/.config/neofetch/config.conf.$timestamp
+    mv ~/.config/neofetch/config.conf ~/.config/neofetch/config.conf.old.$timestamp
 
     # Check if the variant-specific config file exists
     if [ "$variant" != "default" ] && [ -f ".config/neofetch/config.conf.$variant" ]; then
@@ -282,7 +282,7 @@ copy_neofetch_config() {
 
     # Preserve and replace root's neofetch config
     sudo neofetch
-    sudo mv /root/.config/neofetch/config.conf /root/.config/neofetch/config.conf.$timestamp
+    sudo mv /root/.config/neofetch/config.conf /root/.config/neofetch/config.conf.old.$timestamp
     sudo ln -s ~/.config/neofetch/config.conf /root/.config/neofetch/config.conf
 }
 
@@ -293,18 +293,18 @@ copy_kvantum_themes() {
     local timestamp=$(date +%s)  # Generate timestamp for backups
 
     if [ "$distro" = "nixos" ]; then
-        mv ~/.config/Kvantum ~/.config/Kvantum.$timestamp
+        mv ~/.config/Kvantum ~/.config/Kvantum.old.$timestamp
         cp -vnpr .config/Kvantum/ ~/.config/
         echo "" >> ~/.config/Kvantum/kvantum.kvconfig
         echo "[Applications]
 Gruvbox-Dark-Brown=kdeconnect-app, kdeconnect-sms" >> ~/.config/Kvantum/kvantum.kvconfig
-        sudo mv /root/.config/Kvantum /root/.config/Kvantum.$timestamp
+        sudo mv /root/.config/Kvantum /root/.config/Kvantum.old.$timestamp
         kvantummanager --set gruvbox-fallnn
         sudo ln -s ~/.config/Kvantum /root/.config/
     else
-        mv ~/.config/Kvantum ~/.config/Kvantum.$timestamp
+        mv ~/.config/Kvantum ~/.config/Kvantum.old.$timestamp
         cp -vnpr .config/Kvantum/ ~/.config/
-        sudo mv /root/.config/Kvantum /root/.config/Kvantum.$timestamp
+        sudo mv /root/.config/Kvantum /root/.config/Kvantum.old.$timestamp
         kvantummanager --set "$theme_variant"
         sudo ln -s ~/.config/Kvantum /root/.config/
     fi
@@ -315,15 +315,15 @@ copy_qtct_configs() {
     local timestamp=$(date +%s)  # Generate timestamp for backups
 
     # Handle qt5ct
-    mv ~/.config/qt5ct ~/.config/qt5ct.$timestamp
+    mv ~/.config/qt5ct ~/.config/qt5ct.old.$timestamp
     cp -vnpr .config/qt5ct/ ~/.config/
-    sudo mv /root/.config/qt5ct /root/.config/qt5ct.$timestamp
+    sudo mv /root/.config/qt5ct /root/.config/qt5ct.old.$timestamp
     sudo ln -s ~/.config/qt5ct/ /root/.config/
 
     # Handle qt6ct
-    mv ~/.config/qt6ct ~/.config/qt6ct.$timestamp
+    mv ~/.config/qt6ct ~/.config/qt6ct.old.$timestamp
     cp -vnpr .config/qt6ct/ ~/.config/
-    sudo mv /root/.config/qt6ct /root/.config/qt6ct.$timestamp
+    sudo mv /root/.config/qt6ct /root/.config/qt6ct.old.$timestamp
     sudo ln -s ~/.config/qt6ct/ /root/.config/
 }
 
@@ -359,8 +359,8 @@ copy_menu_preferences() {
     local timestamp=$(date +%s)  # Generate timestamp for backup
 
     # Create timestamped backup directory and move old menu preferences
-    mkdir -p ~/.config/menus/old_$timestamp
-    mv ~/.config/menus/*.menu ~/.config/menus/old_$timestamp/
+    mkdir -p ~/.config/menus/old.$timestamp
+    mv ~/.config/menus/*.menu ~/.config/menus/old.$timestamp/
 
     # Copy new menu preferences for the specified distro
     cp -vnpr .config/menus/$distro/* ~/.config/menus/
@@ -372,7 +372,7 @@ copy_qbittorrent_config() {
     local timestamp=$(date +%s)  # Generate timestamp for backups
 
     # Backup the old config with timestamp
-    mv ~/.config/qBittorrent/qBittorrent.conf ~/.config/qBittorrent/qBittorrent.conf.$timestamp
+    mv ~/.config/qBittorrent/qBittorrent.conf ~/.config/qBittorrent/qBittorrent.conf.old.$timestamp
     mkdir -p ~/.config/qBittorrent/
 
     # Copy distro-specific config
@@ -387,12 +387,12 @@ copy_libreoffice_config() {
 
     # User-side config
     mkdir -p ~/.config/libreoffice
-    mv ~/.config/libreoffice/4 ~/.config/libreoffice/4_$timestamp  # Rename to include timestamp
+    mv ~/.config/libreoffice/4 ~/.config/libreoffice/4.old.$timestamp  # Rename to include timestamp
     cp -vnpr .config/libreoffice/$distro ~/.config/libreoffice/4
 
     # Root-side config
     sudo mkdir -p /root/.config/libreoffice
-    sudo mv /root/.config/libreoffice/4 /root/.config/libreoffice/4_$timestamp  # Rename to include timestamp
+    sudo mv /root/.config/libreoffice/4 /root/.config/libreoffice/4.old.$timestamp  # Rename to include timestamp
     sudo cp -vprf .config/libreoffice/$distro /root/.config/libreoffice/4
 }
 
@@ -401,7 +401,7 @@ copy_filezilla_config() {
     local timestamp=$(date +%s)  # Generate timestamp for backups
 
     # Backup the old config with timestamp
-    mv ~/.config/filezilla ~/.config/filezilla.$timestamp
+    mv ~/.config/filezilla ~/.config/filezilla.old.$timestamp
     cp -vnpr .config/filezilla/ ~/.config/
 }
 
@@ -410,7 +410,7 @@ copy_profile_picture() {
     local timestamp=$(date +%s)  # Generate timestamp for backup
 
     # Create timestamped backup for the old profile picture
-    mv ~/.face ~/.face_$timestamp
+    mv ~/.face ~/.face.old.$timestamp
 
     # Copy new profile picture
     cp -vnpr .face ~/
@@ -521,11 +521,11 @@ setup_synth_shell_config() {
 
     # Place Synth-Shell config, preserving old ones with timestamped backup
     mkdir -p ~/.config/synth-shell
-    cp -vnpr ~/.config/synth-shell/* ~/.config/synth-shell/old_$timestamp/
+    cp -vnpr ~/.config/synth-shell/* ~/.config/synth-shell/old.$timestamp/
     cp -vprf .config/synth-shell/$distro/* ~/.config/synth-shell/
 
     sudo mkdir -p /root/.config/synth-shell
-    sudo cp -vnpr /root/.config/synth-shell/* /root/.config/synth-shell/old_$timestamp/
+    sudo cp -vnpr /root/.config/synth-shell/* /root/.config/synth-shell/old.$timestamp/
     sudo cp -vprf .config/synth-shell/root-synth-shell-prompt.config /root/.config/synth-shell/synth-shell-prompt.config
 }
 
@@ -534,15 +534,15 @@ install_nvchad() {
     timestamp=$(date +%s)
 
     # Backup existing NVim configs if they exist
-    [ -d ~/.config/nvim ] && mv ~/.config/nvim ~/.config/nvim."$timestamp"
-    [ -d ~/.local/share/nvim ] && mv ~/.local/share/nvim ~/.local/share/nvim."$timestamp"
-    [ -d ~/.cache/nvim ] && mv ~/.cache/nvim ~/.cache/nvim."$timestamp"
+    [ -d ~/.config/nvim ] && mv ~/.config/nvim ~/.config/nvim.old.$timestamp
+    [ -d ~/.local/share/nvim ] && mv ~/.local/share/nvim ~/.local/share/nvim.old.$timestamp
+    [ -d ~/.cache/nvim ] && mv ~/.cache/nvim ~/.cache/nvim.old.$timestam
 
     # Clone NVChad starter config
     git clone https://github.com/NvChad/starter ~/.config/nvim
 
     # Backup and copy custom chadrc.lua config
-    [ -f ~/.config/nvim/lua/chadrc.lua ] && mv ~/.config/nvim/lua/chadrc.lua ~/.config/nvim/lua/chadrc.lua."$timestamp"
+    [ -f ~/.config/nvim/lua/chadrc.lua ] && mv ~/.config/nvim/lua/chadrc.lua ~/.config/nvim/lua/chadrc.lua.old.$timestamp
     cp -vpnr .config/nvim/lua/chadrc.lua ~/.config/nvim/lua/
 
     # Install all mason plugins and quit Neovim
@@ -566,7 +566,7 @@ configure_nanorc_basic() {
     local timestamp=$(date +%s)  # Generate timestamp for backups
 
     # Backup the old nanorc file with timestamp
-    sudo cp /etc/nanorc /etc/nanorc.$timestamp
+    sudo cp /etc/nanorc /etc/nanorc.old.$timestamp
 
     # Add the syntax highlighting inclusion line if it's not already present
     if ! grep -q '^include "/usr/share/nano/\*.nanorc"' /etc/nanorc; then
@@ -588,7 +588,7 @@ set_qt_and_gtk_environment() {
     local timestamp=$(date +%s)  # Generate timestamp for backups
 
     # Backup the old environment file with timestamp
-    sudo cp /etc/environment /etc/environment.$timestamp
+    sudo cp /etc/environment /etc/environment.old.$timestamp
 
     # Set QT and GTK theming variables if not already present
     if ! grep -q "^QT_QPA_PLATFORMTHEME=qt5ct" /etc/environment; then
@@ -606,7 +606,7 @@ append_slick_greeter_config() {
     local timestamp=$(date +%s)  # Generate timestamp for backup
 
     # Backup the old slick-greeter.conf with timestamp
-    sudo cp /etc/lightdm/slick-greeter.conf /etc/lightdm/slick-greeter.conf.$timestamp
+    sudo cp /etc/lightdm/slick-greeter.conf /etc/lightdm/slick-greeter.conf.old.$timestamp
 
     # Append new settings to slick-greeter.conf
     echo "[Greeter]
@@ -626,7 +626,7 @@ append_lightdm_gtk_greeter_config() {
     local timestamp=$(date +%s)  # Generate timestamp for backup
 
     # Backup the old lightdm-gtk-greeter.conf with timestamp
-    sudo cp /etc/lightdm/lightdm-gtk-greeter.conf /etc/lightdm/lightdm-gtk-greeter.conf.$timestamp
+    sudo cp /etc/lightdm/lightdm-gtk-greeter.conf /etc/lightdm/lightdm-gtk-greeter.conf.old.$timestamp
 
     # Append new settings to lightdm-gtk-greeter.conf
     echo "[greeter]
