@@ -70,11 +70,13 @@ for url in "${!files[@]}"; do
     if [ -f "$local_path" ]; then
         cp "$local_path" "${local_path}.old.${timestamp}" || { echo "Failed to backup $local_path"; exit 1; }
     fi
-    curl -fsSL -o "$local_path" "$url" || {
+    if curl -fsSL -o "$local_path" "$url"; then
+        echo "File $local_path updated successfully."
+    else
         echo "Failed to download $url"
         [ -f "${local_path}.old.${timestamp}" ] && mv "${local_path}.old.${timestamp}" "$local_path"
         exit 1
-    }
+    fi
 done
 
 # Update MAKEFLAGS in /etc/slpkg/slpkg.toml to match CPU cores
