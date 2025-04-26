@@ -68,11 +68,11 @@ for url in "${!files[@]}"; do
     local_path="${files[$url]}"
 
     if [ -f "$local_path" ]; then
-        cp "$local_path" "${local_path}.${timestamp}" || { echo "Failed to backup $local_path"; exit 1; }
+        cp "$local_path" "${local_path}.old.${timestamp}" || { echo "Failed to backup $local_path"; exit 1; }
     fi
     curl -fsSL -o "$local_path" "$url" || {
         echo "Failed to download $url"
-        [ -f "${local_path}.${timestamp}" ] && mv "${local_path}.old.${timestamp}" "$local_path"
+        [ -f "${local_path}.old.${timestamp}" ] && mv "${local_path}.old.${timestamp}" "$local_path"
         exit 1
     }
 done
