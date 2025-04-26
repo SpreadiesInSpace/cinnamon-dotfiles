@@ -21,7 +21,7 @@ override_qt_cursor_theme
 # Enable GTK & QT Flatpak Theming Override
 enable_flatpak_theme_override
 
-# Copies BleachBit config to appropriate directories, preserving old one
+# Backup and copy BleachBit config to appropriate directories
 copy_bleachbit_config "gentoo"
 
 # Copies fonts to appropriate directories
@@ -33,31 +33,31 @@ copy_sounds_and_wallpapers
 # Copies applets to appropriate directories
 copy_applets "applets.640"
 
-# Copies KDE Global Cinnamon defaults to ~/.config, preserving old one
+# Backup and copy KDE Global defaults to ~/.config
 copy_kdeglobals
 
 # Symlink kdeglobals to color-schemes for KDE applications like haruna
 symlink_kdeglobals
 
-# Copies haruna config to appropriate directory, preserving old config
+# Backup and copy Haruna config to appropriate directory
 copy_haruna_config
 
-# Copies Cinnamon spice settings, preserving old ones
+# Backup and copy Cinnamon spice settings
 copy_cinnamon_spice_settings "gentoo"
 
 # Copies My Personal Shortcuts
 copy_personal_shortcuts "gentoo"
 
-# Copies .bashrc and etc to home directory, preserving old one
+# Backup and copy .bashrc and etc to home directory
 copy_bashrc_and_etc "Gentoo"
 
-# Copies neofetch config file to appropriate directory, preserving old one
+# Backup and copy neofetch config file to appropriate directory
 copy_neofetch_config "gentoo"
 
-# Installs Kvantum Themes to appropriate directory, preserving old config
+# Backup and copy Kvantum Themes to appropriate directory
 copy_kvantum_themes "gruvbox-fallnn"
 
-# Copies qt5ct & qt6ct config to appropriate directories, preserving old ones
+# Backup and copy qt5ct & qt6ct config to appropriate directories
 copy_qtct_configs
 
 # Copies Gedit Theme to appropriate directory
@@ -66,19 +66,19 @@ copy_gedit_old_theme
 # Copies Menu Preferences to appropriate directory
 copy_menu_preferences "gentoo"
 
-# Copies Qbittorent config to appropriate directory, preserving old one
+# Backup and copy Qbittorrent config to appropriate directory
 copy_qbittorrent_config "arch"
 
-# Copies LibreOffice config to appropriate directory, preserving old ones
+# Backup and copy LibreOffice config to appropriate directory
 copy_libreoffice_config "gentoo"
 
-# Copies Filezilla config to appropriate directory, preserving old one
+# Backup and copy Filezilla config to appropriate directory
 copy_filezilla_config
 
-# Copies Profile Picture to home directory, preserving old one
+# Backup and copy Profile Picture to home directory
 copy_profile_picture
 
-# Import Entire Desktop Configuration, preserving old one
+# Backup and Import Entire Desktop Configuration
 import_desktop_config "Gentoo"
 
 # Apply gedit and gnome-terminal configuration to root
@@ -93,7 +93,7 @@ set_cinnamon_background_and_sounds
 # Install Synth-Shell Prompt
 setup_synth_shell_config "gentoo"
 
-# Install NVChad for neovim, preserving old configs
+# Backup old configs and install NVChad for neovim
 install_nvchad
 
 # Restarts Cinnamon
@@ -102,15 +102,15 @@ restart_cinnamon
 # Places Login Wallpaper
 place_login_wallpaper
 
-# Check if syntax highlighting configurations are already in nanorc, preserving old one
+# Backup old config and enable syntax highlighting for nano
 configure_nanorc_basic
 # configure_nanorc_extra
 
-# Check if environment variables for QT & Additional Theming are already set, preserving old one
+# Backup old config and set QT and GTK theming variables
 set_qt_and_gtk_environment
 
-# Append new settings to slick-greeter.conf, preserving old one
+# Backup old config and append new settings to slick-greeter.conf
 append_slick_greeter_config
 
-# Append new settings to lightdm-gtk-greeter.conf, preserving old one
+# Backup old config and append new settings to lightdm-gtk-greeter.conf
 append_lightdm_gtk_greeter_config

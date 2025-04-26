@@ -15,14 +15,18 @@ check_not_root() {
 }
 
 check_dependencies() {
+  # Check for missing dependencies
   local missing=0
   local deps=(dconf flatpak git gsettings nvim sudo unzip)
 
   for cmd in "${deps[@]}"; do
-    command -v "$cmd" >/dev/null 2>&1 || {
+    if ! command -v "$cmd" >/dev/null 2>&1; then
       printf '%s\n' "Missing dependency: $cmd"
+      if [ "$cmd" = "dconf" ]; then
+        printf '%s\n' "Note: Debian-based systems may need 'dconf-cli'."
+      fi
       missing=1
-    }
+    fi
   done
 
   # Ensure DBus session is available for gsettings/dconf
@@ -172,7 +176,7 @@ copy_kdeglobals() {
   # Creates a timestamp for backup
   local timestamp=$(date +%s)
 
-  # Backup and copy KDE Global Cinnamon defaults to ~/.config
+  # Backup and copy KDE Global defaults to ~/.config
   if [ -f ~/.config/kdeglobals ]; then
     mv ~/.config/kdeglobals ~/.config/kdeglobals.old.$timestamp
   fi
@@ -429,6 +433,7 @@ import_desktop_config() {
 }
 
 apply_gedit_and_gnome_terminal_config() {
+    # Apply gedit and gnome-terminal configuration to root
     local distro=$1
     local gedit_config=$2
 
@@ -562,7 +567,7 @@ place_login_wallpaper() {
 
 # NixOS doesn't use this
 configure_nanorc_basic() {
-    # Enables basic syntax highlighting in nano, preserving old config
+    # Backup old config and enable basic syntax highlighting in nano
     local timestamp=$(date +%s)  # Generate timestamp for backups
 
     # Backup the old nanorc file with timestamp
@@ -584,7 +589,7 @@ configure_nanorc_extra() {
 
 # NixOS doesn't use this, openSUSE needs 2 ZYPP variables
 set_qt_and_gtk_environment() {
-    # Sets QT and GTK theming variables, preserving old environment config
+    # Backup old config and set QT and GTK theming variables
     local timestamp=$(date +%s)  # Generate timestamp for backups
 
     # Backup the old environment file with timestamp
@@ -602,7 +607,7 @@ set_qt_and_gtk_environment() {
 
 # NixOS doesn't use this
 append_slick_greeter_config() {
-    # Append new settings to slick-greeter.conf, preserving old one
+    # Backup old config and append new settings to slick-greeter.conf
     local timestamp=$(date +%s)  # Generate timestamp for backup
 
     # Backup the old slick-greeter.conf with timestamp
@@ -622,7 +627,7 @@ draw-user-backgrounds=false" | sudo tee /etc/lightdm/slick-greeter.conf > /dev/n
 
 # NixOS doesn't use this
 append_lightdm_gtk_greeter_config() {
-    # Append new settings to lightdm-gtk-greeter.conf, preserving old one
+    # Backup old config and append new settings to lightdm-gtk-greeter.conf
     local timestamp=$(date +%s)  # Generate timestamp for backup
 
     # Backup the old lightdm-gtk-greeter.conf with timestamp
