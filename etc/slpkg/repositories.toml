@@ -92,14 +92,15 @@ MIRROR = "http://mirror.nl.leaseweb.net/slackware/slackware64-current/patches/"
 
 [ALIEN]
 ENABLE = true
-MIRROR = "https://slackware.nl/people/alien/sbrepos/current/x86_64/"
+# MIRROR = "https://slackware.nl/people/alien/sbrepos/current/x86_64/"
+MIRROR = "https://us.slackware.nl/people/alien/sbrepos/current/x86_64/"
 
 [MULTILIB]
 ENABLE = false
 MIRROR = "https://slackware.nl/people/alien/multilib/15.0/"
 
 [RESTRICTED]
-ENABLE = true
+ENABLE = false
 MIRROR = "https://slackware.nl/people/alien/restricted_sbrepos/current/x86_64/"
 
 [GNOME]
