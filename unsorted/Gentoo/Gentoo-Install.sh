@@ -194,7 +194,7 @@ set_video_card() {
   done
 
   # Create or update the /etc/portage/package.use/00video-cards file
-  echo "*/* VIDEO_CARDS: $video_card" | tee /mnt/gentoo/etc/portage/package.use/00video-cards >/dev/null
+  echo "*/* VIDEO_CARDS: $video_card" > /mnt/gentoo/etc/portage/package.use/00video-cards
   echo; echo "Updated VIDEO_CARDS in /etc/portage/package.use/00video-cards to $video_card based on provided input."; echo
 }
 

@@ -49,6 +49,7 @@ else
   set_video_card() {
     while true; do
       echo "Select your video card type:"
+      echo
       echo "1) amdgpu radeonsi"
       echo "2) nvidia"
       echo "3) intel"
@@ -57,6 +58,7 @@ else
       echo "6) vc4 (Raspberry Pi)"
       echo "7) d3d12 (WSL)"
       echo "8) other"
+      echo
       read -p "Enter the number corresponding to your video card: " video_card_number
 
       case $video_card_number in
@@ -68,15 +70,14 @@ else
         6) video_card="vc4"; break ;;
         7) video_card="d3d12"; break ;;
         8)
-          read -p "Enter your video card string: " video_card
-          break ;;
+          read -p "Enter the video card type: " video_card; break ;;
         *) echo "Invalid selection, please try again." ;;
       esac
     done
     
     # Create or update the /etc/portage/package.use/00video-cards file
-    echo "*/* VIDEO_CARDS: $video_card" | tee /etc/portage/package.use/00video-cards
-    echo "Updated VIDEO_CARDS in /etc/portage/package.use/00video-cards to $video_card based on provided input."
+    echo "*/* VIDEO_CARDS: $video_card" > /etc/portage/package.use/00video-cards
+    echo; echo "Updated VIDEO_CARDS in /etc/portage/package.use/00video-cards to $video_card based on provided input."; echo
   }
   
   # Call the function

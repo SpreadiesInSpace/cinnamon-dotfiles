@@ -82,7 +82,8 @@ done
 # Update MAKEFLAGS in /etc/slpkg/slpkg.toml to match CPU cores
 cores=$(nproc)
 # Backup the current slpkg.toml file
-cp /etc/slpkg/slpkg.toml /etc/slpkg/slpkg.toml.bak
+timestamp=$(date +%s)
+cp /etc/slpkg/slpkg.toml /etc/slpkg/slpkg.toml.old.${timestamp}
 # Edit slpkg.toml to set MAKEFLAGS
 sed -i "s/^MAKEFLAGS = \"-j[0-9]*\"/MAKEFLAGS = \"-j$cores\"/" /etc/slpkg/slpkg.toml
 echo "Updated MAKEFLAGS in /etc/slpkg/slpkg.toml to -j$cores based on the number of CPU cores."
