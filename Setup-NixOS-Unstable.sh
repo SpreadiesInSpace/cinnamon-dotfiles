@@ -22,7 +22,8 @@ prompt_for_vm
 display_status "$enable_autologin" "$is_vm"
 
 # Backs up old configuration.nix
-cp /etc/nixos/configuration.nix /etc/nixos/configuration.nix.old
+timestamp=$(date +%s)
+cp /etc/nixos/configuration.nix "/etc/nixos/configuration.nix.old.${timestamp}"
 
 # Copies my configuration.nix
 cp ./home/theming/NixOS/configuration.nix /etc/nixos/configuration.nix

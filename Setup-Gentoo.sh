@@ -30,7 +30,8 @@ else
   echo "Configuring /etc/portage/make.conf..."
 
   # Backup current make.conf & replace with custom one
-  cp /etc/portage/make.conf /etc/portage/make.conf.old
+  timestamp=$(date +%s)
+  cp /etc/portage/make.conf /etc/portage/make.conf.old.${timestamp}
   cp etc/portage/make.conf /etc/portage/make.conf
 
   # Set MAKEOPTS based on CPU cores (load limit = cores + 1)

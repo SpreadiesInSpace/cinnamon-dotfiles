@@ -53,7 +53,7 @@ for package in "${packages[@]}"; do
   fi
 done
 
-# Replace slpkg and slackpkg configs
+# Declare Config Files
 declare -A files=(
     ["https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/etc/slpkg/repositories.toml"]="/etc/slpkg/repositories.toml"
     ["https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/etc/slpkg/slpkg.toml"]="/etc/slpkg/slpkg.toml"
@@ -61,19 +61,20 @@ declare -A files=(
     ["https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/etc/slackpkg/blacklist"]="/etc/slackpkg/blacklist"
     ["https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/etc/slackpkg/mirrors"]="/etc/slackpkg/mirrors"
 )
+
+# Replace slpkg and slackpkg configs
+timestamp=$(date +%s)
 for url in "${!files[@]}"; do
     local_path="${files[$url]}"
-    # Backup the existing local file
-    cp "$local_path" "${local_path}.old"    
-    # Download the new file
-    curl -o "$local_path" "$url"    
-    # Verify the download was successful
-    if [ $? -eq 0 ]; then
-        echo "File $local_path updated successfully."
-    else
-        echo "Failed to update the file $local_path."
-        mv "${local_path}.old" "$local_path"
+
+    if [ -f "$local_path" ]; then
+        cp "$local_path" "${local_path}.${timestamp}" || { echo "Failed to backup $local_path"; exit 1; }
     fi
+    curl -fsSL -o "$local_path" "$url" || {
+        echo "Failed to download $url"
+        [ -f "${local_path}.${timestamp}" ] && mv "${local_path}.old.${timestamp}" "$local_path"
+        exit 1
+    }
 done
 
 # Update MAKEFLAGS in /etc/slpkg/slpkg.toml to match CPU cores
@@ -272,8 +273,10 @@ if ! grep -q '# Start libvirt' /etc/rc.d/rc.local; then
   echo '  /etc/rc.d/rc.libvirt start' >> /etc/rc.d/rc.local
   echo 'fi' >> /etc/rc.d/rc.local
 fi
+
 # Make sure rc.libvirt is executable
 chmod +x /etc/rc.d/rc.libvirt
+
 # Start libvirtd service
 /etc/rc.d/rc.libvirt start
 
@@ -284,7 +287,8 @@ manage_virsh_network "slackware"
 add_user_to_groups kvm input disk video audio users
 
 # Backup original rc.4
-cp /etc/rc.d/rc.4 /etc/rc.d/rc.4.old
+timestamp=$(date +%s)
+cp /etc/rc.d/rc.4 "/etc/rc.d/rc.4.old.${timestamp}"
 
 # Run LightDM on Boot
 if ! grep -q 'exec /usr/bin/lightdm' /etc/rc.d/rc.4; then
