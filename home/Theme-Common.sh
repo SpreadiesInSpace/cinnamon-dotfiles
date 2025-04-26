@@ -14,6 +14,28 @@ check_not_root() {
     fi
 }
 
+check_dependencies() {
+    # Check for missing dependencies
+    local missing=()
+
+    for cmd in dconf flatpak git gsettings nvim sudo unzip; do
+        if ! command -v "$cmd" >/dev/null 2>&1; then
+            missing+=("$cmd")
+        fi
+    done
+
+    if (( ${#missing[@]} > 0 )); then
+        printf "Missing dependencies detected:\n"
+        for dep in "${missing[@]}"; do
+            printf "  - %s\n" "$dep"
+        done
+        printf "\nPlease install the missing packages and re-run the script.\n"
+        printf "Press Enter to exit..."
+        read -r
+        exit 1
+    fi
+}
+
 install_icons_and_themes() {
     # Run installer
     sudo echo

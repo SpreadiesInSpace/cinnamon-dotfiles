@@ -6,6 +6,9 @@ source ./Theme-Common.sh
 # Check if the script is run as root
 check_not_root
 
+# Check for missing dependencies
+check_dependencies
+
 # Install icons and themes
 install_icons_and_themes
 
