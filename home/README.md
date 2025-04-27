@@ -14,7 +14,7 @@
  - [ ] Source Code Pro
  - [ ] Sauce Code Pro Nerd
 
-**Dependencies** ***# The script will break if these aren't installed.***
+**Dependencies** ***- The script will break if these aren't installed.***
 
  - [ ] dconf (Debian-based systems need dconf-cli)
  - [ ] flatpak (for themeing override)
@@ -35,7 +35,7 @@
  - [ ] gpaste
  - [ ] gir1.2-gpaste-4.0 ***# if on Debian or Ubuntu-based distro***
  - [ ] neofetch
- - [ ] kvantum ***# kvantum and qt5/6ct are needed to theme QT apps)***
+ - [ ] kvantum ***# kvantum and qt5/6ct are needed to theme QT apps***
  - [ ] kvantum-qt5
  - [ ] qt5ct
  - [ ] qt6ct
@@ -63,7 +63,7 @@
  - [ ] bleachbit
  - [ ] brave ***# use Dark Reader, set Sepia to 50% for maximum Gruvbox uniformity***
  - [ ] bottom
- - [ ] celluloid
+ - [ ] celluloid/haruna
  - [ ] filezilla
  - [ ] flatpak ***# GTK and QT Overrides applied***
  - [ ] gparted
