@@ -25,7 +25,7 @@ git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles
 ```bash
 cd cinnamon-dotfiles
 ```
-3. bash Setup.sh to run script
+3. Run script
 ```bash
 # Default NixOS behavior doesn't let you chmod+x then ./Setup.sh
 bash Setup.sh
