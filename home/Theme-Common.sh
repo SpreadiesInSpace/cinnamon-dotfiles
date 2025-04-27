@@ -327,9 +327,9 @@ Gruvbox-Dark-Brown=kdeconnect-app, kdeconnect-sms" >> ~/.config/Kvantum/kvantum.
         kvantummanager --set gruvbox-fallnn
         sudo ln -sf ~/.config/Kvantum /root/.config/
     else
-        mv ~/.config/Kvantum ~/.config/Kvantum.old.$timestamp
+        mv ~/.config/Kvantum ~/.config/Kvantum.old.$timestamp >/dev/null 2>&1
         cp -npr .config/Kvantum/ ~/.config/
-        sudo mv /root/.config/Kvantum /root/.config/Kvantum.old.$timestamp
+        sudo mv /root/.config/Kvantum /root/.config/Kvantum.old.$timestamp >/dev/null 2>&1
         kvantummanager --set "$theme_variant"
         sudo ln -sf ~/.config/Kvantum /root/.config/
     fi
@@ -386,11 +386,12 @@ copy_menu_preferences() {
 
     echo "Applying Cinnamon Menu Preferences..."
     # Create timestamped backup directory and move old menu preferences
-    mkdir -p ~/.config/menus/old.$timestamp
-    mv ~/.config/menus/*.menu ~/.config/menus/old.$timestamp/ 
+    # mkdir -p ~/.config/menus/old.$timestamp
+    # mv ~/.config/menus/*.menu ~/.config/menus/old.$timestamp/ 
+    cp -npr ~/.config/menus/ ~/.config/menus.old.$timestamp/
 
     # Copy new menu preferences for the specified distro
-    cp -npr .config/menus/$distro/* ~/.config/menus/
+    cp -npr .config/menus/$distro/ ~/.config/menus/
 }
 
 copy_qbittorrent_config() {
