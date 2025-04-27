@@ -76,8 +76,9 @@ copy_filezilla_config
 copy_profile_picture
 
 # Backup and copy bauh config to appropriate directory
-mv ~/.config/bauh ~/.config/bauh.old
-cp -vnpr .config/bauh/ ~/.config/
+timestamp=$(date +%s)
+[ -d ~/.config/bauh ] && mv ~/.config/bauh ~/.config/bauh.old.$timestamp
+cp -npr .config/bauh/ ~/.config/
 
 # Backup and Import Entire Desktop Configuration
 import_desktop_config "Arch"
@@ -97,9 +98,6 @@ setup_synth_shell_config "arch"
 # Backup old configs and install NVChad for neovim
 install_nvchad
 
-# Restarts Cinnamon
-restart_cinnamon
-
 # Places Login Wallpaper
 place_login_wallpaper
 
@@ -115,3 +113,6 @@ append_slick_greeter_config
 
 # Backup old config and append new settings to lightdm-gtk-greeter.conf
 append_lightdm_gtk_greeter_config
+
+# Restarts Cinnamon
+restart_cinnamon

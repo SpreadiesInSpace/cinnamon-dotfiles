@@ -4,52 +4,60 @@
 # - Make Variables for Theme Related Entries (for Light Mode)
 # - Remove All Verbose Copies 
 # - Suppress All Functions' Outputs
-# - Echo Relavent Descriptions for All Functions
+# - Echo Relevant Descriptions for All Functions
+
+die() {
+    # Handle exits on error
+    printf "\033[1;31mError:\033[0m %s\n" "$*" >&2
+    read -rp "Press Enter to exit..."
+    exit 1
+}
 
 check_not_root() {
     # Prevents script from being run as root
     if [ "$EUID" -eq 0 ]; then
-        echo "This script must NOT be run as root. Please execute it as a regular user."
-        exit 1
+        die "This script must NOT be run as root. Please execute it as a regular user."
     fi
 }
 
 check_dependencies() {
-  # Check for missing dependencies
-  local missing=0
+  local missing=()
   local deps=(dconf flatpak git gsettings nvim sudo unzip)
 
   for cmd in "${deps[@]}"; do
     if ! command -v "$cmd" >/dev/null 2>&1; then
-      printf '%s\n' "Missing dependency: $cmd"
       if [ "$cmd" = "dconf" ]; then
-        printf '%s\n' "Note: Debian-based systems may need 'dconf-cli'."
+        missing+=("dconf (Debian-based systems may need 'dconf-cli')")
+      elif [ "$cmd" = "nvim" ]; then
+        missing+=("neovim")
+      else
+        missing+=("$cmd")
       fi
-      missing=1
     fi
   done
 
   # Ensure DBus session is available for gsettings/dconf
   if ! env | grep -q '^DBUS_SESSION_BUS_ADDRESS='; then
-    printf '%s\n' "D-Bus session not detected. Run this in a user session with a graphical environment."
-    missing=1
+    missing+=("DBus session")
   fi
 
   # Check if gsettings can actually read schemas
   if command -v gsettings >/dev/null 2>&1 && ! gsettings list-schemas >/dev/null 2>&1; then
-    printf '%s\n' "gsettings is present but non-functional (no schemas available)."
-    missing=1
+    missing+=("functional gsettings")
   fi
 
-  if [ "$missing" -eq 1 ]; then
-    printf '\n%s\n' "Resolve the above issues before continuing. Press Enter to exit."
-    read -r
-    exit 1
+  # If anything is missing, display and exit
+  if [ "${#missing[@]}" -ne 0 ]; then
+    printf '%s\n' "Missing dependencies:"
+    for item in "${missing[@]}"; do
+      printf '  - %s\n' "$item"
+    done
+    die "Resolve the above issues before continuing."
   fi
 }
 
 install_icons_and_themes() {
-    # Run installer
+    # Download icons and fonts
     sudo echo
     bash icons-and-fonts.sh
 
@@ -63,26 +71,29 @@ install_icons_and_themes() {
     THEME_DIR="Gruvbox-Dark-BL"
 
     # Extract icons
+    echo "Extracting Icons..."
     mv .icons/*.zip "$PWD"
-    unzip "$ICON_ZIP"
-    unzip "$CURSOR_ZIP"
+    unzip -q "$ICON_ZIP"
+    unzip -q "$CURSOR_ZIP"
     mv "$ICON_EXTRACTED" ".icons/$ICON_RENAME"
     mv "$CURSOR_DIR" .icons/
 
     # Extract themes
+    echo "Extracting Themes..."
     mv .themes/*.zip "$PWD"
-    unzip "$THEME_ZIP"
+    unzip -q "$THEME_ZIP"
     mv "$THEME_DIR" .themes/
 
     # Always install to user directories
+    echo "Installing Icons and Themes..."
     mkdir -p ~/.icons ~/.themes
-    cp -vnpr .icons/* ~/.icons/
-    cp -vnpr .themes/* ~/.themes/
+    cp -npr .icons/* ~/.icons/
+    cp -npr .themes/* ~/.themes/
 
     # If not NixOS, also install to system-wide directories
     if ! grep -qi "nixos" /etc/os-release; then
-        sudo cp -vnpr .icons/* /usr/share/icons/
-        sudo cp -vnpr .themes/* /usr/share/themes/
+        sudo cp -npr .icons/* /usr/share/icons/
+        sudo cp -npr .themes/* /usr/share/themes/
     fi
 
     # Move ZIPs back & clean up
@@ -95,18 +106,19 @@ override_qt_cursor_theme() {
     # Override Cursor Theme for QT Apps
     local distro="$1"
 
+    echo "Setting Cursor Theme Override for QT Apps..."
     if [ "$distro" = "nixos" ]; then
         mkdir -p ~/.icons/default
         rm -rf ~/.icons/default/*
-        ln -s ~/.icons/"Capitaine Cursors (Gruvbox) - White/"* ~/.icons/default/
+        ln -sf ~/.icons/"Capitaine Cursors (Gruvbox) - White/"* ~/.icons/default/
         sudo mkdir -p /root/.icons/default
         sudo rm -rf /root/.icons/default/*
-        sudo ln -s ~/.icons/"Capitaine Cursors (Gruvbox) - White/"* /root/.icons/default/
+        sudo ln -sf ~/.icons/"Capitaine Cursors (Gruvbox) - White/"* /root/.icons/default/
     else
         rm -rf ~/.icons/default
         sudo mkdir -p /usr/share/icons/default
         sudo rm -rf /usr/share/icons/default/*
-        sudo ln -s "/usr/share/icons/Capitaine Cursors (Gruvbox) - White/"* /usr/share/icons/default/
+        sudo ln -sf "/usr/share/icons/Capitaine Cursors (Gruvbox) - White/"* /usr/share/icons/default/
     fi
 }
 
@@ -116,6 +128,7 @@ enable_flatpak_theme_override() {
         flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
     }
     
+    echo "Setting GTK & QT Flatpak Theme Override..."
     # Enable GTK & QT Flatpak Theming Override
     sudo flatpak override --filesystem="$HOME/.themes"
     sudo flatpak override --filesystem="$HOME/.icons"
@@ -132,61 +145,65 @@ copy_bleachbit_config() {
     local user_target="$HOME/.config/bleachbit/bleachbit.ini"
     local root_target="/root/.config/bleachbit/bleachbit.ini"
 
+    echo "Configuring BleachBit..."
     # Backup and copy BleachBit config to appropriate directories
     if [ -f "$user_target" ]; then
         mv "$user_target" "$user_target.old.$timestamp"
     fi
     mkdir -p "$(dirname "$user_target")"
-    cp -vnpr "$src_file" "$user_target"
+    cp -npr "$src_file" "$user_target"
 
     if sudo test -f "$root_target"; then
         sudo mv "$root_target" "$root_target.old.$timestamp"
     fi
     sudo mkdir -p "$(dirname "$root_target")"
-    sudo cp -vprf "$src_file" "$root_target"
+    sudo cp -prf "$src_file" "$root_target"
 }
 
 copy_fonts() {
   # Copies fonts to appropriate directories
   local distro="$1"
 
+  echo "Setting Fonts..."
   # NixOS doesn’t use /usr/share/fonts/ for user fonts
   if [ "$distro" = "nixos" ]; then
-    cp -vnpr .fonts/ ~/
+    cp -npr .fonts/ ~/
   else
-    sudo cp -vnpr .fonts/* /usr/share/fonts/
+    sudo cp -npr .fonts/* /usr/share/fonts/
     mkdir -p ~/.fonts
-    sudo ln -s /usr/share/fonts/* ~/.fonts/
+    sudo ln -sf /usr/share/fonts/* ~/.fonts/
   fi
 }
 
 copy_sounds_and_wallpapers() {
   # Copies sounds and wallpapers to home directory
-  cp -vnpr sounds/ ~/
-  cp -vnpr wallpapers/ ~/
+  cp -npr sounds/ ~/
+  cp -npr wallpapers/ ~/
 }
 
 copy_applets() {
     # Copies applets to appropriate directories
     local applet_variant=$1
-    cp -vnpr .local/share/cinnamon/$applet_variant/* ~/.local/share/cinnamon/applets/
+    echo "Configuring Cinnamon Applets..."
+    cp -npr .local/share/cinnamon/$applet_variant/* ~/.local/share/cinnamon/applets/
 }
 
 copy_kdeglobals() {
   # Creates a timestamp for backup
   local timestamp=$(date +%s)
 
+  echo "Applying Gruvbbox Colors to kdeglobals System-wide..."
   # Backup and copy KDE Global defaults to ~/.config
   if [ -f ~/.config/kdeglobals ]; then
     mv ~/.config/kdeglobals ~/.config/kdeglobals.old.$timestamp
   fi
-  cp -vnpr .config/kdeglobals ~/.config/
+  cp -npr .config/kdeglobals ~/.config/
 
   if sudo test -f /root/.config/kdeglobals; then
     sudo mv /root/.config/kdeglobals /root/.config/kdeglobals.old.$timestamp
   fi
   sudo mkdir -p /root/.config/
-  sudo ln -s ~/.config/kdeglobals /root/.config/
+  sudo ln -sf ~/.config/kdeglobals /root/.config/
 }
 
 symlink_kdeglobals() {
@@ -207,31 +224,32 @@ copy_haruna_config() {
     # Creates a timestamp for backup
     local timestamp=$(date +%s)
 
+    echo "Configuring Haruna..."
     # Backup and copy Haruna config to appropriate directory
     if [ -d ~/.config/haruna ]; then
         mv ~/.config/haruna ~/.config/haruna.old.$timestamp
     fi
-    cp -vnpr .config/haruna/ ~/.config/
+    cp -npr .config/haruna/ ~/.config/
 }
 
 copy_cinnamon_spice_settings() {
     # Backup and copy Cinnamon spice settings
     local distro=$1
     local timestamp=$(date +%s)  # Generate timestamp for backup
-
-    # Create backup directory and move old settings to a timestamped backup folder
-    mkdir -p ~/.config/cinnamon/spices/old.$timestamp
-    mv ~/.config/cinnamon/spices/* ~/.config/cinnamon/spices/old.$timestamp/
-
+    mv ~/.config/cinnamon/spices/ ~/.config/cinnamon/spices.old.$timestamp/
+    mkdir -p ~/.config/cinnamon/spices/
+    
+    echo "Applying Cinnamon Spice Settings..."
     # Copy new settings for the specified distro
-    cp -vnpr .config/cinnamon/spices.$distro/* ~/.config/cinnamon/spices/
+    cp -npr .config/cinnamon/spices.$distro/* ~/.config/cinnamon/spices/
 }
 
 copy_personal_shortcuts() {
     # Copies My Personal Shortcuts
     local distro=$1
     mkdir -p ~/.local/share/applications
-    cp -vnpr .local/share/applications/$distro/* ~/.local/share/applications/
+    echo "Setting Shortcuts..."
+    cp -npr .local/share/applications/$distro/* ~/.local/share/applications/
 }
 
 copy_bashrc_and_etc() {
@@ -239,9 +257,10 @@ copy_bashrc_and_etc() {
     local distro=$1
     local timestamp=$(date +%s)
 
+    echo "Backing Up .bashrc and Adding New bash Aliases..."
     if [ "$distro" = "nixos" ]; then
         cd theming/
-        cp -vnpr NixOS/* ~/; rm ~/configuration.nix
+        cp -npr NixOS/* ~/; rm ~/configuration.nix
         sudo cp /root/.bashrc /root/.bashrc.old.$timestamp
         sudo cp NixOS/.bashrc.root /root/.bashrc
         sudo cp NixOS/NixAscii.txt /root/
@@ -251,7 +270,7 @@ copy_bashrc_and_etc() {
         cd ..
     else
         # Copies distro-specific theming files to home directory
-        cp -vnpr "theming/$distro/"* ~/
+        cp -npr "theming/$distro/"* ~/
 
         # Preserve old root .bashrc with timestamp
         sudo cp /root/.bashrc /root/.bashrc.old.$timestamp
@@ -259,9 +278,9 @@ copy_bashrc_and_etc() {
         # Create minimal root .bashrc with tty check and source user .bashrc
         echo 'if [[ $(tty) == /dev/tty[0-9]* ]]; then
         return
-    fi' | sudo tee /root/.bashrc
+    fi' | sudo tee /root/.bashrc >/dev/null 2>&1
 
-        echo "source $HOME/.bashrc" | sudo tee -a /root/.bashrc
+        echo "source $HOME/.bashrc" | sudo tee -a /root/.bashrc >/dev/null 2>&1
 
         # Preserve and replace user .bashrc with timestamp
         cp ~/.bashrc ~/.bashrc.old.$timestamp
@@ -273,21 +292,22 @@ copy_neofetch_config() {
     local variant=${1:-default}  # Use "default" if no argument is passed
     local timestamp=$(date +%s)  # Generate timestamp for backups
 
+    echo "Configuring neofetch..."
     # Backup and copy neofetch config file to appropriate directory
-    neofetch
+    neofetch >/dev/null 2>&1
     mv ~/.config/neofetch/config.conf ~/.config/neofetch/config.conf.old.$timestamp
 
     # Check if the variant-specific config file exists
     if [ "$variant" != "default" ] && [ -f ".config/neofetch/config.conf.$variant" ]; then
-        cp -vnpr ".config/neofetch/config.conf.$variant" ~/.config/neofetch/config.conf
+        cp -npr ".config/neofetch/config.conf.$variant" ~/.config/neofetch/config.conf
     else
-        cp -vnpr ".config/neofetch/config.conf" ~/.config/neofetch/config.conf
+        cp -npr ".config/neofetch/config.conf" ~/.config/neofetch/config.conf
     fi
 
     # Preserve and replace root's neofetch config
-    sudo neofetch
+    sudo neofetch >/dev/null 2>&1
     sudo mv /root/.config/neofetch/config.conf /root/.config/neofetch/config.conf.old.$timestamp
-    sudo ln -s ~/.config/neofetch/config.conf /root/.config/neofetch/config.conf
+    sudo ln -sf ~/.config/neofetch/config.conf /root/.config/neofetch/config.conf
 }
 
 copy_kvantum_themes() {
@@ -296,21 +316,22 @@ copy_kvantum_themes() {
     local distro=$2
     local timestamp=$(date +%s)  # Generate timestamp for backups
 
+    echo "Installing Kvantum Themes..."
     if [ "$distro" = "nixos" ]; then
         mv ~/.config/Kvantum ~/.config/Kvantum.old.$timestamp
-        cp -vnpr .config/Kvantum/ ~/.config/
+        cp -npr .config/Kvantum/ ~/.config/
         echo "" >> ~/.config/Kvantum/kvantum.kvconfig
         echo "[Applications]
 Gruvbox-Dark-Brown=kdeconnect-app, kdeconnect-sms" >> ~/.config/Kvantum/kvantum.kvconfig
         sudo mv /root/.config/Kvantum /root/.config/Kvantum.old.$timestamp
         kvantummanager --set gruvbox-fallnn
-        sudo ln -s ~/.config/Kvantum /root/.config/
+        sudo ln -sf ~/.config/Kvantum /root/.config/
     else
         mv ~/.config/Kvantum ~/.config/Kvantum.old.$timestamp
-        cp -vnpr .config/Kvantum/ ~/.config/
+        cp -npr .config/Kvantum/ ~/.config/
         sudo mv /root/.config/Kvantum /root/.config/Kvantum.old.$timestamp
         kvantummanager --set "$theme_variant"
-        sudo ln -s ~/.config/Kvantum /root/.config/
+        sudo ln -sf ~/.config/Kvantum /root/.config/
     fi
 }
 
@@ -318,17 +339,18 @@ copy_qtct_configs() {
     # Backup and copy qt5ct & qt6ct config to appropriate directories
     local timestamp=$(date +%s)  # Generate timestamp for backups
 
+    echo "Applying Kvantum Themes System-wide..."
     # Handle qt5ct
     mv ~/.config/qt5ct ~/.config/qt5ct.old.$timestamp
-    cp -vnpr .config/qt5ct/ ~/.config/
+    cp -npr .config/qt5ct/ ~/.config/
     sudo mv /root/.config/qt5ct /root/.config/qt5ct.old.$timestamp
-    sudo ln -s ~/.config/qt5ct/ /root/.config/
+    sudo ln -sf ~/.config/qt5ct/ /root/.config/
 
     # Handle qt6ct
     mv ~/.config/qt6ct ~/.config/qt6ct.old.$timestamp
-    cp -vnpr .config/qt6ct/ ~/.config/
+    cp -npr .config/qt6ct/ ~/.config/
     sudo mv /root/.config/qt6ct /root/.config/qt6ct.old.$timestamp
-    sudo ln -s ~/.config/qt6ct/ /root/.config/
+    sudo ln -sf ~/.config/qt6ct/ /root/.config/
 }
 
 # Gentoo/LMDE doesn't use this
@@ -337,11 +359,11 @@ copy_gedit_theme() {
 
     # User directory
     mkdir -p ~/.local/share/libgedit-gtksourceview-300/styles
-    cp -vnpr gruvbox-dark-gedit46.xml ~/.local/share/libgedit-gtksourceview-300/styles
+    cp -npr gruvbox-dark-gedit46.xml ~/.local/share/libgedit-gtksourceview-300/styles
 
     # Root directory
     sudo mkdir -p /root/.local/share/libgedit-gtksourceview-300/styles
-    sudo cp -vprf gruvbox-dark-gedit46.xml /root/.local/share/libgedit-gtksourceview-300/styles
+    sudo cp -prf gruvbox-dark-gedit46.xml /root/.local/share/libgedit-gtksourceview-300/styles
 }
 
 # Gentoo/LMDE uses this
@@ -350,11 +372,11 @@ copy_gedit_old_theme() {
 
     # User directory
     mkdir -p ~/.local/share/gedit/styles
-    cp -vnpr gruvbox-dark.xml ~/.local/share/gedit/styles/
+    cp -npr gruvbox-dark.xml ~/.local/share/gedit/styles/
 
     # Root directory
     sudo mkdir -p /root/.local/share/gedit/styles
-    sudo cp -vprf gruvbox-dark.xml /root/.local/share/gedit/styles/
+    sudo cp -prf gruvbox-dark.xml /root/.local/share/gedit/styles/
 }
 
 copy_menu_preferences() {
@@ -362,12 +384,13 @@ copy_menu_preferences() {
     local distro=$1
     local timestamp=$(date +%s)  # Generate timestamp for backup
 
+    echo "Applying Cinnamon Menu Preferences..."
     # Create timestamped backup directory and move old menu preferences
     mkdir -p ~/.config/menus/old.$timestamp
     mv ~/.config/menus/*.menu ~/.config/menus/old.$timestamp/
 
     # Copy new menu preferences for the specified distro
-    cp -vnpr .config/menus/$distro/* ~/.config/menus/
+    cp -npr .config/menus/$distro/* ~/.config/menus/
 }
 
 copy_qbittorrent_config() {
@@ -375,13 +398,14 @@ copy_qbittorrent_config() {
     local distro=$1
     local timestamp=$(date +%s)  # Generate timestamp for backups
 
+    echo "Configuring qBittorrent..."
     # Backup the old config with timestamp
     mv ~/.config/qBittorrent/qBittorrent.conf ~/.config/qBittorrent/qBittorrent.conf.old.$timestamp
     mkdir -p ~/.config/qBittorrent/
 
     # Copy distro-specific config
-    cp -vnpr .config/qBittorrent/qBittorrent.conf.$distro ~/.config/qBittorrent/qBittorrent.conf
-    cp -vnpr .config/qBittorrent/mumble-dark.qbtheme ~/.config/qBittorrent/
+    cp -npr .config/qBittorrent/qBittorrent.conf.$distro ~/.config/qBittorrent/qBittorrent.conf
+    cp -npr .config/qBittorrent/mumble-dark.qbtheme ~/.config/qBittorrent/
 }
 
 copy_libreoffice_config() {
@@ -389,41 +413,45 @@ copy_libreoffice_config() {
     local distro=$1
     local timestamp=$(date +%s)  # Generate timestamp for backup
 
+    echo "Configuring LibreOffice..."
     # User-side config
     mkdir -p ~/.config/libreoffice
     mv ~/.config/libreoffice/4 ~/.config/libreoffice/4.old.$timestamp  # Rename to include timestamp
-    cp -vnpr .config/libreoffice/$distro ~/.config/libreoffice/4
+    cp -npr .config/libreoffice/$distro ~/.config/libreoffice/4
 
     # Root-side config
     sudo mkdir -p /root/.config/libreoffice
     sudo mv /root/.config/libreoffice/4 /root/.config/libreoffice/4.old.$timestamp  # Rename to include timestamp
-    sudo cp -vprf .config/libreoffice/$distro /root/.config/libreoffice/4
+    sudo cp -prf .config/libreoffice/$distro /root/.config/libreoffice/4
 }
 
 copy_filezilla_config() {
     # Backup and copy Filezilla config to appropriate directory
     local timestamp=$(date +%s)  # Generate timestamp for backups
 
+    echo "Configuring FileZilla..."
     # Backup the old config with timestamp
     mv ~/.config/filezilla ~/.config/filezilla.old.$timestamp
-    cp -vnpr .config/filezilla/ ~/.config/
+    cp -npr .config/filezilla/ ~/.config/
 }
 
 copy_profile_picture() {
     # Backup and copy Profile Picture to home directory
     local timestamp=$(date +%s)  # Generate timestamp for backup
 
+    echo "Setting Profile Picture..."
     # Create timestamped backup for the old profile picture
     mv ~/.face ~/.face.old.$timestamp
 
     # Copy new profile picture
-    cp -vnpr .face ~/
+    cp -npr .face ~/
 }
 
 import_desktop_config() {
     local distro=$1
     local timestamp=$(date +%s)  # Generate timestamp for backup
 
+    echo "Applying Proper Look & Feel System-wide ..."
     # Backup and Import Entire Desktop Configuration
     cd theming/$distro/
     dconf dump / > Old_Desktop_Configuration_$timestamp.dconf  # Timestamped backup
@@ -457,6 +485,7 @@ apply_gedit_and_gnome_terminal_config() {
 set_default_apps() {
     local distro=$1
 
+    echo "Setting Default Apps..."
     # Set default apps for the given distro
     chmod +x Default-Apps-$distro.sh
     bash Default-Apps-$distro.sh
@@ -467,6 +496,8 @@ set_default_apps() {
 
 # Only Fedora/LMDE/NixOS uses this
 set_cinnamon_menu_icon() {
+
+    echo "Setting Cinnamon Menu Icon..."
     # Replaces hardcoded Cinnamon menu icon path with $HOME-based path
     local icon_file="$1"
     local json_file="${HOME}/.config/cinnamon/spices/menu@cinnamon.org/0.json"
@@ -481,12 +512,15 @@ set_cinnamon_menu_icon() {
 }
 
 set_cinnamon_background_and_sounds() {
+
+    echo "Setting Wallpaper..."
     # Set Wallpaper
     gsettings set org.cinnamon.desktop.background picture-uri file://${HOME}/wallpapers/Desktop_Wallpaper.png
     mkdir -p ~/Pictures
-    ln -s ~/wallpapers/* ~/Pictures
+    ln -sf ~/wallpapers/* ~/Pictures
     gsettings set org.cinnamon.desktop.background.slideshow image-source directory://${HOME}/Pictures
 
+    echo "Setting Cinnamon Sound Events..."
     # Set Login Sounds
     gsettings set org.cinnamon.sounds login-enabled true
     gsettings set org.cinnamon.sounds login-file ${HOME}/sounds/login.oga
@@ -518,51 +552,47 @@ setup_synth_shell_config() {
     local distro=$1
     local timestamp=$(date +%s)  # Generate timestamp for backup
 
-    # Clone Synth-Shell and run setup
-    git clone --recursive https://github.com/andresgongora/synth-shell-prompt.git
-    yes | synth-shell-prompt/setup.sh
-    yes | sudo synth-shell-prompt/setup.sh
+    echo "Configuring Synth Shell Prompt..."
+    # Clone Synth-Shell and run setup (suppress output)
+    git clone --recursive https://github.com/andresgongora/synth-shell-prompt.git >/dev/null 2>&1 || die "Failed to Download Synth Shell Prompt."
+    yes | synth-shell-prompt/setup.sh >/dev/null 2>&1
+    yes | sudo synth-shell-prompt/setup.sh >/dev/null 2>&1
     rm -rf synth-shell-prompt/
 
     # Place Synth-Shell config, preserving old ones with timestamped backup
-    mkdir -p ~/.config/synth-shell
-    cp -vnpr ~/.config/synth-shell/* ~/.config/synth-shell/old.$timestamp/
-    cp -vprf .config/synth-shell/$distro/* ~/.config/synth-shell/
+    cp -npr ~/.config/synth-shell/ ~/.config/synth-shell.old.$timestamp/
+    cp -prf .config/synth-shell/$distro/* ~/.config/synth-shell/
 
-    sudo mkdir -p /root/.config/synth-shell
-    sudo cp -vnpr /root/.config/synth-shell/* /root/.config/synth-shell/old.$timestamp/
-    sudo cp -vprf .config/synth-shell/root-synth-shell-prompt.config /root/.config/synth-shell/synth-shell-prompt.config
+    sudo cp -npr /root/.config/synth-shell/ /root/.config/synth-shell.old.$timestamp/
+    sudo cp -prf .config/synth-shell/root-synth-shell-prompt.config /root/.config/synth-shell/synth-shell-prompt.config
 }
 
 install_nvchad() {
     # Timestamp for unique backups
     timestamp=$(date +%s)
 
+    echo "Configuring NvChad..."
     # Backup existing NVim configs if they exist
     [ -d ~/.config/nvim ] && mv ~/.config/nvim ~/.config/nvim.old.$timestamp
     [ -d ~/.local/share/nvim ] && mv ~/.local/share/nvim ~/.local/share/nvim.old.$timestamp
-    [ -d ~/.cache/nvim ] && mv ~/.cache/nvim ~/.cache/nvim.old.$timestam
+    [ -d ~/.cache/nvim ] && mv ~/.cache/nvim ~/.cache/nvim.old.$timestamp
 
     # Clone NVChad starter config
-    git clone https://github.com/NvChad/starter ~/.config/nvim
+    git clone https://github.com/NvChad/starter ~/.config/nvim >/dev/null 2>&1 || die "Failed to Download NvChad"
 
     # Backup and copy custom chadrc.lua config
     [ -f ~/.config/nvim/lua/chadrc.lua ] && mv ~/.config/nvim/lua/chadrc.lua ~/.config/nvim/lua/chadrc.lua.old.$timestamp
-    cp -vpnr .config/nvim/lua/chadrc.lua ~/.config/nvim/lua/
+    cp -npr .config/nvim/lua/chadrc.lua ~/.config/nvim/lua/
 
     # Install all mason plugins and quit Neovim
-    nvim --headless "+MasonInstallAll" +qa
-}
-
-restart_cinnamon() {
-    # Restarts Cinnamon
-    cinnamon-dbus-command RestartCinnamon 1
+    nvim --headless "+MasonInstallAll" +qa >/dev/null 2>&1
 }
 
 # NixOS doesn't use this
 place_login_wallpaper() {
+    echo "Setting Login Wallpaper..."
     # Places Login Wallpaper
-    sudo cp -vnr wallpapers/Login_Wallpaper.jpg /boot/
+    sudo cp -nr wallpapers/Login_Wallpaper.jpg /boot/
 }
 
 # NixOS doesn't use this
@@ -573,6 +603,7 @@ configure_nanorc_basic() {
     # Backup the old nanorc file with timestamp
     sudo cp /etc/nanorc /etc/nanorc.old.$timestamp
 
+    echo "Configuring nano..."
     # Add the syntax highlighting inclusion line if it's not already present
     if ! grep -q '^include "/usr/share/nano/\*.nanorc"' /etc/nanorc; then
         echo 'include "/usr/share/nano/*.nanorc"' | sudo tee -a /etc/nanorc > /dev/null
@@ -592,6 +623,7 @@ set_qt_and_gtk_environment() {
     # Backup old config and set QT and GTK theming variables
     local timestamp=$(date +%s)  # Generate timestamp for backups
 
+    echo "Setting QT and GTK Theme Variables..."
     # Backup the old environment file with timestamp
     sudo cp /etc/environment /etc/environment.old.$timestamp
 
@@ -610,6 +642,7 @@ append_slick_greeter_config() {
     # Backup old config and append new settings to slick-greeter.conf
     local timestamp=$(date +%s)  # Generate timestamp for backup
 
+    echo "Configuring LightDM Greeter..."
     # Backup the old slick-greeter.conf with timestamp
     sudo cp /etc/lightdm/slick-greeter.conf /etc/lightdm/slick-greeter.conf.old.$timestamp
 
@@ -650,3 +683,8 @@ user-background=false
 hide-user-image = true" | sudo tee /etc/lightdm/lightdm-gtk-greeter.conf > /dev/null
 }
 
+restart_cinnamon() {
+    echo "Restarting Cinnamon..."
+    # Restarts Cinnamon
+    cinnamon-dbus-command RestartCinnamon 1 >/dev/null 2>&1
+}

@@ -3,7 +3,7 @@
 # TO DO: 
 # - Remove All Verbose Copies 
 # - Suppress All Functions' Outputs
-# - Echo Relavent Descriptions for All Functions
+# - Echo Relevant Descriptions for All Functions
 # - Account for Gentoo OpenRC (if I switch to it one day)
 
 check_if_root() {

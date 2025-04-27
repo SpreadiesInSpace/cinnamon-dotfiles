@@ -96,9 +96,6 @@ set_cinnamon_background_and_sounds
 # Backup old configs and install NVChad for neovim
 install_nvchad
 
-# Restarts Cinnamon
-restart_cinnamon
-
 # Places Login Wallpaper
 # place_login_wallpaper
 
@@ -114,3 +111,6 @@ restart_cinnamon
 
 # Backup old config and append new settings to lightdm-gtk-greeter.conf
 # append_lightdm_gtk_greeter_config
+
+# Restarts Cinnamon
+restart_cinnamon
