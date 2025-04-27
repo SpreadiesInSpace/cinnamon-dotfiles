@@ -2,7 +2,8 @@
 
 **Disclaimer:** *Please go through the scripts carefully so you know what is going on. Feel free to comment out whatever you don't want before you run each script.*
 
-**Install Straight from ISO (UEFI Only, BIOS in the works)**
+**Install Straight from ISO** *- Currently supports UEFI only, BIOS in the works*
+
 ```bash
 # For Arch, Gentoo, openSUSE Tumbleweed & Void
 bash <(curl -sL https://tinyurl.com/cinnamon-ISO)
@@ -11,6 +12,8 @@ bash <(curl -sL https://tinyurl.com/cinnamon-ISO)
 # For Slackware Current
 bash <(wget -qO- https://tinyurl.com/cinnamon-ISO)
 ```
+*View cinnamon-ISO [Source](https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/extra/Setup-ISO.sh)*
+
 **Steps to Install**
 
 1. Clone this repo
