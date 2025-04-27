@@ -2,8 +2,14 @@
 
 **Steps to Install**
 
-1. Clone this repo https://github.com/SpreadiesInSpace/cinnamon-dotfiles
+1. Clone this repo
+```bash
+git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles
+```
 2. Head to cinnamon-dotfiles/home
+```bash
+cd cinnamon-dotfiles/home
+```
 3. bash Setup-*Distro*-Theme.sh to run script
 ```bash
 # Default NixOS behavior doesn't let you chmod+x then ./Setup-NixOS-Theme.sh
