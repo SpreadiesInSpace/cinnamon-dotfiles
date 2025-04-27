@@ -1,4 +1,4 @@
-**Disclaimer:** *Please go through the script carefully so you know what is going on. Feel free to comment out whatever you don't want before you run the script.*
+**Disclaimer:** *Please go through the scripts carefully so you know what is going on. Feel free to comment out whatever you don't want before you run each script.*
 
 **Steps to Install**
 
