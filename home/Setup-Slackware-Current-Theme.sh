@@ -13,7 +13,7 @@ check_dependencies
 install_icons_and_themes
 
 # Disable Cinnamon 6.4's built in polkit
-dconf write /org/cinnamon/enable-polkit-agent "false"
+disable_polkit_agent
 
 # Override Cursor Theme for QT Apps
 override_qt_cursor_theme
@@ -28,8 +28,7 @@ copy_bleachbit_config "slackware"
 copy_fonts
 
 # Symlink Fonts for Root
-sudo mkdir -p /root/.fonts
-sudo ln -sf /usr/share/fonts/* /root/.fonts/
+symlink_fonts
 
 # Copies sounds and wallpapers to home directory
 copy_sounds_and_wallpapers

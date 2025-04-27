@@ -100,6 +100,12 @@ install_icons_and_themes() {
     rm -rf ".icons/$ICON_RENAME" ".icons/$CURSOR_DIR" ".themes/$THEME_DIR"
 }
 
+# Only Gentoo/openSUSE/Slackware uses this
+disable_polkit_agent() {
+    # Disable Cinnamon 6.4's built in polkit
+    dconf write /org/cinnamon/enable-polkit-agent "false"
+}
+
 override_qt_cursor_theme() {
     # Override Cursor Theme for QT Apps
     local distro="$1"
@@ -171,6 +177,13 @@ copy_fonts() {
     mkdir -p ~/.fonts
     sudo ln -sf /usr/share/fonts/* ~/.fonts/
   fi
+}
+
+# Only Slackware/Void uses this
+symlink_fonts() {
+    # Symlink Fonts for Root
+    sudo mkdir -p /root/.fonts
+    sudo ln -sf /usr/share/fonts/* /root/.fonts/
 }
 
 copy_sounds_and_wallpapers() {
