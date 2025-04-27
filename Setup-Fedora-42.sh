@@ -36,10 +36,6 @@ rm -rf /var/cache/PackageKit || die "Failed to remove PackageKit cache"
 echo "Refreshing Metadata Cache..."
 pkcon refresh force -c -1 >/dev/null 2>&1 || die "Failed to refresh metadata cache"
 
-# Disable Gnome Software Automatic Update Downloads
-su - "$SUDO_USER" -c "dconf write /org/gnome/software/allow-updates false" || die "Failed to disable Gnome Software automatic update downloads"
-su - "$SUDO_USER" -c "dconf write /org/gnome/software/download-updates false" || die "Failed to disable Gnome Software update downloads"
-
 # Update system and install git
 dnf -y update || die "System update failed."
 dnf -y install git || die "Git installation failed."
