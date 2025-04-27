@@ -4,9 +4,10 @@
 
 1. Clone this repo https://github.com/SpreadiesInSpace/cinnamon-dotfiles
 2. Head to cinnamon-dotfiles/home
-3. chmod+x then run the Setup.sh of your distro.
+3. bash Setup-*Distro*-Theme.sh to run script
 
 **Required Fonts**
+
 *Note: You only need to download Noto, the rest is accounted for in the script.*
 
  - [ ] Noto-fonts
@@ -14,7 +15,9 @@
  - [ ] Source Code Pro
  - [ ] Sauce Code Pro Nerd
 
-**Dependencies** ***- The script will break if these aren't installed.***
+**Dependencies** 
+
+*The script will break if these aren't installed.*
 
  - [ ] dconf (Debian-based systems need dconf-cli)
  - [ ] flatpak (for themeing override)
