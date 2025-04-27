@@ -29,7 +29,7 @@ copy_fonts
 
 # Symlink Fonts for Root
 sudo mkdir -p /root/.fonts
-sudo ln -s /usr/share/fonts/* /root/.fonts/
+sudo ln -sf /usr/share/fonts/* /root/.fonts/
 
 # Copies sounds and wallpapers to home directory
 copy_sounds_and_wallpapers
@@ -65,10 +65,13 @@ copy_kvantum_themes "gruvbox-fallnn"
 copy_qtct_configs
 
 # Backup and copy xfce4 config to appropriate directories
-mv ~/.config/xfce4 ~/.config/xfce4.old
-cp -vnpr .config/xfce4/ ~/.config/
-sudo mv /root/.config/xfce4 /root/.config/xfce4.old
-sudo cp -vnpr .config/xfce4/ /root/.config/
+timestamp=$(date +%s)
+[ -d ~/.config/xfce4 ] && mv ~/.config/xfce4 ~/.config/xfce4.old.$timestamp
+cp -npr .config/xfce4/ ~/.config/
+if sudo test -d /root/.config/xfce4; then
+    sudo mv /root/.config/xfce4 /root/.config/xfce4.old.$timestamp
+fi
+sudo cp -npr .config/xfce4/ /root/.config/
 
 # Copies Gedit Theme to appropriate directory
 copy_gedit_theme

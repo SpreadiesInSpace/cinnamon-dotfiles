@@ -26,7 +26,7 @@ copy_fonts
 
 # Symlink Fonts for Root
 sudo mkdir -p /root/.fonts
-sudo ln -s /usr/share/fonts/* /root/.fonts/
+sudo ln -sf /usr/share/fonts/* /root/.fonts/
 
 # Copies sounds and wallpapers to home directory
 copy_sounds_and_wallpapers

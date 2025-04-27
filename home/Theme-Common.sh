@@ -262,7 +262,7 @@ copy_bashrc_and_etc() {
         sudo cp /root/.bashrc /root/.bashrc.old.$timestamp >/dev/null 2>&1
         sudo cp NixOS/.bashrc.root /root/.bashrc
         sudo cp NixOS/NixAscii.txt /root/
-        cp ~/.bashrc ~/.bashrc.old.$timestamp
+        cp ~/.bashrc ~/.bashrc.old.$timestamp >/dev/null 2>&1
         cat NixOS/.bashrc > bashrc
         mv bashrc ~/.bashrc
         cd ..
@@ -281,7 +281,7 @@ copy_bashrc_and_etc() {
         echo "source $HOME/.bashrc" | sudo tee -a /root/.bashrc >/dev/null 2>&1
 
         # Preserve and replace user .bashrc with timestamp
-        cp ~/.bashrc ~/.bashrc.old.$timestamp
+        cp ~/.bashrc ~/.bashrc.old.$timestamp >/dev/null 2>&1
         cp "theming/$distro/.bashrc" ~/.bashrc
     fi
 }
@@ -384,8 +384,6 @@ copy_menu_preferences() {
 
     echo "Applying Cinnamon Menu Preferences..."
     # Create timestamped backup directory and move old menu preferences
-    # mkdir -p ~/.config/menus/old.$timestamp
-    # mv ~/.config/menus/*.menu ~/.config/menus/old.$timestamp/ 
     cp -npr ~/.config/menus/ ~/.config/menus.old.$timestamp/
     mkdir -p ~/.config/menus/
     # Copy new menu preferences for the specified distro
@@ -453,7 +451,7 @@ import_desktop_config() {
     echo "Applying Proper Look & Feel System-wide..."
     # Backup and Import Entire Desktop Configuration
     cd theming/$distro/
-    dconf dump / > Old_Desktop_Configuration_$timestamp.dconf  # Timestamped backup
+    dconf dump / > Old_Desktop_Configuration_$timestamp.dconf
     mv Old_Desktop_Configuration_$timestamp.dconf ~/
     dconf load / < $distro.dconf
     rm ~/$distro.dconf
@@ -604,7 +602,7 @@ configure_nanorc_basic() {
     local timestamp=$(date +%s)
 
     # Backup the old nanorc file with timestamp
-    sudo cp /etc/nanorc /etc/nanorc.old.$timestamp
+    sudo cp /etc/nanorc /etc/nanorc.old.$timestamp >/dev/null 2>&1
 
     echo "Configuring nano..."
     # Add the syntax highlighting inclusion line if it's not already present
@@ -628,7 +626,7 @@ set_qt_and_gtk_environment() {
 
     echo "Setting QT and GTK Theme Variables..."
     # Backup the old environment file with timestamp
-    sudo cp /etc/environment /etc/environment.old.$timestamp
+    sudo cp /etc/environment /etc/environment.old.$timestamp >/dev/null 2>&1
 
     # Set QT and GTK theming variables if not already present
     if ! grep -q "^QT_QPA_PLATFORMTHEME=qt5ct" /etc/environment; then
