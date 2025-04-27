@@ -2,9 +2,7 @@
 
 # TO DO: 
 # - Make Variables for Theme Related Entries (for Light Mode)
-# - Remove All Verbose Copies 
-# - Suppress All Functions' Outputs
-# - Echo Relevant Descriptions for All Functions
+# - Suppress Synth Shell Prompt Output
 
 die() {
     # Handle exits on error
@@ -389,9 +387,9 @@ copy_menu_preferences() {
     # mkdir -p ~/.config/menus/old.$timestamp
     # mv ~/.config/menus/*.menu ~/.config/menus/old.$timestamp/ 
     cp -npr ~/.config/menus/ ~/.config/menus.old.$timestamp/
-
+    mkdir -p ~/.config/menus/
     # Copy new menu preferences for the specified distro
-    cp -npr .config/menus/$distro/ ~/.config/menus/
+    cp -npr .config/menus/$distro/* ~/.config/menus/
 }
 
 copy_qbittorrent_config() {
