@@ -25,10 +25,14 @@ git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles
 ```bash
 cd cinnamon-dotfiles
 ```
-3. Run script
+3. Run setup script
 ```bash
 # Default NixOS behavior doesn't let you chmod+x then ./Setup.sh
 bash Setup.sh
+```
+4. Then run theme script
+```bash
+bash Theme.sh
 ```
 
 ## Screenshots
