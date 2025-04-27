@@ -554,6 +554,8 @@ setup_synth_shell_config() {
     local timestamp=$(date +%s)
 
     echo "Configuring Synth Shell Prompt..."
+    # Ensure synth-shell-prompt is removed if script fails
+    trap 'rm -rf synth-shell-prompt/' EXIT
     # Clone Synth-Shell and run setup
     git clone --recursive https://github.com/andresgongora/synth-shell-prompt.git >/dev/null 2>&1 || die "Failed to Download Synth Shell Prompt."
     yes | synth-shell-prompt/setup.sh >/dev/null 2>&1
