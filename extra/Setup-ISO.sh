@@ -17,11 +17,11 @@ NC='\033[0m' # No Color
 
 # Install script URLs and names
 declare -A installs=(
-  [1]="https://tinyurl.com/spready-arch"
-  [2]="https://tinyurl.com/spready-gentoo"
-  [3]="https://tinyurl.com/spready-opensuse-tumbleweed"
-  [4]="https://tinyurl.com/spready-slackware-current"
-  [5]="https://tinyurl.com/spready-void"
+  [1]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/unsorted/Arch/Arch-Install.sh"
+  [2]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/unsorted/Gentoo/Gentoo-Install.sh"
+  [3]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/unsorted/openSUSE/openSUSE-Install.sh"
+  [4]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/unsorted/Slackware/Slackware-Install.sh"
+  [5]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/unsorted/Void/Void-Install.sh"
 )
 
 declare -A names=(
