@@ -1,24 +1,26 @@
 #!/bin/bash
 
 # TO DO: 
-# - Remove All Verbose Copies 
-# - Suppress All Functions' Outputs
-# - Echo Relevant Descriptions for All Functions
 # - Account for Gentoo OpenRC (if I switch to it one day)
+
+die() {
+    # Handle exits on error
+    printf "\033[1;31mError:\033[0m %s\n" "$*" >&2
+    read -rp "Press Enter to exit..."
+    exit 1
+}
 
 check_if_root() {
     # Check if the script is run as root
     if [ "$EUID" -ne 0 ]; then
-        echo "Please run the script using sudo."
-        exit
+        die "Please run the script using sudo."
     fi
 }
 
 check_if_not_root_account() {
     # Check if the script is run from the root account
     if [ "$SUDO_USER" = "" ]; then
-        echo "Please do not run this script from the root account. Use sudo instead."
-        exit
+        die "Please do not run this script from the root account. Use sudo instead."
     fi
 }
 
@@ -28,30 +30,35 @@ get_current_username() {
 }
 
 prompt_for_autologin() {
-    # Autologin Prompt
-    read -rp "Enable autologin for $username? [y/N]: " autologin_input
-    case "$autologin_input" in
-        [yY][eE][sS]|[yY])
-            enable_autologin=true
-            ;;
-        *)
-            enable_autologin=false
-            ;;
-    esac
+    while true; do
+        read -rp "Enable autologin for $username? [y/N]: " autologin_input
+        if [[ "$autologin_input" =~ ^([yY][eE][sS]?|[nN][oO]?)?$ ]]; then
+            if [[ "$autologin_input" =~ ^([yY][eE][sS]?|[yY])$ ]]; then
+                enable_autologin=true
+            else
+                enable_autologin=false
+            fi
+            break
+        else
+            echo "Invalid input. Please answer yes or no."
+        fi
+    done
 }
 
-# NixOS doesn't use this
 prompt_for_vm() {
-    # VM Prompt
-    read -rp "Is this a Virtual Machine? [y/N]: " response
-    case "$response" in
-        [yY][eE][sS]|[yY])
-            is_vm=true
-            ;;
-        *)
-            is_vm=false
-            ;;
-    esac
+    while true; do
+        read -rp "Is this a Virtual Machine? [y/N]: " response
+        if [[ "$response" =~ ^([yY][eE][sS]?|[nN][oO]?)?$ ]]; then
+            if [[ "$response" =~ ^([yY][eE][sS]?|[yY])$ ]]; then
+                is_vm=true
+            else
+                is_vm=false
+            fi
+            break
+        else
+            echo "Invalid input. Please answer yes or no."
+        fi
+    done
 }
 
 display_status() {
@@ -61,7 +68,8 @@ display_status() {
 }
 
 enable_flathub() {
-# Function to enable Flathub remote for Flatpak
+# Enable Flathub remote for Flatpak
+  echo "Enabling Flathub..."
   flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 }
 
@@ -70,12 +78,13 @@ preserve_old_libvirt_configs() {
     # Preserve old configurations with timestamp
     local timestamp=$(date +%s)
 
-    cp /etc/libvirt/libvirtd.conf /etc/libvirt/libvirtd.conf.old.$timestamp
-    cp /etc/libvirt/qemu.conf /etc/libvirt/qemu.conf.old.$timestamp
+    cp /etc/libvirt/libvirtd.conf /etc/libvirt/libvirtd.conf.old.$timestamp >/dev/null 2>&1
+    cp /etc/libvirt/qemu.conf /etc/libvirt/qemu.conf.old.$timestamp >/dev/null 2>&1
 }
 
 # NixOS/Slackware doesn't use this
 set_libvirtd_permissions() {
+    echo "Configuring libvirt..."
     # Set proper permissions in libvirtd.conf
     for line in \
       'unix_sock_group = "libvirt"' \
@@ -85,17 +94,18 @@ set_libvirtd_permissions() {
       # Only add the line if it's completely missing (including commented-out lines)
       if ! grep -q -E "^$key\s*=" /etc/libvirt/libvirtd.conf; then
         # Append the line if it doesn't exist in any form
-        echo "$line" | tee -a /etc/libvirt/libvirtd.conf > /dev/null
+        echo "$line" | tee -a /etc/libvirt/libvirtd.conf >/dev/null 2>&1
       fi
     done
 }
 
 # NixOS/Slackware doesn't use this
 set_qemu_permissions() {
+    echo "Configuring QEMU..."
     # Set proper permissions in qemu.conf
     for key in user group swtpm_user swtpm_group; do
       if ! grep -q "^$key = \"$username\"$" /etc/libvirt/qemu.conf; then
-        echo "$key = \"$username\"" | tee -a /etc/libvirt/qemu.conf > /dev/null
+        echo "$key = \"$username\"" | tee -a /etc/libvirt/qemu.conf >/dev/null 2>&1
       fi
     done
 }
@@ -105,29 +115,31 @@ manage_virsh_network() {
     # Only enable net-autostart if in physical machine
     local distro=${1:-}
 
+    echo "Configuring virsh..."
     if [ "$is_vm" = false ]; then
-        virsh net-autostart default
-        virsh net-start default
+        virsh net-autostart default >/dev/null 2>&1
+        virsh net-start default >/dev/null 2>&1
     else
-        virsh net-autostart default --disable
+        virsh net-autostart default --disable >/dev/null 2>&1
         rm -f /etc/libvirt/qemu/networks/autostart/default.xml
         if virsh net-info default | grep -q "Active:.*yes"; then
-            virsh net-destroy default
+            virsh net-destroy default >/dev/null 2>&1
         fi
 
         # Restart libvirtd based on distro
         if [ "$distro" = "void" ]; then
-            sv restart libvirtd
+            sv restart libvirtd >/dev/null 2>&1
         elif [ "$distro" = "slackware" ]; then
-            /etc/rc.d/rc.libvirt restart
+            /etc/rc.d/rc.libvirt restart >/dev/null 2>&1
         else
-            systemctl restart libvirtd
+            systemctl restart libvirtd >/dev/null 2>&1
         fi
     fi
 }
 
 # NixOS doesn't use this
 add_user_to_groups() {
+    echo "Adding User to Appropriate Groups..."
     # Add user to necessary groups
     local groups=("$@")
     for group in "${groups[@]}"; do
@@ -135,12 +147,11 @@ add_user_to_groups() {
     done
 }
 
-
 # NixOS doesn't use this
 backup_lightdm_config() {
     # Backup original LightDM config with timestamp
     local timestamp=$(date +%s)
-    cp /etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf.old.$timestamp
+    cp /etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf.old.$timestamp >/dev/null 2>&1
 }
 
 # NixOS doesn't use this
@@ -148,6 +159,7 @@ modify_lightdm_conf() {
     # Modify lightdm.conf in-place
     local distro=${1:-}
 
+    echo "Configuring LightDM..."
     awk -v user="$username" -v autologin="$enable_autologin" -v distro="$distro" -i inplace '
     /^\[Seat:\*\]/ {a=1}
     a==1 && /^#?greeter-hide-users=/ {
@@ -184,6 +196,7 @@ modify_lightdm_conf() {
 
 # NixOS doesn't use this
 ensure_autologin_group() {
+    echo "Adding User to Autologin Group..."
     # Ensure autologin group exists and add user
     groupadd -f autologin
     gpasswd -a "$username" autologin
@@ -208,16 +221,17 @@ set_lightdm_display_for_vm() {
 
 # NixOS/Slackware/Void doesn't use this
 set_systemd_timeout_stop() {
+    echo "Setting systemd service shutdown timeout to 15 seconds..."
     # Set timeout for stopping services during shutdown via drop in file
     mkdir -p /etc/systemd/system.conf.d
-    echo "[Manager]" | tee /etc/systemd/system.conf.d/override.conf
-    echo "DefaultTimeoutStopSec=15s" | tee -a /etc/systemd/system.conf.d/override.conf
+    echo "[Manager]" | tee /etc/systemd/system.conf.d/override.conf >/dev/null 2>&1
+    echo "DefaultTimeoutStopSec=15s" | tee -a /etc/systemd/system.conf.d/override.conf >/dev/null 2>&1
 }
 
 # NixOS/Slackware/Void doesn't use this
 reload_systemd_daemon() {
     # Reload systemd to apply changes
-    systemctl daemon-reload
+    systemctl daemon-reload >/dev/null 2>&1
 }
 
 add_setup_theme_flag() {
