@@ -2,7 +2,8 @@
 
 **Disclaimer:** *Please go through the scripts carefully so you know what is going on. Feel free to comment out whatever you don't want before you run each script.*
 
-## Install Straight from ISO *- Currently supports UEFI only, BIOS in the works*
+## Install Straight from ISO
+*Currently supports UEFI only, BIOS in the works*
 
 ```bash
 # For Arch, Gentoo, openSUSE Tumbleweed & Void
