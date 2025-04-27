@@ -14,7 +14,7 @@ die() {
 check_not_root() {
     # Prevents script from being run as root
     if [ "$EUID" -eq 0 ]; then
-        die "This script must NOT be run as root. Please execute it as a regular user."
+        die "This script must NOT be run as root. Please run it as a regular user."
     fi
 }
 
@@ -568,7 +568,7 @@ setup_synth_shell_config() {
     # Ensure synth-shell-prompt is removed if script fails
     trap 'rm -rf synth-shell-prompt/' EXIT
     # Clone Synth-Shell and run setup
-    git clone --recursive https://github.com/andresgongora/synth-shell-prompt.git >/dev/null 2>&1 || die "Failed to Download Synth Shell Prompt."
+    git clone --recursive https://github.com/andresgongora/synth-shell-prompt.git >/dev/null 2>&1 || die "Failed to download Synth Shell Prompt."
     yes | synth-shell-prompt/setup.sh >/dev/null 2>&1
     yes | sudo synth-shell-prompt/setup.sh >/dev/null 2>&1
     rm -rf synth-shell-prompt/
@@ -592,7 +592,7 @@ install_nvchad() {
     [ -d ~/.cache/nvim ] && mv ~/.cache/nvim ~/.cache/nvim.old.$timestamp
 
     # Clone NVChad starter config
-    git clone https://github.com/NvChad/starter ~/.config/nvim >/dev/null 2>&1 || die "Failed to Download NvChad"
+    git clone https://github.com/NvChad/starter ~/.config/nvim >/dev/null 2>&1 || die "Failed to download NvChad."
 
     # Backup and copy custom chadrc.lua config
     [ -f ~/.config/nvim/lua/chadrc.lua ] && mv ~/.config/nvim/lua/chadrc.lua ~/.config/nvim/lua/chadrc.lua.old.$timestamp

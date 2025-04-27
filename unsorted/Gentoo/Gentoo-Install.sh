@@ -156,12 +156,12 @@ echo; echo "make.conf updated successfully"
 cores=$(nproc)
 makeopts_load_limit=$((cores + 1))
 sed -i "s/^MAKEOPTS=.*/MAKEOPTS=\"-j$cores -l$makeopts_load_limit\"/" /mnt/gentoo/etc/portage/make.conf
-echo; echo "Updated MAKEOPTS to -j$cores -l$makeopts_load_limit"
+echo; echo "Set MAKEOPTS to -j$cores -l$makeopts_load_limit"
 
 # Set EMERGE_DEFAULT_OPTS based on CPU cores (load limit as 90% of cores)
 load_limit=$(echo "$cores * 0.9" | bc -l | awk '{printf "%.1f", $0}')
 sed -i "s/^EMERGE_DEFAULT_OPTS=.*/EMERGE_DEFAULT_OPTS=\"-j$cores -l$load_limit\"/" /mnt/gentoo/etc/portage/make.conf
-echo "Updated EMERGE_DEFAULT_OPTS to -j$cores -l$load_limit"
+echo "Set EMERGE_DEFAULT_OPTS to -j$cores -l$load_limit"
 
 # Set VIDEO_CARDS value in package.use
 set_video_card() {

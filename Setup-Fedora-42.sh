@@ -22,47 +22,49 @@ prompt_for_vm
 display_status "$enable_autologin" "$is_vm"
 
 # Enable Parallel Downloads
+echo "Configuring DNF..."
 if ! grep -q "^max_parallel_downloads=10$" /etc/dnf/dnf.conf; then
-    echo 'max_parallel_downloads=10' | tee -a /etc/dnf/dnf.conf
+    echo 'max_parallel_downloads=10' | tee -a /etc/dnf/dnf.conf >/dev/null 2>&1 || die "Failed to enable parallel downloads in /etc/dnf/dnf.conf"
 else
-    sed -i '/^#*max_parallel_downloads=10/s/^#*//' /etc/dnf/dnf.conf
+    sed -i '/^#*max_parallel_downloads=10/s/^#*//' /etc/dnf/dnf.conf || die "Failed to modify parallel downloads setting in /etc/dnf/dnf.conf"
 fi
 
 # Remove PackageKit cache
-rm -rf /var/cache/PackageKit
+rm -rf /var/cache/PackageKit || die "Failed to remove PackageKit cache"
 
 # Redownload metadata cache without auto updates
-pkcon refresh force -c -1
+echo "Refreshing Metadata Cache..."
+pkcon refresh force -c -1 >/dev/null 2>&1 || die "Failed to refresh metadata cache"
 
 # Disable Gnome Software Automatic Update Downloads
-su - "$SUDO_USER" -c "dconf write /org/gnome/software/allow-updates false"
-su - "$SUDO_USER" -c "dconf write /org/gnome/software/download-updates false"
+su - "$SUDO_USER" -c "dconf write /org/gnome/software/allow-updates false" || die "Failed to disable Gnome Software automatic update downloads"
+su - "$SUDO_USER" -c "dconf write /org/gnome/software/download-updates false" || die "Failed to disable Gnome Software update downloads"
 
 # Update system and install git
-dnf -y update
-dnf -y install git
+dnf -y update || die "System update failed."
+dnf -y install git || die "Git installation failed."
 
 # Add RPM Fusion
-dnf -y install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+dnf -y install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm || die "Failed to add RPM Fusion repositories."
 
 # Install Media Codecs
-dnf4 -y group upgrade multimedia
-dnf -y swap 'ffmpeg-free' 'ffmpeg' --allowerasing
-dnf -y upgrade @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
-dnf group install -y sound-and-video
+dnf4 -y group upgrade multimedia || die "Multimedia group upgrade failed."
+dnf -y swap 'ffmpeg-free' 'ffmpeg' --allowerasing || die "Failed to swap ffmpeg-free with ffmpeg."
+dnf -y upgrade @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin || die "Failed to upgrade multimedia group."
+dnf group install -y sound-and-video || die "Failed to install sound-and-video group."
 
 # Install Brave
-dnf -y install dnf-plugins-core
-dnf config-manager addrepo --id=brave-browser --set=name='Brave Browser' --set=baseurl='https://brave-browser-rpm-release.s3.brave.com/$basearch'
-rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
-dnf -y install brave-browser
+dnf -y install dnf-plugins-core || die "Failed to install dnf-plugins-core."
+dnf config-manager addrepo --id=brave-browser --set=name='Brave Browser' --set=baseurl='https://brave-browser-rpm-release.s3.brave.com/$basearch' || die "Failed to add Brave repository."
+rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc || die "Failed to import Brave GPG key."
+dnf -y install brave-browser || die "Failed to install Brave Browser."
 
 # Install Bottom
-dnf -y copr enable atim/bottom
-dnf -y install bottom
+dnf -y copr enable atim/bottom || die "Failed to enable COPR repo for Bottom."
+dnf -y install bottom || die "Failed to install Bottom."
 
 # Install Neofetch
-dnf -y install https://dl.fedoraproject.org/pub/fedora/linux/releases/40/Everything/x86_64/os/Packages/n/neofetch-7.1.0-12.fc40.noarch.rpm
+dnf -y install https://dl.fedoraproject.org/pub/fedora/linux/releases/40/Everything/x86_64/os/Packages/n/neofetch-7.1.0-12.fc40.noarch.rpm || die "Failed to install Neofetch."
 
 # All packages
 packages=(
@@ -134,19 +136,19 @@ packages=(
 )
 
 # Install Packages
-dnf -y install "${packages[@]}"
+dnf -y install "${packages[@]}" || die "Failed to install packages."
 
 # Disable Problem Reporting
-systemctl disable abrtd.service
+systemctl disable abrtd.service >/dev/null 2>&1 || die "Failed to disable Problem Reporting service."
 
 # Uninstall SystemD Core Dump Generator (tracker-miners)
-dnf remove -y tracker-miners
+dnf remove -y tracker-miners || die "Failed to remove tracker-miners."
 
 # Replace FirewallD with UFW and allow KDE Connect through
-dnf -y remove firewalld
-systemctl daemon-reload
-ufw enable
-ufw allow "KDE Connect"
+dnf -y remove firewalld || die "Failed to remove firewalld"
+systemctl daemon-reload || die "Failed to reload systemd daemon"
+ufw enable || die "Failed to enable UFW"
+ufw allow "KDE Connect" || die "Failed to allow KDE Connect in UFW"
 
 # Enable Flathub for Flatpak
 enable_flathub
@@ -161,7 +163,7 @@ set_libvirtd_permissions
 set_qemu_permissions
 
 # Enable libvirtd service (for Virtual Machine Manager)
-systemctl enable --now libvirtd
+systemctl enable --now libvirtd || die "Failed to enable libvirtd service."
 
 # Only enable net-autostart if in physical machine
 manage_virsh_network

@@ -22,8 +22,8 @@ prompt_for_vm
 display_status "$enable_autologin" "$is_vm"
 
 # Update system and install git and curl
-apt update && apt upgrade -y
-apt install -y git curl
+apt update && apt upgrade -y || die "Failed to update and upgrade system."
+apt install -y git curl || die "Failed to install git and curl."
 
 # Install Bottom
 VERSION="0.10.2"
@@ -31,28 +31,28 @@ FILE_VERSION="0.10.2-1"
 # Define the source URL using the version and file version variables
 URL="https://github.com/ClementTsang/bottom/releases/download/${VERSION}/bottom_${FILE_VERSION}_amd64.deb"
 # Download the specified version using curl
-curl -LO "$URL"
+curl -LO "$URL" || die "Failed to download Bottom package."
 # Install the downloaded package
-dpkg -i bottom_${FILE_VERSION}_amd64.deb
+dpkg -i bottom_${FILE_VERSION}_amd64.deb || die "Failed to install Bottom package."
 # Remove the downloaded package file
-rm bottom_${FILE_VERSION}_amd64.deb
+rm bottom_${FILE_VERSION}_amd64.deb || die "Failed to remove downloaded Bottom package file."
 
 # Install Brave Browser
-curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
-echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|tee /etc/apt/sources.list.d/brave-browser-release.list
-apt update
-apt install -y brave-browser
+curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg || die "Failed to download Brave keyring."
+echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main" | tee /etc/apt/sources.list.d/brave-browser-release.list || die "Failed to add Brave repository."
+apt update || die "Failed to update package list after adding Brave repository."
+apt install -y brave-browser || die "Failed to install Brave Browser."
 
 # Install Neovim AppImage
-curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage
-chmod u+x nvim-linux-x86_64.appimage
-./nvim-linux-x86_64.appimage --appimage-extract
-./squashfs-root/AppRun --version
-rm -rf /squashfs-root/
-mv squashfs-root /
-rm -rf /usr/bin/nvim
-ln -s /squashfs-root/AppRun /usr/bin/nvim
-rm nvim-linux-x86_64.appimage
+curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage || die "Failed to download Neovim AppImage."
+chmod u+x nvim-linux-x86_64.appimage || die "Failed to make Neovim AppImage executable."
+./nvim-linux-x86_64.appimage --appimage-extract || die "Failed to extract Neovim AppImage."
+./squashfs-root/AppRun --version || die "Failed to check Neovim version."
+rm -rf /squashfs-root/ || die "Failed to remove extracted Neovim AppImage files."
+mv squashfs-root / || die "Failed to move extracted Neovim files."
+rm -rf /usr/bin/nvim || die "Failed to remove existing Neovim binary."
+ln -s /squashfs-root/AppRun /usr/bin/nvim || die "Failed to create symlink for Neovim."
+rm nvim-linux-x86_64.appimage || die "Failed to remove Neovim AppImage file."
 
 # All packages
 packages=(
@@ -128,7 +128,7 @@ packages=(
 )
 
 # Install Packages
-apt install -y "${packages[@]}"
+apt install -y "${packages[@]}" || die "Failed to install packages."
 
 # Enable Flathub for Flatpak
 enable_flathub
@@ -143,7 +143,7 @@ set_libvirtd_permissions
 set_qemu_permissions
 
 # Enable libvirtd service (for Virtual Machine Manager)
-systemctl enable --now libvirtd
+systemctl enable --now libvirtd || die "Failed to enable libvirtd service."
 
 # Only enable net-autostart if in physical machine
 manage_virsh_network

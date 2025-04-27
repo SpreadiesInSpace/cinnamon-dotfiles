@@ -22,31 +22,36 @@ prompt_for_vm
 display_status "$enable_autologin" "$is_vm"
 
 # Check if Color, ParallelDownloads, and ILoveCandy are already in /etc/pacman.conf
+echo "Configuring pacman..."
 declare -A options=(["Color"]="Color" ["ParallelDownloads"]="ParallelDownloads = 5" ["ILoveCandy"]="ILoveCandy")
 for key in "${!options[@]}"; do
     if ! grep -q "^$key" /etc/pacman.conf; then
-        sed -i "/^# Misc options/a ${options[$key]}" /etc/pacman.conf
+        sed -i "/^# Misc options/a ${options[$key]}" /etc/pacman.conf || die "Failed to configure pacman option: $key"
     fi
 done
 
 # Update MAKEFLAGS /etc/makepkg.conf to match CPU cores
-sed -i 's/^#*\s*MAKEFLAGS=.*/MAKEFLAGS="--jobs=$(nproc)"/' /etc/makepkg.conf
+echo "Set MAKEFLAGS to --jobs=$(nproc)"
+sed -i 's/^#*\s*MAKEFLAGS=.*/MAKEFLAGS="--jobs=$(nproc)"/' /etc/makepkg.conf || die "Failed to update MAKEFLAGS in /etc/makepkg.conf"
 
 # Install base-devel and git
-pacman -S --needed --noconfirm base-devel git
+pacman -S --needed --noconfirm base-devel git || die "Failed to install git."
 
 # Remove passwordless sudo if script is interrupted
 trap 'rm -f /etc/sudoers.d/99_${SUDO_USER}_nopasswd' EXIT
 
 # Temporarily allow passwordless sudo for current user
-echo "$SUDO_USER ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/99_${SUDO_USER}_nopasswd
-chmod 0440 /etc/sudoers.d/99_${SUDO_USER}_nopasswd
+echo "$SUDO_USER ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/99_${SUDO_USER}_nopasswd || die "Failed to modify sudoers file for $SUDO_USER"
+chmod 0440 /etc/sudoers.d/99_${SUDO_USER}_nopasswd || die "Failed to set proper permissions for sudoers file"
 
 # Install yay
 cat << 'EOF' | su - "$SUDO_USER"
-git clone https://aur.archlinux.org/yay-bin.git
-cd yay-bin
-makepkg -si --noconfirm
+source ./Setup-Common.sh
+trap 'rm -rf yay-bin' EXIT
+echo "Configuring yay..."
+git clone https://aur.archlinux.org/yay-bin.git >/dev/null 2>&1 || die "Failed to download yay."
+cd yay-bin || die "Failed to enter yay-bin directory"
+makepkg -si --noconfirm >/dev/null 2>&1 || die "Failed to install yay."
 cd ..
 rm -rf yay-bin
 
@@ -136,7 +141,7 @@ packages=(
 )
 
 # Install Packages
-yay -Syu --needed --noconfirm "${packages[@]}"
+yay -Syu --needed --noconfirm "${packages[@]}" || die "Failed to install packages."
 EOF
 
 # Remove temporary passwordless sudo access
@@ -155,7 +160,9 @@ set_libvirtd_permissions
 set_qemu_permissions
 
 # Enable and start services
-systemctl enable libvirtd lightdm NetworkManager
+systemctl enable libvirtd || die "Failed to enable libvirtd service."
+systemctl enable lightdm || die "Failed to enable lightdm service."
+systemctl enable NetworkManager || die "Failed to enable NetworkManager service."
 
 # Only enable net-autostart if in physical machine
 manage_virsh_network

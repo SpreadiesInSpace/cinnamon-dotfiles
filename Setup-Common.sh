@@ -45,6 +45,7 @@ prompt_for_autologin() {
     done
 }
 
+# NixOS doesn't use this
 prompt_for_vm() {
     while true; do
         read -rp "Is this a Virtual Machine? [y/N]: " response
@@ -62,16 +63,17 @@ prompt_for_vm() {
 }
 
 display_status() {
-  # Display Status from Prompts
-  echo "Autologin: $1"
-  echo "Is VM: $2"
+    # Display Status from Prompts
+    echo "Autologin: $1"
+    echo "Is VM: $2"
 }
 
 enable_flathub() {
-# Enable Flathub remote for Flatpak
-  echo "Enabling Flathub..."
-  flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+    # Enable Flathub remote for Flatpak
+    echo "Enabling Flathub..."
+    flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo || die "Failed to enable Flathub remote."
 }
+
 
 # NixOS/Slackware doesn't use this
 preserve_old_libvirt_configs() {
@@ -94,7 +96,7 @@ set_libvirtd_permissions() {
       # Only add the line if it's completely missing (including commented-out lines)
       if ! grep -q -E "^$key\s*=" /etc/libvirt/libvirtd.conf; then
         # Append the line if it doesn't exist in any form
-        echo "$line" | tee -a /etc/libvirt/libvirtd.conf >/dev/null 2>&1
+        echo "$line" | tee -a /etc/libvirt/libvirtd.conf >/dev/null 2>&1 || die "Failed to update libvirtd.conf with $line."
       fi
     done
 }
@@ -105,7 +107,7 @@ set_qemu_permissions() {
     # Set proper permissions in qemu.conf
     for key in user group swtpm_user swtpm_group; do
       if ! grep -q "^$key = \"$username\"$" /etc/libvirt/qemu.conf; then
-        echo "$key = \"$username\"" | tee -a /etc/libvirt/qemu.conf >/dev/null 2>&1
+        echo "$key = \"$username\"" | tee -a /etc/libvirt/qemu.conf >/dev/null 2>&1 || die "Failed to update qemu.conf with $key = \"$username\"."
       fi
     done
 }
@@ -143,7 +145,7 @@ add_user_to_groups() {
     # Add user to necessary groups
     local groups=("$@")
     for group in "${groups[@]}"; do
-        usermod -aG "$group" "$username"
+        usermod -aG "$group" "$username" || die "Failed to add user $username to group $group."
     done
 }
 
@@ -191,30 +193,29 @@ modify_lightdm_conf() {
         }
     }
     {print}
-    ' /etc/lightdm/lightdm.conf
+    ' /etc/lightdm/lightdm.conf || die "Failed to modify LightDM configuration."
 }
 
 # NixOS doesn't use this
 ensure_autologin_group() {
     echo "Adding User to Autologin Group..."
     # Ensure autologin group exists and add user
-    groupadd -f autologin
-    gpasswd -a "$username" autologin
+    groupadd -f autologin || die "Failed to create autologin group."
+    gpasswd -a "$username" autologin || die "Failed to add user to autologin group."
 }
-
 
 # NixOS doesn't use this
 set_lightdm_display_for_vm() {
     # If running in a VM, set display-setup-script in lightdm.conf
     if [ "$is_vm" = true ]; then
         # Detect connected output using sysfs (avoids X dependency)
-        output_path=$(grep -l connected /sys/class/drm/*/status | head -n1)
+        output_path=$(grep -l connected /sys/class/drm/*/status | head -n1) || die "Failed to detect connected display output."
         output=$(basename "$(dirname "$output_path")")
         output="${output#*-}"  # Strip 'cardX-' prefix
         if [[ -n "$output" ]]; then
             sed -i "/^\[Seat:\*\]/,/^\[.*\]/ {
                 s|^#*display-setup-script=.*|display-setup-script=xrandr --output $output --mode 1920x1080 --rate 60|
-            }" /etc/lightdm/lightdm.conf
+            }" /etc/lightdm/lightdm.conf || die "Failed to update lightdm.conf with display-setup-script."
         fi
     fi
 }
@@ -223,9 +224,9 @@ set_lightdm_display_for_vm() {
 set_systemd_timeout_stop() {
     echo "Setting systemd service shutdown timeout to 15 seconds..."
     # Set timeout for stopping services during shutdown via drop in file
-    mkdir -p /etc/systemd/system.conf.d
-    echo "[Manager]" | tee /etc/systemd/system.conf.d/override.conf >/dev/null 2>&1
-    echo "DefaultTimeoutStopSec=15s" | tee -a /etc/systemd/system.conf.d/override.conf >/dev/null 2>&1
+    mkdir -p /etc/systemd/system.conf.d || die "Failed to create directory /etc/systemd/system.conf.d."
+    echo "[Manager]" | tee /etc/systemd/system.conf.d/override.conf >/dev/null 2>&1 || die "Failed to write to /etc/systemd/system.conf.d/override.conf."
+    echo "DefaultTimeoutStopSec=15s" | tee -a /etc/systemd/system.conf.d/override.conf >/dev/null 2>&1 || die "Failed to append to /etc/systemd/system.conf.d/override.conf."
 }
 
 # NixOS/Slackware/Void doesn't use this
@@ -236,7 +237,7 @@ reload_systemd_daemon() {
 
 add_setup_theme_flag() {
     local distro=$1
-    su - "$SUDO_USER" -c "touch $(pwd)/.$distro.done"
+    su - "$SUDO_USER" -c "touch $(pwd)/.$distro.done" || die "Failed to create the done flag for $distro."
 }
 
 print_reboot_message() {

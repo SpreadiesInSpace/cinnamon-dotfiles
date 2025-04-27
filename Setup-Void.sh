@@ -22,18 +22,18 @@ prompt_for_vm
 display_status "$enable_autologin" "$is_vm"
 
 # Install base-devel, git, and other dependencies
-xbps-install -Syu git xtools
+xbps-install -Syu git xtools || die "Failed to install git and xtools"
 
 # Install xmirror utility
-xbps-install -Sy xmirror
+xbps-install -Sy xmirror || die "Failed to install xmirror"
 
 # Use xmirror to select the fastest mirrors
-# xmirror -s https://repo-fastly.voidlinux.org/
-xmirror -s https://mirror.vofr.net/voidlinux/
+# xmirror -s https://repo-fastly.voidlinux.org/ || die "Failed to set the mirror with xmirror"
+xmirror -s https://mirror.vofr.net/voidlinux/ || die "Failed to set the mirror with xmirror"
 
 # Install multilib and nonfree repos
-xbps-install -Sy void-repo-nonfree void-repo-multilib void-repo-multilib-nonfree
-xbps-install -Syu
+xbps-install -Sy void-repo-nonfree void-repo-multilib void-repo-multilib-nonfree || die "Failed to install multilib and nonfree repositories"
+xbps-install -Syu || die "Failed to update system after adding repositories"
 
 # All packages (adapt package names as needed for Void Linux)
 packages=(
@@ -164,15 +164,15 @@ packages=(
 )
 
 # Install Packages
-xbps-install -Sy "${packages[@]}"
+xbps-install -Sy "${packages[@]}" || die "Failed to install packages."
 
 # Protect neofetch from being removed
-xbps-pkgdb -m hold neofetch
+xbps-pkgdb -m hold neofetch || die "Failed to hold neofetch package"
 
 # Install Brave
 cd home/theming/Void
 chmod +x update_brave.sh
-./update_brave.sh
+./update_brave.sh || die "Failed to install Brave."
 cd ..
 
 # Enable Flathub for Flatpak
@@ -189,7 +189,7 @@ set_qemu_permissions
 
 # Enable and start services
 for service in dbus lightdm NetworkManager polkitd spice-vdagentd libvirtd virtlockd virtlogd; do
-  ln -sf /etc/sv/$service /etc/runit/runsvdir/default
+  ln -sf /etc/sv/$service /etc/runit/runsvdir/default || die "Failed to enable $service."
 done
 
 # Let services start

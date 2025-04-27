@@ -31,19 +31,19 @@ else
 
   # Backup current make.conf & replace with custom one
   timestamp=$(date +%s)
-  cp /etc/portage/make.conf /etc/portage/make.conf.old.${timestamp}
-  cp etc/portage/make.conf /etc/portage/make.conf
+  cp /etc/portage/make.conf /etc/portage/make.conf.old.${timestamp} || die "Failed to back up current make.conf."
+  cp etc/portage/make.conf /etc/portage/make.conf || die "Failed to copy custom make.conf."
 
   # Set MAKEOPTS based on CPU cores (load limit = cores + 1)
-  cores=$(nproc)
+  cores=$(nproc) || die "Failed to retrieve number of CPU cores."
   makeopts_load_limit=$((cores + 1))
-  sed -i "s/^MAKEOPTS=.*/MAKEOPTS=\"-j$cores -l$makeopts_load_limit\"/" /etc/portage/make.conf
-  echo "Updated MAKEOPTS to -j$cores -l$makeopts_load_limit"
+  sed -i "s/^MAKEOPTS=.*/MAKEOPTS=\"-j$cores -l$makeopts_load_limit\"/" /etc/portage/make.conf || die "Failed to set MAKEOPTS in make.conf."
+  echo "Set MAKEOPTS to -j$cores -l$makeopts_load_limit"
 
   # Set EMERGE_DEFAULT_OPTS based on CPU cores (load limit as 90% of cores)
-  load_limit=$(echo "$cores * 0.9" | bc -l | awk '{printf "%.1f", $0}')
-  sed -i "s/^EMERGE_DEFAULT_OPTS=.*/EMERGE_DEFAULT_OPTS=\"-j$cores -l$load_limit\"/" /etc/portage/make.conf
-  echo "Updated EMERGE_DEFAULT_OPTS to -j$cores -l$load_limit"
+  load_limit=$(echo "$cores * 0.9" | bc -l | awk '{printf "%.1f", $0}') || die "Failed to calculate load limit."
+  sed -i "s/^EMERGE_DEFAULT_OPTS=.*/EMERGE_DEFAULT_OPTS=\"-j$cores -l$load_limit\"/" /etc/portage/make.conf || die "Failed to set EMERGE_DEFAULT_OPTS in make.conf."
+  echo "Set EMERGE_DEFAULT_OPTS to -j$cores -l$load_limit"
 
   # Set VIDEO_CARDS value in package.use
   set_video_card() {
@@ -76,77 +76,77 @@ else
     done
     
     # Create or update the /etc/portage/package.use/00video-cards file
-    echo "*/* VIDEO_CARDS: $video_card" > /etc/portage/package.use/00video-cards
+    echo "*/* VIDEO_CARDS: $video_card" > /etc/portage/package.use/00video-cards || die "Failed to update /etc/portage/package.use/00video-cards with VIDEO_CARDS."
     echo; echo "Updated VIDEO_CARDS in /etc/portage/package.use/00video-cards to $video_card based on provided input."; echo
   }
   
   # Call the function
-  set_video_card
+  set_video_card || die "Failed to set video card."
 
   # Drop flag so this doesn't run again
-  touch "$MAKECONF_FLAG"
+  touch "$MAKECONF_FLAG" || die "Failed to create $MAKECONF_FLAG flag."
 fi
 
 # Review make.conf file
 # nano /etc/portage/make.conf
 
-# Install Essentials 
-emerge -vquN app-eselect/eselect-repository app-editors/nano dev-vcs/git
+# Install Essentials
+emerge -vquN app-eselect/eselect-repository app-editors/nano dev-vcs/git || die "Failed to install essential packages."
 
 # Switch from rsync to git for faster repository sync times
 FLAG="/var/db/repos/.synced-git-repo"
 
 # Skip this if run previously
 if [[ ! -f "$FLAG" ]]; then
-  eselect repository disable gentoo
-  eselect repository enable gentoo
-  rm -rf /var/db/repos/gentoo
-  touch "$FLAG"
+  eselect repository disable gentoo || die "Failed to disable gentoo repository."
+  eselect repository enable gentoo || die "Failed to enable gentoo repository."
+  rm -rf /var/db/repos/gentoo || die "Failed to remove existing gentoo repository."
+  touch "$FLAG" || die "Failed to create git sync flag."
   echo "Switched to git for repository sync."
 else
   echo "Repository already configured for git. Skipping."
 fi
 
 # Enable Additional Overlays
-eselect repository add sunny-overlay git https://github.com/dguglielmi/sunny-overlay.git # for GPaste
-eselect repository enable guru # for unstable packages
-eselect repository enable gentoo-zh # for Brave
-eselect repository enable djs_overlay # for Cinnamon 6.4
+eselect repository add sunny-overlay git https://github.com/dguglielmi/sunny-overlay.git || die "Failed to add sunny-overlay repository."
+eselect repository enable guru || die "Failed to enable guru repository."
+eselect repository enable gentoo-zh || die "Failed to enable gentoo-zh repository."
+eselect repository enable djs_overlay || die "Failed to enable djs_overlay repository."
 
 # Mask select djs_overlay packages
-echo "app-editors/neovim::djs_overlay" | tee /etc/portage/package.mask/neovim
-echo "www-client/brave-bin::djs_overlay" | tee /etc/portage/package.mask/brave
+echo "app-editors/neovim::djs_overlay" | tee /etc/portage/package.mask/neovim || die "Failed to mask neovim package."
+echo "www-client/brave-bin::djs_overlay" | tee /etc/portage/package.mask/brave || die "Failed to mask brave-bin package."
 
 # Allow select unstable packages to be merged
-echo "x11-misc/gpaste ~amd64" | tee /etc/portage/package.accept_keywords/gpaste
-echo "app-admin/grub-customizer ~amd64" | tee /etc/portage/package.accept_keywords/grub-customizer
-echo "media-video/haruna ~amd64" | tee /etc/portage/package.accept_keywords/haruna
-echo "x11-apps/lightdm-gtk-greeter-settings ~amd64" | tee /etc/portage/package.accept_keywords/lightdm-gtk-greeter-settings
-echo "x11-themes/kvantum ~amd64" | tee /etc/portage/package.accept_keywords/kvantum
-echo "app-backup/timeshift ~amd64" | tee /etc/portage/package.accept_keywords/timeshift
+echo "x11-misc/gpaste ~amd64" | tee /etc/portage/package.accept_keywords/gpaste || die "Failed to add gpaste to package.accept_keywords."
+echo "app-admin/grub-customizer ~amd64" | tee /etc/portage/package.accept_keywords/grub-customizer || die "Failed to add grub-customizer to package.accept_keywords."
+echo "media-video/haruna ~amd64" | tee /etc/portage/package.accept_keywords/haruna || die "Failed to add haruna to package.accept_keywords."
+echo "x11-apps/lightdm-gtk-greeter-settings ~amd64" | tee /etc/portage/package.accept_keywords/lightdm-gtk-greeter-settings || die "Failed to add lightdm-gtk-greeter-settings to package.accept_keywords."
+echo "x11-themes/kvantum ~amd64" | tee /etc/portage/package.accept_keywords/kvantum || die "Failed to add kvantum to package.accept_keywords."
+echo "app-backup/timeshift ~amd64" | tee /etc/portage/package.accept_keywords/timeshift || die "Failed to add timeshift to package.accept_keywords."
 
 # Enable Extra Use Flags
-echo "app-editors/gedit-plugins charmap git terminal" | tee /etc/portage/package.use/gedit-plugins
-echo "media-video/ffmpegthumbnailer gnome" | tee /etc/portage/package.use/ffmpegthumbnailer
-echo "gnome-extra/nemo tracker" | tee /etc/portage/package.use/nemo
-echo "app-emulation/qemu glusterfs iscsi opengl pipewire spice usbredir vde virgl virtfs zstd" | tee /etc/portage/package.use/qemu
+echo "app-editors/gedit-plugins charmap git terminal" | tee /etc/portage/package.use/gedit-plugins || die "Failed to set USE flags for gedit-plugins."
+echo "media-video/ffmpegthumbnailer gnome" | tee /etc/portage/package.use/ffmpegthumbnailer || die "Failed to set USE flags for ffmpegthumbnailer."
+echo "gnome-extra/nemo tracker" | tee /etc/portage/package.use/nemo || die "Failed to set USE flags for nemo."
+echo "app-emulation/qemu glusterfs iscsi opengl pipewire spice usbredir vde virgl virtfs zstd" | tee /etc/portage/package.use/qemu || die "Failed to set USE flags for qemu."
 
 # Sync Repository + All Overlays
-emaint sync -a
+emaint sync -a || die "Failed to sync repositories and overlays."
 
 # Select 23.0 gnome desktop systemd profile for Cinnamon
-eselect profile set default/linux/amd64/23.0/desktop/gnome/systemd
+eselect profile set default/linux/amd64/23.0/desktop/gnome/systemd || die "Failed to set default profile."
 
 # Enable Sound (Pipewire)
-echo "media-video/pipewire sound-server" | tee /etc/portage/package.use/pipewire
-echo "media-sound/pulseaudio -daemon" | tee /etc/portage/package.use/pulseaudio
+echo "media-video/pipewire sound-server" | tee /etc/portage/package.use/pipewire || die "Failed to set USE flags for pipewire."
+echo "media-sound/pulseaudio -daemon" | tee /etc/portage/package.use/pulseaudio || die "Failed to set USE flags for pulseaudio."
 
 # Set LINGUAS for Cinnamon Localization
-# echo "*/* LINGUAS: en" | tee /etc/portage/package.use/00localization
+# echo "*/* LINGUAS: en" | tee /etc/portage/package.use/00localization || die "Failed to set LINGUAS to EN"
 
 # Emerge changes and cleanup
-emerge -vqDuN @world
-emerge -q --depclean
+emerge -vqDuN @world || die "Failed to emerge world update."
+emerge -q --depclean || die "Failed to clean up unused dependencies."
 
 # Update system and install Cinnamon (split them to prevent slot conflicts)
 desktop_environment=(
@@ -156,7 +156,7 @@ desktop_environment=(
     "x11-misc/lightdm-gtk-greeter"
     "www-client/brave-bin" # for verifying gentoo-zh > djs_brave override
 )
-emerge -vqDuN --with-bdeps=y "${desktop_environment[@]}"
+emerge -vqDuN --with-bdeps=y "${desktop_environment[@]}" || die "Failed to install Cinnamon/Brave package group."
 
 # All Packages
 packages=(
@@ -232,13 +232,13 @@ packages=(
     "app-emulation/guestfs-tools"
 )
 # Automatically accept USE changes and update config files
-touch /etc/portage/package.use/zzz_autounmask
+touch /etc/portage/package.use/zzz_autounmask || die "Failed to create /etc/portage/package.use/zzz_autounmask."
 # Emerge with autounmask-write and continue
-emerge -vqDuN --with-bdeps=y "${packages[@]}" --autounmask-write --autounmask-continue=y
+emerge -vqDuN --with-bdeps=y "${packages[@]}" --autounmask-write --autounmask-continue=y || die "Emerge failed during initial package installation."
 # Update configurations automatically, writing to zzz_autounmask
-dispatch-conf <<< $(echo -e 'y')
+dispatch-conf <<< $(echo -e 'y') || die "Failed to run dispatch-conf for configuration update."
 # Resume emerge
-emerge -vqDuN --with-bdeps=y --keep-going "${packages[@]}"
+emerge -vqDuN --with-bdeps=y --keep-going "${packages[@]}" || die "Failed to install packages."
 
 # Enable Flathub for Flatpak
 enable_flathub
@@ -253,8 +253,12 @@ set_libvirtd_permissions
 set_qemu_permissions
 
 # Enable and start services
-systemctl enable libvirtd lightdm NetworkManager
-systemctl --global enable pipewire.service pipewire-pulse.socket wireplumber.service
+systemctl enable libvirtd || die "Failed to enable libvirtd service."
+systemctl enable lightdm || die "Failed to enable lightdm service."
+systemctl enable NetworkManager || die "Failed to enable NetworkManager service."
+systemctl --global enable pipewire.service || die "Failed to enable pipewire.service globally."
+systemctl --global enable pipewire-pulse.socket || die "Failed to enable pipewire-pulse.socket globally."
+systemctl --global enable wireplumber.service || die "Failed to enable wireplumber.service globally."
 
 # Only enable net-autostart if in physical machine
 manage_virsh_network
