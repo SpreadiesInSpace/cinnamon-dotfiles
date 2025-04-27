@@ -1,7 +1,16 @@
 ![Cinnamon Gruvbox Merge](https://github.com/SpreadiesInSpace/cinnamon-dotfiles/blob/main/screenshots/Collection/CinnamonGruvboxMerge2025.gif "Cult of Cinnamon")
 
-**Disclaimer:** *Please go through the script carefully so you know what is going on. Feel free to comment out whatever you don't want before you run the script.*
+**Disclaimer:** *Please go through the scripts carefully so you know what is going on. Feel free to comment out whatever you don't want before you run each script.*
 
+**Install Straight from ISO (UEFI Only, BIOS in the works)**
+```bash
+# For Arch, Gentoo, openSUSE Tumbleweed & Void
+bash <(curl -sL https://tinyurl.com/cinnamon-ISO)
+```
+```bash
+# For Slackware Current
+bash <(wget -qO- https://tinyurl.com/cinnamon-ISO)
+```
 **Steps to Install**
 
 1. Clone this repo
