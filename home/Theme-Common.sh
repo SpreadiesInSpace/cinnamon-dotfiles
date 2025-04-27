@@ -452,13 +452,14 @@ import_desktop_config() {
     local distro=$1
     local timestamp=$(date +%s)
 
-    echo "Applying Proper Look & Feel System-wide ..."
+    echo "Applying Proper Look & Feel System-wide..."
     # Backup and Import Entire Desktop Configuration
     cd theming/$distro/
     dconf dump / > Old_Desktop_Configuration_$timestamp.dconf  # Timestamped backup
     mv Old_Desktop_Configuration_$timestamp.dconf ~/
     dconf load / < $distro.dconf
     rm ~/$distro.dconf
+    cd ../..
 }
 
 apply_gedit_and_gnome_terminal_config() {
@@ -466,6 +467,7 @@ apply_gedit_and_gnome_terminal_config() {
     local distro=$1
     local gedit_config=$2
 
+    cd theming/$distro/
     if [[ "$distro" == "openSUSE" ]]; then
         # Use gnomesu for openSUSE
         gnomesu dconf load / < "gnome-terminal-$distro.dconf"
@@ -479,8 +481,7 @@ apply_gedit_and_gnome_terminal_config() {
         cd ..
         sudo dbus-launch dconf load / < "$gedit_config"
     fi
-
-    cd "$distro/"
+    cd ..
 }
 
 set_default_apps() {
@@ -488,6 +489,7 @@ set_default_apps() {
 
     echo "Setting Default Apps..."
     # Set default apps for the given distro
+    cd theming/$distro/
     chmod +x Default-Apps-$distro.sh
     bash Default-Apps-$distro.sh
     sudo bash Default-Apps-$distro.sh
