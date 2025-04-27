@@ -166,7 +166,7 @@ set_libvirtd_permissions
 set_qemu_permissions
 
 # Enable libvirtd service (for Virtual Machine Manager)
-systemctl enable --now libvirtd || die "Failed to enable libvirtd service."
+systemctl enable libvirtd || die "Failed to enable libvirtd service."
 
 # Only enable net-autostart if in physical machine
 manage_virsh_network
