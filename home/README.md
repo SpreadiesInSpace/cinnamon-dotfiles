@@ -14,9 +14,18 @@
  - [ ] Source Code Pro
  - [ ] Sauce Code Pro Nerd
 
-**Dependencies**
+**Dependencies** ***# The script will break if these aren't installed.***
 
- - [ ] unzip ***# The script will break if this isn't installed.***
+ - [ ] dconf (Debian-based systems need dconf-cli)
+ - [ ] flatpak (for themeing override)
+ - [ ] git
+ - [ ] gsettings
+ - [ ] neovim
+ - [ ] sudo
+ - [ ] unzip
+ 
+**Optional Dependencies**
+ 
  - [ ] gedit
  - [ ] git
  - [ ] gnome-calculator
@@ -26,7 +35,7 @@
  - [ ] gpaste
  - [ ] gir1.2-gpaste-4.0 ***# if on Debian or Ubuntu-based distro***
  - [ ] neofetch
- - [ ] kvantum
+ - [ ] kvantum ***# kvantum and qt5/6ct are needed to theme QT apps)***
  - [ ] kvantum-qt5
  - [ ] qt5ct
  - [ ] qt6ct

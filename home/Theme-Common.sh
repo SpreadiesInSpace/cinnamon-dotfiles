@@ -25,7 +25,7 @@ check_dependencies() {
   for cmd in "${deps[@]}"; do
     if ! command -v "$cmd" >/dev/null 2>&1; then
       if [ "$cmd" = "dconf" ]; then
-        missing+=("dconf (Debian-based systems may need 'dconf-cli')")
+        missing+=("dconf (Debian-based systems need 'dconf-cli')")
       elif [ "$cmd" = "nvim" ]; then
         missing+=("neovim")
       else
