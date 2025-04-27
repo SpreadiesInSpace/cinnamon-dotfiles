@@ -261,7 +261,7 @@ copy_bashrc_and_etc() {
     if [ "$distro" = "nixos" ]; then
         cd theming/
         cp -npr NixOS/* ~/; rm ~/configuration.nix
-        sudo cp /root/.bashrc /root/.bashrc.old.$timestamp
+        sudo cp /root/.bashrc /root/.bashrc.old.$timestamp >/dev/null 2>&1
         sudo cp NixOS/.bashrc.root /root/.bashrc
         sudo cp NixOS/NixAscii.txt /root/
         cp ~/.bashrc ~/.bashrc.old.$timestamp
@@ -273,7 +273,7 @@ copy_bashrc_and_etc() {
         cp -npr "theming/$distro/"* ~/
 
         # Preserve old root .bashrc with timestamp
-        sudo cp /root/.bashrc /root/.bashrc.old.$timestamp
+        sudo cp /root/.bashrc /root/.bashrc.old.$timestamp >/dev/null 2>&1
 
         # Create minimal root .bashrc with tty check and source user .bashrc
         echo 'if [[ $(tty) == /dev/tty[0-9]* ]]; then
@@ -318,12 +318,12 @@ copy_kvantum_themes() {
 
     echo "Installing Kvantum Themes..."
     if [ "$distro" = "nixos" ]; then
-        mv ~/.config/Kvantum ~/.config/Kvantum.old.$timestamp
+        mv ~/.config/Kvantum ~/.config/Kvantum.old.$timestamp >/dev/null 2>&1
         cp -npr .config/Kvantum/ ~/.config/
         echo "" >> ~/.config/Kvantum/kvantum.kvconfig
         echo "[Applications]
 Gruvbox-Dark-Brown=kdeconnect-app, kdeconnect-sms" >> ~/.config/Kvantum/kvantum.kvconfig
-        sudo mv /root/.config/Kvantum /root/.config/Kvantum.old.$timestamp
+        sudo mv /root/.config/Kvantum /root/.config/Kvantum.old.$timestamp >/dev/null 2>&1
         kvantummanager --set gruvbox-fallnn
         sudo ln -sf ~/.config/Kvantum /root/.config/
     else
@@ -341,15 +341,15 @@ copy_qtct_configs() {
 
     echo "Applying Kvantum Themes System-wide..."
     # Handle qt5ct
-    mv ~/.config/qt5ct ~/.config/qt5ct.old.$timestamp
+    mv ~/.config/qt5ct ~/.config/qt5ct.old.$timestamp >/dev/null 2>&1
     cp -npr .config/qt5ct/ ~/.config/
-    sudo mv /root/.config/qt5ct /root/.config/qt5ct.old.$timestamp
+    sudo mv /root/.config/qt5ct /root/.config/qt5ct.old.$timestamp >/dev/null 2>&1
     sudo ln -sf ~/.config/qt5ct/ /root/.config/
 
     # Handle qt6ct
-    mv ~/.config/qt6ct ~/.config/qt6ct.old.$timestamp
+    mv ~/.config/qt6ct ~/.config/qt6ct.old.$timestamp >/dev/null 2>&1
     cp -npr .config/qt6ct/ ~/.config/
-    sudo mv /root/.config/qt6ct /root/.config/qt6ct.old.$timestamp
+    sudo mv /root/.config/qt6ct /root/.config/qt6ct.old.$timestamp >/dev/null 2>&1
     sudo ln -sf ~/.config/qt6ct/ /root/.config/
 }
 
@@ -387,7 +387,7 @@ copy_menu_preferences() {
     echo "Applying Cinnamon Menu Preferences..."
     # Create timestamped backup directory and move old menu preferences
     mkdir -p ~/.config/menus/old.$timestamp
-    mv ~/.config/menus/*.menu ~/.config/menus/old.$timestamp/
+    mv ~/.config/menus/*.menu ~/.config/menus/old.$timestamp/ 
 
     # Copy new menu preferences for the specified distro
     cp -npr .config/menus/$distro/* ~/.config/menus/
@@ -400,7 +400,7 @@ copy_qbittorrent_config() {
 
     echo "Configuring qBittorrent..."
     # Backup the old config with timestamp
-    mv ~/.config/qBittorrent/qBittorrent.conf ~/.config/qBittorrent/qBittorrent.conf.old.$timestamp
+    mv ~/.config/qBittorrent/qBittorrent.conf ~/.config/qBittorrent/qBittorrent.conf.old.$timestamp >/dev/null 2>&1
     mkdir -p ~/.config/qBittorrent/
 
     # Copy distro-specific config
@@ -416,12 +416,12 @@ copy_libreoffice_config() {
     echo "Configuring LibreOffice..."
     # User-side config
     mkdir -p ~/.config/libreoffice
-    mv ~/.config/libreoffice/4 ~/.config/libreoffice/4.old.$timestamp  # Rename to include timestamp
+    mv ~/.config/libreoffice/4 ~/.config/libreoffice/4.old.$timestamp >/dev/null 2>&1
     cp -npr .config/libreoffice/$distro ~/.config/libreoffice/4
 
     # Root-side config
     sudo mkdir -p /root/.config/libreoffice
-    sudo mv /root/.config/libreoffice/4 /root/.config/libreoffice/4.old.$timestamp  # Rename to include timestamp
+    sudo mv /root/.config/libreoffice/4 /root/.config/libreoffice/4.old.$timestamp >/dev/null 2>&1
     sudo cp -prf .config/libreoffice/$distro /root/.config/libreoffice/4
 }
 
@@ -431,7 +431,7 @@ copy_filezilla_config() {
 
     echo "Configuring FileZilla..."
     # Backup the old config with timestamp
-    mv ~/.config/filezilla ~/.config/filezilla.old.$timestamp
+    mv ~/.config/filezilla ~/.config/filezilla.old.$timestamp >/dev/null 2>&1
     cp -npr .config/filezilla/ ~/.config/
 }
 
@@ -441,7 +441,7 @@ copy_profile_picture() {
 
     echo "Setting Profile Picture..."
     # Create timestamped backup for the old profile picture
-    mv ~/.face ~/.face.old.$timestamp
+    mv ~/.face ~/.face.old.$timestamp >/dev/null 2>&1
 
     # Copy new profile picture
     cp -npr .face ~/
@@ -644,7 +644,7 @@ append_slick_greeter_config() {
 
     echo "Configuring LightDM Greeter..."
     # Backup the old slick-greeter.conf with timestamp
-    sudo cp /etc/lightdm/slick-greeter.conf /etc/lightdm/slick-greeter.conf.old.$timestamp
+    sudo cp /etc/lightdm/slick-greeter.conf /etc/lightdm/slick-greeter.conf.old.$timestamp >/dev/null 2>&1
 
     # Append new settings to slick-greeter.conf
     echo "[Greeter]
@@ -664,7 +664,7 @@ append_lightdm_gtk_greeter_config() {
     local timestamp=$(date +%s)  # Generate timestamp for backup
 
     # Backup the old lightdm-gtk-greeter.conf with timestamp
-    sudo cp /etc/lightdm/lightdm-gtk-greeter.conf /etc/lightdm/lightdm-gtk-greeter.conf.old.$timestamp
+    sudo cp /etc/lightdm/lightdm-gtk-greeter.conf /etc/lightdm/lightdm-gtk-greeter.conf.old.$timestamp >/dev/null 2>&1
 
     # Append new settings to lightdm-gtk-greeter.conf
     echo "[greeter]
