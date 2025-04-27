@@ -27,7 +27,7 @@ setup_xdeb() {
   install_missing_deps
 
   # Download the latest xdeb release
-  curl -sLO $(curl -s https://api.github.com/repos/xdeb-org/xdeb/releases/latest | grep -oP '"browser_download_url": "\K(.*xdeb)(?=")')
+  curl -LO $(curl -s https://api.github.com/repos/xdeb-org/xdeb/releases/latest | grep -oP '"browser_download_url": "\K(.*xdeb)(?=")')
   chmod 0744 xdeb
 }
 
