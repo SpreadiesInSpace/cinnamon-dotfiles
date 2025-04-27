@@ -30,34 +30,34 @@ get_current_username() {
 }
 
 prompt_for_autologin() {
+    # Autologin Prompt
     while true; do
         read -rp "Enable autologin for $username? [y/N]: " autologin_input
-        if [[ "$autologin_input" =~ ^([yY][eE][sS]?|[nN][oO]?)?$ ]]; then
-            if [[ "$autologin_input" =~ ^([yY][eE][sS]?|[yY])$ ]]; then
-                enable_autologin=true
-            else
-                enable_autologin=false
-            fi
+        if [[ "$autologin_input" =~ ^([yY][eE][sS]?|[yY])$ ]]; then
+            enable_autologin=true
+            break
+        elif [[ "$autologin_input" =~ ^([nN][oO]?)$ ]]; then
+            enable_autologin=false
             break
         else
-            echo "Invalid input. Please answer yes or no."
+            echo "Invalid input. Please answer y or n."
         fi
     done
 }
 
 # NixOS doesn't use this
 prompt_for_vm() {
+    # VM Prompt
     while true; do
         read -rp "Is this a Virtual Machine? [y/N]: " response
-        if [[ "$response" =~ ^([yY][eE][sS]?|[nN][oO]?)?$ ]]; then
-            if [[ "$response" =~ ^([yY][eE][sS]?|[yY])$ ]]; then
-                is_vm=true
-            else
-                is_vm=false
-            fi
+        if [[ "$response" =~ ^([yY][eE][sS]?|[yY])$ ]]; then
+            is_vm=true
+            break
+        elif [[ "$response" =~ ^([nN][oO]?)$ ]]; then
+            is_vm=false
             break
         else
-            echo "Invalid input. Please answer yes or no."
+            echo "Invalid input. Please answer y or n."
         fi
     done
 }
