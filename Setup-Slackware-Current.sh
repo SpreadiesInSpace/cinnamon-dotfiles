@@ -281,7 +281,7 @@ fi
 chmod +x /etc/rc.d/rc.libvirt || die "Failed to make /etc/rc.d/rc.libvirt executable"
 
 # Start libvirtd service
-/etc/rc.d/rc.libvirt start || die "Failed to start libvirtd service"
+/etc/rc.d/rc.libvirt start >/dev/null 2>&1 || die "Failed to start libvirtd service"
 
 # Only enable net-autostart if in physical machine
 manage_virsh_network "slackware"
