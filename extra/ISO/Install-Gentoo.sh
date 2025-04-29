@@ -135,11 +135,14 @@ mount --make-rslave /mnt/gentoo/dev || die "Failed to set /mnt/gentoo/dev as sla
 mount --bind /run /mnt/gentoo/run || die "Failed to mount /run"
 mount --make-slave /mnt/gentoo/run || die "Failed to set /mnt/gentoo/run as slave"
 
-# Extra Mounts for Non-Gentoo Media
-test -L /dev/shm && rm /dev/shm || die "Failed to remove symlink for /dev/shm"
-mkdir /dev/shm || die "Failed to create /dev/shm"
-mount --types tmpfs --options nosuid,nodev,noexec shm /dev/shm || die "Failed to mount /dev/shm"
-chmod 1777 /dev/shm /run/shm || die "Failed to set permissions for /dev/shm"
+# Fix /dev/shm if it's a broken symlink (common on non-Gentoo ISOs)
+if test -L /dev/shm; then
+  echo "Fixing /dev/shm symlink..."
+  rm /dev/shm || die "Failed to remove /dev/shm symlink."
+  mkdir /dev/shm || die "Failed to create /dev/shm directory."
+  mount -t tmpfs -o nosuid,nodev,noexec shm /dev/shm || die "Failed to mount tmpfs on /dev/shm."
+  chmod 1777 /dev/shm /run/shm || die "Failed to set permissions on /dev/shm or /run/shm."
+fi
 
 # Entering Chroot
 cat << EOF | chroot /mnt/gentoo /bin/bash
@@ -289,12 +292,12 @@ systemctl enable systemd-timesyncd.service
 # Configure GRUB Bootloader
 if [ "$BOOTMODE" = "UEFI" ]; then
   if [ "$REMOVABLE_BOOT" = "1" ]; then
-    grub-install --target=x86_64-efi --efi-directory=/efi --removable
+    grub-install --target=x86_64-efi --efi-directory=/boot/efi --removable
   else
-    grub-install --target=x86_64-efi --efi-directory=/efi
+    grub-install --target=x86_64-efi --efi-directory=/boot/efi
   fi
 else
-  grub-install --target=i386-pc "$drive"
+  grub-install --target=i386-pc --boot-directory=/boot "$drive"
 fi
 
 # Set GRUB timeout to 0
