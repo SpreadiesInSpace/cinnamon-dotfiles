@@ -1,9 +1,9 @@
 ![Cinnamon Gruvbox Merge](https://github.com/SpreadiesInSpace/cinnamon-dotfiles/blob/main/screenshots/Collection/CinnamonGruvboxMerge2025.gif "Cult of Cinnamon")
 
-**Disclaimer:** *Please go through the scripts carefully so you know what is going on. Feel free to comment out whatever you don't want before you run each script.*
+**Disclaimer:** *Please go through the scripts carefully so you know what is going on before running them.*
 
 ## Install Straight from ISO
-*Currently supports UEFI only, BIOS in the works*
+*Supports UEFI and BIOS, 64-bit Only*
 
 ```bash
 # For Arch, Gentoo, openSUSE Tumbleweed & Void

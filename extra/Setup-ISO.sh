@@ -17,19 +17,19 @@ NC='\033[0m' # No Color
 
 # Install script URLs and names
 declare -A installs=(
-  [1]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/unsorted/Arch/Arch-Install.sh"
-  [2]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/unsorted/Gentoo/Gentoo-Install.sh"
-  [3]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/unsorted/openSUSE/openSUSE-Install.sh"
-  [4]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/unsorted/Slackware/Slackware-Install.sh"
-  [5]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/unsorted/Void/Void-Install.sh"
+  [1]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/extra/ISO/Install-Arch.sh"
+  [2]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/extra/ISO/Install-Gentoo.sh"
+  [3]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/extra/ISO/Install-openSUSE-Tumbleweed.sh"
+  [4]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/extra/ISO/Install-Slackware-Current.sh"
+  [5]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/extra/ISO/Install-Void.sh"
 )
 
 declare -A names=(
-  [1]="Arch-Install.sh"
-  [2]="Gentoo-Install.sh"
-  [3]="OpenSUSE-TW-Install.sh"
-  [4]="Slackware-Current-Install.sh"
-  [5]="Void-Install.sh"
+  [1]="Install-Arch.sh"
+  [2]="Install-Gentoo"
+  [3]="Install-openSUSE-Tumbleweed.sh"
+  [4]="Install-Slackware-Current.sh"
+  [5]="Install-Void.sh"
 )
 
 # Prompt menu
