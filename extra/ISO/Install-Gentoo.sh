@@ -284,8 +284,18 @@ emerge -vq sys-apps/mlocate app-shells/bash-completion sys-fs/xfsprogs sys-fs/e2
 # Enable Time Synchronization
 systemctl enable systemd-timesyncd.service
 
-# Gentoo Install - Configuring the Bootloader
-grub-install --efi-directory=/efi
+#==================== Gentoo Install - Configuring the Bootloader ====================
+
+# Configure GRUB Bootloader
+if [ "$BOOTMODE" = "UEFI" ]; then
+  if [ "$REMOVABLE_BOOT" = "1" ]; then
+    grub-install --target=x86_64-efi --efi-directory=/efi --removable
+  else
+    grub-install --target=x86_64-efi --efi-directory=/efi
+  fi
+else
+  grub-install --target=i386-pc "$drive"
+fi
 
 # Set GRUB timeout to 0
 sed -i '/^#*GRUB_TIMEOUT=/s/^#*GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub

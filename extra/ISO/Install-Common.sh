@@ -189,7 +189,6 @@ create_btrfs_subvolumes() {
 mount_partitions() {
   # Mount the partitions
   local distro="$1"
-  # Handle Gentoo Mounts
   local MNT="/mnt"
   if [ "$distro" = "gentoo" ]; then
     MNT="/mnt/gentoo"
@@ -197,10 +196,15 @@ mount_partitions() {
   mkdir -p "$MNT" || die "Failed to create $MNT."
   mount -o noatime,compress=zstd,discard=async,subvol=@ "$ROOT" "$MNT" || die "Failed to mount root subvolume."
   mkdir -p "$MNT/home" || die "Failed to create $MNT/home."
-  mount -o noatime,compress=zstd,discard=async,subvol=@home "$ROOT" "$MNT/home" || die "Failed to mount home subvolume."  
+  mount -o noatime,compress=zstd,discard=async,subvol=@home "$ROOT" "$MNT/home" || die "Failed to mount home subvolume."
   if [ "$BOOTMODE" = "UEFI" ]; then
-    mkdir -p "$MNT/efi" || die "Failed to create $MNT/efi."
-    mount "$BOOT" "$MNT/efi" || die "Failed to mount EFI partition."
+    if [ "$distro" = "gentoo" ]; then
+      mkdir -p "$MNT/efi" || die "Failed to create $MNT/efi."
+      mount "$BOOT" "$MNT/efi" || die "Failed to mount EFI partition."
+    else
+      mkdir -p "$MNT/boot/efi" || die "Failed to create $MNT/boot/efi."
+      mount "$BOOT" "$MNT/boot/efi" || die "Failed to mount EFI partition."
+    fi
   fi
 }
 
@@ -251,4 +255,30 @@ set_video_card() {
   # Create or update the /etc/portage/package.use/00video-cards file
   echo "*/* VIDEO_CARDS: $video_card" > /mnt/gentoo/etc/portage/package.use/00video-cards || die "Failed to update VIDEO_CARDS in /etc/portage/package.use/00video-cards."
   echo; echo "Updated VIDEO_CARDS in /etc/portage/package.use/00video-cards to $video_card based on provided input."; echo
+}
+
+install_grub() {
+  # Optional arg: "gentoo" or "opensuse"; defaults to standard behavior
+  local distro="${1:-default}"
+  # Configure GRUB Bootloader
+  local cmd="grub-install"
+  local efi_dir="/boot/efi"
+  # Gentoo uses /efi; openSUSE uses grub2-install
+  [ "$distro" = "gentoo" ] && efi_dir="/efi"
+  [ "$distro" = "opensuse" ] && cmd="grub2-install"
+  if [ "$BOOTMODE" = "UEFI" ]; then
+    # Install GRUB for UEFI, use --removable if needed
+    if [ "$REMOVABLE_BOOT" = "1" ]; then
+      "$cmd" --target=x86_64-efi --efi-directory="$efi_dir" --removable || die "Failed to install GRUB (UEFI removable)."
+    else
+      "$cmd" --target=x86_64-efi --efi-directory="$efi_dir" || die "Failed to install GRUB (UEFI)."
+    fi
+  else
+    # Install GRUB for BIOS, Gentoo omits --boot-directory
+    if [ "$distro" = "gentoo" ]; then
+      "$cmd" --target=i386-pc "$drive" || die "Failed to install GRUB (BIOS)."
+    else
+      "$cmd" --target=i386-pc --boot-directory=/boot "$drive" || die "Failed to install GRUB (BIOS)."
+    fi
+  fi
 }
