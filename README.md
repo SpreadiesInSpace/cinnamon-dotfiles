@@ -3,7 +3,7 @@
 **Disclaimer:** *Please go through the scripts carefully so you know what is going on before running them.*
 
 ## Install Straight from ISO
-*Supports UEFI and BIOS, 64-bit Only*
+*Supports UEFI and BIOS, x86_64 Only*
 
 ```bash
 # For Arch, Gentoo, openSUSE Tumbleweed & Void
