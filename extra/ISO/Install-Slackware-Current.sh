@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Download and source common functions
+echo "Sourcing functions..."
 wget -qO Install-Common.sh https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/extra/ISO/Install-Common.sh || { echo "Failed to download Install-Common.sh"; exit 1; }
 [ -f ./Install-Common.sh ] && source ./Install-Common.sh || { echo "Failed to source Install-Common.sh."; exit 1; }
 
@@ -36,7 +37,7 @@ prompt_timezone
 prompt_drive
 
 # Partition the drive
-partition_drive
+partition_drive "slackware"
 
 # Determine correct partition suffix
 partition_suffix
@@ -125,8 +126,16 @@ source /etc/profile
 ln -sf "/usr/share/zoneinfo/$timezone" /etc/localtime
 hwclock --systohc
 
-# Install Grub
-grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=grub
+# Configure GRUB Bootloader
+if [ "$BOOTMODE" = "UEFI" ]; then
+  if [ "$REMOVABLE_BOOT" = "1" ]; then
+    grub-install --target=x86_64-efi --efi-directory=/boot/efi --removable
+  else
+    grub-install --target=x86_64-efi --efi-directory=/boot/efi
+  fi
+else
+  grub-install --target=i386-pc --boot-directory=/boot "$drive"
+fi
 
 # Set GRUB timeout to 0
 sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub

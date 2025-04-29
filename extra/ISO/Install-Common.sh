@@ -34,8 +34,7 @@ This indicates a broken UEFI environment. Cannot continue safely."
     fi
   else
     BOOTMODE="BIOS"
-    echo; echo "WARNING: You are booted in BIOS mode."
-    echo "If your system supports UEFI, it is recommended to boot the installer ISO in UEFI mode."
+    echo; echo "WARNING: You are booted in BIOS mode. If your system supports UEFI, it is recommended to boot the installer ISO in UEFI mode."
     read -rp "Continue with BIOS mode? [y/N]: " bios_continue
     case "$bios_continue" in
       [yY][eE][sS]|[yY]) ;;
@@ -134,12 +133,13 @@ prompt_drive() {
 }
 
 partition_drive() {
+  # Partition the drive
+  local distro=$1
   # Set parted path for Slackware
   local PARTED="parted"
-  if grep -qi slackware /etc/os-release 2>/dev/null; then
+  if [ "$distro" = "slackware" ]; then
     PARTED="/usr/sbin/parted"
   fi
-  # Partition the drive
   if [ "$BOOTMODE" = "UEFI" ]; then
     # Create GPT partition table
     "$PARTED" -s "$drive" mklabel gpt || die "Failed to create GPT partition table."
@@ -155,7 +155,6 @@ partition_drive() {
     "$PARTED" -s "$drive" mkpart primary btrfs 1MiB 100% || die "Failed to create root partition."
   fi
 }
-
 
 partition_suffix() {
   # Determine correct partition suffix
@@ -191,12 +190,13 @@ create_btrfs_subvolumes() {
 }
 
 mount_partitions() {
+  # Mount the partitions
+  local distro="$1"
   # Handle Gentoo Mounts
   local MNT="/mnt"
-  if grep -qi gentoo /etc/os-release 2>/dev/null; then
+  if [ "$distro" = "gentoo" ]; then
     MNT="/mnt/gentoo"
   fi
-  # Mount the partitions
   mkdir -p "$MNT" || die "Failed to create $MNT."
   mount -o noatime,compress=zstd,discard=async,subvol=@ "$ROOT" "$MNT" || die "Failed to mount root subvolume."
   mkdir -p "$MNT/home" || die "Failed to create $MNT/home."

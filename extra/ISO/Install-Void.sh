@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Download and source common functions
+echo "Sourcing functions..."
 curl -fsSL -o Install-Common.sh https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/extra/ISO/Install-Common.sh || { echo "Failed to download Install-Common.sh"; exit 1; }
 [ -f ./Install-Common.sh ] && source ./Install-Common.sh || { echo "Failed to source Install-Common.sh."; exit 1; }
 
@@ -55,7 +56,7 @@ cp /var/db/xbps/keys/* /mnt/var/db/xbps/keys/ || die "Failed to copy XBPS keys."
 XBPS_ARCH=$ARCH xbps-install -Sy -r /mnt -R "$REPO" base-system || die "Failed to install base system."
 
 # Install Packages
-xbps-install -Sy -r /mnt -R "$REPO" NetworkManager git xtools xmirror nano sudo grub-x86_64-efi bash-completion unzip || die "Failed to install packages."
+xbps-install -Sy -r /mnt -R "$REPO" NetworkManager git xtools xmirror nano sudo grub grub-x86_64-efi bash-completion unzip || die "Failed to install packages."
 
 # Enable Networking
 for service in dbus NetworkManager polkitd; do
@@ -109,8 +110,16 @@ PASSWORD
 # Setup Sudo by uncommenting %wheel ALL=(ALL:ALL) with visudo
 sed -i 's/^#\s*\(%wheel ALL=(ALL:ALL) ALL\)/\1/' /etc/sudoers
 
-# Installing Grub
-grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="Void"
+# Configure GRUB Bootloader
+if [ "$BOOTMODE" = "UEFI" ]; then
+  if [ "$REMOVABLE_BOOT" = "1" ]; then
+    grub-install --target=x86_64-efi --efi-directory=/boot/efi --removable
+  else
+    grub-install --target=x86_64-efi --efi-directory=/boot/efi
+  fi
+else
+  grub-install --target=i386-pc --boot-directory=/boot "$drive"
+fi
 
 # Set GRUB timeout to 0
 sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub

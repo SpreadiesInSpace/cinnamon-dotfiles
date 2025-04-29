@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Download and source common functions
+echo "Sourcing functions..."
 curl -fsSL -o Install-Common.sh https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/extra/ISO/Install-Common.sh || { echo "Failed to download Install-Common.sh"; exit 1; }
 [ -f ./Install-Common.sh ] && source ./Install-Common.sh || { echo "Failed to source Install-Common.sh."; exit 1; }
 
@@ -57,7 +58,7 @@ mount_system_partitions
 
 # Installing the Base System
 zypper --root /mnt ar --no-gpgcheck --refresh https://download.opensuse.org/tumbleweed/repo/oss/ oss || die "Failed to add openSUSE repo."
-zypper --root /mnt in -y --download-in-advance dracut kernel-default grub2-x86_64-efi shim zypper bash man shadow util-linux nano arch-install-scripts || die "Failed to install base packages."
+zypper --root /mnt in -y --download-in-advance dracut kernel-default grub2 grub2-i386-pc grub2-x86_64-efi shim zypper bash man shadow util-linux nano arch-install-scripts || die "Failed to install base packages."
 
 # Copy Repos
 cp /etc/zypp/repos.d/* /mnt/etc/zypp/repos.d/ || die "Failed to copy repo files."
@@ -98,6 +99,17 @@ echo "KEYMAP=us" > /etc/vconsole.conf
 # Installing grub
 dracut -f --regenerate-all
 grub2-install --efi-directory=/boot/efi
+
+# Configure GRUB Bootloader
+if [ "$BOOTMODE" = "UEFI" ]; then
+  if [ "$REMOVABLE_BOOT" = "1" ]; then
+    grub2-install --target=x86_64-efi --efi-directory=/boot/efi --removable
+  else
+    grub2-install --target=x86_64-efi --efi-directory=/boot/efi
+  fi
+else
+  grub2-install --target=i386-pc --boot-directory=/boot "$drive"
+fi
 
 # Set GRUB timeout to 0
 sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub
