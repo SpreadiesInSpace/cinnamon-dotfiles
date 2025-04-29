@@ -34,7 +34,9 @@ This indicates a broken UEFI environment. Cannot continue safely."
     fi
   else
     BOOTMODE="BIOS"
-    echo; echo "WARNING: You are booted in BIOS mode. If your system supports UEFI, it is recommended to boot the installer ISO in UEFI mode."
+    echo; echo "WARNING: You are booted in BIOS mode."
+    echo "If your system supports UEFI, it is recommended to boot the installer ISO"
+    echo "in UEFI mode."
     read -rp "Continue with BIOS mode? [y/N]: " bios_continue
     case "$bios_continue" in
       [yY][eE][sS]|[yY]) ;;

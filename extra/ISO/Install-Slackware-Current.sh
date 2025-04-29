@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Download and source common functions
-echo "Sourcing functions..."
-wget -qO Install-Common.sh https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/extra/ISO/Install-Common.sh || { echo "Failed to download Install-Common.sh"; exit 1; }
+wget -qO Install-Common.sh https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/extra/ISO/Install-Common.sh 2>/dev/null || { echo "Failed to download Install-Common.sh"; exit 1; }
+clear; echo "Sourcing functions..."
 [ -f ./Install-Common.sh ] && source ./Install-Common.sh || { echo "Failed to source Install-Common.sh."; exit 1; }
 
 # Check if script is run as root
