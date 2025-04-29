@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# Source common functions
-[ -f ./Install-Common.sh ] && source ./Install-Common.sh || { echo "Install-Common.sh not found."; exit 1; }
+# Download and source common functions
+wget -qO Install-Common.sh https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/extra/ISO/Install-Common.sh || { echo "Failed to download Install-Common.sh"; exit 1; }
+[ -f ./Install-Common.sh ] && source ./Install-Common.sh || { echo "Failed to source Install-Common.sh."; exit 1; }
 
 # Check if script is run as root
 check_if_root
