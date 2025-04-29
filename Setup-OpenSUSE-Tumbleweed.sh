@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Source common functions
-source ./Setup-Common.sh
+[ -f ./Setup-Common.sh ] && source ./Setup-Common.sh || { echo "Setup-Common.sh not found."; exit 1; }
 
 # Check if the script is run as root
 check_if_root
@@ -22,8 +22,7 @@ prompt_for_vm
 display_status "$enable_autologin" "$is_vm"
 
 # Enable Parallel Downloads during Setup
-# export ZYPP_CURL2=1
-export ZYPP_PCK_PRELOAD=1
+export ZYPP_PCK_PRELOAD=1 || die "Failed to enable parallel downloads."
 
 # Enable Parallel Downloads and Faster Repo Syncing Persistently 
 if ! grep -q "^ZYPP_CURL2=1" /etc/environment; then
@@ -166,6 +165,7 @@ set_libvirtd_permissions
 set_qemu_permissions
 
 # Enable libvirtd service (for Virtual Machine Manager)
+echo "Enabling services..."
 systemctl enable libvirtd --now >/dev/null 2>&1
 
 # Only enable net-autostart if in physical machine

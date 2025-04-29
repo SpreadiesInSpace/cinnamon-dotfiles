@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Source common functions
-source ./Setup-Common.sh
+[ -f ./Setup-Common.sh ] && source ./Setup-Common.sh || { echo "Setup-Common.sh not found."; exit 1; }
 
 # Check if the script is run as root
 check_if_root
@@ -201,8 +201,8 @@ slpkg -iy "${gnome_packages[@]}" -o gnome || die "Failed to install gnome packag
 slpkg -iy appstream-glib gnome-terminal -o gnome -O  || die "Failed to install appstream-glib/gnome-terminal."
 
 # Add LightDM group
-groupadd -g 380 lightdm
-useradd -d /var/lib/lightdm -s /bin/false -u 380 -g 380 lightdm
+groupadd -g 380 lightdm || die "Failed to create group 'lightdm'."
+useradd -d /var/lib/lightdm -s /bin/false -u 380 -g 380 lightdm || die "Failed to create user 'lightdm'."
 
 # SBo packages
 sbo_packages=(
@@ -281,6 +281,7 @@ fi
 chmod +x /etc/rc.d/rc.libvirt || die "Failed to make /etc/rc.d/rc.libvirt executable"
 
 # Start libvirtd service
+echo "Enabling services..."
 /etc/rc.d/rc.libvirt start >/dev/null 2>&1 || die "Failed to start libvirtd service"
 
 # Only enable net-autostart if in physical machine

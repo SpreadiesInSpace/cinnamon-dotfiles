@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Source common functions
-source ./Setup-Common.sh
+[ -f ./Setup-Common.sh ] && source ./Setup-Common.sh || { echo "Setup-Common.sh not found."; exit 1; }
 
 # Check if the script is run as root
 check_if_root
@@ -44,41 +44,6 @@ else
   load_limit=$(echo "$cores * 0.9" | bc -l | awk '{printf "%.1f", $0}') || die "Failed to calculate load limit."
   sed -i "s/^EMERGE_DEFAULT_OPTS=.*/EMERGE_DEFAULT_OPTS=\"-j$cores -l$load_limit\"/" /etc/portage/make.conf || die "Failed to set EMERGE_DEFAULT_OPTS in make.conf."
   echo "Set EMERGE_DEFAULT_OPTS to -j$cores -l$load_limit"
-
-  # Set VIDEO_CARDS value in package.use
-  set_video_card() {
-    while true; do
-      echo "Select your video card type:"
-      echo
-      echo "1) amdgpu radeonsi"
-      echo "2) nvidia"
-      echo "3) intel"
-      echo "4) nouveau (open source)"
-      echo "5) virgl (QEMU/KVM)"
-      echo "6) vc4 (Raspberry Pi)"
-      echo "7) d3d12 (WSL)"
-      echo "8) other"
-      echo
-      read -p "Enter the number corresponding to your video card: " video_card_number
-
-      case $video_card_number in
-        1) video_card="amdgpu radeonsi"; break ;;
-        2) video_card="nvidia"; break ;;
-        3) video_card="intel"; break ;;
-        4) video_card="nouveau"; break ;;
-        5) video_card="virgl"; break ;;
-        6) video_card="vc4"; break ;;
-        7) video_card="d3d12"; break ;;
-        8)
-          read -p "Enter the video card type: " video_card; break ;;
-        *) echo "Invalid selection, please try again." ;;
-      esac
-    done
-    
-    # Create or update the /etc/portage/package.use/00video-cards file
-    echo "*/* VIDEO_CARDS: $video_card" > /etc/portage/package.use/00video-cards || die "Failed to update /etc/portage/package.use/00video-cards with VIDEO_CARDS."
-    echo; echo "Updated VIDEO_CARDS in /etc/portage/package.use/00video-cards to $video_card based on provided input."; echo
-  }
   
   # Call the function
   set_video_card || die "Failed to set video card."
@@ -253,12 +218,13 @@ set_libvirtd_permissions
 set_qemu_permissions
 
 # Enable and start services
-systemctl enable libvirtd || die "Failed to enable libvirtd service."
-systemctl enable lightdm || die "Failed to enable lightdm service."
-systemctl enable NetworkManager || die "Failed to enable NetworkManager service."
-systemctl --global enable pipewire.service || die "Failed to enable pipewire.service globally."
-systemctl --global enable pipewire-pulse.socket || die "Failed to enable pipewire-pulse.socket globally."
-systemctl --global enable wireplumber.service || die "Failed to enable wireplumber.service globally."
+echo "Enabling services..."
+systemctl enable libvirtd >/dev/null 2>&1 || die "Failed to enable libvirtd service."
+systemctl enable lightdm >/dev/null 2>&1 || die "Failed to enable lightdm service."
+systemctl enable NetworkManager >/dev/null 2>&1 || die "Failed to enable NetworkManager service."
+systemctl --global enable pipewire.service >/dev/null 2>&1 || die "Failed to enable pipewire.service globally."
+systemctl --global enable pipewire-pulse.socket >/dev/null 2>&1 || die "Failed to enable pipewire-pulse.socket globally."
+systemctl --global enable wireplumber.service >/dev/null 2>&1 || die "Failed to enable wireplumber.service globally."
 
 # Only enable net-autostart if in physical machine
 manage_virsh_network

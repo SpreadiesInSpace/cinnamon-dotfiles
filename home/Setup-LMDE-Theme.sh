@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Source common functions
-source ./Theme-Common.sh
+[ -f ./Theme-Common.sh ] && source ./Theme-Common.sh || { echo "Theme-Common.sh not found."; exit 1; }
 
 # Check if the script is run as root
 check_not_root

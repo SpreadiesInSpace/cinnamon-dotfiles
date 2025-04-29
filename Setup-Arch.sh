@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Source common functions
-source ./Setup-Common.sh
+[ -f ./Setup-Common.sh ] && source ./Setup-Common.sh || { echo "Setup-Common.sh not found."; exit 1; }
 
 # Check if the script is run as root
 check_if_root
@@ -160,9 +160,10 @@ set_libvirtd_permissions
 set_qemu_permissions
 
 # Enable and start services
-systemctl enable libvirtd || die "Failed to enable libvirtd service."
-systemctl enable lightdm || die "Failed to enable lightdm service."
-systemctl enable NetworkManager || die "Failed to enable NetworkManager service."
+echo "Enabling services..."
+systemctl enable libvirtd >/dev/null 2>&1 || die "Failed to enable libvirtd service."
+systemctl enable lightdm >/dev/null 2>&1 || die "Failed to enable lightdm service."
+systemctl enable NetworkManager >/dev/null 2>&1 || die "Failed to enable NetworkManager service."
 
 # Only enable net-autostart if in physical machine
 manage_virsh_network

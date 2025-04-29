@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Source common functions
-source ./Setup-Common.sh
+[ -f ./Setup-Common.sh ] && source ./Setup-Common.sh || { echo "Setup-Common.sh not found."; exit 1; }
 
 # Check if the script is run as root
 check_if_root
@@ -143,6 +143,7 @@ set_libvirtd_permissions
 set_qemu_permissions
 
 # Enable libvirtd service (for Virtual Machine Manager)
+echo "Enabling services..."
 systemctl enable libvirtd --now >/dev/null 2>&1
 
 # Only enable net-autostart if in physical machine
