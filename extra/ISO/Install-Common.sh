@@ -160,18 +160,13 @@ partition_drive() {
 
 partition_suffix() {
   # Determine correct partition suffix
-  if [[ "$drive" == *"nvme"* || "$drive" == *"mmcblk"* ]]; then
-    if [ "$BOOTMODE" = "UEFI" ]; then
-      BOOT="${drive}p1"; ROOT="${drive}p2"
-    else
-      ROOT="${drive}p1"
-    fi
+  local suffix=""
+  [[ "$drive" == *"nvme"* || "$drive" == *"mmcblk"* ]] && suffix="p"
+  if [ "$BOOTMODE" = "UEFI" ]; then
+    BOOT="${drive}${suffix}1"
+    ROOT="${drive}${suffix}2"
   else
-    if [ "$BOOTMODE" = "UEFI" ]; then
-      BOOT="${drive}1"; ROOT="${drive}2"
-    else
-      ROOT="${drive}1"
-    fi
+    ROOT="${drive}${suffix}1"
   fi
 }
 

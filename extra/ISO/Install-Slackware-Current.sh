@@ -94,8 +94,7 @@ echo "Running ldconfig..."
 [ -x /mnt/sbin/ldconfig ] && /mnt/sbin/ldconfig -r /mnt || die "Failed to run ldconfig."
 
 # Run netconfig interactively before chroot
-chroot /mnt netconfig || die "Failed to run netconfig in chroot."
-clear
+chroot /mnt netconfig; clear || die "Failed to run netconfig in chroot."
 
 # Extract hostname without domain
 hostname=$(cat /mnt/etc/HOSTNAME)
@@ -106,7 +105,7 @@ hostname=${hostname%%.*}
 cp --dereference /etc/resolv.conf /mnt/etc/ || die "Failed to copy resolv.conf."
 
 # Entering Chroot
-chroot /mnt /bin/bash || die "Failed to enter chroot."
+cat << EOF | chroot /mnt /bin/bash || die "Failed to enter chroot."
 
 # New Chroot
 source /etc/profile
