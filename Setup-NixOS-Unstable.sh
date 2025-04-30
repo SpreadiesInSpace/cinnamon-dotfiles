@@ -25,6 +25,21 @@ display_status "$enable_autologin" "$is_vm"
 # Set Config File Variable
 CONFIG="/etc/nixos/configuration.nix"
 
+if [ -d /sys/firmware/efi ]; then
+  # UEFI setup
+  sed -i '/^\s*grub = {/,/^\s*};/ {
+    s/^\(\s*\)efiSupport =.*/\1efiSupport = true;/
+    s/^\(\s*\)device =.*/\1device = "nodev";/
+  }' "$CONFIG"
+else
+  # BIOS setup
+  prompt_drive
+  sed -i '/^\s*grub = {/,/^\s*};/ {
+    s/^\(\s*\)efiSupport =.*/\1efiSupport = false;/
+    s/^\(\s*\)device =.*/\1device = "'"$drive"';/
+  }' "$CONFIG"
+fi
+
 # Backs up old configuration.nix
 timestamp=$(date +%s)
 cp "$CONFIG" ""$CONFIG".old.${timestamp}" || die "Failed to back up configuration.nix"
