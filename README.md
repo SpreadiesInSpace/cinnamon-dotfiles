@@ -13,7 +13,7 @@ bash <(curl -sL https://tinyurl.com/cinnamon-ISO)
 # For Slackware Current
 bash <(wget -qO- https://tinyurl.com/cinnamon-ISO)
 ```
-*View cinnamon-ISO [Source](https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/extra/Setup-ISO.sh)*
+*View cinnamon-ISO [source](https://github.com/SpreadiesInSpace/cinnamon-dotfiles/blob/main/extra/Setup-ISO.sh)*
 
 ## Steps to Install
 
