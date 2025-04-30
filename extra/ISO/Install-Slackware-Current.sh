@@ -105,6 +105,9 @@ hostname=${hostname%%.*}
 [ ! -e /etc/resolv.conf ] && die "Source resolv.conf does not exist."
 cp --dereference /etc/resolv.conf /mnt/etc/ || die "Failed to copy resolv.conf."
 
+# Ensure variable 'drive' is exported before chroot
+export drive
+
 # Entering Chroot
 cat << EOF | chroot /mnt /bin/bash || die "Failed to enter chroot."
 

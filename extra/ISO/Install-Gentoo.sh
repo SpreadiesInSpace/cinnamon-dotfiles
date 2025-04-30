@@ -145,6 +145,9 @@ if test -L /dev/shm; then
   chmod 1777 /dev/shm /run/shm || die "Failed to set permissions on /dev/shm or /run/shm."
 fi
 
+# Ensure variable 'drive' is exported before chroot
+export drive
+
 # Entering Chroot
 cat << EOF | chroot /mnt/gentoo /bin/bash
 

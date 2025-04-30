@@ -70,6 +70,9 @@ cp --dereference /etc/resolv.conf /mnt/etc/ || die "Failed to copy resolv.conf."
 # Generate fstab
 xgenfstab -U /mnt > /mnt/etc/fstab || die "Failed to generate fstab."
 
+# Ensure variable 'drive' is exported before chroot
+export drive
+
 # Entering Chroot
 cat << EOF | xchroot /mnt /bin/bash || die "Failed to enter chroot."
 

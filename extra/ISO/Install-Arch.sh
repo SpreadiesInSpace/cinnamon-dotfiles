@@ -55,6 +55,9 @@ pacstrap -K /mnt base linux linux-firmware sudo bash-completion grub efibootmgr 
 # Generate fstab
 genfstab -U /mnt >> /mnt/etc/fstab || die "Failed to generate fstab."
 
+# Ensure variable 'drive' is exported before chroot
+export drive
+
 # Entering Chroot
 cat << EOF | arch-chroot /mnt || die "Failed to enter chroot."
 
@@ -113,7 +116,7 @@ echo "$username:$userpasswd" | chpasswd || die "Failed to set user password"
 cat << 'CLONE' | su - "$username"
 cd && git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles || { echo "Failed to clone repo"; exit 1; }
 cd cinnamon-dotfiles || { echo "Failed to enter repo directory"; exit 1; }
-touch .arch.done || { echo "Failed to create flag file"; exit 1; }
+touch .arch.done || { echo "Failed to create flag"; exit 1; }
 echo "Reboot and run Setup.sh in cinnamon-dotfiles located in \$HOME/cinnamon-dotfiles."
 CLONE
 EOF

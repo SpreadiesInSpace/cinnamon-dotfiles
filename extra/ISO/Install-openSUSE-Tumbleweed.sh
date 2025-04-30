@@ -68,6 +68,9 @@ cp /etc/zypp/repos.d/* /mnt/etc/zypp/repos.d/ || die "Failed to copy repo files.
 [ ! -e /etc/resolv.conf ] && die "Source resolv.conf does not exist."
 cp --dereference /etc/resolv.conf /mnt/etc/ || die "Failed to copy resolv.conf."
 
+# Ensure variable 'drive' is exported before chroot
+export drive
+
 # Chrooting
 cat << EOF | chroot /mnt /bin/bash || die "Failed to enter chroot."
 
@@ -75,92 +78,89 @@ cat << EOF | chroot /mnt /bin/bash || die "Failed to enter chroot."
 die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
 
 # New Chroot
-source /etc/profile
+source /etc/profile || die "Failed to source /etc/profile."
 export PS1="(chroot) ${PS1}"
 
 # Sync Repos
-zypper ref
+zypper ref || die "Failed to refresh zypper repositories."
 
 # Remove Dangling Repo (at this point, all proper repos have been generated)
-zypper rr oss
+zypper rr oss || die "Failed to remove oss repo."
 
 # Generate fstab
-genfstab -U / >> /etc/fstab
+genfstab -U / >> /etc/fstab || die "Failed to generate fstab."
 
 # Set Hostname
-echo "$hostname" > /etc/hostname
+echo "$hostname" > /etc/hostname || die "Failed to set hostname"
 
 # Allow Resolving the Local Hostname
-echo -e "127.0.1.1\t$hostname.localdomain\t$hostname" >> /etc/hosts
+echo -e "127.0.1.1\t$hostname.localdomain\t$hostname" >> /etc/hosts || die "Failed to write to /etc/hosts."
 
 # Set Locale
-echo "LANG=en_US.UTF-8" > /etc/locale.conf
-echo 'RC_LANG="en_US.UTF-8"' > /etc/sysconfig/language
+echo "LANG=en_US.UTF-8" > /etc/locale.conf || die "Failed to set /etc/locale.conf."
+echo 'RC_LANG="en_US.UTF-8"' > /etc/sysconfig/language || die "Failed to set /etc/sysconfig/language."
 
 # Set Keymap
-echo "KEYMAP=us" > /etc/vconsole.conf
-
-# Installing grub
-dracut -f --regenerate-all
-grub2-install --efi-directory=/boot/efi
+echo "KEYMAP=us" > /etc/vconsole.conf || die "Failed to set keymap."
 
 # Configure GRUB Bootloader
+dracut -f --regenerate-all || die "Failed to regenerate initramfs with dracut."
 if [ "$BOOTMODE" = "UEFI" ]; then
   if [ "$REMOVABLE_BOOT" = "1" ]; then
-    grub2-install --target=x86_64-efi --efi-directory=/boot/efi --removable
+    grub2-install --target=x86_64-efi --efi-directory=/boot/efi --removable || die "Failed to install GRUB (UEFI removable)"
   else
-    grub2-install --target=x86_64-efi --efi-directory=/boot/efi
+    grub2-install --target=x86_64-efi --efi-directory=/boot/efi || die "Failed to install GRUB (UEFI)"
   fi
 else
-  grub2-install --target=i386-pc --boot-directory=/boot "$drive"
+  grub2-install --target=i386-pc --boot-directory=/boot "$drive" || die "Failed to install GRUB (BIOS)"
 fi
 
 # Set GRUB timeout to 0
-sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub
+sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub || die "Failed to set GRUB_TIMEOUT"
 
 # Generate Grub Config
-grub2-mkconfig -o /boot/grub2/grub.cfg
+grub2-mkconfig -o /boot/grub2/grub.cfg || die "Failed to generate GRUB config"
 
 # Install Basic Desktop
-zypper in -y -t pattern basic_desktop
+zypper in -y -t pattern basic_desktop || die "Failed to install basic desktop pattern."
 
 # Install Cinnamon Desktop Environment
-zypper al mint-x-icon-theme mint-y-icon-theme
-zypper rm -y busybox-which
-zypper in -y cinnamon lightdm-gtk-greeter-settings btrfsprogs sudo bash-completion git unzip
+zypper al mint-x-icon-theme mint-y-icon-theme || die "Failed to lock Mint icon themes."
+zypper rm -y busybox-which || die "Failed to remove busybox-which."
+zypper in -y cinnamon lightdm-gtk-greeter-settings btrfsprogs sudo bash-completion git unzip || die "Failed to install Cinnamon and base packages."
 
 # Install Recommended Packages (excluding Snapper & Firefox)
-zypper al snapper*
-zypper inr
-zypper rm -y MozillaFirefox* *-lang *-doc
-zypper al MozillaFirefox* *-lang *-doc
+zypper al snapper* || die "Failed to lock snapper packages."
+zypper -n inr || die "Failed to install recommended packages."
+zypper rm -y MozillaFirefox* *-lang *-doc || die "Failed to remove Firefox, language packs, and docs."
+zypper al MozillaFirefox* *-lang *-doc || die "Failed to lock Firefox, language packs, and docs."
 
 # Configure lightdm
-systemctl set-default graphical
+systemctl set-default graphical || die "Failed to set default target to graphical."
 
 # Set Timezone
-ln -sf "../usr/share/zoneinfo/$timezone" /etc/localtime
-hwclock --systohc
+ln -sf "../usr/share/zoneinfo/$timezone" /etc/localtime || die "Failed to set timezone"
+hwclock --systohc || die "Failed to sync hardware clock"
 
 # Setup Sudo by uncommenting %wheel ALL=(ALL:ALL) with visudo
-sed -i 's/^#\s*\(%wheel ALL=(ALL:ALL) ALL\)/\1/' /usr/etc/sudoers
+sed -i 's/^#\s*\(%wheel ALL=(ALL:ALL) ALL\)/\1/' /usr/etc/sudoers || die "Failed to enable sudo for wheel group"
 
 # Add wheel group for sudo
-groupadd -f wheel
+groupadd -f wheel || die "Failed to add wheel group."
 
 # Create User and Set Passwords
-useradd -m -G wheel,audio,video,users -s /bin/bash "$username"
-echo "root:$rootpasswd" | chpasswd
-echo "$username:$userpasswd" | chpasswd
+useradd -m -G wheel,audio,video,users -s /bin/bash "$username" || die "Failed to create user"
+echo "root:$rootpasswd" | chpasswd || die "Failed to set root password"
+echo "$username:$userpasswd" | chpasswd || die "Failed to set user password"
 
 # Enabling System Services
-systemctl enable NetworkManager
+systemctl enable NetworkManager || die "Failed to enable NetworkManager"
 
 # Clone Repo as New User
 cat << 'CLONE' | su - "$username"
-cd; git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles
-cd cinnamon-dotfiles
-touch .opensuse-tumbleweed.done
-echo "Reboot and run Setup.sh in cinnamon-dotfiles located in $username's home folder."
+cd && git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles || { echo "Failed to clone repo"; exit 1; }
+cd cinnamon-dotfiles || { echo "Failed to enter repo directory"; exit 1; }
+touch .opensuse-tumbleweed.done || { echo "Failed to create flag"; exit 1; }
+echo "Reboot and run Setup.sh in cinnamon-dotfiles located in \$HOME/cinnamon-dotfiles."
 CLONE
 EOF
