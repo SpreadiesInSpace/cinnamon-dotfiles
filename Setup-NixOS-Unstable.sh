@@ -2,7 +2,6 @@
 
 # Source common functions
 [ -f ./Setup-Common.sh ] && source ./Setup-Common.sh || { echo "Setup-Common.sh not found."; exit 1; }
-[ -f ./extra/ISO/Install-Common.sh ] && source ./extra/ISO/Install-Common.sh || { echo "Failed to source extra/ISO/Install-Common.sh."; exit 1; }
 
 # Check if the script is run as root
 check_if_root
@@ -37,9 +36,9 @@ if [ ! -d /sys/firmware/efi ]; then
   # Comment out efiSupport inside grub block
   sudo sed -i '/^\s*grub = {/,/^\s*};/ {
     s/^\(\s*\)efiSupport = /\1# efiSupport = /
-  }' "$CONFIG"
+  }' "$CONFIG" || die "Failed to comment out efiSupport in grub block."
   # Comment out efi.canTouchEfiVariables
-  sudo sed -i 's/^\(\s*\)efi\.canTouchEfiVariables = /\1# efi.canTouchEfiVariables = /' "$CONFIG"
+  sudo sed -i 's/^\(\s*\)efi\.canTouchEfiVariables = /\1# efi.canTouchEfiVariables = /' "$CONFIG" || die "Failed to comment out efi.canTouchEfiVariables."
 fi
 
 # If autologin is set to false, modify line 74 in /etc/nixos/configuration.nix
