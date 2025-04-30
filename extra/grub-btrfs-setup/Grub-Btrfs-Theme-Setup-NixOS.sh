@@ -7,6 +7,7 @@ sudo cp -vnpr boot/grub/themes/gruvbox-dark/ /boot/grub/themes/
 
 CONFIG_FILE="/etc/nixos/configuration.nix"
 
+<<skip
 # Comment out systemd-boot section
 sudo sed -i '/^\(\s*\)systemd-boot\.enable = true;/s/^\(\s*\)/\1# /' "$CONFIG_FILE"
 
@@ -20,6 +21,14 @@ sudo sed -i '/^\(\s*\)#\s*grub = {/,/^\(\s*\)#};/ {
   s/^\(\s*\)#\s*splashImage = /\1splashImage = /
   s/^\(\s*\)#\s*gfxmodeEfi = /\1gfxmodeEfi = /
   s/^\(\s*\)#\s*};/\1};/
+}' "$CONFIG_FILE"
+skip
+
+# Uncomment theme related lines in grub section
+sudo sed -i '/^\s*grub = {/,/^\s*};/ {
+  s/^\(\s*\)#\s*theme = /\1theme = /
+  s/^\(\s*\)#\s*splashImage = /\1splashImage = /
+  s/^\(\s*\)#\s*gfxmodeEfi = /\1gfxmodeEfi = /
 }' "$CONFIG_FILE"
 
 # Update grub.cfg and enable grub-btrfs daemon

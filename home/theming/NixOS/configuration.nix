@@ -23,17 +23,17 @@ in
   imports = [ ./hardware-configuration.nix ];
 
   boot.loader = {
-    systemd-boot.enable = true;
+    # systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
     timeout = 2;
-    # grub = {
-      # enable = true;
-      # efiSupport = true;
-      # device = "nodev";
+    grub = {
+      enable = true;
+      efiSupport = true;
+      device = "nodev";
       # theme = "/boot/grub/themes/gruvbox-dark";
       # splashImage = null;
       # gfxmodeEfi = "1920x1080";
-    # };
+    };
   };
   
   networking = {

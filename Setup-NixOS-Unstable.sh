@@ -2,6 +2,7 @@
 
 # Source common functions
 [ -f ./Setup-Common.sh ] && source ./Setup-Common.sh || { echo "Setup-Common.sh not found."; exit 1; }
+[ -f ./extra/ISO/Install-Common.sh ] && source ./extra/ISO/Install-Common.sh || { echo "Failed to source extra/ISO/Install-Common.sh."; exit 1; }
 
 # Check if the script is run as root
 check_if_root
@@ -21,26 +22,29 @@ prompt_for_vm
 # Display Status from Prompts
 display_status "$enable_autologin" "$is_vm"
 
+# Set Config File Variable
+CONFIG="/etc/nixos/configuration.nix"
+
 # Backs up old configuration.nix
 timestamp=$(date +%s)
-cp /etc/nixos/configuration.nix "/etc/nixos/configuration.nix.old.${timestamp}" || die "Failed to back up configuration.nix"
+cp "$CONFIG" ""$CONFIG".old.${timestamp}" || die "Failed to back up configuration.nix"
 
 # Copies my configuration.nix
-cp ./home/theming/NixOS/configuration.nix /etc/nixos/configuration.nix || die "Failed to copy configuration.nix"
+cp ./home/theming/NixOS/configuration.nix "$CONFIG" || die "Failed to copy configuration.nix"
 
 # If autologin is set to false, modify line 73 in /etc/nixos/configuration.nix
 if [ "$enable_autologin" = false ]; then
-    sed -i '73s/^\( *enable *= *\)true;/\1false;/' /etc/nixos/configuration.nix || die "Failed to modify autologin setting"
+    sed -i '73s/^\( *enable *= *\)true;/\1false;/' "$CONFIG" || die "Failed to modify autologin setting"
 fi
 
 # Replace the placeholder with the actual username
-sed -i "s/f16poom/$username/g" /etc/nixos/configuration.nix || die "Failed to replace username in configuration.nix"
+sed -i "s/f16poom/$username/g" "$CONFIG" || die "Failed to replace username in configuration.nix"
 
 # Prompt the user for hostname
 while ! read -p "Enter the hostname for your system: " hostname || [[ ! "$hostname" =~ ^[a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?$ ]]; do
     echo "Invalid hostname. Must be alphanumeric and may include hyphens (no leading/trailing hyphen)."
 done
-sed -i "s/hostName = .*;/hostName = \"$hostname\";/g" /etc/nixos/configuration.nix || die "Failed to update hostname in configuration.nix"
+sed -i "s/hostName = .*;/hostName = \"$hostname\";/g" "$CONFIG" || die "Failed to update hostname in configuration.nix"
 
 # Places Login Wallpaper
 echo "Setting Login Wallpaper..."
