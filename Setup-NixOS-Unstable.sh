@@ -32,10 +32,10 @@ if [ ! -d /sys/firmware/efi ]; then
   sudo sed -i '/^\s*grub = {/,/^\s*};/ {
     s/^\(\s*\)efiSupport =.*/\1efiSupport = false;/
     s/^\(\s*\)device =.*/\1device = "'"$drive"';/
-  }' "$CONFIG_FILE"
+  }' "$CONFIG"
 
   # Optional: also disable touching EFI variables on BIOS
-  sudo sed -i 's/^\(\s*\)efi\.canTouchEfiVariables = true;/\1efi.canTouchEfiVariables = false;/' "$CONFIG_FILE"
+  sudo sed -i 's/^\(\s*\)efi\.canTouchEfiVariables = true;/\1efi.canTouchEfiVariables = false;/' "$CONFIG"
 fi
 
 # Backs up old configuration.nix
