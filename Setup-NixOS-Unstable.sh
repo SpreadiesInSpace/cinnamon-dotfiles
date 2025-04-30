@@ -25,31 +25,25 @@ display_status "$enable_autologin" "$is_vm"
 # Set Config File Variable
 CONFIG="/etc/nixos/configuration.nix"
 
-# Only run if BIOS (not UEFI)
-if [ ! -d /sys/firmware/efi ]; then
-
-  prompt_drive  # sets $drive (e.g. /dev/sda)
-
-  # Comment out efiSupport inside grub block
-  sudo sed -i '/^\s*grub = {/,/^\s*};/ {
-    s/^\(\s*\)efiSupport = /\1# efiSupport = /
-  }' "$CONFIG"
-
-  # Replace device with selected drive inside grub block
-  sudo sed -i '/^\s*grub = {/,/^\s*};/ {
-    s/^\(\s*\)device = .*/\1device = "'"$drive"';/
-  }' "$CONFIG"
-
-  # Comment out efi.canTouchEfiVariables
-  sudo sed -i 's/^\(\s*\)efi\.canTouchEfiVariables = /\1# efi.canTouchEfiVariables = /' "$CONFIG"
-fi
-
 # Backs up old configuration.nix
 timestamp=$(date +%s)
 cp "$CONFIG" ""$CONFIG".old.${timestamp}" || die "Failed to back up configuration.nix"
 
 # Copies my configuration.nix
 cp ./home/theming/NixOS/configuration.nix "$CONFIG" || die "Failed to copy configuration.nix"
+
+# BIOS detection: only change if not UEFI
+if [ ! -d /sys/firmware/efi ]; then
+  prompt_drive  # this sets $drive
+
+  sudo sed -i '/^\s*grub = {/,/^\s*};/ {
+    s/^\(\s*\)efiSupport =.*/\1efiSupport = false;/
+    s/^\(\s*\)device =.*/\1device = "'"$drive"';/
+  }' "$CONFIG_FILE"
+
+  # Optional: also disable touching EFI variables on BIOS
+  sudo sed -i 's/^\(\s*\)efi\.canTouchEfiVariables = true;/\1efi.canTouchEfiVariables = false;/' "$CONFIG_FILE"
+fi
 
 # If autologin is set to false, modify line 74 in /etc/nixos/configuration.nix
 if [ "$enable_autologin" = false ]; then
