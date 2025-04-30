@@ -34,14 +34,9 @@ cp ./home/theming/NixOS/configuration.nix "$CONFIG" || die "Failed to copy confi
 
 # Only run if BIOS
 if [ ! -d /sys/firmware/efi ]; then
-  prompt_drive
   # Comment out efiSupport inside grub block
   sudo sed -i '/^\s*grub = {/,/^\s*};/ {
     s/^\(\s*\)efiSupport = /\1# efiSupport = /
-  }' "$CONFIG"
-  # Replace device with selected drive inside grub block
-  sudo sed -i '/^\s*grub = {/,/^\s*};/ {
-    s/^\(\s*\)device = .*/\1device = "'"$drive"';/
   }' "$CONFIG"
   # Comment out efi.canTouchEfiVariables
   sudo sed -i 's/^\(\s*\)efi\.canTouchEfiVariables = /\1# efi.canTouchEfiVariables = /' "$CONFIG"
