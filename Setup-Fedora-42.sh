@@ -31,11 +31,11 @@ else
 fi
 
 # Remove PackageKit cache
-rm -rf /var/cache/PackageKit || die "Failed to remove PackageKit cache"
+rm -rf /var/cache/PackageKit || die "Failed to remove PackageKit cache."
 
 # Redownload metadata cache without auto updates
 echo "Refreshing Metadata Cache..."
-pkcon refresh force -c -1 >/dev/null 2>&1 || die "Failed to refresh metadata cache"
+pkcon refresh force -c -1 >/dev/null 2>&1 || die "Failed to refresh metadata cache."
 
 # Update system and install git
 dnf -y update || die "System update failed."
@@ -142,10 +142,10 @@ systemctl disable abrtd.service >/dev/null 2>&1 || die "Failed to disable Proble
 dnf remove -y tracker-miners || die "Failed to remove tracker-miners."
 
 # Replace FirewallD with UFW and allow KDE Connect through
-dnf -y remove firewalld || die "Failed to remove firewalld"
-systemctl daemon-reload || die "Failed to reload systemd daemon"
-ufw enable || die "Failed to enable UFW"
-ufw allow "KDE Connect" || die "Failed to allow KDE Connect in UFW"
+dnf -y remove firewalld || die "Failed to remove firewalld."
+systemctl daemon-reload || die "Failed to reload systemd daemon."
+ufw enable || die "Failed to enable UFW."
+ufw allow "KDE Connect" || die "Failed to allow KDE Connect in UFW."
 
 # Enable Flathub for Flatpak
 enable_flathub

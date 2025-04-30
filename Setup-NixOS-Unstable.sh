@@ -44,7 +44,7 @@ fi
 
 # If autologin is set to false, modify line 74 in /etc/nixos/configuration.nix
 if [ "$enable_autologin" = false ]; then
-    sed -i '74s/^\( *enable *= *\)true;/\1false;/' "$CONFIG" || die "Failed to modify autologin setting"
+    sed -i '74s/^\( *enable *= *\)true;/\1false;/' "$CONFIG" || die "Failed to modify autologin setting."
 fi
 
 # Replace the placeholder with the actual username
@@ -58,15 +58,15 @@ sed -i "s/hostName = .*;/hostName = \"$hostname\";/g" "$CONFIG" || die "Failed t
 
 # Places Login Wallpaper
 echo "Setting Login Wallpaper..."
-cp -nr home/wallpapers/Login_Wallpaper.jpg /boot/ || die "Failed to copy login wallpaper"
+cp -nr home/wallpapers/Login_Wallpaper.jpg /boot/ || die "Failed to copy login wallpaper."
 
 # Add Nix Unstable and 23.05 Channels (for Neovim, icons and themes)
-nix-channel --add https://nixos.org/channels/nixos-unstable nixos || die "Failed to add Nix unstable channel"
-# nix-channel --add https://nixos.org/channels/nixos-23.05 nixos-23.05 || die "Failed to add Nix 23.05 channel"
-nix-channel --update || die "Failed to update Nix channels"
+nix-channel --add https://nixos.org/channels/nixos-unstable nixos || die "Failed to add Nix unstable channel."
+# nix-channel --add https://nixos.org/channels/nixos-23.05 nixos-23.05 || die "Failed to add Nix 23.05 channel."
+nix-channel --update || die "Failed to update Nix channels."
 
 # Reconfigures system
-nixos-rebuild switch --upgrade || die "Failed to rebuild NixOS"
+nixos-rebuild switch --upgrade || die "Failed to rebuild NixOS."
 
 # Enable Flathub for Flatpak
 enable_flathub

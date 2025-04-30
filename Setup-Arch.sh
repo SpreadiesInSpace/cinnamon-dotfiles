@@ -27,13 +27,13 @@ echo "Configuring pacman..."
 declare -A options=(["Color"]="Color" ["ParallelDownloads"]="ParallelDownloads = 5" ["ILoveCandy"]="ILoveCandy")
 for key in "${!options[@]}"; do
     if ! grep -q "^$key" /etc/pacman.conf; then
-        sed -i "/^# Misc options/a ${options[$key]}" /etc/pacman.conf || die "Failed to configure pacman option: $key"
+        sed -i "/^# Misc options/a ${options[$key]}" /etc/pacman.conf || die "Failed to configure pacman option: $key."
     fi
 done
 
 # Update MAKEFLAGS /etc/makepkg.conf to match CPU cores
 echo "Set MAKEFLAGS to --jobs=$(nproc)"
-sed -i 's/^#*\s*MAKEFLAGS=.*/MAKEFLAGS="--jobs=$(nproc)"/' /etc/makepkg.conf || die "Failed to update MAKEFLAGS in /etc/makepkg.conf"
+sed -i 's/^#*\s*MAKEFLAGS=.*/MAKEFLAGS="--jobs=$(nproc)"/' /etc/makepkg.conf || die "Failed to update MAKEFLAGS in /etc/makepkg.conf."
 
 # Install base-devel and git
 pacman -S --needed --noconfirm base-devel git || die "Failed to install git."
@@ -42,8 +42,8 @@ pacman -S --needed --noconfirm base-devel git || die "Failed to install git."
 trap 'rm -f /etc/sudoers.d/99_${SUDO_USER}_nopasswd' EXIT
 
 # Temporarily allow passwordless sudo for current user
-echo "$SUDO_USER ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/99_${SUDO_USER}_nopasswd || die "Failed to modify sudoers file for $SUDO_USER"
-chmod 0440 /etc/sudoers.d/99_${SUDO_USER}_nopasswd || die "Failed to set proper permissions for sudoers file"
+echo "$SUDO_USER ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/99_${SUDO_USER}_nopasswd || die "Failed to modify sudoers file for $SUDO_USER."
+chmod 0440 /etc/sudoers.d/99_${SUDO_USER}_nopasswd || die "Failed to set proper permissions for sudoers file."
 
 # Install yay
 cat << 'EOF' | su - "$SUDO_USER"
@@ -51,7 +51,7 @@ source ./Setup-Common.sh
 trap 'rm -rf yay-bin' EXIT
 echo "Configuring yay..."
 git clone https://aur.archlinux.org/yay-bin.git >/dev/null 2>&1 || die "Failed to download yay."
-cd yay-bin || die "Failed to enter yay-bin directory"
+cd yay-bin || die "Failed to enter yay-bin directory."
 makepkg -si --noconfirm >/dev/null 2>&1 || die "Failed to install yay."
 cd ..
 rm -rf yay-bin

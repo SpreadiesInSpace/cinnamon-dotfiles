@@ -4,7 +4,7 @@
 echo "Sourcing functions..."
 die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
 curl -fsSL -o Install-Common.sh https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/extra/ISO/Install-Common.sh || die "Failed to download Install-Common.sh"
-[ -f ./Install-Common.sh ] && source ./Install-Common.sh || die "Failed to source Install-Common.sh."
+[ -f ./Install-Common.sh ] && source ./Install-Common.sh || die "Failed to source Install-Common.sh"
 
 # Check if script is run as root
 check_if_root
@@ -146,7 +146,7 @@ if test -L /dev/shm; then
 fi
 
 # Ensure variable 'drive' is exported before chroot
-export drive
+export drive || die "Failed to export drive variable."
 
 # Entering Chroot
 cat << EOF | chroot /mnt/gentoo /bin/bash

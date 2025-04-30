@@ -4,7 +4,7 @@
 echo "Sourcing functions..."
 die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
 wget -qO Install-Common.sh https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/extra/ISO/Install-Common.sh 2>/dev/null || die "Failed to download Install-Common.sh"
-[ -f ./Install-Common.sh ] && source ./Install-Common.sh || die "Failed to source Install-Common.sh."
+[ -f ./Install-Common.sh ] && source ./Install-Common.sh || die "Failed to source Install-Common.sh"
 
 # Check if script is run as root
 check_if_root
@@ -106,7 +106,7 @@ hostname=${hostname%%.*}
 cp --dereference /etc/resolv.conf /mnt/etc/ || die "Failed to copy resolv.conf."
 
 # Ensure variable 'drive' is exported before chroot
-export drive
+export drive || die "Failed to export drive variable."
 
 # Entering Chroot
 cat << EOF | chroot /mnt /bin/bash || die "Failed to enter chroot."
@@ -115,39 +115,38 @@ cat << EOF | chroot /mnt /bin/bash || die "Failed to enter chroot."
 die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
 
 # New Chroot
-source /etc/profile
+source /etc/profile || die "Failed to source /etc/profile."
 
-# Post Install Scripts
-/var/log/setup/setup.*.mkinitrd
-/var/log/setup/setup.*.mkfontdir
-/var/log/setup/setup.*.fontconfig
-/var/log/setup/setup.*.update-desktop-database
-/var/log/setup/setup.*.update-mime-database
-/var/log/setup/setup.*.gtk-update-icon-cache
-/var/log/setup/setup.*.cacerts
-/var/log/setup/setup.cups-genppdupdate
-/var/log/setup/setup.htmlview
+# Run Post Install Scripts
+/var/log/setup/setup.*.mkfontdir || die "Failed to run mkfontdir."
+/var/log/setup/setup.*.fontconfig || die "Failed to run fontconfig."
+/var/log/setup/setup.*.update-desktop-database || die "Failed to run update-desktop-database."
+/var/log/setup/setup.*.update-mime-database || die "Failed to run update-mime-database."
+/var/log/setup/setup.*.gtk-update-icon-cache || die "Failed to run gtk-update-icon-cache."
+/var/log/setup/setup.*.cacerts || die "Failed to run cacerts."
+/var/log/setup/setup.cups-genppdupdate || die "Failed to run cups-genppdupdate."
+/var/log/setup/setup.htmlview || die "Failed to run htmlview."
 
 # Set Timezone
-ln -sf "/usr/share/zoneinfo/$timezone" /etc/localtime
-hwclock --systohc
+ln -sf "/usr/share/zoneinfo/$timezone" /etc/localtime || die "Failed to set timezone."
+hwclock --systohc || die "Failed to sync hardware clock."
 
 # Configure GRUB Bootloader
 if [ "$BOOTMODE" = "UEFI" ]; then
   if [ "$REMOVABLE_BOOT" = "1" ]; then
-    grub-install --target=x86_64-efi --efi-directory=/boot/efi --removable
+    grub-install --target=x86_64-efi --efi-directory=/boot/efi --removable || die "Failed to install GRUB (UEFI removable)."
   else
-    grub-install --target=x86_64-efi --efi-directory=/boot/efi
+    grub-install --target=x86_64-efi --efi-directory=/boot/efi || die "Failed to install GRUB (UEFI)."
   fi
 else
-  grub-install --target=i386-pc --boot-directory=/boot "$drive"
+  grub-install --target=i386-pc --boot-directory=/boot "$drive" || die "Failed to install GRUB (BIOS)."
 fi
 
 # Set GRUB timeout to 0
-sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub
+sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub || die "Failed to set GRUB_TIMEOUT."
 
 # Generate Grub Config
-grub-mkconfig -o /boot/grub/grub.cfg
+/var/log/setup/setup.*.mkinitrd || die "Failed to make initrd and generate GRUB config."
 
 # List Default Enabled Services from Setup Menu
 services=(
@@ -189,79 +188,79 @@ for svc in "${services[@]}"; do
   [[ "$svc" == \#* || -z "$svc" ]] && continue
   svc_path="/etc/rc.d/rc.$svc"
   if [ -f "$svc_path" ]; then
-    chmod +x "$svc_path"  # Just chmod, don't start
+    chmod +x "$svc_path" || die "Failed to chmod +x $svc_path."
   else
-    echo "Service script not found: $svc_path"
+    die "Service script not found: $svc_path."
   fi
 done
 
 # Download arch-install-scripts source and SlackBuild (for genfstab)
 echo "Installing arch-install-scripts..."
-wget -q https://gitlab.archlinux.org/archlinux/arch-install-scripts/-/archive/v29/arch-install-scripts-v29.tar.gz -O arch-install-scripts-v29.tar.gz
-wget -q https://slackbuilds.org/slackbuilds/15.0/system/arch-install-scripts.tar.gz -O arch-install-scripts-slackbuild.tar.gz
+wget -q https://gitlab.archlinux.org/archlinux/arch-install-scripts/-/archive/v29/arch-install-scripts-v29.tar.gz -O arch-install-scripts-v29.tar.gz || die "Failed to download arch-install-scripts source."
+wget -q https://slackbuilds.org/slackbuilds/15.0/system/arch-install-scripts.tar.gz -O arch-install-scripts-slackbuild.tar.gz || die "Failed to download SlackBuild."
 
 # Extract SlackBuild and move the source into place
-tar -xf arch-install-scripts-slackbuild.tar.gz >/dev/null 2>&1
-mv arch-install-scripts-v29.tar.gz arch-install-scripts/
+tar -xf arch-install-scripts-slackbuild.tar.gz >/dev/null 2>&1 || die "Failed to extract SlackBuild."
+mv arch-install-scripts-v29.tar.gz arch-install-scripts/ || die "Failed to move source tarball."
 
 # Build, install and cleanup
-cd arch-install-scripts || exit 1
-./arch-install-scripts.SlackBuild >/dev/null 2>&1
-installpkg /tmp/arch-install-scripts-29-noarch-1_SBo.tgz>/dev/null 2>&1
-cd .. && rm -rf arch-install-scripts*
+cd arch-install-scripts || die "Missing arch-install-scripts directory"
+./arch-install-scripts.SlackBuild >/dev/null 2>&1 || die "SlackBuild failed."
+installpkg /tmp/arch-install-scripts-29-noarch-1_SBo.tgz >/dev/null 2>&1 || die "installpkg failed"
+cd .. && rm -rf arch-install-scripts* || die "Cleanup for arch-install-scripts failed."
 
 # Generate fstab
-genfstab -U / > /etc/fstab
+genfstab -U / > /etc/fstab || die "Failed to generate fstab."
 # Append Essential Mounts
 echo "#/dev/cdrom    /mnt/cdrom     auto      noauto,owner,ro,comment=x-gvfs-show    0 0
 #/dev/fd0      /mnt/floppy    auto      noauto,owner                           0 0
 devpts         /dev/pts       devpts    gid=5,mode=620                         0 0
 proc           /proc          proc      defaults                               0 0
-tmpfs          /dev/shm       tmpfs     nosuid,nodev,noexec                    0 0" >> /etc/fstab
+tmpfs          /dev/shm       tmpfs     nosuid,nodev,noexec                    0 0" >> /etc/fstab || "Failed to append essential mounts to fstab."
 
 # Set Hostname
-echo "$hostname" > /etc/HOSTNAME
+echo "$hostname" > /etc/HOSTNAME || die "Failed to set hostname."
 
 # Prevent software from unsafely resolving localhost over the network
 echo "# For loopbacking.
 127.0.0.1               localhost
-::1                     localhost" | tee /etc/hosts > /dev/null
+::1                     localhost" | tee /etc/hosts > /dev/null || die "Failed to write to /etc/hosts."
 
 # Allow Resolving the Local Hostname
-echo "127.0.1.1               $hostname.localdomain $hostname" >> /etc/hosts
+echo "127.0.1.1               $hostname.localdomain $hostname" >> /etc/hosts || die "Failed to write to /etc/hosts."
 
 # Setup Sudo by uncommenting %wheel ALL=(ALL:ALL) with visudo
-sed -i 's/^#\s*\(%wheel ALL=(ALL:ALL) ALL\)/\1/' /etc/sudoers
+sed -i 's/^#\s*\(%wheel ALL=(ALL:ALL) ALL\)/\1/' /etc/sudoers || die "Failed to enable sudo for wheel group."
 
 # Set Run Level to 4
-sed -i 's/id:3:initdefault:/id:4:initdefault:/g' /etc/inittab
+sed -i 's/id:3:initdefault:/id:4:initdefault:/g' /etc/inittab || die "Failed to set run level to 4."
 
 # Create User and Set Passwords
-useradd -m -g users -G wheel,audio,video,plugdev,netdev,lp,scanner -s /bin/bash "$username"
-echo "root:$rootpasswd" | chpasswd
-echo "$username:$userpasswd" | chpasswd
+useradd -m -g users -G wheel,audio,video,plugdev,netdev,lp,scanner -s /bin/bash "$username" || die "Failed to create user."
+echo "root:$rootpasswd" | chpasswd || die "Failed to set root password."
+echo "$username:$userpasswd" | chpasswd || die "Failed to set user password."
 
 # Set Default DE to XFCE System-Wide
-ln -sf /etc/X11/xinit/xinitrc.xfce /etc/X11/xinit/xinitrc
-ln -sf /etc/X11/xinit/xinitrc.xfce /etc/X11/xsession
-cp /etc/X11/xinit/xinitrc.xfce /root/.xinitrc
-cp /etc/X11/xinit/xinitrc.xfce /root/.xsession
-chmod -x /root/.xinitrc
-chmod -x /root/.xsession
+ln -sf /etc/X11/xinit/xinitrc.xfce /etc/X11/xinit/xinitrc || die "Failed to link xinitrc."
+ln -sf /etc/X11/xinit/xinitrc.xfce /etc/X11/xsession || die "Failed to link xsession."
+cp /etc/X11/xinit/xinitrc.xfce /root/.xinitrc || die "Failed to copy .xinitrc to /root."
+cp /etc/X11/xinit/xinitrc.xfce /root/.xsession || die "Failed to copy .xsession to /root."
+chmod -x /root/.xinitrc || die "Failed to chmod .xinitrc."
+chmod -x /root/.xsession || die "Failed to chmod .xsession."
 
 # Enable Autologin
 sed -i '/^\[Autologin\]/,/^\[/ {
-  s/^User=[[:space:]]*$/User='$username'/;
+  s/^User=[[:space:]]*$/User='"$username"'/;
   s/^Session=[[:space:]]*$/Session=xfce/;
-  s/^User=.*$/User='$username'/;
+  s/^User=.*$/User='"$username"'/;
   s/^Session=.*$/Session=xfce/;
-}' /etc/sddm.conf
+}' /etc/sddm.conf || die "Failed to configure autologin in sddm.conf."
 
 # Clone Repo as New User
 cat << 'CLONE' | su - "$username"
-cd; git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles
-cd cinnamon-dotfiles
-touch .slackware-current.done
-echo "Reboot and run Setup.sh in cinnamon-dotfiles located in $username's home folder."
+cd && git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles || { echo "Failed to clone repo."; exit 1; }
+cd cinnamon-dotfiles || { echo "Failed to enter repo directory."; exit 1; }
+touch .slackware-current.done || { echo "Failed to create flag."; exit 1; }
+echo "Reboot and run Setup.sh in cinnamon-dotfiles located in \$HOME/cinnamon-dotfiles."
 CLONE
 EOF

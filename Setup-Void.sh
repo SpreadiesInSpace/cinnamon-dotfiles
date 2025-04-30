@@ -23,18 +23,18 @@ prompt_for_vm
 display_status "$enable_autologin" "$is_vm"
 
 # Install base-devel, git, and other dependencies
-xbps-install -Syu git xtools || die "Failed to install git and xtools"
+xbps-install -Syu git xtools || die "Failed to install git and xtools."
 
 # Install xmirror utility
-xbps-install -Sy xmirror || die "Failed to install xmirror"
+xbps-install -Sy xmirror || die "Failed to install xmirror."
 
 # Use xmirror to select the fastest mirrors
-# xmirror -s https://repo-fastly.voidlinux.org/ || die "Failed to set the mirror with xmirror"
-xmirror -s https://mirror.vofr.net/voidlinux/ || die "Failed to set the mirror with xmirror"
+# xmirror -s https://repo-fastly.voidlinux.org/ || die "Failed to set the mirror with xmirror."
+xmirror -s https://mirror.vofr.net/voidlinux/ || die "Failed to set the mirror with xmirror."
 
 # Install multilib and nonfree repos
-xbps-install -Sy void-repo-nonfree void-repo-multilib void-repo-multilib-nonfree || die "Failed to install multilib and nonfree repositories"
-xbps-install -Syu || die "Failed to update system after adding repositories"
+xbps-install -Sy void-repo-nonfree void-repo-multilib void-repo-multilib-nonfree || die "Failed to install multilib and nonfree repositories."
+xbps-install -Syu || die "Failed to update system after adding repositories."
 
 # All packages (adapt package names as needed for Void Linux)
 packages=(
@@ -168,7 +168,7 @@ packages=(
 xbps-install -Sy "${packages[@]}" || die "Failed to install packages."
 
 # Protect neofetch from being removed
-xbps-pkgdb -m hold neofetch || die "Failed to hold neofetch package"
+xbps-pkgdb -m hold neofetch || die "Failed to hold neofetch package."
 
 # Install Brave
 cd home/theming/Void

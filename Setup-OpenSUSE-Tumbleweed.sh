@@ -27,34 +27,34 @@ export ZYPP_PCK_PRELOAD=1 || die "Failed to enable parallel downloads."
 
 # Enable Parallel Downloads and Faster Repo Syncing Persistently 
 if ! grep -q "^ZYPP_CURL2=1" /etc/environment; then
-    echo 'ZYPP_CURL2=1' | tee -a /etc/environment || die "Failed to enable parallel downloads"
+    echo 'ZYPP_CURL2=1' | tee -a /etc/environment || die "Failed to enable parallel downloads."
 fi
 if ! grep -q "^ZYPP_PCK_PRELOAD=1" /etc/environment; then
-    echo 'ZYPP_PCK_PRELOAD=1' | tee -a /etc/environment || die "Failed to enable faster repo syncing"
+    echo 'ZYPP_PCK_PRELOAD=1' | tee -a /etc/environment || die "Failed to enable faster repo syncing."
 fi
 
 # Fix openSUSE's line break paste
-echo "set enable-bracketed-paste" >> /home/$username/.inputrc || die "Failed to update .inputrc for $username"
+echo "set enable-bracketed-paste" >> /home/$username/.inputrc || die "Failed to update .inputrc for $username."
 echo "set enable-bracketed-paste" >> /root/.inputrc || die "Failed to update /root/.inputrc"
 
 # Update system and install packages
-zypper ref || die "Failed to refresh repositories"
-zypper dup -y || die "Failed to perform system update"
+zypper ref || die "Failed to refresh repositories."
+zypper dup -y || die "Failed to perform system update."
 
 # Install git
-zypper in -y git || die "Failed to install git"
+zypper in -y git || die "Failed to install git."
 
 # Install Media Codecs
-zypper ar -cfp 90 --no-gpgcheck 'https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/Essentials/' packman-essentials || die "Failed to add Packman repository"
+zypper ar -cfp 90 --no-gpgcheck 'https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/Essentials/' packman-essentials || die "Failed to add Packman repository."
 zypper ref || die "Failed to refresh repositories"
-zypper dup --from packman-essentials -y --allow-vendor-change || die "Failed to update from Packman repository"
-zypper in --from packman-essentials -y ffmpeg gstreamer-plugins-{good,bad,ugly,libav} libavcodec || die "Failed to install media codecs"
+zypper dup --from packman-essentials -y --allow-vendor-change || die "Failed to update from Packman repository."
+zypper in --from packman-essentials -y ffmpeg gstreamer-plugins-{good,bad,ugly,libav} libavcodec || die "Failed to install media codecs."
 
 # Install Brave
 zypper in -y curl || die "Failed to install curl"
-rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc || die "Failed to import Brave browser GPG key"
-zypper ar https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo || die "Failed to add Brave browser repository"
-zypper in -y brave-browser || die "Failed to install Brave browser"
+rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc || die "Failed to import Brave browser GPG key."
+zypper ar https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo || die "Failed to add Brave browser repository."
+zypper in -y brave-browser || die "Failed to install Brave browser."
 
 # For Cinnamon and Opi
 zypper rm -y busybox-which busybox-diffutils
@@ -139,19 +139,19 @@ else
 fi
 
 # Remove devhelp
-zypper rm -y devhelp* || die "Failed to remove devhelp"
-zypper al devhelp* || die "Failed to add devhelp to avoid reinstallation"
+zypper rm -y devhelp* || die "Failed to remove devhelp."
+zypper al devhelp* || die "Failed to add devhelp to avoid reinstallation."
 
 # Install neofetch
-zypper ar --no-gpgcheck https://download.opensuse.org/repositories/utilities/openSUSE_Factory/utilities.repo || die "Failed to add neofetch repository"
-zypper ref || die "Failed to refresh repositories"
-zypper in -y neofetch || die "Failed to install neofetch"
+zypper ar --no-gpgcheck https://download.opensuse.org/repositories/utilities/openSUSE_Factory/utilities.repo || die "Failed to add neofetch repository."
+zypper ref || die "Failed to refresh repositories."
+zypper in -y neofetch || die "Failed to install neofetch."
 
 # Protect neofetch from being replaced by neowofetch
-zypper al neofetch || die "Failed to add neofetch to the blacklist"
+zypper al neofetch || die "Failed to add neofetch to the blacklist."
 
 # Install Additional Tools for Virt Manager
-zypper in -y -t pattern kvm_server kvm_tools || die "Failed to install Virt Manager tools"
+zypper in -y -t pattern kvm_server kvm_tools || die "Failed to install Virt Manager tools."
 
 # Enable Flathub for Flatpak
 enable_flathub
@@ -179,7 +179,7 @@ add_user_to_groups libvirt kvm input disk video audio
 backup_lightdm_config
 
 # Copies example lightdm.conf
-cp /usr/share/doc/packages/lightdm/lightdm.conf.example /etc/lightdm/lightdm.conf || die "Failed to copy LightDM configuration file"
+cp /usr/share/doc/packages/lightdm/lightdm.conf.example /etc/lightdm/lightdm.conf || die "Failed to copy LightDM configuration file."
 
 # Modify lightdm.conf in-place
 modify_lightdm_conf
