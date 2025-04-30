@@ -30,14 +30,18 @@ if [ ! -d /sys/firmware/efi ]; then
 
   prompt_drive  # sets $drive (e.g. /dev/sda)
 
-  # Patch grub.efiSupport and grub.device only inside grub = { ... };
-  sudo sed -i '/grub = {/,/};/ {
-    s/^\(\s*\)efiSupport\s*=.*/\1efiSupport = false;/
-    s/^\(\s*\)device\s*=.*/\1device = "'"$drive"';/
+  # Comment out efiSupport inside grub block
+  sudo sed -i '/^\s*grub = {/,/^\s*};/ {
+    s/^\(\s*\)efiSupport = /\1# efiSupport = /
   }' "$CONFIG"
 
-  # Also disable canTouchEfiVariables
-  sudo sed -i 's/^\(\s*\)efi\.canTouchEfiVariables\s*=.*/\1efi.canTouchEfiVariables = false;/' "$CONFIG"
+  # Replace device with selected drive inside grub block
+  sudo sed -i '/^\s*grub = {/,/^\s*};/ {
+    s/^\(\s*\)device = .*/\1device = "'"$drive"';/
+  }' "$CONFIG"
+
+  # Comment out efi.canTouchEfiVariables
+  sudo sed -i 's/^\(\s*\)efi\.canTouchEfiVariables = /\1# efi.canTouchEfiVariables = /' "$CONFIG"
 fi
 
 # Backs up old configuration.nix
