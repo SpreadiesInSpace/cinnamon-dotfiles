@@ -56,7 +56,7 @@ pacstrap -K /mnt base linux linux-firmware sudo bash-completion grub efibootmgr 
 genfstab -U /mnt >> /mnt/etc/fstab || die "Failed to generate fstab."
 
 # Ensure variable 'drive' is exported before chroot
-export drive
+export drive || die "Failed to export drive variable."
 
 # Entering Chroot
 cat << EOF | arch-chroot /mnt || die "Failed to enter chroot."

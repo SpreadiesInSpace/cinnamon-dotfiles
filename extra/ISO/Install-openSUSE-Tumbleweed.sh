@@ -69,7 +69,7 @@ cp /etc/zypp/repos.d/* /mnt/etc/zypp/repos.d/ || die "Failed to copy repo files.
 cp --dereference /etc/resolv.conf /mnt/etc/ || die "Failed to copy resolv.conf."
 
 # Ensure variable 'drive' is exported before chroot
-export drive
+export drive || die "Failed to export drive variable."
 
 # Chrooting
 cat << EOF | chroot /mnt /bin/bash || die "Failed to enter chroot."
