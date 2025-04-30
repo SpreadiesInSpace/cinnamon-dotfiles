@@ -114,7 +114,7 @@ sed -i "s/^EMERGE_DEFAULT_OPTS=.*/EMERGE_DEFAULT_OPTS=\"-j$cores -l$load_limit\"
 echo "Set EMERGE_DEFAULT_OPTS to -j$cores -l$load_limit"
 
 # Set VIDEO_CARDS value in package.use
-echo; set_video_card
+echo; set_video_card || die "Failed to set video card."
 
 # Signal that make.conf was configured during install phase
 touch /mnt/gentoo/etc/portage/.makeconf_configured || die "Failed to create .makeconf_configured flag."
@@ -149,65 +149,62 @@ fi
 export drive || die "Failed to export drive variable."
 
 # Entering Chroot
-cat << EOF | chroot /mnt/gentoo /bin/bash
+cat << EOF | chroot /mnt/gentoo /bin/bash || die "Failed to enter chroot."
 
 # Minimal Error Handling function
 die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
 
 # New Chroot Environment - Installing the Gentoo Base System (Continued)
-source /etc/profile
+source /etc/profile || die "Failed to source /etc/profile."
 export PS1="(chroot) ${PS1}"
 
 # Sync Snapshot
-emerge-webrsync
+emerge-webrsync || die "Failed to run emerge-webrsync."
 
-# Set Binary Package Repo
+# Set Binary Package Repo.
 echo "[binhost]
-priority = 9999" > /etc/portage/binrepos.conf/gentoo.conf
+priority = 9999" > /etc/portage/binrepos.conf/gentoo.conf || die "Failed to write binhost config."
 
-# Set BINHOST sync URI based on CPU support for AVX2
+# Set BINHOST sync URI based on CPU support for AVX2.
 if grep -q "avx2" /proc/cpuinfo; then
-  echo "sync-uri = http://download.nus.edu.sg/mirror/gentoo/releases/amd64/binpackages/23.0/x86-64-v3/" >> /etc/portage/binrepos.conf/gentoo.conf
-  echo "Use x86-64-v3 optimized binaries for AVX2-capable CPUs"
+  echo "sync-uri = http://download.nus.edu.sg/mirror/gentoo/releases/amd64/binpackages/23.0/x86-64-v3/" >> /etc/portage/binrepos.conf/gentoo.conf || die "Failed to write AVX2 binhost URI."
+  echo "Use x86-64-v3 optimized binaries for AVX2-capable CPUs."
 else
-  echo "sync-uri = https://distfiles.gentoo.org/releases/amd64/binpackages/23.0/x86-64/" >> /etc/portage/binrepos.conf/gentoo.conf
-  echo "Use baseline x86-64 binaries for broader compatibility"
+  echo "sync-uri = https://distfiles.gentoo.org/releases/amd64/binpackages/23.0/x86-64/" >> /etc/portage/binrepos.conf/gentoo.conf || die "Failed to write baseline binhost URI."
+  echo "Use baseline x86-64 binaries for broader compatibility."
 fi
 
-# Verify GPG
-rm -rf /etc/portage/gnupg/ && echo && getuto
+# Verify GPG.
+rm -rf /etc/portage/gnupg/ || die "Failed to remove old GPG directory."
+echo && getuto || die "Failed to verify GPG keys with getuto."
 
-# Suppress unsafe directories warnings
-# chmod 644 /etc/portage/gnupg/pubring.kbx
-# chmod 644 /etc/portage/make.conf
+# Select Mirrors (mirrors already set in make.conf)
+# emerge -1qv mirrorselect || die "Failed to install mirrorselect."
+# mirrorselect -i -o >> /etc/portage/make.conf || die "Failed to run mirrorselect."
 
-# For Selecting Mirrors (mirrors already set in make.conf)
-# emerge -1qv mirrorselect
-# mirrorselect -i -o >> /etc/portage/make.conf
-
-# Install Essentials 
-emerge -vquN app-eselect/eselect-repository dev-vcs/git
+# Install Essentials
+emerge -vquN app-eselect/eselect-repository dev-vcs/git || die "Failed to install eselect-repository and git."
 
 # Switch from rsync to git for faster repository sync times
-eselect repository disable gentoo
-eselect repository enable gentoo
-rm -rf /var/db/repos/gentoo
+eselect repository disable gentoo || die "Failed to disable rsync-based Gentoo repository."
+eselect repository enable gentoo || die "Failed to enable Git-based Gentoo repository."
+rm -rf /var/db/repos/gentoo || die "Failed to remove old Gentoo repository."
 
 # Signal that repository sync is now using git during install phase
-touch /var/db/repos/.synced-git-repo
+touch /var/db/repos/.synced-git-repo || die "Failed to create .synced-git-repo flag file."
 
 # Sync Repository
-emaint sync -r gentoo
+emaint sync -r gentoo || die "Failed to sync the Gentoo repository using Git."
 
 # Update portage if there happens to be a new version
-emerge -1uqv sys-apps/portage 
+emerge -1uqv sys-apps/portage || die "Failed to update Portage."
 
 # Read the News
 # eselect news list
 # eselect news read
 
 # Select 23.0 gnome desktop systemd profile for Cinnamon
-eselect profile set default/linux/amd64/23.0/desktop/gnome/systemd
+eselect profile set default/linux/amd64/23.0/desktop/gnome/systemd || die "Failed to set the system profile."
 
 # Set CPU Flags (TO DO: make it work in chroot heredoc)
 emerge -1uqv app-portage/cpuid2cpuflags
@@ -220,41 +217,41 @@ else
 fi
 
 # Update World Set
-emerge -vqDuN @world
+emerge -vqDuN @world || die "Failed to update the world set."
 
-# Remove Obselete Packages
-emerge -q --depclean
+# Remove Obsolete Packages
+emerge -q --depclean || die "Failed to remove obsolete packages."
 
 # Set Timezone
-ln -sf "../usr/share/zoneinfo/$timezone" /etc/localtime
-hwclock --systohc
+ln -sf "../usr/share/zoneinfo/$timezone" /etc/localtime || die "Failed to set timezone."
+hwclock --systohc || die "Failed to set hardware clock."
 
 # Locale Generation (uncomment en_US.UTF-8 UTF-8 in /etc/locale.gen)
-sed -i 's/^#\s*\(en_US.UTF-8 UTF-8\)/\1/' /etc/locale.gen
-locale-gen
+sed -i 's/^#\s*\(en_US.UTF-8 UTF-8\)/\1/' /etc/locale.gen || die "Failed to uncomment locale in /etc/locale.gen."
+locale-gen || die "Failed to generate locales."
 
 # Set Locale
-eselect locale set en_US.utf8
+eselect locale set en_US.utf8 || die "Failed to set locale to en_US.utf8."
 
 # Reload Environment
-env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
+env-update && source /etc/profile && export PS1="(chroot) ${PS1}" || die "Failed to reload environment."
 
 #=================== Gentoo Install - Configuring the Linux Kernel ===================
 
 # Using GRUB & Initramfs
 echo "sys-kernel/installkernel grub
-sys-kernel/installkernel dracut" > /etc/portage/package.use/installkernel
+sys-kernel/installkernel dracut" > /etc/portage/package.use/installkernel || die "Failed to update /etc/portage/package.use/installkernel."
 
 # Install Kernel
-emerge -qv sys-kernel/gentoo-kernel-bin
+emerge -qv sys-kernel/gentoo-kernel-bin || die "Failed to install gentoo-kernel-bin."
 
 # Skip firmware installation for VMs
 if ! systemd-detect-virt --vm &>/dev/null; then
   echo "Physical machine detected. Installing firmware..."
-  emerge -qv sys-kernel/linux-firmware
+  emerge -qv sys-kernel/linux-firmware || die "Failed to install sys-kernel/linux-firmware."
   grep -q "GenuineIntel" /proc/cpuinfo && {
     echo "Intel CPU detected. Installing intel-microcode..."
-    emerge -qv sys-firmware/intel-microcode
+    emerge -qv sys-firmware/intel-microcode || die "Failed to install sys-firmware/intel-microcode."
   } || echo "Non-Intel CPU detected. Skipping intel-microcode."
 else
   echo "VM detected. Skipping firmware and microcode installation."
@@ -263,77 +260,77 @@ fi
 #====================== Gentoo Install - Configuring the System ======================
 
 # Generate fstab
-emerge -qv sys-fs/genfstab
-genfstab -U / >> /etc/fstab
+emerge -qv sys-fs/genfstab || die "Failed to install sys-fs/genfstab."
+genfstab -U / >> /etc/fstab || die "Failed to generate fstab."
 
 # Set Hostname
-echo "$hostname" > /etc/hostname
+echo "$hostname" > /etc/hostname || die "Failed to set hostname."
 
 # Allow Resolving the Local Hostname
-echo -e "127.0.1.1\t$hostname.localdomain\t$hostname" >> /etc/hosts
+echo -e "127.0.1.1\t$hostname.localdomain\t$hostname" >> /etc/hosts || die "Failed to update /etc/hosts."
 
 # Systemd Setup
-systemd-machine-id-setup
+systemd-machine-id-setup || die "Failed to run systemd-machine-id-setup."
 # systemd-firstboot --prompt
-systemctl preset-all --preset-mode=enable-only
+systemctl preset-all --preset-mode=enable-only || die "Failed to preset systemd services."
 
 # Networking
-emerge -vq net-misc/networkmanager gnome-extra/nm-applet
-systemctl disable systemd-networkd
-systemctl disable systemd-resolved.service
-systemctl enable NetworkManager
+emerge -vq net-misc/networkmanager gnome-extra/nm-applet || die "Failed to install network-manager and nm-applet."
+systemctl disable systemd-networkd || die "Failed to disable systemd-networkd."
+systemctl disable systemd-resolved.service || die "Failed to disable systemd-resolved service."
+systemctl enable NetworkManager || die "Failed to enable NetworkManager."
 
 #===================== Gentoo Install - Installing System Tools ======================
 
 # Install System Tools
-emerge -vq sys-apps/mlocate app-shells/bash-completion sys-fs/xfsprogs sys-fs/e2fsprogs sys-fs/dosfstools sys-fs/btrfs-progs sys-fs/f2fs-tools sys-fs/ntfs3g sys-block/io-scheduler-udev-rules app-arch/unzip
+emerge -vq sys-apps/mlocate app-shells/bash-completion sys-fs/xfsprogs sys-fs/e2fsprogs sys-fs/dosfstools sys-fs/btrfs-progs sys-fs/f2fs-tools sys-fs/ntfs3g sys-block/io-scheduler-udev-rules app-arch/unzip || die "Failed to install essential system tools."
 
 # No sys-fs/zfs because it pulls in zfs-kmod which takes a while to compile
 # emerge -qv sys-fs/zfs
 
 # Enable Time Synchronization
-systemctl enable systemd-timesyncd.service
+systemctl enable systemd-timesyncd.service || die "Failed to enable systemd-timesyncd service."
 
 #==================== Gentoo Install - Configuring the Bootloader ====================
 
 # Configure GRUB Bootloader
 if [ "$BOOTMODE" = "UEFI" ]; then
   if [ "$REMOVABLE_BOOT" = "1" ]; then
-    grub-install --target=x86_64-efi --efi-directory=/boot/efi --removable
+    grub-install --target=x86_64-efi --efi-directory=/boot/efi --removable || die "Failed to install GRUB (UEFI removable)."
   else
-    grub-install --target=x86_64-efi --efi-directory=/boot/efi
+    grub-install --target=x86_64-efi --efi-directory=/boot/efi || die "Failed to install GRUB (UEFI)."
   fi
 else
-  grub-install --target=i386-pc --boot-directory=/boot "$drive"
+  grub-install --target=i386-pc --boot-directory=/boot "$drive" || die "Failed to install GRUB (BIOS)."
 fi
 
 # Set GRUB timeout to 0
-sed -i '/^#*GRUB_TIMEOUT=/s/^#*GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub
+sed -i '/^#*GRUB_TIMEOUT=/s/^#*GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub || die "Failed to set GRUB_TIMEOUT."
 
 # Generate Grub Config
-grub-mkconfig -o /boot/grub/grub.cfg
+grub-mkconfig -o /boot/grub/grub.cfg || die "Failed to generate GRUB config."
 
 #============================ Gentoo Install - Finalizing ============================
 
 # Install Sudo
-emerge -qv app-admin/sudo
+emerge -qv app-admin/sudo || die "Failed to install sudo."
 
 # Setup Sudo by uncommenting %wheel ALL=(ALL:ALL) with visudo
-sed -i 's/^#\s*\(%wheel ALL=(ALL:ALL) ALL\)/\1/' /etc/sudoers
+sed -i 's/^#\s*\(%wheel ALL=(ALL:ALL) ALL\)/\1/' /etc/sudoers || die "Failed to enable sudo for wheel group."
 
 # Cleanup
-rm /stage3-*.tar.*
+rm /stage3-*.tar.* || die "Failed to remove Stage 3 tarball."
 
 # Create User and Set Passwords
-useradd -m -G users,wheel,plugdev -s /bin/bash "$username"
-echo "root:$rootpasswd" | chpasswd
-echo "$username:$userpasswd" | chpasswd
+useradd -m -G users,wheel,plugdev -s /bin/bash "$username" || die "Failed to create user."
+echo "root:$rootpasswd" | chpasswd || die "Failed to set root password."
+echo "$username:$userpasswd" | chpasswd || die "Failed to set user password."
 
 # Clone Repo as New User
 cat << 'CLONE' | su - "$username"
-cd; git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles
-cd cinnamon-dotfiles
-touch .gentoo.done
-echo "Reboot and run Setup.sh in cinnamon-dotfiles located in $username's home folder."
+cd && git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles || { echo "Failed to clone repo."; exit 1; }
+cd cinnamon-dotfiles || { echo "Failed to enter repo directory."; exit 1; }
+touch .gentoo.done || { echo "Failed to create flag."; exit 1; }
+echo "Reboot and run Setup.sh in cinnamon-dotfiles located in \$HOME/cinnamon-dotfiles."
 CLONE
 EOF
