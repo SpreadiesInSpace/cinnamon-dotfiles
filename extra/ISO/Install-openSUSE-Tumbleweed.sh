@@ -2,8 +2,9 @@
 
 # Download and source common functions
 echo "Sourcing functions..."
-curl -fsSL -o Install-Common.sh https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/extra/ISO/Install-Common.sh || { echo "Failed to download Install-Common.sh"; exit 1; }
-[ -f ./Install-Common.sh ] && source ./Install-Common.sh || { echo "Failed to source Install-Common.sh."; exit 1; }
+die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
+curl -fsSL -o Install-Common.sh https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/extra/ISO/Install-Common.sh || die "Failed to download Install-Common.sh"
+[ -f ./Install-Common.sh ] && source ./Install-Common.sh || die "Failed to source Install-Common.sh."
 
 # Check if script is run as root
 check_if_root
@@ -69,6 +70,9 @@ cp --dereference /etc/resolv.conf /mnt/etc/ || die "Failed to copy resolv.conf."
 
 # Chrooting
 cat << EOF | chroot /mnt /bin/bash || die "Failed to enter chroot."
+
+# Minimal Error Handling function
+die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
 
 # New Chroot
 source /etc/profile
