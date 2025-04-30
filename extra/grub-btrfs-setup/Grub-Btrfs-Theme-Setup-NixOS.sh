@@ -28,7 +28,6 @@ skip
 sudo sed -i '/^\s*grub = {/,/^\s*};/ {
   s/^\(\s*\)#\s*theme = /\1theme = /
   s/^\(\s*\)#\s*splashImage = /\1splashImage = /
-  s/^\(\s*\)#\s*gfxmodeEfi = /\1gfxmodeEfi = /
 }' "$CONFIG_FILE"
 
 # Update grub.cfg and enable grub-btrfs daemon

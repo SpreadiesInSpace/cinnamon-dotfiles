@@ -32,9 +32,9 @@ cp "$CONFIG" ""$CONFIG".old.${timestamp}" || die "Failed to back up configuratio
 # Copies my configuration.nix
 cp ./home/theming/NixOS/configuration.nix "$CONFIG" || die "Failed to copy configuration.nix"
 
-# If autologin is set to false, modify line 73 in /etc/nixos/configuration.nix
+# If autologin is set to false, modify line 74 in /etc/nixos/configuration.nix
 if [ "$enable_autologin" = false ]; then
-    sed -i '73s/^\( *enable *= *\)true;/\1false;/' "$CONFIG" || die "Failed to modify autologin setting"
+    sed -i '74s/^\( *enable *= *\)true;/\1false;/' "$CONFIG" || die "Failed to modify autologin setting"
 fi
 
 # Replace the placeholder with the actual username

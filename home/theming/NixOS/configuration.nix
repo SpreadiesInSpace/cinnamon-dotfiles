@@ -25,14 +25,15 @@ in
   boot.loader = {
     # systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
-    timeout = 2;
+    timeout = 3;
     grub = {
       enable = true;
       efiSupport = true;
       device = "nodev";
+      gfxmodeEfi = "1920x1080";
+      # gfxmodeBios = "1920x1080";
       # theme = "/boot/grub/themes/gruvbox-dark";
       # splashImage = null;
-      # gfxmodeEfi = "1920x1080";
     };
   };
   
