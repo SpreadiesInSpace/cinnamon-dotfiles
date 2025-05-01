@@ -66,10 +66,13 @@ prompt_username() {
   # Prompt for new username
   while true; do
     read -p "Enter new username: " username
-    if [[ "$username" =~ ^[a-z_][a-z0-9_-]*$ ]]; then
+    if [[ -z "$username" ]]; then
+      echo "Username cannot be empty."
+    elif [[ "$username" =~ ^[a-z_][a-z0-9_-]*$ ]]; then
       break
+    else
+      echo "Invalid username. Use only lowercase letters, numbers, underscores or hyphens (cannot start with number or hyphen)."
     fi
-    echo "Invalid username. Use only lowercase letters, numbers, underscores or hyphens (cannot start with number or hyphen)"
   done
 }
 
@@ -95,10 +98,13 @@ prompt_hostname() {
   # Prompt for hostname
   while true; do
     read -p "Enter hostname: " hostname
-    if [[ "$hostname" =~ ^[a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?$ ]] && ! [[ "$hostname" =~ \  ]]; then
+    if [[ -z "$hostname" ]]; then
+      echo "Hostname cannot be empty."
+    elif [[ "$hostname" =~ ^[a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?$ ]] && ! [[ "$hostname" =~ \  ]]; then
       break
+    else
+      echo "Invalid hostname. Must be alphanumeric, may include hyphens, and cannot contain spaces or start/end with a hyphen."
     fi
-    echo "Invalid hostname. Must be alphanumeric, may include hyphens, and cannot contain spaces or start/end with a hyphen."
   done
 }
 

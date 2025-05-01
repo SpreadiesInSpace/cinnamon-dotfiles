@@ -51,8 +51,8 @@ fi
 sed -i "s/f16poom/$username/g" "$CONFIG" || die "Failed to replace username in configuration.nix"
 
 # Prompt the user for hostname
-while ! read -p "Enter the hostname for your system: " hostname || [[ ! "$hostname" =~ ^[a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?$ ]]; do
-    echo "Invalid hostname. Must be alphanumeric and may include hyphens (no leading/trailing hyphen)."
+while ! read -p "Enter the hostname for your system: " hostname || [ -z "$hostname" ] || [[ ! "$hostname" =~ ^[a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?$ ]]; do
+    echo "Invalid hostname. Must be non-empty, alphanumeric, and may include hyphens (no leading/trailing hyphen)."
 done
 sed -i "s/hostName = .*;/hostName = \"$hostname\";/g" "$CONFIG" || die "Failed to update hostname in configuration.nix"
 
