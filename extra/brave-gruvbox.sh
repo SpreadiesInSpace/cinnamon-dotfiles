@@ -5,7 +5,7 @@ die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
 
 # Backup Existing Brave Profile
 timestamp=$(date +%s)
-[ -d ~/.config/BraveSoftware/ ] mv ~/.config/BraveSoftware/ ~/.config/BraveSoftware.old.$timestamp/ || die "Failed to backup old Brave Profile."
+[ -d ~/.config/BraveSoftware/ ] && mv ~/.config/BraveSoftware/ ~/.config/BraveSoftware.old.$timestamp/ || die "Failed to backup old Brave Profile."
 
 # Clone Brave Gruvbox Example Profile
 git clone https://github.com/spreadiesinspace/BraveSoftware ~/.config/BraveSoftware || die "Failed to download new Brave profile."
