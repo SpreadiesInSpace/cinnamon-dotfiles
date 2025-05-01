@@ -23,5 +23,5 @@ sudo dnf remove -y \
   papirus-icon-theme pix pppoeconf redshift simple-scan thingy thunderbird \
   transmission-gtk warpinator webapp-manager xed xreader xviewer eom \
   google-noto-seriff* ibus* paper-icon-theme pidgin shotwell tecla \
-  tracker-miners xawtv xfburn || die "Failed to remove bloat packages."
+  tracker-miners xawtv xfburn
 

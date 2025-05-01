@@ -18,7 +18,7 @@ apt remove -y \
   mint-artwork mint-backgrounds* mintbackup mintstick numix* \
   papirus-icon-theme pix pppoeconf redshift simple-scan thingy \
   thunderbird transmission-gtk warpinator webapp-manager xed xreader \
-  xviewer mint-L* mint-x* mint-y* || die "Failed to remove bloat packages."
+  xviewer mint-L* mint-x* mint-y*
 
 # Remove specific icon themes
 rm -rf \
