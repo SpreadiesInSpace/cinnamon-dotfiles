@@ -1,8 +1,11 @@
 #!/bin/bash
 
+# Minimal Error Handling function
+die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
+
 # Backup Existing Brave Profile
-mv ~/.config/BraveSoftware/ ~/.config/BraveSoftware.bak/
+mv ~/.config/BraveSoftware/ ~/.config/BraveSoftware.bak/ || die "Failed to backup old Brave Profile."
 
 # Clone Brave Gruvbox Example Profile
-git clone https://github.com/spreadiesinspace/BraveSoftware ~/.config/BraveSoftware
-rm -rf ~/.config/BraveSoftware/.git/
+git clone https://github.com/spreadiesinspace/BraveSoftware ~/.config/BraveSoftware || die "Failed to download new Brave profile."
+rm -rf ~/.config/BraveSoftware/.git/ || die "Failed to remove .git"
