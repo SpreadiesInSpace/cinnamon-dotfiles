@@ -31,8 +31,8 @@ alias updateAll='updateApp && cleanAll'
 alias updateRestart='updateAll; sudo reboot'
 alias updateShutdown='updateAll; sudo poweroff'
 
-# Skip sourcing .bashrc if running in tty
+# Skip sourcing synth-shell-prompt if running in tty
 if [[ $(tty) == /dev/tty[0-9]* ]]; then
-  return
+    return
 fi
 

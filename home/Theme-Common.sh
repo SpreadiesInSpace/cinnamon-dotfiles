@@ -287,10 +287,10 @@ copy_bashrc_and_etc() {
         sudo cp /root/.bashrc /root/.bashrc.old.$timestamp >/dev/null 2>&1
 
         # Create minimal root .bashrc with tty check and source user .bashrc
-        echo 'if [[ $(tty) == /dev/tty[0-9]* ]]; then
-        return
-    fi' | sudo tee /root/.bashrc >/dev/null 2>&1
-
+        echo "# Skip sourcing user .bashrc if running in tty" | sudo tee /root/.bashrc >/dev/null 2>&1
+        echo 'if [[ $(tty) == /dev/tty[0-9]* ]]; then' | sudo tee -a /root/.bashrc >/dev/null 2>&1 
+        echo '    return'  | sudo tee -a /root/.bashrc >/dev/null 2>&1
+        echo 'fi' | sudo tee -a /root/.bashrc >/dev/null 2>&1
         echo "source $HOME/.bashrc" | sudo tee -a /root/.bashrc >/dev/null 2>&1
 
         # Preserve and replace user .bashrc with timestamp

@@ -32,7 +32,7 @@ alias updateShutdown='updateAll; systemctl poweroff'
 # Update and Cleanup
 alias UC='updateAll;sudo bleachbit;exit'
 
-# Skip sourcing .bashrc if running in tty
+# Skip sourcing synth-shell-prompt if running in tty
 if [[ $(tty) == /dev/tty[0-9]* ]]; then
-  return
+    return
 fi

@@ -141,7 +141,7 @@ alias updateShutdown='updateAll; systemctl poweroff'
 # LMDE Neofetch
 alias neofetch='neofetch --ascii ${HOME}/LMDEAscii.txt'
 
-# Skip sourcing .bashrc if running in tty
+# Skip sourcing synth-shell-prompt if running in tty
 if [[ $(tty) == /dev/tty[0-9]* ]]; then
-  return
+    return
 fi

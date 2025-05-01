@@ -35,7 +35,7 @@ alias UC='updateAll;run-as-spot bleachbit;exit'
 # Remove History
 rm -rf .history
 
-# Skip sourcing .bashrc if running in tty
+# Skip sourcing synth-shell-prompt if running in tty
 if [[ $(tty) == /dev/tty[0-9]* ]]; then
-  return
+    return
 fi
