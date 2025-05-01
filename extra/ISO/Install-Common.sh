@@ -151,11 +151,11 @@ partition_drive() {
   if [ "$BOOTMODE" = "UEFI" ]; then
     # Create GPT partition table
     "$PARTED" -s "$drive" mklabel gpt || die "Failed to create GPT partition table."
-    # Create ESP (EFI System Partition) for UEFI
-    "$PARTED" -s "$drive" mkpart primary fat32 1MiB 513MiB || die "Failed to create boot partition."
+    # Create ESP (EFI System Partition) for UEFI – 1GiB
+    "$PARTED" -s "$drive" mkpart primary fat32 1MiB 1050MiB || die "Failed to create boot partition."
     "$PARTED" -s "$drive" set 1 esp on || die "Failed to set ESP flag."
     # Create root partition
-    "$PARTED" -s "$drive" mkpart primary btrfs 513MiB 100% || die "Failed to create root partition."
+    "$PARTED" -s "$drive" mkpart primary btrfs 1050MiB 100% || die "Failed to create root partition."
   else
     # Create MBR partition table for BIOS
     "$PARTED" -s "$drive" mklabel msdos || die "Failed to create MBR partition table."
