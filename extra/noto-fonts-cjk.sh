@@ -10,8 +10,9 @@ wget -c -T 10 -t 10 -q --show-progress --content-disposition https://archlinux.o
 zstd -d *.pkg.tar.zst || die "Decompression failed."
 tar -xf *.pkg.tar || die "Extraction failed."
 
-# Install 
-sudo cp -vnpr usr/share/fonts/noto-cjk/ /usr/share/fonts/ || die "Failed to copy noto-fonts-cjk to /usr/share/fonts"
+# Install
+echo "Installing noto-fonts-cjk." 
+sudo cp -npr usr/share/fonts/noto-cjk/ /usr/share/fonts/ || die "Failed to copy noto-fonts-cjk to /usr/share/fonts"
 
 # Symlink
 mkdir -p ~/.fonts || die "Failed to make .fonts folder."
