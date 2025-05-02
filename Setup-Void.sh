@@ -28,9 +28,9 @@ xbps-install -Syu git xtools || die "Failed to install git and xtools."
 # Install xmirror utility
 xbps-install -Sy xmirror || die "Failed to install xmirror."
 
-# Use xmirror to select the fastest mirrors
-# xmirror -s https://repo-fastly.voidlinux.org/ || die "Failed to set the mirror with xmirror."
-xmirror -s https://mirror.vofr.net/voidlinux/ || die "Failed to set the mirror with xmirror."
+# Use xmirror to select a mirror
+xmirror -s https://repo-fastly.voidlinux.org/ || die "Failed to set the mirror with xmirror."
+# xmirror -s https://mirror.vofr.net/voidlinux/ || die "Failed to set the mirror with xmirror."
 
 # Install multilib and nonfree repos
 xbps-install -Sy void-repo-nonfree void-repo-multilib void-repo-multilib-nonfree || die "Failed to install multilib and nonfree repositories."
