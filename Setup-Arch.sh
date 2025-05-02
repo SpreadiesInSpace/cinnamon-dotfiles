@@ -47,7 +47,7 @@ chmod 0440 /etc/sudoers.d/99_${SUDO_USER}_nopasswd || die "Failed to set proper 
 
 # Install yay
 cat << 'EOF' | su - "$SUDO_USER"
-source ./Setup-Common.sh
+die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
 trap 'rm -rf yay-bin' EXIT
 echo "Configuring yay..."
 git clone https://aur.archlinux.org/yay-bin.git >/dev/null 2>&1 || die "Failed to download yay."
