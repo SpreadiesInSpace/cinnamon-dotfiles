@@ -53,9 +53,6 @@ else
   touch "$MAKECONF_FLAG" || die "Failed to create $MAKECONF_FLAG flag."
 fi
 
-# Review make.conf file
-# nano /etc/portage/make.conf
-
 # Install Essentials
 emerge -vquN app-eselect/eselect-repository app-editors/nano dev-vcs/git || die "Failed to install essential packages."
 
@@ -97,6 +94,10 @@ echo "media-video/ffmpegthumbnailer gnome" | tee /etc/portage/package.use/ffmpeg
 echo "gnome-extra/nemo tracker" | tee /etc/portage/package.use/nemo || die "Failed to set USE flags for nemo."
 echo "app-emulation/qemu glusterfs iscsi opengl pipewire spice usbredir vde virgl virtfs zstd" | tee /etc/portage/package.use/qemu || die "Failed to set USE flags for qemu."
 
+# Temporary Python Versions Fix
+echo "sys-cluster/glusterfs PYTHON_SINGLE_TARGET: python3_12
+x11-apps/lightdm-gtk-greeter-settings PYTHON_SINGLE_TARGET: python3_12" | tee /etc/portage/package.use/python || die "Failed to set USE flags for python."
+
 # Sync Repository + All Overlays
 emaint sync -a || die "Failed to sync repositories and overlays."
 
@@ -107,36 +108,29 @@ eselect profile set default/linux/amd64/23.0/desktop/gnome/systemd || die "Faile
 echo "media-video/pipewire sound-server" | tee /etc/portage/package.use/pipewire || die "Failed to set USE flags for pipewire."
 echo "media-sound/pulseaudio -daemon" | tee /etc/portage/package.use/pulseaudio || die "Failed to set USE flags for pulseaudio."
 
-# Set LINGUAS for Cinnamon Localization
-# echo "*/* LINGUAS: en" | tee /etc/portage/package.use/00localization || die "Failed to set LINGUAS to EN"
-
 # Emerge changes and cleanup
 emerge -vqDuN @world || die "Failed to emerge world update."
 emerge -q --depclean || die "Failed to clean up unused dependencies."
 
-# Update system and install Cinnamon (split them to prevent slot conflicts)
-desktop_environment=(
+# All Packages
+packages=(
+    # Unstable Packages
+    "x11-misc/gpaste"
+    "app-admin/grub-customizer"
+    #"x11-apps/lightdm-gtk-greeter-settings" # clashes with gobject-introspection
+    "x11-themes/kvantum"
+    "app-backup/timeshift" # triggers use flag change
+    # Desktop environment related packages
     "x11-base/xorg-server"
     "gnome-extra/cinnamon"
     "x11-misc/lightdm"
     "x11-misc/lightdm-gtk-greeter"
-    "www-client/brave-bin" # for verifying gentoo-zh > djs_brave override
-)
-emerge -vqDuN --with-bdeps=y "${desktop_environment[@]}" || die "Failed to install Cinnamon/Brave package group."
-
-# All Packages
-packages=(
-    "x11-misc/gpaste"
-    "app-admin/grub-customizer"
-    "x11-apps/lightdm-gtk-greeter-settings"
-    "x11-themes/kvantum"
-    "app-backup/timeshift" # triggers use flag change
-    # Desktop environment related packages
+    "www-client/brave-bin"
     "media-gfx/eog"
     "app-text/evince"
     "media-video/ffmpegthumbnailer"
     "app-editors/gedit"
-    "app-editors/gedit-plugins"
+    #"app-editors/gedit-plugins" # clashes with gobject-introspection
     "gnome-extra/gnome-calculator"
     "sys-apps/gnome-disk-utility"
     "media-gfx/gnome-screenshot"

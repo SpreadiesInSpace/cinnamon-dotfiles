@@ -1,0 +1,2 @@
+sys-cluster/glusterfs PYTHON_SINGLE_TARGET: python3_12
+x11-apps/lightdm-gtk-greeter-settings PYTHON_SINGLE_TARGET: python3_12
