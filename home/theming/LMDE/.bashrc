@@ -112,12 +112,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# Terminal Title
-PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
-
-# Bash Hostname
-PS1="\[\033]0;\u@\h: \w\007\][\u@\h:\W]\$ "
-
 # Update and Cleanup
 alias UC='updateAll;sudo bleachbit;exit'
 

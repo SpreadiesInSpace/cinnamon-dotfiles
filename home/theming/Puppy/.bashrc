@@ -3,11 +3,8 @@ if [[ $(ps -o comm= $PPID) == "gedit" ]]; then
   cd ~
 fi
 
-# Terminal Title
-PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
-
-# Bash Hostname
-PS1="\[\033]0;\u@\h: \w\007\][\u@\h:\W]\$ "
+# PS1 Prompt
+PS1="\[\e]0;\u@\h: \w\a\]$PS1"
 
 # Ignore History with Space
 HISTCONTROL=ignoreboth

@@ -11,9 +11,6 @@ if [[ $(ps -o comm= $PPID) == "gedit" ]]; then
   cd ~
 fi
 
-# Terminal Title
-PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
-
 # Ignore History with Space
 HISTCONTROL=ignoreboth
 
