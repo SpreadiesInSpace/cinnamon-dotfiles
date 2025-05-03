@@ -92,6 +92,7 @@ bash Setup-NixOS-Theme.sh
  - [ ] qbittorrent
  - [ ] timeshift
  - [ ] virt-manager
+ - [ ] vscodium
  
 ## Brave Theming
 
