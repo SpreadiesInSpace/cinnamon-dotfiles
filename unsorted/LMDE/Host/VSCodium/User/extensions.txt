@@ -1,0 +1,3 @@
+bmalehorn.vscode-fish
+jdinhlife.gruvbox
+jnoortheen.nix-ide

@@ -1,0 +1,16 @@
+{
+    "git.openRepositoryInParentFolders": "always",
+    "editor.minimap.enabled": false,
+    "workbench.preferredDarkColorTheme": "Gruvbox Dark Hard",
+    "editor.wordWrap": "on",
+    "terminal.integrated.fontSize": 12,
+    "editor.fontSize": 13,
+    "workbench.colorTheme": "Gruvbox Dark Hard",
+    "workbench.startupEditor": "none",
+    "files.associations": {
+        "*.dconf": "properties",
+        "*.config": "properties",
+        "*.toml": "properties",
+        "*.kvconfig": "properties"
+    },
+}
