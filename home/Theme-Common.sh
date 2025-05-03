@@ -506,6 +506,31 @@ set_default_apps() {
     cd ../..
 }
 
+copy_vscodium_config() {
+    # Backup VSCodium config & plugins
+    local timestamp=$(date +%s)
+    echo "Configuring VSCodium..."
+    if [ -d ~/.config/VSCodium ]; then
+        mv ~/.config/VSCodium ~/.config/VSCodium.old.$timestamp
+    fi
+    if [ -d ~/.vscode-oss ]; then
+        mv ~/.vscode-oss ~/.vscode-oss.old.$timestamp
+    fi
+    
+    # Copy VSCodium config and plugins to appropriate directory
+    git clone https://github.com/spreadiesinspace/codium
+    cd codium/
+    cp -npr VSCodium/ ~/.config/
+    cp -npr .vscode-oss/ ~/
+    
+    # Set VSCodium as default (user only)
+    bash Default-Apps-VSCodium.sh
+
+    # Cleanup 
+    cd ..
+    rm -rf codium/
+}
+
 # Only Fedora/LMDE/NixOS uses this
 set_cinnamon_menu_icon() {
 
