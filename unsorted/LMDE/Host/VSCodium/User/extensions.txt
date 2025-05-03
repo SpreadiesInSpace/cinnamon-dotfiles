@@ -1,2 +1,0 @@
-bbenoist.nix
-jdinhlife.gruvbox
