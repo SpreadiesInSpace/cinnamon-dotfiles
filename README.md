@@ -37,4 +37,5 @@ bash Theme.sh
 
 ## Screenshots
 ![Fedora](https://github.com/SpreadiesInSpace/cinnamon-dotfiles/blob/main/screenshots/CinnamonGruvbox2024.png "Cinnamon Gruvbox")
+## Wallpapers
 ![Cinnamon Gruvbox Wallpapers](https://github.com/SpreadiesInSpace/cinnamon-dotfiles/blob/main/screenshots/Collection/wallpapers.gif "Cult of Cinnamon")
