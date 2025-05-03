@@ -92,7 +92,7 @@ bash Setup-NixOS-Theme.sh
  - [ ] qbittorrent
  - [ ] timeshift
  - [ ] virt-manager
- - [ ] vscodium
+ - [ ] vscodium ***# Gruvbox Dark Hard theme appiled***
  
 ## Brave Theming
 
