@@ -518,7 +518,7 @@ copy_vscodium_config() {
     fi
     
     # Copy VSCodium config and plugins to appropriate directory
-    git clone https://github.com/spreadiesinspace/codium
+    git clone https://github.com/spreadiesinspace/codium >/dev/null 2>&1 || die "Failed to download VSCodium config."
     cd codium/
     cp -npr VSCodium/ ~/.config/
     cp -npr .vscode-oss/ ~/
