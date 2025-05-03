@@ -32,9 +32,6 @@ HISTCONTROL=ignoreboth
 # Bottom Gruvbox Color Scheme
 alias btm='btm --color gruvbox'
 
-# Rmlint Cleaning
-# alias cleanLint='bash rmlint.sh -d && rmlint'
-
 # Fedora Cleaning
 alias cleanExtra='sudo rpm -e --nodeps cinnamon-themes mint-x-icons mint-y-icons mint-y-theme mint-themes mint-themes-gtk3 mint-themes-gtk4; sudo rm -rf /var/lib/systemd/coredump/*; sudo rm -rf /var/tmp/.guestfs-1000/*; sudo rm -rf /var/cache/PackageKit/'
 alias cleanAll='flatpak remove --unused; sudo flatpak repair; cleanExtra; yes | sudo dnf clean all | rm -rf ~/.cache/* | sudo journalctl --vacuum-size=50M | sudo journalctl --vacuum-time=4weeks | SystemMaxUse=50M | sudo bleachbit -c --preset && bleachbit -c --preset'

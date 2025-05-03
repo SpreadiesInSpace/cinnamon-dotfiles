@@ -18,9 +18,6 @@ HISTCONTROL=ignoreboth
 # Bottom Gruvbox Color Scheme
 alias btm='btm --theme gruvbox'
 
-# Rmlint Cleaning
-# alias cleanLint='bash rmlint.sh -d && rmlint'
-
 # openSUSE Cleaning
 alias cleanAll='sudo zypper rm *-lang *-doc; sudo rm -rf /usr/share/themes/Mint-*; flatpak remove --unused; sudo flatpak repair; sudo rm -rf /var/lib/systemd/coredump/*; sudo zypper clean -a;sudo zypper purge-kernels; sudo snapper delete 1-100; rm -rf ~/.cache/*; sudo rm /tmp/* -rf; sudo journalctl --vacuum-size=50M; sudo journalctl --vacuum-time=4weeks; SystemMaxUse=50M; sudo bleachbit -c --preset && bleachbit -c --preset; sudo -E bleachbit; exit'
 

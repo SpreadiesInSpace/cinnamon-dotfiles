@@ -20,9 +20,6 @@ HISTCONTROL=ignoreboth
 # Bottom Gruvbox Color Scheme
 alias btm='btm --theme gruvbox'
 
-# Rmlint Cleaning
-# alias cleanLint='bash rmlint.sh -d && rmlint'
-
 # Void Cleaning
 alias cleanAll='flatpak remove --unused; sudo flatpak repair; sudo xbps-remove -yROo; sudo vkpurge rm all; rm -rf ~/.cache/*; sudo rm -rf /var/cache/xbps; sudo bleachbit -c --preset && bleachbit -c --preset'
  

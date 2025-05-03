@@ -18,9 +18,6 @@ alias UC='updateAll;sudo bleachbit;exit'
 # Bottom Gruvbox Color Scheme
 alias btm='btm --theme gruvbox'
 
-# Rmlint Cleaning
-# alias cleanLint='bash rmlint.sh -d && rmlint'
-
 # Slackware Cleaning
 alias cleanAll='sudo find /var/log -type f -name "*.log" -exec truncate -s 0 {} \;; sudo sboclean -d; sudo sboclean -w; sudo slpkg -T; flatpak uninstall --unused; sudo flatpak repair; rm -rf ~/.cache/*; sudo bleachbit -c --preset && bleachbit -c --preset'
 
