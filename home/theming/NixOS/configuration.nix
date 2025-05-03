@@ -136,6 +136,7 @@ in
       timeshift
       unzip
       virt-manager
+      vscodium
       wget
       xclip
       xorg.xkill

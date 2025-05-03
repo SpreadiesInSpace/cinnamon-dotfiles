@@ -85,6 +85,9 @@ apply_gedit_and_gnome_terminal_config "Fedora" "gedit-48.dconf"
 # Sets Default Apps
 set_default_apps "Fedora"
 
+# Backup and copy VSCodium config + plugins to appropriate directory
+copy_vscodium_config
+
 # Define the home directory (For Menu Applet Icon) *
 set_cinnamon_menu_icon "goa-account-fedora.svg"
 

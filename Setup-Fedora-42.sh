@@ -63,6 +63,11 @@ dnf -y install bottom || die "Failed to install Bottom."
 # Install Neofetch
 dnf -y install https://dl.fedoraproject.org/pub/fedora/linux/releases/40/Everything/x86_64/os/Packages/n/neofetch-7.1.0-12.fc40.noarch.rpm || die "Failed to install Neofetch."
 
+# Install VSCodium
+rpmkeys --import https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg || die "Failed to import VSCodium GPG key."
+printf "[gitlab.com_paulcarroty_vscodium_repo]\nname=download.vscodium.com\nbaseurl=https://download.vscodium.com/rpms/\nenabled=1\ngpgcheck=1\nrepo_gpgcheck=1\ngpgkey=https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg\nmetadata_expire=1h\n" | tee -a /etc/yum.repos.d/vscodium.repo || die "Failed to add VSCodium repository."
+dnf install codium || die "Failed to install VSCodium."
+
 # All packages
 packages=(
     # System utilities

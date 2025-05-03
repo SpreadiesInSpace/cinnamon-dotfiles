@@ -56,6 +56,11 @@ rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc || di
 zypper ar https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo || die "Failed to add Brave browser repository."
 zypper in -y brave-browser || die "Failed to install Brave browser."
 
+# Install VSCodium
+rpmkeys --import https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg || die "Failed to import VSCodium GPG key."
+printf "[gitlab.com_paulcarroty_vscodium_repo]\nname=gitlab.com_paulcarroty_vscodium_repo\nbaseurl=https://download.vscodium.com/rpms/\nenabled=1\ngpgcheck=1\nrepo_gpgcheck=1\ngpgkey=https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg\nmetadata_expire=1h\n" | tee -a /etc/zypp/repos.d/vscodium.repo || die "Failed to add VSCodium repository."
+zypper in -y codium || die "Failed to install VSCodium."
+
 # For Cinnamon and Opi
 zypper rm -y busybox-which busybox-diffutils
 

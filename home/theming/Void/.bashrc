@@ -21,9 +21,9 @@ alias btm='btm --theme gruvbox'
 alias cleanAll='flatpak remove --unused; sudo flatpak repair; sudo xbps-remove -yROo; sudo vkpurge rm all; rm -rf ~/.cache/*; sudo rm -rf /var/cache/xbps; sudo bleachbit -c --preset && bleachbit -c --preset'
  
 # Void Update
-alias updateBrave='${HOME}/update_brave.sh'
+alias updateXdeb='${HOME}/update_xdeb.sh'
 alias updateNeovim='nvim --headless "+Lazy! sync" +qa'
-alias updateApp='sudo xbps-install -Su xbps && sudo xbps-install -Suvy; updateBrave; flatpak update -y; updateNeovim'
+alias updateApp='sudo xbps-install -Su xbps && sudo xbps-install -Suvy; updateXdeb; flatpak update -y; updateNeovim'
 alias updateAll='updateApp && cleanAll'
 alias updateRestart='updateAll; sudo reboot'
 alias updateShutdown='updateAll; sudo poweroff'

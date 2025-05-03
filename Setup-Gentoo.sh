@@ -143,6 +143,7 @@ packages=(
     "x11-misc/qt5ct"
     "gui-apps/qt6ct"
     "media-sound/rhythmbox"
+    "app-editors/vscodium"
     # System utilities
     "app-admin/eclean-kernel"
     "dev-python/zstandard" # for eclean-kernel

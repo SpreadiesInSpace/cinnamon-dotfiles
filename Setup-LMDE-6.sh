@@ -55,6 +55,18 @@ rm -rf /usr/bin/nvim || die "Failed to remove existing Neovim binary."
 ln -s /squashfs-root/AppRun /usr/bin/nvim || die "Failed to create symlink for Neovim."
 rm nvim-linux-x86_64.appimage || die "Failed to remove Neovim AppImage file."
 
+# Install VSCodium
+wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg \
+    | gpg --dearmor \
+    | dd of=/usr/share/keyrings/vscodium-archive-keyring.gpg \
+    || die "Failed to import VSCodium GPG key."
+echo 'deb [arch=amd64,arm64 signed-by=/usr/share/keyrings/vscodium-archive-keyring.gpg] https://download.vscodium.com/debs vscodium main' \
+    | tee /etc/apt/sources.list.d/vscodium.list \
+    > /dev/null \
+    || die "Failed to add VSCodium repository."
+apt update || die "APT update failed."
+apt install -y codium || die "Failed to install VSCodium."
+
 # All packages
 packages=(
     # System utilities

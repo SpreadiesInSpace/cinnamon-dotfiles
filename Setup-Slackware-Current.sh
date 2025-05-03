@@ -147,6 +147,7 @@ packages=(
     "luv" # for neovim
     "lua-lpeg" # for neovim
     "unibilium" # for neovim
+    "vscodium-bin"
     # Virtualization tools
     "libslirp"
     "libcacard"

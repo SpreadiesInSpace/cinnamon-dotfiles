@@ -88,6 +88,9 @@ apply_gedit_and_gnome_terminal_config "Void" "gedit-48.dconf"
 # Sets Default Apps
 set_default_apps "Void"
 
+# Backup and copy VSCodium config + plugins to appropriate directory
+copy_vscodium_config
+
 # Sets Background and Sounds
 set_cinnamon_background_and_sounds
 

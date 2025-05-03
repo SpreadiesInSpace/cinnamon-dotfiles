@@ -108,6 +108,7 @@ packages=(
     "qt5ct"
     "qt6ct"
     "rhythmbox"
+    "vscodium-bin"
     # Applications
     "bauh"
     "bleachbit"

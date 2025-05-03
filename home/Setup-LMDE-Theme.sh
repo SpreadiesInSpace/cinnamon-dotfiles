@@ -85,6 +85,9 @@ apply_gedit_and_gnome_terminal_config "LMDE" "gedit.dconf"
 # Sets Default Apps
 set_default_apps "LMDE"
 
+# Backup and copy VSCodium config + plugins to appropriate directory
+copy_vscodium_config
+
 # Define the home directory (For Menu Applet Icon) *
 set_cinnamon_menu_icon "linuxmint-logo-filled-ring.svg"
 
