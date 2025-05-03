@@ -1,2 +1,2 @@
+bbenoist.nix
 jdinhlife.gruvbox
-jnoortheen.nix-ide
