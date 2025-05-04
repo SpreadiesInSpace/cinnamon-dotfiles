@@ -194,7 +194,7 @@
         "default": true,
         "description": "Show bookmarks and places",
         "tooltip": "Choose whether or not to show bookmarks and places in the menu.",
-        "value": true
+        "value": false
     },
     "show-recents": {
         "type": "switch",
