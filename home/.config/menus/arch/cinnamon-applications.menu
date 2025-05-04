@@ -6,18 +6,7 @@
 	<Name>Applications</Name>
 	<MergeFile type="parent">/etc/xdg/menus/cinnamon-applications.menu</MergeFile>
 	<Menu>
-		<Name>Other</Name>
-	</Menu>
-	<Menu>
-		<Name>Administration</Name>
-		<Include>
-			<Filename>Mount CIFS Share.desktop</Filename>
-		</Include>
-		<AppDir>/home/f16poom/.local/share/applications</AppDir>
-	</Menu>
-	<Menu>
-		<Name>Education</Name>
-		<DirectoryDir>/home/f16poom/.local/share/desktop-directories</DirectoryDir>
+		<Name>Science</Name>
 		<Exclude>
 			<Filename>libreoffice-math.desktop</Filename>
 		</Exclude>
@@ -29,19 +18,5 @@
 			<Filename>org.gnome.Evince.desktop</Filename>
 		</Exclude>
 		<AppDir>/home/f16poom/.local/share/applications</AppDir>
-	</Menu>
-	<Menu>
-		<Name>Science</Name>
-		<Exclude>
-			<Filename>libreoffice-math.desktop</Filename>
-		</Exclude>
-		<AppDir>/home/f16poom/.local/share/applications</AppDir>
-	</Menu>
-	<Menu>
-		<Name>Development</Name>
-		<Exclude>
-			<Filename>yad-icon-browser.desktop</Filename>
-		</Exclude>
-		<AppDir>/home/Spready/.local/share/applications</AppDir>
 	</Menu>
 </Menu>

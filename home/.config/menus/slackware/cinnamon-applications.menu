@@ -5,595 +5,292 @@
 <Menu>
 	<Name>Applications</Name>
 	<MergeFile type="parent">/etc/xdg/menus/cinnamon-applications.menu</MergeFile>
+	
+	<!-- Administration Category -->
+	<Menu>
+		<Name>Administration</Name>
+		<Directory>Administration.directory</Directory>
+		<Include>
+			<Filename>org.kde.onlinequoteseditor5.desktop</Filename>
+			<Filename>org.kde.calligraplan.desktop</Filename>
+			<Filename>org.kde.calligraplanwork.desktop</Filename>
+			<Filename>org.kde.kmymoney.desktop</Filename>
+			<Filename>org.kde.kontact.desktop</Filename>
+			<Filename>libreoffice-extension-manager.desktop</Filename>
+			<Filename>org.kde.kaddressbook.desktop</Filename>
+		</Include>
+	</Menu>
+
+	<!-- Development Category -->
+	<Menu>
+		<Name>Development</Name>
+		<Directory>Development.directory</Directory>
+		<Include>
+			<Filename>org.kde.kturtle.desktop</Filename>
+			<Filename>org.kde.kile.desktop</Filename>
+			<Filename>org.kde.cantor.desktop</Filename>
+			<Filename>org.kde.rocs.desktop</Filename>
+			<Filename>org.kde.step.desktop</Filename>
+		</Include>
+	</Menu>
+
+	<!-- Internet Category -->
+	<Menu>
+		<Name>Internet</Name>
+		<Directory>Internet.directory</Directory>
+		<Include>
+			<Filename>org.kde.merkuro.contact.desktop</Filename>
+			<Filename>org.kde.merkuro.calendar.desktop</Filename>
+			<Filename>org.kde.korganizer.desktop</Filename>
+			<Filename>org.kde.marble.desktop</Filename>
+			<Filename>org.kde.marble-qt.desktop</Filename>
+		</Include>
+	</Menu>
+
+	<!-- Multimedia Category -->
+	<Menu>
+		<Name>Multimedia</Name>
+		<Directory>Multimedia.directory</Directory>
+		<Include>
+			<Filename>org.kde.artikulate.desktop</Filename>
+			<Filename>org.kde.minuet.desktop</Filename>
+			<Filename>org.kde.kstars.desktop</Filename>
+			<Filename>org.kde.kmag.desktop</Filename>
+			<Filename>org.kde.kmouth.desktop</Filename>
+			<Filename>org.kde.kmousetool.desktop</Filename>
+			<Filename>org.kde.khangman.desktop</Filename>
+			<Filename>org.kde.blinken.desktop</Filename>
+			<Filename>org.kde.kanagram.desktop</Filename>
+			<Filename>org.kde.parley.desktop</Filename>
+			<Filename>org.kde.kiten.desktop</Filename>
+			<Filename>org.kde.kwordquiz.desktop</Filename>
+			<Filename>org.kde.palapeli.desktop</Filename>
+			<Filename>org.kde.bomber.desktop</Filename>
+			<Filename>org.kde.bovo.desktop</Filename>
+			<Filename>org.kde.granatier.desktop</Filename>
+			<Filename>org.kde.katomic.desktop</Filename>
+			<Filename>org.kde.kblackbox.desktop</Filename>
+			<Filename>org.kde.kblocks.desktop</Filename>
+			<Filename>org.kde.kbounce.desktop</Filename>
+			<Filename>org.kde.kbreakout.desktop</Filename>
+			<Filename>org.kde.kdiamond.desktop</Filename>
+			<Filename>org.kde.kfourinline.desktop</Filename>
+			<Filename>org.kde.kgoldrunner.desktop</Filename>
+			<Filename>org.kde.kmines.desktop</Filename>
+			<Filename>org.kde.kmahjongg.desktop</Filename>
+			<Filename>org.kde.knetwalk.desktop</Filename>
+			<Filename>org.kde.kreversi.desktop</Filename>
+			<Filename>org.kde.kpat.desktop</Filename>
+			<Filename>org.kde.ksquares.desktop</Filename>
+			<Filename>org.kde.kspaceduel.desktop</Filename>
+			<Filename>org.kde.ksnakeduel.desktop</Filename>
+			<Filename>org.kde.ksudoku.desktop</Filename>
+			<Filename>org.kde.kapman.desktop</Filename>
+			<Filename>org.kde.killbots.desktop</Filename>
+			<Filename>org.kde.kigo.desktop</Filename>
+			<Filename>org.kde.kiriki.desktop</Filename>
+			<Filename>org.kde.klickety.desktop</Filename>
+			<Filename>org.kde.klines.desktop</Filename>
+			<Filename>org.kde.knights.desktop</Filename>
+			<Filename>org.kde.kolf.desktop</Filename>
+			<Filename>org.kde.kollision.desktop</Filename>
+			<Filename>org.kde.kjumpingcube.desktop</Filename>
+			<Filename>org.kde.konquest.desktop</Filename>
+			<Filename>org.kde.ksirk.desktop</Filename>
+			<Filename>org.kde.ksirkskineditor.desktop</Filename>
+			<Filename>org.kde.kubrick.desktop</Filename>
+			<Filename>xboard.desktop</Filename>
+			<Filename>eboard.desktop</Filename>
+			<Filename>xsnow.desktop</Filename>
+			<Filename>org.kde.lskat.desktop</Filename>
+			<Filename>org.kde.knavalbattle.desktop</Filename>
+			<Filename>org.kde.picmi.desktop</Filename>
+			<Filename>org.kde.ksame.desktop</Filename>
+			<Filename>org.kde.kshisen.desktop</Filename>
+		</Include>
+	</Menu>
+
+	<!-- Graphics Category -->
+	<Menu>
+		<Name>Graphics</Name>
+		<Directory>Graphics.directory</Directory>
+		<Include>
+			<Filename>org.kde.calligragemini.desktop</Filename>
+			<Filename>org.kde.kig.desktop</Filename>
+			<Filename>org.kde.kmplot.desktop</Filename>
+			<Filename>org.kde.labplot2.desktop</Filename>
+			<Filename>org.kde.kalgebra.desktop</Filename>
+			<Filename>org.kde.kalgebramobile.desktop</Filename>
+			<Filename>org.kde.kalzium.desktop</Filename>
+			<Filename>xaos.desktop</Filename>
+		</Include>
+	</Menu>
+
+	<!-- Accessories Category -->
+	<Menu>
+		<Name>Accessories</Name>
+		<Directory>Accessories.directory</Directory>
+		<Include>
+			<Filename>org.kde.ghostwriter.desktop</Filename>
+			<Filename>org.kde.ktouch.desktop</Filename>
+			<Filename>org.kde.calligrawords.desktop</Filename>
+			<Filename>org.kde.calligrasheets.desktop</Filename>
+			<Filename>org.kde.calligrastage.desktop</Filename>
+		</Include>
+	</Menu>
+
+	<!-- Preferences Category -->
+	<Menu>
+		<Name>Preferences</Name>
+		<Directory>Preferences.directory</Directory>
+		<Include>
+			<Filename>org.kde.kbruch.desktop</Filename>
+			<Filename>org.kde.kgeography.desktop</Filename>
+			<Filename>org.kde.marble.maps.desktop</Filename>
+		</Include>
+	</Menu>
+	
+	<!-- Hidden Entries from Criginal Categories -->
 	<Menu>
 		<Name>Education</Name>
-		<DirectoryDir>/home/f16poom/.local/share/desktop-directories</DirectoryDir>
 		<Exclude>
 			<Filename>org.kde.artikulate.desktop</Filename>
-		</Exclude>
-		<AppDir>/home/f16poom/.local/share/applications</AppDir>
-		<Exclude>
-			<Filename>org.kde.blinken.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.cantor.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.kalgebra.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.kalgebramobile.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.marble.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.kgeography.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.khangman.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.kstars.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.ktouch.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.kturtle.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.kwordquiz.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.kalzium.desktop</Filename>
-		</Exclude>
-		<Exclude>
 			<Filename>org.kde.kbruch.desktop</Filename>
-		</Exclude>
-		<Exclude>
+			<Filename>org.kde.kgeography.desktop</Filename>
+			<Filename>org.kde.khangman.desktop</Filename>
+			<Filename>org.kde.blinken.desktop</Filename>
+			<Filename>org.kde.ktouch.desktop</Filename>
+			<Filename>org.kde.kturtle.desktop</Filename>
+			<Filename>org.kde.kwordquiz.desktop</Filename>
 			<Filename>org.kde.kanagram.desktop</Filename>
-		</Exclude>
-		<Exclude>
+			<Filename>org.kde.kiten.desktop</Filename>
+			<Filename>org.kde.kmplot.desktop</Filename>
+			<Filename>org.kde.marble.maps.desktop</Filename>
 			<Filename>org.kde.kig.desktop</Filename>
-		</Exclude>
-		<Exclude>
+			<Filename>org.kde.minuet.desktop</Filename>
 			<Filename>org.kde.step.desktop</Filename>
-		</Exclude>
-		<Exclude>
 			<Filename>org.kde.parley.desktop</Filename>
 		</Exclude>
-		<Exclude>
-			<Filename>org.kde.minuet.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.marble.maps.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.rocs.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>xaos.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.kiten.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.marble-qt.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.kmplot.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>libreoffice-math.desktop</Filename>
-		</Exclude>
+		<AppDir>/home/f16poom/.local/share/applications</AppDir>
 	</Menu>
 	<Menu>
 		<Name>Games</Name>
-		<DirectoryDir>/home/f16poom/.local/share/desktop-directories</DirectoryDir>
-		<Exclude>
-			<Filename>org.kde.bomber.desktop</Filename>
-		</Exclude>
 		<AppDir>/home/f16poom/.local/share/applications</AppDir>
 		<Exclude>
-			<Filename>org.kde.bovo.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.granatier.desktop</Filename>
-		</Exclude>
-		<Exclude>
 			<Filename>org.kde.blinken.desktop</Filename>
-		</Exclude>
-		<Exclude>
+			<Filename>org.kde.bomber.desktop</Filename>
+			<Filename>org.kde.bovo.desktop</Filename>
+			<Filename>org.kde.granatier.desktop</Filename>
 			<Filename>org.kde.katomic.desktop</Filename>
-		</Exclude>
-		<Exclude>
 			<Filename>org.kde.kblackbox.desktop</Filename>
-		</Exclude>
-		<Exclude>
 			<Filename>org.kde.kblocks.desktop</Filename>
-		</Exclude>
-		<Exclude>
 			<Filename>org.kde.kbounce.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.kdiamond.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.kgoldrunner.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.kjumpingcube.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.konquest.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.picmi.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.kapman.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.kspaceduel.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.knetwalk.desktop</Filename>
-		</Exclude>
-		<Exclude>
 			<Filename>org.kde.kbreakout.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.ksquares.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.ksnakeduel.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.khangman.desktop</Filename>
-		</Exclude>
-		<Exclude>
+			<Filename>org.kde.kdiamond.desktop</Filename>
 			<Filename>org.kde.kfourinline.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.kshisen.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.kolf.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.palapeli.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.klines.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.kreversi.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.kmahjongg.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.ksudoku.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.knights.desktop</Filename>
-		</Exclude>
-		<Exclude>
+			<Filename>org.kde.kgoldrunner.desktop</Filename>
+			<Filename>org.kde.khangman.desktop</Filename>
 			<Filename>org.kde.kmines.desktop</Filename>
-		</Exclude>
-		<Exclude>
+			<Filename>org.kde.kmahjongg.desktop</Filename>
+			<Filename>org.kde.knetwalk.desktop</Filename>
+			<Filename>org.kde.kreversi.desktop</Filename>
 			<Filename>org.kde.kpat.desktop</Filename>
-		</Exclude>
-		<Exclude>
+			<Filename>org.kde.ksquares.desktop</Filename>
 			<Filename>org.kde.kanagram.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.kigo.desktop</Filename>
-		</Exclude>
-		<Exclude>
+			<Filename>org.kde.kspaceduel.desktop</Filename>
+			<Filename>org.kde.ksnakeduel.desktop</Filename>
+			<Filename>org.kde.ksudoku.desktop</Filename>
+			<Filename>org.kde.kapman.desktop</Filename>
 			<Filename>org.kde.killbots.desktop</Filename>
-		</Exclude>
-		<Exclude>
+			<Filename>org.kde.kigo.desktop</Filename>
 			<Filename>org.kde.kiriki.desktop</Filename>
-		</Exclude>
-		<Exclude>
 			<Filename>org.kde.klickety.desktop</Filename>
-		</Exclude>
-		<Exclude>
+			<Filename>org.kde.klines.desktop</Filename>
+			<Filename>org.kde.knights.desktop</Filename>
+			<Filename>org.kde.kolf.desktop</Filename>
 			<Filename>org.kde.kollision.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.ksame.desktop</Filename>
-		</Exclude>
-		<Exclude>
+			<Filename>org.kde.kjumpingcube.desktop</Filename>
+			<Filename>org.kde.konquest.desktop</Filename>
 			<Filename>org.kde.ksirk.desktop</Filename>
-		</Exclude>
-		<Exclude>
 			<Filename>org.kde.ksirkskineditor.desktop</Filename>
-		</Exclude>
-		<Exclude>
 			<Filename>org.kde.kubrick.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.lskat.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.knavalbattle.desktop</Filename>
-		</Exclude>
-		<Exclude>
 			<Filename>xboard.desktop</Filename>
-		</Exclude>
-		<Exclude>
 			<Filename>eboard.desktop</Filename>
-		</Exclude>
-		<Exclude>
 			<Filename>xsnow.desktop</Filename>
+			<Filename>org.kde.lskat.desktop</Filename>
+			<Filename>org.kde.knavalbattle.desktop</Filename>
+			<Filename>org.kde.palapeli.desktop</Filename>
+			<Filename>org.kde.picmi.desktop</Filename>
+			<Filename>org.kde.ksame.desktop</Filename>
+			<Filename>org.kde.kshisen.desktop</Filename>
 		</Exclude>
 	</Menu>
 	<Menu>
+		<Name>Office</Name>
+		<Exclude>
+			<Filename>org.kde.calligragemini.desktop</Filename>
+			<Filename>org.kde.calligrasheets.desktop</Filename>
+			<Filename>org.kde.calligrastage.desktop</Filename>
+			<Filename>org.kde.calligrawords.desktop</Filename>
+			<Filename>org.kde.contactprintthemeeditor.desktop</Filename>
+			<Filename>org.kde.contactthemeeditor.desktop</Filename>
+			<Filename>org.gnome.Evince.desktop</Filename>
+			<Filename>org.kde.kaddressbook.desktop</Filename>
+			<Filename>org.kde.kmail2.desktop</Filename>
+			<Filename>org.kde.headerthemeeditor.desktop</Filename>
+			<Filename>org.kde.kmymoney.desktop</Filename>
+			<Filename>org.kde.korganizer.desktop</Filename>
+			<Filename>org.kde.ktimetracker.desktop</Filename>
+			<Filename>org.kde.ktnef.desktop</Filename>
+			<Filename>org.kde.karbon.desktop</Filename>
+			<Filename>org.kde.kile.desktop</Filename>
+			<Filename>org.kde.kontact.desktop</Filename>
+			<Filename>org.kde.lokalize.desktop</Filename>
+			<Filename>org.kde.merkuro.calendar.desktop</Filename>
+			<Filename>org.kde.merkuro.contact.desktop</Filename>
+			<Filename>org.kde.okular.desktop</Filename>
+			<Filename>org.kde.onlinequoteseditor5.desktop</Filename>
+			<Filename>org.kde.calligraplan.desktop</Filename>
+			<Filename>org.kde.calligraplanwork.desktop</Filename>
+			<Filename>org.kde.sieveeditor.desktop</Filename>
+			<Filename>org.kde.ghostwriter.desktop</Filename>
+			<Filename>libreoffice-extension-manager.desktop</Filename>
+		</Exclude>
+		<AppDir>/home/f16poom/.local/share/applications</AppDir>
+	</Menu>
+	<Menu>
 		<Name>Other</Name>
-		<DirectoryDir>/home/f16poom/.local/share/desktop-directories</DirectoryDir>
 		<Exclude>
 			<Filename>kcm_fcitx5.desktop</Filename>
 		</Exclude>
 		<AppDir>/home/f16poom/.local/share/applications</AppDir>
 	</Menu>
 	<Menu>
-		<Name>Development</Name>
-		<DirectoryDir>/home/f16poom/.local/share/desktop-directories</DirectoryDir>
-		<Exclude>
-			<Filename>org.kde.akonadiconsole.desktop</Filename>
-		</Exclude>
-		<AppDir>/home/f16poom/.local/share/applications</AppDir>
-		<Exclude>
-			<Filename>cmake-gui.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.cervisia.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>ddd.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.plasma.cuttlefish.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>emacs.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>emacsclient.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.gnome.Glade.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.gtk.IconBrowser4.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>yad-icon-browser.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>joe.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.kapptemplate.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>jpico.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>jstar.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.kcachegrind.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.kdebugsettings.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>jmacs.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.gtk.Demo4.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.lokalize.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.kdevelop.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.kdevelop_ps.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.kuiviewer.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.gtk.gtk4.NodeEditor.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.kimagemapeditor.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.kate.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.kompare.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.kirigami2.gallery.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.plasmaengineexplorer.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.plasma.themeexplorer.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.plasma.lookandfeelexplorer.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.gtk.PrintEditor4.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>qt5-assistant.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>qt5-designer.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>qt5-linguist.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>qt6-assistant.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>qt5-qdbusviewer.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>qt6-designer.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>qt6-linguist.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>qt6-qdbusviewer.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.umbrello.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.gtk.WidgetFactory4.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>distccmon-gnome.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.cuttlefish.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>vulkanCapsViewer.desktop</Filename>
-		</Exclude>
-	</Menu>
-	<Menu>
 		<Name>Universal Access</Name>
-		<DirectoryDir>/home/f16poom/.local/share/desktop-directories</DirectoryDir>
 		<Exclude>
 			<Filename>org.kde.kmag.desktop</Filename>
-		</Exclude>
-		<AppDir>/home/f16poom/.local/share/applications</AppDir>
-		<Exclude>
+			<Filename>org.kde.kmouth.desktop</Filename>
 			<Filename>org.kde.kmousetool.desktop</Filename>
 		</Exclude>
-		<Exclude>
-			<Filename>org.kde.kmouth.desktop</Filename>
-		</Exclude>
-	</Menu>
-	<Menu>
-		<Name>Preferences</Name>
-		<DirectoryDir>/home/f16poom/.local/share/desktop-directories</DirectoryDir>
-	</Menu>
-	<Menu>
-		<Name>Office</Name>
-		<Exclude>
-			<Filename>org.kde.kmail2.desktop</Filename>
-		</Exclude>
 		<AppDir>/home/f16poom/.local/share/applications</AppDir>
-		<Exclude>
-			<Filename>org.kde.contactprintthemeeditor.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.contactthemeeditor.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.kaddressbook.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.calligragemini.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.calligrasheets.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.calligrastage.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.headerthemeeditor.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.calligrawords.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.kmymoney.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>kaddressbook-view.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.kontact.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.lokalize.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.merkuro.calendar.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.merkuro.contact.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.onlinequoteseditor5.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.okular.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.calligraplan.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.calligraplanwork.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.sieveeditor.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.ghostwriter.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.korganizer.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.ktimetracker.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.ktnef.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.karbon.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.kile.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.gnome.Evince.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>libreoffice-extension-manager.desktop</Filename>
-		</Exclude>
-	</Menu>
-	<Menu>
-		<Name>Administration</Name>
-		<Include>
-			<Filename>alacarte-made-cc7c9306-d985-11ee-b2f3-5254002e9856.desktop</Filename>
-		</Include>
-		<Include>
-			<Filename>alacarte-made-2c2450dc-d986-11ee-b2f3-5254002e9856.desktop</Filename>
-		</Include>
-		<Include>
-			<Filename>alacarte-made-94459108-d986-11ee-b2f3-5254002e9856.desktop</Filename>
-		</Include>
-		<Include>
-			<Filename>Mount CIFS Share.desktop</Filename>
-		</Include>
-		<AppDir>/home/f16poom/.local/share/applications</AppDir>
-		<Include>
-			<Filename>alacarte-made-4da03e52-e6f0-11ee-b5ae-5254002e9856.desktop</Filename>
-		</Include>
-		<Include>
-			<Filename>alacarte-made-528735ce-ec36-11ee-862f-5254002e9856.desktop</Filename>
-		</Include>
-		<Layout>
-			<Merge type="menus"/>
-			<Filename>avahi-discover.desktop</Filename>
-			<Filename>org.bleachbit.BleachBit.desktop</Filename>
-			<Filename>cinnamon.desktop</Filename>
-			<Filename>cinnamon2d.desktop</Filename>
-			<Filename>org.kde.dolphin.desktop</Filename>
-			<Filename>org.fcitx.Fcitx5.desktop</Filename>
-			<Filename>org.kde.dolphinsu.desktop</Filename>
-			<Filename>gparted.desktop</Filename>
-			<Filename>htop.desktop</Filename>
-			<Filename>colordkdeiccimporter.desktop</Filename>
-			<Filename>org.kde.partitionmanager.desktop</Filename>
-			<Filename>org.kde.kdf.desktop</Filename>
-			<Filename>org.kde.ksystemlog.desktop</Filename>
-			<Filename>org.kde.kwalletmanager5.desktop</Filename>
-			<Filename>gkbd-keyboard-display.desktop</Filename>
-			<Filename>kfmclient.desktop</Filename>
-			<Filename>kfmclient_dir.desktop</Filename>
-			<Filename>kfmclient_war.desktop</Filename>
-			<Filename>org.kde.konsole.desktop</Filename>
-			<Filename>org.kde.kwikdisk.desktop</Filename>
-			<Filename>cups.desktop</Filename>
-			<Filename>system-config-printer.desktop</Filename>
-			<Filename>pia-manager.desktop</Filename>
-			<Filename>gnome-system-monitor.desktop</Filename>
-			<Filename>org.kde.plasma-systemmonitor.desktop</Filename>
-			<Filename>xfce4-taskmanager.desktop</Filename>
-			<Filename>thunar.desktop</Filename>
-			<Filename>timeshift-gtk.desktop</Filename>
-			<Filename>uxterm.desktop</Filename>
-			<Filename>cinnamon-settings-users.desktop</Filename>
-			<Filename>xterm.desktop</Filename>
-			<Filename>xfce4-terminal.desktop</Filename>
-			<Filename>org.freedesktop.Xwayland.desktop</Filename>
-			<Filename>org.kde.yakuake.desktop</Filename>
-			<Filename>ca.desrt.dconf-editor.desktop</Filename>
-			<Filename>rxvt-unicode.desktop</Filename>
-			<Filename>rxvt-unicode-256color.desktop</Filename>
-			<Filename>gcm-picker.desktop</Filename>
-			<Filename>org.gnome.ColorProfileViewer.desktop</Filename>
-			<Filename>alacarte-made-94459108-d986-11ee-b2f3-5254002e9856.desktop</Filename>
-			<Filename>gcm-import.desktop</Filename>
-			<Filename>Mount CIFS Share.desktop</Filename>
-			<Filename>shredder.desktop</Filename>
-			<Filename>org.gnome.Terminal.desktop</Filename>
-			<Filename>virt-manager.desktop</Filename>
-			<Merge type="files"/>
-		</Layout>
 	</Menu>
 	<Menu>
 		<Name>Science</Name>
 		<Exclude>
 			<Filename>org.kde.cantor.desktop</Filename>
-		</Exclude>
-		<AppDir>/home/f16poom/.local/share/applications</AppDir>
-		<Exclude>
 			<Filename>org.kde.kalgebra.desktop</Filename>
-		</Exclude>
-		<Exclude>
 			<Filename>org.kde.kalgebramobile.desktop</Filename>
-		</Exclude>
-		<Exclude>
 			<Filename>org.kde.marble.desktop</Filename>
-		</Exclude>
-		<Exclude>
 			<Filename>org.kde.kstars.desktop</Filename>
-		</Exclude>
-		<Exclude>
+			<Filename>org.kde.labplot2.desktop</Filename>
+			<Filename>libreoffice-math.desktop</Filename>
+			<Filename>org.kde.marble-qt.desktop</Filename>
+			<Filename>qalculate-gtk.desktop</Filename>
+			<Filename>io.github.Qalculate.qalculate-qt.desktop</Filename>
+			<Filename>org.kde.rocs.desktop</Filename>
+			<Filename>xaos.desktop</Filename>
 			<Filename>org.kde.kalzium.desktop</Filename>
 		</Exclude>
-		<Exclude>
-			<Filename>org.kde.labplot2.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>libreoffice-math.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.marble-qt.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.kde.rocs.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>xaos.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>qalculate-gtk.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>io.github.Qalculate.qalculate-qt.desktop</Filename>
-		</Exclude>
+		<AppDir>/home/f16poom/.local/share/applications</AppDir>
 	</Menu>
 </Menu>

@@ -6,18 +6,7 @@
 	<Name>Applications</Name>
 	<MergeFile type="parent">/etc/xdg/menus/cinnamon-applications.menu</MergeFile>
 	<Menu>
-		<Name>Other</Name>
-	</Menu>
-	<Menu>
-		<Name>Administration</Name>
-		<Include>
-			<Filename>Mount CIFS Share.desktop</Filename>
-		</Include>
-		<AppDir>/home/f16poom/.local/share/applications</AppDir>
-	</Menu>
-	<Menu>
-		<Name>Education</Name>
-		<DirectoryDir>/home/f16poom/.local/share/desktop-directories</DirectoryDir>
+		<Name>Science</Name>
 		<Exclude>
 			<Filename>libreoffice-math.desktop</Filename>
 		</Exclude>
@@ -27,26 +16,6 @@
 		<Name>Office</Name>
 		<Exclude>
 			<Filename>org.gnome.Evince.desktop</Filename>
-		</Exclude>
-		<AppDir>/home/f16poom/.local/share/applications</AppDir>
-		<Include>
-			<Filename>libreoffice-startcenter.desktop</Filename>
-		</Include>
-		<Exclude>
-			<Filename>org.gnome.Calendar.desktop</Filename>
-		</Exclude>
-	</Menu>
-	<Menu>
-		<Name>Universal Access</Name>
-		<Exclude>
-			<Filename>onboard.desktop</Filename>
-		</Exclude>
-		<AppDir>/home/f16poom/.local/share/applications</AppDir>
-	</Menu>
-	<Menu>
-		<Name>Science</Name>
-		<Exclude>
-			<Filename>libreoffice-math.desktop</Filename>
 		</Exclude>
 		<AppDir>/home/f16poom/.local/share/applications</AppDir>
 	</Menu>
