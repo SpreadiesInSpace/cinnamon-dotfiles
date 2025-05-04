@@ -2,7 +2,17 @@
 
 **Disclaimer:** *Please go through the scripts carefully so you know what is going on before running them.*
 
-## Install Straight from ISO
+## Supported Distros (with ISO download links)
+* [Arch](https://archlinux.org/download/)
+* [Fedora 42](https://fedoraproject.org/spins/cinnamon/download/)
+* [Gentoo](https://www.gentoo.org/downloads/)
+* [Linux Mint (Debian Edition)](https://linuxmint.com/edition.php?id=308)
+* [NixOS Unstable](https://nixos.org/download/#nixos-iso)
+* [openSUSE Tumbleweed](https://get.opensuse.org/tumbleweed/#download)
+* [Slackware Current](https://us.slackware.nl/slackware/slackware64-current-iso/)
+* [Void Linux](https://voidlinux.org/download/)
+
+## Install from ISO
 *Supports UEFI and BIOS, x86_64 Only*
 
 ```bash
@@ -15,20 +25,11 @@ bash <(wget -qO- https://tinyurl.com/cinnamon-ISO)
 ```
 *View cinnamon-ISO [source](https://github.com/SpreadiesInSpace/cinnamon-dotfiles/blob/main/extra/Setup-ISO.sh)*
 
-## Supported Distros (with ISO download links)
-* [Arch](https://archlinux.org/download/)
-* [Fedora 42](https://fedoraproject.org/spins/cinnamon/download/)
-* [Gentoo](https://www.gentoo.org/downloads/)
-* [Linux Mint (Debian Edition)](https://linuxmint.com/edition.php?id=308)
-* [NixOS Unstable](https://nixos.org/download/#nixos-iso)
-* [openSUSE Tumbleweed](https://get.opensuse.org/tumbleweed/#download)
-* [Slackware Current](https://us.slackware.nl/slackware/slackware64-current-iso/)
-* [Void Linux](https://voidlinux.org/download/)
-
-## Steps to Install
+## Installation Steps
 
 1. Clone this repo
 ```bash
+# Skip this step if you installed from ISO
 git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles
 ```
 2. Head to cinnamon-dotfiles
