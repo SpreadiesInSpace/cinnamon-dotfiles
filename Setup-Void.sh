@@ -172,7 +172,6 @@ xbps-pkgdb -m hold neofetch || die "Failed to hold neofetch package."
 
 # Install Brave and VSCodium
 cd home/theming/Void
-chmod +x update_xdeb.sh
 ./update_xdeb.sh || die "Failed to install Brave/VSCodium."
 cd ..
 
