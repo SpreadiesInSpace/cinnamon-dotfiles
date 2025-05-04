@@ -608,7 +608,7 @@ setup_synth_shell_config() {
 
 install_nvchad() {
     # Timestamp for unique backups
-    timestamp=$(date +%s)
+    local timestamp=$(date +%s)
 
     echo "Configuring NvChad..."
     # Backup existing NVim configs if they exist
