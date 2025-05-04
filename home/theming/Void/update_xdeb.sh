@@ -88,7 +88,7 @@ check_and_download_vscodium() {
   echo "Latest VSCodium version: $VERSION"
 
   if command -v codium &>/dev/null; then
-    INSTALLED_VERSION=$(codium --version | head -n1 | grep -oP '^\d+(\.\d+)+') || die "Failed to get installed VSCodium version."
+    INSTALLED_VERSION=$(codium --no-sandbox --user-data-dir /home/$REAL_USER/ --version | head -n1 | grep -oP '^\d+(\.\d+)+') || die "Failed to get installed VSCodium version."
     echo "Installed version: $INSTALLED_VERSION"
     if [[ "$INSTALLED_VERSION" == "${VERSION#v}" ]]; then
       echo "VSCodium is already up to date."
