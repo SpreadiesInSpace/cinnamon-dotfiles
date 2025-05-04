@@ -266,7 +266,7 @@ window-height=480
 window-width=600
 
 [org/gnome/gedit/plugins]
-active-plugins=['terminal', 'git', 'bracketcompletion', 'spell', 'sort', 'quickopen', 'quickhighlight', 'modelines', 'filebrowser', 'externaltools', 'docinfo']
+active-plugins=['terminal', 'git', 'bracketcompletion', 'spell', 'sort', 'quickopen', 'quickhighlight', 'modelines', 'filebrowser', 'docinfo']
 
 [org/gnome/gedit/plugins/filebrowser]
 filter-mode=@as []
