@@ -36,30 +36,29 @@ prompt_for_hibernation() {
     done
 }
 
-
 prompt_for_hibernation
 
-# Calculate ZRAM size based on Gentoo Wiki guidance
+# Calculate ZRAM size based on Gentoo Wiki guidelines
 if [ "$ram_mb" -le 2048 ]; then
-    if \$hibernation; then
+    if $hibernation; then
         zram_size_kb=$((ram_kb * 3))
     else
         zram_size_kb=$((ram_kb * 2))
     fi
 elif [ "$ram_mb" -le 8192 ]; then
-    if \$hibernation; then
+    if $hibernation; then
         zram_size_kb=$((ram_kb * 2))
     else
         zram_size_kb=$((ram_kb))
     fi
 elif [ "$ram_mb" -le 65536 ]; then
-    if \$hibernation; then
+    if $hibernation; then
         zram_size_kb=$((ram_kb * 3 / 2))
     else
         zram_size_kb=$((8 * 1024 * 1024))  # 8 GB in KB
     fi
 else
-    if \$hibernation; then
+    if $hibernation; then
         echo "Warning: Hibernation is not recommended for RAM > 64GB"
         zram_size_kb=$((8 * 1024 * 1024))
     else
@@ -87,6 +86,7 @@ description="ZRAM compressed swap device"
 depend() { need localmount; }
 start() {
   modprobe zram
+  echo zstd > /sys/block/zram0/comp_algorithm
   echo 1 > /sys/block/zram0/max_comp_streams
   echo $(( $(awk '/MemTotal/ {print $2}' /proc/meminfo) * 512 )) > /sys/block/zram0/disksize
   mkswap /dev/zram0
@@ -108,6 +108,7 @@ setup_runit() {
     cat << EOF > /etc/sv/zram/run || die "Failed to write runit service"
 #!/bin/sh
 modprobe zram
+echo zstd > /sys/block/zram0/comp_algorithm
 echo 1 > /sys/block/zram0/max_comp_streams
 echo $(( $zram_size_kb )) > /sys/block/zram0/disksize
 mkswap /dev/zram0
@@ -123,6 +124,7 @@ setup_sysv() {
     rc_local="/etc/rc.d/rc.local"
     grep -q zram "$rc_local" 2>/dev/null || cat << EOF >> "$rc_local" || die "Failed to write rc.local"
 modprobe zram
+echo zstd > /sys/block/zram0/comp_algorithm
 echo 1 > /sys/block/zram0/max_comp_streams
 echo $(( $zram_size_kb )) > /sys/block/zram0/disksize
 mkswap /dev/zram0
@@ -138,19 +140,17 @@ boot.initrd.zram.enable = true;
 Then run: nixos-rebuild switch"
 }
 
-#======================== Package Installation #========================
+#======================== Package Installation =========================
 
 install_zram_generator() {
     if [ "$distro" = "arch" ]; then
-        pacman -Sy --noconfirm systemd-zram-generator || die "Failed to install zram generator"
+        pacman -Sy --noconfirm zram-generator || die "Failed to install zram generator"
     elif [ "$distro" = "fedora" ]; then
-        dnf install -y systemd-zram-generator || die "Failed to install zram generator"
+        dnf install -y zram-generator || die "Failed to install zram generator"
     elif [ "$distro" = "gentoo" ]; then
-        emerge -av sys-apps/systemd-zram-generator || die "Failed to emerge zram generator"
-    elif [ "$distro" = "void" ]; then
-        xbps-install -Sy systemd-zram-generator || die "Failed to install zram generator"
-    elif [ "$distro" = "opensuse" ]; then
-        zypper install -y systemd-zram-generator || die "Failed to install zram generator"
+        emerge -av sys-apps/zram-generator || die "Failed to emerge zram generator"
+    elif [ "$distro" = "opensuse-tumbleweed" ]; then
+        zypper install -y zram-generator || die "Failed to install zram generator"
     elif [ "$distro" = "debian" ] || [ "$distro" = "ubuntu" ] || [ "$distro" = "linuxmint" ] || [ "$distro" = "lmde" ]; then
         apt update && apt install -y systemd-zram-generator || die "Failed to install zram generator"
     else
@@ -162,7 +162,7 @@ install_zram_generator() {
 
 if [ "$distro" = "nixos" ]; then
     setup_nixos
-elif [ "$distro" = "void" ] && [ "$init_sys" = "runit" ]; then
+elif [ "$distro" = "void" ]; then
     setup_runit
 elif [ "$distro" = "gentoo" ] && [ "$init_sys" = "openrc" ]; then
     setup_openrc
