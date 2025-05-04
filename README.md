@@ -1,4 +1,4 @@
-![Cinnamon Gruvbox Merge](https://github.com/SpreadiesInSpace/cinnamon-dotfiles/blob/main/screenshots/Collection/CinnamonGruvboxMerge2025.gif "Cult of Cinnamon")
+![Cinnamon Gruvbox GIF](https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/screenshots/Collection/CinnamonGruvboxMerge2025.gif "Pixel perfect theming across 8 distros.")
 
 **Disclaimer:** *Please go through the scripts carefully so you know what is going on before running them.*
 
@@ -36,6 +36,6 @@ bash Theme.sh
 ```
 
 ## Screenshots - [Link](https://github.com/SpreadiesInSpace/cinnamon-dotfiles/blob/main/screenshots/CinnamonGruvbox2024.png)
-![Fedora](https://github.com/SpreadiesInSpace/cinnamon-dotfiles/blob/main/screenshots/CinnamonGruvbox2024.png "Cinnamon Gruvbox")
+![LMDE Screenshots](https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/screenshots/CinnamonGruvbox2024.png "GTK, QT and Flatpak apps all thoroughly themed.")
 ## Wallpapers - [Link](https://github.com/SpreadiesInSpace/cinnamon-dotfiles/tree/main/home/wallpapers)
-![Cinnamon Gruvbox Wallpapers](https://github.com/SpreadiesInSpace/cinnamon-dotfiles/blob/main/screenshots/Collection/wallpapers.gif "Cult of Cinnamon")
+![Cinnamon Gruvbox Wallpapers](https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/screenshots/Collection/wallpapers.gif "I made the light/dark Cinnamon logo wallpapers.")
