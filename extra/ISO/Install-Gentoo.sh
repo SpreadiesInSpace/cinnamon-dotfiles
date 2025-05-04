@@ -45,7 +45,7 @@ create_btrfs_subvolumes
 # Mount the partitions
 mount_partitions "gentoo"
 
-#========================== Gentoo Install - The Stage File ==========================
+#=================== Gentoo Install - The Stage File ===================
 
 # Move to Mounted Root Partition
 cd /mnt/gentoo || die "Failed to change directory to /mnt/gentoo."
@@ -122,7 +122,7 @@ touch /mnt/gentoo/etc/portage/.makeconf_configured || die "Failed to create .mak
 # Review make.conf
 # nano /mnt/gentoo/etc/portage/make.conf
 
-#================ Gentoo Install - Installing the Gentoo Base System =================
+#========= Gentoo Install - Installing the Gentoo Base System ==========
 
 # Copy Network Info 
 cp --dereference /etc/resolv.conf /mnt/gentoo/etc/ || die "Failed to copy resolv.conf to /mnt/gentoo/etc/"
@@ -236,7 +236,7 @@ eselect locale set en_US.utf8 || die "Failed to set locale to en_US.utf8."
 # Reload Environment
 env-update && source /etc/profile && export PS1="(chroot) ${PS1}" || die "Failed to reload environment."
 
-#=================== Gentoo Install - Configuring the Linux Kernel ===================
+#============ Gentoo Install - Configuring the Linux Kernel ============
 
 # Using GRUB & Initramfs
 echo "sys-kernel/installkernel grub
@@ -257,7 +257,7 @@ else
   echo "VM detected. Skipping firmware and microcode installation."
 fi
 
-#====================== Gentoo Install - Configuring the System ======================
+#=============== Gentoo Install - Configuring the System ===============
 
 # Generate fstab
 emerge -qv sys-fs/genfstab || die "Failed to install sys-fs/genfstab."
@@ -280,7 +280,7 @@ systemctl disable systemd-networkd || die "Failed to disable systemd-networkd."
 systemctl disable systemd-resolved.service || die "Failed to disable systemd-resolved service."
 systemctl enable NetworkManager || die "Failed to enable NetworkManager."
 
-#===================== Gentoo Install - Installing System Tools ======================
+#============== Gentoo Install - Installing System Tools ===============
 
 # Install System Tools
 emerge -vq sys-apps/mlocate app-shells/bash-completion sys-fs/xfsprogs sys-fs/e2fsprogs sys-fs/dosfstools sys-fs/btrfs-progs sys-fs/f2fs-tools sys-fs/ntfs3g sys-block/io-scheduler-udev-rules app-arch/unzip || die "Failed to install essential system tools."
@@ -291,7 +291,7 @@ emerge -vq sys-apps/mlocate app-shells/bash-completion sys-fs/xfsprogs sys-fs/e2
 # Enable Time Synchronization
 systemctl enable systemd-timesyncd.service || die "Failed to enable systemd-timesyncd service."
 
-#==================== Gentoo Install - Configuring the Bootloader ====================
+#============= Gentoo Install - Configuring the Bootloader =============
 
 # Configure GRUB Bootloader
 if [ "$BOOTMODE" = "UEFI" ]; then
@@ -310,7 +310,7 @@ sed -i '/^#*GRUB_TIMEOUT=/s/^#*GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/gru
 # Generate Grub Config
 grub-mkconfig -o /boot/grub/grub.cfg || die "Failed to generate GRUB config."
 
-#============================ Gentoo Install - Finalizing ============================
+#===================== Gentoo Install - Finalizing =====================
 
 # Install Sudo
 emerge -qv app-admin/sudo || die "Failed to install sudo."
