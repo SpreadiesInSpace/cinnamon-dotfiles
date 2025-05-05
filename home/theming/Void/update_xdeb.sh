@@ -3,13 +3,8 @@
 # Minimal Error Handling function
 die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
 
-# Get the real user who owns the terminal
-REAL_USER=$(who -T | awk '/+/{print $1}' | head -1) || die "Failed to determine REAL_USER."
-[ -n "$REAL_USER" ] || die "Could not determine the real user from 'who -T'."
-
 # Set the directory where you want to download and convert packages
-[ -d "/home/$REAL_USER" ] || die "User '$REAL_USER' does not have a /home directory."
-WORKDIR="/home/$REAL_USER/xdeb_updates"
+WORKDIR="$HOME/xdeb_updates"
 mkdir -p "$WORKDIR" || die "Failed to create directory $WORKDIR."
 cd "$WORKDIR" || die "Failed to change to directory $WORKDIR."
 
@@ -88,7 +83,7 @@ check_and_download_vscodium() {
   echo "Latest VSCodium version: $VERSION"
 
   if command -v codium &>/dev/null; then
-    INSTALLED_VERSION=$(codium --no-sandbox --user-data-dir /home/$REAL_USER/ --version | head -n1 | grep -oP '^\d+(\.\d+)+') || die "Failed to get installed VSCodium version."
+    INSTALLED_VERSION=$(codium --no-sandbox --user-data-dir $HOME --version | head -n1 | grep -oP '^\d+(\.\d+)+') || die "Failed to get installed VSCodium version."
     echo "Installed version: $INSTALLED_VERSION"
     if [[ "$INSTALLED_VERSION" == "${VERSION#v}" ]]; then
       echo "VSCodium is already up to date."
