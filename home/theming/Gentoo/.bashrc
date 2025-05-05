@@ -19,9 +19,6 @@ fi
 # Ignore History with Space
 HISTCONTROL=ignoreboth
 
-# virsh net-autostart default --disable
-alias netFix='sudo nmcli networking off & sudo nmcli networking on'
-
 # Update and Cleanup
 alias UC='updateAll;sudo bleachbit;exit'
 
@@ -35,7 +32,7 @@ alias cleanKernel='sudo eclean-kernel -a'
 # Gentoo Update
 alias updateSync='sudo emaint -a sync'
 alias updatePortage='sudo emerge --oneshot sys-apps/portage'
-alias updateNeovim='nvim --headless "+Lazy! sync" +qa'
+alias updateNeovim='echo "Performing LazySync..."; nvim --headless "+Lazy! sync" +qa > /dev/null 2>&1; echo "LazySync complete!"'
 alias updateApp='updateSync; sudo emerge -avqDuN --with-bdeps=y @world; flatpak update -y; updateNeovim; sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias updateAll='updateApp && cleanAll'
 alias updateRestart='updateAll; systemctl reboot'

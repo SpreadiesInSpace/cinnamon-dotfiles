@@ -22,7 +22,7 @@ alias btm='btm --theme gruvbox'
 alias cleanAll='sudo zypper rm *-lang *-doc; sudo rm -rf /usr/share/themes/Mint-*; flatpak remove --unused; sudo flatpak repair; sudo rm -rf /var/lib/systemd/coredump/*; sudo zypper clean -a;sudo zypper purge-kernels; sudo snapper delete 1-100; rm -rf ~/.cache/*; sudo rm /tmp/* -rf; sudo journalctl --vacuum-size=50M; sudo journalctl --vacuum-time=4weeks; SystemMaxUse=50M; sudo bleachbit -c --preset && bleachbit -c --preset; sudo -E bleachbit; exit'
 
 # openSUSE Update
-alias updateNeovim='nvim --headless "+Lazy! sync" +qa'
+alias updateNeovim='echo "Performing LazySync..."; nvim --headless "+Lazy! sync" +qa > /dev/null 2>&1; echo "LazySync complete!"'
 alias updateApp='sudo zypper ref; sudo zypper dup; flatpak update -y; updateNeovim'
 alias updateAll='updateApp && cleanAll'
 alias updateRestart='updateAll; systemctl reboot'

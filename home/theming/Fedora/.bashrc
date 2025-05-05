@@ -38,7 +38,7 @@ alias cleanAll='flatpak remove --unused; sudo flatpak repair; cleanExtra; yes | 
 alias cleanKernel='sudo dnf remove $(dnf repoquery --installonly --latest-limit=-1 -q)'
  
 # Fedora Update
-alias updateNeovim='nvim --headless "+Lazy! sync" +qa'
+alias updateNeovim='echo "Performing LazySync..."; nvim --headless "+Lazy! sync" +qa > /dev/null 2>&1; echo "LazySync complete!"'
 alias updateApp='yes | sudo dnf upgrade && yes | sudo dnf autoremove; flatpak update -y; updateNeovim'
 alias updateAll='updateApp && cleanAll'
 alias updateRestart='updateAll; systemctl reboot'

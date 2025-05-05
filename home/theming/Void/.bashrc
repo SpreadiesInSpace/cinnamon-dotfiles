@@ -22,7 +22,7 @@ alias cleanAll='flatpak remove --unused; sudo flatpak repair; sudo xbps-remove -
  
 # Void Update
 alias updateXdeb='${HOME}/update_xdeb.sh'
-alias updateNeovim='nvim --headless "+Lazy! sync" +qa'
+alias updateNeovim='echo "Performing LazySync..."; nvim --headless "+Lazy! sync" +qa > /dev/null 2>&1; echo "LazySync complete!"'
 alias updateApp='sudo xbps-install -Su xbps && sudo xbps-install -Suvy; updateXdeb; flatpak update -y; updateNeovim'
 alias updateAll='updateApp && cleanAll'
 alias updateRestart='updateAll; sudo reboot'

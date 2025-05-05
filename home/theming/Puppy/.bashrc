@@ -16,7 +16,7 @@ alias btm='btm --theme gruvbox'
 alias cleanAll='flatpak remove --unused; sudo flatpak repair; yes | apt clean && yes | apt autoclean && yes | apt autoremove && yes | rm -rf ~/.cache/* | rm -rf ~/.history | sudo journalctl --vacuum-size=50M | sudo journalctl --vacuum-time=4weeks | SystemMaxUse=50M | sudo bleachbit -c --preset && bleachbit -c --preset'
 
 # Puppy Update
-alias updateNeovim='${HOME}/update_neovim.sh;nvim --headless "+Lazy! sync" +qa'
+alias updateNeovim='${HOME}/update_neovim.sh; echo "Performing LazySync..."; nvim --headless "+Lazy! sync" +qa > /dev/null 2>&1; echo "LazySync complete!"'
 alias updateApp='yes | apt update && yes | apt full-upgrade; flatpak update -y; updateNeovim'
 alias updateAll='updateApp && cleanAll'
 alias updateRestart='updateAll; reboot'

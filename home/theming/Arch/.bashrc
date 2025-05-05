@@ -20,7 +20,7 @@ alias cleanCache='sudo pacman -Rns $(pacman -Qtdq)'
 alias cleanAll='flatpak remove --unused; sudo flatpak repair; sudo rm -rf /var/lib/systemd/coredump/*; yes | sudo pacman -Scc && yes | rm -rf ~/.cache/* | sudo journalctl --vacuum-size=50M | sudo journalctl --vacuum-time=4weeks | SystemMaxUse=50M | sudo bleachbit -c --preset && bleachbit -c --preset && cleanCache'
 
 # Arch Update
-alias updateNeovim='nvim --headless "+Lazy! sync" +qa'
+alias updateNeovim='echo "Performing LazySync..."; nvim --headless "+Lazy! sync" +qa > /dev/null 2>&1; echo "LazySync complete!"'
 alias updateApp='yay; flatpak update -y; updateNeovim'
 alias updateAll='updateApp && cleanAll'
 alias updateRestart='updateAll; systemctl reboot'

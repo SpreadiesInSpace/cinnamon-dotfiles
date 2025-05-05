@@ -123,7 +123,7 @@ alias cleanAll='flatpak remove --unused; sudo flatpak repair; sudo rm -rf /var/l
 alias cleanKernel="sudo apt-get purge \$(dpkg-query -W -f'\${Package}\\n' 'linux-*' | sed -nr 's/.*-([0-9]+(\\.[0-9]+){2}-[^-]+).*/\\1 &/p' | linux-version sort | awk '(\$1==c){exit} {print \$2}' c=\$(uname -r | cut -f1,2 -d-))"
 
 # Debian Update (Tien)
-alias updateNeovim='${HOME}/update_neovim.sh;nvim --headless "+Lazy! sync" +qa'
+alias updateNeovim='${HOME}/update_neovim.sh; echo "Performing LazySync..."; nvim --headless "+Lazy! sync" +qa > /dev/null 2>&1; echo "LazySync complete!"'
 alias updateApp='yes | sudo apt update && yes | sudo apt full-upgrade;flatpak update -y | updateNeovim'
 alias updateAll='updateApp && cleanAll'
 alias updateRestart='updateAll; systemctl reboot'
