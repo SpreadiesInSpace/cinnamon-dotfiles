@@ -16,7 +16,7 @@ grep -q zram /proc/swaps && die "zram swap is already active."
 # Load zram module
 modprobe zram || die "zram module not available"
 
-# Calculate zram size per Gentoo wiki guidance
+# Calculate zram size per Gentoo Wiki
 ram_kib=$(awk '/MemTotal/ {print $2}' /proc/meminfo)
 ram_gib=$((ram_kib / 1024 / 1024))
 
