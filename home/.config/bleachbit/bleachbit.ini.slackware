@@ -12,15 +12,16 @@ shred = False
 units_iec = False
 window_maximized = False
 first_start = False
-version = 4.6.2
+version = 5.0.0
 window_x = 560
 window_y = 192
 window_width = 800
 window_height = 600
 hashsalt = 2780a22223b27579cdafa6f1411604e48ff5b44acb145f7e7c43a55c7f7b6196a614c487c8885dffedb8b44256bb2ecf4af7c81f0b6f4f2c3a2b21c931c92103
+auto_detect_lang = True
+window_fullscreen = False
 
 [hashpath]
-
 
 [preserve_languages]
 en = True
