@@ -10,165 +10,35 @@ die() {
 # Check if the script is run as root
 [[ $EUID -ne 0 ]] && die "Please run the script as superuser."
 
-# Detect distro and init system
-[ -f /etc/os-release ] || die "/etc/os-release not found"
-. /etc/os-release
-distro="$ID"
-init_sys=$(ps -p 1 -o comm=)
+# Abort if zram swap is already active
+grep -q zram /proc/swaps && die "zram swap is already active."
 
-# Determine memory size
-ram_kb=$(awk '/MemTotal/ {print $2}' /proc/meminfo) || die "Failed to read memory"
-ram_mb=$((ram_kb / 1024))
-zram_size_kb=0
+# Load zram module
+modprobe zram || die "zram module not available"
 
-prompt_for_hibernation() {
-    while true; do
-        read -rp "Will this system support hibernation? [y/N]: " hibernate_input
-        if [[ "$hibernate_input" =~ ^([yY][eE][sS]?|[yY])$ ]]; then
-            hibernation=true
-            break
-        elif [[ "$hibernate_input" =~ ^([nN][oO]?)$ ]]; then
-            hibernation=false
-            break
-        else
-            echo "Invalid input. Please answer y or n."
-        fi
-    done
-}
+# Calculate zram size per Gentoo wiki guidance
+ram_kib=$(awk '/MemTotal/ {print $2}' /proc/meminfo)
+ram_gib=$((ram_kib / 1024 / 1024))
 
-prompt_for_hibernation
-
-# Calculate ZRAM size based on Gentoo Wiki guidelines
-if [ "$ram_mb" -le 2048 ]; then
-    if $hibernation; then
-        zram_size_kb=$((ram_kb * 3))
-    else
-        zram_size_kb=$((ram_kb * 2))
-    fi
-elif [ "$ram_mb" -le 8192 ]; then
-    if $hibernation; then
-        zram_size_kb=$((ram_kb * 2))
-    else
-        zram_size_kb=$((ram_kb))
-    fi
-elif [ "$ram_mb" -le 65536 ]; then
-    if $hibernation; then
-        zram_size_kb=$((ram_kb * 3 / 2))
-    else
-        zram_size_kb=$((8 * 1024 * 1024))  # 8 GB in KB
-    fi
+if [ "$ram_gib" -lt 8 ]; then
+    zram_size_kib=$((ram_kib * 3 / 2))  # 1.5x RAM
+elif [ "$ram_gib" -lt 16 ]; then
+    zram_size_kib=$((ram_kib))         # 1.0x RAM
 else
-    if $hibernation; then
-        echo "Warning: Hibernation is not recommended for RAM > 64GB"
-        zram_size_kb=$((8 * 1024 * 1024))
-    else
-        zram_size_kb=$((8 * 1024 * 1024))
-    fi
+    zram_size_kib=$((ram_kib / 2))     # 0.5x RAM
 fi
 
-#===================== Init-based setup functions ======================
-
-setup_systemd() {
-    echo "[zram0]
-zram-size = ${zram_size_kb}K
-compression-algorithm = zstd
-swap-priority = 100" > /etc/systemd/zram-generator.conf || die "Failed to write config"
-
-    systemctl daemon-reexec || die "Failed to reexec systemd"
-    systemctl restart systemd-zram-setup@zram0 || die "Failed to restart zram"
-    echo "ZRAM configured using systemd-zram-generator"
-}
-
-setup_openrc() {
-    cat << 'EOF' > /etc/init.d/zram || die "Failed to write OpenRC init script"
-#!/sbin/openrc-run
-description="ZRAM compressed swap device"
-depend() { need localmount; }
-start() {
-  modprobe zram
-  echo zstd > /sys/block/zram0/comp_algorithm
-  echo 1 > /sys/block/zram0/max_comp_streams
-  echo $(( $(awk '/MemTotal/ {print $2}' /proc/meminfo) * 512 )) > /sys/block/zram0/disksize
-  mkswap /dev/zram0
-  swapon -p 100 /dev/zram0
-}
-stop() {
-  swapoff /dev/zram0
-  modprobe -r zram
-}
-EOF
-    chmod +x /etc/init.d/zram || die "Failed to chmod"
-    rc-update add zram default || die "Failed to add service"
-    /etc/init.d/zram start || die "Failed to start zram"
-    echo "ZRAM configured via OpenRC service"
-}
-
-setup_runit() {
-    mkdir -p /etc/sv/zram || die "Failed to create runit dir"
-    cat << EOF > /etc/sv/zram/run || die "Failed to write runit service"
-#!/bin/sh
-modprobe zram
-echo zstd > /sys/block/zram0/comp_algorithm
-echo 1 > /sys/block/zram0/max_comp_streams
-echo $(( $zram_size_kb )) > /sys/block/zram0/disksize
-mkswap /dev/zram0
-swapon -p 100 /dev/zram0
-exec sleep infinity
-EOF
-    chmod +x /etc/sv/zram/run || die "Failed to chmod"
-    ln -sf /etc/sv/zram /var/service/ || die "Failed to link runit service"
-    echo "ZRAM configured via runit service"
-}
-
-setup_sysv() {
-    rc_local="/etc/rc.d/rc.local"
-    grep -q zram "$rc_local" 2>/dev/null || cat << EOF >> "$rc_local" || die "Failed to write rc.local"
-modprobe zram
-echo zstd > /sys/block/zram0/comp_algorithm
-echo 1 > /sys/block/zram0/max_comp_streams
-echo $(( $zram_size_kb )) > /sys/block/zram0/disksize
-mkswap /dev/zram0
-swapon -p 100 /dev/zram0
-EOF
-    chmod +x "$rc_local" || die "Failed to chmod rc.local"
-    echo "ZRAM setup appended to rc.local"
-}
-
-setup_nixos() {
-    echo "ZRAM must be declared in Nix config:
-boot.initrd.zram.enable = true;
-Then run: nixos-rebuild switch"
-}
-
-#======================== Package Installation =========================
-
-install_zram_generator() {
-    if [ "$distro" = "arch" ]; then
-        pacman -Sy --noconfirm zram-generator || die "Failed to install zram generator"
-    elif [ "$distro" = "fedora" ]; then
-        dnf install -y zram-generator || die "Failed to install zram generator"
-    elif [ "$distro" = "gentoo" ]; then
-        emerge -av sys-apps/zram-generator || die "Failed to emerge zram generator"
-    elif [ "$distro" = "opensuse-tumbleweed" ]; then
-        zypper install -y zram-generator || die "Failed to install zram generator"
-    elif [ "$distro" = "debian" ] || [ "$distro" = "ubuntu" ] || [ "$distro" = "linuxmint" ] || [ "$distro" = "lmde" ]; then
-        apt update && apt install -y systemd-zram-generator || die "Failed to install zram generator"
-    else
-        die "Unsupported distro: $distro. Manual install required."
-    fi
-}
-
-#=================== Execution based on Init System ====================
-
-if [ "$distro" = "nixos" ]; then
-    setup_nixos
-elif [ "$distro" = "void" ]; then
-    setup_runit
-elif [ "$distro" = "gentoo" ] && [ "$init_sys" = "openrc" ]; then
-    setup_openrc
-elif [ "$distro" = "slackware" ]; then
-    setup_sysv
+# Use zramctl if available, else fallback to sysfs
+if command -v zramctl >/dev/null 2>&1; then
+    zram_dev=$(zramctl --find)
+    zramctl --algorithm zstd --size "${zram_size_kib}K" "$zram_dev" || die "zramctl setup failed"
 else
-    install_zram_generator
-    setup_systemd
+    zram_dev=/dev/zram0
+    [ -e "$zram_dev" ] || echo 0 > /sys/class/zram-control/hot_add
+    echo zstd > /sys/block/zram0/comp_algorithm 2>/dev/null || true
+    echo "${zram_size_kib}K" > /sys/block/zram0/disksize || die "Failed to set zram size"
 fi
+
+# Format and enable swap
+mkswap "$zram_dev" || die "mkswap failed"
+swapon "$zram_dev" || die "swapon failed"
