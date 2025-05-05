@@ -16,12 +16,17 @@
 *Supports UEFI and BIOS, x86_64 Only*
 
 ```bash
-# For Arch, Gentoo, openSUSE Tumbleweed & Void Linux
+# For Arch, Gentoo, openSUSE Tumbleweed
 bash <(curl -fsSL https://tinyurl.com/cinnamon-ISO)
 ```
 ```bash
 # For Slackware Current (no curl by default)
 bash <(wget -qO- https://tinyurl.com/cinnamon-ISO)
+```
+```bash
+# For Void Linux (no curl or wget by default)
+sudo xbps-install -Sy curl
+bash <(curl -fsSL https://tinyurl.com/cinnamon-ISO)
 ```
 *View cinnamon-ISO [source](https://github.com/SpreadiesInSpace/cinnamon-dotfiles/blob/main/extra/Setup-ISO.sh)*
 
