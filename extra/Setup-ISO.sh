@@ -20,16 +20,18 @@ declare -A installs=(
   [1]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/extra/ISO/Install-Arch.sh"
   [2]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/extra/ISO/Install-Gentoo.sh"
   [3]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/extra/ISO/Install-openSUSE-Tumbleweed.sh"
-  [4]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/extra/ISO/Install-Slackware-Current.sh"
-  [5]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/extra/ISO/Install-Void.sh"
+  [4]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/extra/ISO/Install-NixOS-Unstable.sh"
+  [5]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/extra/ISO/Install-Slackware-Current.sh"
+  [6]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/extra/ISO/Install-Void.sh"
 )
 
 declare -A names=(
   [1]="Install-Arch.sh"
   [2]="Install-Gentoo"
   [3]="Install-openSUSE-Tumbleweed.sh"
-  [4]="Install-Slackware-Current.sh"
-  [5]="Install-Void.sh"
+  [4]="Install-NixOS-Unstable.sh"
+  [5]="Install-Slackware-Current.sh"
+  [6]="Install-Void.sh"
 )
 
 # Prompt menu
@@ -46,7 +48,7 @@ PS3="Select a number: "
 
 select opt in "${options[@]}"; do
   case $REPLY in
-    [1-5])
+    [1-6])
       url="${installs[$REPLY]}"
       filename="${names[$REPLY]}"
       if [[ -z "$url" ]]; then
@@ -67,14 +69,14 @@ select opt in "${options[@]}"; do
       chmod +x "$filename"
       echo -e "${GREEN}Running $filename...${NC}"
 
-      if [[ "$REPLY" == "4" ]]; then
+      if [[ "$REPLY" == "5" ]]; then
         bash "$filename"  # Slackware: run non-sudo
       else
         sudo bash "$filename"
       fi
       break
       ;;
-    6)
+    7)
       echo -e "${GREEN}Exiting.${NC}"
       exit 0
       ;;
