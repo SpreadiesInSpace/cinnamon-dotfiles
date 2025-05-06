@@ -30,6 +30,20 @@ prompt_timezone "nixos"
 # Prompt for drive to partition
 prompt_drive
 
+# Autologin Prompt
+while true; do
+    read -rp "Enable autologin for $username? [y/N]: " autologin_input
+    if [[ "$autologin_input" =~ ^([yY][eE][sS]?|[yY])$ ]]; then
+        enable_autologin=true
+        break
+    elif [[ "$autologin_input" =~ ^([nN][oO]?)$ ]]; then
+        enable_autologin=false
+        break
+    else
+        echo "Invalid input. Please answer y or n."
+    fi
+done
+
 # Partition the drive
 partition_drive
 
@@ -71,6 +85,11 @@ if [ ! -d /sys/firmware/efi ]; then
   sudo sed -i 's/^\(\s*\)efi\.canTouchEfiVariables = /\1# efi.canTouchEfiVariables = /' "$CONFIG" || die "Failed to comment out efi.canTouchEfiVariables."
 fi
 
+# If autologin is set to false, modify line 74 in /etc/nixos/configuration.nix
+if [ "$enable_autologin" = false ]; then
+    sed -i '74s/^\( *enable *= *\)true;/\1false;/' "$CONFIG" || die "Failed to modify autologin setting."
+fi
+
 # Replace the placeholder with the actual username
 sed -i "s/f16poom/$username/g" "$CONFIG" || die "Failed to replace username in configuration.nix"
 
@@ -91,27 +110,29 @@ nix-channel --update || die "Failed to update Nix channels."
 # Install NixOS
 nixos-install --no-root-passwd || die "Failed to install NixOS."
 
+# Set Passwords
+nixos-enter --root /mnt -c "echo 'root:$rootpasswd' | chpasswd" || die "Failed to set root password."
+nixos-enter --root /mnt -c "echo '$username:$userpasswd' | chpasswd" || die "Failed to set user password."
+
+# Enable Flathub remote for Flatpak
+nixos-enter --root /mnt -c 'echo "Enabling Flathub..." && flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo' || die "Failed to enable Flathub remote."
+
 # Place Login Wallpaper 
 curl -fsSL -o Login_Wallpaper.jpg https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/home/wallpapers/Login_Wallpaper.jpg || die "Failed to download wallpaper."
 cp -nr Login_Wallpaper.jpg /mnt/boot/ || die "Failed to copy login wallpaper."
 
-# Add back background line in configuration.nix
+# Add back background line in configuration.nix & rebuild
 sed -i 's|^\(\s*\)#\s*\(background\s*=.*\)|\1\2|' "$CONFIG"
+nixos-enter --root /mnt -c "nixos-rebuild switch" || die "Rebuild Failed."
 
-# Set root password
-nixos-enter --root /mnt -c "echo 'root:$rootpasswd' | chpasswd" || die "Failed to set root password."
-
-# Set user password
-nixos-enter --root /mnt -c "echo '$username:$userpasswd' | chpasswd" || die "Failed to set user password."
-
-# Clone dotfiles and set up flag as the user
+# Clone Repo as New User
 nixos-enter --root /mnt -c "su - $username -c '
   cd \$HOME &&
   git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles ||
     { echo \"Failed to clone repo.\"; exit 1; }
   cd cinnamon-dotfiles ||
     { echo \"Failed to enter repo directory.\"; exit 1; }
-  touch .nixos-unstable.done ||
-    { echo \"Failed to create flag.\"; exit 1; }
+  touch .nixos-unstable.done .nixos.done ||
+    { echo \"Failed to create flags.\"; exit 1; }
   echo \"Reboot and run Setup.sh in cinnamon-dotfiles located in \$HOME/cinnamon-dotfiles.\"
 '"
