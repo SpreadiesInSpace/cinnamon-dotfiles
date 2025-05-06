@@ -12,7 +12,7 @@
 * [Slackware Current](https://us.slackware.nl/slackware/slackware64-current-iso/)
 * [Void Linux](https://voidlinux.org/download/)
 
-## Install from ISO
+## Install from ISO (cinnamon-ISO)
 *Supports UEFI and BIOS, x86_64 Only*
 
 ```bash
@@ -34,7 +34,7 @@ bash <(curl -fsSL https://tinyurl.com/cinnamon-ISO)
 
 1. Clone this repo
 ```bash
-# Skip this step if you installed via cinnamon-ISO
+# Installed your distro via cinnamon-ISO? Skip this step.
 git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles
 ```
 2. Head to cinnamon-dotfiles
@@ -43,7 +43,7 @@ cd cinnamon-dotfiles
 ```
 3. Run setup script
 ```bash
-# NixOS installs via cinnamon-ISO can skip this step.
+# NixOS installed via cinnamon-ISO? Skip this step.
 bash Setup.sh
 ```
 4. Then run theme script
