@@ -4,7 +4,7 @@
 die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
 
 # Set the directory where you want to download and convert packages
-WORKDIR="$HOME/xdeb_updates"
+WORKDIR="$HOME/.config/xdeb"
 mkdir -p "$WORKDIR" || die "Failed to create directory $WORKDIR."
 cd "$WORKDIR" || die "Failed to change to directory $WORKDIR."
 
@@ -44,8 +44,7 @@ check_and_download_brave() {
 
   VERSION=$(echo "$LATEST_RELEASE" | grep -oP '"tag_name": "\K(.*)(?=")') || die "Failed to parse Brave version."
   DEB_URL=$(echo "$LATEST_RELEASE" | grep -oP '"browser_download_url": "\K(.*amd64.deb)(?=")') || die "Failed to find Brave .deb URL."
-
-  echo "Latest version available: $VERSION"
+  echo "Latest Brave version: ${VERSION#v}"
 
   # Check installed Brave version
   if command -v brave-browser-stable &>/dev/null; then
@@ -130,5 +129,5 @@ if check_and_download_vscodium; then
   convert_and_install_vscodium
 fi
 
-# Cleanup
-rm -rf "$WORKDIR" || die "Failed to clean up $WORKDIR."
+# Cleanup - remove everything in $WORKDIR except xdeb
+rm -rf "$WORKDIR"/binpkgs/ "$WORKDIR"/*dir/ "$WORKDIR"/*.deb "$WORKDIR"/shlibs || die "Failed to clean up $WORKDIR."
