@@ -4,7 +4,7 @@ if [[ $(ps -o comm= $PPID) == "gedit" ]]; then
 fi
 
 # PS1 Prompt
-PS1="\[\e]0;\u@\h: \w\a\]$PS1"
+export PS1="\[\e[38;5;9m\][\[\e[38;5;11m\]\u\[\e[38;5;2m\]@\[\e[38;5;12m\]\h \[\e[38;5;5m\]\w\[\e[38;5;9m\]]\[\e[0m\]\$ "
 
 # Ignore History with Space
 HISTCONTROL=ignoreboth
@@ -29,7 +29,7 @@ alias UC='updateAll;run-as-spot bleachbit;exit'
 # Remove History
 rm -rf .history
 
-# Skip sourcing synth-shell-prompt if running in tty
-if [[ $(tty) == /dev/tty[0-9]* ]]; then
+# Skip Synth Shell prompt in virtual console or nvim's embedded terminal
+if [[ $(tty) == /dev/tty[0-9]* ]] || [[ $(ps -h -o comm -p $PPID) == "nvim" ]]; then
     return
 fi

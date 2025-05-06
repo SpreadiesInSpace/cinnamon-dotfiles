@@ -112,6 +112,9 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# PS1 Prompt
+export PS1="\[\e[38;5;9m\][\[\e[38;5;11m\]\u\[\e[38;5;2m\]@\[\e[38;5;12m\]\h \[\e[38;5;5m\]\w\[\e[38;5;9m\]]\[\e[0m\]\$ "
+
 # Update and Cleanup
 alias UC='updateAll;sudo bleachbit;exit'
 
@@ -132,7 +135,7 @@ alias updateShutdown='updateAll; systemctl poweroff'
 # LMDE Neofetch
 alias neofetch='neofetch --ascii ${HOME}/LMDEAscii.txt'
 
-# Skip sourcing synth-shell-prompt if running in tty
-if [[ $(tty) == /dev/tty[0-9]* ]]; then
+# Skip Synth Shell prompt in virtual console or nvim's embedded terminal
+if [[ $(tty) == /dev/tty[0-9]* ]] || [[ $(ps -h -o comm -p $PPID) == "nvim" ]]; then
     return
 fi

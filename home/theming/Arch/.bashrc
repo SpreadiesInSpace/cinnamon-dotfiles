@@ -9,6 +9,9 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 PS1='[\u@\h \W]\$ '
 
+# PS1 Prompt
+export PS1="\[\e[38;5;9m\][\[\e[38;5;11m\]\u\[\e[38;5;2m\]@\[\e[38;5;12m\]\h \[\e[38;5;5m\]\w\[\e[38;5;9m\]]\[\e[0m\]\$ "
+
 # Ignore History with Space
 HISTCONTROL=ignoreboth
 
@@ -29,7 +32,7 @@ alias updateShutdown='updateAll; systemctl poweroff'
 # Update and Cleanup
 alias UC='updateAll;sudo bleachbit;exit'
 
-# Skip sourcing synth-shell-prompt if running in tty
-if [[ $(tty) == /dev/tty[0-9]* ]]; then
+# Skip Synth Shell prompt in virtual console or nvim's embedded terminal
+if [[ $(tty) == /dev/tty[0-9]* ]] || [[ $(ps -h -o comm -p $PPID) == "nvim" ]]; then
     return
 fi
