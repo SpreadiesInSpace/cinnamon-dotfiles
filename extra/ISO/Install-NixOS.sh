@@ -12,7 +12,7 @@ check_if_root
 # Detect if booted in UEFI or BIOS mode
 detect_boot_mode
 
-# Prompt for root password (nixos-install will prompt for root password)
+# Prompt for root password
 prompt_root_password
 
 # Prompt for new username
@@ -91,28 +91,27 @@ nix-channel --update || die "Failed to update Nix channels."
 # Install NixOS
 nixos-install --no-root-passwd || die "Failed to install NixOS."
 
-# Place Login Wallpaper
-# curl -fsSL -o Login_Wallpaper.jpg https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/home/wallpapers/Login_Wallpaper.jpg || die "Failed to download wallpaper."
-# cp -nr Login_Wallpaper.jpg /mnt/boot/ || die "Failed to copy login wallpaper."
+# Place Login Wallpaper 
+curl -fsSL -o Login_Wallpaper.jpg https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/home/wallpapers/Login_Wallpaper.jpg || die "Failed to download wallpaper."
+cp -nr Login_Wallpaper.jpg /mnt/boot/ || die "Failed to copy login wallpaper."
 
-# Entering Chroot
-cat << EOF | chroot /mnt /bin/bash || die "Failed to enter chroot."
+# Add back background line in configuration.nix
+sed -i 's|^\(\s*\)#\s*\(background\s*=.*\)|\1\2|' "$CONFIG"
 
-# Minimal Error Handling function
-die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
+# Set root password
+nixos-enter --root /mnt -c "echo 'root:$rootpasswd' | chpasswd" || die "Failed to set root password."
 
-# New Chroot
-source /etc/profile || die "Failed to source /etc/profile."
+# Set user password
+nixos-enter --root /mnt -c "echo '$username:$userpasswd' | chpasswd" || die "Failed to set user password."
 
-# Create User and Set Passwords
-echo "root:$rootpasswd" | chpasswd || die "Failed to set root password."
-echo "$username:$userpasswd" | chpasswd || die "Failed to set user password."
-
-# Clone Repo as New User
-cat << 'CLONE' | su - "$username"
-cd && git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles || { echo "Failed to clone repo."; exit 1; }
-cd cinnamon-dotfiles || { echo "Failed to enter repo directory."; exit 1; }
-touch .nixos-unstable.done || { echo "Failed to create flag."; exit 1; }
-echo "Reboot and run Setup.sh in cinnamon-dotfiles located in \$HOME/cinnamon-dotfiles."
-CLONE
-EOF
+# Clone dotfiles and set up flag as the user
+nixos-enter --root /mnt -c "su - $username -c '
+  cd \$HOME &&
+  git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles ||
+    { echo \"Failed to clone repo.\"; exit 1; }
+  cd cinnamon-dotfiles ||
+    { echo \"Failed to enter repo directory.\"; exit 1; }
+  touch .nixos-unstable.done ||
+    { echo \"Failed to create flag.\"; exit 1; }
+  echo \"Reboot and run Setup.sh in cinnamon-dotfiles located in \$HOME/cinnamon-dotfiles.\"
+'"

@@ -22,6 +22,27 @@ prompt_for_vm
 # Display Status from Prompts
 display_status "$enable_autologin" "$is_vm"
 
+# Check if the .nixos-unstable.done flag exists
+if [ -f ".nixos-unstable.done" ]; then
+  
+  # If autologin is set to false, modify line 74 in /etc/nixos/configuration.nix
+  if [ "$enable_autologin" = false ]; then
+      sed -i '74s/^\( *enable *= *\)true;/\1false;/' "$CONFIG" || die "Failed to modify autologin setting."
+  fi
+
+  # Enable Flathub for Flatpak
+  enable_flathub
+
+  # Add flag for Setup-Theme.sh
+  add_setup_theme_flag "nixos"
+
+  # Run Theme.sh
+  bash Theme.sh
+  
+  # Exit successfully
+  exit 0
+fi
+
 # Set Config File Variable
 CONFIG="/etc/nixos/configuration.nix"
 
