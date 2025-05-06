@@ -19,8 +19,8 @@ NC='\033[0m' # No Color
 declare -A installs=(
   [1]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/extra/ISO/Install-Arch.sh"
   [2]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/extra/ISO/Install-Gentoo.sh"
-  [3]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/extra/ISO/Install-openSUSE-Tumbleweed.sh"
-  [4]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/extra/ISO/Install-NixOS-Unstable.sh"
+  [3]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/extra/ISO/Install-NixOS-Unstable.sh"
+  [4]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/extra/ISO/Install-openSUSE-Tumbleweed.sh"
   [5]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/extra/ISO/Install-Slackware-Current.sh"
   [6]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/extra/ISO/Install-Void.sh"
 )
