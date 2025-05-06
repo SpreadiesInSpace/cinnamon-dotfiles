@@ -123,7 +123,6 @@ cp -nr Login_Wallpaper.jpg /mnt/boot/ || die "Failed to copy login wallpaper."
 
 # Add back background line in configuration.nix & rebuild
 sed -i 's|^\(\s*\)#\s*\(background\s*=.*\)|\1\2|' "$CONFIG"
-nixos-enter --root /mnt -c "nixos-rebuild build" || die "Rebuild Failed."
 
 # Clone Repo as New User
 nixos-enter --root /mnt -c "su - $username -c '
@@ -134,5 +133,5 @@ nixos-enter --root /mnt -c "su - $username -c '
     { echo \"Failed to enter repo directory.\"; exit 1; }
   touch .nixos-unstable.done .nixos.done ||
     { echo \"Failed to create flags.\"; exit 1; }
-  echo \"Reboot and run Setup.sh in cinnamon-dotfiles located in \$HOME/cinnamon-dotfiles.\"
+  echo \"Reboot and run Theme.sh in cinnamon-dotfiles located in \$HOME/cinnamon-dotfiles.\"
 '"
