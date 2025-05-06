@@ -110,10 +110,16 @@ prompt_hostname() {
 
 prompt_timezone() {
   # Prompt for timezone
+  local distro="$1"
+  local zoneinfo_dir="/usr/share/zoneinfo"
+  
+  # If NixOS, use /etc/zoneinfo instead 
+  [ "$distro" = "nixos" ] && zoneinfo_dir="/etc/zoneinfo"
+
   while true; do
     read -p "Enter your timezone (e.g., Asia/Bangkok): " timezone
     timezone="${timezone:-Asia/Bangkok}"  # default if empty
-    if [ -f "/usr/share/zoneinfo/$timezone" ]; then
+    if [ -f "$zoneinfo_dir/$timezone" ]; then
       echo "Timezone set to: $timezone"
       break
     fi
@@ -202,8 +208,13 @@ mount_partitions() {
   mkdir -p "$MNT/home" || die "Failed to create $MNT/home."
   mount -o noatime,compress=zstd,discard=async,subvol=@home "$ROOT" "$MNT/home" || die "Failed to mount home subvolume."
   if [ "$BOOTMODE" = "UEFI" ]; then
-    mkdir -p "$MNT/boot/efi" || die "Failed to create $MNT/boot/efi."
-    mount "$BOOT" "$MNT/boot/efi" || die "Failed to mount EFI partition."
+    if [ "$distro" = "nixos" ]; then
+      mkdir -p "$MNT/boot" || die "Failed to create $MNT/boot."
+      mount "$BOOT" "$MNT/boot" || die "Failed to mount EFI partition to /boot."
+    else
+      mkdir -p "$MNT/boot/efi" || die "Failed to create $MNT/boot/efi."
+      mount "$BOOT" "$MNT/boot/efi" || die "Failed to mount EFI partition to /boot/efi."
+    fi
   fi
 }
 

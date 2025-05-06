@@ -68,9 +68,9 @@ select opt in "${options[@]}"; do
       echo -e "${GREEN}Running $filename...${NC}"
 
       if [[ "$REPLY" == "4" ]]; then
-        ./"$filename"  # Slackware: run non-sudo
+        bash "$filename"  # Slackware: run non-sudo
       else
-        sudo ./"$filename"
+        sudo bash "$filename"
       fi
       break
       ;;

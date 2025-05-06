@@ -69,7 +69,7 @@ while true; do
   echo "Invalid timezone: $timezone"
 done
 
-# Places Login Wallpaper
+# Place Login Wallpaper
 echo "Setting Login Wallpaper..."
 cp -nr home/wallpapers/Login_Wallpaper.jpg /boot/ || die "Failed to copy login wallpaper."
 

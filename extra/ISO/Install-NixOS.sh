@@ -25,15 +25,7 @@ prompt_user_password
 prompt_hostname
 
 # Prompt for timezone
-while true; do
-  read -p "Enter your timezone (e.g., Asia/Bangkok): " timezone
-  timezone="${timezone:-Asia/Bangkok}"  # default if empty
-  if [ -f "/etc/zoneinfo/$timezone" ]; then
-    echo "Timezone set to: $timezone"
-    break
-  fi
-  echo "Invalid timezone: $timezone"
-done
+prompt_timezone "nixos"
 
 # Prompt for drive to partition
 prompt_drive
@@ -51,7 +43,7 @@ format_partitions
 create_btrfs_subvolumes
 
 # Mount the partitions
-mount_partitions
+mount_partitions "nixos"
 
 # Generate NixOS config
 nixos-generate-config --root /mnt || die "Failed to generate NixOS config."
@@ -88,6 +80,9 @@ sed -i "s/hostName = .*;/hostName = \"$hostname\";/g" "$CONFIG" || die "Failed t
 # Set Timezone
 sed -i "s|^\(\s*time\.timeZone\s*=\s*\).*|\\1\"$timezone\";|" "$CONFIG"|| die "Failed to set timezone."
 
+# Comment out background line in configuration.nix
+sed -i 's|^\(\s*background\s*=.*\)|# \1|' "$CONFIG"
+
 # Add Nix Unstable and 23.05 Channels (for Neovim, icons and themes)
 nix-channel --add https://nixos.org/channels/nixos-unstable nixos || die "Failed to add Nix unstable channel."
 # nix-channel --add https://nixos.org/channels/nixos-23.05 nixos-23.05 || die "Failed to add Nix 23.05 channel."
@@ -95,6 +90,10 @@ nix-channel --update || die "Failed to update Nix channels."
 
 # Install NixOS
 nixos-install --no-root-passwd || die "Failed to install NixOS."
+
+# Place Login Wallpaper
+# curl -fsSL -o Login_Wallpaper.jpg https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/home/wallpapers/Login_Wallpaper.jpg || die "Failed to download wallpaper."
+# cp -nr Login_Wallpaper.jpg /mnt/boot/ || die "Failed to copy login wallpaper."
 
 # Entering Chroot
 cat << EOF | chroot /mnt /bin/bash || die "Failed to enter chroot."
