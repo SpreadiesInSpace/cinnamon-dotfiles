@@ -123,7 +123,7 @@ cp -nr Login_Wallpaper.jpg /mnt/boot/ || die "Failed to copy login wallpaper."
 
 # Add back background line in configuration.nix & rebuild
 sed -i 's|^\(\s*\)#\s*\(background\s*=.*\)|\1\2|' "$CONFIG"
-nixos-enter --root /mnt -c "nixos-rebuild switch" || die "Rebuild Failed."
+nixos-enter --root /mnt -c "nixos-rebuild build" || die "Rebuild Failed."
 
 # Clone Repo as New User
 nixos-enter --root /mnt -c "su - $username -c '
