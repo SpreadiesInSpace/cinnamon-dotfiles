@@ -28,8 +28,8 @@ declare -A installs=(
 declare -A names=(
   [1]="Install-Arch.sh"
   [2]="Install-Gentoo"
-  [3]="Install-openSUSE-Tumbleweed.sh"
-  [4]="Install-NixOS-Unstable.sh"
+  [3]="Install-NixOS-Unstable.sh"
+  [4]="Install-openSUSE-Tumbleweed.sh"
   [5]="Install-Slackware-Current.sh"
   [6]="Install-Void.sh"
 )
@@ -39,6 +39,7 @@ echo -e "${YELLOW}Which installer would you like to run?${NC}"
 options=(
   "Arch Linux"
   "Gentoo"
+  "NixOS Unstable"
   "openSUSE Tumbleweed"
   "Slackware Current"
   "Void Linux"
