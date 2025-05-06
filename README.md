@@ -16,7 +16,7 @@
 *Supports UEFI and BIOS, x86_64 Only*
 
 ```bash
-# For Arch, Gentoo, openSUSE Tumbleweed
+# For Arch, Gentoo, NixOS Unstable & openSUSE Tumbleweed
 bash <(curl -fsSL https://tinyurl.com/cinnamon-ISO)
 ```
 ```bash
@@ -34,7 +34,7 @@ bash <(curl -fsSL https://tinyurl.com/cinnamon-ISO)
 
 1. Clone this repo
 ```bash
-# Skip this step if you installed from ISO
+# Skip this step if you installed via cinnamon-ISO
 git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles
 ```
 2. Head to cinnamon-dotfiles
@@ -43,7 +43,7 @@ cd cinnamon-dotfiles
 ```
 3. Run setup script
 ```bash
-# Default NixOS behavior doesn't let you chmod+x then ./Setup.sh
+# NixOS installs via cinnamon-ISO can skip this step.
 bash Setup.sh
 ```
 4. Then run theme script
