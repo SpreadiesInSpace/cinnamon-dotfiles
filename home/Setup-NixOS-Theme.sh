@@ -118,3 +118,6 @@ install_nvchad
 
 # Restarts Cinnamon
 restart_cinnamon
+
+# Display Logoff Message
+print_finish_message

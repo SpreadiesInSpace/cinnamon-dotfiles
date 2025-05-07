@@ -120,3 +120,6 @@ append_lightdm_gtk_greeter_config
 
 # Restarts Cinnamon
 restart_cinnamon
+
+# Display Logoff Message
+print_finish_message

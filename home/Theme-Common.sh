@@ -727,3 +727,7 @@ restart_cinnamon() {
     # Restarts Cinnamon
     cinnamon-dbus-command RestartCinnamon 1 >/dev/null 2>&1
 }
+
+print_finish_message() {
+    echo "Theme installation comlete! Log out and back in to apply changes."
+}
