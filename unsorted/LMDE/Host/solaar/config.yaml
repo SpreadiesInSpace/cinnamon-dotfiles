@@ -1,0 +1,66 @@
+- 1.1.8+dfsg-2
+- _NAME: Wireless Touch Keyboard K400 Plus
+  _absent: [hi-res-scroll, lowres-scroll-mode, hires-smooth-invert, hires-smooth-resolution, hires-scroll-mode, scroll-ratchet, smart-shift, thumb-scroll-invert,
+    thumb-scroll-mode, onboard_profiles, report_rate, pointer_speed, dpi, speed-change, backlight, backlight-timed, reprogrammable-keys, persistent-remappable-keys,
+    crown-smooth, divert-crown, divert-gkeys, m-key-leds, mr-key-led, multiplatform, change-host, sidetone, equalizer]
+  _battery: 4096
+  _modelId: 404D00000000
+  _sensitive: {fn-swap: true}
+  _serial: 9CFEE947
+  _unitId: 679422DA
+  _wpid: 404D
+  disable-keyboard-keys: {1: false, 4: false, 8: false, 16: false}
+  divert-keys: {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 8: 0, 34: 0, 40: 0, 62: 0, 64: 0, 79: 0, 84: 0, 110: 0, 145: 0, 149: 0, 183: 0, 184: 0}
+  fn-swap: false
+  gesture2-divert: {1: false, 2: false, 10: false, 44: false, 64: false, 65: false, 67: false, 84: false, 85: false, 100: false}
+  gesture2-gestures: {1: true, 2: true, 10: true, 30: true, 34: false, 42: true, 43: true, 45: false, 64: false, 65: false, 67: false, 84: true}
+  gesture2-params:
+    4: {scale: 256}
+- _NAME: 'G604 '
+  _absent: [hi-res-scroll, lowres-scroll-mode, scroll-ratchet, smart-shift, thumb-scroll-invert, thumb-scroll-mode, pointer_speed, speed-change, backlight,
+    backlight-timed, fn-swap, reprogrammable-keys, persistent-remappable-keys, divert-keys, disable-keyboard-keys, crown-smooth, divert-crown, divert-gkeys,
+    m-key-leds, mr-key-led, multiplatform, gesture2-gestures, gesture2-divert, gesture2-params, sidetone, equalizer]
+  _battery: 4096
+  _modelId: B02440850000
+  _serial: F139A162
+  _unitId: F139A162
+  _wpid: '4085'
+  change-host: null
+  dpi: 1600
+  hires-scroll-mode: false
+  hires-smooth-invert: false
+  hires-smooth-resolution: true
+  onboard_profiles: 1
+  report_rate: 1
+- _NAME: Logitech PRO Gaming Keyboard
+  _absent: [hi-res-scroll, lowres-scroll-mode, hires-smooth-invert, hires-smooth-resolution, hires-scroll-mode, scroll-ratchet, smart-shift, thumb-scroll-invert,
+    thumb-scroll-mode, onboard_profiles, pointer_speed, dpi, speed-change, backlight, backlight-timed, reprogrammable-keys, persistent-remappable-keys,
+    divert-keys, disable-keyboard-keys, crown-smooth, divert-crown, divert-gkeys, m-key-leds, mr-key-led, multiplatform, change-host, gesture2-gestures,
+    gesture2-divert, gesture2-params, sidetone, equalizer]
+  _battery: 0
+  _modelId: C33900000000
+  _unitId: '33394704'
+  fn-swap: false
+  report_rate: 1
+- _NAME: MX Master 3S
+  _absent: [hi-res-scroll, lowres-scroll-mode, onboard_profiles, report_rate, pointer_speed, speed-change, backlight, backlight-timed, fn-swap, persistent-remappable-keys,
+    disable-keyboard-keys, crown-smooth, divert-crown, divert-gkeys, m-key-leds, mr-key-led, multiplatform, gesture2-gestures, gesture2-divert, gesture2-params,
+    sidetone, equalizer]
+  _battery: 4100
+  _modelId: B03400000000
+  _sensitive: {change-host: false, divert-keys: false, dpi: false, hires-smooth-invert: false, hires-smooth-resolution: false, reprogrammable-keys: false,
+    scroll-ratchet: false, thumb-scroll-invert: false, thumb-scroll-mode: false}
+  _serial: EC1B1F2D
+  _unitId: EC1B1F2D
+  _wpid: B034
+  change-host: null
+  divert-keys: {82: 0, 83: 0, 86: 0, 195: 0, 196: 0}
+  dpi: 1250
+  hires-scroll-mode: false
+  hires-smooth-invert: false
+  hires-smooth-resolution: false
+  reprogrammable-keys: {80: 80, 81: 81, 82: 82, 83: 83, 86: 86, 195: 195, 196: 196}
+  scroll-ratchet: 2
+  smart-shift: 10
+  thumb-scroll-invert: false
+  thumb-scroll-mode: true

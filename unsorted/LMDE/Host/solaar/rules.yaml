@@ -1,0 +1,13 @@
+%YAML 1.3
+---
+- Test: [thumb_wheel_up, 10]
+- KeyPress:
+  - XF86_AudioRaiseVolume
+  - click
+...
+---
+- Test: [thumb_wheel_down, 10]
+- KeyPress:
+  - XF86_AudioLowerVolume
+  - click
+...
