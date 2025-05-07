@@ -60,7 +60,7 @@ in
       desktopManager.cinnamon.sessionPath = [ pkgs.gpaste ];
       displayManager.lightdm = {
         enable = true;
-        background = /boot/Login_Wallpaper.jpg;
+        # background = /boot/Login_Wallpaper.jpg;
         greeters.slick = {
           enable = true;
           theme = theme;

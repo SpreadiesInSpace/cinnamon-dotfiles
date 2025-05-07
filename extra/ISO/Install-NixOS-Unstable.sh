@@ -81,8 +81,12 @@ if [ ! -d /sys/firmware/efi ]; then
   sudo sed -i '/^\s*grub = {/,/^\s*};/ {
     s/^\(\s*\)efiSupport = /\1# efiSupport = /
   }' "$CONFIG" || die "Failed to comment out efiSupport in grub block."
+  
   # Comment out efi.canTouchEfiVariables
   sudo sed -i 's/^\(\s*\)efi\.canTouchEfiVariables = /\1# efi.canTouchEfiVariables = /' "$CONFIG" || die "Failed to comment out efi.canTouchEfiVariables."
+  
+  # Replace boot.loader.grub.device with the selected drive
+  sed -i "s|^\(\s*device\s*=\s*\).*|\\1\"$drive\";|" "$CONFIG" || die "Failed to set GRUB bootloader device."
 fi
 
 # If autologin is set to false, modify line 74 in /etc/nixos/configuration.nix
@@ -100,7 +104,7 @@ sed -i "s/hostName = .*;/hostName = \"$hostname\";/g" "$CONFIG" || die "Failed t
 sed -i "s|^\(\s*time\.timeZone\s*=\s*\).*|\\1\"$timezone\";|" "$CONFIG"|| die "Failed to set timezone."
 
 # Comment out background line in configuration.nix
-sed -i 's|^\(\s*background\s*=.*\)|# \1|' "$CONFIG"
+# sed -i 's|^\(\s*\)\(.*background\s*=.*\)|\1# \2|' "$CONFIG"
 
 # Add Nix Unstable and 23.05 Channels (for Neovim, icons and themes)
 nix-channel --add https://nixos.org/channels/nixos-unstable nixos || die "Failed to add Nix unstable channel."
@@ -121,7 +125,7 @@ nixos-enter --root /mnt -c 'echo "Enabling Flathub..." && flatpak remote-add --i
 curl -fsSL -o Login_Wallpaper.jpg https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/home/wallpapers/Login_Wallpaper.jpg || die "Failed to download wallpaper."
 cp -nr Login_Wallpaper.jpg /mnt/boot/ || die "Failed to copy login wallpaper."
 
-# Add back background line in configuration.nix & rebuild
+# Enable background in configuration.nix
 sed -i 's|^\(\s*\)#\s*\(background\s*=.*\)|\1\2|' "$CONFIG"
 
 # Clone Repo as New User
