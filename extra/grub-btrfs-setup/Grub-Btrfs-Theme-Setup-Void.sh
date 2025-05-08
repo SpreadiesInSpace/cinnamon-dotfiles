@@ -9,7 +9,7 @@ if [ "$EUID" -eq 0 ]; then
 fi
 
 # Install grub-btrfs
-sudo xbps-install -Syu btrfs-progs grub bash gawk inotify-tools grub-btrfs || die "Failed to install required packages with xbps-install."
+sudo xbps-install -Syu btrfs-progs grub bash gawk inotify-tools grub-btrfs grub-btrfs-runit || die "Failed to install required packages with xbps-install."
 
 # Install Gruvbox GRUB theme
 cd ../.. || die "Failed to change directory to project root."
@@ -23,4 +23,4 @@ sudo grep -qxF "$GRUB_THEME_LINE" /etc/default/grub || echo -e "\n$GRUB_THEME_LI
 
 # Update grub.cfg
 sudo grub-mkconfig -o /boot/grub/grub.cfg || die "Failed to generate /boot/grub/grub.cfg."
-# sudo ln -s /etc/sv/grub-btrfsd /var/service || die "Failed to create symlink for grub-btrfsd service."
+sudo ln -s /etc/sv/grub-btrfs /var/service || die "Failed to create symlink for grub-btrfsd service."
