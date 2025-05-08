@@ -23,4 +23,4 @@ sudo grep -qxF "$GRUB_THEME_LINE" /etc/default/grub || echo -e "\n$GRUB_THEME_LI
 
 # Update grub.cfg
 sudo grub-mkconfig -o /boot/grub/grub.cfg || die "Failed to generate /boot/grub/grub.cfg."
-sudo ln -s /etc/sv/grub-btrfs /var/service || die "Failed to create symlink for grub-btrfsd service."
+sudo ln -s /etc/sv/grub-btrfs /var/service || die "Failed to create symlink for grub-btrfs service."
