@@ -27,7 +27,7 @@ sudo rm -rf grub-btrfs || die "Failed to remove grub-btrfs directory."
 cd ../.. || die "Failed to change directory to project root."
 sudo mkdir -p /boot/grub/themes || die "Failed to create GRUB themes directory."
 sudo mv /boot/grub/themes/linuxmint /boot/grub/themes/linuxmint.original || die "Failed to rename original linuxmint theme."
-sudo cp -npr boot/grub/themes/gruvbox-dark /boot/grub/themes/ || die "Failed to copy Gruvbox GRUB theme."
+sudo cp -rf boot/grub/themes/gruvbox-dark /boot/grub/themes/ || die "Failed to copy Gruvbox GRUB theme."
 sudo mv /boot/grub/themes/gruvbox-dark /boot/grub/themes/linuxmint || die "Failed to rename Gruvbox theme to linuxmint."
 
 # Update /etc/default/grub to use the new theme

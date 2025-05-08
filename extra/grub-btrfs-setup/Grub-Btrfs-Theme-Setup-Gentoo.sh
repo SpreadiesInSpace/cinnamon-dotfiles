@@ -9,7 +9,7 @@ if [ "$EUID" -eq 0 ]; then
 fi
 
 # Enable Guru Repository
-sudo emerge -vq app-eselect/eselect-repository || die "Failed to install app-eselect/eselect-repository."
+sudo emerge -uvq app-eselect/eselect-repository || die "Failed to install app-eselect/eselect-repository."
 sudo eselect repository enable guru || die "Failed to enable the guru repository."
 sudo emaint sync -r guru || die "Failed to sync the guru repository."
 
@@ -25,7 +25,7 @@ sudo emerge -vq app-backup/grub-btrfs || die "Failed to install grub-btrfs."
 # Install Gruvbox GRUB theme
 cd ../.. || die "Failed to change directory to project root."
 sudo mkdir -p /boot/grub/themes || die "Failed to create GRUB themes directory."
-sudo cp -npr boot/grub/themes/gruvbox-dark/ /boot/grub/themes/ || die "Failed to copy Gruvbox GRUB theme."
+sudo cp -rf boot/grub/themes/gruvbox-dark/ /boot/grub/themes/ || die "Failed to copy Gruvbox GRUB theme."
 
 # Update /etc/default/grub to use the new theme
 GRUB_THEME_LINE='GRUB_THEME="/boot/grub/themes/gruvbox-dark/theme.txt"'
