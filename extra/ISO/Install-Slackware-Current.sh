@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 # Download and source common functions
 echo "Sourcing functions..."
@@ -63,6 +64,7 @@ mount --bind /var/log/mount /mnt/var/log/mount || die "Failed to bind mount /var
 pkg_dirs=( /var/log/mount/slackware64/* )
 [ ! -d "/var/log/mount/slackware64" ] && die "Slackware package directory not found at /var/log/mount/slackware64."
 package_sets=()
+dir=""
 for dir in "${pkg_dirs[@]}"; do
   [ -d "$dir" ] && package_sets+=("$(basename "$dir")")
 done
@@ -105,8 +107,10 @@ hostname=${hostname%%.*}
 [ ! -e /etc/resolv.conf ] && die "Source resolv.conf does not exist."
 cp --dereference /etc/resolv.conf /mnt/etc/ || die "Failed to copy resolv.conf."
 
-# Ensure variable 'drive' is exported before chroot
-export drive || die "Failed to export drive variable."
+# Ensure variables are exported before chroot
+: "${svc:=}"
+: "${svc_path:=}"
+export drive hostname timezone username rootpasswd svc svc_path userpasswd BOOTMODE REMOVABLE_BOOT || die "Failed to export required variables."
 
 # Entering Chroot
 cat << EOF | chroot /mnt /bin/bash || die "Failed to enter chroot."

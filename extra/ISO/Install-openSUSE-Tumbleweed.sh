@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 # Download and source common functions
 echo "Sourcing functions..."
@@ -68,8 +69,8 @@ cp /etc/zypp/repos.d/* /mnt/etc/zypp/repos.d/ || die "Failed to copy repo files.
 [ ! -e /etc/resolv.conf ] && die "Source resolv.conf does not exist."
 cp --dereference /etc/resolv.conf /mnt/etc/ || die "Failed to copy resolv.conf."
 
-# Ensure variable 'drive' is exported before chroot
-export drive || die "Failed to export drive variable."
+# Ensure variables are exported before chroot
+export drive hostname timezone username rootpasswd userpasswd BOOTMODE REMOVABLE_BOOT || die "Failed to export required variables."
 
 # Chrooting
 cat << EOF | chroot /mnt /bin/bash || die "Failed to enter chroot."
@@ -79,7 +80,6 @@ die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
 
 # New Chroot
 source /etc/profile || die "Failed to source /etc/profile."
-export PS1="(chroot) ${PS1}"
 
 # Sync Repos
 zypper ref || die "Failed to refresh zypper repositories."

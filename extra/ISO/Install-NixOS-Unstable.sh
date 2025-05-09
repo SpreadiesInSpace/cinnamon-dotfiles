@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 # Download and source common functions
 echo "Sourcing functions..."
@@ -113,6 +114,9 @@ nix-channel --update || die "Failed to update Nix channels."
 
 # Install NixOS
 nixos-install --no-root-passwd || die "Failed to install NixOS."
+
+# Ensure variables are exported before chroot
+export username rootpasswd userpasswd || die "Failed to export required variables."
 
 # Set Passwords
 nixos-enter --root /mnt -c "echo 'root:$rootpasswd' | chpasswd" || die "Failed to set root password."

@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 # Download and source common functions
 echo "Sourcing functions..."
@@ -145,8 +146,9 @@ if test -L /dev/shm; then
   chmod 1777 /dev/shm /run/shm || die "Failed to set permissions on /dev/shm or /run/shm."
 fi
 
-# Ensure variable 'drive' is exported before chroot
-export drive || die "Failed to export drive variable."
+# Ensure variables are exported before chroot
+: "${cpuflags:=}"
+export cpuflags drive hostname timezone username rootpasswd userpasswd BOOTMODE REMOVABLE_BOOT || die "Failed to export required variables."
 
 # Entering Chroot
 cat << EOF | chroot /mnt/gentoo /bin/bash || die "Failed to enter chroot."
@@ -156,7 +158,6 @@ die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
 
 # New Chroot Environment - Installing the Gentoo Base System (Continued)
 source /etc/profile || die "Failed to source /etc/profile."
-export PS1="(chroot) ${PS1}"
 
 # Sync Snapshot
 emerge-webrsync || die "Failed to run emerge-webrsync."
@@ -234,7 +235,7 @@ locale-gen || die "Failed to generate locales."
 eselect locale set en_US.utf8 || die "Failed to set locale to en_US.utf8."
 
 # Reload Environment
-env-update && source /etc/profile && export PS1="(chroot) ${PS1}" || die "Failed to reload environment."
+env-update && source /etc/profile || die "Failed to reload environment."
 
 #============ Gentoo Install - Configuring the Linux Kernel ============
 

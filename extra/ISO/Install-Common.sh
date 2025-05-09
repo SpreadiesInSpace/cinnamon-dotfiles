@@ -110,7 +110,7 @@ prompt_hostname() {
 
 prompt_timezone() {
   # Prompt for timezone
-  local distro="$1"
+  local distro="${1:-}"
   local zoneinfo_dir="/usr/share/zoneinfo"
   
   # If NixOS, use /etc/zoneinfo instead 
@@ -148,7 +148,7 @@ prompt_drive() {
 
 partition_drive() {
   # Partition the drive
-  local distro=$1
+  local distro="${1:-}"
   # Set parted path for Slackware
   local PARTED="parted"
   if [ "$distro" = "slackware" ]; then
@@ -200,7 +200,7 @@ create_btrfs_subvolumes() {
 
 mount_partitions() {
   # Mount the partitions
-  local distro="$1"
+  local distro="${1:-}"
   local MNT="/mnt"
   [ "$distro" = "gentoo" ] && MNT="/mnt/gentoo"
   mkdir -p "$MNT" || die "Failed to create $MNT."
@@ -269,7 +269,7 @@ set_video_card() {
 
 install_grub() {
   # Configure GRUB Bootloader
-  local distro="$1"
+  local distro="${1:-}"
   local cmd="grub-install"
   # Use grub2-install for openSUSE
   [ "$distro" = "opensuse" ] && cmd="grub2-install"

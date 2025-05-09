@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 # Download and source common functions
 echo "Sourcing functions..."
@@ -70,8 +71,8 @@ cp --dereference /etc/resolv.conf /mnt/etc/ || die "Failed to copy resolv.conf."
 # Generate fstab
 xgenfstab -U /mnt > /mnt/etc/fstab || die "Failed to generate fstab."
 
-# Ensure variable 'drive' is exported before chroot
-export drive || die "Failed to export drive variable."
+# Ensure variables are exported before chroot
+export drive hostname timezone username rootpasswd userpasswd BOOTMODE REMOVABLE_BOOT || die "Failed to export required variables."
 
 # Entering Chroot
 cat << EOF | xchroot /mnt /bin/bash || die "Failed to enter chroot."

@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 # Download and source common functions
 echo "Sourcing functions..."
@@ -55,8 +56,8 @@ pacstrap -K /mnt base linux linux-firmware sudo bash-completion grub efibootmgr 
 # Generate fstab
 genfstab -U /mnt >> /mnt/etc/fstab || die "Failed to generate fstab."
 
-# Ensure variable 'drive' is exported before chroot
-export drive || die "Failed to export drive variable."
+# Ensure variables are exported before chroot
+export drive hostname timezone username rootpasswd userpasswd BOOTMODE REMOVABLE_BOOT || die "Failed to export required variables."
 
 # Entering Chroot
 cat << EOF | arch-chroot /mnt || die "Failed to enter chroot."
