@@ -608,7 +608,7 @@ setup_synth_shell_config() {
 install_nvchad() {
     # Ensure Neovim is available
     if ! command -v nvim >/dev/null 2>&1; then
-        echo "Neovim (nvim) not found. Skipping NvChad installation."
+        echo "Neovim not found. Skipping NvChad installation..."
         return 0
     fi
 
