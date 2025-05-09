@@ -7,13 +7,14 @@
 # Installed your distro via cinnamon-ISO? Skip this step.
 git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles
 ```
-2. Head to cinnamon-dotfiles
+2. Head to cinnamon-dotfiles/home
 ```bash
-cd cinnamon-dotfiles
+cd cinnamon-dotfiles/home
 ```
-3. Run theme script
+3. Run theme script (Setup-*Distro*-Theme.sh)
 ```bash
-bash Theme.sh
+# Default NixOS behavior doesn't let you chmod+x then ./Setup-NixOS-Theme.sh
+bash Setup-NixOS-Theme.sh
 ```
 
 ## Required Fonts
