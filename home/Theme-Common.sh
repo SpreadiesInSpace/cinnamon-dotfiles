@@ -20,14 +20,12 @@ check_not_root() {
 
 check_dependencies() {
   local missing=()
-  local deps=(dconf flatpak git gsettings nvim sudo unzip)
+  local deps=(dconf flatpak git gsettings sudo unzip)
 
   for cmd in "${deps[@]}"; do
     if ! command -v "$cmd" >/dev/null 2>&1; then
       if [ "$cmd" = "dconf" ]; then
         missing+=("dconf (Debian-based systems need 'dconf-cli')")
-      elif [ "$cmd" = "nvim" ]; then
-        missing+=("neovim")
       else
         missing+=("$cmd")
       fi
@@ -608,6 +606,12 @@ setup_synth_shell_config() {
 }
 
 install_nvchad() {
+    # Ensure Neovim is available
+    if ! command -v nvim >/dev/null 2>&1; then
+        echo "Neovim (nvim) not found. Skipping NvChad installation."
+        return 0
+    fi
+
     # Timestamp for unique backups
     local timestamp=$(date +%s)
 

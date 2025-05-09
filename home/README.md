@@ -33,7 +33,6 @@ bash Setup-NixOS-Theme.sh
  - [ ] flatpak (for themeing override)
  - [ ] git
  - [ ] gsettings
- - [ ] neovim
  - [ ] sudo
  - [ ] unzip
  
@@ -48,6 +47,7 @@ bash Setup-NixOS-Theme.sh
  - [ ] gpaste
  - [ ] gir1.2-gpaste-4.0 ***# if on Debian or Ubuntu-based distro***
  - [ ] neofetch
+ - [ ] neovim
  - [ ] kvantum ***# kvantum and qt5/6ct are needed to theme QT apps***
  - [ ] kvantum-qt5
  - [ ] qt5ct
