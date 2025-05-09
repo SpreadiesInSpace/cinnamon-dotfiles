@@ -54,10 +54,10 @@ REPO=https://repo-fastly.voidlinux.org/current
 ARCH=x86_64 
 mkdir -p /mnt/var/db/xbps/keys || die "Failed to create /mnt/var/db/xbps/keys."
 cp /var/db/xbps/keys/* /mnt/var/db/xbps/keys/ || die "Failed to copy XBPS keys."
-XBPS_ARCH=$ARCH xbps-install -Sy -r /mnt -R "$REPO" base-system || die "Failed to install base system."
+XBPS_ARCH=$ARCH xbps-install -Syu -r /mnt -R "$REPO" base-system || die "Failed to install base system."
 
 # Install Packages
-xbps-install -Sy -r /mnt -R "$REPO" NetworkManager git xtools xmirror nano sudo grub grub-x86_64-efi bash-completion unzip || die "Failed to install packages."
+xbps-install -Syu -r /mnt -R "$REPO" NetworkManager git xtools xmirror nano sudo grub grub-x86_64-efi bash-completion unzip || die "Failed to install packages."
 
 # Enable Networking
 for service in dbus NetworkManager polkitd; do
