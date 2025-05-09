@@ -63,6 +63,7 @@ copy_qtct_configs
 
 # Copies Gedit Theme to appropriate directory
 copy_gedit_old_theme
+copy_gedit_theme
 
 # Copies Menu Preferences to appropriate directory
 copy_menu_preferences "gentoo"
