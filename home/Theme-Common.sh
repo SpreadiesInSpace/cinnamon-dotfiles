@@ -106,7 +106,7 @@ disable_polkit_agent() {
 
 override_qt_cursor_theme() {
     # Override Cursor Theme for QT Apps
-    local distro="$1"
+    local distro="${1:-}"
 
     echo "Setting Cursor Theme Override for QT Apps..."
     if [ "$distro" = "nixos" ]; then
@@ -141,7 +141,7 @@ enable_flatpak_theme_override() {
 }
 
 copy_bleachbit_config() {
-    local distro="$1"
+    local distro="${1:-}"
     local timestamp=$(date +%s)
     local src_file=".config/bleachbit/bleachbit.ini.$distro"
     local user_target="$HOME/.config/bleachbit/bleachbit.ini"
@@ -164,7 +164,7 @@ copy_bleachbit_config() {
 
 copy_fonts() {
   # Copies fonts to appropriate directories
-  local distro="$1"
+  local distro="${1:-}"
 
   echo "Setting Fonts..."
   # NixOS doesn’t use /usr/share/fonts/ for user fonts
@@ -217,7 +217,7 @@ copy_kdeglobals() {
 
 symlink_kdeglobals() {
   # Symlink kdeglobals to color-schemes for KDE applications like haruna
-  local distro="$1"
+  local distro="${1:-}"
 
   if [ "$distro" = "nixos" ]; then
     sudo mkdir -p ~/.local/share/color-schemes/
@@ -243,7 +243,7 @@ copy_haruna_config() {
 
 copy_cinnamon_spice_settings() {
     # Backup and copy Cinnamon spice settings
-    local distro=$1
+    local distro="${1:-}"
     local timestamp=$(date +%s)
     mv ~/.config/cinnamon/spices/ ~/.config/cinnamon/spices.old.$timestamp/
     mkdir -p ~/.config/cinnamon/spices/
@@ -255,7 +255,7 @@ copy_cinnamon_spice_settings() {
 
 copy_personal_shortcuts() {
     # Copies My Personal Shortcuts
-    local distro=$1
+    local distro="${1:-}"
     mkdir -p ~/.local/share/applications
     echo "Setting Shortcuts..."
     cp -npr .local/share/applications/$distro/* ~/.local/share/applications/
@@ -263,7 +263,7 @@ copy_personal_shortcuts() {
 
 copy_bashrc_and_etc() {
     # Backup and copy .bashrc and etc to home directory
-    local distro=$1
+    local distro="${1:-}"
     local timestamp=$(date +%s)
 
     echo "Backing Up .bashrc and Adding New bash Aliases..."
@@ -321,8 +321,8 @@ copy_neofetch_config() {
 
 copy_kvantum_themes() {
     # Backup and copy Kvantum Themes to appropriate directory
-    local theme_variant=$1
-    local distro=$2
+    local theme_variant="${1:-}"
+    local distro="${2:-}"
     local timestamp=$(date +%s)
 
     echo "Installing Kvantum Themes..."
@@ -389,7 +389,7 @@ copy_gedit_old_theme() {
 
 copy_menu_preferences() {
     # Backup and copy Menu Preferences to appropriate directory
-    local distro=$1
+    local distro="${1:-}"
     local timestamp=$(date +%s)
 
     echo "Applying Cinnamon Menu Preferences..."
@@ -402,7 +402,7 @@ copy_menu_preferences() {
 
 copy_qbittorrent_config() {
     # Backup and copy Qbittorrent config to appropriate directory
-    local distro=$1
+    local distro="${1:-}"
     local timestamp=$(date +%s)
 
     echo "Configuring qBittorrent..."
@@ -417,7 +417,7 @@ copy_qbittorrent_config() {
 
 copy_libreoffice_config() {
     # Backup and copy LibreOffice config to appropriate directory
-    local distro=$1
+    local distro="${1:-}"
     local timestamp=$(date +%s)
 
     echo "Configuring LibreOffice..."
@@ -455,7 +455,7 @@ copy_profile_picture() {
 }
 
 import_desktop_config() {
-    local distro=$1
+    local distro="${1:-}"
     local timestamp=$(date +%s)
 
     echo "Applying Proper Look & Feel System-wide..."
@@ -470,8 +470,8 @@ import_desktop_config() {
 
 apply_gedit_and_gnome_terminal_config() {
     # Apply gedit and gnome-terminal configuration to root
-    local distro=$1
-    local gedit_config=$2
+    local distro="${1:-}"
+    local gedit_config="${2:-}"
 
     cd theming/$distro/
     if [[ "$distro" == "openSUSE" ]]; then
@@ -493,7 +493,7 @@ apply_gedit_and_gnome_terminal_config() {
 }
 
 set_default_apps() {
-    local distro=$1
+    local distro="${1:-}"
 
     echo "Setting Default Apps..."
     # Set default apps for the given distro
@@ -585,7 +585,7 @@ set_cinnamon_background_and_sounds() {
 
 # NixOS doesn't use this
 setup_synth_shell_config() {
-    local distro=$1
+    local distro="${1:-}"
     local timestamp=$(date +%s)
 
     echo "Configuring Synth Shell Prompt..."
