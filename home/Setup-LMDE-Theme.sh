@@ -80,7 +80,7 @@ copy_profile_picture
 import_desktop_config "LMDE"
 
 # Apply gedit and gnome-terminal configuration to root
-apply_gedit_and_gnome_terminal_config "LMDE" "gedit.dconf"
+apply_gedit_and_gnome_terminal_config "LMDE" "gedit-48.dconf"
 
 # Sets Default Apps
 set_default_apps "LMDE"

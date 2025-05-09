@@ -95,7 +95,7 @@ copy_profile_picture
 import_desktop_config "Slackware"
 
 # Apply gedit and gnome-terminal configuration to root
-apply_gedit_and_gnome_terminal_config "Slackware" "gedit.dconf"
+apply_gedit_and_gnome_terminal_config "Slackware" "gedit-48.dconf"
 
 # Sets Default Apps
 set_default_apps "Slackware"

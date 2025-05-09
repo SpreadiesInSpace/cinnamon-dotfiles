@@ -83,7 +83,7 @@ copy_profile_picture
 import_desktop_config "Gentoo"
 
 # Apply gedit and gnome-terminal configuration to root
-apply_gedit_and_gnome_terminal_config "Gentoo" "gedit.dconf"
+apply_gedit_and_gnome_terminal_config "Gentoo" "gedit-48.dconf"
 
 # Sets Default Apps
 set_default_apps "Gentoo"

@@ -364,7 +364,6 @@ copy_qtct_configs() {
     sudo ln -sf ~/.config/qt6ct/ /root/.config/
 }
 
-# Gentoo/LMDE doesn't use this
 copy_gedit_theme() {
     # Copies Gedit Theme to appropriate directory
 
