@@ -489,6 +489,8 @@ apply_gedit_and_gnome_terminal_config() {
         cd ..
         sudo dbus-launch dconf load / < "$gedit_config"
     fi
+    # Set gedit sidebar root to user's home directory
+    gsettings set org.gnome.gedit.plugins.filebrowser virtual-root "file:///home/$(whoami)"
     cd ..
 }
 
