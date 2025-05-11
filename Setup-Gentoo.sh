@@ -130,7 +130,7 @@ packages=(
     "app-text/evince"
     "media-video/ffmpegthumbnailer"
     "app-editors/gedit"
-    #"app-editors/gedit-plugins" # clashes with gobject-introspection
+    "app-editors/gedit-plugins"
     "gnome-extra/gnome-calculator"
     "sys-apps/gnome-disk-utility"
     "media-gfx/gnome-screenshot"
