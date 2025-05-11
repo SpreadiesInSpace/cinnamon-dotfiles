@@ -54,8 +54,8 @@ check_dependencies() {
 
 install_icons_and_themes() {
     # Download icons and fonts
-    sudo echo
-    bash icons-and-fonts.sh
+    sudo echo || die "Failed to gain sudo privileges."
+    bash icons-and-fonts.sh || die "Failed to execute icons-and-fonts.sh."
 
     # Set filenames
     ICON_ZIP="gruvbox-dark-icons-gtk-1.0.0.zip"
@@ -68,34 +68,34 @@ install_icons_and_themes() {
 
     # Extract icons
     echo "Extracting Icons..."
-    mv .icons/*.zip "$PWD"
-    unzip -q "$ICON_ZIP"
-    unzip -q "$CURSOR_ZIP"
-    mv "$ICON_EXTRACTED" ".icons/$ICON_RENAME"
-    mv "$CURSOR_DIR" .icons/
+    mv .icons/*.zip "$PWD" || die "Failed to move icon zip files."
+    unzip -q "$ICON_ZIP" || die "Failed to unzip $ICON_ZIP."
+    unzip -q "$CURSOR_ZIP" || die "Failed to unzip $CURSOR_ZIP."
+    mv "$ICON_EXTRACTED" ".icons/$ICON_RENAME" || die "Failed to rename extracted icon directory."
+    mv "$CURSOR_DIR" .icons/ || die "Failed to move cursor directory."
 
     # Extract themes
     echo "Extracting Themes..."
-    mv .themes/*.zip "$PWD"
-    unzip -q "$THEME_ZIP"
-    mv "$THEME_DIR" .themes/
+    mv .themes/*.zip "$PWD" || die "Failed to move theme zip files."
+    unzip -q "$THEME_ZIP" || die "Failed to unzip $THEME_ZIP."
+    mv "$THEME_DIR" .themes/ || die "Failed to move extracted theme directory."
 
     # Always install to user directories
     echo "Installing Icons and Themes..."
-    mkdir -p ~/.icons ~/.themes
-    cp -npr .icons/* ~/.icons/
-    cp -npr .themes/* ~/.themes/
+    mkdir -p ~/.icons ~/.themes || die "Failed to create user icon or theme directories."
+    cp -npr .icons/* ~/.icons/ || die "Failed to copy icons to user directory."
+    cp -npr .themes/* ~/.themes/ || die "Failed to copy themes to user directory."
 
     # If not NixOS, also install to system-wide directories
     if ! grep -qi "nixos" /etc/os-release; then
-        sudo cp -npr .icons/* /usr/share/icons/
-        sudo cp -npr .themes/* /usr/share/themes/
+        sudo cp -npr .icons/* /usr/share/icons/ || die "Failed to copy icons to system directory."
+        sudo cp -npr .themes/* /usr/share/themes/ || die "Failed to copy themes to system directory."
     fi
 
     # Move ZIPs back & clean up
-    mv "$CURSOR_ZIP" "$ICON_ZIP" .icons/
-    mv "$THEME_ZIP" .themes/
-    rm -rf ".icons/$ICON_RENAME" ".icons/$CURSOR_DIR" ".themes/$THEME_DIR"
+    mv "$CURSOR_ZIP" "$ICON_ZIP" .icons/ || die "Failed to move icon and cursor zip files back."
+    mv "$THEME_ZIP" .themes/ || die "Failed to move theme zip file back."
+    rm -rf ".icons/$ICON_RENAME" ".icons/$CURSOR_DIR" ".themes/$THEME_DIR" || die "Failed to clean up extracted directories."
 }
 
 # Only Gentoo/openSUSE/Slackware uses this
