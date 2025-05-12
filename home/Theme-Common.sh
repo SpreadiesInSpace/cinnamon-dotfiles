@@ -520,7 +520,7 @@ copy_vscodium_config() {
     git clone https://github.com/spreadiesinspace/codium >/dev/null 2>&1 || die "Failed to download VSCodium config."
     cd codium/
     cp -npr VSCodium/ ~/.config/
-    cp -npr .vscode-oss/ ~/
+    bash extensions-restore.sh >/dev/null 2>&1 || die "Failed to install VSCodium extensions."
     
     # Set VSCodium as default (user only)
     bash Default-Apps-VSCodium.sh
