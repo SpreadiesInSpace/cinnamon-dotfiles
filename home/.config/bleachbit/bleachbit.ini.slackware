@@ -43,4 +43,4 @@ thumbnails = True
 thumbnails.cache = True
 x11 = True
 x11.debug_logs = True
-
+bash.tmp = True
