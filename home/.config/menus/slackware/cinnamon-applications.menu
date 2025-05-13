@@ -5,7 +5,6 @@
 <Menu>
 	<Name>Applications</Name>
 	<MergeFile type="parent">/etc/xdg/menus/cinnamon-applications.menu</MergeFile>
-	
 	<!-- Administration Category -->
 	<Menu>
 		<Name>Administration</Name>
@@ -20,7 +19,6 @@
 			<Filename>org.kde.kaddressbook.desktop</Filename>
 		</Include>
 	</Menu>
-
 	<!-- Development Category -->
 	<Menu>
 		<Name>Development</Name>
@@ -33,7 +31,6 @@
 			<Filename>org.kde.step.desktop</Filename>
 		</Include>
 	</Menu>
-
 	<!-- Internet Category -->
 	<Menu>
 		<Name>Internet</Name>
@@ -46,7 +43,6 @@
 			<Filename>org.kde.marble-qt.desktop</Filename>
 		</Include>
 	</Menu>
-
 	<!-- Multimedia Category -->
 	<Menu>
 		<Name>Multimedia</Name>
@@ -109,7 +105,6 @@
 			<Filename>org.kde.kshisen.desktop</Filename>
 		</Include>
 	</Menu>
-
 	<!-- Graphics Category -->
 	<Menu>
 		<Name>Graphics</Name>
@@ -125,7 +120,6 @@
 			<Filename>xaos.desktop</Filename>
 		</Include>
 	</Menu>
-
 	<!-- Accessories Category -->
 	<Menu>
 		<Name>Accessories</Name>
@@ -138,7 +132,6 @@
 			<Filename>org.kde.calligrastage.desktop</Filename>
 		</Include>
 	</Menu>
-
 	<!-- Preferences Category -->
 	<Menu>
 		<Name>Preferences</Name>
@@ -149,7 +142,6 @@
 			<Filename>org.kde.marble.maps.desktop</Filename>
 		</Include>
 	</Menu>
-	
 	<!-- Hidden Entries from Criginal Categories -->
 	<Menu>
 		<Name>Education</Name>
@@ -262,8 +254,8 @@
 		<Name>Other</Name>
 		<Exclude>
 			<Filename>kcm_fcitx5.desktop</Filename>
+			<Filename>org.gnome.RestDemo.desktop</Filename>
 		</Exclude>
-		<AppDir>/home/f16poom/.local/share/applications</AppDir>
 	</Menu>
 	<Menu>
 		<Name>Universal Access</Name>
