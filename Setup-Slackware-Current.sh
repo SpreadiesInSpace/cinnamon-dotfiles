@@ -212,7 +212,7 @@ sbo_packages=(
     "gnome-calculator"
     "gnome-screenshot"
     "gnome-system-monitor"
-    #"kvantum-qt5"
+    "kvantum-qt5"
     "haruna"
     "lightdm"
     "lightdm-settings"
@@ -240,15 +240,15 @@ cd qemu/
 cd ..
 rm -rf qemu/
 
-# lngn packages
-lngn_packages=(
-    "kvantum" # for qBittorrent
-    "kwindowsystem" # for kvantum-qt6
-    # "md4c" # for kvantum-qt6
+# Slint packages
+slint_packages=(
+    "kvantum-qt6" # for qBittorrent
+    "kwindowsystem6" # for kvantum-qt6
+    "md4c" # for kvantum-qt6
 )
 
-# Install packages from lngn over SBo to reduce compile times
-slpkg -iy "${lngn_packages[@]}" -o lngn -O || die "Failed to install lngn packages."
+# Install packages from Slint over SBo to reduce compile times
+slpkg -iy "${slint_packages[@]}" -o slint -O || die "Failed to install slint packages."
 
 # Workaround for gedit-plugins to compile (broken)
 # slpkg -iy libpeas gedit-plugins || die "Failed to install libpeas gedit-plugins."

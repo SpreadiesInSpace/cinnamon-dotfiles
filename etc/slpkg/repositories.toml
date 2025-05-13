@@ -138,7 +138,7 @@ ENABLE = false
 MIRROR = "http://www.slackel.gr/repo/x86_64/current/"
 
 [SLINT]
-ENABLE = false
+ENABLE = true
 MIRROR = "https://slackware.uk/slint/x86_64/slint-15.0/"
 
 [PPRKUT]
@@ -146,5 +146,5 @@ ENABLE = false
 MIRROR = "https://repo.liwjatan.org/pprkut/15.0/x86_64/"
 
 [LNGN]
-ENABLE = true
+ENABLE = false
 MIRROR = "https://slackware.lngn.net/pub/x86_64/slackware64-current/"
