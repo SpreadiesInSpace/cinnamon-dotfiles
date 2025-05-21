@@ -97,8 +97,20 @@ touch /var/log/slpkg/deps.log || die "Failed to create deps.log"
 slpkg -Uy -o "slack" || die "Failed to update slack packages."
 slpkg -Uy -o "slack_extra" || die "Failed to update slack_extra packages."
 
-# Update Grub (in case Kernel Gets Updated)
-grub-mkconfig -o /boot/grub/grub.cfg || die "Failed to reconfigure GRUB."
+# Update Bootloader Entries (in case Kernel Gets Updated)
+if command -v grub-mkconfig >/dev/null 2>&1; then
+    echo "Detected GRUB bootloader."
+    grub-mkconfig -o /boot/grub/grub.cfg || die "Failed to generate GRUB config."
+elif [ -f /boot/efi/EFI/Slackware/elilo.conf ] || [ -f /boot/efi/EFI/ELILO/elilo.conf ]; then
+    echo "Detected ELILO bootloader."
+    eliloconfig || die "Failed to update ELILO configuration."
+elif [ -f /etc/lilo.conf ]; then
+    echo "Detected LILO bootloader."
+    lilo || die "Failed to update LILO configuration."
+else
+    echo "No recognized bootloader found."
+    die "Bootloader configuration not updated."
+fi
 
 # Install Bash Completion for csb
 slpkg -iy bash-completion -o "slack_extra" || die "Failed to install bash-completion."
