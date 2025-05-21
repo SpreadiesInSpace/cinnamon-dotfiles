@@ -25,10 +25,7 @@ display_status "$enable_autologin" "$is_vm"
 # Enable Parallel Downloads during Setup
 export ZYPP_PCK_PRELOAD=1 || die "Failed to enable parallel downloads."
 
-# Enable Parallel Downloads and Faster Repo Syncing Persistently 
-if ! grep -q "^ZYPP_CURL2=1" /etc/environment; then
-    echo 'ZYPP_CURL2=1' | tee -a /etc/environment || die "Failed to enable parallel downloads."
-fi
+# Enable Parallel Downloads Persistently 
 if ! grep -q "^ZYPP_PCK_PRELOAD=1" /etc/environment; then
     echo 'ZYPP_PCK_PRELOAD=1' | tee -a /etc/environment || die "Failed to enable faster repo syncing."
 fi
