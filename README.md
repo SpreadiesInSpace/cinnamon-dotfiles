@@ -25,8 +25,8 @@ bash <(wget -qO- https://tinyurl.com/cinnamon-ISO)
 ```
 ```bash
 # For Void Linux (no curl or wget by default)
-sudo xbps-install -Sy curl
-bash <(curl -fsSL https://tinyurl.com/cinnamon-ISO)
+sudo xbps-install -Sy xbps wget
+bash <(wget -qO- https://tinyurl.com/cinnamon-ISO)
 ```
 *View cinnamon-ISO [source](https://github.com/SpreadiesInSpace/cinnamon-dotfiles/blob/main/extra/Setup-ISO.sh)*
 
