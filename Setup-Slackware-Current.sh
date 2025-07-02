@@ -132,59 +132,65 @@ packages=(
     #"unzip"
     #"xkill"
     #"xrandr"
-    # Network utilities
+    # For Filezilla
+    "libfilezilla"
+    "libmspack"
+    "pugixml"
+    "wxwidgets"
     "filezilla"
-    "libfilezilla" # for filezilla
-    "libmspack" # for filezilla
-    "pugixml" # for filezilla
-    "wxwidgets" # for filezilla
+    # Network utilities
     #"gvfs"
     #"kdeconnect"
     #"samba"
-    # Desktop environment and related packages
-    #"cinnamon"
-    "qt5ct"
     # Applications
     "bleachbit"
     #"noto-fonts"
     #"noto-emoji"
     "qbittorrent"
     "libtorrent-rasterbar" # for qBittorrent
+    "qt5ct"
     "ufw"
-    "xclip"
+    "vscodium-bin"
     # For NvChad
     #"gcc"
     #"make"
+    "xclip"
+    # For Neovim
+    "luv"
+    "lua-lpeg"
+    "unibilium"
     "neovim"
-    "luv" # for neovim
-    "lua-lpeg" # for neovim
-    "unibilium" # for neovim
-    "vscodium-bin"
-    # Virtualization tools
-    "libslirp"
-    "libcacard"
-    "spice"
-    "usbredir"
-    "virglrenderer"
-    "libnfs"
-    "snappy"
-    "device-tree-compiler"
-    "vde2"
-    "spice-gtk"
-    "gtk-vnc"
+    # For Virt-Manager
     "libosinfo"
-    "edk2-ovmf-bin"
-    #"dnsmasq"
-    #"bridge-utils"
-    #"iptables"
-    #"dmidecode"
-    "spice-vdagent"
+    "osinfo-db"
+    "osinfo-db-tools"
+    "yajl"
+    "numactl"
     "libvirt"
     "libvirt-glib"
     "libvirt-python"
+    "gtk-vnc"
+    "spice"
+    "spice-gtk"
+    "spice-protocol"
+    "spice-vdagent"
     "audit"
+    "device-tree-compiler"
+    #"bridge-utils"
+    #"dmidecode"
+    #"dnsmasq"
+    #"iptables"
+    "libbpf"
+    "libcacard"
+    "libslirp"
+    "libnfs"
+    "snappy"
+    "usbredir"
+    "vde2"
+    "virglrenderer"
+    "qemu" # TARGETS=x86_64-softmmu
     "virtiofsd"    
-    "yajl"
+    "edk2-ovmf-bin"
     "virt-manager"
 )
 
@@ -197,15 +203,16 @@ gnome_packages=(
     "evince"
     "flatpak"
     "malcontent" # for flatpak
+    # For gedit
+    "libgedit-amtk"
+    "libgedit-gtksourceview"
+    "libpeas"
     "gedit"
-    "libgedit-amtk" # for gedit
-    "libgedit-gtksourceview" # for gedit
-    "libpeas" # for gedit
     "gnome-disk-utility"
     "gpaste"
     # "libportal" # for file-roller
-    #"rhythmbox" # using Elisa instead
-    #"totem-pl-parser" # for rhythmbox
+    # "rhythmbox" # using Elisa instead
+    # "totem-pl-parser" # for rhythmbox
 )
 
 # Install packages from GFS over SBo to reduce compile times
@@ -220,6 +227,7 @@ useradd -d /var/lib/lightdm -s /bin/false -u 380 -g 380 lightdm || die "Failed t
 
 # SBo packages
 sbo_packages=(
+    "brave-browser"
     "file-roller"
     "gnome-calculator"
     "gnome-screenshot"
@@ -231,14 +239,12 @@ sbo_packages=(
     "lightdm-slick-greeter"
     "ncdu"
     "qt6ct"
-    "tepl" # for gedit
     "timeshift"
-    #"libuchardet" # for rhythmbox
-    "brave-browser"
-    "ripgrep"
-    #"qemu" # TARGETS=x86_64-softmmu
-    "libiscsi"
-    "glusterfs"
+    # "libuchardet" # for rhythmbox
+    "tepl" # for gedit
+    "ripgrep" # for neovim
+    "libiscsi" # for Virt-Manager
+    "glusterfs" # for Virt-Manager
 )
 
 # Install Packages
@@ -246,11 +252,11 @@ slpkg install -y "${sbo_packages[@]}" || die "Failed to install packages."
 slpkg install -y bottom || die "Failed to install bottom." # prevent download timeout 
 
 # Install Self-Compiled qemu from SBo
-git clone https://github.com/spreadiesinspace/qemu || die "Failed to download QEMU."
-cd qemu/
-./install.sh || die "Failed to install QEMU."
-cd ..
-rm -rf qemu/
+# git clone https://github.com/spreadiesinspace/qemu || die "Failed to download QEMU."
+# cd qemu/
+# ./install.sh || die "Failed to install QEMU."
+# cd ..
+# rm -rf qemu/
 
 # Slint packages
 slint_packages=(
