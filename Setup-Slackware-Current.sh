@@ -94,8 +94,8 @@ slpkg update || die "Failed to sync slpkg."
 
 # Update Slackware Packages
 # touch /var/log/slpkg/deps.log || die "Failed to create deps.log"
-slpkg upgrade -y -o 'slack' || die "Failed to update slack packages."
-slpkg upgrade -y -o 'slack_extra' || die "Failed to update slack_extra packages."
+slpkg upgrade -y -o "slack" || die "Failed to update slack packages."
+slpkg upgrade -y -o "slack_extra" || die "Failed to update slack_extra packages."
 
 # Update Bootloader Entries (in case Kernel Gets Updated)
 if command -v grub-mkconfig >/dev/null 2>&1; then
@@ -113,7 +113,7 @@ else
 fi
 
 # Install Bash Completion for csb
-slpkg install -y bash-completion -o 'slack_extra' || die "Failed to install bash-completion."
+slpkg install -y bash-completion -o "slack_extra" || die "Failed to install bash-completion."
 
 # Alien packages
 alien_packages=(
@@ -242,7 +242,7 @@ sbo_packages=(
 )
 
 # Install Packages
-slpkg install -y "${sbo_packages[@]}"  || die "Failed to install packages."
+slpkg install -y "${sbo_packages[@]}" || die "Failed to install packages."
 slpkg install -y bottom || die "Failed to install bottom." # prevent download timeout 
 
 # Install Self-Compiled qemu from SBo
