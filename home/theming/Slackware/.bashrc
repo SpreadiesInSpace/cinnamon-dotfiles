@@ -20,7 +20,7 @@ alias cleanAll='sudo find /var/log -type f -name "*.log" -exec truncate -s 0 {} 
 
 # Slackware Update
 alias updateNeovim='echo "Performing LazySync..."; nvim --headless "+Lazy! sync" +qa > /dev/null 2>&1; echo "LazySync complete!"'
-alias updateApp='sudo sbocheck; sudo sboupgrade --all; sudo slpkg -u; sudo slpkg -U; sudo slpkg -U -o "slack"; sudo slpkg -U -o "slack_extra"; sudo slpkg -U -o "csb"; sudo slpkg -U -o "conraid"; sudo slpkg -U -o "alien"; sudo slpkg -U -o "gnome"; sudo slpkg -U -o "slint"; sudo grub-mkconfig -o /boot/grub/grub.cfg; flatpak update -y'
+alias updateApp='sudo sbocheck; sudo sboupgrade --all; sudo slpkg update; sudo slpkg upgrade -o 'slack'; sudo slpkg upgrade -o "slack_extra"; sudo slpkg upgrade -o "csb"; sudo slpkg upgrade -o "conraid"; sudo slpkg upgrade -o "alien"; sudo slpkg upgrade -o "gnome"; sudo slpkg upgrade -o "slint"; sudo grub-mkconfig -o /boot/grub/grub.cfg; flatpak update -y'
 alias updateAll='updateApp && cleanAll'
 alias updateRestart='updateAll; sudo reboot'
 alias updateShutdown='updateAll; sudo poweroff'

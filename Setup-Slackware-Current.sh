@@ -90,12 +90,12 @@ sed -i "s/^MAKEFLAGS = \"-j[0-9]*\"/MAKEFLAGS = \"-j$cores\"/" /etc/slpkg/slpkg.
 echo "Updated MAKEFLAGS in /etc/slpkg/slpkg.toml to -j$cores based on the number of CPU cores."
 
 # Sync slpkg
-slpkg -uy || die "Failed to sync slpkg."
+slpkg update || die "Failed to sync slpkg."
 
 # Update Slackware Packages
-touch /var/log/slpkg/deps.log || die "Failed to create deps.log"
-slpkg -Uy -o "slack" || die "Failed to update slack packages."
-slpkg -Uy -o "slack_extra" || die "Failed to update slack_extra packages."
+# touch /var/log/slpkg/deps.log || die "Failed to create deps.log"
+slpkg upgrade -y -o 'slack' || die "Failed to update slack packages."
+slpkg upgrade -y -o 'slack_extra' || die "Failed to update slack_extra packages."
 
 # Update Bootloader Entries (in case Kernel Gets Updated)
 if command -v grub-mkconfig >/dev/null 2>&1; then
@@ -113,7 +113,7 @@ else
 fi
 
 # Install Bash Completion for csb
-slpkg -iy bash-completion -o "slack_extra" || die "Failed to install bash-completion."
+slpkg install -y bash-completion -o 'slack_extra' || die "Failed to install bash-completion."
 
 # Alien packages
 alien_packages=(
@@ -122,7 +122,7 @@ alien_packages=(
 )
 
 # Install packages from Alien over SBo to reduce compile times
-slpkg -iy "${alien_packages[@]}" -o alien -O || die "Failed to install alienbob packages."
+slpkg install -y "${alien_packages[@]}" -o alien || die "Failed to install alienbob packages."
 
 # All packages
 packages=(
@@ -149,7 +149,7 @@ packages=(
     #"noto-fonts"
     #"noto-emoji"
     "qbittorrent"
-    "libtorrent-rasterbar"
+    "libtorrent-rasterbar" # for qBittorrent
     "ufw"
     "xclip"
     # For NvChad
@@ -189,7 +189,7 @@ packages=(
 )
 
 # Install packages from Conraid over SBo to reduce compile times
-slpkg -iy "${packages[@]}" -o conraid || die "Failed to install conraid packages."
+slpkg install -y "${packages[@]}" -o conraid || die "Failed to install conraid packages."
 
 # GFS packages
 gnome_packages=(
@@ -209,10 +209,10 @@ gnome_packages=(
 )
 
 # Install packages from GFS over SBo to reduce compile times
-slpkg -iy "${gnome_packages[@]}" -o gnome || die "Failed to install gnome packages."
+slpkg install -y "${gnome_packages[@]}" -o gnome || die "Failed to install gnome packages."
 # Replace Slackware Current's appstream-glib with gfs for file-roller
 # -O avoids pulling in dependencies like the entire Gnome DE
-slpkg -iy appstream-glib gnome-terminal -o gnome -O  || die "Failed to install appstream-glib/gnome-terminal."
+slpkg install -y appstream-glib gnome-terminal -o gnome -O  || die "Failed to install appstream-glib/gnome-terminal."
 
 # Add LightDM group
 groupadd -g 380 lightdm || die "Failed to create group 'lightdm'."
@@ -242,8 +242,8 @@ sbo_packages=(
 )
 
 # Install Packages
-slpkg -iy "${sbo_packages[@]}"  || die "Failed to install packages."
-slpkg -iy bottom || die "Failed to install bottom." # prevent download timeout 
+slpkg install -y "${sbo_packages[@]}"  || die "Failed to install packages."
+slpkg install -y bottom || die "Failed to install bottom." # prevent download timeout 
 
 # Install Self-Compiled qemu from SBo
 git clone https://github.com/spreadiesinspace/qemu || die "Failed to download QEMU."
@@ -260,14 +260,14 @@ slint_packages=(
 )
 
 # Install packages from Slint over SBo to reduce compile times
-slpkg -iy "${slint_packages[@]}" -o slint -O || die "Failed to install slint packages."
+slpkg install -y "${slint_packages[@]}" -o slint -O || die "Failed to install slint packages."
 
 # Workaround for gedit-plugins to compile (broken)
-# slpkg -iy libpeas gedit-plugins || die "Failed to install libpeas gedit-plugins."
-# slpkg -iy libpeas -o gnome || die "Failed to install libpeas for gnome."
+# slpkg install -y libpeas gedit-plugins || die "Failed to install libpeas gedit-plugins."
+# slpkg install -y libpeas -o gnome || die "Failed to install libpeas for gnome."
 
 # Install Cinnamon and Set Default DE System-Wide
-slpkg -iy "*" -o csb || die "Failed to install Cinnamon"
+slpkg install -y '*' -o csb || die "Failed to install Cinnamon"
 ln -sf /etc/X11/xinit/xinitrc.cinnamon-session /etc/X11/xinit/xinitrc || die "Failed to create symlink for xinitrc."
 ln -sf /etc/X11/xinit/xinitrc.cinnamon-session /etc/X11/xsession || die "Failed to create symlink for xsession."
 cp /etc/X11/xinit/xinitrc.cinnamon-session /root/.xinitrc || die "Failed to copy xinitrc to /root."

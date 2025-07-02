@@ -1,25 +1,23 @@
 # General configuration file for slpkg.
 # Location: /etc/slpkg/slpkg.toml
-# Last Updated: 17/03/2025
-# Version: 5.2.3
+# Last Updated: 12/06/2025
+# Version: 5.3.0
 
 [CONFIGS]
 
-# Specify the default operating system architecture.
-# This is used to determine the correct package versions
-# for your system.
-OS_ARCH = "x86_64"
-
 # Specifies the download location for packages.
 # Note: This path is only used with the 'download' command.
+# Default is /tmp/slpkg.
 DOWNLOAD_ONLY_PATH = "/tmp/slpkg/"
 
 # Specifies the file suffix for package list files.
 # Change this value if you intend to use '.sqf' files instead.
+# Default is ".pkgs".
 FILE_LIST_SUFFIX = ".pkgs"
 
 # List of file suffixes for binary packages.
 # These are the supported package formats for installation.
+# Default is [".tgz", ".txz"].
 PACKAGE_TYPE = [".tgz", ".txz"]
 
 # Enable or disable colorful menu display.
@@ -31,40 +29,47 @@ COLORS = true
 MAKEFLAGS = "-j16"
 
 # Enable or disable GPG verification for package integrity.
-# Default is false. If set to true, ensure repositories are
-# updated to import GPG keys.
+# If set to true, ensure repositories are updated to import GPG keys.
+# Support for Git mirrors is unavailable, as .asc files are missing.
+# Default is false. [true/false]
 GPG_VERIFICATION = false
 
 # Enable or disable MD5 checksum verification.
-# Default is true. [true/false]
+# Default is true. [true/false].
 CHECKSUM_MD5 = true
 
 # Enable or disable the use of dialog for interactive shell
 # scripts. Dialog allows you to display questions or messages
-# using dialog boxes. Default is true. [true/false]
-DIALOG = true
+# using dialog boxes. Default is false. [true/false]
+DIALOG = false
+
+# Enable or disable to use the terminal selector for interactive shell
+# scripts. Selector allows you to display checkbox to choose packages.
+# Default is true. [true/false]
+TERMINAL_SELECTOR = true
 
 # View missing dependencies as main packages from
 # the repository. Some repositories include packages only
 # as dependencies, but not as standalone main packages.
-# Default is true. [true/false]
+# Default is false. [true/false]
 VIEW_MISSING_DEPS = true
 
 # There are two different methods to choose from when upgrading
 # your installed packages: the "version" method and the
 # "package" method. Recommended for -current users.
 #
-# - The "version" method (default): This compares the version
+# - The "version" method: This compares the version
 #   and build number of the packages, following semantic
 #   versioning rules.
+#   WARNING: Packages that do not follow semantic versioning rules are ignored.
 #
-# - The "package" method: This checks for differences between
+# - The "package" method (default): This checks for differences between
 #   the installed and repository packages, which means it may
 #   also suggest downgrades if the installed package is newer
 #   than the one in the repository.
 #
-# The default value is "false". [true/false]
-PACKAGE_METHOD = false
+# The default value is true. [true/false]
+PACKAGE_METHOD = true
 
 # Enable or disable the ability to downgrade packages.
 # This setting only works if the 'package' method is set
@@ -74,11 +79,6 @@ DOWNGRADE_PACKAGES = false
 # Delete downloaded source files after building or
 # installing packages. Default is false. [true/false]
 DELETE_SOURCES = false
-
-# Choose between basic or extended ASCII printable characters.
-# If true, extended characters are used; otherwise, basic
-# ones are used. Default is true. [true/false]
-ASCII_CHARACTERS = true
 
 # Enable or disable interactive questions. If set to false,
 # the --yes option will not work. Default is true. [true/false]
@@ -93,6 +93,7 @@ KERNEL_VERSION = true
 # Specify a command to run after a kernel upgrade to update
 # the bootloader.
 # Example for GRUB: grub-mkconfig -o /boot/grub/grub.cfg.
+# Default is "".
 BOOTLOADER_COMMAND = ""
 
 # Enable or disable parallel downloading of sources.
@@ -113,13 +114,8 @@ PROGRESS_BAR = true
 PROGRESS_SPINNER = "spinner"
 
 # Choose a color for the progress bar spinner. Default is green.
-# Options: [white/green/violet/yellow/blue/cyan/grey/red]
-SPINNER_COLOR = "green"
-
-# Choose a color for the border box. Default is bold_green.
-# Bold colors: [bold_green/bold_cyan/bold_yellow/bold_red/bold_blue]
-# Regular colors: [white/green/cyan/yellow/red/blue]
-BORDER_COLOR = "bold_green"
+# Options: [white/green/yellow/cyan/grey/red]
+SPINNER_COLOR = "white"
 
 # Keep process log files in the /var/log/slpkg/ directory.
 # Default is true. [true/false]
@@ -128,15 +124,18 @@ PROCESS_LOG = true
 # Specify the Slackware command for installing packages. By default,
 # 'upgradepkg' is used with the '--install-new' option to install new
 # packages alongside upgrades. See the 'upgradepkg' manpage for details.
+# Default is "upgradepkg --install-new".
 INSTALLPKG = "upgradepkg --install-new"
 
 # Specify the Slackware command for reinstalling packages. By default,
 # 'upgradepkg' is used with the '--reinstall' option to force
 # re-installation even if the same version is already installed.
+# Default is "upgradepkg --reinstall".
 REINSTALL = "upgradepkg --reinstall"
 
 # Specify the Slackware command for removing packages. By default,
 # 'removepkg' is used. See the 'removepkg' manpage for details.
+# Default is "removepkg".
 REMOVEPKG = "removepkg"
 
 # Choose a downloader tool. Options: [wget/wget2/curl/aria2c/lftp].
@@ -147,6 +146,7 @@ DOWNLOADER = "wget"
 # -c, --continue: Resume partial downloads.
 # -q: Suppress Wget's output.
 # --show-progress: Force display of the progress bar.
+# Default is "-c -q --progress=bar:force:noscroll --show-progress".
 WGET_OPTIONS = "-c -q --progress=bar:force:noscroll --show-progress"
 
 # Specify options for the Curl downloader.
@@ -154,6 +154,7 @@ CURL_OPTIONS = ""
 
 # Specify options for the aria2c downloader.
 # -c, --continue: Resume download started by web browsers or other programs.
+# Default is "-c".
 ARIA2_OPTIONS = "-c"
 
 # Specify options for the LFTP 'get' command. Default is '-c get -e'.
@@ -166,7 +167,7 @@ LFTP_MIRROR_OPTIONS = "-c mirror --parallel=100 --only-newer --delete"
 
 # Use Git instead of LFTP to synchronize SlackBuilds repositories
 # (SBo and Ponce). Requires updating the 'mirror' setting
-# in repositories.toml.
+# in repositories.toml. Default is "git clone --depth 1".
 GIT_CLONE = "git clone --depth 1"
 
 # Configure Python urllib3 settings for changelog file comparisons.
@@ -174,6 +175,8 @@ GIT_CLONE = "git clone --depth 1"
 # aborted. By default, urllib3 retries requests 3 times and follows
 # up to 3 redirects. For more details, visit:
 # https://urllib3.readthedocs.io/en/stable/user-guide.html
+# Default are: URLLIB_RETRIES = false, URLLIB_REDIRECT = false,
+# URLLIB_TIMEOUT = 3.0.
 URLLIB_RETRIES = false
 URLLIB_REDIRECT = false
 URLLIB_TIMEOUT = 3.0
@@ -182,6 +185,7 @@ URLLIB_TIMEOUT = 3.0
 # proxy types. For SOCKS proxies, install the PySocks package.
 # For more details, visit:
 # https://urllib3.readthedocs.io/en/stable/advanced-usage.html#socks-proxies
+# Default are: PROXY_ADDRESS = "", PROXY_USERNAME = "", PROXY_PASSWORD = "".
 PROXY_ADDRESS = ""
 PROXY_USERNAME = ""
 PROXY_PASSWORD = ""

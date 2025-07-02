@@ -1,7 +1,7 @@
 # General repositories configuration file for slpkg.
 # Location: /etc/slpkg/repositories.toml
-# Last Updated: 16/03/2025
-# Version: 5.2.2
+# Last Updated: 13/06/2025
+# Version: 5.3.0
 
 # Enable or disable repositories by setting 'true' or 'false'.
 # You can also use custom mirrors not included in this file.
@@ -145,6 +145,10 @@ MIRROR = "https://slackware.uk/slint/x86_64/slint-15.0/"
 ENABLE = false
 MIRROR = "https://repo.liwjatan.org/pprkut/15.0/x86_64/"
 
-[LNGN]
+[SLACKDCE]
 ENABLE = false
-MIRROR = "https://slackware.lngn.net/pub/x86_64/slackware64-current/"
+MIRROR = "https://slackware.halpanet.org/slackdce/packages/15.0/x86_64/"
+
+[D2SLACK]
+ENABLE = false
+MIRROR = "https://slackdce.theworkpc.com/mirrors/d2slack/"
