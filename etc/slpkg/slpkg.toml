@@ -52,7 +52,7 @@ TERMINAL_SELECTOR = true
 # the repository. Some repositories include packages only
 # as dependencies, but not as standalone main packages.
 # Default is false. [true/false]
-VIEW_MISSING_DEPS = true
+VIEW_MISSING_DEPS = false
 
 # There are two different methods to choose from when upgrading
 # your installed packages: the "version" method and the
@@ -115,7 +115,7 @@ PROGRESS_SPINNER = "spinner"
 
 # Choose a color for the progress bar spinner. Default is green.
 # Options: [white/green/yellow/cyan/grey/red]
-SPINNER_COLOR = "white"
+SPINNER_COLOR = "green"
 
 # Keep process log files in the /var/log/slpkg/ directory.
 # Default is true. [true/false]
