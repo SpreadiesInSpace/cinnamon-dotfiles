@@ -104,7 +104,7 @@ packages=(
     "gthumb"
     "gufw"
     "haruna"
-    "mint-meta-codecs"
+    #"mint-meta-codecs"
     "nemo"
     "nemo-fileroller"
     "qt5-style-kvantum"
