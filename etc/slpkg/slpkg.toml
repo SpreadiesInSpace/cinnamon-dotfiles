@@ -41,7 +41,7 @@ CHECKSUM_MD5 = true
 # Enable or disable the use of dialog for interactive shell
 # scripts. Dialog allows you to display questions or messages
 # using dialog boxes. Default is false. [true/false]
-DIALOG = false
+DIALOG = true
 
 # Enable or disable to use the terminal selector for interactive shell
 # scripts. Selector allows you to display checkbox to choose packages.
@@ -52,7 +52,7 @@ TERMINAL_SELECTOR = true
 # the repository. Some repositories include packages only
 # as dependencies, but not as standalone main packages.
 # Default is false. [true/false]
-VIEW_MISSING_DEPS = false
+VIEW_MISSING_DEPS = true
 
 # There are two different methods to choose from when upgrading
 # your installed packages: the "version" method and the

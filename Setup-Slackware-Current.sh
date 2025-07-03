@@ -122,7 +122,7 @@ alien_packages=(
 )
 
 # Install packages from Alien over SBo to reduce compile times
-slpkg install -y "${alien_packages[@]}" -o alien || die "Failed to install alienbob packages."
+slpkg install -y "${alien_packages[@]}" -o alien -O || die "Failed to install alienbob packages."
 
 # All packages
 packages=(
@@ -180,7 +180,6 @@ packages=(
     #"dmidecode"
     #"dnsmasq"
     #"iptables"
-    "libbpf"
     "libcacard"
     "libslirp"
     "libnfs"
@@ -189,6 +188,8 @@ packages=(
     "vde2"
     "virglrenderer"
     "qemu" # TARGETS=x86_64-softmmu
+    "libbpf" # for conraid's qemu
+    "jack" # for conraid's qemu
     "virtiofsd"    
     "edk2-ovmf-bin"
     "virt-manager"
@@ -201,25 +202,34 @@ slpkg install -y "${packages[@]}" -o conraid || die "Failed to install conraid p
 gnome_packages=(
     "eog"
     "evince"
+    "libgxps" # for evince
+    "file-roller"
+    "libportal" # for file-roller
+    # For flatpak
+    "libstemmer"
+    "libxmlb"
+    "malcontent"
     "flatpak"
-    "malcontent" # for flatpak
     # For gedit
     "libgedit-amtk"
     "libgedit-gtksourceview"
+    "libgedit-tepl"
     "libpeas"
     "gedit"
+    "gedit-plugins"
+    "gnome-calculator"
+    "gnome-system-monitor"
     "gnome-disk-utility"
     "gpaste"
-    # "libportal" # for file-roller
     # "rhythmbox" # using Elisa instead
     # "totem-pl-parser" # for rhythmbox
 )
 
 # Install packages from GFS over SBo to reduce compile times
 slpkg install -y "${gnome_packages[@]}" -o gnome || die "Failed to install gnome packages."
-# Replace Slackware Current's appstream-glib with gfs for file-roller
+# Replace Slackware Current's appstream-glib with gfs for file-roller (GFS 46.x)
 # -O avoids pulling in dependencies like the entire Gnome DE
-slpkg install -y appstream-glib gnome-terminal -o gnome -O  || die "Failed to install appstream-glib/gnome-terminal."
+# slpkg install -y gnome-terminal -o gnome -O  || die "Failed to install gnome-terminal."
 
 # Add LightDM group
 groupadd -g 380 lightdm || die "Failed to create group 'lightdm'."
@@ -228,10 +238,7 @@ useradd -d /var/lib/lightdm -s /bin/false -u 380 -g 380 lightdm || die "Failed t
 # SBo packages
 sbo_packages=(
     "brave-browser"
-    "file-roller"
-    "gnome-calculator"
     "gnome-screenshot"
-    "gnome-system-monitor"
     "kvantum-qt5"
     "haruna"
     "lightdm"
@@ -240,8 +247,8 @@ sbo_packages=(
     "ncdu"
     "qt6ct"
     "timeshift"
-    # "libuchardet" # for rhythmbox
-    "tepl" # for gedit
+    # "libuchardet" # for rhythmbox (GFS 46)
+    # "tepl" # for gedit (GFS 46)
     "ripgrep" # for neovim
     "libiscsi" # for Virt-Manager
     "glusterfs" # for Virt-Manager
@@ -268,7 +275,7 @@ slint_packages=(
 # Install packages from Slint over SBo to reduce compile times
 slpkg install -y "${slint_packages[@]}" -o slint -O || die "Failed to install slint packages."
 
-# Workaround for gedit-plugins to compile (broken)
+# Workaround for gedit-plugins to compile (GFS 46, broken)
 # slpkg install -y libpeas gedit-plugins || die "Failed to install libpeas gedit-plugins."
 # slpkg install -y libpeas -o gnome || die "Failed to install libpeas for gnome."
 

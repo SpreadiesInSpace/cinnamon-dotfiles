@@ -105,8 +105,8 @@ MIRROR = "https://slackware.nl/people/alien/restricted_sbrepos/current/x86_64/"
 
 [GNOME]
 ENABLE = true
-MIRROR = "https://slackware.uk/gfs/current/46.10/x86_64/"
-# MIRROR = "https://reddoglinux.ddns.net/linux/gnome/46.x/x86_64/"
+MIRROR = "https://slackware.uk/gfs/current/48/x86_64/"
+# MIRROR = "https://reddoglinux.ddns.net/linux/gnome/48.x/x86_64/"
 
 [MSB]
 ENABLE = false
