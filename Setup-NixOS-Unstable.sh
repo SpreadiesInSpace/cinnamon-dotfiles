@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Exit early NixOS script is run from ISO.
+# Exit early if NixOS is installed via cinnamon-ISO
 if [ -f ".nixos-unstable.done" ]; then
   echo "This NixOS install was done via Install-NixOS.sh."
   echo "Now run Theme.sh with the following command:" 
