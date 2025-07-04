@@ -50,7 +50,7 @@ bash Setup.sh
 ```bash
 bash Theme.sh
 ```
-*See this [README](https://github.com/SpreadiesInSpace/cinnamon-dotfiles/blob/main/extra/Setup-ISO.sh) for theming details.*
+*See this [README](https://github.com/SpreadiesInSpace/cinnamon-dotfiles/tree/main/home#readme) for theming details.*
 
 ## Screenshots - [Link](https://github.com/SpreadiesInSpace/cinnamon-dotfiles/blob/main/screenshots/CinnamonGruvbox2024.png)
 ![LMDE Screenshots](https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/screenshots/CinnamonGruvbox2024.png "GTK, QT and Flatpak apps all thoroughly themed.")
