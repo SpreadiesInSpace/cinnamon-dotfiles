@@ -61,9 +61,8 @@ FLAG="/var/db/repos/.synced-git-repo"
 
 # Skip this if run previously
 if [[ ! -f "$FLAG" ]]; then
-  eselect repository disable gentoo || die "Failed to disable gentoo repository."
-  eselect repository enable gentoo || die "Failed to enable gentoo repository."
-  rm -rf /var/db/repos/gentoo || die "Failed to remove existing gentoo repository."
+  eselect repository remove -f gentoo || die "Failed to remove rsync-based Gentoo repository."
+  eselect repository add gentoo git https://github.com/gentoo-mirror/gentoo.git || die "Failed to enable Git-based Gentoo repository."
   touch "$FLAG" || die "Failed to create git sync flag."
   echo "Switched to git for repository sync."
 else

@@ -187,9 +187,8 @@ echo && getuto || die "Failed to verify GPG keys with getuto."
 emerge -vquN app-eselect/eselect-repository dev-vcs/git || die "Failed to install eselect-repository and git."
 
 # Switch from rsync to git for faster repository sync times
-eselect repository disable gentoo || die "Failed to disable rsync-based Gentoo repository."
-eselect repository enable gentoo || die "Failed to enable Git-based Gentoo repository."
-rm -rf /var/db/repos/gentoo || die "Failed to remove old Gentoo repository."
+eselect repository remove -f gentoo || die "Failed to remove rsync-based Gentoo repository."
+eselect repository add gentoo git https://github.com/gentoo-mirror/gentoo.git || die "Failed to enable Git-based Gentoo repository."
 
 # Signal that repository sync is now using git during install phase
 touch /var/db/repos/.synced-git-repo || die "Failed to create .synced-git-repo flag file."
