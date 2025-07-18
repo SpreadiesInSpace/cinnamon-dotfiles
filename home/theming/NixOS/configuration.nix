@@ -132,7 +132,7 @@ in
       qbittorrent
       ripgrep
       # rmlint
-      rhythmbox
+      # rhythmbox
       timeshift
       unzip
       virt-manager
