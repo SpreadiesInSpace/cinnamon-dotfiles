@@ -61,7 +61,8 @@ dnf -y copr enable atim/bottom || die "Failed to enable COPR repo for Bottom."
 dnf -y install bottom || die "Failed to install Bottom."
 
 # Install Neofetch
-dnf -y install https://dl.fedoraproject.org/pub/fedora/linux/releases/40/Everything/x86_64/os/Packages/n/neofetch-7.1.0-12.fc40.noarch.rpm || die "Failed to install Neofetch."
+dnf -y install https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/40/Everything/x86_64/os/Packages/n/neofetch-7.1.0-12.fc40.noarch.rpm || die "Failed to install Neofetch."
+
 
 # Install VSCodium
 rpmkeys --import https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg || die "Failed to import VSCodium GPG key."
