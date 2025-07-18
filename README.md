@@ -7,7 +7,7 @@
 * [Fedora 42](https://fedoraproject.org/spins/cinnamon/download/)
 * [Gentoo](https://www.gentoo.org/downloads/)
 * [Linux Mint (Debian Edition)](https://linuxmint.com/edition.php?id=308)
-* [NixOS Unstable](https://nixos.org/download/#nixos-iso)
+* [NixOS 25.05](https://nixos.org/download/#nixos-iso)
 * [openSUSE Tumbleweed](https://get.opensuse.org/tumbleweed/#download)
 * [Slackware Current](https://us.slackware.nl/slackware/slackware64-current-iso/)
 * [Void Linux](https://voidlinux.org/download/)
@@ -16,7 +16,7 @@
 *Supports UEFI and BIOS, x86_64 Only*
 
 ```bash
-# For Arch, Gentoo, NixOS Unstable & openSUSE Tumbleweed
+# For Arch, Gentoo, NixOS & openSUSE Tumbleweed
 bash <(curl -fsSL https://tinyurl.com/cinnamon-ISO)
 ```
 ```bash
