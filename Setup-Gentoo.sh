@@ -74,11 +74,13 @@ fi
 eselect repository add sunny-overlay git https://github.com/dguglielmi/sunny-overlay.git || die "Failed to add sunny-overlay repository."
 eselect repository enable guru || die "Failed to enable guru repository."
 eselect repository enable gentoo-zh || die "Failed to enable gentoo-zh repository."
-eselect repository enable djs_overlay || die "Failed to enable djs_overlay repository."
 
+<<djs_overlay
 # Mask select djs_overlay packages
+eselect repository enable djs_overlay || die "Failed to enable djs_overlay repository."
 echo "app-editors/neovim::djs_overlay" | tee /etc/portage/package.mask/neovim || die "Failed to mask neovim package."
 echo "www-client/brave-bin::djs_overlay" | tee /etc/portage/package.mask/brave || die "Failed to mask brave-bin package."
+djs_overlay
 
 # Allow select unstable packages to be merged
 echo "x11-misc/gpaste ~amd64" | tee /etc/portage/package.accept_keywords/gpaste || die "Failed to add gpaste to package.accept_keywords."
@@ -91,8 +93,17 @@ echo "app-backup/timeshift ~amd64" | tee /etc/portage/package.accept_keywords/ti
 # Enable Extra Use Flags
 echo "app-editors/gedit-plugins charmap git terminal" | tee /etc/portage/package.use/gedit-plugins || die "Failed to set USE flags for gedit-plugins."
 echo "media-video/ffmpegthumbnailer gnome" | tee /etc/portage/package.use/ffmpegthumbnailer || die "Failed to set USE flags for ffmpegthumbnailer."
-echo "gnome-extra/nemo tracker" | tee /etc/portage/package.use/nemo || die "Failed to set USE flags for nemo."
+# echo "gnome-extra/nemo tracker" | tee /etc/portage/package.use/nemo || die "Failed to set USE flags for nemo."
 echo "app-emulation/qemu glusterfs iscsi opengl pipewire spice usbredir vde virgl virtfs zstd" | tee /etc/portage/package.use/qemu || die "Failed to set USE flags for qemu."
+
+# Set Polkit Permissions
+cat << 'EOF' | tee /etc/polkit-1/rules.d/55-allowing-all-actions.rules > /dev/null || die "Failed to set polkit rules."
+polkit.addRule(function(action, subject) {
+    if (subject.isInGroup("wheel")) {
+        return polkit.Result.YES;
+    }
+});
+EOF
 
 # Temporary Python Versions Fix
 # echo "x11-apps/lightdm-gtk-greeter-settings PYTHON_SINGLE_TARGET: python3_12" | tee /etc/portage/package.use/python || die "Failed to set USE flags for python."
