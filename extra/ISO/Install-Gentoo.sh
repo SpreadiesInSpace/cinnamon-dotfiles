@@ -189,6 +189,7 @@ emerge -vquN app-eselect/eselect-repository dev-vcs/git || die "Failed to instal
 # Switch from rsync to git for faster repository sync times
 eselect repository remove -f gentoo || die "Failed to remove rsync-based Gentoo repository."
 eselect repository add gentoo git https://github.com/gentoo-mirror/gentoo.git || die "Failed to enable Git-based Gentoo repository."
+rm -rf /var/db/repos/gentoo || die "Failed to remove existing gentoo repository."
 
 # Signal that repository sync is now using git during install phase
 touch /var/db/repos/.synced-git-repo || die "Failed to create .synced-git-repo flag file."

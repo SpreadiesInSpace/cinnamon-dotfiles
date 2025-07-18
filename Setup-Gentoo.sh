@@ -64,6 +64,7 @@ if [[ ! -f "$FLAG" ]]; then
   eselect repository remove -f gentoo || die "Failed to remove rsync-based Gentoo repository."
   eselect repository add gentoo git https://github.com/gentoo-mirror/gentoo.git || die "Failed to enable Git-based Gentoo repository."
   touch "$FLAG" || die "Failed to create git sync flag."
+  rm -rf /var/db/repos/gentoo || die "Failed to remove existing gentoo repository."
   echo "Switched to git for repository sync."
 else
   echo "Repository already configured for git. Skipping."
