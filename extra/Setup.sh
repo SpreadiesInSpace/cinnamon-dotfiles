@@ -73,7 +73,7 @@ scripts=(
   "Setup-Fedora-42.sh"
   "Setup-Gentoo.sh"
   "Setup-LMDE-6.sh"
-  "Setup-NixOS-Unstable.sh"
+  "Setup-NixOS-25.05.sh"
   "Setup-OpenSUSE-Tumbleweed.sh"
   "Setup-Slackware-Current.sh"
   "Setup-Void.sh"
@@ -88,7 +88,7 @@ for script in "${scripts[@]}"; do
     pretty_name="$(tr '[:lower:]' '[:upper:]' <<< ${flag:1:1})${flag:2:-5}"
     echo -e "${GREEN}Detected flag: $pretty_name. Running $script...${NC}"
     chmod +x "$script"
-    if [[ "$script" == "Setup-NixOS-Unstable.sh" ]]; then
+    if [[ "$script" == "Setup-NixOS-25.05.sh" ]]; then
       nix-shell -p unzip --run "sudo bash $script"
     else
       sudo bash "$script"
@@ -111,7 +111,7 @@ select script in "${scripts[@]}" "Exit"; do
     fi
     echo -e "${GREEN}Running $script...${NC}"
     chmod +x "$script"
-    if [[ "$script" == "Setup-NixOS-Unstable.sh" ]]; then
+    if [[ "$script" == "Setup-NixOS-25.05.sh" ]]; then
       nix-shell -p unzip --run "sudo bash $script"
     else
       sudo bash "$script"

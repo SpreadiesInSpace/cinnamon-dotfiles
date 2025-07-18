@@ -19,7 +19,7 @@ NC='\033[0m' # No Color
 declare -A installs=(
   [1]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/extra/ISO/Install-Arch.sh"
   [2]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/extra/ISO/Install-Gentoo.sh"
-  [3]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/extra/ISO/Install-NixOS-Unstable.sh"
+  [3]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/extra/ISO/Install-NixOS-25.05.sh"
   [4]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/extra/ISO/Install-openSUSE-Tumbleweed.sh"
   [5]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/extra/ISO/Install-Slackware-Current.sh"
   [6]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/extra/ISO/Install-Void.sh"
@@ -28,7 +28,7 @@ declare -A installs=(
 declare -A names=(
   [1]="Install-Arch.sh"
   [2]="Install-Gentoo"
-  [3]="Install-NixOS-Unstable.sh"
+  [3]="Install-NixOS-25.05.sh"
   [4]="Install-openSUSE-Tumbleweed.sh"
   [5]="Install-Slackware-Current.sh"
   [6]="Install-Void.sh"
@@ -39,7 +39,7 @@ echo -e "${YELLOW}Which installer would you like to run?${NC}"
 options=(
   "Arch Linux"
   "Gentoo"
-  "NixOS Unstable"
+  "NixOS 25.05"
   "openSUSE Tumbleweed"
   "Slackware Current"
   "Void Linux"
