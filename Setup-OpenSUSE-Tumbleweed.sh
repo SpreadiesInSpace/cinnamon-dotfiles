@@ -155,6 +155,9 @@ zypper al neofetch || die "Failed to add neofetch to the blacklist."
 # Install Additional Tools for Virt Manager
 zypper in -y -t pattern kvm_server kvm_tools || die "Failed to install Virt Manager tools."
 
+# Set polkit permissions for wheel group users
+set_polkit_perms
+
 # Enable Flathub for Flatpak
 enable_flathub
 

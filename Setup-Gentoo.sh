@@ -203,16 +203,8 @@ dispatch-conf <<< $(echo -e 'y') || die "Failed to run dispatch-conf for configu
 # Resume emerge
 emerge -vqDuN --with-bdeps=y --keep-going "${packages[@]}" || die "Failed to install packages."
 
-<<polkit
-# Set Polkit Permissions
-cat << 'EOF' | tee /etc/polkit-1/rules.d/55-allowing-all-actions.rules > /dev/null || die "Failed to set polkit rules."
-polkit.addRule(function(action, subject) {
-    if (subject.isInGroup("wheel")) {
-        return polkit.Result.YES;
-    }
-});
-EOF
-polkit
+# Set polkit permissions for wheel group users
+set_polkit_perms
 
 # Enable Flathub for Flatpak
 enable_flathub

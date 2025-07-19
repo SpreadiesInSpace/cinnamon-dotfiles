@@ -288,6 +288,9 @@ cp /etc/X11/xinit/xinitrc.cinnamon-session /root/.xsession || die "Failed to cop
 chmod -x /root/.xinitrc || die "Failed to modify permissions for /root/.xinitrc."
 chmod -x /root/.xsession || die "Failed to modify permissions for /root/.xsession."
 
+# Set polkit permissions for wheel group users
+set_polkit_perms
+
 # Enable Flathub for Flatpak
 enable_flathub
 

@@ -98,7 +98,7 @@ install_icons_and_themes() {
     rm -rf ".icons/$ICON_RENAME" ".icons/$CURSOR_DIR" ".themes/$THEME_DIR" || die "Failed to clean up extracted directories."
 }
 
-# Only openSUSE/Slackware uses this (Gentoo uses rules override file)
+# Nothing currently uses this
 disable_polkit_agent() {
     # Disable Cinnamon 6.4's built in polkit
     dconf write /org/cinnamon/enable-polkit-agent "false"
