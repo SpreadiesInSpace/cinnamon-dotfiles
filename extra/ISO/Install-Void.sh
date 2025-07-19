@@ -50,8 +50,9 @@ create_btrfs_subvolumes
 mount_partitions
 
 # Install Base System
-REPO=https://repo-fastly.voidlinux.org/current
+REPO=https://repo-fi.voidlinux.org/current
 # REPO=https://mirror.vofr.net/voidlinux/current
+# REPO=https://repo-fastly.voidlinux.org/current
 ARCH=x86_64 
 mkdir -p /mnt/var/db/xbps/keys || die "Failed to create /mnt/var/db/xbps/keys."
 cp /var/db/xbps/keys/* /mnt/var/db/xbps/keys/ || die "Failed to copy XBPS keys."
