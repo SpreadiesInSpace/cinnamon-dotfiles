@@ -474,8 +474,9 @@ apply_gedit_and_gnome_terminal_config() {
     local gedit_config="${2:-}"
     if [[ "$distro" == "openSUSE" ]]; then
         # Use gnomesu for openSUSE
-        gnomesu dconf load / < "theming/$distro/gnome-terminal-$distro.dconf"
-        gnomesu dconf load / < "theming/$gedit_config"
+        cat "theming/$distro/gnome-terminal-$distro.dconf" "theming/$gedit_config" > combined.dconf
+        gnomesu dconf load / < "combined.dconf"
+        rm -rf combined.dconf
     else
         # Use sudo dbus-launch for other distros
         sudo dbus-launch dconf load / < "theming/$distro/gnome-terminal-$distro.dconf"
