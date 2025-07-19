@@ -460,12 +460,10 @@ import_desktop_config() {
 
     echo "Applying Proper Look & Feel System-wide..."
     # Backup and Import Entire Desktop Configuration
-    cd theming/$distro/
     dconf dump / > Old_Desktop_Configuration_$timestamp.dconf
-    mv Old_Desktop_Configuration_$timestamp.dconf ~/
-    dconf load / < $distro.dconf
+    dconf load / < "theming/$distro/$distro.dconf"
+    # Remove dconf copied from earlier functions
     rm ~/$distro.dconf
-    cd ../..
 }
 
 apply_gedit_and_gnome_terminal_config() {
@@ -493,12 +491,10 @@ set_default_apps() {
 
     echo "Setting Default Apps..."
     # Set default apps for the given distro
-    cd theming/$distro/
-    chmod +x Default-Apps-$distro.sh
-    bash Default-Apps-$distro.sh
-    sudo bash Default-Apps-$distro.sh
+    chmod +x theming/$distro/Default-Apps-$distro.sh
+    bash theming/$distro/Default-Apps-$distro.sh
+    sudo bash theming/$distro/Default-Apps-$distro.sh
     rm ~/Default-Apps-$distro.sh
-    cd ../..
 }
 
 copy_vscodium_config() {

@@ -9,6 +9,12 @@ fi
 # Set LINGUAS for Cinnamon Localization
 # echo "*/* LINGUAS: en" | tee /etc/portage/package.use/00localization || die "Failed to set LINGUAS to EN"
 
+# Use Cinnamon from djs_overlay
+eselect repository enable djs_overlay || die "Failed to enable djs_overlay repository."
+echo "app-editors/nemo::djs_overlay" | tee /etc/portage/package.mask/nemo || die "Failed to mask nemo package."
+echo "app-editors/neovim::djs_overlay" | tee /etc/portage/package.mask/neovim || die "Failed to mask neovim package."
+echo "www-client/brave-bin::djs_overlay" | tee /etc/portage/package.mask/brave || die "Failed to mask brave-bin package."
+
 # Update system and install Cinnamon (split them to prevent slot conflicts)
 desktop_environment=(
     "x11-base/xorg-server"

@@ -93,7 +93,6 @@ echo "Updated MAKEFLAGS in /etc/slpkg/slpkg.toml to -j$cores based on the number
 slpkg update || die "Failed to sync slpkg."
 
 # Update Slackware Packages
-# touch /var/log/slpkg/deps.log || die "Failed to create deps.log"
 slpkg upgrade -y -o "slack" || die "Failed to update slack packages."
 slpkg upgrade -y -o "slack_extra" || die "Failed to update slack_extra packages."
 
@@ -222,14 +221,10 @@ gnome_packages=(
     "gnome-disk-utility"
     "gpaste"
     # "rhythmbox" # using Elisa instead
-    # "totem-pl-parser" # for rhythmbox
 )
 
 # Install packages from GFS over SBo to reduce compile times
 slpkg install -y "${gnome_packages[@]}" -o gnome || die "Failed to install gnome packages."
-# Replace Slackware Current's appstream-glib with gfs for file-roller (GFS 46.x)
-# -O avoids pulling in dependencies like the entire Gnome DE
-# slpkg install -y gnome-terminal -o gnome -O  || die "Failed to install gnome-terminal."
 
 # Add LightDM group
 groupadd -g 380 lightdm || die "Failed to create group 'lightdm'."
@@ -247,8 +242,6 @@ sbo_packages=(
     "ncdu"
     "qt6ct"
     "timeshift"
-    # "libuchardet" # for rhythmbox (GFS 46)
-    # "tepl" # for gedit (GFS 46)
     "ripgrep" # for neovim
     "libiscsi" # for Virt-Manager
     "glusterfs" # for Virt-Manager
@@ -257,13 +250,6 @@ sbo_packages=(
 # Install Packages
 slpkg install -y "${sbo_packages[@]}" || die "Failed to install packages."
 slpkg install -y bottom || die "Failed to install bottom." # prevent download timeout 
-
-# Install Self-Compiled qemu from SBo
-# git clone https://github.com/spreadiesinspace/qemu || die "Failed to download QEMU."
-# cd qemu/
-# ./install.sh || die "Failed to install QEMU."
-# cd ..
-# rm -rf qemu/
 
 # Slint packages
 slint_packages=(
@@ -274,10 +260,6 @@ slint_packages=(
 
 # Install packages from Slint over SBo to reduce compile times
 slpkg install -y "${slint_packages[@]}" -o slint -O || die "Failed to install slint packages."
-
-# Workaround for gedit-plugins to compile (GFS 46, broken)
-# slpkg install -y libpeas gedit-plugins || die "Failed to install libpeas gedit-plugins."
-# slpkg install -y libpeas -o gnome || die "Failed to install libpeas for gnome."
 
 # Install Cinnamon and Set Default DE System-Wide
 slpkg install -y '*' -o csb || die "Failed to install Cinnamon"

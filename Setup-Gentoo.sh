@@ -75,14 +75,6 @@ eselect repository add sunny-overlay git https://github.com/dguglielmi/sunny-ove
 eselect repository enable guru || die "Failed to enable guru repository."
 eselect repository enable gentoo-zh || die "Failed to enable gentoo-zh repository."
 
-<<djs_overlay
-# Use Cinnamon from djs_overlay
-eselect repository enable djs_overlay || die "Failed to enable djs_overlay repository."
-echo "app-editors/nemo::djs_overlay" | tee /etc/portage/package.mask/nemo || die "Failed to mask nemo package."
-echo "app-editors/neovim::djs_overlay" | tee /etc/portage/package.mask/neovim || die "Failed to mask neovim package."
-echo "www-client/brave-bin::djs_overlay" | tee /etc/portage/package.mask/brave || die "Failed to mask brave-bin package."
-djs_overlay
-
 # Allow select unstable packages to be merged
 echo "x11-misc/gpaste ~amd64" | tee /etc/portage/package.accept_keywords/gpaste || die "Failed to add gpaste to package.accept_keywords."
 echo "app-admin/grub-customizer ~amd64" | tee /etc/portage/package.accept_keywords/grub-customizer || die "Failed to add grub-customizer to package.accept_keywords."
