@@ -104,8 +104,9 @@ set_video_card() {
   echo; echo "Updated VIDEO_CARDS in /etc/portage/package.use/00video-cards to $video_card based on provided input."; echo
 }
 
-set_polkit_permissions() {
-    # Set Polkit Permissions
+# Only Gentoo/openSUSE/Slackware uses this
+set_polkit_perms() {
+    # Set polkit permissions for wheel group users
     cat << 'EOF' | tee /etc/polkit-1/rules.d/10-admin.rules > /dev/null || die "Failed to set polkit rules."
 polkit.addAdminRule(function(action, subject) {
     return ["unix-group:wheel"];
