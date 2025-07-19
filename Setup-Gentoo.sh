@@ -96,15 +96,6 @@ echo "media-video/ffmpegthumbnailer gnome" | tee /etc/portage/package.use/ffmpeg
 # echo "gnome-extra/nemo tracker" | tee /etc/portage/package.use/nemo || die "Failed to set USE flags for nemo."
 echo "app-emulation/qemu glusterfs iscsi opengl pipewire spice usbredir vde virgl virtfs zstd" | tee /etc/portage/package.use/qemu || die "Failed to set USE flags for qemu."
 
-# Set Polkit Permissions
-cat << 'EOF' | tee /etc/polkit-1/rules.d/55-allowing-all-actions.rules > /dev/null || die "Failed to set polkit rules."
-polkit.addRule(function(action, subject) {
-    if (subject.isInGroup("wheel")) {
-        return polkit.Result.YES;
-    }
-});
-EOF
-
 # Temporary Python Versions Fix
 # echo "x11-apps/lightdm-gtk-greeter-settings PYTHON_SINGLE_TARGET: python3_12" | tee /etc/portage/package.use/python || die "Failed to set USE flags for python."
 
@@ -210,6 +201,15 @@ emerge -vqDuN --with-bdeps=y "${packages[@]}" --autounmask-write --autounmask-co
 dispatch-conf <<< $(echo -e 'y') || die "Failed to run dispatch-conf for configuration update."
 # Resume emerge
 emerge -vqDuN --with-bdeps=y --keep-going "${packages[@]}" || die "Failed to install packages."
+
+# Set Polkit Permissions
+cat << 'EOF' | tee /etc/polkit-1/rules.d/55-allowing-all-actions.rules > /dev/null || die "Failed to set polkit rules."
+polkit.addRule(function(action, subject) {
+    if (subject.isInGroup("wheel")) {
+        return polkit.Result.YES;
+    }
+});
+EOF
 
 # Enable Flathub for Flatpak
 enable_flathub
