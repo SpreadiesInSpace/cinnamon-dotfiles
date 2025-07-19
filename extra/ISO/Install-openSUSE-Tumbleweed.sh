@@ -82,7 +82,7 @@ die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
 source /etc/profile || die "Failed to source /etc/profile."
 
 # Sync Repos
-zypper ref || die "Failed to refresh zypper repositories."
+zypper --gpg-auto-import-keys ref || die "Failed to refresh zypper repositories."
 
 # Remove Dangling Repo (at this point, all proper repos have been generated)
 zypper rr oss || die "Failed to remove oss repo."
