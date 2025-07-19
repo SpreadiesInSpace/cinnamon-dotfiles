@@ -472,24 +472,19 @@ apply_gedit_and_gnome_terminal_config() {
     # Apply gedit and gnome-terminal configuration to root
     local distro="${1:-}"
     local gedit_config="${2:-}"
-
-    cd theming/$distro/
     if [[ "$distro" == "openSUSE" ]]; then
         # Use gnomesu for openSUSE
-        gnomesu dconf load / < "gnome-terminal-$distro.dconf"
-        rm ~/gnome-terminal-$distro.dconf
-        cd ..
-        gnomesu dconf load / < "$gedit_config"
+        gnomesu dconf load / < "theming/$distro/gnome-terminal-$distro.dconf"
+        gnomesu dconf load / < "theming/$gedit_config"
     else
         # Use sudo dbus-launch for other distros
-        sudo dbus-launch dconf load / < "gnome-terminal-$distro.dconf"
-        rm ~/gnome-terminal-$distro.dconf
-        cd ..
-        sudo dbus-launch dconf load / < "$gedit_config"
+        sudo dbus-launch dconf load / < "theming/$distro/gnome-terminal-$distro.dconf"
+        sudo dbus-launch dconf load / < "theming/$gedit_config"
     fi
+    # Remove gnome-terminal dconf copied from earlier functions
+    rm -rf ~/gnome-terminal-$distro.dconf
     # Set gedit sidebar root to user's home directory
     dconf write /org/gnome/gedit/plugins/filebrowser/virtual-root "'file:///home/$(whoami)'"
-    cd ..
 }
 
 set_default_apps() {
