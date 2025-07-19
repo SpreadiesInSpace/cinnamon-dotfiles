@@ -74,11 +74,6 @@ fi
 eselect repository add sunny-overlay git https://github.com/dguglielmi/sunny-overlay.git || die "Failed to add sunny-overlay repository."
 eselect repository enable guru || die "Failed to enable guru repository."
 eselect repository enable gentoo-zh || die "Failed to enable gentoo-zh repository."
-eselect repository enable djs_overlay || die "Failed to enable djs_overlay repository."
-
-# Mask select djs_overlay packages
-echo "app-editors/neovim::djs_overlay" | tee /etc/portage/package.mask/neovim || die "Failed to mask neovim package."
-echo "www-client/brave-bin::djs_overlay" | tee /etc/portage/package.mask/brave || die "Failed to mask brave-bin package."
 
 # Allow select unstable packages to be merged
 echo "x11-misc/gpaste ~amd64" | tee /etc/portage/package.accept_keywords/gpaste || die "Failed to add gpaste to package.accept_keywords."
@@ -199,6 +194,12 @@ emerge -vqDuN --with-bdeps=y "${packages[@]}" --autounmask-write --autounmask-co
 dispatch-conf <<< $(echo -e 'y') || die "Failed to run dispatch-conf for configuration update."
 # Resume emerge
 emerge -vqDuN --with-bdeps=y --keep-going "${packages[@]}" || die "Failed to install packages."
+
+
+# Use cinnamon from djs_overlay
+eselect repository enable djs_overlay || die "Failed to enable djs_overlay repository."
+echo "app-editors/neovim::djs_overlay" | tee /etc/portage/package.mask/neovim || die "Failed to mask neovim package."
+echo "www-client/brave-bin::djs_overlay" | tee /etc/portage/package.mask/brave || die "Failed to mask brave-bin package."
 
 <<polkit
 # Set Polkit Permissions
