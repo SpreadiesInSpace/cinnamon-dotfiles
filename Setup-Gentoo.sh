@@ -74,13 +74,11 @@ fi
 eselect repository add sunny-overlay git https://github.com/dguglielmi/sunny-overlay.git || die "Failed to add sunny-overlay repository."
 eselect repository enable guru || die "Failed to enable guru repository."
 eselect repository enable gentoo-zh || die "Failed to enable gentoo-zh repository."
-
-<<djs_overlay
-# Mask select djs_overlay packages
 eselect repository enable djs_overlay || die "Failed to enable djs_overlay repository."
+
+# Mask select djs_overlay packages
 echo "app-editors/neovim::djs_overlay" | tee /etc/portage/package.mask/neovim || die "Failed to mask neovim package."
 echo "www-client/brave-bin::djs_overlay" | tee /etc/portage/package.mask/brave || die "Failed to mask brave-bin package."
-djs_overlay
 
 # Allow select unstable packages to be merged
 echo "x11-misc/gpaste ~amd64" | tee /etc/portage/package.accept_keywords/gpaste || die "Failed to add gpaste to package.accept_keywords."
@@ -202,6 +200,7 @@ dispatch-conf <<< $(echo -e 'y') || die "Failed to run dispatch-conf for configu
 # Resume emerge
 emerge -vqDuN --with-bdeps=y --keep-going "${packages[@]}" || die "Failed to install packages."
 
+<<polkit
 # Set Polkit Permissions
 cat << 'EOF' | tee /etc/polkit-1/rules.d/55-allowing-all-actions.rules > /dev/null || die "Failed to set polkit rules."
 polkit.addRule(function(action, subject) {
@@ -210,6 +209,7 @@ polkit.addRule(function(action, subject) {
     }
 });
 EOF
+polkit
 
 # Enable Flathub for Flatpak
 enable_flathub

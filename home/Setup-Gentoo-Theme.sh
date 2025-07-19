@@ -14,7 +14,7 @@ check_dependencies
 install_icons_and_themes
 
 # Disable Cinnamon 6.4's built in polkit
-# disable_polkit_agent
+disable_polkit_agent
 
 # Override Cursor Theme for QT Apps
 override_qt_cursor_theme
