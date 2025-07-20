@@ -1,7 +1,7 @@
 # General repositories configuration file for slpkg.
 # Location: /etc/slpkg/repositories.toml
-# Last Updated: 13/06/2025
-# Version: 5.3.0
+# Last Updated: 13/07/2025
+# Version: 5.3.7
 
 # Enable or disable repositories by setting 'true' or 'false'.
 # You can also use custom mirrors not included in this file.
@@ -44,6 +44,8 @@ REPOSITORY = "ponce"
 # Only applicable for repositories fully installed on the system.
 # Example: ["slack", "gnome"]
 # Note: Always review new packages before installation.
+# Recommended ["slack"] repository for Slackware -current users,
+# it is equivalent to 'slackpkg install-new'.
 REPOSITORIES = ["slack"]
 
 [REMOVE_PACKAGES]
@@ -67,15 +69,21 @@ MIRROR = "https://slackware.uk/sbosrcarch/by-name/"
 
 [SBO]
 ENABLE = false
-# MIRROR = "https://slackbuilds.org/slackbuilds/15.0/"
+MIRROR = "https://slackbuilds.org/slackbuilds/15.0/"
 # Alternative, you can use a git repository.
-MIRROR = "https://github.com/SlackBuildsOrg/slackbuilds.git"
+# MIRROR = "https://github.com/SlackBuildsOrg/slackbuilds.git"
 # MIRROR = "https://gitlab.com/SlackBuilds.org/slackbuilds.git"
+# By default, the 'master' branch is used. You can change this to another branch,
+# for example '14.1', if you need to.
+# BRANCH = "master"
 
 [PONCE]
 ENABLE = true
 MIRROR = "https://github.com/Ponce/slackbuilds.git"
-# Alternative, you can use the this repository.
+# By default, the 'master' branch is used. You can change this to another branch,
+# if you need to.
+BRANCH = 'current'
+# Alternative, you can use this repository.
 # MIRROR = "https://cgit.ponce.cc/slackbuilds/plain/"
 
 [SLACK]

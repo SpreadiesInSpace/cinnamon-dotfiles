@@ -1,9 +1,22 @@
 # General configuration file for slpkg.
 # Location: /etc/slpkg/slpkg.toml
-# Last Updated: 12/06/2025
-# Version: 5.3.0
+# Last Updated: 14/07/2025
+# Version: 5.3.7
 
 [CONFIGS]
+
+# Sets the minimum severity level for log messages written by the application.
+# Messages with a lower severity than the configured level will be ignored.
+#
+# Available options (from least to most verbose):
+#   "CRITICAL" - For severe errors that cause the application to stop.
+#   "ERROR"    - For serious problems that prevent a function from completing.
+#   "WARNING"  - For unexpected events or potential issues that don't stop execution.
+#   "INFO"     - For general confirmation that things are working as expected (default).
+#   "DEBUG"    - For detailed diagnostic information, useful for troubleshooting.
+#
+# Default: "INFO"
+LOGGING_LEVEL = "INFO"
 
 # Specifies the download location for packages.
 # Note: This path is only used with the 'download' command.
@@ -87,6 +100,7 @@ ASK_QUESTION = true
 # Remove the kernel version from custom SlackBuilds
 # (e.g., nvidia-kernel, virtualbox-kernel) to simplify version
 # comparison between installed and repository packages.
+# This ignored if PACKAGE_METHOD is true.
 # Default is true. [true/false]
 KERNEL_VERSION = true
 
