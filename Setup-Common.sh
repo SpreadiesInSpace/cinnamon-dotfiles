@@ -114,6 +114,27 @@ polkit.addAdminRule(function(action, subject) {
 EOF
 }
 
+# Only Void uses this
+configure_pipewire() {
+    # Remove PulseAudio-related components
+    xbps-remove -y alsa-plugins-pulseaudio pulseaudio rtkit >/dev/null 2>&1
+    
+    # Configure PipeWire to use WirePlumber 
+    mkdir -p /etc/pipewire/pipewire.conf.d || die "Failed to make PipeWire directory."
+    ln -sf /usr/share/examples/wireplumber/10-wireplumber.conf /etc/pipewire/pipewire.conf.d/ || die "Failed to symlink WirePlumber."
+
+    # Configure PipeWire-Pluse
+    ln -sf /usr/share/examples/pipewire/20-pipewire-pulse.conf /etc/pipewire/pipewire.conf.d/ || die "Failed to symlink pipewire-pulse."
+
+    # Configure PipeWire ALSA
+    mkdir -p /etc/alsa/conf.d || die "Failed to make PipeWire ALSA directory."
+    ln -sf /usr/share/alsa/alsa.conf.d/50-pipewire.conf /etc/alsa/conf.d || die "Failed to symlink PipeWire config."
+    ln -sf /usr/share/alsa/alsa.conf.d/99-pipewire-default.conf /etc/alsa/conf.d || die "Failed to symlink PipeWire default config."
+
+    # Autostart PipeWire
+    ln -sf /usr/share/applications/pipewire.desktop /etc/xdg/autostart || die "Failed to autostart PipeWire."
+}
+
 enable_flathub() {
     # Enable Flathub remote for Flatpak
     echo "Enabling Flathub..."

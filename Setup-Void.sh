@@ -86,6 +86,11 @@ packages=(
     "rsync"
     "psmisc"
     "dkms"
+    # PipeWire
+    "alsa-pipewire"
+    "libspa-bluetooth"
+    "pipewire"
+    "wireplumber"
     # System utilities
     "file-roller"
     "flatpak"
@@ -172,6 +177,9 @@ xbps-pkgdb -m hold neofetch || die "Failed to hold neofetch package."
 cd home/theming/Void
 ./update_xdeb.sh || die "Failed to install Brave/VSCodium."
 cd ..
+
+# Configure PipeWire
+configure_pipewire
 
 # Enable Flathub for Flatpak
 enable_flathub
