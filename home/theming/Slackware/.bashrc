@@ -19,8 +19,9 @@ alias btm='btm --theme gruvbox'
 alias cleanAll='sudo find /var/log -type f -name "*.log" -exec truncate -s 0 {} \;; sudo sboclean -d; sudo sboclean -w; sudo slpkg -T; flatpak uninstall --unused; sudo flatpak repair; rm -rf ~/.cache/*; sudo bleachbit -c --preset && bleachbit -c --preset'
 
 # Slackware Update
+updateSlpkg() { sudo slpkg update; sudo slpkg upgrade; for repo in slack slack_extra csb conraid alien gnome slint; do sudo slpkg upgrade -o "$repo"; done; }
 alias updateNeovim='echo "Performing LazySync..."; nvim --headless "+Lazy! sync" +qa > /dev/null 2>&1; echo "LazySync complete!"'
-alias updateApp='sudo sbocheck; sudo sboupgrade --all; sudo slpkg update; sudo slpkg upgrade; sudo slpkg upgrade -o "slack"; sudo slpkg upgrade -o "slack_extra"; sudo slpkg upgrade -o "csb"; sudo slpkg upgrade -o "conraid"; sudo slpkg upgrade -o "alien"; sudo slpkg upgrade -o "gnome"; sudo slpkg upgrade -o "slint"; sudo grub-mkconfig -o /boot/grub/grub.cfg; flatpak update -y'
+alias updateApp='sudo sbocheck; sudo sboupgrade --all; updateSlpkg; sudo grub-mkconfig -o /boot/grub/grub.cfg; flatpak update -y; updateNeovim'
 alias updateAll='updateApp && cleanAll'
 alias updateRestart='updateAll; sudo reboot'
 alias updateShutdown='updateAll; sudo poweroff'
