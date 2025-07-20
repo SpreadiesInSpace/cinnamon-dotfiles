@@ -174,7 +174,7 @@ cd home/theming/Void
 cd ..
 
 # Install and configure audio
-configure_audio "pulseaudio"
+configure_audio
 
 # Enable Flathub for Flatpak
 enable_flathub
