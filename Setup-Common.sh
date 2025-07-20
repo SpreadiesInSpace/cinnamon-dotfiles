@@ -114,6 +114,41 @@ polkit.addAdminRule(function(action, subject) {
 EOF
 }
 
+# Only Void uses this
+configure_audio() {
+    local type="${1:-}"
+
+    # Install and configure audio
+    if [ "$type" = "pulseaudio" ]; then
+        # Install PulseAudio Packages
+        xbps-install -y rtkit pulseaudio alsa-plugins-pulseaudio || die "Failed to install PulseAudio."
+    else
+        # Install Pipewire Packages
+        xbps-install -y alsa-pipewire libspa-bluetooth pipewire wireplumber || die "Failed to install PipeWire."
+
+        # Configure PipeWire to use WirePlumber 
+        mkdir -p /etc/pipewire/pipewire.conf.d || die "Failed to make PipeWire directory."
+        ln -sf /usr/share/examples/wireplumber/10-wireplumber.conf /etc/pipewire/pipewire.conf.d/ || die "Failed to symlink WirePlumber."
+
+        # Remove PulseAudio-related components if installed
+        if xbps-query -Rs pulseaudio > /dev/null 2>&1; then
+            xbps-remove -y alsa-plugins-pulseaudio pulseaudio rtkit || die "Failed to remove PulseAudio."
+        fi
+
+        # Configure PipeWire-Pluse
+        mkdir -p /etc/pipewire/pipewire.conf.d || die "Failed to make pipewire-pulse directory."
+        ln -sf /usr/share/examples/pipewire/20-pipewire-pulse.conf /etc/pipewire/pipewire.conf.d/ || die "Failed to symlink pipewire-pulse."
+
+        # Configure PipeWire ALSA
+        mkdir -p /etc/alsa/conf.d || die "Failed to make PipeWire ALSA directory."
+        ln -sf /usr/share/alsa/alsa.conf.d/50-pipewire.conf /etc/alsa/conf.d || die "Failed to symlink PipeWire config."
+        ln -sf /usr/share/alsa/alsa.conf.d/99-pipewire-default.conf /etc/alsa/conf.d || die "Failed to symlink PipeWire default config."
+        
+        # Autostart PipeWire
+        ln -sf /usr/share/applications/pipewire.desktop /etc/xdg/autostart || die "Failed to autostart PipeWire."
+    fi
+}
+
 enable_flathub() {
     # Enable Flathub remote for Flatpak
     echo "Enabling Flathub..."

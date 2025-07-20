@@ -52,7 +52,6 @@ packages=(
     "setxkbmap"
     "xauth"
     "font-misc-misc"
-    "alsa-plugins-pulseaudio"
     "gptfdisk"
     "gettext"
     "elogind"
@@ -70,8 +69,6 @@ packages=(
     "AppStream"
     "libvdpau-va-gl"
     "vdpauinfo"
-    "pipewire"
-    "wireplumber"
     "gstreamer1-pipewire"
     "upower"
     "dtrx"
@@ -175,6 +172,9 @@ xbps-pkgdb -m hold neofetch || die "Failed to hold neofetch package."
 cd home/theming/Void
 ./update_xdeb.sh || die "Failed to install Brave/VSCodium."
 cd ..
+
+# Install and configure audio
+configure_audio "pulseaudio"
 
 # Enable Flathub for Flatpak
 enable_flathub
