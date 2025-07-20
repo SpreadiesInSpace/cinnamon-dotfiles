@@ -267,6 +267,26 @@ set_video_card() {
   echo; echo "Updated VIDEO_CARDS in /etc/portage/package.use/00video-cards to $video_card based on provided input."; echo
 }
 
+# Only Void uses this
+configure_audio() {
+  # Configure PipeWire
+  mkdir -p /mnt/etc/pipewire/pipewire.conf.d || die "Failed to make PipeWire directory."
+
+  # Configure PipeWire to use WirePlumber 
+  ln -sf /mnt/usr/share/examples/wireplumber/10-wireplumber.conf /etc/pipewire/pipewire.conf.d/ || die "Failed to symlink WirePlumber."
+
+  # Configure PipeWire-Pluse
+  ln -sf /mnt/usr/share/examples/pipewire/20-pipewire-pulse.conf /etc/pipewire/pipewire.conf.d/ || die "Failed to symlink pipewire-pulse."
+
+  # Configure PipeWire ALSA
+  mkdir -p /mnt/etc/alsa/conf.d || die "Failed to make PipeWire ALSA directory."
+  ln -sf /mnt/usr/share/alsa/alsa.conf.d/50-pipewire.conf /etc/alsa/conf.d || die "Failed to symlink PipeWire config."
+  ln -sf /mnt/usr/share/alsa/alsa.conf.d/99-pipewire-default.conf /etc/alsa/conf.d || die "Failed to symlink PipeWire default config."
+
+  # Autostart PipeWire
+  ln -sf /mnt/usr/share/applications/pipewire.desktop /etc/xdg/autostart || die "Failed to autostart PipeWire."
+}
+
 install_grub() {
   # Configure GRUB Bootloader
   local distro="${1:-}"

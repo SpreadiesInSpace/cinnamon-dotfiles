@@ -173,9 +173,6 @@ cd home/theming/Void
 ./update_xdeb.sh || die "Failed to install Brave/VSCodium."
 cd ..
 
-# Install and configure audio
-configure_audio
-
 # Enable Flathub for Flatpak
 enable_flathub
 
