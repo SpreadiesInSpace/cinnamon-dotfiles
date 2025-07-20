@@ -268,7 +268,7 @@ set_video_card() {
 }
 
 # Only Void uses this
-configure_audio() {
+configure_pipewire() {
   # Configure PipeWire
   mkdir -p /mnt/etc/pipewire/pipewire.conf.d || die "Failed to make PipeWire directory."
 

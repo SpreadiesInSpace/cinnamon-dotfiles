@@ -62,7 +62,7 @@ XBPS_ARCH=$ARCH xbps-install -Syu -r /mnt -R "$REPO" base-system || die "Failed 
 xbps-install -Syu -r /mnt -R "$REPO" cinnamon dejavu-fonts-ttf lightdm lightdm-gtk-greeter-settings lightdm-gtk3-greeter gnome-terminal spice-vdagent xorg-minimal xorg-input-drivers xorg-video-drivers NetworkManager alsa-pipewire libspa-bluetooth pipewire wireplumber git xtools xmirror nano sudo grub grub-x86_64-efi bash-completion unzip || die "Failed to install packages."
 
 # Configure PipeWire
-configure_audio
+configure_pipewire
 
 # Enable Services
 for service in dbus lightdm NetworkManager polkitd spice-vdagentd; do
