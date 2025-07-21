@@ -32,8 +32,10 @@ prompt_timezone
 prompt_drive
 
 # Update keyring (for older ISOs)
-echo "Updating keyring..."
-pacman -Sy --needed --noconfirm archlinux-keyring || die "Failed to update keyring."
+echo "Initializing and populating Pacman keyring..."
+pacman-key --init || die "Failed to initialize Pacman keyring."
+pacman-key --populate archlinux || die "Failed to populate Arch Linux keys"
+pacman -Sy --needed --noconfirm archlinux-keyring || die "Failed to update archlinux-keyring."
 
 # Partition the drive
 partition_drive
