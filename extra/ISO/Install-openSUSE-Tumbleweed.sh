@@ -127,7 +127,7 @@ zypper in -y -t pattern basic_desktop || die "Failed to install basic desktop pa
 # Install Cinnamon Desktop Environment
 zypper al mint-x-icon-theme mint-y-icon-theme || die "Failed to lock Mint icon themes."
 zypper rm -y busybox-which || die "Failed to remove busybox-which."
-zypper in -y cinnamon lightdm-gtk-greeter-settings btrfsprogs sudo bash-completion git unzip || die "Failed to install Cinnamon and base packages."
+zypper in -y cinnamon gnome-terminal spice-vdagent lightdm-gtk-greeter-settings btrfsprogs sudo bash-completion git unzip || die "Failed to install Cinnamon and base packages."
 
 # Install Recommended Packages (excluding Snapper & Firefox)
 zypper al snapper* || die "Failed to lock snapper packages."
