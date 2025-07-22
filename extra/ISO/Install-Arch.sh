@@ -53,7 +53,7 @@ create_btrfs_subvolumes
 mount_partitions
 
 # Install Essential packages
-pacstrap -K /mnt base linux linux-firmware sudo bash-completion grub efibootmgr git networkmanager nano unzip || die "Failed to install base packages."
+pacstrap -K /mnt base linux linux-firmware cinnamon lightdm lightdm-slick-greeter gnome-terminal spice-vdagent sudo bash-completion grub efibootmgr git networkmanager nano unzip || die "Failed to install base packages."
 
 # Generate fstab
 genfstab -U /mnt >> /mnt/etc/fstab || die "Failed to generate fstab."
@@ -87,8 +87,18 @@ echo "$hostname" > /etc/hostname || die "Failed to set hostname."
 # Allow Resolving the Local Hostname
 echo -e "127.0.1.1\t$hostname.localdomain\t$hostname" >> /etc/hosts || die "Failed to write to /etc/hosts."
 
-# Enable Networking
-systemctl enable NetworkManager || die "Failed to enable NetworkManager."
+# Set LightDM as Display Manager
+awk -i inplace '
+/^\[Seat:\*\]/ {a=1}
+a==1 && /^#?greeter-session=/ {
+    print "greeter-session=lightdm-slick-greeter"
+    next
+}
+{print}
+' /etc/lightdm/lightdm.conf || die "Failed to set greeter-session for LightDM."
+
+# Enable Services
+systemctl enable lightdm NetworkManager || die "Failed to enable services."
 
 # Configure GRUB Bootloader
 if [ "$BOOTMODE" = "UEFI" ]; then
