@@ -49,17 +49,14 @@ create_btrfs_subvolumes
 # Mount the partitions
 mount_partitions
 
-# Install Base System
+# Install Base System and Packages
 REPO=https://repo-fi.voidlinux.org/current
 # REPO=https://mirror.vofr.net/voidlinux/current
 # REPO=https://repo-fastly.voidlinux.org/current
 ARCH=x86_64 
 mkdir -p /mnt/var/db/xbps/keys || die "Failed to create /mnt/var/db/xbps/keys."
 cp /var/db/xbps/keys/* /mnt/var/db/xbps/keys/ || die "Failed to copy XBPS keys."
-XBPS_ARCH=$ARCH xbps-install -Syu -r /mnt -R "$REPO" base-system || die "Failed to install base system."
-
-# Install Packages
-xbps-install -Syu -r /mnt -R "$REPO" cinnamon dejavu-fonts-ttf lightdm lightdm-gtk-greeter-settings lightdm-gtk3-greeter gnome-terminal spice-vdagent xorg-minimal xorg-input-drivers xorg-video-drivers NetworkManager alsa-pipewire libspa-bluetooth pipewire wireplumber git xtools xmirror nano sudo grub grub-x86_64-efi bash-completion unzip || die "Failed to install packages."
+XBPS_ARCH=$ARCH xbps-install -Syu -r /mnt -R "$REPO" base-system cinnamon dejavu-fonts-ttf lightdm lightdm-gtk-greeter-settings lightdm-gtk3-greeter gnome-terminal spice-vdagent xorg-minimal xorg-input-drivers xorg-video-drivers NetworkManager alsa-pipewire libspa-bluetooth pipewire wireplumber git xtools xmirror nano sudo grub grub-x86_64-efi bash-completion unzip || die "Failed to install base packages."
 
 # Enable Services
 for service in dbus lightdm NetworkManager polkitd spice-vdagentd; do
