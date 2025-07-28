@@ -1,7 +1,7 @@
 # General configuration file for slpkg.
 # Location: /etc/slpkg/slpkg.toml
-# Last Updated: 14/07/2025
-# Version: 5.3.7
+# Last Updated: 20/07/2025
+# Version: 5.4.0
 
 [CONFIGS]
 
@@ -55,6 +55,17 @@ CHECKSUM_MD5 = true
 # scripts. Dialog allows you to display questions or messages
 # using dialog boxes. Default is false. [true/false]
 DIALOG = true
+
+# Specifies the terminal pager command to use when viewing paginated output.
+# This command should accept content via standard input (stdin).
+# Common pagers include "less -R" (recommended for color support), "more", or "most".
+# The "-R" option for 'less' allows ANSI color escape sequences to be interpreted.
+PAGER = "most"
+
+# Specifies the default text editor to use for opening and editing files.
+# This variable is typically read from the environment (e.g., EDITOR=$EDITOR)
+# but can be explicitly set here. Common editors include "vim", "nano", "emacs".
+EDITOR = "nano"
 
 # Enable or disable to use the terminal selector for interactive shell
 # scripts. Selector allows you to display checkbox to choose packages.
