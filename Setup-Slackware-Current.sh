@@ -112,7 +112,7 @@ else
 fi
 
 # Install Bash Completion for csb
-slpkg install -y bash-completion -o "slack_extra" || die "Failed to install bash-completion."
+slpkg install -y -P -B bash-completion -o "slack_extra" || die "Failed to install bash-completion."
 
 # Alien packages
 alien_packages=(
@@ -121,7 +121,7 @@ alien_packages=(
 )
 
 # Install packages from Alien over SBo to reduce compile times
-slpkg install -y "${alien_packages[@]}" -o alien -O || die "Failed to install alienbob packages."
+slpkg install -y -P -B "${alien_packages[@]}" -o alien -O || die "Failed to install alienbob packages."
 
 # All packages
 packages=(
@@ -195,7 +195,7 @@ packages=(
 )
 
 # Install packages from Conraid over SBo to reduce compile times
-slpkg install -y "${packages[@]}" -o conraid || die "Failed to install conraid packages."
+slpkg install -y -P -B "${packages[@]}" -o conraid || die "Failed to install conraid packages."
 
 # GFS packages
 gnome_packages=(
@@ -224,7 +224,7 @@ gnome_packages=(
 )
 
 # Install packages from GFS over SBo to reduce compile times
-slpkg install -y "${gnome_packages[@]}" -o gnome || die "Failed to install gnome packages."
+slpkg install -y -P -B "${gnome_packages[@]}" -o gnome || die "Failed to install gnome packages."
 
 # Add LightDM group
 groupadd -g 380 lightdm || die "Failed to create group 'lightdm'."
@@ -232,13 +232,14 @@ useradd -d /var/lib/lightdm -s /bin/false -u 380 -g 380 lightdm || die "Failed t
 
 # SBo packages
 sbo_packages=(
+    "bottom"
     "brave-browser"
     "gnome-screenshot"
     "kvantum-qt5"
     "haruna"
-    "lightdm"
-    "lightdm-settings"
-    "lightdm-slick-greeter"
+    #"lightdm"
+    #"lightdm-settings"
+    #"lightdm-slick-greeter"
     "ncdu"
     "qt6ct"
     "timeshift"
@@ -248,8 +249,8 @@ sbo_packages=(
 )
 
 # Install Packages
-slpkg install -y "${sbo_packages[@]}" || die "Failed to install packages."
-slpkg install -y bottom || die "Failed to install bottom." # prevent download timeout 
+slpkg install -y -P -B "${sbo_packages[@]}" || die "Failed to install packages."
+# slpkg install -y -P -B bottom || die "Failed to install bottom." # prevent download timeout 
 
 # Slint packages
 slint_packages=(
@@ -259,10 +260,11 @@ slint_packages=(
 )
 
 # Install packages from Slint over SBo to reduce compile times
-slpkg install -y "${slint_packages[@]}" -o slint -O || die "Failed to install slint packages."
+slpkg install -y -P -B "${slint_packages[@]}" -o slint -O || die "Failed to install slint packages."
 
-# Install Cinnamon and Set Default DE System-Wide
-slpkg install -y '*' -o csb || die "Failed to install Cinnamon"
+# Install Cinnamon, LightDM and set Default DE System-Wide
+slpkg install -y -P -B '*' -o csb || die "Failed to install Cinnamon"
+slpkg install -y -P -B lightdm lightdm-settings lightdm-slick-greeter || die "Failed to install LightDM"
 ln -sf /etc/X11/xinit/xinitrc.cinnamon-session /etc/X11/xinit/xinitrc || die "Failed to create symlink for xinitrc."
 ln -sf /etc/X11/xinit/xinitrc.cinnamon-session /etc/X11/xsession || die "Failed to create symlink for xsession."
 cp /etc/X11/xinit/xinitrc.cinnamon-session /root/.xinitrc || die "Failed to copy xinitrc to /root."
