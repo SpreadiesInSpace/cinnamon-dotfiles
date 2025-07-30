@@ -45,7 +45,6 @@ prompt_for_autologin() {
     done
 }
 
-# NixOS doesn't use this
 prompt_for_vm() {
     # VM Prompt
     while true; do
@@ -53,7 +52,7 @@ prompt_for_vm() {
         if [[ "$response" =~ ^([yY]|[yY][eE][sS])$ ]]; then
             is_vm=true
             break
-        elif [[ "$response" =~ ^([nN]|[nN][oO])$ ]]; then
+        elif [[ "$response" =~ ^([nN]|[nN][oO])$ || -z "$response" ]]; then
             is_vm=false
             break
         else
