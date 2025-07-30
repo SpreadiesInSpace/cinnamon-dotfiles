@@ -23,13 +23,14 @@ prompt_for_vm
 display_status "$enable_autologin" "$is_vm"
 
 # Install base-devel, git, and other dependencies
-xbps-install -Syu git xtools || die "Failed to install git and xtools."
+xbps-install -Syu xbps git xtools || die "Failed to install git and xtools."
 
 # Install xmirror utility
 xbps-install -Sy xmirror || die "Failed to install xmirror."
 
 # Use xmirror to select a mirror
 xmirror -s https://repo-fi.voidlinux.org/ || die "Failed to set the mirror with xmirror."
+# xmirror -s https://repo-de.voidlinux.org/ || die "Failed to set the mirror with xmirror."
 # xmirror -s https://mirror.vofr.net/voidlinux/ || die "Failed to set the mirror with xmirror."
 # xmirror -s https://repo-fastly.voidlinux.org/ || die "Failed to set the mirror with xmirror."
 
@@ -73,7 +74,7 @@ packages=(
     "upower"
     "dtrx"
     "unzip"
-    "p7zip"
+    "7zip"
     "bash-completion"
     "colord"
     "alsa-utils"

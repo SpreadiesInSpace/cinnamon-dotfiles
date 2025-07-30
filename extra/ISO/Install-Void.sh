@@ -51,6 +51,7 @@ mount_partitions
 
 # Install Base System and Packages
 REPO=https://repo-fi.voidlinux.org/current
+# REPO=https://repo-de.voidlinux.org/current
 # REPO=https://mirror.vofr.net/voidlinux/current
 # REPO=https://repo-fastly.voidlinux.org/current
 ARCH=x86_64 
