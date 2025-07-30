@@ -33,10 +33,10 @@ prompt_for_autologin() {
     # Autologin Prompt
     while true; do
         read -rp "Enable autologin for $username? [y/N]: " autologin_input
-        if [[ "$autologin_input" =~ ^([yY][eE][sS]?|[yY])$ ]]; then
+        if [[ "$autologin_input" =~ ^([yY]|[yY][eE][sS])$ ]]; then
             enable_autologin=true
             break
-        elif [[ "$autologin_input" =~ ^([nN][oO]?)$ ]]; then
+        elif [[ "$autologin_input" =~ ^([nN]|[nN][oO])$ || -z "$autologin_input" ]]; then
             enable_autologin=false
             break
         else
@@ -50,10 +50,10 @@ prompt_for_vm() {
     # VM Prompt
     while true; do
         read -rp "Is this a Virtual Machine? [y/N]: " response
-        if [[ "$response" =~ ^([yY][eE][sS]?|[yY])$ ]]; then
+        if [[ "$response" =~ ^([yY]|[yY][eE][sS])$ ]]; then
             is_vm=true
             break
-        elif [[ "$response" =~ ^([nN][oO]?)$ ]]; then
+        elif [[ "$response" =~ ^([nN]|[nN][oO])$ ]]; then
             is_vm=false
             break
         else
