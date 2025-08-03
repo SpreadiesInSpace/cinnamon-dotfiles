@@ -186,14 +186,31 @@ packages=(
     "net-libs/libiscsi"
     "app-emulation/guestfs-tools"
 )
-# Automatically accept USE changes and update config files
-touch /etc/portage/package.use/zzz_autounmask || die "Failed to create /etc/portage/package.use/zzz_autounmask."
-# Emerge with autounmask-write and continue
-emerge -vqDuN --with-bdeps=y "${packages[@]}" --autounmask-write --autounmask-continue=y || die "Emerge failed during initial package installation."
-# Update configurations automatically, writing to zzz_autounmask
-dispatch-conf <<< $(echo -e 'y') || die "Failed to run dispatch-conf for configuration update."
-# Resume emerge
-emerge -vqDuN --with-bdeps=y --keep-going "${packages[@]}" || die "Failed to install packages."
+
+# Create autounmask file
+touch /etc/portage/package.use/zzz_autounmask || die "Failed to create autounmask file."
+
+# For guestfs-tools (libguestfs currently triggers sandbox violation)
+mkdir -p /etc/portage/{env,package.env}
+echo 'FEATURES="-sandbox -usersandbox"' > /etc/portage/env/no-sandbox.conf
+echo 'app-emulation/libguestfs no-sandbox.conf' >> /etc/portage/package.env/libguestfs
+
+# Install Packages
+emerge -vqDuN --with-bdeps=y --keep-going --autounmask-write --autounmask-continue=y "${packages[@]}"
+
+# Capture Exit Code
+emerge_exit_code=$?
+
+# Report results
+if [ $emerge_exit_code -eq 0 ]; then
+    echo "All packages installed successfully."
+elif [ $emerge_exit_code -eq 1 ]; then
+    echo "Some packages failed but installation continued."
+    echo "Check the output above for failed packages."
+    echo "You may want to investigate and retry failed packages individually."
+else
+    die "Emerge encountered a fatal error (exit code: $emerge_exit_code)"
+fi
 
 # Set polkit permissions for wheel group users
 set_polkit_perms
