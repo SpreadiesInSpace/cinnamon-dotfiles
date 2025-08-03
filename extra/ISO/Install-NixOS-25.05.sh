@@ -139,7 +139,7 @@ nixos-enter --root /mnt -c "su - $username -c '
     { echo \"Failed to clone repo.\"; exit 1; }
   cd cinnamon-dotfiles ||
     { echo \"Failed to enter repo directory.\"; exit 1; }
-  touch .nixos-unstable.done .nixos.done ||
+  touch .nixos-25.05.done .nixos.done ||
     { echo \"Failed to create flags.\"; exit 1; }
   echo \"Reboot and run Theme.sh in cinnamon-dotfiles located in \$HOME/cinnamon-dotfiles.\"
 '"
