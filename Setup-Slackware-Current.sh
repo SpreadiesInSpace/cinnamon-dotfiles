@@ -264,7 +264,7 @@ slpkg install -y -P -B "${slint_packages[@]}" -o slint -O || die "Failed to inst
 
 # Install Cinnamon, LightDM and set Default DE System-Wide
 slpkg install -y -P -B '*' -o csb || die "Failed to install Cinnamon"
-slpkg install -y -P -B lightdm lightdm-settings lightdm-slick-greeter || die "Failed to install LightDM"
+slpkg install -y -P -B -O lightdm lightdm-settings lightdm-slick-greeter || die "Failed to install LightDM"
 ln -sf /etc/X11/xinit/xinitrc.cinnamon-session /etc/X11/xinit/xinitrc || die "Failed to create symlink for xinitrc."
 ln -sf /etc/X11/xinit/xinitrc.cinnamon-session /etc/X11/xsession || die "Failed to create symlink for xsession."
 cp /etc/X11/xinit/xinitrc.cinnamon-session /root/.xinitrc || die "Failed to copy xinitrc to /root."
