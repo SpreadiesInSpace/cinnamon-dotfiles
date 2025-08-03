@@ -191,9 +191,9 @@ packages=(
 touch /etc/portage/package.use/zzz_autounmask || die "Failed to create autounmask file."
 
 # For guestfs-tools (libguestfs currently triggers sandbox violation)
-mkdir -p /etc/portage/{env,package.env}
-echo 'FEATURES="-sandbox -usersandbox"' > /etc/portage/env/no-sandbox.conf
-echo 'app-emulation/libguestfs no-sandbox.conf' >> /etc/portage/package.env/libguestfs
+mkdir -p /etc/portage/{env,package.env} || die "Failed to make env directory."
+echo 'FEATURES="-sandbox -usersandbox"' > /etc/portage/env/no-sandbox.conf || die "Failed to make no-sandbox flags config file."
+echo 'app-emulation/libguestfs no-sandbox.conf' >> /etc/portage/package.env/libguestfs || die "Failed to add no-sandbox flags to libguestfs."
 
 # Install Packages
 emerge -vqDuN --with-bdeps=y --keep-going --autounmask-write --autounmask-continue=y "${packages[@]}"
