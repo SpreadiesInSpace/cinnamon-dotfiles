@@ -62,30 +62,48 @@ GENTOO_MIRROR="https://distfiles.gentoo.org"
 GENTOO_ARCH="amd64"
 GENTOO_INIT="systemd"
 STAGE3_BASENAME="stage3-$GENTOO_ARCH-desktop-$GENTOO_INIT"
-RELEASES_URL="$GENTOO_MIRROR/releases/$GENTOO_ARCH/autobuilds/current-$STAGE3_BASENAME/"
+RELEASES_URL="$GENTOO_MIRROR/releases/$GENTOO_ARCH/autobuilds"
+LATEST_TXT_URL="$RELEASES_URL/latest-$STAGE3_BASENAME.txt"
 
-# Get the latest Stage 3 tarball
-STAGE3_TARBALL=$(curl -s "$RELEASES_URL" | python3 -c 'import sys, urllib.parse; print(urllib.parse.unquote(sys.stdin.read()))' | grep -o "\"${STAGE3_BASENAME}-[0-9A-Z]*.tar.xz\"" | sort -u | head -1 | sed 's/"//g')
-if [ -z "$STAGE3_TARBALL" ]; then
-  die "Failed to find the latest Stage 3 tarball."
-fi
-
-# Download tarball and verification files
-echo; for suffix in "" ".asc" ".DIGESTS" ".sha256"; do
-  wget -c -T 10 -t 10 -q --show-progress "$RELEASES_URL/$STAGE3_TARBALL$suffix" || die "Failed to download $RELEASES_URL/$STAGE3_TARBALL$suffix"
-done
+# Download the latest stage3 list
+echo; echo "Downloading latest stage3 list..."
+wget -c -T 10 -t 10 -q --show-progress "$LATEST_TXT_URL" -O latest-stage3.txt || die "Failed to download $LATEST_TXT_URL."
 
 # Import Gentoo release key via WKD
-echo; gpg --quiet --auto-key-locate=clear,nodefault,wkd --locate-key releng@gentoo.org || die "Failed to import Gentoo release key."
+echo "Importing Gentoo release key..."
+gpg --quiet --auto-key-locate=clear,nodefault,wkd --locate-key releng@gentoo.org 2>/dev/null || die "Failed to import Gentoo release key."
+
+# Verify the PGP signature of the latest-stage3.txt file
+echo "Verifying GPG signature of latest-stage3.txt..."
+gpg --verify latest-stage3.txt 2>/dev/null || die "GPG verification of latest-stage3.txt failed! Aborting..."
+
+# Parse the stage3 tarball path from the verified file
+STAGE3_TARBALL_PATH=$(awk '/^[^#].*\.tar\.xz/ { print $1; exit }' latest-stage3.txt)
+if [[ -z "$STAGE3_TARBALL_PATH" ]]; then
+   die "Failed to parse the stage3 tarball path from latest-stage3.txt."
+fi
+STAGE3_TARBALL=$(basename "$STAGE3_TARBALL_PATH")
+
+# Download tarball and verification files
+echo "Downloading stage3 tarball and verification files..."
+for suffix in "" ".asc" ".DIGESTS" ".sha256"; do
+  wget -c -T 10 -t 10 -q --show-progress "$RELEASES_URL/$STAGE3_TARBALL_PATH$suffix" || die "Failed to download $RELEASES_URL/$STAGE3_TARBALL_PATH$suffix"
+done
 
 # Verify GPG signatures
 echo "Verifying GPG signatures..."
-for ext in asc DIGESTS sha256; do
+for ext in asc DIGESTS; do
   echo "- Checking $STAGE3_TARBALL.$ext..."
   if ! gpg --verify "$STAGE3_TARBALL.$ext" 2>/dev/null; then
     die "GPG verification of $STAGE3_TARBALL.$ext failed! Aborting..."
   fi
 done
+
+# Verify SHA256 hash
+echo "- Verifying SHA256 checksum..."
+if ! sha256sum --check "$STAGE3_TARBALL.sha256" 2>/dev/null; then
+  die "SHA256 verification failed! Aborting..."
+fi
 
 # If all verifications passed, extract the tarball
 echo; echo "All verifications passed. Extracting tarball..."
