@@ -39,7 +39,7 @@ prompt_timezone
 prompt_drive
 
 # Partition the drive
-partition_drive "slackware"
+partition_drive
 
 # Determine correct partition suffix
 partition_suffix

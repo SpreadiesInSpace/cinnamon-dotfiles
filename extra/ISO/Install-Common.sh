@@ -18,19 +18,25 @@ detect_boot_mode() {
   # Detect if booted in UEFI or BIOS mode
   if [ -d /sys/firmware/efi ]; then
     BOOTMODE="UEFI"
-    REMOVABLE_BOOT="0"  # assume normal boot unless proven otherwise
-    # Check if efivars is mounted
-    if ! mount | grep -q efivars; then
-      echo "efivars not mounted. Attempting to mount efivars..."
-      if ! mount -t efivarfs efivars /sys/firmware/efi/efivars; then
-        echo "Failed to mount efivars. Attempting to remount as read-write..."
-        if ! mount -o remount,rw,nosuid,nodev,noexec --types efivarfs efivarfs /sys/firmware/efi/efivars; then
-          die "System booted in UEFI mode but efivars is not available.
-This indicates a broken UEFI environment. Cannot continue safely."
-        else
-          REMOVABLE_BOOT="1"
+    REMOVABLE_BOOT="0"
+    # Check if efivarfs is mounted
+    if ! grep -q 'efivarfs' /proc/mounts; then
+      echo "efivars not mounted. Attempting to mount efivarfs..."
+      if ! mount -t efivarfs efivarfs /sys/firmware/efi/efivars 2>/dev/null; then
+        echo "Failed to mount efivarfs. Attempting to remount as read-write..."
+        if ! mount -o remount,rw,nosuid,nodev,noexec --types efivarfs efivarfs /sys/firmware/efi/efivars 2>/dev/null; then
+          # At this point, efivars exists but is not writable/mountable
+          if [ ! -w /sys/firmware/efi/efivars ]; then
+            REMOVABLE_BOOT="1"  # Writable access blocked — may be removable boot
+          fi
+          die "UEFI detected but efivarfs is not accessible.
+This is likely a permissions or kernel setting issue."
         fi
       fi
+    fi
+    # If efivarfs is mounted but not writable, mark as possible removable boot
+    if [ ! -w /sys/firmware/efi/efivars ]; then
+      REMOVABLE_BOOT="1"
     fi
   else
     BOOTMODE="BIOS"
@@ -98,12 +104,15 @@ prompt_hostname() {
   # Prompt for hostname
   while true; do
     read -p "Enter hostname: " hostname
+    # Trim leading and trailing whitespace
+    hostname="${hostname#"${hostname%%[![:space:]]*}"}"  # leading
+    hostname="${hostname%"${hostname##*[![:space:]]}"}"  # trailing
     if [[ -z "$hostname" ]]; then
       echo "Hostname cannot be empty."
-    elif [[ "$hostname" =~ ^[a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?$ ]] && ! [[ "$hostname" =~ \  ]]; then
+    elif [[ "$hostname" =~ ^[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?$ ]]; then
       break
     else
-      echo "Invalid hostname. Must be alphanumeric, may include hyphens, and cannot contain spaces or start/end with a hyphen."
+      echo "Invalid hostname. Must start/end with a letter or number and may include internal hyphens."
     fi
   done
 }
@@ -133,8 +142,7 @@ prompt_drive() {
   while true; do
     read -p "Enter drive to use (e.g., /dev/sda, /dev/nvme0n1, /dev/mmcblk0): " drive
     # Check if the drive is a valid block device and not a partition
-    if [[ "$drive" =~ ^/dev/(sd[a-z]|nvme[0-9]+n[0-9]+|mmcblk[0-9]+|vd[a-z])$ ]] && [ -b "$drive" ]; then
-      # Confirm before proceeding
+    if [[ "$drive" =~ ^/dev/(sd[a-z]+|nvme[0-9]+n[0-9]+|mmcblk[0-9]+|vd[a-z]+)$ ]] && [ -b "$drive" ]; then
       read -rp "WARNING: This will erase all data on $drive. Are you sure you want to continue? [y/N]: " confirm
       case "$confirm" in
         [yY][eE][sS]|[yY]) break ;;
@@ -147,12 +155,13 @@ prompt_drive() {
 }
 
 partition_drive() {
-  # Partition the drive
-  local distro="${1:-}"
-  # Set parted path for Slackware
-  local PARTED="parted"
-  if [ "$distro" = "slackware" ]; then
+  # Find parted binary
+  if command -v parted >/dev/null 2>&1; then
+    PARTED="parted"
+  elif [ -x /usr/sbin/parted ]; then
     PARTED="/usr/sbin/parted"
+  else
+    die "parted not found. Cannot partition the drive."
   fi
   if [ "$BOOTMODE" = "UEFI" ]; then
     # Create GPT partition table

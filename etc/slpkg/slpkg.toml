@@ -54,7 +54,7 @@ CHECKSUM_MD5 = true
 # Enable or disable the use of dialog for interactive shell
 # scripts. Dialog allows you to display questions or messages
 # using dialog boxes. Default is false. [true/false]
-DIALOG = true
+DIALOG = false
 
 # Specifies the terminal pager command to use when viewing paginated output.
 # This command should accept content via standard input (stdin).
@@ -76,7 +76,7 @@ TERMINAL_SELECTOR = true
 # the repository. Some repositories include packages only
 # as dependencies, but not as standalone main packages.
 # Default is false. [true/false]
-VIEW_MISSING_DEPS = true
+VIEW_MISSING_DEPS = false
 
 # There are two different methods to choose from when upgrading
 # your installed packages: the "version" method and the

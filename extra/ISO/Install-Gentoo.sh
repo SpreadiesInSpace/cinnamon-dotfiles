@@ -60,7 +60,8 @@ hwclock --systohc --utc
 # Set Variables
 GENTOO_MIRROR="https://distfiles.gentoo.org"
 GENTOO_ARCH="amd64"
-STAGE3_BASENAME="stage3-amd64-desktop-systemd"
+GENTOO_INIT="systemd"
+STAGE3_BASENAME="stage3-$GENTOO_ARCH-desktop-$GENTOO_INIT"
 RELEASES_URL="$GENTOO_MIRROR/releases/$GENTOO_ARCH/autobuilds/current-$STAGE3_BASENAME/"
 
 # Get the latest Stage 3 tarball
@@ -77,7 +78,7 @@ done
 # Import Gentoo release key via WKD
 echo; gpg --quiet --auto-key-locate=clear,nodefault,wkd --locate-key releng@gentoo.org || die "Failed to import Gentoo release key."
 
-# Verify GPG signature files
+# Verify GPG signatures
 echo "Verifying GPG signatures..."
 for ext in asc DIGESTS sha256; do
   echo "- Checking $STAGE3_TARBALL.$ext..."

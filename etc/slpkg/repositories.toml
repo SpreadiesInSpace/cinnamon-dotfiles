@@ -1,7 +1,7 @@
 # General repositories configuration file for slpkg.
 # Location: /etc/slpkg/repositories.toml
-# Last Updated: 13/07/2025
-# Version: 5.3.7
+# Last Updated: 27/07/2025
+# Version: 5.4.2
 
 # Enable or disable repositories by setting 'true' or 'false'.
 # You can also use custom mirrors not included in this file.
@@ -115,6 +115,12 @@ MIRROR = "https://slackware.nl/people/alien/restricted_sbrepos/current/x86_64/"
 ENABLE = true
 MIRROR = "https://slackware.uk/gfs/current/48/x86_64/"
 # MIRROR = "https://reddoglinux.ddns.net/linux/gnome/48.x/x86_64/"
+
+[COSMIC]
+ENABLE = false
+MIRROR = "https://slackware.uk/cosmicde/x86_64/"
+# This repository is based on Slackware Current.
+# Only Enable if you are running Current.
 
 [MSB]
 ENABLE = false
