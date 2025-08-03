@@ -70,8 +70,8 @@ echo; echo "Downloading latest stage3 list..."
 wget -c -T 10 -t 10 -q --show-progress "$LATEST_TXT_URL" -O latest-stage3.txt || die "Failed to download $LATEST_TXT_URL."
 
 # Import Gentoo release key via WKD
-echo "Importing Gentoo release key..."
-gpg --quiet --auto-key-locate=clear,nodefault,wkd --locate-key releng@gentoo.org 2>/dev/null || die "Failed to import Gentoo release key."
+echo; echo "Importing Gentoo release key..."
+gpg --quiet --auto-key-locate=clear,nodefault,wkd --locate-key releng@gentoo.org >/dev/null 2>&1 || die "Failed to import Gentoo release key."
 
 # Verify the PGP signature of the latest-stage3.txt file
 echo "Verifying GPG signature of latest-stage3.txt..."
@@ -85,14 +85,14 @@ fi
 STAGE3_TARBALL=$(basename "$STAGE3_TARBALL_PATH")
 
 # Download tarball and verification files
-echo "Downloading stage3 tarball and verification files..."
+echo; echo "Downloading stage3 tarball and verification files..."
 for suffix in "" ".asc" ".DIGESTS" ".sha256"; do
   wget -c -T 10 -t 10 -q --show-progress "$RELEASES_URL/$STAGE3_TARBALL_PATH$suffix" || die "Failed to download $RELEASES_URL/$STAGE3_TARBALL_PATH$suffix"
 done
 
 # Verify GPG signatures
-echo "Verifying GPG signatures..."
-for ext in asc DIGESTS; do
+echo; echo "Verifying GPG signatures..."
+for ext in asc DIGESTS sha256; do
   echo "- Checking $STAGE3_TARBALL.$ext..."
   if ! gpg --verify "$STAGE3_TARBALL.$ext" 2>/dev/null; then
     die "GPG verification of $STAGE3_TARBALL.$ext failed! Aborting..."
@@ -194,8 +194,13 @@ else
   echo "Use baseline x86-64 binaries for broader compatibility."
 fi
 
+# Only remove if there are known issues
+if [ -d /etc/portage/gnupg ] && [ ! -w /etc/portage/gnupg ]; then
+    echo "Fixing GPG directory permissions..."
+    rm -rf /etc/portage/gnupg/ || die "Failed to remove problematic GPG directory."
+fi
+
 # Verify GPG.
-rm -rf /etc/portage/gnupg/ || die "Failed to remove old GPG directory."
 echo && getuto || die "Failed to verify GPG keys with getuto."
 
 # Select Mirrors (mirrors already set in make.conf)
@@ -227,14 +232,14 @@ emerge -1uqv sys-apps/portage || die "Failed to update Portage."
 eselect profile set default/linux/amd64/23.0/desktop/gnome/systemd || die "Failed to set the system profile."
 
 # Set CPU Flags (TO DO: make it work in chroot heredoc)
-emerge -1uqv app-portage/cpuid2cpuflags
+# emerge -1uqv app-portage/cpuid2cpuflags
 # echo "*/* $(cpuid2cpuflags)" > /etc/portage/package.use/00cpu-flags
-cpuflags=$(cpuid2cpuflags)
-if [[ -n "$cpuflags" ]]; then
-  printf "*/* %s\n" "$cpuflags" > /etc/portage/package.use/00cpu-flags
-else
-  echo "Warning: cpuid2cpuflags returned nothing!"
-fi
+# cpuflags=$(cpuid2cpuflags)
+# if [[ -n "$cpuflags" ]]; then
+#   printf "*/* %s\n" "$cpuflags" > /etc/portage/package.use/00cpu-flags
+# else
+#   echo "Warning: cpuid2cpuflags returned nothing!"
+# fi
 
 # Update World Set
 emerge -vqDuN @world || die "Failed to update the world set."
@@ -259,19 +264,18 @@ env-update && source /etc/profile || die "Failed to reload environment."
 #============ Gentoo Install - Configuring the Linux Kernel ============
 
 # Using GRUB & Initramfs
-echo "sys-kernel/installkernel grub
-sys-kernel/installkernel dracut" > /etc/portage/package.use/installkernel || die "Failed to update /etc/portage/package.use/installkernel."
+echo "sys-kernel/installkernel grub dracut" > /etc/portage/package.use/installkernel || die "Failed to update /etc/portage/package.use/installkernel."
 
-# Install Kernel
-emerge -qv sys-kernel/gentoo-kernel-bin || die "Failed to install gentoo-kernel-bin."
+# Install Kernel and System Packages
+emerge -qv sys-kernel/gentoo-kernel-bin sys-fs/genfstab net-misc/networkmanager gnome-extra/nm-applet emerge -vq app-shells/bash-completion sys-fs/xfsprogs sys-fs/e2fsprogs sys-fs/dosfstools sys-fs/btrfs-progs sys-fs/f2fs-tools sys-fs/ntfs3g sys-block/io-scheduler-udev-rules app-arch/unzip app-admin/sudo || die "Failed to install system packages."
 
 # Skip firmware installation for VMs
 if ! systemd-detect-virt --vm &>/dev/null; then
   echo "Physical machine detected. Installing firmware..."
-  emerge -qv sys-kernel/linux-firmware || die "Failed to install sys-kernel/linux-firmware."
+  emerge -vq sys-kernel/linux-firmware || die "Failed to install sys-kernel/linux-firmware."
   grep -q "GenuineIntel" /proc/cpuinfo && {
     echo "Intel CPU detected. Installing intel-microcode..."
-    emerge -qv sys-firmware/intel-microcode || die "Failed to install sys-firmware/intel-microcode."
+    emerge -vq sys-firmware/intel-microcode || die "Failed to install sys-firmware/intel-microcode."
   } || echo "Non-Intel CPU detected. Skipping intel-microcode."
 else
   echo "VM detected. Skipping firmware and microcode installation."
@@ -280,7 +284,7 @@ fi
 #=============== Gentoo Install - Configuring the System ===============
 
 # Generate fstab
-emerge -qv sys-fs/genfstab || die "Failed to install sys-fs/genfstab."
+# emerge -vq sys-fs/genfstab || die "Failed to install sys-fs/genfstab."
 genfstab -U / >> /etc/fstab || die "Failed to generate fstab."
 
 # Set Hostname
@@ -295,7 +299,7 @@ systemd-machine-id-setup || die "Failed to run systemd-machine-id-setup."
 systemctl preset-all --preset-mode=enable-only || die "Failed to preset systemd services."
 
 # Networking
-emerge -vq net-misc/networkmanager gnome-extra/nm-applet || die "Failed to install network-manager and nm-applet."
+# emerge -vq net-misc/networkmanager gnome-extra/nm-applet || die "Failed to install network-manager and nm-applet."
 systemctl disable systemd-networkd || die "Failed to disable systemd-networkd."
 systemctl disable systemd-resolved.service || die "Failed to disable systemd-resolved service."
 systemctl enable NetworkManager || die "Failed to enable NetworkManager."
@@ -303,10 +307,10 @@ systemctl enable NetworkManager || die "Failed to enable NetworkManager."
 #============== Gentoo Install - Installing System Tools ===============
 
 # Install System Tools
-emerge -vq sys-apps/mlocate app-shells/bash-completion sys-fs/xfsprogs sys-fs/e2fsprogs sys-fs/dosfstools sys-fs/btrfs-progs sys-fs/f2fs-tools sys-fs/ntfs3g sys-block/io-scheduler-udev-rules app-arch/unzip || die "Failed to install essential system tools."
+# emerge -vq sys-apps/mlocate app-shells/bash-completion sys-fs/xfsprogs sys-fs/e2fsprogs sys-fs/dosfstools sys-fs/btrfs-progs sys-fs/f2fs-tools sys-fs/ntfs3g sys-block/io-scheduler-udev-rules app-arch/unzip || die "Failed to install essential system tools."
 
 # No sys-fs/zfs because it pulls in zfs-kmod which takes a while to compile
-# emerge -qv sys-fs/zfs
+# emerge -vq sys-fs/zfs
 
 # Enable Time Synchronization
 systemctl enable systemd-timesyncd.service || die "Failed to enable systemd-timesyncd service."
@@ -333,7 +337,7 @@ grub-mkconfig -o /boot/grub/grub.cfg || die "Failed to generate GRUB config."
 #===================== Gentoo Install - Finalizing =====================
 
 # Install Sudo
-emerge -qv app-admin/sudo || die "Failed to install sudo."
+# emerge -vq app-admin/sudo || die "Failed to install sudo."
 
 # Setup Sudo by uncommenting %wheel ALL=(ALL:ALL) with visudo
 sed -i 's/^#\s*\(%wheel ALL=(ALL:ALL) ALL\)/\1/' /etc/sudoers || die "Failed to enable sudo for wheel group."
