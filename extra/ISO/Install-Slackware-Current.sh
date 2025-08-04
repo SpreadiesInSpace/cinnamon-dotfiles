@@ -4,7 +4,7 @@ set -euo pipefail
 # Download and source common functions
 echo "Sourcing functions..."
 die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
-wget -qO Install-Common.sh https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/extra/ISO/Install-Common.sh 2>/dev/null || die "Failed to download Install-Common.sh"
+wget -qO- Install-Common.sh https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/extra/ISO/Install-Common.sh 2>/dev/null || die "Failed to download Install-Common.sh"
 [ -f ./Install-Common.sh ] && source ./Install-Common.sh || die "Failed to source Install-Common.sh"
 
 # Check if script is run as root
@@ -107,6 +107,9 @@ hostname=${hostname%%.*}
 [ ! -e /etc/resolv.conf ] && die "Source resolv.conf does not exist."
 cp --dereference /etc/resolv.conf /mnt/etc/ || die "Failed to copy resolv.conf."
 
+# Copy common functions to chroot environment
+cp Install-Common.sh /mnt/ || die "Failed to copy Install-Common.sh to chroot."
+
 # Ensure variables are exported before chroot
 : "${svc:=}"
 : "${svc_path:=}"
@@ -115,8 +118,8 @@ export drive hostname timezone username rootpasswd svc svc_path userpasswd BOOTM
 # Entering Chroot
 cat << EOF | chroot /mnt /bin/bash || die "Failed to enter chroot."
 
-# Minimal Error Handling function
-die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
+# Source common functions inside chroot
+source Install-Common.sh || { echo "Failed to source Install-Common.sh in chroot."; exit 1; }
 
 # New Chroot
 source /etc/profile || die "Failed to source /etc/profile."
@@ -133,18 +136,10 @@ source /etc/profile || die "Failed to source /etc/profile."
 
 # Set Timezone
 ln -sf "/usr/share/zoneinfo/$timezone" /etc/localtime || die "Failed to set timezone."
-hwclock --systohc || die "Failed to sync hardware clock."
+hwclock --systohc || die "Failed to set hardware clock."
 
 # Configure GRUB Bootloader
-if [ "$BOOTMODE" = "UEFI" ]; then
-  if [ "$REMOVABLE_BOOT" = "1" ]; then
-    grub-install --target=x86_64-efi --efi-directory=/boot/efi --removable || die "Failed to install GRUB (UEFI removable)."
-  else
-    grub-install --target=x86_64-efi --efi-directory=/boot/efi || die "Failed to install GRUB (UEFI)."
-  fi
-else
-  grub-install --target=i386-pc --boot-directory=/boot "$drive" || die "Failed to install GRUB (BIOS)."
-fi
+install_grub
 
 # Set GRUB timeout to 0
 sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub || die "Failed to set GRUB_TIMEOUT."
@@ -259,6 +254,9 @@ sed -i '/^\[Autologin\]/,/^\[/ {
   s/^User=.*$/User='"$username"'/;
   s/^Session=.*$/Session=xfce/;
 }' /etc/sddm.conf || die "Failed to configure autologin in sddm.conf."
+
+# Clean up
+rm -rf Install-Common.sh
 
 # Clone Repo as New User
 cat << 'CLONE' | su - "$username"

@@ -46,6 +46,9 @@ create_btrfs_subvolumes
 # Mount the partitions
 mount_partitions "gentoo"
 
+# Store Script Directory (for Install-Common.sh copy to chroot)
+SCRIPT_DIR="$(pwd)"
+
 #=================== Gentoo Install - The Stage File ===================
 
 # Move to Mounted Root Partition
@@ -100,7 +103,7 @@ for ext in asc DIGESTS sha256; do
 done
 
 # Verify SHA256 hash
-echo "- Verifying SHA256 checksum..."
+echo; echo "Verifying SHA256 checksum..."
 if ! sha256sum --check "$STAGE3_TARBALL.sha256" 2>/dev/null; then
   die "SHA256 verification failed! Aborting..."
 fi
@@ -165,6 +168,9 @@ if test -L /dev/shm; then
   chmod 1777 /dev/shm /run/shm || die "Failed to set permissions on /dev/shm or /run/shm."
 fi
 
+# Copy common functions to chroot environment
+cp "$SCRIPT_DIR/Install-Common.sh" /mnt/gentoo/ || die "Failed to copy Install-Common.sh to chroot."
+
 # Ensure variables are exported before chroot
 : "${cpuflags:=}"
 export cpuflags drive hostname timezone username rootpasswd userpasswd BOOTMODE REMOVABLE_BOOT || die "Failed to export required variables."
@@ -172,8 +178,8 @@ export cpuflags drive hostname timezone username rootpasswd userpasswd BOOTMODE 
 # Entering Chroot
 cat << EOF | chroot /mnt/gentoo /bin/bash || die "Failed to enter chroot."
 
-# Minimal Error Handling function
-die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
+# Source common functions inside chroot
+source Install-Common.sh || { echo "Failed to source Install-Common.sh in chroot."; exit 1; }
 
 # New Chroot Environment - Installing the Gentoo Base System (Continued)
 source /etc/profile || die "Failed to source /etc/profile."
@@ -248,7 +254,7 @@ emerge -vqDuN @world || die "Failed to update the world set."
 emerge -q --depclean || die "Failed to remove obsolete packages."
 
 # Set Timezone
-ln -sf "../usr/share/zoneinfo/$timezone" /etc/localtime || die "Failed to set timezone."
+ln -sf "/usr/share/zoneinfo/$timezone" /etc/localtime || die "Failed to set timezone."
 hwclock --systohc || die "Failed to set hardware clock."
 
 # Locale Generation (uncomment en_US.UTF-8 UTF-8 in /etc/locale.gen)
@@ -266,7 +272,7 @@ env-update && source /etc/profile || die "Failed to reload environment."
 # Using GRUB & Initramfs
 echo "sys-kernel/installkernel grub dracut" > /etc/portage/package.use/installkernel || die "Failed to update /etc/portage/package.use/installkernel."
 
-# Install Kernel and System Packages
+# Install System Packages
 emerge -qv sys-kernel/gentoo-kernel-bin sys-fs/genfstab net-misc/networkmanager gnome-extra/nm-applet emerge -vq app-shells/bash-completion sys-fs/xfsprogs sys-fs/e2fsprogs sys-fs/dosfstools sys-fs/btrfs-progs sys-fs/f2fs-tools sys-fs/ntfs3g sys-block/io-scheduler-udev-rules app-arch/unzip app-admin/sudo || die "Failed to install system packages."
 
 # Skip firmware installation for VMs
@@ -318,15 +324,7 @@ systemctl enable systemd-timesyncd.service || die "Failed to enable systemd-time
 #============= Gentoo Install - Configuring the Bootloader =============
 
 # Configure GRUB Bootloader
-if [ "$BOOTMODE" = "UEFI" ]; then
-  if [ "$REMOVABLE_BOOT" = "1" ]; then
-    grub-install --target=x86_64-efi --efi-directory=/boot/efi --removable || die "Failed to install GRUB (UEFI removable)."
-  else
-    grub-install --target=x86_64-efi --efi-directory=/boot/efi || die "Failed to install GRUB (UEFI)."
-  fi
-else
-  grub-install --target=i386-pc --boot-directory=/boot "$drive" || die "Failed to install GRUB (BIOS)."
-fi
+install_grub
 
 # Set GRUB timeout to 0
 sed -i '/^#*GRUB_TIMEOUT=/s/^#*GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub || die "Failed to set GRUB_TIMEOUT."
@@ -342,13 +340,13 @@ grub-mkconfig -o /boot/grub/grub.cfg || die "Failed to generate GRUB config."
 # Setup Sudo by uncommenting %wheel ALL=(ALL:ALL) with visudo
 sed -i 's/^#\s*\(%wheel ALL=(ALL:ALL) ALL\)/\1/' /etc/sudoers || die "Failed to enable sudo for wheel group."
 
-# Cleanup
-rm /stage3-*.tar.* || die "Failed to remove Stage 3 tarball."
-
 # Create User and Set Passwords
 useradd -m -G users,wheel,plugdev -s /bin/bash "$username" || die "Failed to create user."
 echo "root:$rootpasswd" | chpasswd || die "Failed to set root password."
 echo "$username:$userpasswd" | chpasswd || die "Failed to set user password."
+
+# Cleanup
+rm /stage3-*.tar.* Install-Common.sh latest-stage3.txt || die "Failed to remove Stage 3 tarball."
 
 # Clone Repo as New User
 cat << 'CLONE' | su - "$username"

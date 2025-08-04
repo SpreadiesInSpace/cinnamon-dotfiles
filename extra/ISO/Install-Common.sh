@@ -276,6 +276,7 @@ set_video_card() {
   echo; echo "Updated VIDEO_CARDS in /etc/portage/package.use/00video-cards to $video_card based on provided input."; echo
 }
 
+# NixOS doesn't use this
 install_grub() {
   # Configure GRUB Bootloader
   local distro="${1:-}"

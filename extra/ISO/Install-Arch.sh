@@ -58,18 +58,21 @@ pacstrap -K /mnt base linux linux-firmware cinnamon lightdm lightdm-slick-greete
 # Generate fstab
 genfstab -U /mnt >> /mnt/etc/fstab || die "Failed to generate fstab."
 
+# Copy common functions to chroot environment
+cp Install-Common.sh /mnt/ || die "Failed to copy Install-Common.sh to chroot."
+
 # Ensure variables are exported before chroot
 export drive hostname timezone username rootpasswd userpasswd BOOTMODE REMOVABLE_BOOT || die "Failed to export required variables."
 
 # Entering Chroot
 cat << EOF | arch-chroot /mnt || die "Failed to enter chroot."
 
-# Minimal Error Handling function
-die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
+# Source common functions inside chroot
+source Install-Common.sh || { echo "Failed to source Install-Common.sh in chroot."; exit 1; }
 
 # Set Timezone
 ln -sf "/usr/share/zoneinfo/$timezone" /etc/localtime || die "Failed to set timezone."
-hwclock --systohc || die "Failed to sync hardware clock."
+hwclock --systohc || die "Failed to set hardware clock."
 
 # Locale Generation (uncomment en_US.UTF-8 UTF-8 in /etc/locale.gen)
 sed -i 's/^#\s*\(en_US.UTF-8 UTF-8\)/\1/' /etc/locale.gen || die "Failed to uncomment locale."
@@ -101,15 +104,7 @@ a==1 && /^#?greeter-session=/ {
 systemctl enable lightdm NetworkManager || die "Failed to enable services."
 
 # Configure GRUB Bootloader
-if [ "$BOOTMODE" = "UEFI" ]; then
-  if [ "$REMOVABLE_BOOT" = "1" ]; then
-    grub-install --target=x86_64-efi --efi-directory=/boot/efi --removable || die "Failed to install GRUB (UEFI removable)."
-  else
-    grub-install --target=x86_64-efi --efi-directory=/boot/efi || die "Failed to install GRUB (UEFI)."
-  fi
-else
-  grub-install --target=i386-pc --boot-directory=/boot "$drive" || die "Failed to install GRUB (BIOS)."
-fi
+install_grub
 
 # Set GRUB timeout to 0
 sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub || die "Failed to set GRUB_TIMEOUT."
@@ -124,6 +119,9 @@ sed -i 's/^#\s*\(%wheel ALL=(ALL:ALL) ALL\)/\1/' /etc/sudoers || die "Failed to 
 useradd -m -G users,wheel,audio,video -s /bin/bash "$username" || die "Failed to create user."
 echo "root:$rootpasswd" | chpasswd || die "Failed to set root password."
 echo "$username:$userpasswd" | chpasswd || die "Failed to set user password."
+
+# Clean up
+rm -rf Install-Common.sh
 
 # Clone Repo as New User
 cat << 'CLONE' | su - "$username"

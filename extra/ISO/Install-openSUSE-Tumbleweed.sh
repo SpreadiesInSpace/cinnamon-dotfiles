@@ -69,14 +69,17 @@ cp /etc/zypp/repos.d/* /mnt/etc/zypp/repos.d/ || die "Failed to copy repo files.
 [ ! -e /etc/resolv.conf ] && die "Source resolv.conf does not exist."
 cp --dereference /etc/resolv.conf /mnt/etc/ || die "Failed to copy resolv.conf."
 
+# Copy common functions to chroot environment
+cp Install-Common.sh /mnt/ || die "Failed to copy Install-Common.sh to chroot."
+
 # Ensure variables are exported before chroot
 export drive hostname timezone username rootpasswd userpasswd BOOTMODE REMOVABLE_BOOT || die "Failed to export required variables."
 
 # Chrooting
 cat << EOF | chroot /mnt /bin/bash || die "Failed to enter chroot."
 
-# Minimal Error Handling function
-die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
+# Source common functions inside chroot
+source Install-Common.sh || { echo "Failed to source Install-Common.sh in chroot."; exit 1; }
 
 # New Chroot
 source /etc/profile || die "Failed to source /etc/profile."
@@ -105,15 +108,7 @@ echo "KEYMAP=us" > /etc/vconsole.conf || die "Failed to set keymap."
 
 # Configure GRUB Bootloader
 dracut -f --regenerate-all || die "Failed to regenerate initramfs with dracut."
-if [ "$BOOTMODE" = "UEFI" ]; then
-  if [ "$REMOVABLE_BOOT" = "1" ]; then
-    grub2-install --target=x86_64-efi --efi-directory=/boot/efi --removable || die "Failed to install GRUB (UEFI removable)."
-  else
-    grub2-install --target=x86_64-efi --efi-directory=/boot/efi || die "Failed to install GRUB (UEFI)."
-  fi
-else
-  grub2-install --target=i386-pc --boot-directory=/boot "$drive" || die "Failed to install GRUB (BIOS)."
-fi
+install_grub "opensuse"
 
 # Set GRUB timeout to 0
 sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub || die "Failed to set GRUB_TIMEOUT."
@@ -139,8 +134,8 @@ zypper al MozillaFirefox* *-lang *-doc || die "Failed to lock Firefox, language 
 systemctl set-default graphical || die "Failed to set default target to graphical."
 
 # Set Timezone
-ln -sf "../usr/share/zoneinfo/$timezone" /etc/localtime || die "Failed to set timezone."
-hwclock --systohc || die "Failed to sync hardware clock."
+ln -sf "/usr/share/zoneinfo/$timezone" /etc/localtime || die "Failed to set timezone."
+hwclock --systohc || die "Failed to set hardware clock."
 
 # Setup Sudo by uncommenting %wheel ALL=(ALL:ALL) with visudo
 sed -i 's/^#\s*\(%wheel ALL=(ALL:ALL) ALL\)/\1/' /usr/etc/sudoers || die "Failed to enable sudo for wheel group."
@@ -155,6 +150,9 @@ echo "$username:$userpasswd" | chpasswd || die "Failed to set user password."
 
 # Enabling System Services
 systemctl enable NetworkManager || die "Failed to enable NetworkManager."
+
+# Clean up
+rm -rf Install-Common.sh
 
 # Clone Repo as New User
 cat << 'CLONE' | su - "$username"
