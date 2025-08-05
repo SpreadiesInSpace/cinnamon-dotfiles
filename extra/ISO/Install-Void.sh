@@ -102,12 +102,6 @@ hwclock --systohc || die "Failed to set hardware clock."
 sed -i 's/^#\s*\(en_US.UTF-8 UTF-8\)/\1/' /etc/default/libc-locales || die "Failed to uncomment locale."
 xbps-reconfigure -f glibc-locales || die "Failed to generate locale"
 
-# Create User and Set Passwords
-useradd -m -G users,wheel,audio,video,plugdev -s /bin/bash "$username"  || die "Failed to create user."
-echo "root:$rootpasswd" | chpasswd || die "Failed to set root password."
-echo "$username:$userpasswd" | chpasswd || die "Failed to set user password."
-
-<<skip
 # Create User
 useradd -m -G users,wheel,audio,video,plugdev -s /bin/bash "$username"  || die "Failed to create user."
 
@@ -122,7 +116,6 @@ passwd "$username" << PASSWORD || die "Failed to set user password."
 $userpasswd
 $userpasswd
 PASSWORD
-skip
 
 # Setup Sudo by uncommenting %wheel ALL=(ALL:ALL) with visudo
 sed -i 's/^#\s*\(%wheel ALL=(ALL:ALL) ALL\)/\1/' /etc/sudoers || die "Failed to enable sudo for wheel group."
