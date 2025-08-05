@@ -477,8 +477,8 @@ apply_gedit_and_gnome_terminal_config() {
         rm -rf combined.dconf
     else
         # Use sudo dbus-launch for other distros
-        sudo dbus-launch dconf load / < "theming/$distro/gnome-terminal-$distro.dconf"
-        sudo dbus-launch dconf load / < "theming/$gedit_config"
+        sudo dbus-launch --exit-with-session dconf load / < "theming/$distro/gnome-terminal-$distro.dconf"
+        sudo dbus-launch --exit-with-session dconf load / < "theming/$gedit_config"
     fi
     # Remove gnome-terminal dconf copied from earlier functions
     rm -rf ~/gnome-terminal-$distro.dconf
