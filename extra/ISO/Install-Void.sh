@@ -137,7 +137,4 @@ rm -rf Install-Common.sh
 
 # Clone cinnamon-dotfiles repo as new user
 clone_dotfiles "void"
-
-# Set monospace font (for gnome-terminal)
-su - "$username" -c "dbus-launch --exit-with-session gsettings set org.gnome.desktop.interface monospace-font-name 'DejaVu Sans Mono 11'" || die "Failed to set monospace font."
 EOF
