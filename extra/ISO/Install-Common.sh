@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# TO DO: 
+# - Gentoo OpenRC
+
 die() {
     # Handle exits on error
     printf "\033[1;31mError:\033[0m %s\n" "$*" >&2
@@ -154,6 +157,23 @@ prompt_drive() {
   done
 }
 
+# Only NixOS uses this
+prompt_for_autologin() {
+    # Autologin Prompt
+    while true; do
+        read -rp "Enable autologin for $username? [y/N]: " autologin_input
+        if [[ "$autologin_input" =~ ^([yY]|[yY][eE][sS])$ ]]; then
+            enable_autologin=true
+            break
+        elif [[ "$autologin_input" =~ ^([nN]|[nN][oO])$ || -z "$autologin_input" ]]; then
+            enable_autologin=false
+            break
+        else
+            echo "Invalid input. Please answer y or n."
+        fi
+    done
+}
+
 partition_drive() {
   # Find parted binary
   if command -v parted >/dev/null 2>&1; then
@@ -294,4 +314,30 @@ install_grub() {
     # Install GRUB for BIOS
     "$cmd" --target=i386-pc --boot-directory=/boot "$drive" || die "Failed to install GRUB (BIOS)."
   fi
+}
+
+clone_dotfiles() {
+    # Clone cinnamon-dotfiles repo as new user
+    local distro="${1:-}"
+    
+    if [ "$distro" = "nixos" ]; then
+        # NixOS uses nixos-enter and creates multiple flag files
+        nixos-enter --root /mnt -c "su - $username -c '
+          cd \$HOME &&
+          git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles ||
+            { echo \"Failed to clone repo.\"; exit 1; }
+          cd cinnamon-dotfiles ||
+            { echo \"Failed to enter repo directory.\"; exit 1; }
+          touch .nixos-25.05.done .$distro.done ||
+            { echo \"Failed to create flags.\"; exit 1; }
+          echo \"Reboot and run Theme.sh in cinnamon-dotfiles located in \$HOME/cinnamon-dotfiles.\"
+        '" || die "Failed to clone repo for NixOS."
+    else
+        cat << CLONE | su - "$username"
+cd && git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles || die "Failed to clone repo."
+cd cinnamon-dotfiles || die "Failed to enter repo directory."
+touch $distro.done || die "Failed to create flag."
+echo "Reboot and run Setup.sh in cinnamon-dotfiles located in \$HOME/cinnamon-dotfiles."
+CLONE
+    fi
 }

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # TO DO: 
-# - Account for Gentoo OpenRC (if I switch to it one day)
+# - Gentoo OpenRC
 
 die() {
     # Handle exits on error

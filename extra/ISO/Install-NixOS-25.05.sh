@@ -32,18 +32,7 @@ prompt_timezone "nixos"
 prompt_drive
 
 # Autologin Prompt
-while true; do
-    read -rp "Enable autologin for $username? [y/N]: " autologin_input
-    if [[ "$autologin_input" =~ ^([yY][eE][sS]?|[yY])$ ]]; then
-        enable_autologin=true
-        break
-    elif [[ "$autologin_input" =~ ^([nN][oO]?)$ ]]; then
-        enable_autologin=false
-        break
-    else
-        echo "Invalid input. Please answer y or n."
-    fi
-done
+prompt_for_autologin
 
 # Partition the drive
 partition_drive
@@ -104,9 +93,6 @@ sed -i "s/hostName = .*;/hostName = \"$hostname\";/g" "$CONFIG" || die "Failed t
 # Set Timezone
 sed -i "s|^\(\s*time\.timeZone\s*=\s*\).*|\\1\"$timezone\";|" "$CONFIG"|| die "Failed to set timezone."
 
-# Comment out background line in configuration.nix
-# sed -i 's|^\(\s*\)\(.*background\s*=.*\)|\1# \2|' "$CONFIG"
-
 # Add Nix Unstable and 23.05 Channels (for Neovim, icons and themes)
 # nix-channel --add https://nixos.org/channels/nixos-unstable nixos || die "Failed to add Nix unstable channel."
 # nix-channel --add https://nixos.org/channels/nixos-23.05 nixos-23.05 || die "Failed to add Nix 23.05 channel."
@@ -132,14 +118,5 @@ cp -nr Login_Wallpaper.jpg /mnt/boot/ || die "Failed to copy login wallpaper."
 # Enable background in configuration.nix
 sed -i 's|^\(\s*\)#\s*\(background\s*=.*\)|\1\2|' "$CONFIG"
 
-# Clone Repo as New User
-nixos-enter --root /mnt -c "su - $username -c '
-  cd \$HOME &&
-  git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles ||
-    { echo \"Failed to clone repo.\"; exit 1; }
-  cd cinnamon-dotfiles ||
-    { echo \"Failed to enter repo directory.\"; exit 1; }
-  touch .nixos-25.05.done .nixos.done ||
-    { echo \"Failed to create flags.\"; exit 1; }
-  echo \"Reboot and run Theme.sh in cinnamon-dotfiles located in \$HOME/cinnamon-dotfiles.\"
-'"
+# Clone cinnamon-dotfiles repo as new user
+clone_dotfiles "nixos"

@@ -348,11 +348,6 @@ echo "$username:$userpasswd" | chpasswd || die "Failed to set user password."
 # Cleanup
 rm /stage3-*.tar.* Install-Common.sh latest-stage3.txt || die "Failed to remove Stage 3 tarball."
 
-# Clone Repo as New User
-cat << 'CLONE' | su - "$username"
-cd && git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles || { echo "Failed to clone repo."; exit 1; }
-cd cinnamon-dotfiles || { echo "Failed to enter repo directory."; exit 1; }
-touch .gentoo.done || { echo "Failed to create flag."; exit 1; }
-echo "Reboot and run Setup.sh in cinnamon-dotfiles located in \$HOME/cinnamon-dotfiles."
-CLONE
+# Clone cinnamon-dotfiles repo as new user
+clone_dotfiles "gentoo"
 EOF

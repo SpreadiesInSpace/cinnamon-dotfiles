@@ -8,9 +8,11 @@
 * [Gentoo](https://www.gentoo.org/downloads/)
 * [Linux Mint (Debian Edition)](https://linuxmint.com/edition.php?id=308)
 * [NixOS 25.05](https://nixos.org/download/#nixos-iso)
-* [openSUSE Tumbleweed](https://get.opensuse.org/tumbleweed/#download)
+* [openSUSE Tumbleweed*](https://get.opensuse.org/tumbleweed/#download)
 * [Slackware Current](https://us.slackware.nl/slackware/slackware64-current-iso/)
 * [Void Linux](https://voidlinux.org/download/)
+
+**Disclaimer:** *For openSUSE TW, cinnamon-ISO install only works with GNOME/KDE/XFCE LiveCD found in the Alternative Downloads section.*
 
 ## Install from ISO (cinnamon-ISO)
 *Supports UEFI and BIOS, x86_64 Only*

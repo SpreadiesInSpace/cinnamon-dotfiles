@@ -12,11 +12,11 @@ parted -s /dev/vda mklabel msdos
 parted -s /dev/vda mkpart primary btrfs 1MiB 100%
 ```
 
-### BTRFS Subvolumes (for Timeshift) - 1GiB EFI + Remaining BTRFS
+### BTRFS Subvolumes (for Timeshift)
 ```bash
-mkfs.vfat /dev/vda1
-mkfs.btrfs -f /dev/vda2
-mount /dev/vda2 /mnt
+mkfs.vfat /dev/vda1 # GPT Only
+mkfs.btrfs -f /dev/vda2 # /dev/vda for MBR
+mount /dev/vda2 /mnt # /dev/vda for MBR
 btrfs su cr /mnt/@
 btrfs su cr /mnt/@home
 umount /mnt
@@ -27,8 +27,8 @@ umount /mnt
 mount -o noatime,compress=zstd,discard=async,subvol=@ /dev/vda2 /mnt/ 
 mkdir -p /mnt/home
 mount -o noatime,compress=zstd,discard=async,subvol=@home /dev/vda2 /mnt/home 
-mkdir -p /mnt/boot/efi
-mount /dev/vda1 /mnt/boot/efi
+mkdir -p /mnt/boot/efi # UEFI Only
+mount /dev/vda1 /mnt/boot/efi # UEFI Only
 ```
 
 ### BTRFS Mounts - Gentoo
@@ -37,5 +37,5 @@ mkdir -p /mnt/gentoo
 mount -o noatime,compress=zstd,discard=async,subvol=@ /dev/vda2 /mnt/gentoo 
 mkdir -p /mnt/gentoo/home
 mount -o noatime,compress=zstd,discard=async,subvol=@home /dev/vda2 /mnt/gentoo/home 
-mkdir -p /mnt/gentoo/efi
-mount /dev/vda1 /mnt/gentoo/efi
+mkdir -p /mnt/gentoo/efi # UEFI Only
+mount /dev/vda1 /mnt/gentoo/efi # UEFI Only

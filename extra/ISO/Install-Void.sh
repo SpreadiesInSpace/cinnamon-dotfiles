@@ -1,9 +1,13 @@
 #!/bin/bash
 set -euo pipefail
 
+# Update ISO and Install Tools
+echo "Updating ISO and Installing Tools..."
+die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
+xbps-install -Sy xbps wget parted xtools >/dev/null 2>&1 && clear
+
 # Download and source common functions
 echo "Sourcing functions..."
-die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
 wget -qO- Install-Common.sh https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/extra/ISO/Install-Common.sh 2>/dev/null || die "Failed to download Install-Common.sh"
 [ -f ./Install-Common.sh ] && source ./Install-Common.sh || die "Failed to source Install-Common.sh"
 
@@ -32,7 +36,7 @@ prompt_timezone
 prompt_drive
 
 # Refresh repository and install tools
-xbps-install -Sy parted xtools || die "Failed to install parted and xtools."
+# xbps-install -Sy parted xtools || die "Failed to install parted and xtools."
 
 # Partition the drive
 partition_drive
@@ -102,6 +106,12 @@ hwclock --systohc || die "Failed to set hardware clock."
 sed -i 's/^#\s*\(en_US.UTF-8 UTF-8\)/\1/' /etc/default/libc-locales || die "Failed to uncomment locale."
 xbps-reconfigure -f glibc-locales || die "Failed to generate locale"
 
+# Create User and Set Passwords
+useradd -m -G users,wheel,audio,video,plugdev -s /bin/bash "$username"  || die "Failed to create user."
+echo "root:$rootpasswd" | chpasswd || die "Failed to set root password."
+echo "$username:$userpasswd" | chpasswd || die "Failed to set user password."
+
+<<skip
 # Create User
 useradd -m -G users,wheel,audio,video,plugdev -s /bin/bash "$username"  || die "Failed to create user."
 
@@ -116,6 +126,7 @@ passwd "$username" << PASSWORD || die "Failed to set user password."
 $userpasswd
 $userpasswd
 PASSWORD
+skip
 
 # Setup Sudo by uncommenting %wheel ALL=(ALL:ALL) with visudo
 sed -i 's/^#\s*\(%wheel ALL=(ALL:ALL) ALL\)/\1/' /etc/sudoers || die "Failed to enable sudo for wheel group."
@@ -135,11 +146,6 @@ xbps-reconfigure -fa || die "Failed to reconfigure system."
 # Clean up
 rm -rf Install-Common.sh
 
-# Clone Repo as New User
-cat << 'CLONE' | su - "$username"
-cd && git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles || { echo "Failed to clone repo."; exit 1; }
-cd cinnamon-dotfiles || { echo "Failed to enter repo directory."; exit 1; }
-touch .void.done || { echo "Failed to create flag."; exit 1; }
-echo "Reboot and run Setup.sh in cinnamon-dotfiles located in \$HOME/cinnamon-dotfiles."
-CLONE
+# Clone cinnamon-dotfiles repo as new user
+clone_dotfiles "void"
 EOF

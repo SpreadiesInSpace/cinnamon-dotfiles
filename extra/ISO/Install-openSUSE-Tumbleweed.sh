@@ -154,11 +154,6 @@ systemctl enable NetworkManager || die "Failed to enable NetworkManager."
 # Clean up
 rm -rf Install-Common.sh
 
-# Clone Repo as New User
-cat << 'CLONE' | su - "$username"
-cd && git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles || { echo "Failed to clone repo."; exit 1; }
-cd cinnamon-dotfiles || { echo "Failed to enter repo directory."; exit 1; }
-touch .opensuse-tumbleweed.done || { echo "Failed to create flag."; exit 1; }
-echo "Reboot and run Setup.sh in cinnamon-dotfiles located in \$HOME/cinnamon-dotfiles."
-CLONE
+# Clone cinnamon-dotfiles repo as new user
+clone_dotfiles "opensuse-tumbleweed"
 EOF
