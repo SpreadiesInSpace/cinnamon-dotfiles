@@ -336,7 +336,7 @@ clone_dotfiles() {
         cat << CLONE | su - "$username"
 cd && git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles || die "Failed to clone repo."
 cd cinnamon-dotfiles || die "Failed to enter repo directory."
-touch $distro.done || die "Failed to create flag."
+touch .$distro.done || die "Failed to create flag."
 echo "Reboot and run Setup.sh in cinnamon-dotfiles located in \$HOME/cinnamon-dotfiles."
 CLONE
     fi
