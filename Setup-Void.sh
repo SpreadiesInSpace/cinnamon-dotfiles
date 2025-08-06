@@ -22,11 +22,8 @@ prompt_for_vm
 # Display Status from Prompts
 display_status "$enable_autologin" "$is_vm"
 
-# Install base-devel, git, and other dependencies
-xbps-install -Syu xbps git xtools || die "Failed to install git and xtools."
-
-# Install xmirror utility
-xbps-install -Sy xmirror || die "Failed to install xmirror."
+# Install tools
+xbps-install -Sy xbps git xtools xmirror || die "Failed to install git and xtools."
 
 # Use xmirror to select a mirror
 xmirror -s https://repo-fi.voidlinux.org/ || die "Failed to set the mirror with xmirror."

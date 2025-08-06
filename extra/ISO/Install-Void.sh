@@ -137,4 +137,18 @@ rm -rf Install-Common.sh
 
 # Clone cinnamon-dotfiles repo as new user
 clone_dotfiles "void"
+
+# Create first-boot script to set monospace font (for gnome-terminal)
+su - "$username" -c "
+mkdir -p ~/.config/autostart || die 'Failed to create autostart directory.'
+cat > ~/.config/autostart/set-font.desktop << 'MONOSPACE'
+[Desktop Entry]
+Type=Application
+Name=Set Monospace Font
+Exec=sh -c 'gsettings set org.gnome.desktop.interface monospace-font-name \"DejaVu Sans Mono 11\" && rm ~/.config/autostart/set-font.desktop'
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+MONOSPACE
+" || die "Failed to create font setup script."
 EOF
