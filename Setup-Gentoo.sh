@@ -255,7 +255,7 @@ if [ "$GENTOO_INIT" = "systemd" ]; then
     systemctl --global enable "$user_svc" >/dev/null 2>&1 || die "Failed to enable $user_svc globally."
   done
 else
-  for svc in libvirtd display-manager NetworkManager dbus openrc-settingsd elogind; do
+  for svc in libvirtd display-manager NetworkManager spice-vdagent dbus openrc-settingsd elogind; do
     rc-update add "$svc" default || die "Failed to enable $svc service."
   done
 fi
