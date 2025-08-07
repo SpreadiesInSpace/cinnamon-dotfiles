@@ -1,7 +1,7 @@
 # Bash Scripts
 https://pastebin.com/3KEhUUzF
 
-# BTRFS Subvolumes (for Timeshift) - 512MB EFI + Remaining BTRFS
+# BTRFS Subvolumes (for Timeshift) - 1GiB EFI + Remaining BTRFS
 mkfs.vfat /dev/vda1
 mkfs.btrfs -f /dev/vda2
 mount /dev/vda2 /mnt
@@ -41,14 +41,10 @@ https://pastebin.com/J8hgRrde (t.ly/Kdi1)
 SpeedDial2 - s68buWh864jbF4
 
 # General Package List
-bleachbit celluloid filezilla flatpak galculator gedit git gnome-screenshot gnome-system-monitor gnome-terminal gparted gpaste grub-customizer gufw kdeconnect kvantum libreoffice ncdu neofetch neovim qbittorrent qt5ct rmlint timeshift virt-manager
+bleachbit celluloid filezilla flatpak gedit git gnome-calculator gnome-screenshot gnome-system-monitor gnome-terminal gparted gpaste grub-customizer gufw kdeconnect kvantum libreoffice ncdu neofetch neovim qbittorrent qt5ct rhythmbox timeshift virt-manager
 
 # Additiaonal Package List
 bottom brave git-cli grub-btrfs timeshift-autosnap
-
-# Proprietary App List
-snap install authy
-https://www.teamviewer.com/en/download/linux/?t=1654784627439
 
 # Distro Specific Apps
 

@@ -22,6 +22,14 @@ prompt_for_vm
 # Display Status from Prompts
 display_status "$enable_autologin" "$is_vm"
 
+# Detect Init System
+if eselect profile show | grep -q systemd; then
+  GENTOO_INIT="systemd"
+else
+  GENTOO_INIT="openrc"
+fi
+echo "Detected init system: $GENTOO_INIT"
+
 # Check if custom make.conf and VIDEO_CARDS have already been set previously
 MAKECONF_FLAG="/etc/portage/.makeconf_configured"
 
@@ -95,8 +103,12 @@ echo "app-emulation/qemu glusterfs iscsi opengl pipewire spice usbredir vde virg
 # Sync Repository + All Overlays
 emaint sync -a || die "Failed to sync repositories and overlays."
 
-# Select 23.0 gnome desktop systemd profile for Cinnamon
-eselect profile set default/linux/amd64/23.0/desktop/gnome/systemd || die "Failed to set default profile."
+# Select appropriate Gentoo profile based on init system
+if [ "$GENTOO_INIT" = "systemd" ]; then
+  eselect profile set default/linux/amd64/23.0/desktop/gnome/systemd || die "Failed to set systemd system profile."
+else
+  eselect profile set default/linux/amd64/23.0/desktop || die "Failed to set OpenRC system profile."
+fi
 
 # Enable Sound (Pipewire)
 echo "media-video/pipewire sound-server" | tee /etc/portage/package.use/pipewire || die "Failed to set USE flags for pipewire."
@@ -196,7 +208,13 @@ echo 'FEATURES="-sandbox -usersandbox"' > /etc/portage/env/no-sandbox.conf || di
 echo 'app-emulation/libguestfs no-sandbox.conf' >> /etc/portage/package.env/libguestfs || die "Failed to add no-sandbox flags to libguestfs."
 
 # Install Packages
-emerge -vqDuN --with-bdeps=y --keep-going --autounmask-write --autounmask-continue=y "${packages[@]}"
+if [ "$GENTOO_INIT" = "systemd" ]; then
+  emerge -vqDuN --with-bdeps=y --keep-going --autounmask-write --autounmask-continue=y "${packages[@]}"
+else
+  emerge -vqDuN --with-bdeps=y --keep-going --autounmask-write --autounmask-continue=y "${packages[@]}" gui-libs/display-manager-init
+  # Enable LightDM for OpenRC via display-manager
+  sed -i 's|^DISPLAYMANAGER=.*|DISPLAYMANAGER="lightdm"|' /etc/conf.d/display-manager
+fi
 
 # Capture Exit Code
 emerge_exit_code=$?
@@ -229,12 +247,18 @@ set_qemu_permissions
 
 # Enable and start services
 echo "Enabling services..."
-systemctl enable libvirtd >/dev/null 2>&1 || die "Failed to enable libvirtd service."
-systemctl enable lightdm >/dev/null 2>&1 || die "Failed to enable lightdm service."
-systemctl enable NetworkManager >/dev/null 2>&1 || die "Failed to enable NetworkManager service."
-systemctl --global enable pipewire.service >/dev/null 2>&1 || die "Failed to enable pipewire.service globally."
-systemctl --global enable pipewire-pulse.socket >/dev/null 2>&1 || die "Failed to enable pipewire-pulse.socket globally."
-systemctl --global enable wireplumber.service >/dev/null 2>&1 || die "Failed to enable wireplumber.service globally."
+if [ "$GENTOO_INIT" = "systemd" ]; then
+  for svc in libvirtd lightdm NetworkManager; do
+    systemctl enable "$svc" >/dev/null 2>&1 || die "Failed to enable $svc service."
+  done
+  for user_svc in pipewire.service pipewire-pulse.socket wireplumber.service; do
+    systemctl --global enable "$user_svc" >/dev/null 2>&1 || die "Failed to enable $user_svc globally."
+  done
+else
+  for svc in libvirtd display-manager NetworkManager dbus openrc-settingsd elogind; do
+    rc-update add "$svc" default || die "Failed to enable $svc service."
+  done
+fi
 
 # Only enable net-autostart if in physical machine
 manage_virsh_network
@@ -255,10 +279,14 @@ ensure_autologin_group
 set_lightdm_display_for_vm
 
 # Set timeout for stopping services during shutdown via drop in file
-set_systemd_timeout_stop
+if [ "$GENTOO_INIT" = "systemd" ]; then
+  set_systemd_timeout_stop
+fi
 
 # Reload the systemd configuration
-reload_systemd_daemon
+if [ "$GENTOO_INIT" = "systemd" ]; then
+  reload_systemd_daemon
+fi
 
 # Add flag for Setup-Theme.sh
 add_setup_theme_flag "gentoo"

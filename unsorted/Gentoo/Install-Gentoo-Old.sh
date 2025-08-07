@@ -31,9 +31,6 @@ prompt_timezone
 # Prompt for drive to partition
 prompt_drive
 
-# Prompt for init system
-prompt_init_system
-
 # Partition the drive
 partition_drive
 
@@ -61,9 +58,12 @@ cd /mnt/gentoo || die "Failed to change directory to /mnt/gentoo."
 hwclock --systohc --utc
 
 # Grab the Latest Systemd Stage 3 Desktop Profile
+# wget https://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-desktop-systemd/stage3-amd64-desktop-systemd-*.tar.xz/
+
+# Set Variables
 GENTOO_MIRROR="https://distfiles.gentoo.org"
 GENTOO_ARCH="amd64"
-GENTOO_INIT="$init_system"
+GENTOO_INIT="systemd"
 STAGE3_BASENAME="stage3-$GENTOO_ARCH-desktop-$GENTOO_INIT"
 RELEASES_URL="$GENTOO_MIRROR/releases/$GENTOO_ARCH/autobuilds"
 LATEST_TXT_URL="$RELEASES_URL/latest-$STAGE3_BASENAME.txt"
@@ -142,6 +142,9 @@ echo; set_video_card || die "Failed to set video card."
 # Signal that make.conf was configured during install phase
 touch /mnt/gentoo/etc/portage/.makeconf_configured || die "Failed to create .makeconf_configured flag."
 
+# Review make.conf
+# nano /mnt/gentoo/etc/portage/make.conf
+
 #========= Gentoo Install - Installing the Gentoo Base System ==========
 
 # Copy Network Info 
@@ -169,7 +172,8 @@ fi
 cp "$SCRIPT_DIR/Install-Common.sh" /mnt/gentoo/ || die "Failed to copy Install-Common.sh to chroot."
 
 # Ensure variables are exported before chroot
-export drive hostname timezone username rootpasswd userpasswd BOOTMODE REMOVABLE_BOOT GENTOO_INIT || die "Failed to export required variables."
+: "${cpuflags:=}"
+export cpuflags drive hostname timezone username rootpasswd userpasswd BOOTMODE REMOVABLE_BOOT || die "Failed to export required variables."
 
 # Entering Chroot
 cat << EOF | chroot /mnt/gentoo /bin/bash || die "Failed to enter chroot."
@@ -196,7 +200,7 @@ else
   echo "Use baseline x86-64 binaries for broader compatibility."
 fi
 
-# Only remove GPG directory if there are permission issues
+# Only remove if there are known issues
 if [ -d /etc/portage/gnupg ] && [ ! -w /etc/portage/gnupg ]; then
     echo "Fixing GPG directory permissions..."
     rm -rf /etc/portage/gnupg/ || die "Failed to remove problematic GPG directory."
@@ -205,12 +209,12 @@ fi
 # Verify GPG.
 echo && getuto || die "Failed to verify GPG keys with getuto."
 
+# Select Mirrors (mirrors already set in make.conf)
+# emerge -1qv mirrorselect || die "Failed to install mirrorselect."
+# mirrorselect -i -o >> /etc/portage/make.conf || die "Failed to run mirrorselect."
+
 # Install Essentials
-if [ "$GENTOO_INIT" = "systemd" ]; then
-  emerge -vquN app-eselect/eselect-repository dev-vcs/git || die "Failed to install early essential packages"
-else
-  emerge -vquN app-eselect/eselect-repository dev-vcs/git app-emulation/virt-what || die "Failed to install early essential packages"
-fi
+emerge -vquN app-eselect/eselect-repository dev-vcs/git || die "Failed to install eselect-repository and git."
 
 # Switch from rsync to git for faster repository sync times
 eselect repository remove -f gentoo || die "Failed to remove rsync-based Gentoo repository."
@@ -226,16 +230,22 @@ emaint sync -r gentoo || die "Failed to sync the Gentoo repository using Git."
 # Update portage if there happens to be a new version
 emerge -1uqv sys-apps/portage || die "Failed to update Portage."
 
-# Select appropriate Gentoo profile based on init system
-if [ "$GENTOO_INIT" = "systemd" ]; then
-  eselect profile set default/linux/amd64/23.0/desktop/gnome/systemd || die "Failed to set systemd system profile."
-else
-  eselect profile set default/linux/amd64/23.0/desktop || die "Failed to set OpenRC system profile."
-fi
+# Read the News
+# eselect news list
+# eselect news read
+
+# Select 23.0 gnome desktop systemd profile for Cinnamon
+eselect profile set default/linux/amd64/23.0/desktop/gnome/systemd || die "Failed to set the system profile."
 
 # Set CPU Flags (TO DO: make it work in chroot heredoc)
 # emerge -1uqv app-portage/cpuid2cpuflags
 # echo "*/* $(cpuid2cpuflags)" > /etc/portage/package.use/00cpu-flags
+# cpuflags=$(cpuid2cpuflags)
+# if [[ -n "$cpuflags" ]]; then
+#   printf "*/* %s\n" "$cpuflags" > /etc/portage/package.use/00cpu-flags
+# else
+#   echo "Warning: cpuid2cpuflags returned nothing!"
+# fi
 
 # Update World Set
 emerge -vqDuN @world || die "Failed to update the world set."
@@ -262,75 +272,54 @@ env-update && source /etc/profile || die "Failed to reload environment."
 # Using GRUB & Initramfs
 echo "sys-kernel/installkernel grub dracut" > /etc/portage/package.use/installkernel || die "Failed to update /etc/portage/package.use/installkernel."
 
-# Install System packages
-emerge -vq sys-kernel/gentoo-kernel-bin sys-fs/genfstab net-misc/networkmanager gnome-extra/nm-applet app-shells/bash-completion sys-fs/xfsprogs sys-fs/e2fsprogs sys-fs/dosfstools sys-fs/btrfs-progs sys-fs/f2fs-tools sys-fs/ntfs3g sys-block/io-scheduler-udev-rules app-arch/unzip app-admin/sudo || die "Failed to install system packages."
+# Install System Packages
+emerge -qv sys-kernel/gentoo-kernel-bin sys-fs/genfstab net-misc/networkmanager gnome-extra/nm-applet app-shells/bash-completion sys-fs/xfsprogs sys-fs/e2fsprogs sys-fs/dosfstools sys-fs/btrfs-progs sys-fs/f2fs-tools sys-fs/ntfs3g sys-block/io-scheduler-udev-rules app-arch/unzip app-admin/sudo || die "Failed to install system packages."
 
-# Install OpenRC packages
-if [ "$GENTOO_INIT" = "openrc" ]; then
-  emerge -vq app-admin/sysklogd sys-process/cronie net-misc/chrony || die "Failed to install OpenRC packages."
-fi
-
-# Skip installing firmware and Intel microcode in VM
-if if [ "$GENTOO_INIT" = "systemd" ]; then
-     systemd-detect-virt --vm &>/dev/null
-   else
-     virt-what | grep -q .
-   fi; then
-  echo "VM detected. Skipping firmware and microcode packages."
-else
-  echo "Physical machine detected. Adding firmware packages..."
+# Skip firmware installation for VMs
+if ! systemd-detect-virt --vm &>/dev/null; then
+  echo "Physical machine detected. Installing firmware..."
   emerge -vq sys-kernel/linux-firmware || die "Failed to install sys-kernel/linux-firmware."
-  if grep -q "GenuineIntel" /proc/cpuinfo; then
-    echo "Intel CPU detected. Adding intel-microcode..."
+  grep -q "GenuineIntel" /proc/cpuinfo && {
+    echo "Intel CPU detected. Installing intel-microcode..."
     emerge -vq sys-firmware/intel-microcode || die "Failed to install sys-firmware/intel-microcode."
-  else
-    echo "Non-Intel CPU detected. Skipping intel-microcode."
-  fi
+  } || echo "Non-Intel CPU detected. Skipping intel-microcode."
+else
+  echo "VM detected. Skipping firmware and microcode installation."
 fi
 
 #=============== Gentoo Install - Configuring the System ===============
 
 # Generate fstab
+# emerge -vq sys-fs/genfstab || die "Failed to install sys-fs/genfstab."
 genfstab -U / >> /etc/fstab || die "Failed to generate fstab."
 
 # Set Hostname
 echo "$hostname" > /etc/hostname || die "Failed to set hostname."
-if [ "$GENTOO_INIT" = "openrc" ]; then
-  echo "hostname=$hostname" > /etc/conf.d/hostname
-fi
 
 # Allow Resolving the Local Hostname
 echo -e "127.0.1.1\t$hostname.localdomain\t$hostname" >> /etc/hosts || die "Failed to update /etc/hosts."
 
-# Init System Setup
-if [ "$GENTOO_INIT" = "systemd" ]; then
-  systemd-machine-id-setup || die "Failed to run systemd-machine-id-setup."
-  # systemd-firstboot --prompt
-  systemctl preset-all --preset-mode=enable-only || die "Failed to preset systemd services."
-else
-  rc-update add sysklogd default || die "Failed to enable sysklogd service."
-  rc-update add cronie default || die "Failed to enable cronie service."
-fi
+# Systemd Setup
+systemd-machine-id-setup || die "Failed to run systemd-machine-id-setup."
+# systemd-firstboot --prompt
+systemctl preset-all --preset-mode=enable-only || die "Failed to preset systemd services."
 
-# Configure networking based on init system
-if [ "$GENTOO_INIT" = "systemd" ]; then
-  # Disable conflicting systemd services and enable NetworkManager
-  systemctl disable systemd-networkd || die "Failed to disable systemd-networkd."
-  systemctl disable systemd-resolved.service || die "Failed to disable systemd-resolved service."
-  systemctl enable NetworkManager || die "Failed to enable NetworkManager."
-else
-  # Enable NetworkManager for OpenRC
-  rc-update add NetworkManager default || die "Failed to enable NetworkManager."
-fi
+# Networking
+# emerge -vq net-misc/networkmanager gnome-extra/nm-applet || die "Failed to install network-manager and nm-applet."
+systemctl disable systemd-networkd || die "Failed to disable systemd-networkd."
+systemctl disable systemd-resolved.service || die "Failed to disable systemd-resolved service."
+systemctl enable NetworkManager || die "Failed to enable NetworkManager."
 
 #============== Gentoo Install - Installing System Tools ===============
 
+# Install System Tools
+# emerge -vq sys-apps/mlocate app-shells/bash-completion sys-fs/xfsprogs sys-fs/e2fsprogs sys-fs/dosfstools sys-fs/btrfs-progs sys-fs/f2fs-tools sys-fs/ntfs3g sys-block/io-scheduler-udev-rules app-arch/unzip || die "Failed to install essential system tools."
+
+# No sys-fs/zfs because it pulls in zfs-kmod which takes a while to compile
+# emerge -vq sys-fs/zfs
+
 # Enable Time Synchronization
-if [ "$GENTOO_INIT" = "systemd" ]; then
-  systemctl enable systemd-timesyncd.service || die "Failed to enable systemd-timesyncd service."
-else
-  rc-update add chronyd default || die "Failed to enable chronyd service."
-fi
+systemctl enable systemd-timesyncd.service || die "Failed to enable systemd-timesyncd service."
 
 #============= Gentoo Install - Configuring the Bootloader =============
 
@@ -344,6 +333,9 @@ sed -i '/^#*GRUB_TIMEOUT=/s/^#*GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/gru
 grub-mkconfig -o /boot/grub/grub.cfg || die "Failed to generate GRUB config."
 
 #===================== Gentoo Install - Finalizing =====================
+
+# Install Sudo
+# emerge -vq app-admin/sudo || die "Failed to install sudo."
 
 # Setup Sudo by uncommenting %wheel ALL=(ALL:ALL) with visudo
 sed -i 's/^#\s*\(%wheel ALL=(ALL:ALL) ALL\)/\1/' /etc/sudoers || die "Failed to enable sudo for wheel group."

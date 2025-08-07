@@ -159,19 +159,19 @@ prompt_drive() {
 
 # Only NixOS uses this
 prompt_for_autologin() {
-    # Autologin Prompt
-    while true; do
-        read -rp "Enable autologin for $username? [y/N]: " autologin_input
-        if [[ "$autologin_input" =~ ^([yY]|[yY][eE][sS])$ ]]; then
-            enable_autologin=true
-            break
-        elif [[ "$autologin_input" =~ ^([nN]|[nN][oO])$ || -z "$autologin_input" ]]; then
-            enable_autologin=false
-            break
-        else
-            echo "Invalid input. Please answer y or n."
-        fi
-    done
+  # Autologin Prompt
+  while true; do
+      read -rp "Enable autologin for $username? [y/N]: " autologin_input
+      if [[ "$autologin_input" =~ ^([yY]|[yY][eE][sS])$ ]]; then
+          enable_autologin=true
+          break
+      elif [[ "$autologin_input" =~ ^([nN]|[nN][oO])$ || -z "$autologin_input" ]]; then
+          enable_autologin=false
+          break
+      else
+          echo "Invalid input. Please answer y or n."
+      fi
+  done
 }
 
 partition_drive() {
@@ -261,6 +261,25 @@ mount_system_partitions() {
 }
 
 # Only Gentoo uses this
+prompt_init_system() {
+  # Prompt for init system
+  while true; do
+    echo "Select your init system:"
+    echo
+    echo "1) systemd"
+    echo "2) OpenRC"
+    echo
+    read -p "Enter the number corresponding to your init system: " init_system_number
+
+    case $init_system_number in
+        1) init_system="systemd"; break ;;
+        2) init_system="openrc"; break ;;
+        *) echo "Invalid selection, please try again." ;;
+    esac
+  done
+}
+
+# Only Gentoo uses this
 set_video_card() {
 # Set VIDEO_CARDS value in package.use
   while true; do
@@ -317,29 +336,29 @@ install_grub() {
 }
 
 clone_dotfiles() {
-    # Clone cinnamon-dotfiles repo as new user
-    local distro="${1:-}"
-    
-    if [ "$distro" = "nixos" ]; then
-        # NixOS uses nixos-enter and creates multiple flag files
-        nixos-enter --root /mnt -c "su - $username -c '
-          cd \$HOME &&
-          git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles ||
-            { echo \"Failed to clone repo.\"; exit 1; }
-          cd cinnamon-dotfiles ||
-            { echo \"Failed to enter repo directory.\"; exit 1; }
-          touch .nixos-25.05.done .$distro.done ||
-            { echo \"Failed to create flags.\"; exit 1; }
-          echo \"Reboot and run Theme.sh in cinnamon-dotfiles located in \$HOME/cinnamon-dotfiles.\"
-        '" || die "Failed to clone repo for NixOS."
-    else
-        cat << CLONE | su - "$username"
+  # Clone cinnamon-dotfiles repo as new user
+  local distro="${1:-}"
+  
+  if [ "$distro" = "nixos" ]; then
+    # NixOS uses nixos-enter and creates multiple flag files
+    nixos-enter --root /mnt -c "su - $username -c '
+      cd \$HOME &&
+      git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles ||
+        { echo \"Failed to clone repo.\"; exit 1; }
+      cd cinnamon-dotfiles ||
+        { echo \"Failed to enter repo directory.\"; exit 1; }
+      touch .nixos-25.05.done .$distro.done ||
+        { echo \"Failed to create flags.\"; exit 1; }
+      echo \"Reboot and run Theme.sh in cinnamon-dotfiles located in \$HOME/cinnamon-dotfiles.\"
+    '" || die "Failed to clone repo for NixOS."
+  else
+    cat << CLONE | su - "$username"
 cd && git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles || die "Failed to clone repo."
 cd cinnamon-dotfiles || die "Failed to enter repo directory."
 touch .$distro.done || die "Failed to create flag."
 echo "Reboot and run Setup.sh in cinnamon-dotfiles located in \$HOME/cinnamon-dotfiles."
 CLONE
-    fi
+  fi
 }
 
 # Only Void uses this
