@@ -1,4 +1,3 @@
-#!/usr/bin/env xdg-open
 #
 # This file is part of the LibreOffice project.
 #
@@ -22,7 +21,7 @@ Terminal=false
 Icon=libreoffice-impress
 Type=Application
 Categories=Office;Presentation;X-Red-Hat-Base;X-MandrivaLinux-Office-Presentations;
-Exec=libreoffice24.8 --impress %U
+Exec=libreoffice --impress %U
 MimeType=application/vnd.oasis.opendocument.presentation;application/vnd.oasis.opendocument.presentation-template;application/vnd.sun.xml.impress;application/vnd.sun.xml.impress.template;application/mspowerpoint;application/vnd.ms-powerpoint;application/vnd.openxmlformats-officedocument.presentationml.presentation;application/vnd.ms-powerpoint.presentation.macroEnabled.12;application/vnd.openxmlformats-officedocument.presentationml.template;application/vnd.ms-powerpoint.template.macroEnabled.12;application/vnd.openxmlformats-officedocument.presentationml.slide;application/vnd.openxmlformats-officedocument.presentationml.slideshow;application/vnd.ms-powerpoint.slideshow.macroEnabled.12;application/vnd.oasis.opendocument.presentation-flat-xml;application/x-iwork-keynote-sffkey;
 Name=LibreOffice Impress
 GenericName=Presentation

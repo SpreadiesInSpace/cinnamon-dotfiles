@@ -173,7 +173,7 @@ packages=(
     # Applications
     "sys-apps/bleachbit"
     "sys-process/bottom"
-    "app-office/libreoffice"
+    "app-office/libreoffice-bin"
     "app-editors/neovim"
     "net-p2p/qbittorrent"
     "app-emulation/spice-vdagent"

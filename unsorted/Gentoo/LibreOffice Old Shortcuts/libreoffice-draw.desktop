@@ -1,4 +1,3 @@
-#!/usr/bin/env xdg-open
 #
 # This file is part of the LibreOffice project.
 #
@@ -23,7 +22,7 @@ Terminal=false
 Icon=libreoffice-draw
 Type=Application
 Categories=Office;FlowChart;Graphics;2DGraphics;VectorGraphics;X-Red-Hat-Base;X-MandrivaLinux-Office-Drawing;
-Exec=libreoffice24.8 --draw %U
+Exec=libreoffice --draw %U
 MimeType=application/vnd.oasis.opendocument.graphics;application/vnd.oasis.opendocument.graphics-flat-xml;application/vnd.oasis.opendocument.graphics-template;application/vnd.sun.xml.draw;application/vnd.sun.xml.draw.template;application/vnd.visio;application/x-wpg;application/vnd.corel-draw;application/vnd.ms-publisher;image/x-freehand;application/clarisworks;application/x-pagemaker;application/pdf;application/x-stardraw;image/x-emf;image/x-wmf;
 Name=LibreOffice Draw
 GenericName=Drawing Program

@@ -1,4 +1,3 @@
-#!/usr/bin/env xdg-open
 #
 # This file is part of the LibreOffice project.
 #
@@ -22,7 +21,7 @@ Terminal=false
 Icon=libreoffice-base
 Type=Application
 Categories=Office;Database;X-Red-Hat-Base;X-MandrivaLinux-MoreApplications-Databases;
-Exec=libreoffice24.8 --base %U
+Exec=libreoffice --base %U
 MimeType=application/vnd.oasis.opendocument.database;application/vnd.sun.xml.base;
 Name=LibreOffice Base
 GenericName=Database Development

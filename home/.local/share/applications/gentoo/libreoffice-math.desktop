@@ -1,3 +1,4 @@
+#!/usr/bin/env xdg-open
 #
 # This file is part of the LibreOffice project.
 #
@@ -23,7 +24,7 @@ NoDisplay=false
 Icon=libreoffice-math
 Type=Application
 Categories=Office;Education;Science;Math;X-Red-Hat-Base;X-MandrivaLinux-Office-Other;
-Exec=libreoffice --math %U
+Exec=libreoffice24.8 --math %U
 MimeType=application/vnd.oasis.opendocument.formula;application/vnd.sun.xml.math;application/vnd.oasis.opendocument.formula-template;text/mathml;application/mathml+xml;
 Name=LibreOffice Math
 GenericName=Formula Editor
