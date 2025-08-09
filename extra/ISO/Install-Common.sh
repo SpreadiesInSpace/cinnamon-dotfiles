@@ -262,14 +262,14 @@ prompt_init_system() {
 	while true; do
 		echo "Select your init system:"
 		echo
-		echo "1) systemd"
-		echo "2) OpenRC"
+		echo "1) OpenRC"
+		echo "2) systemd"
 		echo
 		read -rp "Enter the number corresponding to your init system: " init_system_number
 
 		case $init_system_number in
-				1) init_system="systemd"; break ;;
-				2) init_system="openrc"; break ;;
+				1) init_system="openrc"; break ;;
+				2) init_system="systemd"; break ;;
 				*) echo "Invalid selection, please try again." ;;
 		esac
 	done
