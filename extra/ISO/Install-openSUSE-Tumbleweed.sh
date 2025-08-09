@@ -59,7 +59,7 @@ mount_partitions
 mount_system_partitions
 
 # Installing the Base System
-zypper --root /mnt ar --no-gpgcheck --refresh https://download.opensuse.org/tumbleweed/repo/oss/ oss || die "Failed to add openSUSE repo."
+zypper --root /mnt ar --gpg-auto-import-keys --refresh https://download.opensuse.org/tumbleweed/repo/oss/ oss || die "Failed to add openSUSE repo."
 zypper --root /mnt in -y --download-in-advance dracut kernel-default grub2 grub2-i386-pc grub2-x86_64-efi shim zypper bash man shadow util-linux nano arch-install-scripts || die "Failed to install base packages."
 
 # Copy Repos
