@@ -219,15 +219,9 @@ fi
 # Capture Exit Code
 emerge_exit_code=$?
 
-# Report results
-if [ $emerge_exit_code -eq 0 ]; then
-	echo "All packages installed successfully."
-elif [ $emerge_exit_code -eq 1 ]; then
-	echo "Some packages failed but installation continued."
-	echo "Check the output above for failed packages."
-	echo "You may want to investigate and retry failed packages individually."
-else
-	die "Emerge encountered a fatal error (exit code: $emerge_exit_code)"
+# Stop script if emerge fails desipte using --keep-going flag
+if [ $emerge_exit_code -ne 0 ]; then
+	die "Emerge failed with exit code: $emerge_exit_code"
 fi
 
 # Set polkit permissions for wheel group users
