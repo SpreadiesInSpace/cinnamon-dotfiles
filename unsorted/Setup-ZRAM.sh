@@ -3,7 +3,6 @@
 # Handle exits on error
 die() {
     printf "\033[1;31mError:\033[0m %s\n" "$*" >&2
-    read -rp "Press Enter to exit..."
     exit 1
 }
 
