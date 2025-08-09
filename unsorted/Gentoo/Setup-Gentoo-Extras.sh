@@ -2,8 +2,8 @@
 
 # Check if script is run as root
 if [ "$EUID" -ne 0 ]; then
-  echo "Please run the script using sudo."
-  exit
+	echo "Please run the script using sudo."
+	exit
 fi
 
 # Set LINGUAS for Cinnamon Localization
@@ -17,11 +17,11 @@ echo "www-client/brave-bin::djs_overlay" | tee /etc/portage/package.mask/brave |
 
 # Update system and install Cinnamon (split them to prevent slot conflicts)
 desktop_environment=(
-    "x11-base/xorg-server"
-    "gnome-extra/cinnamon"
-    "x11-misc/lightdm"
-    "x11-misc/lightdm-gtk-greeter"
-    "www-client/brave-bin" # for verifying gentoo-zh > djs_brave override
+	"x11-base/xorg-server"
+	"gnome-extra/cinnamon"
+	"x11-misc/lightdm"
+	"x11-misc/lightdm-gtk-greeter"
+	"www-client/brave-bin" # for verifying gentoo-zh > djs_brave override
 )
 emerge -vqDuN --with-bdeps=y "${desktop_environment[@]}" || die "Failed to install Cinnamon/Brave package group."
 

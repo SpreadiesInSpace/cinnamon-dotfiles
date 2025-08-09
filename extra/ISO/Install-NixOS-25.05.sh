@@ -67,21 +67,21 @@ cp configuration.nix "$CONFIG" || die "Failed to copy configuration.nix"
 
 # Only run if BIOS
 if [ ! -d /sys/firmware/efi ]; then
-  # Comment out efiSupport inside grub block
-  sudo sed -i '/^\s*grub = {/,/^\s*};/ {
-    s/^\(\s*\)efiSupport = /\1# efiSupport = /
-  }' "$CONFIG" || die "Failed to comment out efiSupport in grub block."
-  
-  # Comment out efi.canTouchEfiVariables
-  sudo sed -i 's/^\(\s*\)efi\.canTouchEfiVariables = /\1# efi.canTouchEfiVariables = /' "$CONFIG" || die "Failed to comment out efi.canTouchEfiVariables."
-  
-  # Replace boot.loader.grub.device with the selected drive
-  sed -i "s|^\(\s*device\s*=\s*\).*|\\1\"$drive\";|" "$CONFIG" || die "Failed to set GRUB bootloader device."
+	# Comment out efiSupport inside grub block
+	sudo sed -i '/^\s*grub = {/,/^\s*};/ {
+		s/^\(\s*\)efiSupport = /\1# efiSupport = /
+	}' "$CONFIG" || die "Failed to comment out efiSupport in grub block."
+	
+	# Comment out efi.canTouchEfiVariables
+	sudo sed -i 's/^\(\s*\)efi\.canTouchEfiVariables = /\1# efi.canTouchEfiVariables = /' "$CONFIG" || die "Failed to comment out efi.canTouchEfiVariables."
+	
+	# Replace boot.loader.grub.device with the selected drive
+	sed -i "s|^\(\s*device\s*=\s*\).*|\\1\"$drive\";|" "$CONFIG" || die "Failed to set GRUB bootloader device."
 fi
 
 # If autologin is set to false, modify line 74 in /etc/nixos/configuration.nix
 if [ "$enable_autologin" = false ]; then
-    sed -i '74s/^\( *enable *= *\)true;/\1false;/' "$CONFIG" || die "Failed to modify autologin setting."
+		sed -i '74s/^\( *enable *= *\)true;/\1false;/' "$CONFIG" || die "Failed to modify autologin setting."
 fi
 
 # Replace the placeholder with the actual username

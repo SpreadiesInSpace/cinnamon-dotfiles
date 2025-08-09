@@ -5,7 +5,7 @@ die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
 
 # Prevents script from being run as root
 if [ "$EUID" -eq 0 ]; then
-    die "This script must NOT be run as root. Please run it as a regular user."
+	die "This script must NOT be run as root. Please run it as a regular user."
 fi
 
 # Enable Guru Repository

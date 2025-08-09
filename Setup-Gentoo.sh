@@ -24,9 +24,9 @@ display_status "$enable_autologin" "$is_vm"
 
 # Detect Init System
 if eselect profile show | grep -q systemd; then
-  GENTOO_INIT="systemd"
+	GENTOO_INIT="systemd"
 else
-  GENTOO_INIT="openrc"
+	GENTOO_INIT="openrc"
 fi
 echo "Detected init system: $GENTOO_INIT"
 
@@ -34,31 +34,31 @@ echo "Detected init system: $GENTOO_INIT"
 MAKECONF_FLAG="/etc/portage/.makeconf_configured"
 
 if [ -f "$MAKECONF_FLAG" ]; then
-  echo "make.conf already configured during install. Skipping..."
+	echo "make.conf already configured during install. Skipping..."
 else
-  echo "Configuring /etc/portage/make.conf..."
+	echo "Configuring /etc/portage/make.conf..."
 
-  # Backup current make.conf & replace with custom one
-  timestamp=$(date +%s)
-  cp /etc/portage/make.conf /etc/portage/make.conf.old.${timestamp} || die "Failed to back up current make.conf."
-  cp etc/portage/make.conf /etc/portage/make.conf || die "Failed to copy custom make.conf."
+	# Backup current make.conf & replace with custom one
+	timestamp=$(date +%s)
+	cp /etc/portage/make.conf /etc/portage/make.conf.old.${timestamp} || die "Failed to back up current make.conf."
+	cp etc/portage/make.conf /etc/portage/make.conf || die "Failed to copy custom make.conf."
 
-  # Set MAKEOPTS based on CPU cores (load limit = cores + 1)
-  cores=$(nproc) || die "Failed to retrieve number of CPU cores."
-  makeopts_load_limit=$((cores + 1))
-  sed -i "s/^MAKEOPTS=.*/MAKEOPTS=\"-j$cores -l$makeopts_load_limit\"/" /etc/portage/make.conf || die "Failed to set MAKEOPTS in make.conf."
-  echo "Set MAKEOPTS to -j$cores -l$makeopts_load_limit"
+	# Set MAKEOPTS based on CPU cores (load limit = cores + 1)
+	cores=$(nproc) || die "Failed to retrieve number of CPU cores."
+	makeopts_load_limit=$((cores + 1))
+	sed -i "s/^MAKEOPTS=.*/MAKEOPTS=\"-j$cores -l$makeopts_load_limit\"/" /etc/portage/make.conf || die "Failed to set MAKEOPTS in make.conf."
+	echo "Set MAKEOPTS to -j$cores -l$makeopts_load_limit"
 
-  # Set EMERGE_DEFAULT_OPTS based on CPU cores (load limit as 90% of cores)
-  load_limit=$(echo "$cores * 0.9" | bc -l | awk '{printf "%.1f", $0}') || die "Failed to calculate load limit."
-  sed -i "s/^EMERGE_DEFAULT_OPTS=.*/EMERGE_DEFAULT_OPTS=\"-j$cores -l$load_limit\"/" /etc/portage/make.conf || die "Failed to set EMERGE_DEFAULT_OPTS in make.conf."
-  echo "Set EMERGE_DEFAULT_OPTS to -j$cores -l$load_limit"
-  
-  # Call the function
-  set_video_card || die "Failed to set video card."
+	# Set EMERGE_DEFAULT_OPTS based on CPU cores (load limit as 90% of cores)
+	load_limit=$(echo "$cores * 0.9" | bc -l | awk '{printf "%.1f", $0}') || die "Failed to calculate load limit."
+	sed -i "s/^EMERGE_DEFAULT_OPTS=.*/EMERGE_DEFAULT_OPTS=\"-j$cores -l$load_limit\"/" /etc/portage/make.conf || die "Failed to set EMERGE_DEFAULT_OPTS in make.conf."
+	echo "Set EMERGE_DEFAULT_OPTS to -j$cores -l$load_limit"
+	
+	# Call the function
+	set_video_card || die "Failed to set video card."
 
-  # Drop flag so this doesn't run again
-  touch "$MAKECONF_FLAG" || die "Failed to create $MAKECONF_FLAG flag."
+	# Drop flag so this doesn't run again
+	touch "$MAKECONF_FLAG" || die "Failed to create $MAKECONF_FLAG flag."
 fi
 
 # Install Essentials
@@ -69,13 +69,13 @@ FLAG="/var/db/repos/.synced-git-repo"
 
 # Skip this if run previously
 if [[ ! -f "$FLAG" ]]; then
-  eselect repository remove -f gentoo || die "Failed to remove rsync-based Gentoo repository."
-  eselect repository add gentoo git https://github.com/gentoo-mirror/gentoo.git || die "Failed to enable Git-based Gentoo repository."
-  touch "$FLAG" || die "Failed to create git sync flag."
-  rm -rf /var/db/repos/gentoo || die "Failed to remove existing gentoo repository."
-  echo "Switched to git for repository sync."
+	eselect repository remove -f gentoo || die "Failed to remove rsync-based Gentoo repository."
+	eselect repository add gentoo git https://github.com/gentoo-mirror/gentoo.git || die "Failed to enable Git-based Gentoo repository."
+	touch "$FLAG" || die "Failed to create git sync flag."
+	rm -rf /var/db/repos/gentoo || die "Failed to remove existing gentoo repository."
+	echo "Switched to git for repository sync."
 else
-  echo "Repository already configured for git. Skipping."
+	echo "Repository already configured for git. Skipping."
 fi
 
 # Enable Additional Overlays
@@ -105,9 +105,9 @@ emaint sync -a || die "Failed to sync repositories and overlays."
 
 # Select appropriate Gentoo profile based on init system
 if [ "$GENTOO_INIT" = "systemd" ]; then
-  eselect profile set default/linux/amd64/23.0/desktop/gnome/systemd || die "Failed to set systemd system profile."
+	eselect profile set default/linux/amd64/23.0/desktop/gnome/systemd || die "Failed to set systemd system profile."
 else
-  eselect profile set default/linux/amd64/23.0/desktop || die "Failed to set OpenRC system profile."
+	eselect profile set default/linux/amd64/23.0/desktop || die "Failed to set OpenRC system profile."
 fi
 
 # Enable Sound (Pipewire)
@@ -120,83 +120,83 @@ emerge -q --depclean || die "Failed to clean up unused dependencies."
 
 # All Packages
 packages=(
-    # Unstable Packages
-    "x11-misc/gpaste"
-    "app-admin/grub-customizer"
-    #"x11-apps/lightdm-gtk-greeter-settings" # clashes with gobject-introspection
-    "x11-themes/kvantum"
-    "app-backup/timeshift" # triggers use flag change
-    # Desktop environment related packages
-    "x11-base/xorg-server"
-    "gnome-extra/cinnamon"
-    "x11-misc/lightdm"
-    "x11-misc/lightdm-gtk-greeter"
-    "www-client/brave-bin"
-    "media-gfx/eog"
-    "app-text/evince"
-    "media-video/ffmpegthumbnailer"
-    "app-editors/gedit"
-    "app-editors/gedit-plugins"
-    "gnome-extra/gnome-calculator"
-    "sys-apps/gnome-disk-utility"
-    "media-gfx/gnome-screenshot"
-    "gnome-extra/gnome-system-monitor"
-    "x11-terms/gnome-terminal"
-    "media-gfx/gthumb"
-    "media-video/haruna"
-    "gnome-extra/nemo"
-    "gnome-extra/nemo-fileroller"
-    "x11-misc/qt5ct"
-    "gui-apps/qt6ct"
-    "media-sound/rhythmbox"
-    "app-editors/vscodium"
-    # System utilities
-    "app-admin/eclean-kernel"
-    "dev-python/zstandard" # for eclean-kernel
-    "app-arch/file-roller"
-    "sys-apps/flatpak"
-    "sys-apps/xdg-desktop-portal-gtk"
-    "app-portage/gentoolkit"
-    "sys-block/gparted"
-    "app-portage/mirrorselect"
-    "sys-fs/ncdu"
-    "app-misc/neofetch"
-    "net-firewall/ufw"    
-    "app-arch/unzip"
-    "x11-apps/xkill"
-    "x11-apps/xrandr"
-    # Network utilities
-    "net-ftp/filezilla"
-    "gnome-base/gvfs"
-    "kde-misc/kdeconnect"
-    "net-fs/samba"
-    # Applications
-    "sys-apps/bleachbit"
-    "sys-process/bottom"
-    "app-office/libreoffice-bin"
-    "app-editors/neovim"
-    "net-p2p/qbittorrent"
-    "app-emulation/spice-vdagent"
-    "media-fonts/noto"
-    "media-fonts/noto-emoji"
-    "x11-misc/xclip"
-    # For NvChad
-    "sys-devel/gcc"
-    "dev-build/make"
-    "sys-apps/ripgrep"   
-    # Virtualization Tools
-    "app-emulation/virt-manager" # triggers use flag change
-    "app-emulation/qemu"
-    "app-emulation/libvirt" # triggers use flag change
-    "sys-firmware/edk2-bin"
-    "net-dns/dnsmasq"
-    "net-misc/vde"
-    "net-misc/bridge-utils"
-    "net-firewall/iptables"
-    "sys-apps/dmidecode"
-    "sys-cluster/glusterfs"
-    "net-libs/libiscsi"
-    "app-emulation/guestfs-tools"
+	# Unstable Packages
+	"x11-misc/gpaste"
+	"app-admin/grub-customizer"
+	#"x11-apps/lightdm-gtk-greeter-settings" # clashes with gobject-introspection
+	"x11-themes/kvantum"
+	"app-backup/timeshift" # triggers use flag change
+	# Desktop environment related packages
+	"x11-base/xorg-server"
+	"gnome-extra/cinnamon"
+	"x11-misc/lightdm"
+	"x11-misc/lightdm-gtk-greeter"
+	"www-client/brave-bin"
+	"media-gfx/eog"
+	"app-text/evince"
+	"media-video/ffmpegthumbnailer"
+	"app-editors/gedit"
+	"app-editors/gedit-plugins"
+	"gnome-extra/gnome-calculator"
+	"sys-apps/gnome-disk-utility"
+	"media-gfx/gnome-screenshot"
+	"gnome-extra/gnome-system-monitor"
+	"x11-terms/gnome-terminal"
+	"media-gfx/gthumb"
+	"media-video/haruna"
+	"gnome-extra/nemo"
+	"gnome-extra/nemo-fileroller"
+	"x11-misc/qt5ct"
+	"gui-apps/qt6ct"
+	"media-sound/rhythmbox"
+	"app-editors/vscodium"
+	# System utilities
+	"app-admin/eclean-kernel"
+	"dev-python/zstandard" # for eclean-kernel
+	"app-arch/file-roller"
+	"sys-apps/flatpak"
+	"sys-apps/xdg-desktop-portal-gtk"
+	"app-portage/gentoolkit"
+	"sys-block/gparted"
+	"app-portage/mirrorselect"
+	"sys-fs/ncdu"
+	"app-misc/neofetch"
+	"net-firewall/ufw"    
+	"app-arch/unzip"
+	"x11-apps/xkill"
+	"x11-apps/xrandr"
+	# Network utilities
+	"net-ftp/filezilla"
+	"gnome-base/gvfs"
+	"kde-misc/kdeconnect"
+	"net-fs/samba"
+	# Applications
+	"sys-apps/bleachbit"
+	"sys-process/bottom"
+	"app-office/libreoffice-bin"
+	"app-editors/neovim"
+	"net-p2p/qbittorrent"
+	"app-emulation/spice-vdagent"
+	"media-fonts/noto"
+	"media-fonts/noto-emoji"
+	"x11-misc/xclip"
+	# For NvChad
+	"sys-devel/gcc"
+	"dev-build/make"
+	"sys-apps/ripgrep"   
+	# Virtualization Tools
+	"app-emulation/virt-manager" # triggers use flag change
+	"app-emulation/qemu"
+	"app-emulation/libvirt" # triggers use flag change
+	"sys-firmware/edk2-bin"
+	"net-dns/dnsmasq"
+	"net-misc/vde"
+	"net-misc/bridge-utils"
+	"net-firewall/iptables"
+	"sys-apps/dmidecode"
+	"sys-cluster/glusterfs"
+	"net-libs/libiscsi"
+	"app-emulation/guestfs-tools"
 )
 
 # Create autounmask file
@@ -209,11 +209,11 @@ echo 'app-emulation/libguestfs no-sandbox.conf' >> /etc/portage/package.env/libg
 
 # Install Packages
 if [ "$GENTOO_INIT" = "systemd" ]; then
-  emerge -vqDuN --with-bdeps=y --keep-going --autounmask-write --autounmask-continue=y "${packages[@]}"
+	emerge -vqDuN --with-bdeps=y --keep-going --autounmask-write --autounmask-continue=y "${packages[@]}"
 else
-  emerge -vqDuN --with-bdeps=y --keep-going --autounmask-write --autounmask-continue=y "${packages[@]}" gui-libs/display-manager-init
-  # Enable LightDM for OpenRC via display-manager
-  sed -i 's|^DISPLAYMANAGER=.*|DISPLAYMANAGER="lightdm"|' /etc/conf.d/display-manager
+	emerge -vqDuN --with-bdeps=y --keep-going --autounmask-write --autounmask-continue=y "${packages[@]}" gui-libs/display-manager-init
+	# Enable LightDM for OpenRC via display-manager
+	sed -i 's|^DISPLAYMANAGER=.*|DISPLAYMANAGER="lightdm"|' /etc/conf.d/display-manager
 fi
 
 # Capture Exit Code
@@ -221,13 +221,13 @@ emerge_exit_code=$?
 
 # Report results
 if [ $emerge_exit_code -eq 0 ]; then
-    echo "All packages installed successfully."
+	echo "All packages installed successfully."
 elif [ $emerge_exit_code -eq 1 ]; then
-    echo "Some packages failed but installation continued."
-    echo "Check the output above for failed packages."
-    echo "You may want to investigate and retry failed packages individually."
+	echo "Some packages failed but installation continued."
+	echo "Check the output above for failed packages."
+	echo "You may want to investigate and retry failed packages individually."
 else
-    die "Emerge encountered a fatal error (exit code: $emerge_exit_code)"
+	die "Emerge encountered a fatal error (exit code: $emerge_exit_code)"
 fi
 
 # Set polkit permissions for wheel group users
@@ -248,16 +248,16 @@ set_qemu_permissions
 # Enable and start services
 echo "Enabling services..."
 if [ "$GENTOO_INIT" = "systemd" ]; then
-  for svc in libvirtd lightdm NetworkManager; do
-    systemctl enable "$svc" >/dev/null 2>&1 || die "Failed to enable $svc service."
-  done
-  for user_svc in pipewire.service pipewire-pulse.socket wireplumber.service; do
-    systemctl --global enable "$user_svc" >/dev/null 2>&1 || die "Failed to enable $user_svc globally."
-  done
+	for svc in libvirtd lightdm NetworkManager; do
+		systemctl enable "$svc" >/dev/null 2>&1 || die "Failed to enable $svc service."
+	done
+	for user_svc in pipewire.service pipewire-pulse.socket wireplumber.service; do
+		systemctl --global enable "$user_svc" >/dev/null 2>&1 || die "Failed to enable $user_svc globally."
+	done
 else
-  for svc in libvirtd display-manager NetworkManager spice-vdagent dbus openrc-settingsd elogind; do
-    rc-update add "$svc" default || die "Failed to enable $svc service."
-  done
+	for svc in libvirtd display-manager NetworkManager spice-vdagent dbus openrc-settingsd elogind; do
+		rc-update add "$svc" default || die "Failed to enable $svc service."
+	done
 fi
 
 # Only enable net-autostart if in physical machine
@@ -280,12 +280,12 @@ set_lightdm_display_for_vm
 
 # Set timeout for stopping services during shutdown via drop in file
 if [ "$GENTOO_INIT" = "systemd" ]; then
-  set_systemd_timeout_stop
+	set_systemd_timeout_stop
 fi
 
 # Reload the systemd configuration
 if [ "$GENTOO_INIT" = "systemd" ]; then
-  reload_systemd_daemon
+	reload_systemd_daemon
 fi
 
 # Add flag for Setup-Theme.sh

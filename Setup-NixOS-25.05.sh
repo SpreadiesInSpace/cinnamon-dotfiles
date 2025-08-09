@@ -2,10 +2,10 @@
 
 # Exit early if NixOS is installed via cinnamon-ISO
 if [ -f ".nixos-25.05.done" ]; then
-  echo "This NixOS install was done via Install-NixOS.sh."
-  echo "Now run Theme.sh with the following command:" 
-  echo "bash Theme.sh"
-  exit 0
+	echo "This NixOS install was done via Install-NixOS.sh."
+	echo "Now run Theme.sh with the following command:" 
+	echo "bash Theme.sh"
+	exit 0
 fi
 
 # Source common functions
@@ -42,17 +42,17 @@ cp ./home/theming/NixOS/configuration.nix "$CONFIG" || die "Failed to copy confi
 
 # Only run if BIOS
 if [ ! -d /sys/firmware/efi ]; then
-  # Comment out efiSupport inside grub block
-  sudo sed -i '/^\s*grub = {/,/^\s*};/ {
-    s/^\(\s*\)efiSupport = /\1# efiSupport = /
-  }' "$CONFIG" || die "Failed to comment out efiSupport in grub block."
-  # Comment out efi.canTouchEfiVariables
-  sudo sed -i 's/^\(\s*\)efi\.canTouchEfiVariables = /\1# efi.canTouchEfiVariables = /' "$CONFIG" || die "Failed to comment out efi.canTouchEfiVariables."
+	# Comment out efiSupport inside grub block
+	sudo sed -i '/^\s*grub = {/,/^\s*};/ {
+		s/^\(\s*\)efiSupport = /\1# efiSupport = /
+	}' "$CONFIG" || die "Failed to comment out efiSupport in grub block."
+	# Comment out efi.canTouchEfiVariables
+	sudo sed -i 's/^\(\s*\)efi\.canTouchEfiVariables = /\1# efi.canTouchEfiVariables = /' "$CONFIG" || die "Failed to comment out efi.canTouchEfiVariables."
 fi
 
 # If autologin is set to false, modify line 74 in /etc/nixos/configuration.nix
 if [ "$enable_autologin" = false ]; then
-    sed -i '74s/^\( *enable *= *\)true;/\1false;/' "$CONFIG" || die "Failed to modify autologin setting."
+	sed -i '74s/^\( *enable *= *\)true;/\1false;/' "$CONFIG" || die "Failed to modify autologin setting."
 fi
 
 # Replace the placeholder with the actual username
@@ -60,21 +60,21 @@ sed -i "s/f16poom/$username/g" "$CONFIG" || die "Failed to replace username in c
 
 # Prompt the user for hostname
 while ! read -p "Enter the hostname for your system: " hostname || [ -z "$hostname" ] || [[ ! "$hostname" =~ ^[a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?$ ]]; do
-    echo "Invalid hostname. Must be non-empty, alphanumeric, and may include hyphens (no leading/trailing hyphen)."
+	echo "Invalid hostname. Must be non-empty, alphanumeric, and may include hyphens (no leading/trailing hyphen)."
 done
 sed -i "s/hostName = .*;/hostName = \"$hostname\";/g" "$CONFIG" || die "Failed to update hostname in configuration.nix"
 
 # Set Timezone
 while true; do
-  read -p "Enter your timezone (e.g., Asia/Bangkok): " timezone
-  timezone="${timezone:-Asia/Bangkok}"  # default if empty
-  if [ -f "/etc/zoneinfo/$timezone" ]; then
-    echo "Timezone set to: $timezone"
-    # Use sed to update the time.timeZone value in the config
-    sed -i "s|^\(\s*time\.timeZone\s*=\s*\).*|\\1\"$timezone\";|" "$CONFIG"
-    break
-  fi
-  echo "Invalid timezone: $timezone"
+	read -p "Enter your timezone (e.g., Asia/Bangkok): " timezone
+	timezone="${timezone:-Asia/Bangkok}"  # default if empty
+	if [ -f "/etc/zoneinfo/$timezone" ]; then
+		echo "Timezone set to: $timezone"
+		# Use sed to update the time.timeZone value in the config
+		sed -i "s|^\(\s*time\.timeZone\s*=\s*\).*|\\1\"$timezone\";|" "$CONFIG"
+		break
+	fi
+	echo "Invalid timezone: $timezone"
 done
 
 # Place Login Wallpaper

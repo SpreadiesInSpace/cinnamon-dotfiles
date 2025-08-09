@@ -83,29 +83,29 @@ gpg --verify latest-stage3.txt 2>/dev/null || die "GPG verification of latest-st
 # Parse the stage3 tarball path from the verified file
 STAGE3_TARBALL_PATH=$(awk '/^[^#].*\.tar\.xz/ { print $1; exit }' latest-stage3.txt)
 if [[ -z "$STAGE3_TARBALL_PATH" ]]; then
-   die "Failed to parse the stage3 tarball path from latest-stage3.txt."
+	die "Failed to parse the stage3 tarball path from latest-stage3.txt."
 fi
 STAGE3_TARBALL=$(basename "$STAGE3_TARBALL_PATH")
 
 # Download tarball and verification files
 echo; echo "Downloading stage3 tarball and verification files..."
 for suffix in "" ".asc" ".DIGESTS" ".sha256"; do
-  wget -c -T 10 -t 10 -q --show-progress "$RELEASES_URL/$STAGE3_TARBALL_PATH$suffix" || die "Failed to download $RELEASES_URL/$STAGE3_TARBALL_PATH$suffix"
+	wget -c -T 10 -t 10 -q --show-progress "$RELEASES_URL/$STAGE3_TARBALL_PATH$suffix" || die "Failed to download $RELEASES_URL/$STAGE3_TARBALL_PATH$suffix"
 done
 
 # Verify GPG signatures
 echo; echo "Verifying GPG signatures..."
 for ext in asc DIGESTS sha256; do
-  echo "- Checking $STAGE3_TARBALL.$ext..."
-  if ! gpg --verify "$STAGE3_TARBALL.$ext" 2>/dev/null; then
-    die "GPG verification of $STAGE3_TARBALL.$ext failed! Aborting..."
-  fi
+	echo "- Checking $STAGE3_TARBALL.$ext..."
+	if ! gpg --verify "$STAGE3_TARBALL.$ext" 2>/dev/null; then
+		die "GPG verification of $STAGE3_TARBALL.$ext failed! Aborting..."
+	fi
 done
 
 # Verify SHA256 hash
 echo; echo "Verifying SHA256 checksum..."
 if ! sha256sum --check "$STAGE3_TARBALL.sha256" 2>/dev/null; then
-  die "SHA256 verification failed! Aborting..."
+	die "SHA256 verification failed! Aborting..."
 fi
 
 # If all verifications passed, extract the tarball
@@ -119,9 +119,9 @@ path="/mnt/gentoo/etc/portage/make.conf"
 # Backup and exit on failure
 cp "$path" "$path.stage3" || die "Failed to back up $path."
 curl -fsSL "$url" -o "$path" || {
-  echo "Failed to fetch $url, restoring original make.conf."
-  mv "$path.stage3" "$path"
-  die "Failed to fetch $url."
+	echo "Failed to fetch $url, restoring original make.conf."
+	mv "$path.stage3" "$path"
+	die "Failed to fetch $url."
 }
 echo; echo "make.conf updated successfully"
 
@@ -158,11 +158,11 @@ mount --make-slave /mnt/gentoo/run || die "Failed to set /mnt/gentoo/run as slav
 
 # Fix /dev/shm if it's a broken symlink (common on non-Gentoo ISOs)
 if test -L /dev/shm; then
-  echo "Fixing /dev/shm symlink..."
-  rm /dev/shm || die "Failed to remove /dev/shm symlink."
-  mkdir /dev/shm || die "Failed to create /dev/shm directory."
-  mount -t tmpfs -o nosuid,nodev,noexec shm /dev/shm || die "Failed to mount tmpfs on /dev/shm."
-  chmod 1777 /dev/shm /run/shm || die "Failed to set permissions on /dev/shm or /run/shm."
+	echo "Fixing /dev/shm symlink..."
+	rm /dev/shm || die "Failed to remove /dev/shm symlink."
+	mkdir /dev/shm || die "Failed to create /dev/shm directory."
+	mount -t tmpfs -o nosuid,nodev,noexec shm /dev/shm || die "Failed to mount tmpfs on /dev/shm."
+	chmod 1777 /dev/shm /run/shm || die "Failed to set permissions on /dev/shm or /run/shm."
 fi
 
 # Copy common functions to chroot environment
@@ -189,17 +189,17 @@ priority = 9999" > /etc/portage/binrepos.conf/gentoo.conf || die "Failed to writ
 
 # Set BINHOST sync URI based on CPU support for AVX2.
 if grep -q "avx2" /proc/cpuinfo; then
-  echo "sync-uri = http://download.nus.edu.sg/mirror/gentoo/releases/amd64/binpackages/23.0/x86-64-v3/" >> /etc/portage/binrepos.conf/gentoo.conf || die "Failed to write AVX2 binhost URI."
-  echo "Use x86-64-v3 optimized binaries for AVX2-capable CPUs."
+	echo "sync-uri = http://download.nus.edu.sg/mirror/gentoo/releases/amd64/binpackages/23.0/x86-64-v3/" >> /etc/portage/binrepos.conf/gentoo.conf || die "Failed to write AVX2 binhost URI."
+	echo "Use x86-64-v3 optimized binaries for AVX2-capable CPUs."
 else
-  echo "sync-uri = https://distfiles.gentoo.org/releases/amd64/binpackages/23.0/x86-64/" >> /etc/portage/binrepos.conf/gentoo.conf || die "Failed to write baseline binhost URI."
-  echo "Use baseline x86-64 binaries for broader compatibility."
+	echo "sync-uri = https://distfiles.gentoo.org/releases/amd64/binpackages/23.0/x86-64/" >> /etc/portage/binrepos.conf/gentoo.conf || die "Failed to write baseline binhost URI."
+	echo "Use baseline x86-64 binaries for broader compatibility."
 fi
 
 # Only remove GPG directory if there are permission issues
 if [ -d /etc/portage/gnupg ] && [ ! -w /etc/portage/gnupg ]; then
-    echo "Fixing GPG directory permissions..."
-    rm -rf /etc/portage/gnupg/ || die "Failed to remove problematic GPG directory."
+	echo "Fixing GPG directory permissions..."
+	rm -rf /etc/portage/gnupg/ || die "Failed to remove problematic GPG directory."
 fi
 
 # Verify GPG.
@@ -207,9 +207,9 @@ echo && getuto || die "Failed to verify GPG keys with getuto."
 
 # Install Essentials
 if [ "$GENTOO_INIT" = "systemd" ]; then
-  emerge -vquN app-eselect/eselect-repository dev-vcs/git || die "Failed to install early essential packages"
+	emerge -vquN app-eselect/eselect-repository dev-vcs/git || die "Failed to install early essential packages"
 else
-  emerge -vquN app-eselect/eselect-repository dev-vcs/git app-emulation/virt-what || die "Failed to install early essential packages"
+	emerge -vquN app-eselect/eselect-repository dev-vcs/git app-emulation/virt-what || die "Failed to install early essential packages"
 fi
 
 # Switch from rsync to git for faster repository sync times
@@ -228,9 +228,9 @@ emerge -1uqv sys-apps/portage || die "Failed to update Portage."
 
 # Select appropriate Gentoo profile based on init system
 if [ "$GENTOO_INIT" = "systemd" ]; then
-  eselect profile set default/linux/amd64/23.0/desktop/gnome/systemd || die "Failed to set systemd system profile."
+	eselect profile set default/linux/amd64/23.0/desktop/gnome/systemd || die "Failed to set systemd system profile."
 else
-  eselect profile set default/linux/amd64/23.0/desktop || die "Failed to set OpenRC system profile."
+	eselect profile set default/linux/amd64/23.0/desktop || die "Failed to set OpenRC system profile."
 fi
 
 # Set CPU Flags (TO DO: make it work in chroot heredoc)
@@ -267,25 +267,22 @@ emerge -vq sys-kernel/gentoo-kernel-bin sys-fs/genfstab net-misc/networkmanager 
 
 # Install OpenRC packages
 if [ "$GENTOO_INIT" = "openrc" ]; then
-  emerge -vq app-admin/sysklogd sys-process/cronie net-misc/chrony || die "Failed to install OpenRC packages."
+	emerge -vq app-admin/sysklogd sys-process/cronie net-misc/chrony || die "Failed to install OpenRC packages."
 fi
 
 # Skip installing firmware and Intel microcode in VM
-if if [ "$GENTOO_INIT" = "systemd" ]; then
-     systemd-detect-virt --vm &>/dev/null
-   else
-     virt-what | grep -q .
-   fi; then
-  echo "VM detected. Skipping firmware and microcode packages."
+if { [ "$GENTOO_INIT" = "systemd" ] && systemd-detect-virt --vm; } || \
+   virt-what | grep -q .; then
+	echo "VM detected. Skipping firmware and microcode packages."
 else
-  echo "Physical machine detected. Adding firmware packages..."
-  emerge -vq sys-kernel/linux-firmware || die "Failed to install sys-kernel/linux-firmware."
-  if grep -q "GenuineIntel" /proc/cpuinfo; then
-    echo "Intel CPU detected. Adding intel-microcode..."
-    emerge -vq sys-firmware/intel-microcode || die "Failed to install sys-firmware/intel-microcode."
-  else
-    echo "Non-Intel CPU detected. Skipping intel-microcode."
-  fi
+	echo "Physical machine detected. Adding firmware packages..."
+	emerge -vq sys-kernel/linux-firmware || die "Failed to install sys-kernel/linux-firmware."
+	if grep -q "GenuineIntel" /proc/cpuinfo; then
+		echo "Intel CPU detected. Adding intel-microcode..."
+		emerge -vq sys-firmware/intel-microcode || die "Failed to install sys-firmware/intel-microcode."
+	else
+		echo "Non-Intel CPU detected. Skipping intel-microcode."
+	fi
 fi
 
 #=============== Gentoo Install - Configuring the System ===============
@@ -296,7 +293,7 @@ genfstab -U / >> /etc/fstab || die "Failed to generate fstab."
 # Set Hostname
 echo "$hostname" > /etc/hostname || die "Failed to set hostname."
 if [ "$GENTOO_INIT" = "openrc" ]; then
-  echo "hostname=$hostname" > /etc/conf.d/hostname
+	echo "hostname=$hostname" > /etc/conf.d/hostname
 fi
 
 # Allow Resolving the Local Hostname
@@ -304,32 +301,32 @@ echo -e "127.0.1.1\t$hostname.localdomain\t$hostname" >> /etc/hosts || die "Fail
 
 # Init System Setup
 if [ "$GENTOO_INIT" = "systemd" ]; then
-  systemd-machine-id-setup || die "Failed to run systemd-machine-id-setup."
-  # systemd-firstboot --prompt
-  systemctl preset-all --preset-mode=enable-only || die "Failed to preset systemd services."
+	systemd-machine-id-setup || die "Failed to run systemd-machine-id-setup."
+	# systemd-firstboot --prompt
+	systemctl preset-all --preset-mode=enable-only || die "Failed to preset systemd services."
 else
-  rc-update add sysklogd default || die "Failed to enable sysklogd service."
-  rc-update add cronie default || die "Failed to enable cronie service."
+	rc-update add sysklogd default || die "Failed to enable sysklogd service."
+	rc-update add cronie default || die "Failed to enable cronie service."
 fi
 
 # Configure networking based on init system
 if [ "$GENTOO_INIT" = "systemd" ]; then
-  # Disable conflicting systemd services and enable NetworkManager
-  systemctl disable systemd-networkd || die "Failed to disable systemd-networkd."
-  systemctl disable systemd-resolved.service || die "Failed to disable systemd-resolved service."
-  systemctl enable NetworkManager || die "Failed to enable NetworkManager."
+	# Disable conflicting systemd services and enable NetworkManager
+	systemctl disable systemd-networkd || die "Failed to disable systemd-networkd."
+	systemctl disable systemd-resolved.service || die "Failed to disable systemd-resolved service."
+	systemctl enable NetworkManager || die "Failed to enable NetworkManager."
 else
-  # Enable NetworkManager for OpenRC
-  rc-update add NetworkManager default || die "Failed to enable NetworkManager."
+	# Enable NetworkManager for OpenRC
+	rc-update add NetworkManager default || die "Failed to enable NetworkManager."
 fi
 
 #============== Gentoo Install - Installing System Tools ===============
 
 # Enable Time Synchronization
 if [ "$GENTOO_INIT" = "systemd" ]; then
-  systemctl enable systemd-timesyncd.service || die "Failed to enable systemd-timesyncd service."
+	systemctl enable systemd-timesyncd.service || die "Failed to enable systemd-timesyncd service."
 else
-  rc-update add chronyd default || die "Failed to enable chronyd service."
+	rc-update add chronyd default || die "Failed to enable chronyd service."
 fi
 
 #============= Gentoo Install - Configuring the Bootloader =============

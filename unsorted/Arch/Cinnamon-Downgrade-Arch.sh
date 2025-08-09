@@ -14,11 +14,11 @@ sudo mv /etc/pacman.conf.og /etc/pacman.conf
 declare -A options=(["IgnorePkg"]="IgnorePkg = cinnamon cinnamon-control-center cinnamon-desktop cinnamon-menus cinnamon-screensaver cinnamon-session cinnamon-settings-daemon cjs muffin nemo nemo-fileroller nemo-image-converter nemo-preview nemo-share xapp xdg-desktop-portal-xapp")
 # Loop over the options
 for key in "${!options[@]}"; do
-    # Check if the option is already in the file
-    if ! grep -q "^$key" /etc/pacman.conf; then
-        # If not, add it under the # Misc options section
-        sudo sed -i "/^# Misc options/a ${options[$key]}" /etc/pacman.conf
-    fi
+	# Check if the option is already in the file
+	if ! grep -q "^$key" /etc/pacman.conf; then
+		# If not, add it under the # Misc options section
+		sudo sed -i "/^# Misc options/a ${options[$key]}" /etc/pacman.conf
+	fi
 done
 
 # Refresh cache

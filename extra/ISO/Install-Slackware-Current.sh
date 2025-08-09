@@ -66,7 +66,7 @@ pkg_dirs=( /var/log/mount/slackware64/* )
 package_sets=()
 dir=""
 for dir in "${pkg_dirs[@]}"; do
-  [ -d "$dir" ] && package_sets+=("$(basename "$dir")")
+	[ -d "$dir" ] && package_sets+=("$(basename "$dir")")
 done
 
 # Prepare for full installation
@@ -79,17 +79,17 @@ IFS=$'\n' package_sets=($(sort <<<"${package_sets[*]}")); unset IFS
 # Install all sets with overall progress
 total_sets=${#package_sets[@]}; set_count=1; echo
 for pkg_set in "${package_sets[@]}"; do
-  pkg_set_cap="${pkg_set^^}"  # Capitalize package set name
-  echo "[$set_count/$total_sets] Installing package set: $pkg_set_cap"
-  pkg_files=( /var/log/mount/slackware64/"$pkg_set"/*.t?z )
-  total_pkgs=${#pkg_files[@]}; pkg_count=1
-  for pkg in "${pkg_files[@]}"; do
-    pkg_name=$(basename "$pkg")
-    printf "\r    [%s/%s] Installing: %-60s" "$pkg_count" "$total_pkgs" "$pkg_name"
-    installpkg --root /mnt "$pkg" >/dev/null 2>&1 || die "Failed to install package $pkg_name."
-    ((pkg_count++))
-  done
-  echo; ((set_count++))
+	pkg_set_cap="${pkg_set^^}"  # Capitalize package set name
+	echo "[$set_count/$total_sets] Installing package set: $pkg_set_cap"
+	pkg_files=( /var/log/mount/slackware64/"$pkg_set"/*.t?z )
+	total_pkgs=${#pkg_files[@]}; pkg_count=1
+	for pkg in "${pkg_files[@]}"; do
+		pkg_name=$(basename "$pkg")
+		printf "\r    [%s/%s] Installing: %-60s" "$pkg_count" "$total_pkgs" "$pkg_name"
+		installpkg --root /mnt "$pkg" >/dev/null 2>&1 || die "Failed to install package $pkg_name."
+		((pkg_count++))
+	done
+	echo; ((set_count++))
 done; echo
 
 # Run post-installation configuration
@@ -149,48 +149,48 @@ sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub || die "Failed to 
 
 # List Default Enabled Services from Setup Menu
 services=(
-  # atalk
-  atd
-  avahidaemon
-  avahidnsconfd
-  # bind
-  crond
-  # cups
-  # dnsmasq
-  # dovecot
-  fuse
-  # httpd
-  # inetd
-  # ip_forward
-  messagebus
-  networkmanager
-  # mysqld
-  # nfsd
-  # ntpd
-  # openldap
-  # openvpn
-  # pcmcia
-  # pcscd
-  # postfix
-  # rpc
-  samba # default is off
-  # saslauthd
-  # smartd
-  # snmpd
-  syslog
-  sshd
+	# atalk
+	atd
+	avahidaemon
+	avahidnsconfd
+	# bind
+	crond
+	# cups
+	# dnsmasq
+	# dovecot
+	fuse
+	# httpd
+	# inetd
+	# ip_forward
+	messagebus
+	networkmanager
+	# mysqld
+	# nfsd
+	# ntpd
+	# openldap
+	# openvpn
+	# pcmcia
+	# pcscd
+	# postfix
+	# rpc
+	samba # default is off
+	# saslauthd
+	# smartd
+	# snmpd
+	syslog
+	sshd
 )
 
 # Enable Selected Services (chmod only, no start)
 for svc in "${services[@]}"; do
-  # Skip commented-out entries
-  [[ "$svc" == \#* || -z "$svc" ]] && continue
-  svc_path="/etc/rc.d/rc.$svc"
-  if [ -f "$svc_path" ]; then
-    chmod +x "$svc_path" || die "Failed to chmod +x $svc_path."
-  else
-    die "Service script not found: $svc_path."
-  fi
+	# Skip commented-out entries
+	[[ "$svc" == \#* || -z "$svc" ]] && continue
+	svc_path="/etc/rc.d/rc.$svc"
+	if [ -f "$svc_path" ]; then
+		chmod +x "$svc_path" || die "Failed to chmod +x $svc_path."
+	else
+		die "Service script not found: $svc_path."
+	fi
 done
 
 # Download arch-install-scripts source and SlackBuild (for genfstab)
@@ -249,10 +249,10 @@ chmod -x /root/.xsession || die "Failed to chmod .xsession."
 
 # Enable Autologin
 sed -i '/^\[Autologin\]/,/^\[/ {
-  s/^User=[[:space:]]*$/User='"$username"'/;
-  s/^Session=[[:space:]]*$/Session=xfce/;
-  s/^User=.*$/User='"$username"'/;
-  s/^Session=.*$/Session=xfce/;
+	s/^User=[[:space:]]*$/User='"$username"'/;
+	s/^Session=[[:space:]]*$/Session=xfce/;
+	s/^User=.*$/User='"$username"'/;
+	s/^Session=.*$/Session=xfce/;
 }' /etc/sddm.conf || die "Failed to configure autologin in sddm.conf."
 
 # Clean up

@@ -146,7 +146,7 @@
                 "brightness": 100,
                 "contrast": 100,
                 "grayscale": 0,
-                "sepia": 100,
+                "sepia": 50,
                 "useFont": false,
                 "fontFamily": "Open Sans",
                 "textStroke": 0,

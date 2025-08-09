@@ -2,8 +2,8 @@
 
 # Check if script is run as root
 if [ "$EUID" -ne 0 ]; then
-  echo "Please run the script using sudo."
-  exit
+	echo "Please run the script using sudo."
+	exit
 fi
 
 # Disable autostart of the default network

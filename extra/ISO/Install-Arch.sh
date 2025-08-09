@@ -94,8 +94,8 @@ echo -e "127.0.1.1\t$hostname.localdomain\t$hostname" >> /etc/hosts || die "Fail
 awk -i inplace '
 /^\[Seat:\*\]/ {a=1}
 a==1 && /^#?greeter-session=/ {
-    print "greeter-session=lightdm-slick-greeter"
-    next
+	print "greeter-session=lightdm-slick-greeter"
+	next
 }
 {print}
 ' /etc/lightdm/lightdm.conf || die "Failed to set greeter-session for LightDM."

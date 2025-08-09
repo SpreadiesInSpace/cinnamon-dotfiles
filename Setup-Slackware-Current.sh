@@ -47,37 +47,37 @@ sh /etc/rc.d/rc.samba start || die "Failed to start Samba service."
 # Install slpkg
 packages=("python3-poetry-core" "python3-tomlkit" "python3-pythondialog" "slpkg")
 for package in "${packages[@]}"; do
-  # Install headlessly but fallback to prompt if any package fails
-  if ! sboinstall -r "$package"; then
-    echo "Install failed for $package, falling back to prompt..."
-    sboinstall "$package" || die "Failed to install $package."
-  fi
+	# Install headlessly but fallback to prompt if any package fails
+	if ! sboinstall -r "$package"; then
+		echo "Install failed for $package, falling back to prompt..."
+		sboinstall "$package" || die "Failed to install $package."
+	fi
 done
 
 # Declare Config Files
 declare -A files=(
-    ["https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/etc/slpkg/repositories.toml"]="/etc/slpkg/repositories.toml"
-    ["https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/etc/slpkg/slpkg.toml"]="/etc/slpkg/slpkg.toml"
-    ["https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/etc/slpkg/blacklist.toml"]="/etc/slpkg/blacklist.toml"
-    ["https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/etc/slackpkg/blacklist"]="/etc/slackpkg/blacklist"
-    ["https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/etc/slackpkg/mirrors"]="/etc/slackpkg/mirrors"
+	["https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/etc/slpkg/repositories.toml"]="/etc/slpkg/repositories.toml"
+	["https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/etc/slpkg/slpkg.toml"]="/etc/slpkg/slpkg.toml"
+	["https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/etc/slpkg/blacklist.toml"]="/etc/slpkg/blacklist.toml"
+	["https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/etc/slackpkg/blacklist"]="/etc/slackpkg/blacklist"
+	["https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/etc/slackpkg/mirrors"]="/etc/slackpkg/mirrors"
 )
 
 # Replace slpkg and slackpkg configs
 timestamp=$(date +%s)
 for url in "${!files[@]}"; do
-    local_path="${files[$url]}"
+	local_path="${files[$url]}"
 
-    if [ -f "$local_path" ]; then
-        cp "$local_path" "${local_path}.old.${timestamp}" || { echo "Failed to backup $local_path."; exit 1; }
-    fi
-    if curl -fsSL -o "$local_path" "$url"; then
-        echo "File $local_path updated successfully."
-    else
-        echo "Failed to download $url."
-        [ -f "${local_path}.old.${timestamp}" ] && mv "${local_path}.old.${timestamp}" "$local_path"
-        exit 1
-    fi
+	if [ -f "$local_path" ]; then
+		cp "$local_path" "${local_path}.old.${timestamp}" || { echo "Failed to backup $local_path."; exit 1; }
+	fi
+	if curl -fsSL -o "$local_path" "$url"; then
+		echo "File $local_path updated successfully."
+	else
+		echo "Failed to download $url."
+		[ -f "${local_path}.old.${timestamp}" ] && mv "${local_path}.old.${timestamp}" "$local_path"
+		exit 1
+	fi
 done
 
 # Update MAKEFLAGS in /etc/slpkg/slpkg.toml to match CPU cores
@@ -98,17 +98,17 @@ slpkg upgrade -y -o "slack_extra" || die "Failed to update slack_extra packages.
 
 # Update Bootloader Entries (in case Kernel Gets Updated)
 if command -v grub-mkconfig >/dev/null 2>&1; then
-    echo "Detected GRUB bootloader."
-    grub-mkconfig -o /boot/grub/grub.cfg || die "Failed to generate GRUB config."
+	echo "Detected GRUB bootloader."
+	grub-mkconfig -o /boot/grub/grub.cfg || die "Failed to generate GRUB config."
 elif [ -f /boot/efi/EFI/Slackware/elilo.conf ] || [ -f /boot/efi/EFI/ELILO/elilo.conf ]; then
-    echo "Detected ELILO bootloader."
-    eliloconfig || die "Failed to update ELILO configuration."
+	echo "Detected ELILO bootloader."
+	eliloconfig || die "Failed to update ELILO configuration."
 elif [ -f /etc/lilo.conf ]; then
-    echo "Detected LILO bootloader."
-    lilo || die "Failed to update LILO configuration."
+	echo "Detected LILO bootloader."
+	lilo || die "Failed to update LILO configuration."
 else
-    echo "No recognized bootloader found."
-    die "Bootloader configuration not updated."
+	echo "No recognized bootloader found."
+	die "Bootloader configuration not updated."
 fi
 
 # Install Bash Completion for csb
@@ -116,8 +116,8 @@ slpkg install -y -P -B bash-completion -o "slack_extra" || die "Failed to instal
 
 # Alien packages
 alien_packages=(
-    "libreoffice"
-    "openjdk17" # for libreoffice
+	"libreoffice"
+	"openjdk17" # for libreoffice
 )
 
 # Install packages from Alien over SBo to reduce compile times
@@ -125,73 +125,73 @@ slpkg install -y -P -B "${alien_packages[@]}" -o alien -O || die "Failed to inst
 
 # All packages
 packages=(
-    # System utilities
-    #"gparted"
-    #"neofetch"
-    #"unzip"
-    #"xkill"
-    #"xrandr"
-    # For Filezilla
-    "libfilezilla"
-    "libmspack"
-    "pugixml"
-    "wxwidgets"
-    "filezilla"
-    # Network utilities
-    #"gvfs"
-    #"kdeconnect"
-    #"samba"
-    # Applications
-    "bleachbit"
-    #"noto-fonts"
-    #"noto-emoji"
-    "qbittorrent"
-    "libtorrent-rasterbar" # for qBittorrent
-    "qt5ct"
-    "ufw"
-    "vscodium-bin"
-    # For NvChad
-    #"gcc"
-    #"make"
-    "xclip"
-    # For Neovim
-    "luv"
-    "lua-lpeg"
-    "unibilium"
-    "neovim"
-    # For Virt-Manager
-    "libosinfo"
-    "osinfo-db"
-    "osinfo-db-tools"
-    "yajl"
-    "numactl"
-    "libvirt"
-    "libvirt-glib"
-    "libvirt-python"
-    "gtk-vnc"
-    "spice"
-    "spice-gtk"
-    "spice-protocol"
-    "spice-vdagent"
-    "audit"
-    "device-tree-compiler"
-    #"bridge-utils"
-    #"dmidecode"
-    #"dnsmasq"
-    #"iptables"
-    "libcacard"
-    "libslirp"
-    "libnfs"
-    "snappy"
-    "usbredir"
-    "vde2"
-    "virglrenderer"
-    "qemu" # TARGETS=x86_64-softmmu
-    "libbpf" # for conraid's qemu
-    "jack" # for conraid's qemu
-    "virtiofsd"    
-    "edk2-ovmf-bin"
-    "virt-manager"
+	# System utilities
+	#"gparted"
+	#"neofetch"
+	#"unzip"
+	#"xkill"
+	#"xrandr"
+	# For Filezilla
+	"libfilezilla"
+	"libmspack"
+	"pugixml"
+	"wxwidgets"
+	"filezilla"
+	# Network utilities
+	#"gvfs"
+	#"kdeconnect"
+	#"samba"
+	# Applications
+	"bleachbit"
+	#"noto-fonts"
+	#"noto-emoji"
+	"qbittorrent"
+	"libtorrent-rasterbar" # for qBittorrent
+	"qt5ct"
+	"ufw"
+	"vscodium-bin"
+	# For NvChad
+	#"gcc"
+	#"make"
+	"xclip"
+	# For Neovim
+	"luv"
+	"lua-lpeg"
+	"unibilium"
+	"neovim"
+	# For Virt-Manager
+	"libosinfo"
+	"osinfo-db"
+	"osinfo-db-tools"
+	"yajl"
+	"numactl"
+	"libvirt"
+	"libvirt-glib"
+	"libvirt-python"
+	"gtk-vnc"
+	"spice"
+	"spice-gtk"
+	"spice-protocol"
+	"spice-vdagent"
+	"audit"
+	"device-tree-compiler"
+	#"bridge-utils"
+	#"dmidecode"
+	#"dnsmasq"
+	#"iptables"
+	"libcacard"
+	"libslirp"
+	"libnfs"
+	"snappy"
+	"usbredir"
+	"vde2"
+	"virglrenderer"
+	"qemu" # TARGETS=x86_64-softmmu
+	"libbpf" # for conraid's qemu
+	"jack" # for conraid's qemu
+	"virtiofsd"    
+	"edk2-ovmf-bin"
+	"virt-manager"
 )
 
 # Install packages from Conraid over SBo to reduce compile times
@@ -199,28 +199,28 @@ slpkg install -y -P -B "${packages[@]}" -o conraid || die "Failed to install con
 
 # GFS packages
 gnome_packages=(
-    "eog"
-    "evince"
-    "libgxps" # for evince
-    "file-roller"
-    "libportal" # for file-roller
-    # For flatpak
-    "libstemmer"
-    "libxmlb"
-    "malcontent"
-    "flatpak"
-    # For gedit
-    "libgedit-amtk"
-    "libgedit-gtksourceview"
-    "libgedit-tepl"
-    "libpeas"
-    "gedit"
-    "gedit-plugins"
-    "gnome-calculator"
-    "gnome-system-monitor"
-    "gnome-disk-utility"
-    "gpaste"
-    # "rhythmbox" # using Elisa instead
+	"eog"
+	"evince"
+	"libgxps" # for evince
+	"file-roller"
+	"libportal" # for file-roller
+	# For flatpak
+	"libstemmer"
+	"libxmlb"
+	"malcontent"
+	"flatpak"
+	# For gedit
+	"libgedit-amtk"
+	"libgedit-gtksourceview"
+	"libgedit-tepl"
+	"libpeas"
+	"gedit"
+	"gedit-plugins"
+	"gnome-calculator"
+	"gnome-system-monitor"
+	"gnome-disk-utility"
+	"gpaste"
+	# "rhythmbox" # using Elisa instead
 )
 
 # Install packages from GFS over SBo to reduce compile times
@@ -232,20 +232,20 @@ useradd -d /var/lib/lightdm -s /bin/false -u 380 -g 380 lightdm || die "Failed t
 
 # SBo packages
 sbo_packages=(
-    "bottom"
-    "brave-browser"
-    "gnome-screenshot"
-    "kvantum-qt5"
-    "haruna"
-    #"lightdm"
-    #"lightdm-settings"
-    #"lightdm-slick-greeter"
-    "ncdu"
-    "qt6ct"
-    "timeshift"
-    "ripgrep" # for neovim
-    "libiscsi" # for Virt-Manager
-    "glusterfs" # for Virt-Manager
+	"bottom"
+	"brave-browser"
+	"gnome-screenshot"
+	"kvantum-qt5"
+	"haruna"
+	#"lightdm"
+	#"lightdm-settings"
+	#"lightdm-slick-greeter"
+	"ncdu"
+	"qt6ct"
+	"timeshift"
+	"ripgrep" # for neovim
+	"libiscsi" # for Virt-Manager
+	"glusterfs" # for Virt-Manager
 )
 
 # Install Packages
@@ -254,9 +254,9 @@ slpkg install -y -P -B "${sbo_packages[@]}" || die "Failed to install packages."
 
 # Slint packages
 slint_packages=(
-    "kvantum-qt6" # for qBittorrent
-    "kwindowsystem6" # for kvantum-qt6
-    "md4c" # for kvantum-qt6
+	"kvantum-qt6" # for qBittorrent
+	"kwindowsystem6" # for kvantum-qt6
+	"md4c" # for kvantum-qt6
 )
 
 # Install packages from Slint over SBo to reduce compile times
@@ -283,12 +283,12 @@ enable_flathub
 
 # Check if the block for libvirt already exists
 if ! grep -q '# Start libvirt' /etc/rc.d/rc.local; then
-  # Add libvirt startup to rc.local if not already present
-  echo '' >> /etc/rc.d/rc.local || die "Failed to append to /etc/rc.d/rc.local"
-  echo '# Start libvirt' >> /etc/rc.d/rc.local || die "Failed to add '# Start libvirt' to /etc/rc.d/rc.local"
-  echo 'if [ -x /etc/rc.d/rc.libvirt ]; then' >> /etc/rc.d/rc.local || die "Failed to add check for rc.libvirt to /etc/rc.d/rc.local"
-  echo '  /etc/rc.d/rc.libvirt start' >> /etc/rc.d/rc.local || die "Failed to add libvirt start command to /etc/rc.d/rc.local"
-  echo 'fi' >> /etc/rc.d/rc.local || die "Failed to close if condition in /etc/rc.d/rc.local"
+	# Add libvirt startup to rc.local if not already present
+	echo '' >> /etc/rc.d/rc.local || die "Failed to append to /etc/rc.d/rc.local"
+	echo '# Start libvirt' >> /etc/rc.d/rc.local || die "Failed to add '# Start libvirt' to /etc/rc.d/rc.local"
+	echo 'if [ -x /etc/rc.d/rc.libvirt ]; then' >> /etc/rc.d/rc.local || die "Failed to add check for rc.libvirt to /etc/rc.d/rc.local"
+	echo '  /etc/rc.d/rc.libvirt start' >> /etc/rc.d/rc.local || die "Failed to add libvirt start command to /etc/rc.d/rc.local"
+	echo 'fi' >> /etc/rc.d/rc.local || die "Failed to close if condition in /etc/rc.d/rc.local"
 fi
 
 # Make sure rc.libvirt is executable
@@ -310,7 +310,7 @@ cp /etc/rc.d/rc.4 "/etc/rc.d/rc.4.old.${timestamp}" || die "Failed to backup /et
 
 # Run LightDM on Boot
 if ! grep -q 'exec /usr/bin/lightdm' /etc/rc.d/rc.4; then
-  sed -i '/# Try to use GNOME'\''s gdm session manager/i\
+	sed -i '/# Try to use GNOME'\''s gdm session manager/i\
 # Try to use LightDM session manager:\nif [ -x /usr/bin/lightdm ]; then\n  exec /usr/bin/lightdm\nfi\n' /etc/rc.d/rc.4 || die "Failed to modify /etc/rc.d/rc.4 to include LightDM."
 fi
 

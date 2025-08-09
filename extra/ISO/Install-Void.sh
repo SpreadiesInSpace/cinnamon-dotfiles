@@ -61,7 +61,7 @@ XBPS_ARCH=$ARCH xbps-install -Syu -r /mnt -R "$REPO" base-system cinnamon dejavu
 
 # Enable Services
 for service in dbus lightdm NetworkManager polkitd spice-vdagentd; do
-  chroot /mnt ln -sfv /etc/sv/$service /etc/runit/runsvdir/default || die "Failed to enable service $service."
+	chroot /mnt ln -sfv /etc/sv/$service /etc/runit/runsvdir/default || die "Failed to enable service $service."
 done
 
 # Copy Network Info 
