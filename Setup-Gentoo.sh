@@ -2,7 +2,8 @@
 
 # Source common functions
 die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
-[ -f ./Setup-Common.sh ] && source ./Setup-Common.sh || die "Setup-Common.sh not found."
+[ -f ./Setup-Common.sh ] || die "Setup-Common.sh not found."
+source ./Setup-Common.sh || die "Failed to source Setup-Common.sh"
 
 # Check if the script is run as root
 check_if_root
@@ -32,29 +33,39 @@ echo "Detected init system: $GENTOO_INIT"
 
 # Check if custom make.conf and VIDEO_CARDS have already been set previously
 MAKECONF_FLAG="/etc/portage/.makeconf_configured"
+path="/etc/portage/make.conf"
 
 if [ -f "$MAKECONF_FLAG" ]; then
 	echo "make.conf already configured during install. Skipping..."
 else
-	echo "Configuring /etc/portage/make.conf..."
+	echo "Configuring $path..."
 
 	# Backup current make.conf & replace with custom one
 	timestamp=$(date +%s)
-	cp /etc/portage/make.conf /etc/portage/make.conf.old.${timestamp} || die "Failed to back up current make.conf."
-	cp etc/portage/make.conf /etc/portage/make.conf || die "Failed to copy custom make.conf."
+	cp "$path" "$path.old.${timestamp}" || die "Failed to back up current make.conf."
+	cp etc/portage/make.conf "$path" || die "Failed to copy custom make.conf."
 
 	# Set MAKEOPTS based on CPU cores (load limit = cores + 1)
 	cores=$(nproc) || die "Failed to retrieve number of CPU cores."
 	makeopts_load_limit=$((cores + 1))
-	sed -i "s/^MAKEOPTS=.*/MAKEOPTS=\"-j$cores -l$makeopts_load_limit\"/" /etc/portage/make.conf || die "Failed to set MAKEOPTS in make.conf."
+	sed -i "s/^MAKEOPTS=.*/MAKEOPTS=\"-j$cores -l$makeopts_load_limit\"/" "$path" || die "Failed to set MAKEOPTS in make.conf."
 	echo "Set MAKEOPTS to -j$cores -l$makeopts_load_limit"
 
 	# Set EMERGE_DEFAULT_OPTS based on CPU cores (load limit as 90% of cores)
 	load_limit=$(echo "$cores * 0.9" | bc -l | awk '{printf "%.1f", $0}') || die "Failed to calculate load limit."
-	sed -i "s/^EMERGE_DEFAULT_OPTS=.*/EMERGE_DEFAULT_OPTS=\"-j$cores -l$load_limit\"/" /etc/portage/make.conf || die "Failed to set EMERGE_DEFAULT_OPTS in make.conf."
+	sed -i "s/^EMERGE_DEFAULT_OPTS=.*/EMERGE_DEFAULT_OPTS=\"-j$cores -l$load_limit\"/" "$path" || die "Failed to set EMERGE_DEFAULT_OPTS in make.conf."
 	echo "Set EMERGE_DEFAULT_OPTS to -j$cores -l$load_limit"
+
+	# Check available RAM and comment out EMERGE_DEFAULT_OPTS if < 16GB
+	ram_gb=$(free -g | awk '/^Mem:/ {print $2}')
+	if [ "$ram_gb" -lt 16 ]; then
+			sed -i 's/^EMERGE_DEFAULT_OPTS=/#EMERGE_DEFAULT_OPTS=/' "$path"
+			echo "RAM Avaiable: $ram_gb GB"
+			echo "RAM < 16 GB, Disabling parallel emerges..."
+			echo "To enable parallel emerges later, uncomment the EMERGE_DEFAULT_OPTS line in make.conf"
+	fi
 	
-	# Call the function
+	# Set VIDEO_CARDS value in package.use
 	set_video_card || die "Failed to set video card."
 
 	# Drop flag so this doesn't run again

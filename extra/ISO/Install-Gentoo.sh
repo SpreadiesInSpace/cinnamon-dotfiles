@@ -5,7 +5,8 @@ set -euo pipefail
 echo "Sourcing functions..."
 die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
 curl -fsSL -o Install-Common.sh https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/extra/ISO/Install-Common.sh || die "Failed to download Install-Common.sh"
-[ -f ./Install-Common.sh ] && source ./Install-Common.sh || die "Failed to source Install-Common.sh"
+[ -f ./Install-Common.sh ] || die "Install-Common.sh not found."
+source ./Install-Common.sh || die "Failed to source Install-Common.sh"
 
 # Check if script is run as root
 check_if_root
@@ -28,11 +29,11 @@ prompt_hostname
 # Prompt for timezone
 prompt_timezone
 
-# Prompt for init system
-prompt_init_system
-
 # Prompt for drive to partition
 prompt_drive
+
+# Prompt for init system
+prompt_init_system
 
 # Partition the drive
 partition_drive
@@ -128,13 +129,22 @@ echo; echo "make.conf updated successfully"
 # Set MAKEOPTS based on CPU cores (load limit = cores + 1)
 cores=$(nproc)
 makeopts_load_limit=$((cores + 1))
-sed -i "s/^MAKEOPTS=.*/MAKEOPTS=\"-j$cores -l$makeopts_load_limit\"/" /mnt/gentoo/etc/portage/make.conf || die "Failed to update MAKEOPTS in make.conf."
+sed -i "s/^MAKEOPTS=.*/MAKEOPTS=\"-j$cores -l$makeopts_load_limit\"/" "$path" || die "Failed to update MAKEOPTS in make.conf."
 echo; echo "Set MAKEOPTS to -j$cores -l$makeopts_load_limit"
 
 # Set EMERGE_DEFAULT_OPTS based on CPU cores (load limit as 90% of cores)
 load_limit=$(echo "$cores * 0.9" | bc -l | awk '{printf "%.1f", $0}')
-sed -i "s/^EMERGE_DEFAULT_OPTS=.*/EMERGE_DEFAULT_OPTS=\"-j$cores -l$load_limit\"/" /mnt/gentoo/etc/portage/make.conf || die "Failed to update EMERGE_DEFAULT_OPTS in make.conf."
+sed -i "s/^EMERGE_DEFAULT_OPTS=.*/EMERGE_DEFAULT_OPTS=\"-j$cores -l$load_limit\"/" "$path" || die "Failed to update EMERGE_DEFAULT_OPTS in make.conf."
 echo "Set EMERGE_DEFAULT_OPTS to -j$cores -l$load_limit"
+
+# Check available RAM and comment out EMERGE_DEFAULT_OPTS if < 16GB
+ram_gb=$(free -g | awk '/^Mem:/ {print $2}')
+if [ "$ram_gb" -lt 16 ]; then
+    sed -i 's/^EMERGE_DEFAULT_OPTS=/#EMERGE_DEFAULT_OPTS=/' "$path"
+		echo "RAM Avaiable: $ram_gb GB"
+    echo "RAM < 16 GB, Disabling parallel emerges..."
+    echo "To enable parallel emerges later, uncomment the EMERGE_DEFAULT_OPTS line in make.conf"
+fi
 
 # Set VIDEO_CARDS value in package.use
 echo; set_video_card || die "Failed to set video card."

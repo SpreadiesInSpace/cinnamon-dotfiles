@@ -2,7 +2,8 @@
 
 # Source common functions
 die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
-[ -f ./Setup-Common.sh ] && source ./Setup-Common.sh || die "Setup-Common.sh not found."
+[ -f ./Setup-Common.sh ] || die "Setup-Common.sh not found."
+source ./Setup-Common.sh || die "Failed to source Setup-Common.sh"
 
 # Check if the script is run as root
 check_if_root
@@ -38,7 +39,8 @@ sboconfig -r https://github.com/Ponce/slackbuilds.git || die "Failed to configur
 sbosnap fetch || die "Failed to fetch sbosnap."
 
 # Update MAKEFLAGS in /etc/sbotools/sbotools.conf to match CPU cores
-sboconfig -j $(nproc) || die "Failed to update sbotools configuration with CPU cores."
+cores=$(nproc)
+sboconfig -j "$cores" || die "Failed to update sbotools configuration with CPU cores."
 
 # For Virt-Manager & accessing samba shares (15.0 needs dnsmasq and samba)
 cp /etc/samba/smb.conf-sample /etc/samba/smb.conf || die "Failed to copy Samba config."
@@ -84,7 +86,7 @@ done
 cores=$(nproc)
 # Backup the current slpkg.toml file
 timestamp=$(date +%s)
-cp /etc/slpkg/slpkg.toml /etc/slpkg/slpkg.toml.old.${timestamp} || die "Failed to backup /etc/slpkg/slpkg.toml."
+cp /etc/slpkg/slpkg.toml /etc/slpkg/slpkg.toml.old."${timestamp}" || die "Failed to backup /etc/slpkg/slpkg.toml."
 # Edit slpkg.toml to set MAKEFLAGS
 sed -i "s/^MAKEFLAGS = \"-j[0-9]*\"/MAKEFLAGS = \"-j$cores\"/" /etc/slpkg/slpkg.toml || die "Failed to update MAKEFLAGS in /etc/slpkg/slpkg.toml."
 echo "Updated MAKEFLAGS in /etc/slpkg/slpkg.toml to -j$cores based on the number of CPU cores."

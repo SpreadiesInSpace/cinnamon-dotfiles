@@ -2,7 +2,8 @@
 
 # Source common functions
 die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
-[ -f ./Setup-Common.sh ] && source ./Setup-Common.sh || die "Setup-Common.sh not found."
+[ -f ./Setup-Common.sh ] || die "Setup-Common.sh not found."
+source ./Setup-Common.sh || die "Failed to source Setup-Common.sh"
 
 # Check if the script is run as root
 check_if_root
@@ -172,7 +173,7 @@ xbps-install -Sy "${packages[@]}" || die "Failed to install packages."
 xbps-pkgdb -m hold neofetch || die "Failed to hold neofetch package."
 
 # Install Brave and VSCodium
-cd home/theming/Void
+cd home/theming/Void || die "Failed to move to theming/Void folder."
 ./update_xdeb.sh || die "Failed to install Brave/VSCodium."
 cd ..
 

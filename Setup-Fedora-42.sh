@@ -2,7 +2,8 @@
 
 # Source common functions
 die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
-[ -f ./Setup-Common.sh ] && source ./Setup-Common.sh || die "Setup-Common.sh not found."
+[ -f ./Setup-Common.sh ] || die "Setup-Common.sh not found."
+source ./Setup-Common.sh || die "Failed to source Setup-Common.sh"
 
 # Check if the script is run as root
 check_if_root
@@ -42,7 +43,7 @@ dnf -y update || die "System update failed."
 dnf -y install git || die "Git installation failed."
 
 # Add RPM Fusion
-dnf -y install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm || die "Failed to add RPM Fusion repositories."
+dnf -y install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-"$(rpm -E %fedora)".noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-"$(rpm -E %fedora)".noarch.rpm || die "Failed to add RPM Fusion repositories."
 
 # Install Media Codecs
 dnf4 -y group upgrade multimedia || die "Multimedia group upgrade failed."
@@ -51,10 +52,7 @@ dnf -y upgrade @multimedia --setopt="install_weak_deps=False" --exclude=PackageK
 dnf group install -y sound-and-video || die "Failed to install sound-and-video group."
 
 # Install Brave
-dnf -y install dnf-plugins-core || die "Failed to install dnf-plugins-core."
-dnf config-manager addrepo --id=brave-browser --set=name='Brave Browser' --set=baseurl='https://brave-browser-rpm-release.s3.brave.com/$basearch' || die "Failed to add Brave repository."
-rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc || die "Failed to import Brave GPG key."
-dnf -y install brave-browser || die "Failed to install Brave Browser."
+curl -fsS https://dl.brave.com/install.sh | sh || die "Failed to install Brave Browser."
 
 # Install Bottom
 dnf -y copr enable atim/bottom || die "Failed to enable COPR repo for Bottom."

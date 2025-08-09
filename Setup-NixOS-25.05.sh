@@ -10,7 +10,8 @@ fi
 
 # Source common functions
 die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
-[ -f ./Setup-Common.sh ] && source ./Setup-Common.sh || die "Setup-Common.sh not found."
+[ -f ./Setup-Common.sh ] || die "Setup-Common.sh not found."
+source ./Setup-Common.sh || die "Failed to source Setup-Common.sh"
 
 # Check if the script is run as root
 check_if_root
@@ -35,7 +36,7 @@ CONFIG="/etc/nixos/configuration.nix"
 
 # Backs up old configuration.nix
 timestamp=$(date +%s)
-cp "$CONFIG" ""$CONFIG".old.${timestamp}" || die "Failed to back up configuration.nix"
+cp "$CONFIG" "$CONFIG.old.${timestamp}" || die "Failed to back up configuration.nix"
 
 # Copies my configuration.nix
 cp ./home/theming/NixOS/configuration.nix "$CONFIG" || die "Failed to copy configuration.nix"
@@ -59,14 +60,14 @@ fi
 sed -i "s/f16poom/$username/g" "$CONFIG" || die "Failed to replace username in configuration.nix"
 
 # Prompt the user for hostname
-while ! read -p "Enter the hostname for your system: " hostname || [ -z "$hostname" ] || [[ ! "$hostname" =~ ^[a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?$ ]]; do
+while ! read -rp "Enter the hostname for your system: " hostname || [ -z "$hostname" ] || [[ ! "$hostname" =~ ^[a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?$ ]]; do
 	echo "Invalid hostname. Must be non-empty, alphanumeric, and may include hyphens (no leading/trailing hyphen)."
 done
 sed -i "s/hostName = .*;/hostName = \"$hostname\";/g" "$CONFIG" || die "Failed to update hostname in configuration.nix"
 
 # Set Timezone
 while true; do
-	read -p "Enter your timezone (e.g., Asia/Bangkok): " timezone
+	read -rp "Enter your timezone (e.g., Asia/Bangkok): " timezone
 	timezone="${timezone:-Asia/Bangkok}"  # default if empty
 	if [ -f "/etc/zoneinfo/$timezone" ]; then
 		echo "Timezone set to: $timezone"

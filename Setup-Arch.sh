@@ -2,7 +2,8 @@
 
 # Source common functions
 die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
-[ -f ./Setup-Common.sh ] && source ./Setup-Common.sh || die "Setup-Common.sh not found."
+[ -f ./Setup-Common.sh ] || die "Setup-Common.sh not found."
+source ./Setup-Common.sh || die "Failed to source Setup-Common.sh"
 
 # Check if the script is run as root
 check_if_root
@@ -32,8 +33,9 @@ for key in "${!options[@]}"; do
 done
 
 # Update MAKEFLAGS /etc/makepkg.conf to match CPU cores
-echo "Set MAKEFLAGS to --jobs=$(nproc)"
-sed -i 's/^#*\s*MAKEFLAGS=.*/MAKEFLAGS="--jobs=$(nproc)"/' /etc/makepkg.conf || die "Failed to update MAKEFLAGS in /etc/makepkg.conf."
+cores=$(nproc)
+echo "Set MAKEFLAGS to --jobs=$cores"
+sed -i "s/^#*\\s*MAKEFLAGS=.*/MAKEFLAGS=\"--jobs=$cores\"/" /etc/makepkg.conf || die "Failed to update MAKEFLAGS in /etc/makepkg.conf."
 
 # Install base-devel and git
 pacman -S --needed --noconfirm base-devel git || die "Failed to install git."
@@ -42,8 +44,8 @@ pacman -S --needed --noconfirm base-devel git || die "Failed to install git."
 trap 'rm -f /etc/sudoers.d/99_${SUDO_USER}_nopasswd' EXIT
 
 # Temporarily allow passwordless sudo for current user
-echo "$SUDO_USER ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/99_${SUDO_USER}_nopasswd || die "Failed to modify sudoers file for $SUDO_USER."
-chmod 0440 /etc/sudoers.d/99_${SUDO_USER}_nopasswd || die "Failed to set proper permissions for sudoers file."
+echo "$SUDO_USER ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/99_"${SUDO_USER}"_nopasswd || die "Failed to modify sudoers file for $SUDO_USER."
+chmod 0440 /etc/sudoers.d/99_"${SUDO_USER}"_nopasswd || die "Failed to set proper permissions for sudoers file."
 
 # Install yay
 cat << 'EOF' | su - "$SUDO_USER"
@@ -147,7 +149,7 @@ yay -Syu --needed --noconfirm "${packages[@]}" || die "Failed to install package
 EOF
 
 # Remove temporary passwordless sudo access
-rm -f /etc/sudoers.d/99_${SUDO_USER}_nopasswd
+rm -f /etc/sudoers.d/99_"${SUDO_USER}"_nopasswd
 
 # Enable Flathub for Flatpak
 enable_flathub

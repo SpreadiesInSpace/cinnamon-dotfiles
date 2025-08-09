@@ -2,7 +2,8 @@
 
 # Source common functions
 die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
-[ -f ./Setup-Common.sh ] && source ./Setup-Common.sh || die "Setup-Common.sh not found."
+[ -f ./Setup-Common.sh ] || die "Setup-Common.sh not found."
+source ./Setup-Common.sh || die "Failed to source Setup-Common.sh"
 
 # Check if the script is run as root
 check_if_root
@@ -23,7 +24,8 @@ prompt_for_vm
 display_status "$enable_autologin" "$is_vm"
 
 # Update system and install git and curl
-apt update && apt upgrade -y || die "Failed to update and upgrade system."
+apt update || die "Failed to update system."
+apt upgrade -y || die "Failed to upgrade system."
 apt install -y git curl || die "Failed to install git and curl."
 
 # Install Bottom
@@ -39,10 +41,7 @@ dpkg -i bottom_${FILE_VERSION}_amd64.deb || die "Failed to install Bottom packag
 rm bottom_${FILE_VERSION}_amd64.deb || die "Failed to remove downloaded Bottom package file."
 
 # Install Brave Browser
-curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg || die "Failed to download Brave keyring."
-echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main" | tee /etc/apt/sources.list.d/brave-browser-release.list || die "Failed to add Brave repository."
-apt update || die "Failed to update package list after adding Brave repository."
-apt install -y brave-browser || die "Failed to install Brave Browser."
+curl -fsS https://dl.brave.com/install.sh | sh || die "Failed to install Brave Browser."
 
 # Install Neovim AppImage
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage || die "Failed to download Neovim AppImage."

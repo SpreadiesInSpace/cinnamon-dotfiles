@@ -2,7 +2,8 @@
 
 # Source common functions
 die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
-[ -f ./Setup-Common.sh ] && source ./Setup-Common.sh || die "Setup-Common.sh not found."
+[ -f ./Setup-Common.sh ] || die "Setup-Common.sh not found."
+source ./Setup-Common.sh || die "Failed to source Setup-Common.sh"
 
 # Check if the script is run as root
 check_if_root
@@ -31,7 +32,7 @@ if ! grep -q "^ZYPP_PCK_PRELOAD=1" /etc/environment; then
 fi
 
 # Fix openSUSE's line break paste
-echo "set enable-bracketed-paste" >> /home/$username/.inputrc || die "Failed to update .inputrc for $username."
+echo "set enable-bracketed-paste" >> /home/"$username"/.inputrc || die "Failed to update .inputrc for $username."
 echo "set enable-bracketed-paste" >> /root/.inputrc || die "Failed to update /root/.inputrc"
 
 # Update system and install packages
@@ -48,10 +49,7 @@ zypper dup --from packman-essentials -y --allow-vendor-change || die "Failed to 
 zypper in --from packman-essentials -y ffmpeg gstreamer-plugins-{good,bad,ugly,libav} libavcodec || die "Failed to install media codecs."
 
 # Install Brave
-zypper in -y curl || die "Failed to install curl"
-rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc || die "Failed to import Brave browser GPG key."
-zypper ar https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo || die "Failed to add Brave browser repository."
-zypper in -y brave-browser || die "Failed to install Brave browser."
+curl -fsS https://dl.brave.com/install.sh | sh || die "Failed to install Brave Browser."
 
 # Install VSCodium
 rpmkeys --import https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg || die "Failed to import VSCodium GPG key."

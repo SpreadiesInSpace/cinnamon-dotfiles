@@ -5,7 +5,8 @@ set -euo pipefail
 echo "Sourcing functions..."
 die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
 wget -qO Install-Common.sh https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/extra/ISO/Install-Common.sh 2>/dev/null || die "Failed to download Install-Common.sh"
-[ -f ./Install-Common.sh ] && source ./Install-Common.sh || die "Failed to source Install-Common.sh"
+[ -f ./Install-Common.sh ] || die "Install-Common.sh not found."
+source ./Install-Common.sh || die "Failed to source Install-Common.sh"
 
 # Check if script is run as root
 check_if_root
@@ -73,8 +74,13 @@ done
 echo "Starting full Slackware installation..."
 
 # Get list of package sets (sorted alphabetically)
-package_sets=(); for dir in /var/log/mount/slackware64/*; do [ -d "$dir" ] && package_sets+=("$(basename "$dir")"); done
-IFS=$'\n' package_sets=($(sort <<<"${package_sets[*]}")); unset IFS
+package_sets=()
+for dir in /var/log/mount/slackware64/*; do 
+    [ -d "$dir" ] && package_sets+=("$(basename "$dir")")
+done
+
+# Sort using mapfile
+mapfile -t package_sets < <(printf '%s\n' "${package_sets[@]}" | sort)
 
 # Install all sets with overall progress
 total_sets=${#package_sets[@]}; set_count=1; echo
@@ -94,7 +100,8 @@ done; echo
 
 # Run post-installation configuration
 echo "Running ldconfig..."
-[ -x /mnt/sbin/ldconfig ] && /mnt/sbin/ldconfig -r /mnt || die "Failed to run ldconfig."
+[ -x /mnt/sbin/ldconfig ] || die "ldconfig not found or not executable at /mnt/sbin/ldconfig"
+/mnt/sbin/ldconfig -r /mnt || die "Failed to run ldconfig."
 
 # Run netconfig interactively before chroot
 chroot /mnt netconfig; clear || die "Failed to run netconfig in chroot."

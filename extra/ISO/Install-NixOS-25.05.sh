@@ -5,7 +5,8 @@ set -euo pipefail
 echo "Sourcing functions..."
 die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
 curl -fsSL -o Install-Common.sh https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/extra/ISO/Install-Common.sh || die "Failed to download Install-Common.sh"
-[ -f ./Install-Common.sh ] && source ./Install-Common.sh || die "Failed to source Install-Common.sh"
+[ -f ./Install-Common.sh ] || die "Install-Common.sh not found."
+source ./Install-Common.sh || die "Failed to source Install-Common.sh"
 
 # Check if script is run as root
 check_if_root
@@ -60,7 +61,7 @@ CONFIG="/mnt/etc/nixos/configuration.nix"
 
 # Backs up old configuration.nix
 timestamp=$(date +%s)
-cp "$CONFIG" ""$CONFIG".old.${timestamp}" || die "Failed to back up configuration.nix"
+cp "$CONFIG" "$CONFIG.old.${timestamp}" || die "Failed to back up configuration.nix"
 
 # Copies my configuration.nix
 cp configuration.nix "$CONFIG" || die "Failed to copy configuration.nix"

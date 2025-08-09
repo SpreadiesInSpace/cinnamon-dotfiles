@@ -2,7 +2,8 @@
 
 # Source common functions
 die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
-[ -f ./Theme-Common.sh ] && source ./Theme-Common.sh || die "Theme-Common.sh not found."
+[ -f ./Theme-Common.sh ] || die "Theme-Common.sh not found."
+source ./Theme-Common.sh || die "Failed to source Theme-Common.sh"
 
 # Check if the script is run as root
 check_not_root

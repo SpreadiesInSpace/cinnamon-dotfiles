@@ -141,7 +141,8 @@ enable_flatpak_theme_override() {
 
 copy_bleachbit_config() {
 	local distro="${1:-}"
-	local timestamp=$(date +%s)
+	local timestamp
+	timestamp=$(date +%s)
 	local src_file=".config/bleachbit/bleachbit.ini.$distro"
 	local user_target="$HOME/.config/bleachbit/bleachbit.ini"
 	local root_target="/root/.config/bleachbit/bleachbit.ini"
@@ -198,7 +199,8 @@ copy_applets() {
 
 copy_kdeglobals() {
 	# Creates a timestamp for backup
-	local timestamp=$(date +%s)
+	local timestamp
+	timestamp=$(date +%s)
 
 	echo "Applying Gruvbbox Colors to kdeglobals System-wide..."
 	# Backup and copy KDE Global defaults to ~/.config
@@ -230,7 +232,8 @@ symlink_kdeglobals() {
 # Void doesn't use this
 copy_haruna_config() {
 	# Creates a timestamp for backup
-	local timestamp=$(date +%s)
+	local timestamp
+	timestamp=$(date +%s)
 
 	echo "Configuring Haruna..."
 	# Backup and copy Haruna config to appropriate directory
@@ -243,7 +246,8 @@ copy_haruna_config() {
 copy_cinnamon_spice_settings() {
 	# Backup and copy Cinnamon spice settings
 	local distro="${1:-}"
-	local timestamp=$(date +%s)
+	local timestamp
+	timestamp=$(date +%s)
 	mv ~/.config/cinnamon/spices/ ~/.config/cinnamon/spices.old."$timestamp"/
 	mkdir -p ~/.config/cinnamon/spices/
 	
@@ -263,7 +267,8 @@ copy_personal_shortcuts() {
 copy_bashrc_and_etc() {
 	# Backup and copy .bashrc and etc to home directory
 	local distro="${1:-}"
-	local timestamp=$(date +%s)
+	local timestamp
+	timestamp=$(date +%s)
 
 	echo "Backing Up .bashrc and Adding New bash Aliases..."
 	if [ "$distro" = "nixos" ]; then
@@ -298,7 +303,8 @@ copy_bashrc_and_etc() {
 
 copy_neofetch_config() {
 	local variant=${1:-default}  # Use "default" if no argument is passed
-	local timestamp=$(date +%s)
+	local timestamp
+	timestamp=$(date +%s)
 
 	echo "Configuring neofetch..."
 	# Backup and copy neofetch config file to appropriate directory
@@ -322,7 +328,8 @@ copy_kvantum_themes() {
 	# Backup and copy Kvantum Themes to appropriate directory
 	local theme_variant="${1:-}"
 	local distro="${2:-}"
-	local timestamp=$(date +%s)
+	local timestamp
+	timestamp=$(date +%s)
 
 	echo "Installing Kvantum Themes..."
 	if [ "$distro" = "nixos" ]; then
@@ -345,7 +352,8 @@ Gruvbox-Dark-Brown=kdeconnect-app, kdeconnect-sms" >> ~/.config/Kvantum/kvantum.
 
 copy_qtct_configs() {
 	# Backup and copy qt5ct & qt6ct config to appropriate directories
-	local timestamp=$(date +%s)
+	local timestamp
+	timestamp=$(date +%s)
 
 	echo "Applying Kvantum Themes System-wide..."
 	# Handle qt5ct
@@ -389,7 +397,8 @@ copy_gedit_old_theme() {
 copy_menu_preferences() {
 	# Backup and copy Menu Preferences to appropriate directory
 	local distro="${1:-}"
-	local timestamp=$(date +%s)
+	local timestamp
+	timestamp=$(date +%s)
 
 	echo "Applying Cinnamon Menu Preferences..."
 	# Create timestamped backup directory and move old menu preferences
@@ -402,7 +411,8 @@ copy_menu_preferences() {
 copy_qbittorrent_config() {
 	# Backup and copy Qbittorrent config to appropriate directory
 	local distro="${1:-}"
-	local timestamp=$(date +%s)
+	local timestamp
+	timestamp=$(date +%s)
 
 	echo "Configuring qBittorrent..."
 	# Backup the old config with timestamp
@@ -417,7 +427,8 @@ copy_qbittorrent_config() {
 copy_libreoffice_config() {
 	# Backup and copy LibreOffice config to appropriate directory
 	local distro="${1:-}"
-	local timestamp=$(date +%s)
+	local timestamp
+	timestamp=$(date +%s)
 
 	echo "Configuring LibreOffice..."
 	# User-side config
@@ -433,7 +444,8 @@ copy_libreoffice_config() {
 
 copy_filezilla_config() {
 	# Backup and copy Filezilla config to appropriate directory
-	local timestamp=$(date +%s)
+	local timestamp
+	timestamp=$(date +%s)
 
 	echo "Configuring FileZilla..."
 	# Backup the old config with timestamp
@@ -443,7 +455,8 @@ copy_filezilla_config() {
 
 copy_profile_picture() {
 	# Backup and copy Profile Picture to home directory
-	local timestamp=$(date +%s)
+	local timestamp
+	timestamp=$(date +%s)
 
 	echo "Setting Profile Picture..."
 	# Create timestamped backup for the old profile picture
@@ -455,7 +468,8 @@ copy_profile_picture() {
 
 import_desktop_config() {
 	local distro="${1:-}"
-	local timestamp=$(date +%s)
+	local timestamp
+	timestamp=$(date +%s)
 
 	echo "Applying Proper Look & Feel System-wide..."
 	# Backup and Import Entire Desktop Configuration
@@ -475,9 +489,9 @@ apply_gedit_and_gnome_terminal_config() {
 		gnomesu dconf load / < "combined.dconf"
 		rm -rf combined.dconf
 	else
-		# Use sudo dbus-launch for other distros
-		sudo dbus-launch --exit-with-session dconf load / < "theming/$distro/gnome-terminal-$distro.dconf"
-		sudo dbus-launch --exit-with-session dconf load / < "theming/$gedit_config"
+		# Use sudo cat with pipe for other distros
+		sudo cat "theming/$distro/gnome-terminal-$distro.dconf" | sudo dbus-launch dconf load /
+		sudo cat "theming/$gedit_config" | sudo dbus-launch dconf load /
 	fi
 	# Remove gnome-terminal dconf copied from earlier functions
 	rm -rf ~/gnome-terminal-"$distro".dconf
@@ -498,7 +512,8 @@ set_default_apps() {
 
 copy_vscodium_config() {
 	# Backup VSCodium config & plugins
-	local timestamp=$(date +%s)
+	local timestamp
+	timestamp=$(date +%s)
 	echo "Configuring VSCodium..."
 	if [ -d ~/.config/VSCodium ]; then
 		mv ~/.config/VSCodium ~/.config/VSCodium.old."$timestamp"
@@ -577,7 +592,8 @@ set_cinnamon_background_and_sounds() {
 # NixOS doesn't use this
 setup_synth_shell_config() {
 	local distro="${1:-}"
-	local timestamp=$(date +%s)
+	local timestamp
+	timestamp=$(date +%s)
 
 	echo "Configuring Synth Shell Prompt..."
 	# Ensure synth-shell-prompt is removed if script fails
@@ -604,7 +620,8 @@ install_nvchad() {
 	fi
 
 	# Timestamp for unique backups
-	local timestamp=$(date +%s)
+	local timestamp
+	timestamp=$(date +%s)
 
 	echo "Configuring NvChad..."
 	# Backup existing NVim configs if they exist
@@ -633,7 +650,8 @@ place_login_wallpaper() {
 # NixOS doesn't use this
 configure_nanorc_basic() {
 	# Backup old config and enable basic syntax highlighting in nano
-	local timestamp=$(date +%s)
+	local timestamp
+	timestamp=$(date +%s)
 
 	# Backup the old nanorc file with timestamp
 	sudo cp /etc/nanorc /etc/nanorc.old."$timestamp" >/dev/null 2>&1
@@ -662,7 +680,8 @@ configure_nanorc_extra() {
 # NixOS doesn't use this, openSUSE needs 2 ZYPP variables
 set_qt_and_gtk_environment() {
 	# Backup old config and set QT and GTK theming variables
-	local timestamp=$(date +%s)
+	local timestamp
+	timestamp=$(date +%s)
 
 	echo "Setting QT and GTK Theme Variables..."
 	# Backup the old environment file with timestamp
@@ -681,7 +700,8 @@ set_qt_and_gtk_environment() {
 # NixOS doesn't use this
 append_slick_greeter_config() {
 	# Backup old config and append new settings to slick-greeter.conf
-	local timestamp=$(date +%s)
+	local timestamp
+	timestamp=$(date +%s)
 
 	echo "Configuring LightDM Greeter..."
 	# Backup the old slick-greeter.conf with timestamp
@@ -702,7 +722,8 @@ draw-user-backgrounds=false" | sudo tee /etc/lightdm/slick-greeter.conf > /dev/n
 # NixOS doesn't use this
 append_lightdm_gtk_greeter_config() {
 	# Backup old config and append new settings to lightdm-gtk-greeter.conf
-	local timestamp=$(date +%s)
+	local timestamp
+	timestamp=$(date +%s)
 
 	# Backup the old lightdm-gtk-greeter.conf with timestamp
 	sudo cp /etc/lightdm/lightdm-gtk-greeter.conf /etc/lightdm/lightdm-gtk-greeter.conf.old."$timestamp" >/dev/null 2>&1

@@ -2,7 +2,8 @@
 
 # Source common functions
 die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
-[ -f ./Theme-Common.sh ] && source ./Theme-Common.sh || die "Theme-Common.sh not found."
+[ -f ./Theme-Common.sh ] || die "Theme-Common.sh not found."
+source ./Theme-Common.sh || die "Failed to source Theme-Common.sh"
 
 # Check if the script is run as root
 check_not_root
@@ -63,10 +64,10 @@ copy_qtct_configs
 
 # Backup and copy xfce4 config to appropriate directories
 timestamp=$(date +%s)
-[ -d ~/.config/xfce4 ] && mv ~/.config/xfce4 ~/.config/xfce4.old.$timestamp
+[ -d ~/.config/xfce4 ] && mv ~/.config/xfce4 ~/.config/xfce4.old."$timestamp"
 cp -npr .config/xfce4/ ~/.config/
 if sudo test -d /root/.config/xfce4; then
-    sudo mv /root/.config/xfce4 /root/.config/xfce4.old.$timestamp
+    sudo mv /root/.config/xfce4 /root/.config/xfce4.old."$timestamp"
 fi
 sudo cp -npr .config/xfce4/ /root/.config/
 
