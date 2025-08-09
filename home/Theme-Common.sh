@@ -639,10 +639,16 @@ configure_nanorc_basic() {
     # Backup the old nanorc file with timestamp
     sudo cp /etc/nanorc /etc/nanorc.old.$timestamp >/dev/null 2>&1
 
+    # Add Syntax Highlighting and soft wrap
     echo "Configuring nano..."
-    # Add the syntax highlighting inclusion line if it's not already present
     if ! grep -q '^include "/usr/share/nano/\*.nanorc"' /etc/nanorc; then
         echo 'include "/usr/share/nano/*.nanorc"' | sudo tee -a /etc/nanorc > /dev/null
+    fi
+    if ! grep -q '^set softwrap' /etc/nanorc; then
+        echo 'set softwrap' | sudo tee -a /etc/nanorc > /dev/null
+    fi
+    if ! grep -q '^set atblanks' /etc/nanorc; then
+        echo 'set atblanks' | sudo tee -a /etc/nanorc > /dev/null
     fi
 }
 
