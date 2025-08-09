@@ -28,11 +28,11 @@ prompt_hostname
 # Prompt for timezone
 prompt_timezone
 
-# Prompt for drive to partition
-prompt_drive
-
 # Prompt for init system
 prompt_init_system
+
+# Prompt for drive to partition
+prompt_drive
 
 # Partition the drive
 partition_drive
