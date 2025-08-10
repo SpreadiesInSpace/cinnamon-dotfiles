@@ -28,7 +28,7 @@ for script in "${scripts[@]}"; do
 	flag="${base//setup-/}" # remove prefix
 	flag=".${flag%%-theme.sh}.done" # trim suffix and prepend dot
 	if [[ -f "$(dirname "$0")/$flag" ]]; then
-		pretty_name="$(tr '[:lower:]' '[:upper:]' <<< ${flag:1:1})${flag:2:-5}"
+		pretty_name="$(tr '[:lower:]' '[:upper:]' <<< "${flag:1:1}")${flag:2:-5}"
 		echo -e "${GREEN}Detected flag: $pretty_name. Running $script...${NC}"
 		# Move to Theme Setup Scripts Directory
 		cd home/ || { echo -e "${RED}Directory not found. Exiting.${NC}"; exit 1; }

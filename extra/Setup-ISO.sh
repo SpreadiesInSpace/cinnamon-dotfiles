@@ -16,13 +16,14 @@ YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
 # Install script URLs and names
+URL="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles"
 declare -A installs=(
-	[1]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/extra/ISO/Install-Arch.sh"
-	[2]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/extra/ISO/Install-Gentoo.sh"
-	[3]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/extra/ISO/Install-NixOS-25.05.sh"
-	[4]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/extra/ISO/Install-openSUSE-Tumbleweed.sh"
-	[5]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/extra/ISO/Install-Slackware-Current.sh"
-	[6]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/extra/ISO/Install-Void.sh"
+	[1]="$URL/refs/heads/main/extra/ISO/Install-Arch.sh"
+	[2]="$URL/refs/heads/main/extra/ISO/Install-Gentoo.sh"
+	[3]="$URL/refs/heads/main/extra/ISO/Install-NixOS-25.05.sh"
+	[4]="$URL/refs/heads/main/extra/ISO/Install-openSUSE-Tumbleweed.sh"
+	[5]="$URL/refs/heads/main/extra/ISO/Install-Slackware-Current.sh"
+	[6]="$URL/refs/heads/main/extra/ISO/Install-Void.sh"
 )
 
 declare -A names=(
