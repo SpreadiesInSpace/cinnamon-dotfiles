@@ -30,12 +30,14 @@ fi
 # Use zramctl if available, else fallback to sysfs
 if command -v zramctl >/dev/null 2>&1; then
 	zram_dev=$(zramctl --find)
-	zramctl --algorithm zstd --size "${zram_size_kib}K" "$zram_dev" || die "zramctl setup failed"
+	zramctl --algorithm zstd --size "${zram_size_kib}K" "$zram_dev" || \
+		die "zramctl setup failed"
 else
 	zram_dev=/dev/zram0
 	[ -e "$zram_dev" ] || echo 0 > /sys/class/zram-control/hot_add
 	echo zstd > /sys/block/zram0/comp_algorithm 2>/dev/null || true
-	echo "${zram_size_kib}K" > /sys/block/zram0/disksize || die "Failed to set zram size"
+	echo "${zram_size_kib}K" > /sys/block/zram0/disksize || \
+		die "Failed to set zram size"
 fi
 
 # Format and enable swap

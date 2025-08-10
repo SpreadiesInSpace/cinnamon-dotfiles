@@ -9,7 +9,8 @@ rm -rf .git || die "Failed to remove git history."
 
 # Initialize
 git init || die "Failed to initialize repo."
-git remote add origin https://github.com/SpreadiesInSpace/cinnamon-dotfiles || die "Failed to set git remote."
+git remote add origin https://github.com/SpreadiesInSpace/cinnamon-dotfiles || \
+	die "Failed to set git remote."
 git add . || die "Failed to add files."
 git commit -m 'Clean Up' || die "Commit failed."
 

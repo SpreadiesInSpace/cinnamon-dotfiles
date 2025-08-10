@@ -23,7 +23,7 @@ prompt_for_vm
 # Display Status from Prompts
 display_status "$enable_autologin" "$is_vm"
 
-# Check if Color, ParallelDownloads, and ILoveCandy are already in /etc/pacman.conf
+# Check if Color, ParallelDownloads, and ILoveCandy are in /etc/pacman.conf
 echo "Configuring pacman..."
 declare -A options=(["Color"]="Color" ["ParallelDownloads"]="ParallelDownloads = 5" ["ILoveCandy"]="ILoveCandy")
 for key in "${!options[@]}"; do
