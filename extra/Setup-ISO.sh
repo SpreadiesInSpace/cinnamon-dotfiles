@@ -47,7 +47,7 @@ options=(
 )
 PS3="Select a number: "
 
-select opt in "${options[@]}"; do
+select _ in "${options[@]}"; do
 	case $REPLY in
 		[1-6])
 			url="${installs[$REPLY]}"

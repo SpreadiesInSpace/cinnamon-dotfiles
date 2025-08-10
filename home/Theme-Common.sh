@@ -575,16 +575,16 @@ set_cinnamon_background_and_sounds() {
 
 	# Disable all other Cinnamon Sound Events
 	for key in \
-	  switch-enabled \
-	  map-enabled \
-	  close-enabled \
-	  minimize-enabled \
-	  maximize-enabled \
-	  unmaximize-enabled \
-	  tile-enabled \
-	  plug-enabled \
-	  unplug-enabled \
-	  notification-enabled; do
+		switch-enabled \
+		map-enabled \
+		close-enabled \
+		minimize-enabled \
+		maximize-enabled \
+		unmaximize-enabled \
+		tile-enabled \
+		plug-enabled \
+		unplug-enabled \
+		notification-enabled; do
 		gsettings set org.cinnamon.sounds $key false
 	done
 }
@@ -752,5 +752,5 @@ restart_cinnamon() {
 }
 
 print_finish_message() {
-	echo "Theme installation comlete! Log out and back in to apply changes."
+	echo "Theme installation complete! Log out and back in to apply changes."
 }

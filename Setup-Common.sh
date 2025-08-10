@@ -151,15 +151,15 @@ set_libvirtd_permissions() {
 	echo "Configuring libvirt..."
 	# Set proper permissions in libvirtd.conf
 	for line in \
-	  'unix_sock_group = "libvirt"' \
-	  'unix_sock_ro_perms = "0777"' \
-	  'unix_sock_rw_perms = "0770"'; do
-	  key=${line%% *}
-	  # Only add the line if it's completely missing (including commented-out lines)
-	  if ! grep -q -E "^$key\s*=" /etc/libvirt/libvirtd.conf; then
+		'unix_sock_group = "libvirt"' \
+		'unix_sock_ro_perms = "0777"' \
+		'unix_sock_rw_perms = "0770"'; do
+		key=${line%% *}
+		# Only add the line if it's completely missing (including commented-out lines)
+		if ! grep -q -E "^$key\s*=" /etc/libvirt/libvirtd.conf; then
 		# Append the line if it doesn't exist in any form
 		echo "$line" | tee -a /etc/libvirt/libvirtd.conf >/dev/null 2>&1 || die "Failed to update libvirtd.conf with $line."
-	  fi
+		fi
 	done
 }
 
@@ -168,9 +168,9 @@ set_qemu_permissions() {
 	echo "Configuring QEMU..."
 	# Set proper permissions in qemu.conf
 	for key in user group swtpm_user swtpm_group; do
-	  if ! grep -q "^$key = \"$username\"$" /etc/libvirt/qemu.conf; then
+		if ! grep -q "^$key = \"$username\"$" /etc/libvirt/qemu.conf; then
 		echo "$key = \"$username\"" | tee -a /etc/libvirt/qemu.conf >/dev/null 2>&1 || die "Failed to update qemu.conf with $key = \"$username\"."
-	  fi
+		fi
 	done
 }
 

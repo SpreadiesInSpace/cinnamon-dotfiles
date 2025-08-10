@@ -9,7 +9,7 @@ die() {
 check_if_root() {
 	# Check if the script is run as root
 	if [ "$EUID" -ne 0 ]; then
-			die "Please run the script as superuser."
+		die "Please run the script as superuser."
 	fi
 }
 

@@ -76,7 +76,7 @@ echo "Starting full Slackware installation..."
 # Get list of package sets (sorted alphabetically)
 package_sets=()
 for dir in /var/log/mount/slackware64/*; do 
-    [ -d "$dir" ] && package_sets+=("$(basename "$dir")")
+	[ -d "$dir" ] && package_sets+=("$(basename "$dir")")
 done
 
 # Sort using mapfile

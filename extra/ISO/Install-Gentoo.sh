@@ -140,10 +140,10 @@ echo "Set EMERGE_DEFAULT_OPTS to -j$cores -l$load_limit"
 # Check available RAM and comment out EMERGE_DEFAULT_OPTS if < 16GB
 ram_gb=$(free -g | awk '/^Mem:/ {print $2}')
 if [ "$ram_gb" -lt 16 ]; then
-    sed -i 's/^EMERGE_DEFAULT_OPTS=/#EMERGE_DEFAULT_OPTS=/' "$path"
-		echo "RAM Avaiable: $ram_gb GB"
-    echo "RAM < 16 GB, Disabling parallel emerges..."
-    echo "To enable parallel emerges later, uncomment the EMERGE_DEFAULT_OPTS line in make.conf"
+	sed -i 's/^EMERGE_DEFAULT_OPTS=/#EMERGE_DEFAULT_OPTS=/' "$path"
+	echo "RAM Avaiable: $ram_gb GB"
+	echo "RAM < 16 GB, Disabling parallel emerges..."
+	echo "To enable parallel emerges later, uncomment the EMERGE_DEFAULT_OPTS line in make.conf"
 fi
 
 # Set VIDEO_CARDS value in package.use
@@ -282,7 +282,7 @@ fi
 
 # Skip installing firmware and Intel microcode in VM
 if { [ "$GENTOO_INIT" = "systemd" ] && systemd-detect-virt --vm; } || \
-   virt-what | grep -q .; then
+	 virt-what | grep -q .; then
 	echo "VM detected. Skipping firmware and microcode packages."
 else
 	echo "Physical machine detected. Adding firmware packages..."

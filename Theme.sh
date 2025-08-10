@@ -31,7 +31,7 @@ for script in "${scripts[@]}"; do
 		pretty_name="$(tr '[:lower:]' '[:upper:]' <<< ${flag:1:1})${flag:2:-5}"
 		echo -e "${GREEN}Detected flag: $pretty_name. Running $script...${NC}"
 		# Move to Theme Setup Scripts Directory
-		cd home/
+		cd home/ || { echo -e "${RED}Directory not found. Exiting.${NC}"; exit 1; }
 		chmod +x "$script"
 		bash "$script"
 		exit 0
@@ -41,7 +41,7 @@ done
 # No flags found — show prompt
 echo -e "${YELLOW}No theme flag found. Choose a theme script to run:${NC}"
 # Move to Theme Setup Scripts Directory
-cd home/
+cd home/ || { echo -e "${RED}Directory not found. Exiting.${NC}"; exit 1; }
 PS3="Select a number: "
 select script in "${scripts[@]}" "Exit"; do
 	if [[ "$script" == "Exit" ]]; then
