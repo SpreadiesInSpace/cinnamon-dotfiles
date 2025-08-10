@@ -24,31 +24,42 @@ prompt_for_vm
 display_status "$enable_autologin" "$is_vm"
 
 # Install sbopkg (for sbotools)
-wget -c -T 10 -t 10 -q --show-progress https://github.com/sbopkg/sbopkg/releases/download/0.38.3/sbopkg-0.38.3-noarch-1_wsr.tgz || die "Failed to download sbopkg package."
-installpkg sbopkg-0.38.3-noarch-1_wsr.tgz || die "Failed to install sbopkg package."
-rm sbopkg-0.38.3-noarch-1_wsr.tgz || die "Failed to remove sbopkg package file."
+BASE_URL="https://github.com/sbopkg/sbopkg/releases/download"
+URL="$BASE_URL/0.38.3/sbopkg-0.38.3-noarch-1_wsr.tgz"
+wget -c -T 10 -t 10 -q --show-progress "$URL" || \
+	die "Failed to download sbopkg package."
+installpkg sbopkg-0.38.3-noarch-1_wsr.tgz || \
+	die "Failed to install sbopkg package."
+rm sbopkg-0.38.3-noarch-1_wsr.tgz || \
+	die "Failed to remove sbopkg package file."
 
 # Point sbopkg to current repo & sync
-sed -i "s/REPO_BRANCH=\${REPO_BRANCH:-15.0}/REPO_BRANCH=\${REPO_BRANCH:-current}/g" /etc/sbopkg/sbopkg.conf || die "Failed to update REPO_BRANCH."
-sed -i "s/REPO_NAME=\${REPO_NAME:-SBo}/REPO_NAME=\${REPO_NAME:-SBo-git}/g" /etc/sbopkg/sbopkg.conf || die "Failed to update REPO_NAME."
+SBO="/etc/sbopkg/sbopkg.conf"
+sed -i "s/REPO_BRANCH=\${REPO_BRANCH:-15\.0}/REPO_BRANCH=\${REPO_BRANCH:-current}/g" \
+	"$SBO" || die "Failed to update REPO_BRANCH."
+sed -i "s/REPO_NAME=\${REPO_NAME:-SBo}/REPO_NAME=\${REPO_NAME:-SBo-git}/g" \
+	"$SBO" || die "Failed to update REPO_NAME."
 sbopkg -r || die "Failed to sync sbopkg repository."
 
 # Install sbotools (for slpkg)
 sbopkg -i sbotools || die "Failed to install sbotools."
-sboconfig -r https://github.com/Ponce/slackbuilds.git || die "Failed to configure sbotools repository."
+sboconfig -r https://github.com/Ponce/slackbuilds.git || \
+	die "Failed to configure sbotools repository."
 sbosnap fetch || die "Failed to fetch sbosnap."
 
 # Update MAKEFLAGS in /etc/sbotools/sbotools.conf to match CPU cores
 cores=$(nproc)
-sboconfig -j "$cores" || die "Failed to update sbotools configuration with CPU cores."
+sboconfig -j "$cores" || \
+	die "Failed to update sbotools configuration with CPU cores."
 
 # For Virt-Manager & accessing samba shares (15.0 needs dnsmasq and samba)
-cp /etc/samba/smb.conf-sample /etc/samba/smb.conf || die "Failed to copy Samba config."
+cp /etc/samba/smb.conf-sample /etc/samba/smb.conf || \
+	die "Failed to copy Samba config."
 sh /etc/rc.d/rc.samba start || die "Failed to start Samba service."
 
 # Install slpkg
-packages=("python3-poetry-core" "python3-tomlkit" "python3-pythondialog" "slpkg")
-for package in "${packages[@]}"; do
+slpkg=("python3-poetry-core" "python3-tomlkit" "python3-pythondialog" "slpkg")
+for package in "${slpkg[@]}"; do
 	# Install headlessly but fallback to prompt if any package fails
 	if ! sboinstall -r "$package"; then
 		echo "Install failed for $package, falling back to prompt..."
@@ -56,13 +67,15 @@ for package in "${packages[@]}"; do
 	fi
 done
 
-# Declare Config Files
+# Declare slpkg config files
+BASE_REPO="https://raw.githubusercontent.com/SpreadiesInSpace"
+REPO_PATH="$BASE_REPO/cinnamon-dotfiles/main"
 declare -A files=(
-	["https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/etc/slpkg/repositories.toml"]="/etc/slpkg/repositories.toml"
-	["https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/etc/slpkg/slpkg.toml"]="/etc/slpkg/slpkg.toml"
-	["https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/etc/slpkg/blacklist.toml"]="/etc/slpkg/blacklist.toml"
-	["https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/etc/slackpkg/blacklist"]="/etc/slackpkg/blacklist"
-	["https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/etc/slackpkg/mirrors"]="/etc/slackpkg/mirrors"
+		["$REPO_PATH/etc/slpkg/repositories.toml"]="/etc/slpkg/repositories.toml"
+		["$REPO_PATH/etc/slpkg/slpkg.toml"]="/etc/slpkg/slpkg.toml"
+		["$REPO_PATH/etc/slpkg/blacklist.toml"]="/etc/slpkg/blacklist.toml"
+		["$REPO_PATH/etc/slackpkg/blacklist"]="/etc/slackpkg/blacklist"
+		["$REPO_PATH/etc/slackpkg/mirrors"]="/etc/slackpkg/mirrors"
 )
 
 # Replace slpkg and slackpkg configs
@@ -70,42 +83,55 @@ timestamp=$(date +%s)
 for url in "${!files[@]}"; do
 	local_path="${files[$url]}"
 
+	# Create backup if file exists
 	if [ -f "$local_path" ]; then
-		cp "$local_path" "${local_path}.old.${timestamp}" || { echo "Failed to backup $local_path."; exit 1; }
+		cp "$local_path" "${local_path}.old.${timestamp}" || \
+			die "Failed to backup $local_path."
 	fi
+	# Download new config file
 	if curl -fsSL -o "$local_path" "$url"; then
 		echo "File $local_path updated successfully."
 	else
 		echo "Failed to download $url."
-		[ -f "${local_path}.old.${timestamp}" ] && mv "${local_path}.old.${timestamp}" "$local_path"
+		# Restore backup if download failed
+	if [ -f "${local_path}.old.${timestamp}" ]; then
+			mv "${local_path}.old.${timestamp}" "$local_path"
+		fi
 		exit 1
 	fi
 done
 
-# Update MAKEFLAGS in /etc/slpkg/slpkg.toml to match CPU cores
-cores=$(nproc)
 # Backup the current slpkg.toml file
 timestamp=$(date +%s)
-cp /etc/slpkg/slpkg.toml /etc/slpkg/slpkg.toml.old."${timestamp}" || die "Failed to backup /etc/slpkg/slpkg.toml."
-# Edit slpkg.toml to set MAKEFLAGS
-sed -i "s/^MAKEFLAGS = \"-j[0-9]*\"/MAKEFLAGS = \"-j$cores\"/" /etc/slpkg/slpkg.toml || die "Failed to update MAKEFLAGS in /etc/slpkg/slpkg.toml."
-echo "Updated MAKEFLAGS in /etc/slpkg/slpkg.toml to -j$cores based on the number of CPU cores."
+cp /etc/slpkg/slpkg.toml /etc/slpkg/slpkg.toml.old."${timestamp}" || \
+	die "Failed to backup /etc/slpkg/slpkg.toml."
+
+# Update MAKEFLAGS in /etc/slpkg/slpkg.toml to match CPU cores
+cores=$(nproc)
+SLPKG_CONF="/etc/slpkg/slpkg.toml"
+sed -i "s/^MAKEFLAGS = \"-j[0-9]*\"/MAKEFLAGS = \"-j$cores\"/" "$SLPKG_CONF" \
+	|| die "Failed to update MAKEFLAGS in $SLPKG_CONF."
+echo "Updated MAKEFLAGS in $SLPKG_CONF to -j$cores based on CPU cores."
 
 # Sync slpkg
 slpkg update || die "Failed to sync slpkg."
 
 # Update Slackware Packages
 slpkg upgrade -y -o "slack" || die "Failed to update slack packages."
-slpkg upgrade -y -o "slack_extra" || die "Failed to update slack_extra packages."
+slpkg upgrade -y -o "slack_extra" || \
+	die "Failed to update slack_extra packages."
 
 # Update Bootloader Entries (in case Kernel Gets Updated)
+ELILO_SLACKWARE="/boot/efi/EFI/Slackware/elilo.conf"
+ELILO_DEFAULT="/boot/efi/EFI/ELILO/elilo.conf"
+LILO_CONF="/etc/lilo.conf"
 if command -v grub-mkconfig >/dev/null 2>&1; then
 	echo "Detected GRUB bootloader."
 	grub-mkconfig -o /boot/grub/grub.cfg || die "Failed to generate GRUB config."
-elif [ -f /boot/efi/EFI/Slackware/elilo.conf ] || [ -f /boot/efi/EFI/ELILO/elilo.conf ]; then
+elif [ -f "$ELILO_SLACKWARE" ] || [ -f "$ELILO_DEFAULT" ]; then
 	echo "Detected ELILO bootloader."
 	eliloconfig || die "Failed to update ELILO configuration."
-elif [ -f /etc/lilo.conf ]; then
+elif [ -f "$LILO_CONF" ]; then
 	echo "Detected LILO bootloader."
 	lilo || die "Failed to update LILO configuration."
 else
@@ -114,7 +140,8 @@ else
 fi
 
 # Install Bash Completion for csb
-slpkg install -y -P -B bash-completion -o "slack_extra" || die "Failed to install bash-completion."
+slpkg install -y -P -B bash-completion -o "slack_extra" || \
+	die "Failed to install bash-completion."
 
 # Alien packages
 alien_packages=(
@@ -123,7 +150,8 @@ alien_packages=(
 )
 
 # Install packages from Alien over SBo to reduce compile times
-slpkg install -y -P -B "${alien_packages[@]}" -o alien -O || die "Failed to install alienbob packages."
+slpkg install -y -P -B "${alien_packages[@]}" -o alien -O || \
+	die "Failed to install alienbob packages."
 
 # All packages
 packages=(
@@ -197,7 +225,8 @@ packages=(
 )
 
 # Install packages from Conraid over SBo to reduce compile times
-slpkg install -y -P -B "${packages[@]}" -o conraid || die "Failed to install conraid packages."
+slpkg install -y -P -B "${packages[@]}" -o conraid || \
+	die "Failed to install conraid packages."
 
 # GFS packages
 gnome_packages=(
@@ -226,11 +255,13 @@ gnome_packages=(
 )
 
 # Install packages from GFS over SBo to reduce compile times
-slpkg install -y -P -B "${gnome_packages[@]}" -o gnome || die "Failed to install gnome packages."
+slpkg install -y -P -B "${gnome_packages[@]}" -o gnome || \
+	die "Failed to install gnome packages."
 
 # Add LightDM group
 groupadd -g 380 lightdm || die "Failed to create group 'lightdm'."
-useradd -d /var/lib/lightdm -s /bin/false -u 380 -g 380 lightdm || die "Failed to create user 'lightdm'."
+useradd -d /var/lib/lightdm -s /bin/false -u 380 -g 380 lightdm || \
+	die "Failed to create user 'lightdm'."
 
 # SBo packages
 sbo_packages=(
@@ -251,8 +282,8 @@ sbo_packages=(
 )
 
 # Install Packages
-slpkg install -y -P -B "${sbo_packages[@]}" || die "Failed to install packages."
-# slpkg install -y -P -B bottom || die "Failed to install bottom." # prevent download timeout 
+slpkg install -y -P -B "${sbo_packages[@]}" || \
+	die "Failed to install packages."
 
 # Slint packages
 slint_packages=(
@@ -262,17 +293,25 @@ slint_packages=(
 )
 
 # Install packages from Slint over SBo to reduce compile times
-slpkg install -y -P -B "${slint_packages[@]}" -o slint -O || die "Failed to install slint packages."
+slpkg install -y -P -B "${slint_packages[@]}" -o slint -O || \
+	die "Failed to install slint packages."
 
 # Install Cinnamon, LightDM and set Default DE System-Wide
 slpkg install -y -P -B '*' -o csb || die "Failed to install Cinnamon"
-slpkg install -y -P -B -O lightdm lightdm-settings lightdm-slick-greeter || die "Failed to install LightDM"
-ln -sf /etc/X11/xinit/xinitrc.cinnamon-session /etc/X11/xinit/xinitrc || die "Failed to create symlink for xinitrc."
-ln -sf /etc/X11/xinit/xinitrc.cinnamon-session /etc/X11/xsession || die "Failed to create symlink for xsession."
-cp /etc/X11/xinit/xinitrc.cinnamon-session /root/.xinitrc || die "Failed to copy xinitrc to /root."
-cp /etc/X11/xinit/xinitrc.cinnamon-session /root/.xsession || die "Failed to copy xsession to /root."
-chmod -x /root/.xinitrc || die "Failed to modify permissions for /root/.xinitrc."
-chmod -x /root/.xsession || die "Failed to modify permissions for /root/.xsession."
+slpkg install -y -P -B -O lightdm lightdm-settings lightdm-slick-greeter || \
+	die "Failed to install LightDM"
+ln -sf /etc/X11/xinit/xinitrc.cinnamon-session /etc/X11/xinit/xinitrc || \
+	die "Failed to create symlink for xinitrc."
+ln -sf /etc/X11/xinit/xinitrc.cinnamon-session /etc/X11/xsession || \
+	die "Failed to create symlink for xsession."
+cp /etc/X11/xinit/xinitrc.cinnamon-session /root/.xinitrc || \
+	die "Failed to copy xinitrc to /root."
+cp /etc/X11/xinit/xinitrc.cinnamon-session /root/.xsession || \
+	die "Failed to copy xsession to /root."
+chmod -x /root/.xinitrc || \
+	die "Failed to modify permissions for /root/.xinitrc."
+chmod -x /root/.xsession || \
+	die "Failed to modify permissions for /root/.xsession."
 
 # Set polkit permissions for wheel group users
 set_polkit_perms
@@ -281,24 +320,32 @@ set_polkit_perms
 enable_flathub
 
 # Start spice-vdagent service (it already autostarts by default)
-/etc/rc.d/rc.spice-vdagent start || die "Failed to start spice-vdagent service."
+/etc/rc.d/rc.spice-vdagent start || \
+	die "Failed to start spice-vdagent service."
 
 # Check if the block for libvirt already exists
 if ! grep -q '# Start libvirt' /etc/rc.d/rc.local; then
 	# Add libvirt startup to rc.local if not already present
-	echo '' >> /etc/rc.d/rc.local || die "Failed to append to /etc/rc.d/rc.local"
-	echo '# Start libvirt' >> /etc/rc.d/rc.local || die "Failed to add '# Start libvirt' to /etc/rc.d/rc.local"
-	echo 'if [ -x /etc/rc.d/rc.libvirt ]; then' >> /etc/rc.d/rc.local || die "Failed to add check for rc.libvirt to /etc/rc.d/rc.local"
-	echo '  /etc/rc.d/rc.libvirt start' >> /etc/rc.d/rc.local || die "Failed to add libvirt start command to /etc/rc.d/rc.local"
-	echo 'fi' >> /etc/rc.d/rc.local || die "Failed to close if condition in /etc/rc.d/rc.local"
+	echo '' >> /etc/rc.d/rc.local || \
+		die "Failed to append to /etc/rc.d/rc.local"
+	echo '# Start libvirt' >> /etc/rc.d/rc.local || \
+		die "Failed to add '# Start libvirt' to /etc/rc.d/rc.local"
+	echo 'if [ -x /etc/rc.d/rc.libvirt ]; then' >> /etc/rc.d/rc.local || \
+		die "Failed to add check for rc.libvirt to /etc/rc.d/rc.local"
+	echo '  /etc/rc.d/rc.libvirt start' >> /etc/rc.d/rc.local || \
+		die "Failed to add libvirt start command to /etc/rc.d/rc.local"
+	echo 'fi' >> /etc/rc.d/rc.local || \
+		die "Failed to close if condition in /etc/rc.d/rc.local"
 fi
 
 # Make sure rc.libvirt is executable
-chmod +x /etc/rc.d/rc.libvirt || die "Failed to make /etc/rc.d/rc.libvirt executable."
+chmod +x /etc/rc.d/rc.libvirt || \
+	die "Failed to make /etc/rc.d/rc.libvirt executable."
 
 # Start libvirtd service
 echo "Enabling services..."
-/etc/rc.d/rc.libvirt start >/dev/null 2>&1 || die "Failed to start libvirtd service."
+/etc/rc.d/rc.libvirt start >/dev/null 2>&1 || \
+	die "Failed to start libvirtd service."
 
 # Only enable net-autostart if in physical machine
 manage_virsh_network "slackware"
@@ -308,12 +355,19 @@ add_user_to_groups kvm input disk video audio users
 
 # Backup original rc.4
 timestamp=$(date +%s)
-cp /etc/rc.d/rc.4 "/etc/rc.d/rc.4.old.${timestamp}" || die "Failed to backup /etc/rc.d/rc.4"
+cp /etc/rc.d/rc.4 "/etc/rc.d/rc.4.old.${timestamp}" || \
+	die "Failed to backup /etc/rc.d/rc.4"
 
 # Run LightDM on Boot
-if ! grep -q 'exec /usr/bin/lightdm' /etc/rc.d/rc.4; then
+RC4_FILE="/etc/rc.d/rc.4"
+if ! grep -q 'exec /usr/bin/lightdm' "$RC4_FILE"; then
+	# Insert LightDM configuration before GNOME's gdm line
 	sed -i '/# Try to use GNOME'\''s gdm session manager/i\
-# Try to use LightDM session manager:\nif [ -x /usr/bin/lightdm ]; then\n  exec /usr/bin/lightdm\nfi\n' /etc/rc.d/rc.4 || die "Failed to modify /etc/rc.d/rc.4 to include LightDM."
+# Try to use LightDM session manager:\
+if [ -x /usr/bin/lightdm ]; then\
+	exec /usr/bin/lightdm\
+fi\
+' "$RC4_FILE" || die "Failed to modify $RC4_FILE to include LightDM."
 fi
 
 # Backup original LightDM config

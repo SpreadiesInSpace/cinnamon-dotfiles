@@ -13,13 +13,21 @@ die() {
 check_not_root() {
 	# Prevents script from being run as root
 	if [ "$EUID" -eq 0 ]; then
-		die "This script must NOT be run as root. Please run it as a regular user."
+		die "This script must NOT be run as root." \
+				 "Please run it as a regular user."
 	fi
 }
 
 check_dependencies() {
 	local missing=()
-	local deps=(dconf flatpak git gsettings sudo unzip)
+	local deps=(
+		dconf
+		flatpak
+		git
+		gsettings
+		sudo
+		unzip
+	)
 
 	for cmd in "${deps[@]}"; do
 		if ! command -v "$cmd" >/dev/null 2>&1; then
@@ -37,7 +45,8 @@ check_dependencies() {
 	fi
 
 	# Check if gsettings can actually read schemas
-	if command -v gsettings >/dev/null 2>&1 && ! gsettings list-schemas >/dev/null 2>&1; then
+	if command -v gsettings >/dev/null 2>&1 && \
+		 ! gsettings list-schemas >/dev/null 2>&1; then
 		missing+=("functional gsettings")
 	fi
 
@@ -57,44 +66,56 @@ install_icons_and_themes() {
 	bash icons-and-fonts.sh || die "Failed to execute icons-and-fonts.sh."
 
 	# Set filenames
-	ICON_ZIP="gruvbox-dark-icons-gtk-1.0.0.zip"
-	ICON_EXTRACTED="gruvbox-dark-icons-gtk-1.0.0"
-	ICON_RENAME="gruvbox-dark-icons-gtk"
-	CURSOR_ZIP="Capitaine Cursors (Gruvbox) - White.zip"
-	CURSOR_DIR="Capitaine Cursors (Gruvbox) - White"
-	THEME_ZIP="1670604530-Gruvbox-Dark-BL.zip"
-	THEME_DIR="Gruvbox-Dark-BL"
+	local icon_zip="gruvbox-dark-icons-gtk-1.0.0.zip"
+	local icon_extracted="gruvbox-dark-icons-gtk-1.0.0"
+	local icon_rename="gruvbox-dark-icons-gtk"
+	local cursor_zip="Capitaine Cursors (Gruvbox) - White.zip"
+	local cursor_dir="Capitaine Cursors (Gruvbox) - White"
+	local theme_zip="1670604530-Gruvbox-Dark-BL.zip"
+	local theme_dir="Gruvbox-Dark-BL"
 
 	# Extract icons
 	echo "Extracting Icons..."
 	mv .icons/*.zip "$PWD" || die "Failed to move icon zip files."
-	unzip -q "$ICON_ZIP" || die "Failed to unzip $ICON_ZIP."
-	unzip -q "$CURSOR_ZIP" || die "Failed to unzip $CURSOR_ZIP."
-	mv "$ICON_EXTRACTED" ".icons/$ICON_RENAME" || die "Failed to rename extracted icon directory."
-	mv "$CURSOR_DIR" .icons/ || die "Failed to move cursor directory."
+	unzip -q "$icon_zip" || die "Failed to unzip $icon_zip."
+	unzip -q "$cursor_zip" || die "Failed to unzip $cursor_zip."
+	mv "$icon_extracted" ".icons/$icon_rename" || \
+		die "Failed to rename extracted icon directory."
+	mv "$cursor_dir" .icons/ || \
+		die "Failed to move cursor directory."
 
 	# Extract themes
 	echo "Extracting Themes..."
 	mv .themes/*.zip "$PWD" || die "Failed to move theme zip files."
-	unzip -q "$THEME_ZIP" || die "Failed to unzip $THEME_ZIP."
-	mv "$THEME_DIR" .themes/ || die "Failed to move extracted theme directory."
+	unzip -q "$theme_zip" || die "Failed to unzip $theme_zip."
+	mv "$theme_dir" .themes/ || \
+		die "Failed to move extracted theme directory."
 
 	# Always install to user directories
 	echo "Installing Icons and Themes..."
-	mkdir -p ~/.icons ~/.themes || die "Failed to create user icon or theme directories."
-	cp -npr .icons/* ~/.icons/ || die "Failed to copy icons to user directory."
-	cp -npr .themes/* ~/.themes/ || die "Failed to copy themes to user directory."
+	mkdir -p ~/.icons ~/.themes || \
+		die "Failed to create user icon or theme directories."
+	cp -npr .icons/* ~/.icons/ || \
+		die "Failed to copy icons to user directory."
+	cp -npr .themes/* ~/.themes/ || \
+		die "Failed to copy themes to user directory."
 
 	# If not NixOS, also install to system-wide directories
 	if ! grep -qi "nixos" /etc/os-release; then
-		sudo cp -npr .icons/* /usr/share/icons/ || die "Failed to copy icons to system directory."
-		sudo cp -npr .themes/* /usr/share/themes/ || die "Failed to copy themes to system directory."
+		sudo cp -npr .icons/* /usr/share/icons/ || \
+			die "Failed to copy icons to system directory."
+		sudo cp -npr .themes/* /usr/share/themes/ || \
+			die "Failed to copy themes to system directory."
 	fi
 
 	# Move ZIPs back & clean up
-	mv "$CURSOR_ZIP" "$ICON_ZIP" .icons/ || die "Failed to move icon and cursor zip files back."
-	mv "$THEME_ZIP" .themes/ || die "Failed to move theme zip file back."
-	rm -rf ".icons/$ICON_RENAME" ".icons/$CURSOR_DIR" ".themes/$THEME_DIR" || die "Failed to clean up extracted directories."
+	mv "$cursor_zip" "$icon_zip" .icons/ || \
+		die "Failed to move icon and cursor zip files back."
+	mv "$theme_zip" .themes/ || \
+		die "Failed to move theme zip file back."
+	rm -rf ".icons/$icon_rename" ".icons/$cursor_dir" \
+		".themes/$theme_dir" || \
+		die "Failed to clean up extracted directories."
 }
 
 # Nothing currently uses this
@@ -106,27 +127,31 @@ disable_polkit_agent() {
 override_qt_cursor_theme() {
 	# Override Cursor Theme for QT Apps
 	local distro="${1:-}"
+	local cursor_theme="Capitaine Cursors (Gruvbox) - White"
 
 	echo "Setting Cursor Theme Override for QT Apps..."
 	if [ "$distro" = "nixos" ]; then
 		mkdir -p ~/.icons/default
 		rm -rf ~/.icons/default/*
-		ln -sf ~/.icons/"Capitaine Cursors (Gruvbox) - White/"* ~/.icons/default/
+		ln -sf ~/.icons/"$cursor_theme/"* ~/.icons/default/
 		sudo mkdir -p /root/.icons/default
 		sudo rm -rf /root/.icons/default/*
-		sudo ln -sf ~/.icons/"Capitaine Cursors (Gruvbox) - White/"* /root/.icons/default/
+		sudo ln -sf ~/.icons/"$cursor_theme/"* /root/.icons/default/
 	else
 		rm -rf ~/.icons/default
 		sudo mkdir -p /usr/share/icons/default
 		sudo rm -rf /usr/share/icons/default/*
-		sudo ln -sf "/usr/share/icons/Capitaine Cursors (Gruvbox) - White/"* /usr/share/icons/default/
+		local sys_cursor_path="/usr/share/icons/$cursor_theme"
+		sudo ln -sf "$sys_cursor_path/"* /usr/share/icons/default/
 	fi
 }
 
 enable_flatpak_theme_override() {
+	local flathub_url="https://dl.flathub.org/repo/flathub.flatpakrepo"
+	
 	# Ensure Flathub exists
 	flatpak remotes | grep -q flathub || {
-		flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+		flatpak remote-add --if-not-exists flathub "$flathub_url"
 	}
 	
 	echo "Setting GTK & QT Flatpak Theme Override..."
@@ -167,7 +192,7 @@ copy_fonts() {
 	local distro="${1:-}"
 
 	echo "Setting Fonts..."
-	# NixOS doesn’t use /usr/share/fonts/ for user fonts
+	# NixOS doesn't use /usr/share/fonts/ for user fonts
 	if [ "$distro" = "nixos" ]; then
 		cp -npr .fonts/ ~/
 	else
@@ -194,7 +219,8 @@ copy_applets() {
 	# Copies applets to appropriate directories
 	local applet_variant=$1
 	echo "Configuring Cinnamon Applets..."
-	cp -npr .local/share/cinnamon/"$applet_variant"/* ~/.local/share/cinnamon/applets/
+	cp -npr .local/share/cinnamon/"$applet_variant"/* \
+		~/.local/share/cinnamon/applets/
 }
 
 copy_kdeglobals() {
@@ -210,7 +236,8 @@ copy_kdeglobals() {
 	cp -npr .config/kdeglobals ~/.config/
 
 	if sudo test -f /root/.config/kdeglobals; then
-		sudo mv /root/.config/kdeglobals /root/.config/kdeglobals.old."$timestamp"
+		sudo mv /root/.config/kdeglobals \
+			/root/.config/kdeglobals.old."$timestamp"
 	fi
 	sudo mkdir -p /root/.config/
 	sudo ln -sf ~/.config/kdeglobals /root/.config/
@@ -219,13 +246,16 @@ copy_kdeglobals() {
 symlink_kdeglobals() {
 	# Symlink kdeglobals to color-schemes for KDE applications like haruna
 	local distro="${1:-}"
+	local color_file="gruvbox-dark.colors"
 
 	if [ "$distro" = "nixos" ]; then
 		sudo mkdir -p ~/.local/share/color-schemes/
-		sudo ln -sf ~/.config/kdeglobals ~/.local/share/color-schemes/gruvbox-dark.colors
+		sudo ln -sf ~/.config/kdeglobals \
+			~/.local/share/color-schemes/"$color_file"
 	else
 		sudo mkdir -p /usr/share/color-schemes/
-		sudo ln -sf ~/.config/kdeglobals /usr/share/color-schemes/gruvbox-dark.colors
+		sudo ln -sf ~/.config/kdeglobals \
+			/usr/share/color-schemes/"$color_file"
 	fi
 }
 
@@ -248,12 +278,14 @@ copy_cinnamon_spice_settings() {
 	local distro="${1:-}"
 	local timestamp
 	timestamp=$(date +%s)
-	mv ~/.config/cinnamon/spices/ ~/.config/cinnamon/spices.old."$timestamp"/
+	mv ~/.config/cinnamon/spices/ \
+		~/.config/cinnamon/spices.old."$timestamp"/
 	mkdir -p ~/.config/cinnamon/spices/
 	
 	echo "Applying Cinnamon Spice Settings..."
 	# Copy new settings for the specified distro
-	cp -npr .config/cinnamon/spices."$distro"/* ~/.config/cinnamon/spices/
+	cp -npr .config/cinnamon/spices."$distro"/* \
+		~/.config/cinnamon/spices/
 }
 
 copy_personal_shortcuts() {
@@ -261,7 +293,8 @@ copy_personal_shortcuts() {
 	local distro="${1:-}"
 	mkdir -p ~/.local/share/applications
 	echo "Setting Shortcuts..."
-	cp -npr .local/share/applications/"$distro"/* ~/.local/share/applications/
+	cp -npr .local/share/applications/"$distro"/* \
+		~/.local/share/applications/
 }
 
 copy_bashrc_and_etc() {
@@ -274,7 +307,8 @@ copy_bashrc_and_etc() {
 	if [ "$distro" = "nixos" ]; then
 		cd theming/ || die "Failed to move to theming folder."
 		cp -npr NixOS/* ~/; rm ~/configuration.nix
-		sudo cp /root/.bashrc /root/.bashrc.old."$timestamp" >/dev/null 2>&1
+		sudo cp /root/.bashrc /root/.bashrc.old."$timestamp" \
+			>/dev/null 2>&1
 		sudo cp NixOS/.bashrc.root /root/.bashrc
 		sudo cp NixOS/NixAscii.txt /root/
 		cp ~/.bashrc ~/.bashrc.old."$timestamp" >/dev/null 2>&1
@@ -286,14 +320,17 @@ copy_bashrc_and_etc() {
 		cp -npr "theming/$distro/"* ~/
 
 		# Preserve old root .bashrc with timestamp
-		sudo cp /root/.bashrc /root/.bashrc.old."$timestamp" >/dev/null 2>&1
+		sudo cp /root/.bashrc /root/.bashrc.old."$timestamp" \
+			>/dev/null 2>&1
 
 		# Create minimal root .bashrc with tty check and source user .bashrc
-		echo "# Skip sourcing user .bashrc if running in tty" | sudo tee /root/.bashrc >/dev/null 2>&1
-		echo 'if [[ $(tty) == /dev/tty[0-9]* ]]; then' | sudo tee -a /root/.bashrc >/dev/null 2>&1 
-		echo '    return'  | sudo tee -a /root/.bashrc >/dev/null 2>&1
-		echo 'fi' | sudo tee -a /root/.bashrc >/dev/null 2>&1
-		echo "source $HOME/.bashrc" | sudo tee -a /root/.bashrc >/dev/null 2>&1
+		{
+			echo "# Skip sourcing user .bashrc if running in tty"
+			echo 'if [[ $(tty) == /dev/tty[0-9]* ]]; then'
+			echo '    return'
+			echo 'fi'
+			echo "source $HOME/.bashrc"
+		} | sudo tee /root/.bashrc >/dev/null 2>&1
 
 		# Preserve and replace user .bashrc with timestamp
 		cp ~/.bashrc ~/.bashrc.old."$timestamp" >/dev/null 2>&1
@@ -309,19 +346,24 @@ copy_neofetch_config() {
 	echo "Configuring neofetch..."
 	# Backup and copy neofetch config file to appropriate directory
 	neofetch >/dev/null 2>&1
-	mv ~/.config/neofetch/config.conf ~/.config/neofetch/config.conf.old."$timestamp"
+	mv ~/.config/neofetch/config.conf \
+		~/.config/neofetch/config.conf.old."$timestamp"
 
 	# Check if the variant-specific config file exists
-	if [ "$variant" != "default" ] && [ -f ".config/neofetch/config.conf.$variant" ]; then
-		cp -npr ".config/neofetch/config.conf.$variant" ~/.config/neofetch/config.conf
+	local variant_config=".config/neofetch/config.conf.$variant"
+	if [ "$variant" != "default" ] && [ -f "$variant_config" ]; then
+		cp -npr "$variant_config" ~/.config/neofetch/config.conf
 	else
-		cp -npr ".config/neofetch/config.conf" ~/.config/neofetch/config.conf
+		cp -npr ".config/neofetch/config.conf" \
+			~/.config/neofetch/config.conf
 	fi
 
 	# Preserve and replace root's neofetch config
 	sudo neofetch >/dev/null 2>&1
-	sudo mv /root/.config/neofetch/config.conf /root/.config/neofetch/config.conf.old."$timestamp"
-	sudo ln -sf ~/.config/neofetch/config.conf /root/.config/neofetch/config.conf
+	sudo mv /root/.config/neofetch/config.conf \
+		/root/.config/neofetch/config.conf.old."$timestamp"
+	sudo ln -sf ~/.config/neofetch/config.conf \
+		/root/.config/neofetch/config.conf
 }
 
 copy_kvantum_themes() {
@@ -333,18 +375,24 @@ copy_kvantum_themes() {
 
 	echo "Installing Kvantum Themes..."
 	if [ "$distro" = "nixos" ]; then
-		mv ~/.config/Kvantum ~/.config/Kvantum.old."$timestamp" >/dev/null 2>&1
+		mv ~/.config/Kvantum ~/.config/Kvantum.old."$timestamp" \
+			>/dev/null 2>&1
 		cp -npr .config/Kvantum/ ~/.config/
-		echo "" >> ~/.config/Kvantum/kvantum.kvconfig
-		echo "[Applications]
-Gruvbox-Dark-Brown=kdeconnect-app, kdeconnect-sms" >> ~/.config/Kvantum/kvantum.kvconfig
-		sudo mv /root/.config/Kvantum /root/.config/Kvantum.old."$timestamp" >/dev/null 2>&1
+		{
+			echo ""
+			echo "[Applications]"
+			echo "Gruvbox-Dark-Brown=kdeconnect-app, kdeconnect-sms"
+		} >> ~/.config/Kvantum/kvantum.kvconfig
+		sudo mv /root/.config/Kvantum \
+			/root/.config/Kvantum.old."$timestamp" >/dev/null 2>&1
 		kvantummanager --set gruvbox-fallnn
 		sudo ln -sf ~/.config/Kvantum /root/.config/
 	else
-		mv ~/.config/Kvantum ~/.config/Kvantum.old."$timestamp" >/dev/null 2>&1
+		mv ~/.config/Kvantum ~/.config/Kvantum.old."$timestamp" \
+			>/dev/null 2>&1
 		cp -npr .config/Kvantum/ ~/.config/
-		sudo mv /root/.config/Kvantum /root/.config/Kvantum.old."$timestamp" >/dev/null 2>&1
+		sudo mv /root/.config/Kvantum \
+			/root/.config/Kvantum.old."$timestamp" >/dev/null 2>&1
 		kvantummanager --set "$theme_variant"
 		sudo ln -sf ~/.config/Kvantum /root/.config/
 	fi
@@ -357,28 +405,34 @@ copy_qtct_configs() {
 
 	echo "Applying Kvantum Themes System-wide..."
 	# Handle qt5ct
-	mv ~/.config/qt5ct ~/.config/qt5ct.old."$timestamp" >/dev/null 2>&1
+	mv ~/.config/qt5ct ~/.config/qt5ct.old."$timestamp" \
+		>/dev/null 2>&1
 	cp -npr .config/qt5ct/ ~/.config/
-	sudo mv /root/.config/qt5ct /root/.config/qt5ct.old."$timestamp" >/dev/null 2>&1
+	sudo mv /root/.config/qt5ct \
+		/root/.config/qt5ct.old."$timestamp" >/dev/null 2>&1
 	sudo ln -sf ~/.config/qt5ct/ /root/.config/
 
 	# Handle qt6ct
-	mv ~/.config/qt6ct ~/.config/qt6ct.old."$timestamp" >/dev/null 2>&1
+	mv ~/.config/qt6ct ~/.config/qt6ct.old."$timestamp" \
+		>/dev/null 2>&1
 	cp -npr .config/qt6ct/ ~/.config/
-	sudo mv /root/.config/qt6ct /root/.config/qt6ct.old."$timestamp" >/dev/null 2>&1
+	sudo mv /root/.config/qt6ct \
+		/root/.config/qt6ct.old."$timestamp" >/dev/null 2>&1
 	sudo ln -sf ~/.config/qt6ct/ /root/.config/
 }
 
 copy_gedit_theme() {
 	# Copies Gedit Theme to appropriate directory
+	local gedit_dir=".local/share/libgedit-gtksourceview-300/styles"
+	local theme_file="gruvbox-dark-gedit46.xml"
 
 	# User directory
-	mkdir -p ~/.local/share/libgedit-gtksourceview-300/styles
-	cp -npr gruvbox-dark-gedit46.xml ~/.local/share/libgedit-gtksourceview-300/styles
+	mkdir -p ~/"$gedit_dir"
+	cp -npr "$theme_file" ~/"$gedit_dir"
 
 	# Root directory
-	sudo mkdir -p /root/.local/share/libgedit-gtksourceview-300/styles
-	sudo cp -prf gruvbox-dark-gedit46.xml /root/.local/share/libgedit-gtksourceview-300/styles
+	sudo mkdir -p /root/"$gedit_dir"
+	sudo cp -prf "$theme_file" /root/"$gedit_dir"
 }
 
 # Gentoo/LMDE uses this
@@ -413,15 +467,20 @@ copy_qbittorrent_config() {
 	local distro="${1:-}"
 	local timestamp
 	timestamp=$(date +%s)
+	local config_file="qBittorrent.conf"
 
 	echo "Configuring qBittorrent..."
 	# Backup the old config with timestamp
-	mv ~/.config/qBittorrent/qBittorrent.conf ~/.config/qBittorrent/qBittorrent.conf.old."$timestamp" >/dev/null 2>&1
+	mv ~/.config/qBittorrent/"$config_file" \
+		~/.config/qBittorrent/"$config_file".old."$timestamp" \
+		>/dev/null 2>&1
 	mkdir -p ~/.config/qBittorrent/
 
 	# Copy distro-specific config
-	cp -npr .config/qBittorrent/qBittorrent.conf."$distro" ~/.config/qBittorrent/qBittorrent.conf
-	cp -npr .config/qBittorrent/mumble-dark.qbtheme ~/.config/qBittorrent/
+	cp -npr .config/qBittorrent/"$config_file"."$distro" \
+		~/.config/qBittorrent/"$config_file"
+	cp -npr .config/qBittorrent/mumble-dark.qbtheme \
+		~/.config/qBittorrent/
 }
 
 copy_libreoffice_config() {
@@ -433,13 +492,16 @@ copy_libreoffice_config() {
 	echo "Configuring LibreOffice..."
 	# User-side config
 	mkdir -p ~/.config/libreoffice
-	mv ~/.config/libreoffice/4 ~/.config/libreoffice/4.old."$timestamp" >/dev/null 2>&1
+	mv ~/.config/libreoffice/4 \
+		~/.config/libreoffice/4.old."$timestamp" >/dev/null 2>&1
 	cp -npr .config/libreoffice/"$distro" ~/.config/libreoffice/4
 
 	# Root-side config
 	sudo mkdir -p /root/.config/libreoffice
-	sudo mv /root/.config/libreoffice/4 /root/.config/libreoffice/4.old."$timestamp" >/dev/null 2>&1
-	sudo cp -prf .config/libreoffice/"$distro" /root/.config/libreoffice/4
+	sudo mv /root/.config/libreoffice/4 \
+		/root/.config/libreoffice/4.old."$timestamp" >/dev/null 2>&1
+	sudo cp -prf .config/libreoffice/"$distro" \
+		/root/.config/libreoffice/4
 }
 
 copy_filezilla_config() {
@@ -449,7 +511,8 @@ copy_filezilla_config() {
 
 	echo "Configuring FileZilla..."
 	# Backup the old config with timestamp
-	mv ~/.config/filezilla ~/.config/filezilla.old."$timestamp" >/dev/null 2>&1
+	mv ~/.config/filezilla ~/.config/filezilla.old."$timestamp" \
+		>/dev/null 2>&1
 	cp -npr .config/filezilla/ ~/.config/
 }
 
@@ -483,31 +546,36 @@ apply_gedit_and_gnome_terminal_config() {
 	# Apply gedit and gnome-terminal configuration to root
 	local distro="${1:-}"
 	local gedit_config="${2:-}"
+	local terminal_config="theming/$distro/gnome-terminal-$distro.dconf"
+	
 	if [[ "$distro" == "openSUSE" ]]; then
 		# Use gnomesu for openSUSE
-		cat "theming/$distro/gnome-terminal-$distro.dconf" "theming/$gedit_config" > combined.dconf
+		cat "$terminal_config" "theming/$gedit_config" > combined.dconf
 		gnomesu dconf load / < "combined.dconf"
 		rm -rf combined.dconf
 	else
 		# Use sudo cat with pipe for other distros
-		sudo cat "theming/$distro/gnome-terminal-$distro.dconf" | sudo dbus-launch dconf load /
-		sudo cat "theming/$gedit_config" | sudo dbus-launch dconf load /
+		sudo cat "$terminal_config" | sudo dbus-launch dconf load /
+		sudo cat "theming/$gedit_config" | \
+			sudo dbus-launch dconf load /
 	fi
 	# Remove gnome-terminal dconf copied from earlier functions
 	rm -rf ~/gnome-terminal-"$distro".dconf
 	# Set gedit sidebar root to user's home directory
-	dconf write /org/gnome/gedit/plugins/filebrowser/virtual-root "'file:///home/$(whoami)'"
+	local gedit_root_setting="/org/gnome/gedit/plugins/filebrowser/virtual-root"
+	dconf write "$gedit_root_setting" "'file:///home/$(whoami)'"
 }
 
 set_default_apps() {
 	local distro="${1:-}"
+	local script_name="Default-Apps-$distro.sh"
 
 	echo "Setting Default Apps..."
 	# Set default apps for the given distro
-	chmod +x theming/"$distro"/Default-Apps-"$distro".sh
-	bash theming/"$distro"/Default-Apps-"$distro".sh
-	sudo bash theming/"$distro"/Default-Apps-"$distro".sh
-	rm ~/Default-Apps-"$distro".sh
+	chmod +x theming/"$distro"/"$script_name"
+	bash theming/"$distro"/"$script_name"
+	sudo bash theming/"$distro"/"$script_name"
+	rm ~/"$script_name"
 }
 
 copy_vscodium_config() {
@@ -523,10 +591,12 @@ copy_vscodium_config() {
 	fi
 	
 	# Copy VSCodium config and plugins to appropriate directory
-	git clone https://github.com/spreadiesinspace/codium >/dev/null 2>&1 || die "Failed to download VSCodium config."
+	git clone https://github.com/spreadiesinspace/codium \
+		>/dev/null 2>&1 || die "Failed to download VSCodium config."
 	cd codium/ || die "Failed to move to codium folder."
 	cp -npr VSCodium/ ~/.config/
-	bash extensions-restore.sh >/dev/null 2>&1 || die "Failed to install VSCodium extensions."
+	bash extensions-restore.sh >/dev/null 2>&1 || \
+		die "Failed to install VSCodium extensions."
 	
 	# Set VSCodium as default (user only)
 	bash Default-Apps-VSCodium.sh
@@ -547,7 +617,8 @@ set_cinnamon_menu_icon() {
 	local new_path="${HOME}/.icons/${icon_file}"
 
 	# Replace the hardcoded path with $HOME-based path on line 91
-	sed -i "91s|\"value\": \"${original_path}\"|\"value\": \"${new_path}\"|g" "$json_file"
+	local sed_pattern="91s|\"value\": \"${original_path}\"|\"value\": \"${new_path}\"|g"
+	sed -i "$sed_pattern" "$json_file"
 
 	# Move the icon file to .icons
 	mv ~/"$icon_file" ~/.icons/
@@ -557,35 +628,46 @@ set_cinnamon_background_and_sounds() {
 
 	echo "Setting Wallpaper..."
 	# Set Wallpaper
-	gsettings set org.cinnamon.desktop.background picture-uri file://"${HOME}"/wallpapers/Desktop_Wallpaper.png
+	local wallpaper_uri="file://${HOME}/wallpapers/Desktop_Wallpaper.png"
+	local pictures_dir="directory://${HOME}/Pictures"
+	
+	gsettings set org.cinnamon.desktop.background picture-uri \
+		"$wallpaper_uri"
 	mkdir -p ~/Pictures
 	ln -sf ~/wallpapers/* ~/Pictures
-	gsettings set org.cinnamon.desktop.background.slideshow image-source directory://"${HOME}"/Pictures
+	gsettings set org.cinnamon.desktop.background.slideshow image-source \
+		"$pictures_dir"
 
 	echo "Setting Cinnamon Sound Events..."
 	# Set Login Sounds
 	gsettings set org.cinnamon.sounds login-enabled true
-	gsettings set org.cinnamon.sounds login-file "${HOME}"/sounds/login.oga
+	gsettings set org.cinnamon.sounds login-file \
+		"${HOME}"/sounds/login.oga
 	gsettings set org.cinnamon.sounds logout-enabled true
-	gsettings set org.cinnamon.sounds logout-file "${HOME}"/sounds/logout.ogg
+	gsettings set org.cinnamon.sounds logout-file \
+		"${HOME}"/sounds/logout.ogg
 
 	# Set Volume Toggle Sound
 	gsettings set org.cinnamon.desktop.sound volume-sound-enabled true
-	gsettings set org.cinnamon.desktop.sound volume-sound-file "${HOME}"/sounds/volume.oga
+	gsettings set org.cinnamon.desktop.sound volume-sound-file \
+		"${HOME}"/sounds/volume.oga
 
 	# Disable all other Cinnamon Sound Events
-	for key in \
-	  switch-enabled \
-	  map-enabled \
-	  close-enabled \
-	  minimize-enabled \
-	  maximize-enabled \
-	  unmaximize-enabled \
-	  tile-enabled \
-	  plug-enabled \
-	  unplug-enabled \
-	  notification-enabled; do
-		gsettings set org.cinnamon.sounds $key false
+	local sound_events=(
+		switch-enabled
+		map-enabled
+		close-enabled
+		minimize-enabled
+		maximize-enabled
+		unmaximize-enabled
+		tile-enabled
+		plug-enabled
+		unplug-enabled
+		notification-enabled
+	)
+	
+	for key in "${sound_events[@]}"; do
+		gsettings set org.cinnamon.sounds "$key" false
 	done
 }
 
@@ -594,22 +676,27 @@ setup_synth_shell_config() {
 	local distro="${1:-}"
 	local timestamp
 	timestamp=$(date +%s)
+	local repo_url="https://github.com/andresgongora/synth-shell-prompt.git"
 
 	echo "Configuring Synth Shell Prompt..."
 	# Ensure synth-shell-prompt is removed if script fails
 	trap 'rm -rf synth-shell-prompt/' EXIT
 	# Clone Synth-Shell and run setup
-	git clone --recursive https://github.com/andresgongora/synth-shell-prompt.git >/dev/null 2>&1 || die "Failed to download Synth Shell Prompt."
+	git clone --recursive "$repo_url" >/dev/null 2>&1 || \
+		die "Failed to download Synth Shell Prompt."
 	yes | synth-shell-prompt/setup.sh >/dev/null 2>&1
 	yes | sudo synth-shell-prompt/setup.sh >/dev/null 2>&1
 	rm -rf synth-shell-prompt/
 
 	# Place Synth-Shell config, preserving old ones with timestamped backup
-	cp -npr ~/.config/synth-shell/ ~/.config/synth-shell.old."$timestamp"/
+	cp -npr ~/.config/synth-shell/ \
+		~/.config/synth-shell.old."$timestamp"/
 	cp -prf .config/synth-shell/"$distro"/* ~/.config/synth-shell/
 
-	sudo cp -npr /root/.config/synth-shell/ /root/.config/synth-shell.old."$timestamp"/
-	sudo cp -prf .config/synth-shell/root-synth-shell-prompt.config /root/.config/synth-shell/synth-shell-prompt.config
+	sudo cp -npr /root/.config/synth-shell/ \
+		/root/.config/synth-shell.old."$timestamp"/
+	sudo cp -prf .config/synth-shell/root-synth-shell-prompt.config \
+		/root/.config/synth-shell/synth-shell-prompt.config
 }
 
 install_nvchad() {
@@ -625,15 +712,21 @@ install_nvchad() {
 
 	echo "Configuring NvChad..."
 	# Backup existing NVim configs if they exist
-	[ -d ~/.config/nvim ] && mv ~/.config/nvim ~/.config/nvim.old."$timestamp"
-	[ -d ~/.local/share/nvim ] && mv ~/.local/share/nvim ~/.local/share/nvim.old."$timestamp"
-	[ -d ~/.cache/nvim ] && mv ~/.cache/nvim ~/.cache/nvim.old."$timestamp"
+	[ -d ~/.config/nvim ] && \
+		mv ~/.config/nvim ~/.config/nvim.old."$timestamp"
+	[ -d ~/.local/share/nvim ] && \
+		mv ~/.local/share/nvim ~/.local/share/nvim.old."$timestamp"
+	[ -d ~/.cache/nvim ] && \
+		mv ~/.cache/nvim ~/.cache/nvim.old."$timestamp"
 
 	# Clone NVChad starter config
-	git clone https://github.com/NvChad/starter ~/.config/nvim >/dev/null 2>&1 || die "Failed to download NvChad."
+	git clone https://github.com/NvChad/starter ~/.config/nvim \
+		>/dev/null 2>&1 || die "Failed to download NvChad."
 
 	# Backup and copy custom chadrc.lua config
-	[ -f ~/.config/nvim/lua/chadrc.lua ] && mv ~/.config/nvim/lua/chadrc.lua ~/.config/nvim/lua/chadrc.lua.old."$timestamp"
+	local chadrc_path="$HOME/.config/nvim/lua/chadrc.lua"
+	[ -f "$chadrc_path" ] && \
+		mv "$chadrc_path" "$chadrc_path".old."$timestamp"
 	cp -npr .config/nvim/lua/chadrc.lua ~/.config/nvim/lua/
 
 	# Install all mason plugins and quit Neovim
@@ -658,8 +751,10 @@ configure_nanorc_basic() {
 
 	# Add Syntax Highlighting and soft wrap
 	echo "Configuring nano..."
-	if ! grep -q '^include "/usr/share/nano/\*.nanorc"' /etc/nanorc; then
-		echo 'include "/usr/share/nano/*.nanorc"' | sudo tee -a /etc/nanorc > /dev/null
+	local nano_include='^include "/usr/share/nano/\*.nanorc"'
+	if ! grep -q "$nano_include" /etc/nanorc; then
+		echo 'include "/usr/share/nano/*.nanorc"' | \
+			sudo tee -a /etc/nanorc > /dev/null
 	fi
 	if ! grep -q '^set softwrap' /etc/nanorc; then
 		echo 'set softwrap' | sudo tee -a /etc/nanorc > /dev/null
@@ -672,8 +767,10 @@ configure_nanorc_basic() {
 # Fedora/Gentoo/NixOS doesn't use this
 configure_nanorc_extra() {
 	# Adds extra nano syntax highlighting rules
-	if ! grep -q '^include "/usr/share/nano/extra/\*.nanorc"' /etc/nanorc; then
-		echo 'include "/usr/share/nano/extra/*.nanorc"' | sudo tee -a /etc/nanorc > /dev/null
+	local extra_include='^include "/usr/share/nano/extra/\*.nanorc"'
+	if ! grep -q "$extra_include" /etc/nanorc; then
+		echo 'include "/usr/share/nano/extra/*.nanorc"' | \
+			sudo tee -a /etc/nanorc > /dev/null
 	fi
 }
 
@@ -685,15 +782,18 @@ set_qt_and_gtk_environment() {
 
 	echo "Setting QT and GTK Theme Variables..."
 	# Backup the old environment file with timestamp
-	sudo cp /etc/environment /etc/environment.old."$timestamp" >/dev/null 2>&1
+	sudo cp /etc/environment /etc/environment.old."$timestamp" \
+		>/dev/null 2>&1
 
 	# Set QT and GTK theming variables if not already present
 	if ! grep -q "^QT_QPA_PLATFORMTHEME=qt5ct" /etc/environment; then
-		echo 'QT_QPA_PLATFORMTHEME=qt5ct' | sudo tee -a /etc/environment > /dev/null
+		echo 'QT_QPA_PLATFORMTHEME=qt5ct' | \
+			sudo tee -a /etc/environment > /dev/null
 	fi
 
 	if ! grep -q "^GTK_THEME=Gruvbox-Dark-BL" /etc/environment; then
-		echo 'GTK_THEME=Gruvbox-Dark-BL' | sudo tee -a /etc/environment > /dev/null
+		echo 'GTK_THEME=Gruvbox-Dark-BL' | \
+			sudo tee -a /etc/environment > /dev/null
 	fi
 }
 
@@ -702,13 +802,16 @@ append_slick_greeter_config() {
 	# Backup old config and append new settings to slick-greeter.conf
 	local timestamp
 	timestamp=$(date +%s)
+	local greeter_conf="/etc/lightdm/slick-greeter.conf"
 
 	echo "Configuring LightDM Greeter..."
 	# Backup the old slick-greeter.conf with timestamp
-	sudo cp /etc/lightdm/slick-greeter.conf /etc/lightdm/slick-greeter.conf.old."$timestamp" >/dev/null 2>&1
+	sudo cp "$greeter_conf" "$greeter_conf".old."$timestamp" \
+		>/dev/null 2>&1
 
 	# Append new settings to slick-greeter.conf
-	echo "[Greeter]
+	sudo tee "$greeter_conf" > /dev/null << 'EOF'
+[Greeter]
 show-hostname=true
 theme-name=Gruvbox-Dark-BL
 icon-theme-name=gruvbox-dark-icons-gtk
@@ -716,7 +819,8 @@ cursor-theme-name=Capitaine Cursors (Gruvbox) - White
 clock-format=%a, %-e %b %-l:%M %p 
 background=/boot/Login_Wallpaper.jpg
 logo=
-draw-user-backgrounds=false" | sudo tee /etc/lightdm/slick-greeter.conf > /dev/null
+draw-user-backgrounds=false
+EOF
 }
 
 # NixOS doesn't use this
@@ -724,12 +828,15 @@ append_lightdm_gtk_greeter_config() {
 	# Backup old config and append new settings to lightdm-gtk-greeter.conf
 	local timestamp
 	timestamp=$(date +%s)
+	local gtk_greeter_conf="/etc/lightdm/lightdm-gtk-greeter.conf"
 
 	# Backup the old lightdm-gtk-greeter.conf with timestamp
-	sudo cp /etc/lightdm/lightdm-gtk-greeter.conf /etc/lightdm/lightdm-gtk-greeter.conf.old."$timestamp" >/dev/null 2>&1
+	sudo cp "$gtk_greeter_conf" "$gtk_greeter_conf".old."$timestamp" \
+		>/dev/null 2>&1
 
 	# Append new settings to lightdm-gtk-greeter.conf
-	echo "[greeter]
+	sudo tee "$gtk_greeter_conf" > /dev/null << 'EOF'
+[greeter]
 background=/boot/Login_Wallpaper.jpg
 theme-name=Gruvbox-Dark-BL
 icon-name=gruvbox-dark-icons-gtk
@@ -742,7 +849,8 @@ xft-rgba=rgb
 clock-format=%a, %-e %b %-l:%M %p 
 indicators=~host;~spacer;~session;~clock;~power
 user-background=false
-hide-user-image = true" | sudo tee /etc/lightdm/lightdm-gtk-greeter.conf > /dev/null
+hide-user-image = true
+EOF
 }
 
 restart_cinnamon() {
@@ -752,5 +860,5 @@ restart_cinnamon() {
 }
 
 print_finish_message() {
-	echo "Theme installation comlete! Log out and back in to apply changes."
+	echo "Theme installation complete! Log out and back in to apply changes."
 }

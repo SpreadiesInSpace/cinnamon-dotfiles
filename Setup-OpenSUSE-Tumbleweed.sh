@@ -28,12 +28,15 @@ export ZYPP_PCK_PRELOAD=1 || die "Failed to enable parallel downloads."
 
 # Enable Parallel Downloads Persistently 
 if ! grep -q "^ZYPP_PCK_PRELOAD=1" /etc/environment; then
-	echo 'ZYPP_PCK_PRELOAD=1' | tee -a /etc/environment || die "Failed to enable faster repo syncing."
+	echo 'ZYPP_PCK_PRELOAD=1' | tee -a /etc/environment || \
+		die "Failed to enable faster repo syncing."
 fi
 
 # Fix openSUSE's line break paste
-echo "set enable-bracketed-paste" >> /home/"$username"/.inputrc || die "Failed to update .inputrc for $username."
-echo "set enable-bracketed-paste" >> /root/.inputrc || die "Failed to update /root/.inputrc"
+echo "set enable-bracketed-paste" >> /home/"$username"/.inputrc || \
+	die "Failed to update .inputrc for $username."
+echo "set enable-bracketed-paste" >> /root/.inputrc || \
+	die "Failed to update /root/.inputrc"
 
 # Update system and install packages
 zypper ref || die "Failed to refresh repositories."
@@ -43,17 +46,35 @@ zypper dup -y || die "Failed to perform system update."
 zypper in -y git || die "Failed to install git."
 
 # Install Media Codecs
-zypper ar -cfp 90 --no-gpgcheck 'https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/Essentials/' packman-essentials || die "Failed to add Packman repository."
+BASE_CODEC="https://ftp.gwdg.de/pub/linux"
+CODEC="$BASE_CODEC/misc/packman/suse/openSUSE_Tumbleweed/Essentials/"
+zypper ar -cfp 90 --no-gpgcheck "$CODEC" packman-essentials || \
+	die "Failed to add Packman repository."
 zypper ref || die "Failed to refresh repositories"
-zypper dup --from packman-essentials -y --allow-vendor-change || die "Failed to update from Packman repository."
-zypper in --from packman-essentials -y ffmpeg gstreamer-plugins-{good,bad,ugly,libav} libavcodec || die "Failed to install media codecs."
+zypper dup --from packman-essentials -y --allow-vendor-change || \
+	die "Failed to update from Packman repository."
+zypper in --from packman-essentials -y ffmpeg \
+	gstreamer-plugins-{good,bad,ugly,libav} libavcodec || \
+	die "Failed to install media codecs."
 
 # Install Brave
-curl -fsS https://dl.brave.com/install.sh | sh || die "Failed to install Brave Browser."
+curl -fsS https://dl.brave.com/install.sh | sh || \
+	die "Failed to install Brave Browser."
 
 # Install VSCodium
-rpmkeys --import https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg || die "Failed to import VSCodium GPG key."
-printf "[gitlab.com_paulcarroty_vscodium_repo]\nname=gitlab.com_paulcarroty_vscodium_repo\nbaseurl=https://download.vscodium.com/rpms/\nenabled=1\ngpgcheck=1\nrepo_gpgcheck=1\ngpgkey=https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg\nmetadata_expire=1h\n" | tee -a /etc/zypp/repos.d/vscodium.repo || die "Failed to add VSCodium repository."
+VSC="https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg"
+rpmkeys --import "$VSC" || die "Failed to import VSCodium GPG key."
+printf "%s\n" \
+	"[gitlab.com_paulcarroty_vscodium_repo]" \
+	"name=gitlab.com_paulcarroty_vscodium_repo" \
+	"baseurl=https://download.vscodium.com/rpms/" \
+	"enabled=1" \
+	"gpgcheck=1" \
+	"repo_gpgcheck=1" \
+	"gpgkey=$VSC" \
+	"metadata_expire=1h" | \
+	tee /etc/zypp/repos.d/vscodium.repo > /dev/null || \
+	die "Failed to add VSCodium repository."
 zypper in -y codium || die "Failed to install VSCodium."
 
 # For Cinnamon and Opi
@@ -143,7 +164,9 @@ zypper rm -y devhelp* || die "Failed to remove devhelp."
 zypper al devhelp* || die "Failed to add devhelp to avoid reinstallation."
 
 # Install neofetch
-zypper ar --no-gpgcheck https://download.opensuse.org/repositories/utilities/openSUSE_Factory/utilities.repo || die "Failed to add neofetch repository."
+BASE_URL="https://download.opensuse.org"
+URL="$BASE_URL/repositories/utilities/openSUSE_Factory/utilities.repo"
+zypper ar --no-gpgcheck "$URL" || die "Failed to add neofetch repository."
 zypper ref || die "Failed to refresh repositories."
 zypper in -y neofetch || die "Failed to install neofetch."
 
@@ -151,7 +174,8 @@ zypper in -y neofetch || die "Failed to install neofetch."
 zypper al neofetch || die "Failed to add neofetch to the blacklist."
 
 # Install Additional Tools for Virt Manager
-zypper in -y -t pattern kvm_server kvm_tools || die "Failed to install Virt Manager tools."
+zypper in -y -t pattern kvm_server kvm_tools || \
+	die "Failed to install Virt Manager tools."
 
 # Set polkit permissions for wheel group users
 set_polkit_perms
@@ -182,7 +206,9 @@ add_user_to_groups libvirt kvm input disk video audio
 backup_lightdm_config
 
 # Copies example lightdm.conf
-cp /usr/share/doc/packages/lightdm/lightdm.conf.example /etc/lightdm/lightdm.conf || die "Failed to copy LightDM configuration file."
+cp /usr/share/doc/packages/lightdm/lightdm.conf.example \
+	/etc/lightdm/lightdm.conf || \
+	die "Failed to copy LightDM configuration file."
 
 # Modify lightdm.conf in-place
 modify_lightdm_conf
