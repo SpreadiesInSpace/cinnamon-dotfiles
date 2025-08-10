@@ -16,8 +16,7 @@ check_if_root() {
 check_if_not_root_account() {
 	# Check if the script is run from the root account
 	if [ "$SUDO_USER" = "" ]; then
-		die "Please do not run this script from the root account. Use" \
-			"sudo instead."
+		die "Please do not run this script from the root account. Use sudo instead."
 	fi
 }
 
@@ -33,8 +32,7 @@ prompt_for_autologin() {
 		if [[ "$autologin_input" =~ ^([yY]|[yY][eE][sS])$ ]]; then
 			enable_autologin=true
 			break
-		elif [[ "$autologin_input" =~ ^([nN]|[nN][oO])$ ||
-			-z "$autologin_input" ]]; then
+		elif [[ "$autologin_input" =~ ^([nN]|[nN][oO])$ || -z "$autologin_input" ]]; then
 			enable_autologin=false
 			break
 		else
@@ -80,8 +78,7 @@ set_video_card() {
 		echo "7) d3d12 (WSL)"
 		echo "8) other"
 		echo
-		read -rp "Enter the number corresponding to your video card: " \
-			video_card_number
+		read -rp "Enter the number corresponding to your video card: " video_card_number
 
 		case $video_card_number in
 		1) video_card="amdgpu radeonsi"; break ;;
@@ -98,19 +95,14 @@ set_video_card() {
 	done
 
 	# Create or update the /etc/portage/package.use/00video-cards file
-	echo "*/* VIDEO_CARDS: $video_card" > \
-		/etc/portage/package.use/00video-cards || \
-		die "Failed to update VIDEO_CARDS in" \
-			"/etc/portage/package.use/00video-cards."
-	echo; echo "Updated VIDEO_CARDS in /etc/portage/package.use/00video-cards" \
-		"to $video_card based on provided input."; echo
+	echo "*/* VIDEO_CARDS: $video_card" > /etc/portage/package.use/00video-cards || die "Failed to update VIDEO_CARDS in /etc/portage/package.use/00video-cards."
+	echo; echo "Updated VIDEO_CARDS in /etc/portage/package.use/00video-cards to $video_card based on provided input."; echo
 }
 
 # Only Gentoo/openSUSE/Slackware uses this
 set_polkit_perms() {
 	# Set polkit permissions for wheel group users
-	cat << 'EOF' | tee /etc/polkit-1/rules.d/10-admin.rules > /dev/null || \
-		die "Failed to set polkit rules."
+	cat << 'EOF' | tee /etc/polkit-1/rules.d/10-admin.rules > /dev/null || die "Failed to set polkit rules."
 polkit.addAdminRule(function(action, subject) {
 	return ["unix-group:wheel"];
 });
@@ -123,49 +115,35 @@ configure_pipewire() {
 	xbps-remove -y alsa-plugins-pulseaudio pulseaudio rtkit >/dev/null 2>&1
 	
 	# Configure PipeWire to use WirePlumber 
-	mkdir -p /etc/pipewire/pipewire.conf.d || \
-		die "Failed to make PipeWire directory."
-	ln -sf /usr/share/examples/wireplumber/10-wireplumber.conf \
-		/etc/pipewire/pipewire.conf.d/ || \
-		die "Failed to symlink WirePlumber."
+	mkdir -p /etc/pipewire/pipewire.conf.d || die "Failed to make PipeWire directory."
+	ln -sf /usr/share/examples/wireplumber/10-wireplumber.conf /etc/pipewire/pipewire.conf.d/ || die "Failed to symlink WirePlumber."
 
 	# Configure PipeWire-Pluse
-	ln -sf /usr/share/examples/pipewire/20-pipewire-pulse.conf \
-		/etc/pipewire/pipewire.conf.d/ || \
-		die "Failed to symlink pipewire-pulse."
+	ln -sf /usr/share/examples/pipewire/20-pipewire-pulse.conf /etc/pipewire/pipewire.conf.d/ || die "Failed to symlink pipewire-pulse."
 
 	# Configure PipeWire ALSA
 	mkdir -p /etc/alsa/conf.d || die "Failed to make PipeWire ALSA directory."
-	ln -sf /usr/share/alsa/alsa.conf.d/50-pipewire.conf \
-		/etc/alsa/conf.d || die "Failed to symlink PipeWire config."
-	ln -sf /usr/share/alsa/alsa.conf.d/99-pipewire-default.conf \
-		/etc/alsa/conf.d || \
-		die "Failed to symlink PipeWire default config."
+	ln -sf /usr/share/alsa/alsa.conf.d/50-pipewire.conf /etc/alsa/conf.d || die "Failed to symlink PipeWire config."
+	ln -sf /usr/share/alsa/alsa.conf.d/99-pipewire-default.conf /etc/alsa/conf.d || die "Failed to symlink PipeWire default config."
 
 	# Autostart PipeWire
-	ln -sf /usr/share/applications/pipewire.desktop /etc/xdg/autostart || \
-		die "Failed to autostart PipeWire."
+	ln -sf /usr/share/applications/pipewire.desktop /etc/xdg/autostart || die "Failed to autostart PipeWire."
 }
 
 enable_flathub() {
 	# Enable Flathub remote for Flatpak
 	echo "Enabling Flathub..."
-	flatpak remote-add --if-not-exists flathub \
-		https://dl.flathub.org/repo/flathub.flatpakrepo || \
-		die "Failed to enable Flathub remote."
+	flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo || die "Failed to enable Flathub remote."
 }
 
 
 # NixOS/Slackware doesn't use this
 preserve_old_libvirt_configs() {
 	# Preserve old configurations with timestamp
-	local timestamp
-	timestamp=$(date +%s)
+	local timestamp=$(date +%s)
 
-	cp /etc/libvirt/libvirtd.conf \
-		/etc/libvirt/libvirtd.conf.old."$timestamp" >/dev/null 2>&1
-	cp /etc/libvirt/qemu.conf \
-		/etc/libvirt/qemu.conf.old."$timestamp" >/dev/null 2>&1
+	cp /etc/libvirt/libvirtd.conf /etc/libvirt/libvirtd.conf.old."$timestamp" >/dev/null 2>&1
+	cp /etc/libvirt/qemu.conf /etc/libvirt/qemu.conf.old."$timestamp" >/dev/null 2>&1
 }
 
 # NixOS/Slackware doesn't use this
@@ -173,16 +151,15 @@ set_libvirtd_permissions() {
 	echo "Configuring libvirt..."
 	# Set proper permissions in libvirtd.conf
 	for line in \
-		'unix_sock_group = "libvirt"' \
-		'unix_sock_ro_perms = "0777"' \
-		'unix_sock_rw_perms = "0770"'; do
-		key=${line%% *}
-		# Only add the line if it's completely missing (including commented)
-		if ! grep -q -E "^$key\s*=" /etc/libvirt/libvirtd.conf; then
+	  'unix_sock_group = "libvirt"' \
+	  'unix_sock_ro_perms = "0777"' \
+	  'unix_sock_rw_perms = "0770"'; do
+	  key=${line%% *}
+	  # Only add the line if it's completely missing (including commented-out lines)
+	  if ! grep -q -E "^$key\s*=" /etc/libvirt/libvirtd.conf; then
 		# Append the line if it doesn't exist in any form
-		echo "$line" | tee -a /etc/libvirt/libvirtd.conf >/dev/null 2>&1 || \
-			die "Failed to update libvirtd.conf with $line."
-		fi
+		echo "$line" | tee -a /etc/libvirt/libvirtd.conf >/dev/null 2>&1 || die "Failed to update libvirtd.conf with $line."
+	  fi
 	done
 }
 
@@ -191,11 +168,9 @@ set_qemu_permissions() {
 	echo "Configuring QEMU..."
 	# Set proper permissions in qemu.conf
 	for key in user group swtpm_user swtpm_group; do
-		if ! grep -q "^$key = \"$username\"$" /etc/libvirt/qemu.conf; then
-		echo "$key = \"$username\"" | tee -a /etc/libvirt/qemu.conf \
-			>/dev/null 2>&1 || \
-			die "Failed to update qemu.conf with $key = \"$username\"."
-		fi
+	  if ! grep -q "^$key = \"$username\"$" /etc/libvirt/qemu.conf; then
+		echo "$key = \"$username\"" | tee -a /etc/libvirt/qemu.conf >/dev/null 2>&1 || die "Failed to update qemu.conf with $key = \"$username\"."
+	  fi
 	done
 }
 
@@ -232,18 +207,15 @@ add_user_to_groups() {
 	# Add user to necessary groups
 	local groups=("$@")
 	for group in "${groups[@]}"; do
-		usermod -aG "$group" "$username" || \
-			die "Failed to add user $username to group $group."
+		usermod -aG "$group" "$username" || die "Failed to add user $username to group $group."
 	done
 }
 
 # NixOS doesn't use this
 backup_lightdm_config() {
 	# Backup original LightDM config with timestamp
-	local timestamp
-	timestamp=$(date +%s)
-	cp /etc/lightdm/lightdm.conf \
-		/etc/lightdm/lightdm.conf.old."$timestamp" >/dev/null 2>&1
+	local timestamp=$(date +%s)
+	cp /etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf.old."$timestamp" >/dev/null 2>&1
 }
 
 # NixOS doesn't use this
@@ -252,8 +224,7 @@ modify_lightdm_conf() {
 	local distro=${1:-}
 
 	echo "Configuring LightDM..."
-	awk -v user="$username" -v autologin="$enable_autologin" \
-		-v distro="$distro" -i inplace '
+	awk -v user="$username" -v autologin="$enable_autologin" -v distro="$distro" -i inplace '
 	/^\[Seat:\*\]/ {a=1}
 	a==1 && /^#?greeter-hide-users=/ {
 		print "greeter-hide-users=false"
@@ -292,8 +263,7 @@ ensure_autologin_group() {
 	echo "Adding User to Autologin Group..."
 	# Ensure autologin group exists and add user
 	groupadd -f autologin || die "Failed to create autologin group."
-	gpasswd -a "$username" autologin || \
-		die "Failed to add user to autologin group."
+	gpasswd -a "$username" autologin || die "Failed to add user to autologin group."
 }
 
 # NixOS doesn't use this
@@ -301,15 +271,13 @@ set_lightdm_display_for_vm() {
 	# If running in a VM, set display-setup-script in lightdm.conf
 	if [ "$is_vm" = true ]; then
 		# Detect connected output using sysfs (avoids X dependency)
-		output_path=$(grep -l connected /sys/class/drm/*/status | head -n1) || \
-			die "Failed to detect connected display output."
+		output_path=$(grep -l connected /sys/class/drm/*/status | head -n1) || die "Failed to detect connected display output."
 		output=$(basename "$(dirname "$output_path")")
 		output="${output#*-}"  # Strip 'cardX-' prefix
 		if [[ -n "$output" ]]; then
 			sed -i "/^\[Seat:\*\]/,/^\[.*\]/ {
 				s|^#*display-setup-script=.*|display-setup-script=xrandr --output $output --mode 1920x1080 --rate 60|
-			}" /etc/lightdm/lightdm.conf || \
-				die "Failed to update lightdm.conf with display-setup-script."
+			}" /etc/lightdm/lightdm.conf || die "Failed to update lightdm.conf with display-setup-script."
 		fi
 	fi
 }
@@ -318,14 +286,9 @@ set_lightdm_display_for_vm() {
 set_systemd_timeout_stop() {
 	echo "Setting systemd service shutdown timeout to 15 seconds..."
 	# Set timeout for stopping services during shutdown via drop in file
-	mkdir -p /etc/systemd/system.conf.d || \
-		die "Failed to create directory /etc/systemd/system.conf.d."
-	echo "[Manager]" | tee /etc/systemd/system.conf.d/override.conf \
-		>/dev/null 2>&1 || \
-		die "Failed to write to /etc/systemd/system.conf.d/override.conf."
-	echo "DefaultTimeoutStopSec=15s" | \
-		tee -a /etc/systemd/system.conf.d/override.conf >/dev/null 2>&1 || \
-		die "Failed to append to /etc/systemd/system.conf.d/override.conf."
+	mkdir -p /etc/systemd/system.conf.d || die "Failed to create directory /etc/systemd/system.conf.d."
+	echo "[Manager]" | tee /etc/systemd/system.conf.d/override.conf >/dev/null 2>&1 || die "Failed to write to /etc/systemd/system.conf.d/override.conf."
+	echo "DefaultTimeoutStopSec=15s" | tee -a /etc/systemd/system.conf.d/override.conf >/dev/null 2>&1 || die "Failed to append to /etc/systemd/system.conf.d/override.conf."
 }
 
 # NixOS/Slackware/Void doesn't use this
@@ -336,8 +299,7 @@ reload_systemd_daemon() {
 
 add_setup_theme_flag() {
 	local distro=$1
-	su - "$SUDO_USER" -c "touch $(pwd)/.$distro.done" || \
-		die "Failed to create the done flag for $distro."
+	su - "$SUDO_USER" -c "touch $(pwd)/.$distro.done" || die "Failed to create the done flag for $distro."
 }
 
 print_reboot_message() {

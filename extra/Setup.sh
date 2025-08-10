@@ -17,8 +17,7 @@ NC='\033[0m' # No Color
 
 # Root check
 if [ "$EUID" -eq 0 ]; then
-	echo -e "${RED}This script must NOT be run as root. Please execute" \
-		"it as a regular user.${NC}"
+	echo -e "${RED}This script must NOT be run as root. Please execute it as a regular user.${NC}"
 	exit 1
 fi
 
@@ -32,58 +31,40 @@ EXTRACT_DIR="cinnamon-dotfiles-main"
 if [[ "$0" =~ ^/dev/fd/ ]]; then
 	SCRIPT_DIR="$PWD"
 else
-	SCRIPT_DIR="$(cd "$(dirname "$(readlink -f "$0" 2>/dev/null)")" \
-		2>/dev/null && pwd || echo "$PWD")"
+	SCRIPT_DIR="$(cd "$(dirname "$(readlink -f "$0" 2>/dev/null)")" 2>/dev/null && pwd || echo "$PWD")"
 fi
 TOP_DIR="$(dirname "$SCRIPT_DIR")"
 
 # Skip cinnamon-dotfiles download if it already exists
 if [[ "$(basename "$TOP_DIR")" == "cinnamon-dotfiles" ]]; then
-	echo -e "${GREEN}Already inside cinnamon-dotfiles. Skipping download" \
-		"and extraction.${NC}"
-	cd "$TOP_DIR" || {
-		echo -e "${RED}Failed to enter directory. Exiting.${NC}"
-		exit 1
-	}
+	echo -e "${GREEN}Already inside cinnamon-dotfiles. Skipping download and extraction.${NC}"
+	cd "$TOP_DIR" || { echo -e "${RED}Failed to enter directory. Exiting.${NC}"; exit 1; }
 else
 	if [[ ! -d "cinnamon-dotfiles" ]]; then
 		echo -e "${YELLOW}Downloading cinnamon-dotfiles archive...${NC}"
 		if command -v curl &>/dev/null; then
-			curl -sL -C - --retry 10 --connect-timeout 10 \
-				"$ZIP_URL" -o "$ZIP_NAME"
+			curl -sL -C - --retry 10 --connect-timeout 10 "$ZIP_URL" -o "$ZIP_NAME"
 		elif command -v wget &>/dev/null; then
 			wget -q -c -T 10 -t 10 "$ZIP_URL" -O "$ZIP_NAME"
 		else
-			echo -e "${RED}Error: Neither curl nor wget is" \
-				"available.${NC}"
+			echo -e "${RED}Error: Neither curl nor wget is available.${NC}"
 			exit 1
 		fi
 
 		echo -e "${YELLOW}Unzipping archive...${NC}"
 		if grep -qi nixos /etc/os-release; then
-			nix-shell -p unzip --run "unzip -n '$ZIP_NAME'" \
-				&>/dev/null || {
-				echo -e "${RED}Unzip failed (NixOS). Exiting.${NC}"
-				exit 1
-			}
+			nix-shell -p unzip --run "unzip -n '$ZIP_NAME'" &>/dev/null || { echo -e "${RED}Unzip failed (NixOS). Exiting.${NC}"; exit 1; }
 		else
-			unzip -n "$ZIP_NAME" &>/dev/null || {
-				echo -e "${RED}Unzip failed. Exiting.${NC}"
-				exit 1
-			}
+			unzip -n "$ZIP_NAME" &>/dev/null || { echo -e "${RED}Unzip failed. Exiting.${NC}"; exit 1; }
 		fi
 		rm "$ZIP_NAME"
 
 		mv "$EXTRACT_DIR" cinnamon-dotfiles
 	else
-		echo -e "${GREEN}cinnamon-dotfiles already exists. Skipping" \
-			"download and extraction.${NC}"
+		echo -e "${GREEN}cinnamon-dotfiles already exists. Skipping download and extraction.${NC}"
 	fi
 
-	cd cinnamon-dotfiles || {
-		echo -e "${RED}Directory not found. Exiting.${NC}"
-		exit 1
-	}
+	cd cinnamon-dotfiles || { echo -e "${RED}Directory not found. Exiting.${NC}"; exit 1; }
 fi
 
 # Setup script list
@@ -104,7 +85,7 @@ for script in "${scripts[@]}"; do
 	flag="${base//setup-/}" # Remove 'setup-' prefix
 	flag=".${flag%%.sh}.done" # Trim extension and prepend dot
 		if [[ -f "./$flag" ]]; then
-		pretty_name="$(tr '[:lower:]' '[:upper:]' <<< "${flag:1:1}")${flag:2:-5}"
+		pretty_name="$(tr '[:lower:]' '[:upper:]' <<< ${flag:1:1})${flag:2:-5}"
 		echo -e "${GREEN}Detected flag: $pretty_name. Running $script...${NC}"
 		chmod +x "$script"
 		if [[ "$script" == "Setup-NixOS-25.05.sh" ]]; then

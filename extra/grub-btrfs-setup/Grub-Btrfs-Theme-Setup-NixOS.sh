@@ -11,8 +11,7 @@ fi
 # Install Gruvbox GRUB theme
 cd ../.. || die "Failed to change directory to project root."
 sudo mkdir -p /boot/grub/themes || die "Failed to create GRUB themes directory."
-sudo cp -rf boot/grub/themes/gruvbox-dark/ /boot/grub/themes/ || \
-	die "Failed to copy Gruvbox GRUB theme."
+sudo cp -rf boot/grub/themes/gruvbox-dark/ /boot/grub/themes/ || die "Failed to copy Gruvbox GRUB theme."
 
 CONFIG_FILE="/etc/nixos/configuration.nix"
 

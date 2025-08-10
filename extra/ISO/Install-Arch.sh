@@ -4,9 +4,7 @@ set -euo pipefail
 # Download and source common functions
 echo "Sourcing functions..."
 die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
-URL="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles"
-curl -fsSL -o Install-Common.sh "$URL/main/extra/ISO/Install-Common.sh" || \
-	die "Failed to download Install-Common.sh"
+curl -fsSL -o Install-Common.sh https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/extra/ISO/Install-Common.sh || die "Failed to download Install-Common.sh"
 [ -f ./Install-Common.sh ] || die "Install-Common.sh not found."
 source ./Install-Common.sh || die "Failed to source Install-Common.sh"
 
@@ -38,8 +36,7 @@ prompt_drive
 echo "Initializing and populating Pacman keyring..."
 pacman-key --init || die "Failed to initialize Pacman keyring."
 pacman-key --populate archlinux || die "Failed to populate Arch Linux keys"
-pacman -Sy --needed --noconfirm archlinux-keyring || \
-	die "Failed to update archlinux-keyring."
+pacman -Sy --needed --noconfirm archlinux-keyring || die "Failed to update archlinux-keyring."
 
 # Partition the drive
 partition_drive
@@ -57,10 +54,7 @@ create_btrfs_subvolumes
 mount_partitions
 
 # Install Essential packages
-pacstrap -K /mnt base linux linux-firmware cinnamon lightdm \
-	lightdm-slick-greeter gnome-terminal spice-vdagent sudo \
-	bash-completion grub efibootmgr git networkmanager nano unzip || \
-	die "Failed to install base packages."
+pacstrap -K /mnt base linux linux-firmware cinnamon lightdm lightdm-slick-greeter gnome-terminal spice-vdagent sudo bash-completion grub efibootmgr git networkmanager nano unzip || die "Failed to install base packages."
 
 # Generate fstab
 genfstab -U /mnt >> /mnt/etc/fstab || die "Failed to generate fstab."
@@ -69,25 +63,20 @@ genfstab -U /mnt >> /mnt/etc/fstab || die "Failed to generate fstab."
 cp Install-Common.sh /mnt/ || die "Failed to copy Install-Common.sh to chroot."
 
 # Ensure variables are exported before chroot
-export drive hostname timezone username rootpasswd userpasswd \
-	BOOTMODE REMOVABLE_BOOT || die "Failed to export required variables."
+export drive hostname timezone username rootpasswd userpasswd BOOTMODE REMOVABLE_BOOT || die "Failed to export required variables."
 
 # Entering Chroot
 cat << EOF | arch-chroot /mnt || die "Failed to enter chroot."
 
 # Source common functions inside chroot
-source Install-Common.sh || { 
-	echo "Failed to source Install-Common.sh in chroot."; exit 1; 
-}
+source Install-Common.sh || { echo "Failed to source Install-Common.sh in chroot."; exit 1; }
 
 # Set Timezone
-ln -sf "/usr/share/zoneinfo/$timezone" /etc/localtime || \
-	die "Failed to set timezone."
+ln -sf "/usr/share/zoneinfo/$timezone" /etc/localtime || die "Failed to set timezone."
 hwclock --systohc || die "Failed to set hardware clock."
 
 # Locale Generation (uncomment en_US.UTF-8 UTF-8 in /etc/locale.gen)
-sed -i 's/^#\s*\(en_US.UTF-8 UTF-8\)/\1/' /etc/locale.gen || \
-	die "Failed to uncomment locale."
+sed -i 's/^#\s*\(en_US.UTF-8 UTF-8\)/\1/' /etc/locale.gen || die "Failed to uncomment locale."
 locale-gen || die "Failed to generate locale."
 
 # Set Locale
@@ -100,8 +89,7 @@ echo "KEYMAP=us" > /etc/vconsole.conf || die "Failed to set keymap."
 echo "$hostname" > /etc/hostname || die "Failed to set hostname."
 
 # Allow Resolving the Local Hostname
-echo -e "127.0.1.1\t$hostname.localdomain\t$hostname" >> /etc/hosts || \
-	die "Failed to write to /etc/hosts."
+echo -e "127.0.1.1\t$hostname.localdomain\t$hostname" >> /etc/hosts || die "Failed to write to /etc/hosts."
 
 # Set LightDM as Display Manager
 awk -i inplace '
@@ -120,19 +108,16 @@ systemctl enable lightdm NetworkManager || die "Failed to enable services."
 install_grub
 
 # Set GRUB timeout to 0
-sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub || \
-	die "Failed to set GRUB_TIMEOUT."
+sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub || die "Failed to set GRUB_TIMEOUT."
 
 # Generate Grub Config
 grub-mkconfig -o /boot/grub/grub.cfg || die "Failed to generate GRUB config."
 
 # Setup Sudo by uncommenting %wheel ALL=(ALL:ALL) with visudo
-sed -i 's/^#\s*\(%wheel ALL=(ALL:ALL) ALL\)/\1/' /etc/sudoers || \
-	die "Failed to enable sudo for wheel group."
+sed -i 's/^#\s*\(%wheel ALL=(ALL:ALL) ALL\)/\1/' /etc/sudoers || die "Failed to enable sudo for wheel group."
 
 # Create User and Set Passwords
-useradd -m -G users,wheel,audio,video -s /bin/bash "$username" || \
-	die "Failed to create user."
+useradd -m -G users,wheel,audio,video -s /bin/bash "$username" || die "Failed to create user."
 echo "root:$rootpasswd" | chpasswd || die "Failed to set root password."
 echo "$username:$userpasswd" | chpasswd || die "Failed to set user password."
 

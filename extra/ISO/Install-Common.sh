@@ -9,7 +9,7 @@ die() {
 check_if_root() {
 	# Check if the script is run as root
 	if [ "$EUID" -ne 0 ]; then
-		die "Please run the script as superuser."
+			die "Please run the script as superuser."
 	fi
 }
 
@@ -21,39 +21,31 @@ detect_boot_mode() {
 		# Check if efivarfs is mounted
 		if ! grep -q 'efivarfs' /proc/mounts; then
 			echo "efivars not mounted. Attempting to mount efivarfs..."
-			if ! mount -t efivarfs efivarfs /sys/firmware/efi/efivars \
-				2>/dev/null; then
-				echo "Failed to mount efivarfs. Attempting to remount as" \
-					"read-write..."
-				if ! mount -o remount,rw,nosuid,nodev,noexec \
-					--types efivarfs efivarfs \
-					/sys/firmware/efi/efivars 2>/dev/null; then
-					# At this point, efivars exists but is not 
-					# writable/mountable
+			if ! mount -t efivarfs efivarfs /sys/firmware/efi/efivars 2>/dev/null; then
+				echo "Failed to mount efivarfs. Attempting to remount as read-write..."
+				if ! mount -o remount,rw,nosuid,nodev,noexec --types efivarfs efivarfs /sys/firmware/efi/efivars 2>/dev/null; then
+					# At this point, efivars exists but is not writable/mountable
 					if [ ! -w /sys/firmware/efi/efivars ]; then
-						# Writable access blocked — may be removable boot
-						REMOVABLE_BOOT="1"
+						REMOVABLE_BOOT="1"  # Writable access blocked — may be removable boot
 					fi
 					die "UEFI detected but efivarfs is not accessible.
 This is likely a permissions or kernel setting issue."
 				fi
 			fi
 		fi
-		# If efivarfs is mounted but not writable, mark as possible 
-		# removable boot
+		# If efivarfs is mounted but not writable, mark as possible removable boot
 		if [ ! -w /sys/firmware/efi/efivars ]; then
 			REMOVABLE_BOOT="1"
 		fi
 	else
 		BOOTMODE="BIOS"
 		echo "WARNING: You are booted in BIOS mode."
-		echo "If your system supports UEFI, it is recommended to boot the" \
-			"installer ISO in UEFI mode."
+		echo "If your system supports UEFI, it is recommended to boot the installer ISO"
+		echo "in UEFI mode."
 		read -rp "Continue with BIOS mode? [y/N]: " bios_continue
 		case "$bios_continue" in
 			[yY][eE][sS]|[yY]) ;;
-			*) die "Aborting. Please reboot the ISO in UEFI mode if" \
-				"desired." ;;
+			*) die "Aborting. Please reboot the ISO in UEFI mode if desired." ;;
 		esac
 	fi
 }
@@ -84,9 +76,7 @@ prompt_username() {
 		elif [[ "$username" =~ ^[a-z_][a-z0-9_-]*$ ]]; then
 			break
 		else
-			echo "Invalid username. Use only lowercase letters, numbers," \
-				"underscores or hyphens (cannot start with number or" \
-				"hyphen)."
+			echo "Invalid username. Use only lowercase letters, numbers, underscores or hyphens (cannot start with number or hyphen)."
 		fi
 	done
 }
@@ -121,8 +111,7 @@ prompt_hostname() {
 		elif [[ "$hostname" =~ ^[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?$ ]]; then
 			break
 		else
-			echo "Invalid hostname. Must start/end with a letter or" \
-				"number and may include internal hyphens."
+			echo "Invalid hostname. Must start/end with a letter or number and may include internal hyphens."
 		fi
 	done
 }
@@ -150,21 +139,16 @@ prompt_drive() {
 	# Prompt for drive to partition
 	echo; lsblk; echo
 	while true; do
-		read -rp "Enter drive to use (e.g., /dev/sda, /dev/nvme0n1, " \
-			"/dev/mmcblk0): " drive
+		read -rp "Enter drive to use (e.g., /dev/sda, /dev/nvme0n1, /dev/mmcblk0): " drive
 		# Check if the drive is a valid block device and not a partition
-		if [[ "$drive" =~ ^/dev/(sd[a-z]+|nvme[0-9]+n[0-9]+|mmcblk[0-9]+|vd[a-z]+)$ ]] &&
-			[ -b "$drive" ]; then
-			read -rp "WARNING: This will erase all data on $drive. Are" \
-				"you sure you want to continue? [y/N]: " confirm
+		if [[ "$drive" =~ ^/dev/(sd[a-z]+|nvme[0-9]+n[0-9]+|mmcblk[0-9]+|vd[a-z]+)$ ]] && [ -b "$drive" ]; then
+			read -rp "WARNING: This will erase all data on $drive. Are you sure you want to continue? [y/N]: " confirm
 			case "$confirm" in
 				[yY][eE][sS]|[yY]) break ;;
 				*) die "Aborting." ;;
 			esac
 		else
-			echo "Invalid drive: $drive. Please enter a valid drive" \
-				"(e.g., /dev/sda, /dev/nvme0n1, /dev/mmcblk0) without a" \
-				"partition number or 'p' suffix."
+			echo "Invalid drive: $drive. Please enter a valid drive (e.g., /dev/sda, /dev/nvme0n1, /dev/mmcblk0) without a partition number or 'p' suffix."
 		fi
 	done
 }
@@ -173,17 +157,16 @@ prompt_drive() {
 prompt_for_autologin() {
 	# Autologin Prompt
 	while true; do
-		read -rp "Enable autologin for $username? [y/N]: " autologin_input
-		if [[ "$autologin_input" =~ ^([yY]|[yY][eE][sS])$ ]]; then
-			enable_autologin=true
-			break
-		elif [[ "$autologin_input" =~ ^([nN]|[nN][oO])$ ||
-			-z "$autologin_input" ]]; then
-			enable_autologin=false
-			break
-		else
-			echo "Invalid input. Please answer y or n."
-		fi
+			read -rp "Enable autologin for $username? [y/N]: " autologin_input
+			if [[ "$autologin_input" =~ ^([yY]|[yY][eE][sS])$ ]]; then
+					enable_autologin=true
+					break
+			elif [[ "$autologin_input" =~ ^([nN]|[nN][oO])$ || -z "$autologin_input" ]]; then
+					enable_autologin=false
+					break
+			else
+					echo "Invalid input. Please answer y or n."
+			fi
 	done
 }
 
@@ -198,22 +181,17 @@ partition_drive() {
 	fi
 	if [ "$BOOTMODE" = "UEFI" ]; then
 		# Create GPT partition table
-		"$PARTED" -s "$drive" mklabel gpt ||
-			die "Failed to create GPT partition table."
+		"$PARTED" -s "$drive" mklabel gpt || die "Failed to create GPT partition table."
 		# Create ESP (EFI System Partition) for UEFI – 1GiB
-		"$PARTED" -s "$drive" mkpart primary fat32 1MiB 1050MiB ||
-			die "Failed to create boot partition."
+		"$PARTED" -s "$drive" mkpart primary fat32 1MiB 1050MiB || die "Failed to create boot partition."
 		"$PARTED" -s "$drive" set 1 esp on || die "Failed to set ESP flag."
 		# Create root partition
-		"$PARTED" -s "$drive" mkpart primary btrfs 1050MiB 100% ||
-			die "Failed to create root partition."
+		"$PARTED" -s "$drive" mkpart primary btrfs 1050MiB 100% || die "Failed to create root partition."
 	else
 		# Create MBR partition table for BIOS
-		"$PARTED" -s "$drive" mklabel msdos ||
-			die "Failed to create MBR partition table."
+		"$PARTED" -s "$drive" mklabel msdos || die "Failed to create MBR partition table."
 		# Create single root partition
-		"$PARTED" -s "$drive" mkpart primary btrfs 1MiB 100% ||
-			die "Failed to create root partition."
+		"$PARTED" -s "$drive" mkpart primary btrfs 1MiB 100% || die "Failed to create root partition."
 	fi
 }
 
@@ -251,21 +229,16 @@ mount_partitions() {
 	local MNT="/mnt"
 	[ "$distro" = "gentoo" ] && MNT="/mnt/gentoo"
 	mkdir -p "$MNT" || die "Failed to create $MNT."
-	mount -o noatime,compress=zstd,discard=async,subvol=@ "$ROOT" "$MNT" ||
-		die "Failed to mount root subvolume."
+	mount -o noatime,compress=zstd,discard=async,subvol=@ "$ROOT" "$MNT" || die "Failed to mount root subvolume."
 	mkdir -p "$MNT/home" || die "Failed to create $MNT/home."
-	mount -o noatime,compress=zstd,discard=async,subvol=@home "$ROOT" \
-		"$MNT/home" || die "Failed to mount home subvolume."
+	mount -o noatime,compress=zstd,discard=async,subvol=@home "$ROOT" "$MNT/home" || die "Failed to mount home subvolume."
 	if [ "$BOOTMODE" = "UEFI" ]; then
 		if [ "$distro" = "nixos" ]; then
 			mkdir -p "$MNT/boot" || die "Failed to create $MNT/boot."
-			mount "$BOOT" "$MNT/boot" ||
-				die "Failed to mount EFI partition to /boot."
+			mount "$BOOT" "$MNT/boot" || die "Failed to mount EFI partition to /boot."
 		else
-			mkdir -p "$MNT/boot/efi" ||
-				die "Failed to create $MNT/boot/efi."
-			mount "$BOOT" "$MNT/boot/efi" ||
-				die "Failed to mount EFI partition to /boot/efi."
+			mkdir -p "$MNT/boot/efi" || die "Failed to create $MNT/boot/efi."
+			mount "$BOOT" "$MNT/boot/efi" || die "Failed to mount EFI partition to /boot/efi."
 		fi
 	fi
 }
@@ -273,8 +246,7 @@ mount_partitions() {
 # Only openSUSE/Slackware uses this
 mount_system_partitions() {
 	# Mount System Partitions
-	mkdir -p /mnt/{proc,sys,dev,run} ||
-		die "Failed to create system mount points."
+	mkdir -p /mnt/{proc,sys,dev,run} || die "Failed to create system mount points."
 	mount --types proc /proc /mnt/proc || die "Failed to mount /proc."
 	mount --rbind /sys /mnt/sys || die "Failed to bind-mount /sys."
 	mount --make-rslave /mnt/sys || die "Failed to make /sys rslave."
@@ -293,13 +265,12 @@ prompt_init_system() {
 		echo "1) OpenRC"
 		echo "2) systemd"
 		echo
-		read -rp "Enter the number corresponding to your init system: " \
-			init_system_number
+		read -rp "Enter the number corresponding to your init system: " init_system_number
 
 		case $init_system_number in
-			1) init_system="openrc"; break ;;
-			2) init_system="systemd"; break ;;
-			*) echo "Invalid selection, please try again." ;;
+				1) init_system="openrc"; break ;;
+				2) init_system="systemd"; break ;;
+				*) echo "Invalid selection, please try again." ;;
 		esac
 	done
 }
@@ -319,8 +290,7 @@ set_video_card() {
 		echo "7) d3d12 (WSL)"
 		echo "8) other"
 		echo
-		read -rp "Enter the number corresponding to your video card: " \
-			video_card_number
+		read -rp "Enter the number corresponding to your video card: " video_card_number
 
 		case $video_card_number in
 			1) video_card="amdgpu radeonsi"; break ;;
@@ -337,14 +307,8 @@ set_video_card() {
 	done
 
 	# Create or update the /etc/portage/package.use/00video-cards file
-	echo "*/* VIDEO_CARDS: $video_card" > \
-		/mnt/gentoo/etc/portage/package.use/00video-cards ||
-		die "Failed to update VIDEO_CARDS in" \
-			"/etc/portage/package.use/00video-cards."
-	echo
-	echo "Updated VIDEO_CARDS in /etc/portage/package.use/00video-cards" \
-		"to $video_card based on provided input."
-	echo
+	echo "*/* VIDEO_CARDS: $video_card" > /mnt/gentoo/etc/portage/package.use/00video-cards || die "Failed to update VIDEO_CARDS in /etc/portage/package.use/00video-cards."
+	echo; echo "Updated VIDEO_CARDS in /etc/portage/package.use/00video-cards to $video_card based on provided input."; echo
 }
 
 # NixOS doesn't use this
@@ -357,17 +321,13 @@ install_grub() {
 	if [ "$BOOTMODE" = "UEFI" ]; then
 		# Install GRUB for UEFI
 		if [ "$REMOVABLE_BOOT" = "1" ]; then
-			"$cmd" --target=x86_64-efi --efi-directory=/boot/efi \
-				--removable ||
-				die "Failed to install GRUB (UEFI removable)."
+			"$cmd" --target=x86_64-efi --efi-directory=/boot/efi --removable || die "Failed to install GRUB (UEFI removable)."
 		else
-			"$cmd" --target=x86_64-efi --efi-directory=/boot/efi ||
-				die "Failed to install GRUB (UEFI)."
+			"$cmd" --target=x86_64-efi --efi-directory=/boot/efi || die "Failed to install GRUB (UEFI)."
 		fi
 	else
 		# Install GRUB for BIOS
-		"$cmd" --target=i386-pc --boot-directory=/boot "$drive" ||
-			die "Failed to install GRUB (BIOS)."
+		"$cmd" --target=i386-pc --boot-directory=/boot "$drive" || die "Failed to install GRUB (BIOS)."
 	fi
 }
 
@@ -385,17 +345,14 @@ clone_dotfiles() {
 				{ echo \"Failed to enter repo directory.\"; exit 1; }
 			touch .nixos-25.05.done .$distro.done ||
 				{ echo \"Failed to create flags.\"; exit 1; }
-			echo \"Reboot and run Theme.sh in cinnamon-dotfiles\" \
-				\"located in \$HOME/cinnamon-dotfiles.\"
+			echo \"Reboot and run Theme.sh in cinnamon-dotfiles located in \$HOME/cinnamon-dotfiles.\"
 		'" || die "Failed to clone repo for NixOS."
 	else
 		cat << CLONE | su - "$username"
-cd && git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles ||
-	die "Failed to clone repo."
+cd && git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles || die "Failed to clone repo."
 cd cinnamon-dotfiles || die "Failed to enter repo directory."
 touch .$distro.done || die "Failed to create flag."
-echo "Reboot and run Setup.sh in cinnamon-dotfiles located in" \
-	"\$HOME/cinnamon-dotfiles."
+echo "Reboot and run Setup.sh in cinnamon-dotfiles located in \$HOME/cinnamon-dotfiles."
 CLONE
 	fi
 }

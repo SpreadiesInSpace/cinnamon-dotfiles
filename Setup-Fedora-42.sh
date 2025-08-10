@@ -26,11 +26,9 @@ display_status "$enable_autologin" "$is_vm"
 # Enable Parallel Downloads
 echo "Configuring DNF..."
 if ! grep -q "^max_parallel_downloads=10$" /etc/dnf/dnf.conf; then
-	echo 'max_parallel_downloads=10' | tee -a /etc/dnf/dnf.conf >/dev/null 2>&1 \
-		|| die "Failed to enable parallel downloads in /etc/dnf/dnf.conf"
+	echo 'max_parallel_downloads=10' | tee -a /etc/dnf/dnf.conf >/dev/null 2>&1 || die "Failed to enable parallel downloads in /etc/dnf/dnf.conf"
 else
-	sed -i '/^#*max_parallel_downloads=10/s/^#*//' /etc/dnf/dnf.conf || \
-		die "Failed to modify parallel downloads setting in /etc/dnf/dnf.conf"
+	sed -i '/^#*max_parallel_downloads=10/s/^#*//' /etc/dnf/dnf.conf || die "Failed to modify parallel downloads setting in /etc/dnf/dnf.conf"
 fi
 
 # Remove PackageKit cache
@@ -38,62 +36,34 @@ rm -rf /var/cache/PackageKit || die "Failed to remove PackageKit cache."
 
 # Redownload metadata cache without auto updates
 echo "Refreshing Metadata Cache..."
-pkcon refresh force -c -1 >/dev/null 2>&1 || \
-	die "Failed to refresh metadata cache."
+pkcon refresh force -c -1 >/dev/null 2>&1 || die "Failed to refresh metadata cache."
 
 # Update system and install git
 dnf -y update || die "System update failed."
 dnf -y install git || die "Git installation failed."
 
 # Add RPM Fusion
-FEDORA_VER="$(rpm -E %fedora)"
-BASE_URL="https://mirrors.rpmfusion.org"
-dnf -y install \
-	"$BASE_URL/free/fedora/rpmfusion-free-release-$FEDORA_VER.noarch.rpm" \
-	"$BASE_URL/nonfree/fedora/rpmfusion-nonfree-release-$FEDORA_VER.noarch.rpm" \
-	|| die "Failed to add RPM Fusion repositories."
+dnf -y install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-"$(rpm -E %fedora)".noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-"$(rpm -E %fedora)".noarch.rpm || die "Failed to add RPM Fusion repositories."
 
 # Install Media Codecs
 dnf4 -y group upgrade multimedia || die "Multimedia group upgrade failed."
-dnf -y swap 'ffmpeg-free' 'ffmpeg' --allowerasing || \
-	die "Failed to swap ffmpeg-free with ffmpeg."
-dnf -y upgrade @multimedia --setopt="install_weak_deps=False" \
-	--exclude=PackageKit-gstreamer-plugin || \
-	die "Failed to upgrade multimedia group."
-dnf group install -y sound-and-video || \
-	die "Failed to install sound-and-video group."
+dnf -y swap 'ffmpeg-free' 'ffmpeg' --allowerasing || die "Failed to swap ffmpeg-free with ffmpeg."
+dnf -y upgrade @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin || die "Failed to upgrade multimedia group."
+dnf group install -y sound-and-video || die "Failed to install sound-and-video group."
 
 # Install Brave
-curl -fsS https://dl.brave.com/install.sh | sh || \
-	die "Failed to install Brave Browser."
+curl -fsS https://dl.brave.com/install.sh | sh || die "Failed to install Brave Browser."
 
 # Install Bottom
 dnf -y copr enable atim/bottom || die "Failed to enable COPR repo for Bottom."
 dnf -y install bottom || die "Failed to install Bottom."
 
 # Install Neofetch
-URL="https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/40"
-dnf -y install \
-	"$URL/Everything/x86_64/os/Packages/n/neofetch-7.1.0-12.fc40.noarch.rpm" \
-	|| die "Failed to install Neofetch."
+dnf -y install https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/40/Everything/x86_64/os/Packages/n/neofetch-7.1.0-12.fc40.noarch.rpm || die "Failed to install Neofetch."
 
 # Install VSCodium
-VSC="https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg"
-rpmkeys --import "$VSC" \
-	|| die "Failed to import VSCodium GPG key."
-# Add VSCodium repository
-GPG="https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg"
-printf "%s\n" \
-	"[gitlab.com_paulcarroty_vscodium_repo]" \
-	"name=download.vscodium.com" \
-	"baseurl=https://download.vscodium.com/rpms/" \
-	"enabled=1" \
-	"gpgcheck=1" \
-	"repo_gpgcheck=1" \
-	"gpgkey=$GPG" \
-	"metadata_expire=1h" | \
-	tee -a /etc/yum.repos.d/vscodium.repo || \
-	die "Failed to add VSCodium repository."
+rpmkeys --import https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg || die "Failed to import VSCodium GPG key."
+printf "[gitlab.com_paulcarroty_vscodium_repo]\nname=download.vscodium.com\nbaseurl=https://download.vscodium.com/rpms/\nenabled=1\ngpgcheck=1\nrepo_gpgcheck=1\ngpgkey=https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg\nmetadata_expire=1h\n" | tee -a /etc/yum.repos.d/vscodium.repo || die "Failed to add VSCodium repository."
 dnf install -y codium || die "Failed to install VSCodium."
 
 # All packages
@@ -169,8 +139,7 @@ packages=(
 dnf -y install "${packages[@]}" || die "Failed to install packages."
 
 # Disable Problem Reporting
-systemctl disable abrtd.service >/dev/null 2>&1 || \
-	die "Failed to disable Problem Reporting service."
+systemctl disable abrtd.service >/dev/null 2>&1 || die "Failed to disable Problem Reporting service."
 
 # Uninstall SystemD Core Dump Generator (tracker-miners)
 dnf remove -y tracker-miners || die "Failed to remove tracker-miners."

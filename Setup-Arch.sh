@@ -23,25 +23,19 @@ prompt_for_vm
 # Display Status from Prompts
 display_status "$enable_autologin" "$is_vm"
 
-# Check if Color, ParallelDownloads, and ILoveCandy are in /etc/pacman.conf
+# Check if Color, ParallelDownloads, and ILoveCandy are already in /etc/pacman.conf
 echo "Configuring pacman..."
-declare -A opts=(
-		["Color"]="Color" 
-		["ParallelDownloads"]="ParallelDownloads = 5" 
-		["ILoveCandy"]="ILoveCandy"
-)
-for key in "${!opts[@]}"; do
-		if ! grep -q "^$key" /etc/pacman.conf; then
-				sed -i "/^# Misc options/a ${opts[$key]}" /etc/pacman.conf || \
-						die "Failed to configure pacman option: $key."
-		fi
+declare -A options=(["Color"]="Color" ["ParallelDownloads"]="ParallelDownloads = 5" ["ILoveCandy"]="ILoveCandy")
+for key in "${!options[@]}"; do
+	if ! grep -q "^$key" /etc/pacman.conf; then
+		sed -i "/^# Misc options/a ${options[$key]}" /etc/pacman.conf || die "Failed to configure pacman option: $key."
+	fi
 done
 
 # Update MAKEFLAGS /etc/makepkg.conf to match CPU cores
 cores=$(nproc)
 echo "Set MAKEFLAGS to --jobs=$cores"
-sed -i "s/^#*\\s*MAKEFLAGS=.*/MAKEFLAGS=\"--jobs=$cores\"/" /etc/makepkg.conf \
-	|| die "Failed to update MAKEFLAGS in /etc/makepkg.conf."
+sed -i "s/^#*\\s*MAKEFLAGS=.*/MAKEFLAGS=\"--jobs=$cores\"/" /etc/makepkg.conf || die "Failed to update MAKEFLAGS in /etc/makepkg.conf."
 
 # Install base-devel and git
 pacman -S --needed --noconfirm base-devel git || die "Failed to install git."
@@ -50,19 +44,15 @@ pacman -S --needed --noconfirm base-devel git || die "Failed to install git."
 trap 'rm -f /etc/sudoers.d/99_${SUDO_USER}_nopasswd' EXIT
 
 # Temporarily allow passwordless sudo for current user
-echo "$SUDO_USER ALL=(ALL) NOPASSWD: ALL" \
-		> /etc/sudoers.d/99_"${SUDO_USER}"_nopasswd || \
-		die "Failed to modify sudoers file for $SUDO_USER."
-chmod 0440 /etc/sudoers.d/99_"${SUDO_USER}"_nopasswd || \
-	die "Failed to set proper permissions for sudoers file."
+echo "$SUDO_USER ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/99_"${SUDO_USER}"_nopasswd || die "Failed to modify sudoers file for $SUDO_USER."
+chmod 0440 /etc/sudoers.d/99_"${SUDO_USER}"_nopasswd || die "Failed to set proper permissions for sudoers file."
 
 # Install yay
 cat << 'EOF' | su - "$SUDO_USER"
 die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
 trap 'rm -rf yay-bin' EXIT
 echo "Configuring yay..."
-git clone https://aur.archlinux.org/yay-bin.git >/dev/null 2>&1 || \
-	die "Failed to download yay."
+git clone https://aur.archlinux.org/yay-bin.git >/dev/null 2>&1 || die "Failed to download yay."
 cd yay-bin || die "Failed to enter yay-bin directory."
 makepkg -si --noconfirm >/dev/null 2>&1 || die "Failed to install yay."
 cd ..
@@ -155,8 +145,7 @@ packages=(
 )
 
 # Install Packages
-yay -Syu --needed --noconfirm "${packages[@]}" || \
-	die "Failed to install packages."
+yay -Syu --needed --noconfirm "${packages[@]}" || die "Failed to install packages."
 EOF
 
 # Remove temporary passwordless sudo access
@@ -176,12 +165,9 @@ set_qemu_permissions
 
 # Enable and start services
 echo "Enabling services..."
-systemctl enable libvirtd >/dev/null 2>&1 || \
-	die "Failed to enable libvirtd service."
-systemctl enable lightdm >/dev/null 2>&1 || \
-	die "Failed to enable lightdm service."
-systemctl enable NetworkManager >/dev/null 2>&1 || \
-	die "Failed to enable NetworkManager service."
+systemctl enable libvirtd >/dev/null 2>&1 || die "Failed to enable libvirtd service."
+systemctl enable lightdm >/dev/null 2>&1 || die "Failed to enable lightdm service."
+systemctl enable NetworkManager >/dev/null 2>&1 || die "Failed to enable NetworkManager service."
 
 # Only enable net-autostart if in physical machine
 manage_virsh_network

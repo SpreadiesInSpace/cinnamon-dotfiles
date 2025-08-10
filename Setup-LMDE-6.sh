@@ -32,49 +32,37 @@ apt install -y git curl || die "Failed to install git and curl."
 VERSION="0.10.2"
 FILE_VERSION="0.10.2-1"
 # Define the source URL using the version and file version variables
-BASE_BTM="https://github.com/ClementTsang/bottom/releases/download"
-BTM="$BASE_BTM/${VERSION}/bottom_${FILE_VERSION}_amd64.deb"
+URL="https://github.com/ClementTsang/bottom/releases/download/${VERSION}/bottom_${FILE_VERSION}_amd64.deb"
 # Download the specified version using curl
-curl -LO "$BTM" || die "Failed to download Bottom package."
+curl -LO "$URL" || die "Failed to download Bottom package."
 # Install the downloaded package
-dpkg -i bottom_${FILE_VERSION}_amd64.deb || \
-	die "Failed to install Bottom package."
+dpkg -i bottom_${FILE_VERSION}_amd64.deb || die "Failed to install Bottom package."
 # Remove the downloaded package file
-rm bottom_${FILE_VERSION}_amd64.deb || \
-	die "Failed to remove downloaded Bottom package file."
+rm bottom_${FILE_VERSION}_amd64.deb || die "Failed to remove downloaded Bottom package file."
 
 # Install Brave Browser
-curl -fsS https://dl.brave.com/install.sh | sh || \
-	die "Failed to install Brave Browser."
+curl -fsS https://dl.brave.com/install.sh | sh || die "Failed to install Brave Browser."
 
 # Install Neovim AppImage
-BASE_NVIM="https://github.com/neovim/neovim/releases"
-NVIM="$BASE_NVIM/latest/download/nvim-linux-x86_64.appimage"
-curl -LO "$NVIM" || die "Failed to download Neovim AppImage."
-chmod u+x nvim-linux-x86_64.appimage || \
-	die "Failed to make Neovim AppImage executable."
-./nvim-linux-x86_64.appimage --appimage-extract || \
-	die "Failed to extract Neovim AppImage."
-./squashfs-root/AppRun --version || \
-	die "Failed to check Neovim version."
-rm -rf /squashfs-root/ || \
-	die "Failed to remove extracted Neovim AppImage files."
+curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage || die "Failed to download Neovim AppImage."
+chmod u+x nvim-linux-x86_64.appimage || die "Failed to make Neovim AppImage executable."
+./nvim-linux-x86_64.appimage --appimage-extract || die "Failed to extract Neovim AppImage."
+./squashfs-root/AppRun --version || die "Failed to check Neovim version."
+rm -rf /squashfs-root/ || die "Failed to remove extracted Neovim AppImage files."
 mv squashfs-root / || die "Failed to move extracted Neovim files."
 rm -rf /usr/bin/nvim || die "Failed to remove existing Neovim binary."
-ln -s /squashfs-root/AppRun /usr/bin/nvim || \
-	die "Failed to create symlink for Neovim."
+ln -s /squashfs-root/AppRun /usr/bin/nvim || die "Failed to create symlink for Neovim."
 rm nvim-linux-x86_64.appimage || die "Failed to remove Neovim AppImage file."
 
 # Install VSCodium
-GPG="https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg"
-KEYRING_PATH="/usr/share/keyrings/vscodium-archive-keyring.gpg"
-REPO_FILE="/etc/apt/sources.list.d/vscodium.list"
-wget -qO - "$GPG" \
-		| gpg --dearmor \
-		| dd of="$KEYRING_PATH" || die "Failed to import VSCodium GPG key."
-echo "deb [arch=amd64,arm64 signed-by=$KEYRING_PATH] \
-https://download.vscodium.com/debs vscodium main" \
-		| tee "$REPO_FILE" > /dev/null || die "Failed to add VSCodium repository."
+wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg \
+	| gpg --dearmor \
+	| dd of=/usr/share/keyrings/vscodium-archive-keyring.gpg \
+	|| die "Failed to import VSCodium GPG key."
+echo 'deb [arch=amd64,arm64 signed-by=/usr/share/keyrings/vscodium-archive-keyring.gpg] https://download.vscodium.com/debs vscodium main' \
+	| tee /etc/apt/sources.list.d/vscodium.list \
+	> /dev/null \
+	|| die "Failed to add VSCodium repository."
 apt update || die "APT update failed."
 apt install -y codium || die "Failed to install VSCodium."
 

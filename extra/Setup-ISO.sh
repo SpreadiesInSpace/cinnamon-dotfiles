@@ -16,14 +16,13 @@ YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
 # Install script URLs and names
-URL="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles"
 declare -A installs=(
-	[1]="$URL/refs/heads/main/extra/ISO/Install-Arch.sh"
-	[2]="$URL/refs/heads/main/extra/ISO/Install-Gentoo.sh"
-	[3]="$URL/refs/heads/main/extra/ISO/Install-NixOS-25.05.sh"
-	[4]="$URL/refs/heads/main/extra/ISO/Install-openSUSE-Tumbleweed.sh"
-	[5]="$URL/refs/heads/main/extra/ISO/Install-Slackware-Current.sh"
-	[6]="$URL/refs/heads/main/extra/ISO/Install-Void.sh"
+	[1]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/extra/ISO/Install-Arch.sh"
+	[2]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/extra/ISO/Install-Gentoo.sh"
+	[3]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/extra/ISO/Install-NixOS-25.05.sh"
+	[4]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/extra/ISO/Install-openSUSE-Tumbleweed.sh"
+	[5]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/extra/ISO/Install-Slackware-Current.sh"
+	[6]="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/refs/heads/main/extra/ISO/Install-Void.sh"
 )
 
 declare -A names=(
@@ -48,7 +47,7 @@ options=(
 )
 PS3="Select a number: "
 
-select _ in "${options[@]}"; do
+select opt in "${options[@]}"; do
 	case $REPLY in
 		[1-6])
 			url="${installs[$REPLY]}"
@@ -60,13 +59,11 @@ select _ in "${options[@]}"; do
 
 			echo -e "${YELLOW}Downloading $filename...${NC}"
 			if command -v curl &>/dev/null; then
-				curl -sL -C - --retry 10 --connect-timeout 10 \
-					"$url" -o "$filename"
+				curl -sL -C - --retry 10 --connect-timeout 10 "$url" -o "$filename"
 			elif command -v wget &>/dev/null; then
 				wget -q -c -T 10 -t 10 "$url" -O "$filename"
 			else
-				echo -e "${RED}Error: Neither curl nor wget found." \
-					"Exiting.${NC}"
+				echo -e "${RED}Error: Neither curl nor wget found. Exiting.${NC}"
 				exit 1
 			fi
 

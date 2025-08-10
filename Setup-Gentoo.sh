@@ -42,23 +42,18 @@ else
 
 	# Backup current make.conf & replace with custom one
 	timestamp=$(date +%s)
-	cp "$path" "$path.old.${timestamp}" || \
-		die "Failed to back up current make.conf."
-	cp etc/portage/make.conf "$path" || \
-		die "Failed to copy custom make.conf."
+	cp "$path" "$path.old.${timestamp}" || die "Failed to back up current make.conf."
+	cp etc/portage/make.conf "$path" || die "Failed to copy custom make.conf."
 
 	# Set MAKEOPTS based on CPU cores (load limit = cores + 1)
 	cores=$(nproc) || die "Failed to retrieve number of CPU cores."
 	makeopts_load_limit=$((cores + 1))
-	sed -i "s/^MAKEOPTS=.*/MAKEOPTS=\"-j$cores -l$makeopts_load_limit\"/" \
-		"$path" || die "Failed to set MAKEOPTS in make.conf."
+	sed -i "s/^MAKEOPTS=.*/MAKEOPTS=\"-j$cores -l$makeopts_load_limit\"/" "$path" || die "Failed to set MAKEOPTS in make.conf."
 	echo "Set MAKEOPTS to -j$cores -l$makeopts_load_limit"
 
 	# Set EMERGE_DEFAULT_OPTS based on CPU cores (load limit as 90% of cores)
-	load_limit=$(awk "BEGIN {printf \"%.1f\", $cores * 0.9}") \
-		|| die "Failed to calculate load limit."
-	sed -i "s/^EMERGE_DEFAULT_OPTS=.*/EMERGE_DEFAULT_OPTS=\"-j$cores -l$load_limit\"/" \
-		"$path" || die "Failed to set EMERGE_DEFAULT_OPTS in make.conf."
+	load_limit=$(echo "$cores * 0.9" | bc -l | awk '{printf "%.1f", $0}') || die "Failed to calculate load limit."
+	sed -i "s/^EMERGE_DEFAULT_OPTS=.*/EMERGE_DEFAULT_OPTS=\"-j$cores -l$load_limit\"/" "$path" || die "Failed to set EMERGE_DEFAULT_OPTS in make.conf."
 	echo "Set EMERGE_DEFAULT_OPTS to -j$cores -l$load_limit"
 
 	# Check available RAM and comment out EMERGE_DEFAULT_OPTS if < 16GB
@@ -67,8 +62,7 @@ else
 			sed -i 's/^EMERGE_DEFAULT_OPTS=/#EMERGE_DEFAULT_OPTS=/' "$path"
 			echo "RAM Avaiable: $ram_gb GB"
 			echo "RAM < 16 GB, Disabling parallel emerges..."
-			echo "To enable parallel emerges later, uncomment the \
-EMERGE_DEFAULT_OPTS line in make.conf"
+			echo "To enable parallel emerges later, uncomment the EMERGE_DEFAULT_OPTS line in make.conf"
 	fi
 	
 	# Set VIDEO_CARDS value in package.use
@@ -79,93 +73,57 @@ EMERGE_DEFAULT_OPTS line in make.conf"
 fi
 
 # Install Essentials
-emerge -vquN app-eselect/eselect-repository app-editors/nano dev-vcs/git || \
-	die "Failed to install essential packages."
+emerge -vquN app-eselect/eselect-repository app-editors/nano dev-vcs/git || die "Failed to install essential packages."
 
 # Switch from rsync to git for faster repository sync times
 FLAG="/var/db/repos/.synced-git-repo"
 
 # Skip this if run previously
 if [[ ! -f "$FLAG" ]]; then
-	eselect repository remove -f gentoo || \
-		die "Failed to remove rsync-based Gentoo repository."
-	URL="https://github.com/gentoo-mirror/gentoo.git"
-	eselect repository add gentoo git "$URL" \
-		|| die "Failed to enable Git-based Gentoo repository."
+	eselect repository remove -f gentoo || die "Failed to remove rsync-based Gentoo repository."
+	eselect repository add gentoo git https://github.com/gentoo-mirror/gentoo.git || die "Failed to enable Git-based Gentoo repository."
 	touch "$FLAG" || die "Failed to create git sync flag."
-	rm -rf /var/db/repos/gentoo || \
-		die "Failed to remove existing gentoo repository."
+	rm -rf /var/db/repos/gentoo || die "Failed to remove existing gentoo repository."
 	echo "Switched to git for repository sync."
 else
 	echo "Repository already configured for git. Skipping."
 fi
 
 # Enable Additional Overlays
-eselect repository add sunny-overlay git \
-	https://github.com/dguglielmi/sunny-overlay.git || \
-	die "Failed to add sunny-overlay repository."
+eselect repository add sunny-overlay git https://github.com/dguglielmi/sunny-overlay.git || die "Failed to add sunny-overlay repository."
 eselect repository enable guru || die "Failed to enable guru repository."
-eselect repository enable gentoo-zh || \
-	die "Failed to enable gentoo-zh repository."
+eselect repository enable gentoo-zh || die "Failed to enable gentoo-zh repository."
 
 # Allow select unstable packages to be merged
-echo "x11-misc/gpaste ~amd64" | \
-	tee /etc/portage/package.accept_keywords/gpaste || \
-	die "Failed to add gpaste to package.accept_keywords."
-echo "app-admin/grub-customizer ~amd64" | \
-	tee /etc/portage/package.accept_keywords/grub-customizer || \
-	die "Failed to add grub-customizer to package.accept_keywords."
-echo "x11-apps/lightdm-gtk-greeter-settings ~amd64" | \
-	tee /etc/portage/package.accept_keywords/lightdm-gtk-greeter-settings || \
-	die "Failed to add lightdm-gtk-greeter-settings to package.accept_keywords."
-echo "app-editors/gedit-plugins charmap git terminal" | \
-	tee /etc/portage/package.use/gedit-plugins || \
-	die "Failed to set USE flags for gedit-plugins."
-echo "media-video/ffmpegthumbnailer gnome" | \
-	tee /etc/portage/package.use/ffmpegthumbnailer || \
-	die "Failed to set USE flags for ffmpegthumbnailer."
-FLAGS="glusterfs iscsi opengl pipewire spice usbredir vde virgl virtfs zstd"
-echo "app-emulation/qemu $FLAGS" | \
-	tee /etc/portage/package.use/qemu || \
-	die "Failed to set USE flags for qemu."
+echo "x11-misc/gpaste ~amd64" | tee /etc/portage/package.accept_keywords/gpaste || die "Failed to add gpaste to package.accept_keywords."
+echo "app-admin/grub-customizer ~amd64" | tee /etc/portage/package.accept_keywords/grub-customizer || die "Failed to add grub-customizer to package.accept_keywords."
+echo "media-video/haruna ~amd64" | tee /etc/portage/package.accept_keywords/haruna || die "Failed to add haruna to package.accept_keywords."
+echo "x11-apps/lightdm-gtk-greeter-settings ~amd64" | tee /etc/portage/package.accept_keywords/lightdm-gtk-greeter-settings || die "Failed to add lightdm-gtk-greeter-settings to package.accept_keywords."
+echo "x11-themes/kvantum ~amd64" | tee /etc/portage/package.accept_keywords/kvantum || die "Failed to add kvantum to package.accept_keywords."
+echo "app-backup/timeshift ~amd64" | tee /etc/portage/package.accept_keywords/timeshift || die "Failed to add timeshift to package.accept_keywords."
 
 # Enable Extra Use Flags
-echo "app-editors/gedit-plugins charmap git terminal" | \
-	tee /etc/portage/package.use/gedit-plugins || \
-	die "Failed to set USE flags for gedit-plugins."
-echo "media-video/ffmpegthumbnailer gnome" | \
-	tee /etc/portage/package.use/ffmpegthumbnailer || \
-	die "Failed to set USE flags for ffmpegthumbnailer."
-FLAGS="glusterfs iscsi opengl pipewire spice usbredir vde virgl virtfs zstd"
-echo "app-emulation/qemu $FLAGS" | \
-	tee /etc/portage/package.use/qemu || \
-	die "Failed to set USE flags for qemu."
+echo "app-editors/gedit-plugins charmap git terminal" | tee /etc/portage/package.use/gedit-plugins || die "Failed to set USE flags for gedit-plugins."
+echo "media-video/ffmpegthumbnailer gnome" | tee /etc/portage/package.use/ffmpegthumbnailer || die "Failed to set USE flags for ffmpegthumbnailer."
+echo "gnome-extra/nemo tracker" | tee /etc/portage/package.use/nemo || die "Failed to set USE flags for nemo."
+echo "app-emulation/qemu glusterfs iscsi opengl pipewire spice usbredir vde virgl virtfs zstd" | tee /etc/portage/package.use/qemu || die "Failed to set USE flags for qemu."
 
 # Temporary Python Versions Fix
-FLAGS="PYTHON_SINGLE_TARGET: python3_12"
-echo "x11-apps/lightdm-gtk-greeter-settings $FLAGS" | \
-	tee /etc/portage/package.use/python || \
-	die "Failed to set USE flags for python."
+# echo "x11-apps/lightdm-gtk-greeter-settings PYTHON_SINGLE_TARGET: python3_12" | tee /etc/portage/package.use/python || die "Failed to set USE flags for python."
 
 # Sync Repository + All Overlays
 emaint sync -a || die "Failed to sync repositories and overlays."
 
 # Select appropriate Gentoo profile based on init system
 if [ "$GENTOO_INIT" = "systemd" ]; then
-	eselect profile set default/linux/amd64/23.0/desktop/gnome/systemd || \
-		die "Failed to set systemd system profile."
+	eselect profile set default/linux/amd64/23.0/desktop/gnome/systemd || die "Failed to set systemd system profile."
 else
-	eselect profile set default/linux/amd64/23.0/desktop || \
-		die "Failed to set OpenRC system profile."
+	eselect profile set default/linux/amd64/23.0/desktop || die "Failed to set OpenRC system profile."
 fi
 
 # Enable Sound (Pipewire)
-echo "media-video/pipewire sound-server" | \
-	tee /etc/portage/package.use/pipewire || \
-	die "Failed to set USE flags for pipewire."
-echo "media-sound/pulseaudio -daemon" | \
-	tee /etc/portage/package.use/pulseaudio || \
-	die "Failed to set USE flags for pulseaudio."
+echo "media-video/pipewire sound-server" | tee /etc/portage/package.use/pipewire || die "Failed to set USE flags for pipewire."
+echo "media-sound/pulseaudio -daemon" | tee /etc/portage/package.use/pulseaudio || die "Failed to set USE flags for pulseaudio."
 
 # Emerge changes and cleanup
 emerge -vqDuN @world || die "Failed to emerge world update."
@@ -253,27 +211,20 @@ packages=(
 )
 
 # Create autounmask file
-touch /etc/portage/package.use/zzz_autounmask || \
-	die "Failed to create autounmask file."
+touch /etc/portage/package.use/zzz_autounmask || die "Failed to create autounmask file."
 
 # For guestfs-tools (libguestfs currently triggers sandbox violation)
 mkdir -p /etc/portage/{env,package.env} || die "Failed to make env directory."
-echo 'FEATURES="-sandbox -usersandbox"' > /etc/portage/env/no-sandbox.conf || \
-	die "Failed to make no-sandbox flags config file."
-echo 'app-emulation/libguestfs no-sandbox.conf' >> \
-	/etc/portage/package.env/libguestfs || \
-	die "Failed to add no-sandbox flags to libguestfs."
+echo 'FEATURES="-sandbox -usersandbox"' > /etc/portage/env/no-sandbox.conf || die "Failed to make no-sandbox flags config file."
+echo 'app-emulation/libguestfs no-sandbox.conf' >> /etc/portage/package.env/libguestfs || die "Failed to add no-sandbox flags to libguestfs."
 
 # Install Packages
 if [ "$GENTOO_INIT" = "systemd" ]; then
-	emerge -vqDuN --with-bdeps=y --keep-going --autounmask-write \
-		--autounmask-continue=y "${packages[@]}"
+	emerge -vqDuN --with-bdeps=y --keep-going --autounmask-write --autounmask-continue=y "${packages[@]}"
 else
-	emerge -vqDuN --with-bdeps=y --keep-going --autounmask-write \
-		--autounmask-continue=y "${packages[@]}" gui-libs/display-manager-init
+	emerge -vqDuN --with-bdeps=y --keep-going --autounmask-write --autounmask-continue=y "${packages[@]}" gui-libs/display-manager-init
 	# Enable LightDM for OpenRC via display-manager
-	sed -i 's|^DISPLAYMANAGER=.*|DISPLAYMANAGER="lightdm"|' \
-		/etc/conf.d/display-manager
+	sed -i 's|^DISPLAYMANAGER=.*|DISPLAYMANAGER="lightdm"|' /etc/conf.d/display-manager
 fi
 
 # Capture Exit Code
@@ -303,19 +254,14 @@ set_qemu_permissions
 echo "Enabling services..."
 if [ "$GENTOO_INIT" = "systemd" ]; then
 	for svc in libvirtd lightdm NetworkManager; do
-		systemctl enable "$svc" >/dev/null 2>&1 || \
-			die "Failed to enable $svc service."
+		systemctl enable "$svc" >/dev/null 2>&1 || die "Failed to enable $svc service."
 	done
-	for user_svc in pipewire.service pipewire-pulse.socket \
-			wireplumber.service; do
-		systemctl --global enable "$user_svc" >/dev/null 2>&1 || \
-			die "Failed to enable $user_svc globally."
+	for user_svc in pipewire.service pipewire-pulse.socket wireplumber.service; do
+		systemctl --global enable "$user_svc" >/dev/null 2>&1 || die "Failed to enable $user_svc globally."
 	done
 else
-	for svc in libvirtd display-manager NetworkManager spice-vdagent dbus \
-			openrc-settingsd elogind; do
-		rc-update add "$svc" default >/dev/null 2>&1 || \
-			die "Failed to enable $svc service."
+	for svc in libvirtd display-manager NetworkManager spice-vdagent dbus openrc-settingsd elogind; do
+		rc-update add "$svc" default || die "Failed to enable $svc service."
 	done
 fi
 
@@ -340,6 +286,10 @@ set_lightdm_display_for_vm
 # Set timeout for stopping services during shutdown via drop in file
 if [ "$GENTOO_INIT" = "systemd" ]; then
 	set_systemd_timeout_stop
+fi
+
+# Reload the systemd configuration
+if [ "$GENTOO_INIT" = "systemd" ]; then
 	reload_systemd_daemon
 fi
 
