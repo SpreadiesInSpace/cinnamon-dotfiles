@@ -9,12 +9,16 @@ if [ "$EUID" -eq 0 ]; then
 fi
 
 # Disable Gnome Software Automatic Update Downloads
-gsettings set org.gnome.software allow-updates false || die "Failed to disable Gnome Software updates."
-gsettings set org.gnome.software download-updates false || die "Failed to disable Gnome Software auto-downloads."
+gsettings set org.gnome.software allow-updates false || \
+	die "Failed to disable Gnome Software updates."
+gsettings set org.gnome.software download-updates false || \
+	die "Failed to disable Gnome Software auto-downloads."
 
 # Set GRUB timeout to 0
-sudo sed -i '/^#*GRUB_TIMEOUT=/s/^#*GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub || die "Failed to update GRUB_TIMEOUT."
-sudo grub2-mkconfig -o /boot/grub2/grub.cfg || die "Failed to regenerate GRUB config."
+sudo sed -i '/^#*GRUB_TIMEOUT=/s/^#*GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' \
+	/etc/default/grub || die "Failed to update GRUB_TIMEOUT."
+sudo grub2-mkconfig -o /boot/grub2/grub.cfg || \
+	die "Failed to regenerate GRUB config."
 
 # Remove Bloat
 sudo dnf remove -y \

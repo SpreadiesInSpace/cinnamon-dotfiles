@@ -120,8 +120,8 @@ prompt_timezone() {
 	# Prompt for timezone
 	local distro="${1:-}"
 	local zoneinfo_dir="/usr/share/zoneinfo"
-	
-	# If NixOS, use /etc/zoneinfo instead 
+
+	# If NixOS, use /etc/zoneinfo instead
 	[ "$distro" = "nixos" ] && zoneinfo_dir="/etc/zoneinfo"
 
 	while true; do
@@ -300,7 +300,7 @@ set_video_card() {
 			5) video_card="virgl"; break ;;
 			6) video_card="vc4"; break ;;
 			7) video_card="d3d12"; break ;;
-			8) 
+			8)
 				read -rp "Enter the video card type: " video_card; break ;;
 			*) echo "Invalid selection, please try again." ;;
 		esac
@@ -334,7 +334,7 @@ install_grub() {
 clone_dotfiles() {
 	# Clone cinnamon-dotfiles repo as new user
 	local distro="${1:-}"
-	
+
 	if [ "$distro" = "nixos" ]; then
 		# NixOS uses nixos-enter and creates multiple flag files
 		nixos-enter --root /mnt -c "su - $username -c '

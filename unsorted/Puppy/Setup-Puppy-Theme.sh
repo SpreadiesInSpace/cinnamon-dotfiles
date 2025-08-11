@@ -32,7 +32,7 @@ ln -s /usr/share/icons/Capitaine\ Cursors\ \(Gruvbox\)\ -\ White/* /usr/share/ic
 # Enable GTK & QT Flatpak Theming Override
 flatpak override --filesystem=$HOME/.themes
 flatpak override --filesystem=$HOME/.icons
-flatpak override --env=GTK_THEME=Gruvbox-Dark-BL 
+flatpak override --env=GTK_THEME=Gruvbox-Dark-BL
 flatpak override --env=ICON_THEME=gruvbox-dark-icons-gtk
 flatpak override --filesystem=xdg-config/Kvantum:ro
 flatpak override --env=QT_STYLE_OVERRIDE=kvantum
@@ -150,7 +150,7 @@ mv ~/.config/filezilla/ ~/.config/filezilla.old
 cp -vnpr .config/filezilla/ ~/.config/
 
 # Copies Profile Picture to home directory, preserving old one
-mv ~/.face ~/.faceold 
+mv ~/.face ~/.faceold
 cp -vnpr .face ~/
 
 # Import Entire Desktop Configuration, preserving old one

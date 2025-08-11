@@ -1,7 +1,9 @@
+#!/bin/bash
+
 # Adding these to make Nix work properly, preserving old configs
 cp ~/.profile ~/.profile.old
 if ! grep -q "^\. \${HOME}/\.nix-profile/etc/profile\.d/nix\.sh" ~/.profile; then
-    echo '. ${HOME}/.nix-profile/etc/profile.d/nix.sh' >> ~/.profile
+		echo '. ${HOME}/.nix-profile/etc/profile.d/nix.sh' >> ~/.profile
 fi
 sudo chown -R $USER:users /nix
 

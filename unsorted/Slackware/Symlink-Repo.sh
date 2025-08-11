@@ -20,8 +20,10 @@ sudo slpkg update
 # Create symlink for sbopkg
 sudo ln -s $REPO_PATH /var/lib/sbopkg/SBo-git
 # Configure sbopkg
-sudo sed -i "s/REPO_BRANCH=\${REPO_BRANCH:-15.0}/REPO_BRANCH=\${REPO_BRANCH:-current}/g" /etc/sbopkg/sbopkg.conf
-sudo sed -i "s/REPO_NAME=\${REPO_NAME:-SBo}/REPO_NAME=\${REPO_NAME:-SBo-git}/g" /etc/sbopkg/sbopkg.conf
+sudo sed -i "s/REPO_BRANCH=\${REPO_BRANCH:-15.0}/REPO_BRANCH=\${REPO_BRANCH:-current}/g" \
+	/etc/sbopkg/sbopkg.conf
+sudo sed -i "s/REPO_NAME=\${REPO_NAME:-SBo}/REPO_NAME=\${REPO_NAME:-SBo-git}/g" \
+	/etc/sbopkg/sbopkg.conf
 # sync sbopkg (will delete metadata from others but still work)
 # sudo sbopkg -r
 

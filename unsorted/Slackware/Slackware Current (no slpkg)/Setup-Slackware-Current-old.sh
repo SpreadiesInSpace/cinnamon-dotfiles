@@ -2,14 +2,14 @@
 
 # Check if script is run as root
 if [ "$EUID" -ne 0 ]; then
-  echo "Please run the script using sudo."
-  exit
+	echo "Please run the script using sudo."
+	exit
 fi
 
 # Check if the script is run from the root account
 if [ "$SUDO_USER" = "" ]; then
-  echo "Please do not run this script from the root account. Use sudo instead."
-  exit
+	echo "Please do not run this script from the root account. Use sudo instead."
+	exit
 fi
 
 # Get the current username
@@ -39,13 +39,13 @@ rm -rf slackware-scripts/
 <<blacklist
 # Blacklist Ponce's repo & SBo packages
 if ! grep -q "^\[0-9\]+_SBo$" /etc/slackpkg/blacklist; then
-    echo '[0-9]+_SBo' | tee -a /etc/slackpkg/blacklist
+		echo '[0-9]+_SBo' | tee -a /etc/slackpkg/blacklist
 fi
 if ! grep -q "^\[0-9\]+_wsr$" /etc/slackpkg/blacklist; then
-    echo '[0-9]+_wsr' | tee -a /etc/slackpkg/blacklist
+		echo '[0-9]+_wsr' | tee -a /etc/slackpkg/blacklist
 fi
 if ! grep -q "^\[0-9\]+_csb$" /etc/slackpkg/blacklist; then
-    echo '[0-9]+_csb' | tee -a /etc/slackpkg/blacklist
+		echo '[0-9]+_csb' | tee -a /etc/slackpkg/blacklist
 fi
 blacklist
 
@@ -55,26 +55,26 @@ removepkg mozjs*
 # Replace blacklist and slackpkgplus.conf for csb and gfs
 # Define the URL and local path pairs in an associative array
 declare -A files=(
-    ["https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/etc/slackpkg/blacklist"]="/etc/slackpkg/blacklist"
-    ["https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/etc/slackpkg/slackpkgplus.conf"]="/etc/slackpkg/slackpkgplus.conf"
+		["https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/etc/slackpkg/blacklist"]="/etc/slackpkg/blacklist"
+		["https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/etc/slackpkg/slackpkgplus.conf"]="/etc/slackpkg/slackpkgplus.conf"
 )
 
 for url in "${!files[@]}"; do
-    local_path="${files[$url]}"
-    
-    # Backup the existing local file
-    cp "$local_path" "${local_path}.old"
-    
-    # Download the new file
-    curl -o "$local_path" "$url"
-    
-    # Verify the download was successful
-    if [ $? -eq 0 ]; then
-        echo "File $local_path updated successfully."
-    else
-        echo "Failed to update the file $local_path."
-        mv "${local_path}.old" "$local_path"
-    fi
+		local_path="${files[$url]}"
+
+		# Backup the existing local file
+		cp "$local_path" "${local_path}.old"
+
+		# Download the new file
+		curl -o "$local_path" "$url"
+
+		# Verify the download was successful
+		if [ $? -eq 0 ]; then
+				echo "File $local_path updated successfully."
+		else
+				echo "Failed to update the file $local_path."
+				mv "${local_path}.old" "$local_path"
+		fi
 done
 
 # Point sbopkg to current repo & sync
@@ -119,8 +119,8 @@ git clone https://github.com/CinnamonSlackBuilds/csb
 cd csb/
 # Check if the Mint entries exist in the build-cinnamon.sh file
 if grep -q "mint-y-icons\|mint-l-icons\|mint-themes\|mint-cursor-themes" build-cinnamon.sh; then
-    # Remove the Mint entries
-    sed -i '/mint-y-icons\|mint-l-icons\|mint-themes\|mint-cursor-themes/d' build-cinnamon.sh
+		# Remove the Mint entries
+		sed -i '/mint-y-icons\|mint-l-icons\|mint-themes\|mint-cursor-themes/d' build-cinnamon.sh
 fi
 ./build-cinnamon.sh
 cd ..
@@ -149,76 +149,76 @@ sh /etc/rc.d/rc.samba start
 
 # All packages
 packages=(
-    # System utilities
-    "file-roller"
-    "flatpak"
-    #"gparted"
-    "ncdu"
-    #"neofetch"
-    "timeshift"
-    #"unzip" 
-    #"xkill" 
-    #"xrandr"
-    # Network utilities
-    #"filezilla" flatpak this, it takes long to compile
-    #"gvfs"
-    #"kdeconnect"
-    #"samba"
-    # Desktop environment and related packages
-    #"cinnamon"
-    #"eog" #using Geeqie instead
-    #"evince" #using okular instead
-    #"gnome-calculator" #using kcalc instead
-    "gnome-screenshot"
-    "gnome-system-monitor"
-    #"gnome-terminal" again webkit2gtk
-    "ufw"
-    "kvantum-qt5"
-    #"mpv"
-    "qt5ct"
-    "qt6ct"
-    "rhythmbox"
-    # Applications
-    "bleachbit"
-    "bottom"
-    "brave-browser"
-    #"clipit"
-    "libreoffice"
-    #"qbittorrent" flatpak this, it takes long to compile
-    #"noto-fonts"
-    "noto-emoji"
-    #"rmlint" compiling via SBo fails on Slackware Current
-    "xclip"
-    # For NvChad
-    #"gcc"
-    #"make"
-    "ripgrep"
-    # Virtualization tools
-    "libslirp"
-    "libiscsi"
-    "libcacard"
-    "spice"
-    "spice-vdagent"
-    "usbredir"
-    "virglrenderer"
-    "libnfs"
-    "snappy"
-    "device-tree-compiler"
-    "glusterfs"
-    "vde2"
-    "qemu" # TARGETS=x86_64-softmmu
-    "spice-gtk"
-    "gtk-vnc"
-    "libvirt"
-    "libvirt-glib"
-    "libvirt-python"
-    "libosinfo"
-    "edk2-ovmf"
-    "virt-manager"
-    #"dnsmasq" # This package and below is already there
-    #"bridge-utils"
-    #"iptables"
-    #"dmidecode"
+		# System utilities
+		"file-roller"
+		"flatpak"
+		#"gparted"
+		"ncdu"
+		#"neofetch"
+		"timeshift"
+		#"unzip"
+		#"xkill"
+		#"xrandr"
+		# Network utilities
+		#"filezilla" flatpak this, it takes long to compile
+		#"gvfs"
+		#"kdeconnect"
+		#"samba"
+		# Desktop environment and related packages
+		#"cinnamon"
+		#"eog" #using Geeqie instead
+		#"evince" #using okular instead
+		#"gnome-calculator" #using kcalc instead
+		"gnome-screenshot"
+		"gnome-system-monitor"
+		#"gnome-terminal" again webkit2gtk
+		"ufw"
+		"kvantum-qt5"
+		#"mpv"
+		"qt5ct"
+		"qt6ct"
+		"rhythmbox"
+		# Applications
+		"bleachbit"
+		"bottom"
+		"brave-browser"
+		#"clipit"
+		"libreoffice"
+		#"qbittorrent" flatpak this, it takes long to compile
+		#"noto-fonts"
+		"noto-emoji"
+		#"rmlint" compiling via SBo fails on Slackware Current
+		"xclip"
+		# For NvChad
+		#"gcc"
+		#"make"
+		"ripgrep"
+		# Virtualization tools
+		"libslirp"
+		"libiscsi"
+		"libcacard"
+		"spice"
+		"spice-vdagent"
+		"usbredir"
+		"virglrenderer"
+		"libnfs"
+		"snappy"
+		"device-tree-compiler"
+		"glusterfs"
+		"vde2"
+		"qemu" # TARGETS=x86_64-softmmu
+		"spice-gtk"
+		"gtk-vnc"
+		"libvirt"
+		"libvirt-glib"
+		"libvirt-python"
+		"libosinfo"
+		"edk2-ovmf"
+		"virt-manager"
+		#"dnsmasq" # This package and below is already there
+		#"bridge-utils"
+		#"iptables"
+		#"dmidecode"
 )
 
 # Update system and install packages
@@ -237,12 +237,12 @@ flatpak install -y runtime/org.kde.KStyle.Kvantum/x86_64/5.15-23.08
 
 # Check if the block for libvirt already exists
 if ! grep -q '# Start libvirt' /etc/rc.d/rc.local; then
-  # Add libvirt startup to rc.local if not already present
-  echo '' >> /etc/rc.d/rc.local
-  echo '# Start libvirt' >> /etc/rc.d/rc.local
-  echo 'if [ -x /etc/rc.d/rc.libvirt ]; then' >> /etc/rc.d/rc.local
-  echo '  /etc/rc.d/rc.libvirt start' >> /etc/rc.d/rc.local
-  echo 'fi' >> /etc/rc.d/rc.local
+	# Add libvirt startup to rc.local if not already present
+	echo '' >> /etc/rc.d/rc.local
+	echo '# Start libvirt' >> /etc/rc.d/rc.local
+	echo 'if [ -x /etc/rc.d/rc.libvirt ]; then' >> /etc/rc.d/rc.local
+	echo '  /etc/rc.d/rc.libvirt start' >> /etc/rc.d/rc.local
+	echo 'fi' >> /etc/rc.d/rc.local
 fi
 # Make sure rc.libvirt is executable
 chmod +x /etc/rc.d/rc.libvirt
@@ -256,7 +256,7 @@ virsh net-autostart default
 # Add the current user to the necessary groups
 groups=(libvirt libvirt-qemu kvm input disk video audio users)
 for group in "${groups[@]}"; do
-    usermod -aG "$group" "$username"
+		usermod -aG "$group" "$username"
 done
 
 # Replace specific liness in sddm.conf

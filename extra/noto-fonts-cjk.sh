@@ -13,7 +13,7 @@ zstd -d ./*.pkg.tar.zst || die "Decompression failed."
 tar -xf ./*.pkg.tar || die "Extraction failed."
 
 # Install
-echo "Installing noto-fonts-cjk." 
+echo "Installing noto-fonts-cjk."
 sudo cp -npr usr/share/fonts/noto-cjk/ /usr/share/fonts/ || \
 	die "Failed to copy noto-fonts-cjk to /usr/share/fonts"
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# TO DO: 
+# TO DO:
 # - Make Variables for Theme Related Entries (for Light Mode)
 # - Suppress Synth Shell Prompt Output
 
@@ -128,7 +128,7 @@ enable_flatpak_theme_override() {
 	flatpak remotes | grep -q flathub || {
 		flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 	}
-	
+
 	echo "Setting GTK & QT Flatpak Theme Override..."
 	# Enable GTK & QT Flatpak Theming Override
 	sudo flatpak override --filesystem="$HOME/.themes"
@@ -250,7 +250,7 @@ copy_cinnamon_spice_settings() {
 	timestamp=$(date +%s)
 	mv ~/.config/cinnamon/spices/ ~/.config/cinnamon/spices.old."$timestamp"/
 	mkdir -p ~/.config/cinnamon/spices/
-	
+
 	echo "Applying Cinnamon Spice Settings..."
 	# Copy new settings for the specified distro
 	cp -npr .config/cinnamon/spices."$distro"/* ~/.config/cinnamon/spices/
@@ -290,7 +290,7 @@ copy_bashrc_and_etc() {
 
 		# Create minimal root .bashrc with tty check and source user .bashrc
 		echo "# Skip sourcing user .bashrc if running in tty" | sudo tee /root/.bashrc >/dev/null 2>&1
-		echo 'if [[ $(tty) == /dev/tty[0-9]* ]]; then' | sudo tee -a /root/.bashrc >/dev/null 2>&1 
+		echo 'if [[ $(tty) == /dev/tty[0-9]* ]]; then' | sudo tee -a /root/.bashrc >/dev/null 2>&1
 		echo '    return'  | sudo tee -a /root/.bashrc >/dev/null 2>&1
 		echo 'fi' | sudo tee -a /root/.bashrc >/dev/null 2>&1
 		echo "source $HOME/.bashrc" | sudo tee -a /root/.bashrc >/dev/null 2>&1
@@ -521,17 +521,17 @@ copy_vscodium_config() {
 	if [ -d ~/.vscode-oss ]; then
 		mv ~/.vscode-oss ~/.vscode-oss.old."$timestamp"
 	fi
-	
+
 	# Copy VSCodium config and plugins to appropriate directory
 	git clone https://github.com/spreadiesinspace/codium >/dev/null 2>&1 || die "Failed to download VSCodium config."
 	cd codium/ || die "Failed to move to codium folder."
 	cp -npr VSCodium/ ~/.config/
 	bash extensions-restore.sh >/dev/null 2>&1 || die "Failed to install VSCodium extensions."
-	
+
 	# Set VSCodium as default (user only)
 	bash Default-Apps-VSCodium.sh
 
-	# Cleanup 
+	# Cleanup
 	cd ..
 	rm -rf codium/
 }
@@ -713,7 +713,7 @@ show-hostname=true
 theme-name=Gruvbox-Dark-BL
 icon-theme-name=gruvbox-dark-icons-gtk
 cursor-theme-name=Capitaine Cursors (Gruvbox) - White
-clock-format=%a, %-e %b %-l:%M %p 
+clock-format=%a, %-e %b %-l:%M %p
 background=/boot/Login_Wallpaper.jpg
 logo=
 draw-user-backgrounds=false" | sudo tee /etc/lightdm/slick-greeter.conf > /dev/null
@@ -739,7 +739,7 @@ xft-antialias=true
 xft-dpi=96
 xft-hintstyle=hintslight
 xft-rgba=rgb
-clock-format=%a, %-e %b %-l:%M %p 
+clock-format=%a, %-e %b %-l:%M %p
 indicators=~host;~spacer;~session;~clock;~power
 user-background=false
 hide-user-image = true" | sudo tee /etc/lightdm/lightdm-gtk-greeter.conf > /dev/null

@@ -25,7 +25,7 @@ rm -rf .themes/Gruvbox-Dark-BL/
 # Enable GTK & QT Flatpak Theming Override
 sudo flatpak override --filesystem=$HOME/.themes
 sudo flatpak override --filesystem=$HOME/.icons
-sudo flatpak override --env=GTK_THEME=Gruvbox-Dark-BL 
+sudo flatpak override --env=GTK_THEME=Gruvbox-Dark-BL
 sudo flatpak override --env=ICON_THEME=gruvbox-dark-icons-gtk
 sudo flatpak override --filesystem=xdg-config/Kvantum:ro
 sudo flatpak override --env=QT_STYLE_OVERRIDE=kvantum
@@ -136,7 +136,7 @@ mv ~/.config/filezilla/ ~/.config/filezilla.old
 cp -vnpr .config/filezilla/ ~/.config/
 
 # Copies Profile Picture to home directory, preserving old one
-mv ~/.face ~/.faceold 
+mv ~/.face ~/.faceold
 cp -vnpr .face ~/
 
 # Import Entire Desktop Configuration, preserving old one
@@ -200,19 +200,19 @@ sudo cp -vnr wallpapers/SpeedDial2_Wallpaper.png /boot/
 # Check if syntax highlighting configurations are already in nanorc, preserving old one
 sudo cp /etc/nanorc /etc/nanorc.old
 if ! grep -q "^include \"/usr/share/nano/\*.nanorc\"" /etc/nanorc; then
-    echo 'include "/usr/share/nano/*.nanorc"' | sudo tee -a /etc/nanorc
+		echo 'include "/usr/share/nano/*.nanorc"' | sudo tee -a /etc/nanorc
 fi
 if ! grep -q "^include \"/usr/share/nano/extra/\*.nanorc\"" /etc/nanorc; then
-    echo 'include "/usr/share/nano/extra/*.nanorc"' | sudo tee -a /etc/nanorc
+		echo 'include "/usr/share/nano/extra/*.nanorc"' | sudo tee -a /etc/nanorc
 fi
 
 # Check if environment variables for QT & Additional Theming are already set, preserving old one
 sudo cp /etc/environment /etc/environment.old
 if ! grep -q "^QT_QPA_PLATFORMTHEME=qt5ct" /etc/environment; then
-    echo 'QT_QPA_PLATFORMTHEME=qt5ct' | sudo tee -a /etc/environment
+		echo 'QT_QPA_PLATFORMTHEME=qt5ct' | sudo tee -a /etc/environment
 fi
 if ! grep -q "^GTK_THEME=Gruvbox-Dark-BL" /etc/environment; then
-    echo 'GTK_THEME=Gruvbox-Dark-BL' | sudo tee -a /etc/environment
+		echo 'GTK_THEME=Gruvbox-Dark-BL' | sudo tee -a /etc/environment
 fi
 
 # Set up theming for sddt

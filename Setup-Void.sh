@@ -24,16 +24,20 @@ prompt_for_vm
 display_status "$enable_autologin" "$is_vm"
 
 # Install tools
-xbps-install -Sy xbps git xtools xmirror || die "Failed to install git and xtools."
+xbps-install -Sy xbps git xtools xmirror || \
+	die "Failed to install git and xtools."
 
 # Use xmirror to select a mirror
-xmirror -s https://repo-fi.voidlinux.org/ || die "Failed to set the mirror with xmirror."
-# xmirror -s https://repo-de.voidlinux.org/ || die "Failed to set the mirror with xmirror."
-# xmirror -s https://mirror.vofr.net/voidlinux/ || die "Failed to set the mirror with xmirror."
-# xmirror -s https://repo-fastly.voidlinux.org/ || die "Failed to set the mirror with xmirror."
+REPO="https://repo-fi.voidlinux.org/"
+# REPO="https://repo-de.voidlinux.org/"
+# REPO="https://mirror.vofr.net/voidlinux/"
+# REPO="https://repo-fastly.voidlinux.org/"
+xmirror -s "$REPO" || die "Failed to set the mirror with xmirror."
 
 # Install multilib and nonfree repos
-xbps-install -Sy void-repo-nonfree void-repo-multilib void-repo-multilib-nonfree || die "Failed to install multilib and nonfree repositories."
+xbps-install -Sy void-repo-nonfree void-repo-multilib \
+	void-repo-multilib-nonfree || \
+		die "Failed to install multilib and nonfree repositories."
 xbps-install -Syu || die "Failed to update system after adding repositories."
 
 # All packages (adapt package names as needed for Void Linux)
@@ -194,8 +198,10 @@ set_qemu_permissions
 
 # Enable and start services
 echo "Enabling services..."
-for service in dbus lightdm NetworkManager polkitd spice-vdagentd libvirtd virtlockd virtlogd; do
-	ln -sf /etc/sv/$service /etc/runit/runsvdir/default || die "Failed to enable $service."
+for service in dbus lightdm NetworkManager polkitd spice-vdagentd libvirtd \
+		virtlockd virtlogd; do
+	ln -sf /etc/sv/$service /etc/runit/runsvdir/default \
+		|| die "Failed to enable $service."
 done
 
 # Let services start

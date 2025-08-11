@@ -5,7 +5,10 @@ sudo mv /etc/pacman.conf /etc/pacman.conf.og
 sudo cp pacman.conf /etc/pacman.conf
 
 # Downgrade Cinnamon and dependencies to version 6.2.9
-yay -Syyu cinnamon cinnamon-control-center cinnamon-desktop cinnamon-menus cinnamon-screensaver cinnamon-session cinnamon-settings-daemon cjs muffin nemo nemo-fileroller nemo-image-converter nemo-preview nemo-share xapp xdg-desktop-portal-xapp
+yay -Syyu cinnamon cinnamon-control-center cinnamon-desktop cinnamon-menus \
+	cinnamon-screensaver cinnamon-session cinnamon-settings-daemon cjs muffin \
+	nemo nemo-fileroller nemo-image-converter nemo-preview nemo-share xapp \
+	xdg-desktop-portal-xapp
 
 # Resore old pacman.conf
 sudo mv /etc/pacman.conf.og /etc/pacman.conf
@@ -30,4 +33,4 @@ mkdir -p ~/.local/share/cinnamon/applets
 mkdir -p ~/.local/share/cinnamon/applets.og
 mv ~/.local/share/cinnamon/applets/* ~/.local/share/cinnamon/applets.og
 cp -vnpr home/.local/share/cinnamon/applets/* ~/.local/share/cinnamon/applets/
-cd unsorted/Arch/
+cd unsorted/Arch/ || exit

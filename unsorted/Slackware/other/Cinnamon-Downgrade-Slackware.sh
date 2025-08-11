@@ -19,4 +19,4 @@ mkdir -p ~/.local/share/cinnamon/applets
 mkdir -p ~/.local/share/cinnamon/applets.og
 mv ~/.local/share/cinnamon/applets/* ~/.local/share/cinnamon/applets.og
 cp -vnpr home/.local/share/cinnamon/applets/* ~/.local/share/cinnamon/applets/
-cd unsorted/Slackware/
+cd unsorted/Slackware/ || exit

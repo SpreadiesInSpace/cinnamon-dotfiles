@@ -147,7 +147,7 @@ touch /mnt/gentoo/etc/portage/.makeconf_configured || die "Failed to create .mak
 
 #========= Gentoo Install - Installing the Gentoo Base System ==========
 
-# Copy Network Info 
+# Copy Network Info
 cp --dereference /etc/resolv.conf /mnt/gentoo/etc/ || die "Failed to copy resolv.conf to /mnt/gentoo/etc/"
 
 # Mount Filesystems
