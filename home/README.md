@@ -31,9 +31,11 @@ bash Setup-NixOS-Theme.sh
 *The script will break if these aren't installed.*
 
  - [ ] dconf (Debian-based systems need dconf-cli)
- - [ ] flatpak (for themeing override)
  - [ ] git
  - [ ] gsettings
+ - [ ] kvantummanager
+ - [ ] qt5ct
+ - [ ] qt6ct
  - [ ] sudo
  - [ ] unzip
  

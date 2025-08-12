@@ -49,7 +49,7 @@ zypper in -y git || die "Failed to install git."
 CODEC="https://ftp.gwdg.de/pub/linux/misc/packman/suse"
 CODEC="$CODEC/openSUSE_Tumbleweed/Essentials/"
 REPO="packman-essentials"
-zypper ar -cfp 90 --no-gpgcheck "$CODEC" "$REPO" || \
+zypper --gpg-auto-import-keys ar -cfp 90 "$CODEC" "$REPO" || \
 	die "Failed to add Packman repository."
 zypper ref || die "Failed to refresh repositories"
 zypper dup --from "$REPO" -y --allow-vendor-change || \
@@ -171,7 +171,7 @@ zypper al devhelp* || die "Failed to add devhelp to avoid reinstallation."
 # Install neofetch
 neofetch_url="https://download.opensuse.org/repositories/utilities"
 neofetch_url="$neofetch_url/openSUSE_Factory/utilities.repo"
-zypper ar --no-gpgcheck $neofetch_url || \
+zypper --gpg-auto-import-keys ar $neofetch_url || \
 	die "Failed to add neofetch repository."
 zypper ref || die "Failed to refresh repositories."
 zypper in -y neofetch || die "Failed to install neofetch."
