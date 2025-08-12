@@ -51,7 +51,7 @@ CODEC="$CODEC/openSUSE_Tumbleweed/Essentials/"
 REPO="packman-essentials"
 zypper --gpg-auto-import-keys ar -cfp 90 "$CODEC" "$REPO" || \
 	die "Failed to add Packman repository."
-zypper ref || die "Failed to refresh repositories"
+zypper --gpg-auto-import-keys ref || die "Failed to refresh repositories"
 zypper dup --from "$REPO" -y --allow-vendor-change || \
 	die "Failed to update from Packman repository."
 zypper in --from "$REPO" -y ffmpeg \
@@ -173,7 +173,7 @@ neofetch_url="https://download.opensuse.org/repositories/utilities"
 neofetch_url="$neofetch_url/openSUSE_Factory/utilities.repo"
 zypper --gpg-auto-import-keys ar $neofetch_url || \
 	die "Failed to add neofetch repository."
-zypper ref || die "Failed to refresh repositories."
+zypper --gpg-auto-import-keys ref || die "Failed to refresh repositories."
 zypper in -y neofetch || die "Failed to install neofetch."
 
 # Protect neofetch from being replaced by neowofetch

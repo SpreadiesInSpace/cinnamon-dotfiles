@@ -236,7 +236,7 @@ copy_fonts() {
 	if [ "$distro" = "nixos" ]; then
 		cp -npr .fonts/ ~/ || die "Failed to copy fonts."
 	else
-		sudo cp -npr .fonts/* /usr/share/fonts/ || die "Failed to copy fonts."
+		sudo cp -npr .fonts/* /usr/share/fonts/ || true
 		mkdir -p ~/.fonts
 		sudo ln -sf /usr/share/fonts/* ~/.fonts/ || \
 			die "Failed to symlink fonts."

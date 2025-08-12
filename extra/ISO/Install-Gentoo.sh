@@ -202,15 +202,38 @@ fi
 cp "$SCRIPT_DIR/Install-Common.sh" /mnt/gentoo/ || \
 	die "Failed to copy Install-Common.sh to chroot."
 
-# Define Binary Repos
+#====================== Extra Variables (Used in Chroot) ======================
+
+# Binary Repos
 SYNC_URI_V3="http://download.nus.edu.sg/mirror/gentoo/releases/amd64"
 SYNC_URI_V3="$SYNC_URI_V3/binpackages/23.0/x86-64-v3/"
 SYNC_URI="https://distfiles.gentoo.org/releases/amd64/binpackages/23.0/x86-64/"
 
+# Package Lists (accounts for Init System and CPU)
+GIT_PKGS="app-eselect/eselect-repository dev-vcs/git"
+SYSTEM_PKGS="sys-kernel/gentoo-kernel-bin sys-fs/genfstab \
+	net-misc/networkmanager gnome-extra/nm-applet app-shells/bash-completion \
+	sys-fs/xfsprogs sys-fs/e2fsprogs sys-fs/dosfstools sys-fs/btrfs-progs \
+	sys-fs/f2fs-tools sys-fs/ntfs3g sys-block/io-scheduler-udev-rules \
+	app-arch/unzip app-admin/sudo"
+
+# OpenRC Packages
+if [ "$GENTOO_INIT" = "openrc" ]; then
+	GIT_PKGS="$GIT_PKGS app-emulation/virt-what"
+	OPENRC_PKGS="app-admin/sysklogd sys-process/cronie net-misc/chrony"
+	SYSTEM_PKGS="$SYSTEM_PKGS $OPENRC_PKGS"
+fi
+
+# CPU Check
+IS_INTEL="false"
+[ -f /proc/cpuinfo ] && grep -q "GenuineIntel" /proc/cpuinfo && IS_INTEL="true"
+
 # Ensure variables are exported before chroot
 export drive hostname timezone username rootpasswd userpasswd BOOTMODE \
-	REMOVABLE_BOOT GENTOO_INIT SYNC_URI_V3 SYNC_URI || \
-	die "Failed to export required variables."
+	REMOVABLE_BOOT GENTOO_INIT SYNC_URI_V3 SYNC_URI GIT_PKGS SYSTEM_PKGS \
+	IS_INTEL || die "Failed to export required variables."
+
+#=========================== Extra Variables - END ============================
 
 # Entering Chroot
 cat << EOF | chroot /mnt/gentoo /bin/bash || die "Failed to enter chroot."
@@ -253,14 +276,8 @@ fi
 # Verify GPG.
 echo && getuto || die "Failed to verify GPG keys with getuto."
 
-# Install Essentials
-if [ "$GENTOO_INIT" = "systemd" ]; then
-	emerge -vquN app-eselect/eselect-repository dev-vcs/git \
-		|| die "Failed to install early essential packages"
-else
-	emerge -vquN app-eselect/eselect-repository dev-vcs/git \
-		app-emulation/virt-what || die "Failed to install early essential packages"
-fi
+# Install packages for Gentoo git sync
+emerge -vquN $GIT_PKGS || die "Failed to install packages for git sync."
 
 # Switch from rsync to git for faster repository sync times
 eselect repository remove -f gentoo || \
@@ -322,33 +339,19 @@ echo "sys-kernel/installkernel grub dracut" > \
 	/etc/portage/package.use/installkernel || \
 	die "Failed to update /etc/portage/package.use/installkernel."
 
-# Install System packages
-emerge -vq sys-kernel/gentoo-kernel-bin sys-fs/genfstab \
-	net-misc/networkmanager gnome-extra/nm-applet app-shells/bash-completion \
-	sys-fs/xfsprogs sys-fs/e2fsprogs sys-fs/dosfstools sys-fs/btrfs-progs \
-	sys-fs/f2fs-tools sys-fs/ntfs3g sys-block/io-scheduler-udev-rules \
-	app-arch/unzip app-admin/sudo || die "Failed to install system packages."
-
-# Install OpenRC packages
-if [ "$GENTOO_INIT" = "openrc" ]; then
-	emerge -vq app-admin/sysklogd sys-process/cronie net-misc/chrony || \
-		die "Failed to install OpenRC packages."
-fi
-
-# Skip installing firmware and Intel microcode in VM
+# Install System Packages
 if { [ "$GENTOO_INIT" = "systemd" ] && systemd-detect-virt --vm; } || \
 	 virt-what | grep -q .; then
-	echo "VM detected. Skipping firmware and microcode packages."
+		# VM - just the system packages (including OpenRC if selected)
+		emerge -vq $SYSTEM_PKGS || die "Failed to install system packages."
 else
-	echo "Physical machine detected. Adding firmware packages..."
-	emerge -vq sys-kernel/linux-firmware || \
-		die "Failed to install sys-kernel/linux-firmware."
-	if grep -q "GenuineIntel" /proc/cpuinfo; then
-		echo "Intel CPU detected. Adding intel-microcode..."
-		emerge -vq sys-firmware/intel-microcode || \
-			die "Failed to install sys-firmware/intel-microcode."
+	# Physical machine - add firmware
+	if [ "$IS_INTEL" = "true" ]; then
+		emerge -vq $SYSTEM_PKGS sys-kernel/linux-firmware \
+			sys-firmware/intel-microcode || die "Failed to install system packages."
 	else
-		echo "Non-Intel CPU detected. Skipping intel-microcode."
+		emerge -vq $SYSTEM_PKGS sys-kernel/linux-firmware || \
+			die "Failed to install system packages."
 	fi
 fi
 
