@@ -342,7 +342,7 @@ if { [ "$GENTOO_INIT" = "systemd" ] && systemd-detect-virt --vm; } || \
 else
 	echo "Physical machine detected. Adding firmware packages..."
 	emerge -vq sys-kernel/linux-firmware || \
-		ie "Failed to install sys-kernel/linux-firmware."
+		die "Failed to install sys-kernel/linux-firmware."
 	if grep -q "GenuineIntel" /proc/cpuinfo; then
 		echo "Intel CPU detected. Adding intel-microcode..."
 		emerge -vq sys-firmware/intel-microcode || \
