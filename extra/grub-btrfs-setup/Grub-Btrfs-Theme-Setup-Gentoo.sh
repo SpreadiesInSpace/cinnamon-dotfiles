@@ -57,7 +57,4 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg || \
 if [ "$GENTOO_INIT" = "systemd" ]; then
 	sudo systemctl enable --now grub-btrfsd.service || \
 		die "Failed to enable and start grub-btrfsd.service."
-else
-	sudo rc-config add grub-btrfsd default
-	sudo rc-service grub-btrfsd start
 fi
