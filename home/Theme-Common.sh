@@ -574,7 +574,11 @@ copy_libreoffice_config() {
 	timestamp=$(date +%s)
 
 	# Ensure LibreOffice is available
-	check_app "libreoffice"
+	if [ "$distro" = "gentoo" ]; then
+		check_app "libreoffice-bin"
+	else
+		check_app "libreoffice"
+	fi
 
 	echo "Configuring LibreOffice..."
 	# User-side config
