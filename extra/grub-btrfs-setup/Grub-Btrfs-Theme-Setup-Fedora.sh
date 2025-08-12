@@ -8,13 +8,6 @@ if [ "$EUID" -eq 0 ]; then
 	die "This script must NOT be run as root. Please run it as a regular user."
 fi
 
-# Detect Init System
-if eselect profile show | grep -q systemd; then
-	GENTOO_INIT="systemd"
-else
-	GENTOO_INIT="openrc"
-fi
-
 # Clone grub-btrfs repo
 git clone https://github.com/Antynea/grub-btrfs || \
 	die "Failed to clone grub-btrfs repository."
@@ -65,7 +58,5 @@ sudo sed -i 's/^GRUB_TERMINAL_OUTPUT="console"/#&/' \
 # Update grub.cfg and enable grub-btrfs daemon
 sudo grub2-mkconfig -o /boot/grub2/grub.cfg || \
 	die "Failed to generate /boot/grub2/grub.cfg."
-if [ "$GENTOO_INIT" = "systemd" ]; then
-	sudo systemctl enable --now grub-btrfsd.service || \
-		die "Failed to enable and start grub-btrfsd.service."
-fi
+sudo systemctl enable --now grub-btrfsd.service || \
+	die "Failed to enable and start grub-btrfsd.service."

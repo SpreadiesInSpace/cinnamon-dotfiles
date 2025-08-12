@@ -8,6 +8,13 @@ if [ "$EUID" -eq 0 ]; then
 	die "This script must NOT be run as root. Please run it as a regular user."
 fi
 
+# Detect Init System
+if eselect profile show | grep -q systemd; then
+	GENTOO_INIT="systemd"
+else
+	GENTOO_INIT="openrc"
+fi
+
 # Enable Guru Repository
 sudo emerge -uvq app-eselect/eselect-repository || \
 	die "Failed to install app-eselect/eselect-repository."
@@ -47,5 +54,10 @@ sudo grep -qxF "$GRUB_THEME_LINE" /etc/default/grub || \
 # Update grub.cfg and enable grub-btrfs daemon
 sudo grub-mkconfig -o /boot/grub/grub.cfg || \
 	die "Failed to generate /boot/grub/grub.cfg."
-sudo systemctl enable --now grub-btrfsd.service || \
-	die "Failed to enable and start grub-btrfsd.service."
+if [ "$GENTOO_INIT" = "systemd" ]; then
+	sudo systemctl enable --now grub-btrfsd.service || \
+		die "Failed to enable and start grub-btrfsd.service."
+else
+	sudo rc-config add grub-btrfsd default
+	sudo rc-service grub-btrfsd start
+fi
