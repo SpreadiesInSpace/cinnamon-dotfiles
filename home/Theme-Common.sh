@@ -234,9 +234,9 @@ copy_fonts() {
 	echo "Setting Fonts..."
 	# NixOS doesn’t use /usr/share/fonts/ for user fonts
 	if [ "$distro" = "nixos" ]; then
-		cp -npr .fonts/ ~/ || die "Failed to copy fonts."
+		cp -npr .fonts/ ~/ >/dev/null 2>&1 || true
 	else
-		sudo cp -npr .fonts/* /usr/share/fonts/ || true
+		sudo cp -npr .fonts/* /usr/share/fonts/ >/dev/null 2>&1 || true
 		mkdir -p ~/.fonts
 		sudo ln -sf /usr/share/fonts/* ~/.fonts/ || \
 			die "Failed to symlink fonts."
@@ -353,7 +353,7 @@ copy_bashrc_and_etc() {
 	echo "Backing Up .bashrc and Adding New bash Aliases..."
 	if [ "$distro" = "nixos" ]; then
 		cd theming/ || die "Failed to move to theming folder."
-		cp -npr NixOS/* ~/; rm ~/configuration.nix
+		cp -npr NixOS/* ~/; rm ~/configuration.nix >/dev/null 2>&1 || true
 		sudo cp /root/.bashrc /root/.bashrc.old."$timestamp" \
 			>/dev/null 2>&1 || true
 		sudo cp NixOS/.bashrc.root /root/.bashrc || die "Failed to copy bashrc."
@@ -637,7 +637,7 @@ import_desktop_config() {
 	dconf load / < "theming/$distro/$distro.dconf" || \
 		die "Failed to apply dconf settings."
 	# Remove dconf copied from earlier functions
-	rm ~/"$distro".dconf || true
+	rm ~/"$distro".dconf >/dev/null 2>&1 || true
 }
 
 apply_gedit_and_gnome_terminal_config() {
@@ -655,7 +655,7 @@ apply_gedit_and_gnome_terminal_config() {
 				"theming/$gedit_config" > combined.dconf
 		gnomesu dconf load / < "combined.dconf" || \
 			die "Failed to apply gedit and/or gnome-terminal dconf."
-		rm combined.dconf || true
+		rm combined.dconf >/dev/null 2>&1 || true
 	else
 		# Use sudo cat with pipe for other distros
 		sudo cat "theming/$distro/gnome-terminal-$distro.dconf" | \
@@ -665,7 +665,7 @@ apply_gedit_and_gnome_terminal_config() {
 			die "Failed to apply gedit dconf."
 	fi
 	# Remove gnome-terminal dconf copied from earlier functions
-	rm ~/gnome-terminal-"$distro".dconf || true
+	rm ~/gnome-terminal-"$distro".dconf >/dev/null 2>&1 || true
 	# Set gedit sidebar root to user's home directory
 	dconf write /org/gnome/gedit/plugins/filebrowser/virtual-root \
 		"'file:///home/$(whoami)'" || die "Failed to apply gedit settings."
@@ -679,7 +679,7 @@ set_default_apps() {
 	chmod +x theming/"$distro"/Default-Apps-"$distro".sh
 	bash theming/"$distro"/Default-Apps-"$distro".sh || true
 	sudo bash theming/"$distro"/Default-Apps-"$distro".sh || true
-	rm ~/Default-Apps-"$distro".sh
+	rm ~/Default-Apps-"$distro".sh >/dev/null 2>&1 || true
 }
 
 copy_vscodium_config() {
