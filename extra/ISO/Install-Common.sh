@@ -63,10 +63,11 @@ This is likely a permissions or kernel setting issue."
 		echo "If your system supports UEFI, it is recommended to boot the \
 installer ISO in"
 		echo "UEFI mode."
-		read -rp "Continue with BIOS mode? [y/N]: " bios_continue
+		read -rp "Continue with BIOS mode? [Y/n]: " bios_continue
 		case "$bios_continue" in
-			[yY][eE][sS]|[yY]) ;;
-			*) die "Aborting. Please reboot the ISO in UEFI mode if desired." ;;
+			[nN][oO]|[nN])
+				die "Aborting. Please reboot the ISO in UEFI mode if desired." ;;
+			*) echo "Continuing with BIOS mode." ;;
 		esac
 	fi
 }
