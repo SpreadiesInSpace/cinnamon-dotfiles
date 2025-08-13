@@ -43,4 +43,11 @@
 			<Filename>libreoffice24.8-writer.desktop</Filename>
 		</Exclude>
 	</Menu>
+	<Menu>
+		<Name>Graphics</Name>
+		<Exclude>
+			<Filename>libreoffice24.8-draw.desktop</Filename>
+		</Exclude>
+		<AppDir>/home/f16poom/.local/share/applications</AppDir>
+	</Menu>
 </Menu>
