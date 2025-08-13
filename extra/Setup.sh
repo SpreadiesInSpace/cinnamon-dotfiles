@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Links to run this file:
 # bash <(curl -sL https://tinyurl.com/cinnamon-setup)

@@ -13,8 +13,7 @@ cd cinnamon-dotfiles/home
 ```
 3. Run theme script (Setup-*Distro*-Theme.sh)
 ```bash
-# Default NixOS behavior doesn't let you chmod+x then ./Setup-NixOS-Theme.sh
-bash Setup-NixOS-Theme.sh
+./Setup-NixOS-Theme.sh
 ```
 
 ## Required Fonts

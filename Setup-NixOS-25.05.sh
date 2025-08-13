@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Exit early if NixOS is installed via cinnamon-ISO
 if [ -f ".nixos-25.05.done" ]; then
