@@ -14,3 +14,5 @@ fi
 git clone https://github.com/spreadiesinspace/BraveSoftware \
 	~/.config/BraveSoftware || die "Failed to download new Brave profile."
 rm -rf ~/.config/BraveSoftware/.git/ || die "Failed to remove .git"
+rm -rf ~/.config/BraveSoftware/update_brave_settings.sh || \
+	die "Failed to remove .git"
