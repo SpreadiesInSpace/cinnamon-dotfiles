@@ -574,7 +574,7 @@ copy_libreoffice_config() {
 	timestamp=$(date +%s)
 
 	# Ensure LibreOffice is available
-	if [ "$distro" = "gentoo" ]; then
+	if grep -qi "gentoo" /etc/os-release; then
 		check_app "libreoffice-bin"
 	else
 		check_app "libreoffice"
