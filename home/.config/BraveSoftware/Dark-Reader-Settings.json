@@ -37,7 +37,7 @@
                 "useFont": false,
                 "fontFamily": "Open Sans",
                 "textStroke": 0,
-                "engine": "svgFilter",
+                "engine": "cssFilter",
                 "stylesheet": "",
                 "darkSchemeBackgroundColor": "#181a1b",
                 "darkSchemeTextColor": "#e8e6e3",
@@ -65,7 +65,7 @@
                 "useFont": false,
                 "fontFamily": "Open Sans",
                 "textStroke": 0,
-                "engine": "svgFilter",
+                "engine": "cssFilter",
                 "stylesheet": "",
                 "darkSchemeBackgroundColor": "#181a1b",
                 "darkSchemeTextColor": "#e8e6e3",
@@ -93,7 +93,7 @@
                 "useFont": false,
                 "fontFamily": "Open Sans",
                 "textStroke": 0,
-                "engine": "svgFilter",
+                "engine": "cssFilter",
                 "stylesheet": "",
                 "darkSchemeBackgroundColor": "#181a1b",
                 "darkSchemeTextColor": "#e8e6e3",
@@ -111,9 +111,6 @@
             ]
         },
         {
-            "url": [
-                "myanimelist.net"
-            ],
             "theme": {
                 "mode": 1,
                 "brightness": 100,
@@ -135,12 +132,12 @@
                 "lightColorScheme": "Default",
                 "darkColorScheme": "Default",
                 "immediateModify": false
-            }
+            },
+            "url": [
+                "myanimelist.net"
+            ]
         },
         {
-            "url": [
-                "discord.com"
-            ],
             "theme": {
                 "mode": 1,
                 "brightness": 100,
@@ -162,7 +159,10 @@
                 "lightColorScheme": "Default",
                 "darkColorScheme": "Default",
                 "immediateModify": false
-            }
+            },
+            "url": [
+                "discord.com"
+            ]
         }
     ],
     "enabledByDefault": true,
@@ -174,7 +174,9 @@
         "www.youtube.com",
         "mirrors.slackware.com",
         "mirror.slackbuilds.org",
-        "slackware.uk"
+        "slackware.uk",
+        "www.microsoft.com",
+        "www.startpage.com"
     ],
     "changeBrowserTheme": false,
     "syncSettings": true,
