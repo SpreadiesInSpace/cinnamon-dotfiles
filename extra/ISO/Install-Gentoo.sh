@@ -176,16 +176,7 @@ cp --dereference /etc/resolv.conf /mnt/gentoo/etc/ || \
 	die "Failed to copy resolv.conf to /mnt/gentoo/etc/"
 
 # Mount Filesystems
-mount --types proc /proc /mnt/gentoo/proc || die "Failed to mount /proc"
-mount --rbind /sys /mnt/gentoo/sys || die "Failed to mount /sys"
-mount --make-rslave /mnt/gentoo/sys || \
-	die "Failed to set /mnt/gentoo/sys as slave"
-mount --rbind /dev /mnt/gentoo/dev || die "Failed to mount /dev"
-mount --make-rslave /mnt/gentoo/dev || \
-	die "Failed to set /mnt/gentoo/dev as slave"
-mount --bind /run /mnt/gentoo/run || die "Failed to mount /run"
-mount --make-slave /mnt/gentoo/run || \
-	die "Failed to set /mnt/gentoo/run as slave"
+mount_system_partitions "gentoo"
 
 # Fix /dev/shm if it's a broken symlink (common on non-Gentoo ISOs)
 if test -L /dev/shm; then

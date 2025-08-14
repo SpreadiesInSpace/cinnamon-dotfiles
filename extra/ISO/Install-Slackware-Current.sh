@@ -22,8 +22,8 @@ SeTmedia || die "Failed to detect or mount installation media."
 clear
 
 # Install glibc-zoneinfo for timezone validation
-installpkg /var/log/mount/slackware64/a/glibc-zoneinfo-*.t?z >/dev/null 2>&1 \
-	|| die "Failed to install glibc-zoneinfo."
+installpkg /var/log/mount/slackware64/a/glibc-zoneinfo-*.t?z \
+	>/dev/null 2>&1 || die "Failed to install glibc-zoneinfo."
 
 # Prompt for root password
 prompt_root_password
@@ -119,7 +119,8 @@ cp --dereference /etc/resolv.conf /mnt/etc/ || \
 	die "Failed to copy resolv.conf."
 
 # Copy common functions to chroot environment
-cp Install-Common.sh /mnt/ || die "Failed to copy Install-Common.sh to chroot."
+cp Install-Common.sh /mnt/ || \
+	die "Failed to copy Install-Common.sh to chroot."
 
 # Define arch-install-scripts source and SlackBuild (for genfstab)
 AIS="https://gitlab.archlinux.org/archlinux/arch-install-scripts"
@@ -259,8 +260,10 @@ sed -i 's/id:3:initdefault:/id:4:initdefault:/g' /etc/inittab || \
 # Create User and Set Passwords
 useradd -m -g users -G wheel,audio,video,plugdev,netdev,lp,scanner \
 	-s /bin/bash "$username" || die "Failed to create user."
-echo "root:$rootpasswd" | chpasswd || die "Failed to set root password."
-echo "$username:$userpasswd" | chpasswd || die "Failed to set user password."
+echo "root:$rootpasswd" | chpasswd || \
+	die "Failed to set root password."
+echo "$username:$userpasswd" | chpasswd || \
+	die "Failed to set user password."
 
 # Set Default DE to XFCE System-Wide
 ln -sf /etc/X11/xinit/xinitrc.xfce /etc/X11/xinit/xinitrc \

@@ -60,15 +60,7 @@ This is likely a permissions or kernel setting issue."
 	else
 		BOOTMODE="BIOS"
 		echo "WARNING: You are booted in BIOS mode."
-		echo "If your system supports UEFI, it is recommended to boot the \
-installer ISO in"
-		echo "UEFI mode."
-		read -rp "Continue with BIOS mode? [Y/n]: " bios_continue
-		case "$bios_continue" in
-			[nN][oO]|[nN])
-				die "Aborting. Please reboot the ISO in UEFI mode if desired." ;;
-			*) echo "Continuing with BIOS mode." ;;
-		esac
+		echo "Continuing in BIOS mode."
 	fi
 }
 
@@ -202,6 +194,7 @@ prompt_for_autologin() {
 }
 
 partition_drive() {
+	local distro="${1:-}"
 	# Find parted binary
 	if command -v parted >/dev/null 2>&1; then
 		PARTED="parted"
@@ -210,44 +203,102 @@ partition_drive() {
 	else
 		die "parted not found. Cannot partition the drive."
 	fi
+
+	# Determine if we need separate /boot (Fedora requirement)
+	local need_boot_partition=false
+	[ "$distro" = "fedora" ] && need_boot_partition=true
+
 	if [ "$BOOTMODE" = "UEFI" ]; then
 		# Create GPT partition table
 		"$PARTED" -s "$drive" mklabel gpt || \
 			die "Failed to create GPT partition table."
-		# Create ESP (EFI System Partition) for UEFI – 1GiB
-		"$PARTED" -s "$drive" mkpart primary fat32 1MiB 1050MiB || \
-			die "Failed to create boot partition."
-		"$PARTED" -s "$drive" set 1 esp on || \
-			die "Failed to set ESP flag."
-		# Create root partition
-		"$PARTED" -s "$drive" mkpart primary btrfs 1050MiB 100% || \
-			die "Failed to create root partition."
+
+		if [ "$need_boot_partition" = true ]; then
+			# Fedora: ESP + /boot + root
+			"$PARTED" -s "$drive" mkpart primary fat32 1MiB 601MiB || \
+				die "Failed to create EFI partition."
+			"$PARTED" -s "$drive" set 1 esp on || \
+				die "Failed to set ESP flag."
+			"$PARTED" -s "$drive" mkpart primary ext4 601MiB 1625MiB || \
+				die "Failed to create boot partition."
+			"$PARTED" -s "$drive" mkpart primary btrfs 1625MiB 100% || \
+				die "Failed to create root partition."
+		else
+			# Other distros: ESP + root
+			"$PARTED" -s "$drive" mkpart primary fat32 1MiB 1050MiB || \
+				die "Failed to create EFI partition."
+			"$PARTED" -s "$drive" set 1 esp on || \
+				die "Failed to set ESP flag."
+			"$PARTED" -s "$drive" mkpart primary btrfs 1050MiB 100% || \
+				die "Failed to create root partition."
+		fi
 	else
 		# Create MBR partition table for BIOS
 		"$PARTED" -s "$drive" mklabel msdos || \
 			die "Failed to create MBR partition table."
-		# Create single root partition
-		"$PARTED" -s "$drive" mkpart primary btrfs 1MiB 100% || \
-			die "Failed to create root partition."
+
+		if [ "$need_boot_partition" = true ]; then
+			# Fedora BIOS: /boot + root
+			"$PARTED" -s "$drive" mkpart primary ext4 1MiB 1025MiB || \
+				die "Failed to create boot partition."
+			"$PARTED" -s "$drive" set 1 boot on || \
+				die "Failed to set boot flag."
+			"$PARTED" -s "$drive" mkpart primary btrfs 1025MiB 100% || \
+				die "Failed to create root partition."
+		else
+			# Other distros BIOS: root only
+			"$PARTED" -s "$drive" mkpart primary btrfs 1MiB 100% || \
+				die "Failed to create root partition."
+			"$PARTED" -s "$drive" set 1 boot on || \
+				die "Failed to set boot flag."
+		fi
 	fi
 }
 
 partition_suffix() {
+	local distro="${1:-}"
 	# Determine correct partition suffix
 	local suffix=""
 	[[ "$drive" == *"nvme"* || "$drive" == *"mmcblk"* ]] && suffix="p"
+
+	# Determine if we need separate /boot (Fedora requirement)
+	local need_boot_partition=false
+	[ "$distro" = "fedora" ] && need_boot_partition=true
+
 	if [ "$BOOTMODE" = "UEFI" ]; then
-		BOOT="${drive}${suffix}1"
-		ROOT="${drive}${suffix}2"
+		if [ "$need_boot_partition" = true ]; then
+			# Fedora: ESP + /boot + root
+			EFI="${drive}${suffix}1"
+			BOOT="${drive}${suffix}2"
+			ROOT="${drive}${suffix}3"
+		else
+			# Other distros: ESP + root
+			EFI="${drive}${suffix}1"
+			ROOT="${drive}${suffix}2"
+			BOOT=""  # No separate boot partition
+		fi
 	else
-		ROOT="${drive}${suffix}1"
+		if [ "$need_boot_partition" = true ]; then
+			# Fedora BIOS: /boot + root
+			BOOT="${drive}${suffix}1"
+			ROOT="${drive}${suffix}2"
+			EFI=""  # No EFI partition
+		else
+			# Other distros BIOS: root only
+			ROOT="${drive}${suffix}1"
+			BOOT=""  # No separate boot partition
+			EFI=""   # No EFI partition
+		fi
 	fi
 }
 
 format_partitions() {
 	# Format the partitions
-	if [ "$BOOTMODE" = "UEFI" ]; then
-		mkfs.fat -F32 "$BOOT" || die "Failed to format EFI partition."
+	if [ "$BOOTMODE" = "UEFI" ] && [ -n "$EFI" ]; then
+		mkfs.fat -F32 "$EFI" || die "Failed to format EFI partition."
+	fi
+	if [ -n "$BOOT" ]; then
+		mkfs.ext4 -F "$BOOT" || die "Failed to format boot partition."
 	fi
 	mkfs.btrfs -f "$ROOT" || die "Failed to format root partition."
 }
@@ -257,6 +308,8 @@ create_btrfs_subvolumes() {
 	mount "$ROOT" /mnt || die "Failed to mount root partition."
 	btrfs su cr /mnt/@ || die "Failed to create subvolume @."
 	btrfs su cr /mnt/@home || die "Failed to create subvolume @home."
+	btrfs su cr /mnt/@.snapshots || \
+		die "Failed to create subvolume @.snapshots."
 	umount /mnt || die "Failed to unmount root partition."
 }
 
@@ -265,37 +318,62 @@ mount_partitions() {
 	local distro="${1:-}"
 	local MNT="/mnt"
 	[ "$distro" = "gentoo" ] && MNT="/mnt/gentoo"
+
 	mkdir -p "$MNT" || die "Failed to create $MNT."
 	mount -o noatime,compress=zstd,discard=async,subvol=@ "$ROOT" "$MNT" || \
 		die "Failed to mount root subvolume."
+
+	# Create and mount home
 	mkdir -p "$MNT/home" || die "Failed to create $MNT/home."
 	mount -o noatime,compress=zstd,discard=async,subvol=@home \
 		"$ROOT" "$MNT/home" || die "Failed to mount home subvolume."
-	if [ "$BOOTMODE" = "UEFI" ]; then
+
+	# Mount snapshots subvolume (universal)
+	mkdir -p "$MNT/.snapshots" || die "Failed to create $MNT/.snapshots."
+	mount -o noatime,compress=zstd,discard=async,subvol=@.snapshots \
+		"$ROOT" "$MNT/.snapshots" || die "Failed to mount snapshots subvolume."
+
+	# Handle boot partition mounting
+	if [ -n "$BOOT" ]; then
+		# Separate /boot partition (Fedora)
+		mkdir -p "$MNT/boot" || die "Failed to create $MNT/boot."
+		mount "$BOOT" "$MNT/boot" || die "Failed to mount boot partition."
+
+		# Mount EFI inside /boot for Fedora
+		if [ "$BOOTMODE" = "UEFI" ] && [ -n "$EFI" ]; then
+			mkdir -p "$MNT/boot/efi" || die "Failed to create $MNT/boot/efi."
+			mount "$EFI" "$MNT/boot/efi" || die "Failed to mount EFI partition."
+		fi
+	elif [ "$BOOTMODE" = "UEFI" ] && [ -n "$EFI" ]; then
+		# Direct EFI mounting for other distros
 		if [ "$distro" = "nixos" ]; then
 			mkdir -p "$MNT/boot" || die "Failed to create $MNT/boot."
-			mount "$BOOT" "$MNT/boot" || \
+			mount "$EFI" "$MNT/boot" || \
 				die "Failed to mount EFI partition to /boot."
 		else
 			mkdir -p "$MNT/boot/efi" || die "Failed to create $MNT/boot/efi."
-			mount "$BOOT" "$MNT/boot/efi" || \
+			mount "$EFI" "$MNT/boot/efi" || \
 				die "Failed to mount EFI partition to /boot/efi."
 		fi
 	fi
 }
 
-# Only openSUSE/Slackware uses this
+# Only Fedora/Gentoo/openSUSE/Slackware uses this
 mount_system_partitions() {
+	local distro="${1:-}"
 	# Mount System Partitions
-	mkdir -p /mnt/{proc,sys,dev,run} || \
+	local MNT="/mnt"
+	[ "$distro" = "gentoo" ] && MNT="/mnt/gentoo"
+
+	mkdir -p "$MNT"/{proc,sys,dev,run} || \
 		die "Failed to create system mount points."
-	mount --types proc /proc /mnt/proc || die "Failed to mount /proc."
-	mount --rbind /sys /mnt/sys || die "Failed to bind-mount /sys."
-	mount --make-rslave /mnt/sys || die "Failed to make /sys rslave."
-	mount --rbind /dev /mnt/dev || die "Failed to bind-mount /dev."
-	mount --make-rslave /mnt/dev || die "Failed to make /dev rslave."
-	mount --bind /run /mnt/run || die "Failed to bind-mount /run."
-	mount --make-slave /mnt/run || die "Failed to make /run slave."
+	mount --types proc /proc "$MNT/proc" || die "Failed to mount /proc."
+	mount --rbind /sys "$MNT/sys" || die "Failed to bind-mount /sys."
+	mount --make-rslave "$MNT/sys" || die "Failed to make /sys rslave."
+	mount --rbind /dev "$MNT/dev" || die "Failed to bind-mount /dev."
+	mount --make-rslave "$MNT/dev" || die "Failed to make /dev rslave."
+	mount --bind /run "$MNT/run" || die "Failed to bind-mount /run."
+	mount --make-slave "$MNT/run" || die "Failed to make /run slave."
 }
 
 # Only Gentoo uses this
@@ -363,8 +441,9 @@ install_grub() {
 	# Configure GRUB Bootloader
 	local distro="${1:-}"
 	local cmd="grub-install"
-	# Use grub2-install for openSUSE
+	# Use grub2-install for openSUSE and Fedora
 	[ "$distro" = "opensuse" ] && cmd="grub2-install"
+	[ "$distro" = "fedora" ] && cmd="grub2-install"
 	if [ "$BOOTMODE" = "UEFI" ]; then
 		# Install GRUB for UEFI
 		if [ "$REMOVABLE_BOOT" = "1" ]; then

@@ -18,7 +18,7 @@
 *Supports UEFI and BIOS, x86_64 Only*
 
 ```bash
-# For Arch, Gentoo, NixOS & openSUSE Tumbleweed
+# For Arch, Fedora 42, Gentoo, NixOS 25.05 & openSUSE Tumbleweed
 bash <(curl -fsSL https://tinyurl.com/cinnamon-ISO)
 ```
 ```bash

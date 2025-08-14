@@ -82,7 +82,8 @@ cp --dereference /etc/resolv.conf /mnt/etc/ || \
 	die "Failed to copy resolv.conf."
 
 # Copy common functions to chroot environment
-cp Install-Common.sh /mnt/ || die "Failed to copy Install-Common.sh to chroot."
+cp Install-Common.sh /mnt/ || \
+	die "Failed to copy Install-Common.sh to chroot."
 
 # Ensure variables are exported before chroot
 export drive hostname timezone username rootpasswd userpasswd BOOTMODE \
@@ -125,7 +126,8 @@ echo 'RC_LANG="en_US.UTF-8"' > /etc/sysconfig/language || \
 echo "KEYMAP=us" > /etc/vconsole.conf || die "Failed to set keymap."
 
 # Configure GRUB Bootloader
-dracut -f --regenerate-all || die "Failed to regenerate initramfs with dracut."
+dracut -f --regenerate-all || \
+	die "Failed to regenerate initramfs with dracut."
 install_grub "opensuse"
 
 # Set GRUB timeout to 0
@@ -175,11 +177,14 @@ groupadd -f wheel || die "Failed to add wheel group."
 # Create User and Set Passwords
 useradd -m -G wheel,audio,video,users -s /bin/bash "$username" || \
 	die "Failed to create user."
-echo "root:$rootpasswd" | chpasswd || die "Failed to set root password."
-echo "$username:$userpasswd" | chpasswd || die "Failed to set user password."
+echo "root:$rootpasswd" | chpasswd || \
+	die "Failed to set root password."
+echo "$username:$userpasswd" | chpasswd || \
+	die "Failed to set user password."
 
 # Enabling System Services
-systemctl enable NetworkManager || die "Failed to enable NetworkManager."
+systemctl enable NetworkManager || \
+	die "Failed to enable NetworkManager."
 
 # Clean up
 rm -rf Install-Common.sh

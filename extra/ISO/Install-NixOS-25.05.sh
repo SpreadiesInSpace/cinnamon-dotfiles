@@ -138,7 +138,8 @@ WALL="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles"
 WALL="$WALL/refs/heads/main/home/wallpapers/Login_Wallpaper.jpg"
 curl -fsSL -o Login_Wallpaper.jpg "$WALL" \
 	|| die "Failed to download wallpaper."
-cp -nr Login_Wallpaper.jpg /mnt/boot/ || die "Failed to copy login wallpaper."
+cp -nr Login_Wallpaper.jpg /mnt/boot/ || \
+	die "Failed to copy login wallpaper."
 
 # Enable background in configuration.nix
 sed -i 's|^\(\s*\)#\s*\(background\s*=.*\)|\1\2|' "$CONFIG"

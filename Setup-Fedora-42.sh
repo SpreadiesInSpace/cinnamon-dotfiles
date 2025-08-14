@@ -26,20 +26,14 @@ display_status "$enable_autologin" "$is_vm"
 # Enable Parallel Downloads
 echo "Configuring DNF..."
 if ! grep -q "^max_parallel_downloads=10$" /etc/dnf/dnf.conf; then
-	echo 'max_parallel_downloads=10' | tee -a /etc/dnf/dnf.conf >/dev/null 2>&1 \
-		|| die "Failed to enable parallel downloads in /etc/dnf/dnf.conf"
+	echo 'max_parallel_downloads=10' | tee -a /etc/dnf/dnf.conf \
+	>/dev/null 2>&1 || \
+	die "Failed to enable parallel downloads in /etc/dnf/dnf.conf"
 else
-	sed -i '/^#*max_parallel_downloads=10/s/^#*//' /etc/dnf/dnf.conf || \
-		die "Failed to modify parallel downloads setting in /etc/dnf/dnf.conf"
+	sed -i '/^#*max_parallel_downloads=10/s/^#*//' \
+	/etc/dnf/dnf.conf || \
+	die "Failed to modify parallel downloads setting in /etc/dnf/dnf.conf"
 fi
-
-# Remove PackageKit cache
-rm -rf /var/cache/PackageKit || die "Failed to remove PackageKit cache."
-
-# Redownload metadata cache without auto updates
-echo "Refreshing Metadata Cache..."
-pkcon refresh force -c -1 >/dev/null 2>&1 || \
-	die "Failed to refresh metadata cache."
 
 # Update system and install git
 dnf -y update || die "System update failed."
@@ -55,22 +49,32 @@ dnf -y install "$free" "$nonfree" || \
 	die "Failed to add RPM Fusion repositories."
 
 # Install Media Codecs
-dnf4 -y group upgrade multimedia || die "Multimedia group upgrade failed."
-dnf -y swap 'ffmpeg-free' 'ffmpeg' --allowerasing || \
-	die "Failed to swap ffmpeg-free with ffmpeg."
-dnf -y upgrade @multimedia --setopt="install_weak_deps=False" \
-	--exclude=PackageKit-gstreamer-plugin || \
-	die "Failed to upgrade multimedia group."
-dnf group install -y sound-and-video || \
-	die "Failed to install sound-and-video group."
+if [[ ! -f ".fedora-42.done" ]]; then
+	dnf4 -y group upgrade multimedia || \
+		die "Multimedia group upgrade failed."
+	dnf -y swap 'ffmpeg-free' 'ffmpeg' --allowerasing || \
+		die "Failed to swap ffmpeg-free with ffmpeg."
+	dnf -y upgrade @multimedia --setopt="install_weak_deps=False" \
+		--exclude=PackageKit-gstreamer-plugin || \
+		die "Failed to upgrade multimedia group."
+	dnf group install -y sound-and-video || \
+		die "Failed to install sound-and-video group."
+else
+	# Skip Media Codecs & Debloat if installed via cinnamon-ISO
+	echo "Media codecs already installed via cinnamon-ISO. Skipping."
+	bash unsorted/Fedora/Fedora-Bloat.sh
+	touch home/.fedora.gnome
+fi
 
 # Install Brave
 curl -fsS https://dl.brave.com/install.sh | sh || \
 	die "Failed to install Brave Browser."
 
 # Install Bottom
-dnf -y copr enable atim/bottom || die "Failed to enable COPR repo for Bottom."
-dnf -y install bottom || die "Failed to install Bottom."
+dnf -y copr enable atim/bottom || \
+	die "Failed to enable COPR repo for Bottom."
+dnf -y install bottom || \
+	die "Failed to install Bottom."
 
 # Install Neofetch
 neofetch_url="https://archives.fedoraproject.org/pub/archive/fedora"
@@ -137,7 +141,7 @@ packages=(
 	"gnome-terminal"
 	"gthumb"
 	"haruna"
-	"ufw"
+	#"ufw"
 	"kvantum"
 	"kvantum-qt6"
 	"lightdm"
@@ -168,19 +172,6 @@ packages=(
 
 # Install Packages
 dnf -y install "${packages[@]}" || die "Failed to install packages."
-
-# Disable Problem Reporting
-systemctl disable abrtd.service >/dev/null 2>&1 || \
-	die "Failed to disable Problem Reporting service."
-
-# Uninstall SystemD Core Dump Generator (tracker-miners)
-dnf remove -y tracker-miners || die "Failed to remove tracker-miners."
-
-# Replace FirewallD with UFW and allow KDE Connect through
-dnf -y remove firewalld || die "Failed to remove firewalld."
-systemctl daemon-reload || die "Failed to reload systemd daemon."
-ufw enable || die "Failed to enable UFW."
-ufw allow "KDE Connect" || die "Failed to allow KDE Connect in UFW."
 
 # Enable Flathub for Flatpak
 enable_flathub

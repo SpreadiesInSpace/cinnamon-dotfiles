@@ -125,7 +125,8 @@ slpkg upgrade -y -o "slack_extra" \
 # Update Bootloader Entries (in case Kernel Gets Updated)
 if command -v grub-mkconfig >/dev/null 2>&1; then
 	echo "Detected GRUB bootloader."
-	grub-mkconfig -o /boot/grub/grub.cfg || die "Failed to generate GRUB config."
+	grub-mkconfig -o /boot/grub/grub.cfg || \
+		die "Failed to generate GRUB config."
 elif [ -f /boot/efi/EFI/Slackware/elilo.conf ] || \
 	[ -f /boot/efi/EFI/ELILO/elilo.conf ]; then
 	echo "Detected ELILO bootloader."
@@ -325,7 +326,8 @@ enable_flathub
 # Check if the block for libvirt already exists
 if ! grep -q '# Start libvirt' /etc/rc.d/rc.local; then
 	# Add libvirt startup to rc.local if not already present
-	echo '' >> /etc/rc.d/rc.local || die "Failed to append to /etc/rc.d/rc.local"
+	echo '' >> /etc/rc.d/rc.local || \
+		die "Failed to append to /etc/rc.d/rc.local"
 	echo '# Start libvirt' >> /etc/rc.d/rc.local || \
 		die "Failed to add '# Start libvirt' to /etc/rc.d/rc.local"
 	echo 'if [ -x /etc/rc.d/rc.libvirt ]; then' >> /etc/rc.d/rc.local || \

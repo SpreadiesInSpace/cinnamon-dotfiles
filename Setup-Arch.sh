@@ -40,11 +40,13 @@ done
 # Update MAKEFLAGS /etc/makepkg.conf to match CPU cores
 cores=$(nproc)
 echo "Set MAKEFLAGS to --jobs=$cores"
-sed -i "s/^#*\\s*MAKEFLAGS=.*/MAKEFLAGS=\"--jobs=$cores\"/" /etc/makepkg.conf \
-	|| die "Failed to update MAKEFLAGS in /etc/makepkg.conf."
+sed -i "s/^#*\\s*MAKEFLAGS=.*/MAKEFLAGS=\"--jobs=$cores\"/" \
+	/etc/makepkg.conf || \
+	die "Failed to update MAKEFLAGS in /etc/makepkg.conf."
 
 # Install base-devel and git
-pacman -S --needed --noconfirm base-devel git || die "Failed to install git."
+pacman -S --needed --noconfirm base-devel git || \
+	die "Failed to install git."
 
 # Remove passwordless sudo if script is interrupted
 trap 'rm -f /etc/sudoers.d/99_${SUDO_USER}_nopasswd' EXIT

@@ -62,13 +62,14 @@ mount_partitions
 pacstrap -K /mnt base linux linux-firmware cinnamon lightdm \
 	lightdm-slick-greeter gnome-terminal spice-vdagent sudo bash-completion \
 		grub efibootmgr git networkmanager nano unzip wget || \
-			die "Failed to install base packages."
+		die "Failed to install base packages."
 
 # Generate fstab
 genfstab -U /mnt >> /mnt/etc/fstab || die "Failed to generate fstab."
 
 # Copy common functions to chroot environment
-cp Install-Common.sh /mnt/ || die "Failed to copy Install-Common.sh to chroot."
+cp Install-Common.sh /mnt/ || \
+	die "Failed to copy Install-Common.sh to chroot."
 
 # Ensure variables are exported before chroot
 export drive hostname timezone username rootpasswd userpasswd BOOTMODE \
@@ -113,10 +114,12 @@ a==1 && /^#?greeter-session=/ {
 	next
 }
 {print}
-' /etc/lightdm/lightdm.conf || die "Failed to set greeter-session for LightDM."
+' /etc/lightdm/lightdm.conf || \
+	die "Failed to set greeter-session for LightDM."
 
 # Enable Services
-systemctl enable lightdm NetworkManager || die "Failed to enable services."
+systemctl enable lightdm NetworkManager || \
+	die "Failed to enable services."
 
 # Configure GRUB Bootloader
 install_grub
@@ -126,7 +129,8 @@ sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub || \
 	die "Failed to set GRUB_TIMEOUT."
 
 # Generate Grub Config
-grub-mkconfig -o /boot/grub/grub.cfg || die "Failed to generate GRUB config."
+grub-mkconfig -o /boot/grub/grub.cfg || \
+	die "Failed to generate GRUB config."
 
 # Setup Sudo by uncommenting %wheel ALL=(ALL:ALL) with visudo
 sed -i 's/^#\s*\(%wheel ALL=(ALL:ALL) ALL\)/\1/' /etc/sudoers || \
@@ -135,8 +139,10 @@ sed -i 's/^#\s*\(%wheel ALL=(ALL:ALL) ALL\)/\1/' /etc/sudoers || \
 # Create User and Set Passwords
 useradd -m -G users,wheel,audio,video -s /bin/bash "$username" || \
 	die "Failed to create user."
-echo "root:$rootpasswd" | chpasswd || die "Failed to set root password."
-echo "$username:$userpasswd" | chpasswd || die "Failed to set user password."
+echo "root:$rootpasswd" | chpasswd || \
+	die "Failed to set root password."
+echo "$username:$userpasswd" | chpasswd || \
+	die "Failed to set user password."
 
 # Clean up
 rm -rf Install-Common.sh

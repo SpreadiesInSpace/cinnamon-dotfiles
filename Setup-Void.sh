@@ -38,7 +38,8 @@ xmirror -s "$REPO" || die "Failed to set the mirror with xmirror."
 xbps-install -Sy void-repo-nonfree void-repo-multilib \
 	void-repo-multilib-nonfree || \
 		die "Failed to install multilib and nonfree repositories."
-xbps-install -Syu || die "Failed to update system after adding repositories."
+xbps-install -Syu || \
+	die "Failed to update system after adding repositories."
 
 # All packages (adapt package names as needed for Void Linux)
 packages=(
@@ -198,8 +199,8 @@ set_qemu_permissions
 
 # Enable and start services
 echo "Enabling services..."
-for service in dbus lightdm NetworkManager polkitd spice-vdagentd libvirtd \
-		virtlockd virtlogd; do
+for service in dbus lightdm NetworkManager polkitd spice-vdagentd \
+		libvirtd virtlockd virtlogd; do
 	ln -sf /etc/sv/$service /etc/runit/runsvdir/default \
 		|| die "Failed to enable $service."
 done

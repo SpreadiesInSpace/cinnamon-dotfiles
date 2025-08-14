@@ -18,27 +18,30 @@ NC='\033[0m' # No Color
 # Install script URLs and names
 URL="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles"
 declare -A installs=(
-	[1]="$URL/refs/heads/main/extra/ISO/Install-Arch.sh"
-	[2]="$URL/refs/heads/main/extra/ISO/Install-Gentoo.sh"
-	[3]="$URL/refs/heads/main/extra/ISO/Install-NixOS-25.05.sh"
-	[4]="$URL/refs/heads/main/extra/ISO/Install-openSUSE-Tumbleweed.sh"
-	[5]="$URL/refs/heads/main/extra/ISO/Install-Slackware-Current.sh"
-	[6]="$URL/refs/heads/main/extra/ISO/Install-Void.sh"
+	[1]="$URL/main/extra/ISO/Install-Arch.sh"
+	[2]="$URL/main/extra/ISO/Install-Fedora-42.sh"
+	[3]="$URL/main/extra/ISO/Install-Gentoo.sh"
+	[4]="$URL/main/extra/ISO/Install-NixOS-25.05.sh"
+	[5]="$URL/main/extra/ISO/Install-openSUSE-Tumbleweed.sh"
+	[6]="$URL/main/extra/ISO/Install-Slackware-Current.sh"
+	[7]="$URL/main/extra/ISO/Install-Void.sh"
 )
 
 declare -A names=(
 	[1]="Install-Arch.sh"
-	[2]="Install-Gentoo"
-	[3]="Install-NixOS-25.05.sh"
-	[4]="Install-openSUSE-Tumbleweed.sh"
-	[5]="Install-Slackware-Current.sh"
-	[6]="Install-Void.sh"
+	[2]="Install-Fedora-42.sh"
+	[3]="Install-Gentoo.sh"
+	[4]="Install-NixOS-25.05.sh"
+	[5]="Install-openSUSE-Tumbleweed.sh"
+	[6]="Install-Slackware-Current.sh"
+	[7]="Install-Void.sh"
 )
 
 # Prompt menu
 echo -e "${YELLOW}Which installer would you like to run?${NC}"
 options=(
 	"Arch Linux"
+	"Fedora 42"
 	"Gentoo"
 	"NixOS 25.05"
 	"openSUSE Tumbleweed"
@@ -50,7 +53,7 @@ PS3="Select a number: "
 
 select _ in "${options[@]}"; do
 	case $REPLY in
-		[1-6])
+		[1-7])
 			url="${installs[$REPLY]}"
 			filename="${names[$REPLY]}"
 			if [[ -z "$url" ]]; then
@@ -71,14 +74,14 @@ select _ in "${options[@]}"; do
 			chmod +x "$filename"
 			echo -e "${GREEN}Running $filename...${NC}"
 
-			if [[ "$REPLY" == "5" ]]; then
+			if [[ "$REPLY" == "6" ]]; then
 				bash "$filename"  # Slackware: run non-sudo
 			else
 				sudo bash "$filename"
 			fi
 			break
 			;;
-		7)
+		8)
 			echo -e "${GREEN}Exiting.${NC}"
 			exit 0
 			;;

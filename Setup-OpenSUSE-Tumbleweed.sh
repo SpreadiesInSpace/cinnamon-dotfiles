@@ -213,7 +213,8 @@ backup_lightdm_config
 
 # Copies example lightdm.conf
 cp /usr/share/doc/packages/lightdm/lightdm.conf.example \
-	/etc/lightdm/lightdm.conf || die "Failed to copy LightDM configuration file."
+	/etc/lightdm/lightdm.conf || \
+	die "Failed to copy LightDM configuration file."
 
 # Modify lightdm.conf in-place
 modify_lightdm_conf

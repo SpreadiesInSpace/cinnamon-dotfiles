@@ -83,7 +83,8 @@ cp --dereference /etc/resolv.conf /mnt/etc/ || \
 xgenfstab -U /mnt > /mnt/etc/fstab || die "Failed to generate fstab."
 
 # Copy common functions to chroot environment
-cp Install-Common.sh /mnt/ || die "Failed to copy Install-Common.sh to chroot."
+cp Install-Common.sh /mnt/ || \
+	die "Failed to copy Install-Common.sh to chroot."
 
 # Ensure variables are exported before chroot
 export drive hostname timezone username rootpasswd userpasswd BOOTMODE \
@@ -114,7 +115,8 @@ ln -sf "/usr/share/zoneinfo/$timezone" /etc/localtime || \
 	die "Failed to set timezone."
 hwclock --systohc || die "Failed to set hardware clock."
 
-# Locale Generation (uncomment en_US.UTF-8 UTF-8) in /etc/default/libc-locales
+# Locale Generation (uncomment en_US.UTF-8 UTF-8) in
+# /etc/default/libc-locales
 sed -i 's/^#\s*\(en_US.UTF-8 UTF-8\)/\1/' /etc/default/libc-locales || \
 	die "Failed to uncomment locale."
 xbps-reconfigure -f glibc-locales || die "Failed to generate locale"
@@ -147,7 +149,8 @@ sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub || \
 	die "Failed to set GRUB_TIMEOUT."
 
 # Generate Grub Config (xbps-reconfigure -fa takes care of this)
-# grub-mkconfig -o /boot/grub/grub.cfg  || die "Failed to generate GRUB config"
+# grub-mkconfig -o /boot/grub/grub.cfg  || \
+	die "Failed to generate GRUB config"
 
 # Reconfigure System
 xbps-reconfigure -fa || die "Failed to reconfigure system."
