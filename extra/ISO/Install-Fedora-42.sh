@@ -139,17 +139,15 @@ sed -i 's/rhgb quiet/quiet/' /etc/default/grub || \
 
 # Configure GRUB Bootloader
 if [ "$BOOTMODE" = "UEFI" ]; then
+	# Reinstall these to regenerate grub.cfg
 	rm -rf /boot/efi/EFI/fedora/grub.cfg /boot/grub2/grub2.cfg
 	dnf reinstall -y shim-* grub2-efi-* grub2-common
-else
-	install_grub "fedora"
-fi
-
-# Add signed Fedora Boot SHIM (for UEFI Secure Boot)
-if [ "$BOOTMODE" = "UEFI" ]; then
+	# Add signed Fedora Boot SHIM (for UEFI Secure Boot)
 	efibootmgr -c -d "$drive" -p 1 -L "Fedora (Custom)" \
 		-l \\EFI\FEDORA\\SHIMX64.EFI || \
 		die "Failed to add signed Fedora Boot SHIM."
+else
+	install_grub "fedora"
 fi
 
 # Regenerate Grub Config
