@@ -69,7 +69,7 @@ export VERSION_ID="$VERSION_ID" || die "Failed to extract Fedora version."
 # Install Core Fedora Packages
 dnf --installroot=/mnt --releasever="$VERSION_ID" \
 	--setopt=max_parallel_downloads=10 \
-	--use-host-config group install -y core cinnamon-desktop || \
+	--use-host-config group install -y core cinnamon-desktop multimedia || \
 	die "Failed to install core packages."
 
 # Install System Packages
@@ -194,6 +194,8 @@ PASSWORD
 # Install Media Codecs
 dnf -y swap 'ffmpeg-free' 'ffmpeg' --allowerasing || \
 	die "Failed to swap ffmpeg-free with ffmpeg."
+dnf install -y ffmpeg --allowerasing || \
+	die "Failed to install ffmpeg."
 dnf group install -y sound-and-video || \
 	die "Failed to install sound-and-video group."
 
