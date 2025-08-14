@@ -443,6 +443,7 @@ install_grub() {
 	local cmd="grub-install"
 	# Use grub2-install for openSUSE and Fedora
 	[ "$distro" = "opensuse" ] && cmd="grub2-install"
+	[ "$distro" = "fedora" ] && cmd="grub2-install"
 	if [ "$BOOTMODE" = "UEFI" ]; then
 		# Install GRUB for UEFI
 		if [ "$REMOVABLE_BOOT" = "1" ]; then

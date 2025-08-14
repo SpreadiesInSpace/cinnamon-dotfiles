@@ -77,8 +77,8 @@ dnf --installroot=/mnt --setopt=max_parallel_downloads=10 \
 	install -y glibc-langpack-en btrfs-progs efi-filesystem efibootmgr fwupd \
 	grub2-common grub2-efi-x64 grub2-pc grub2-pc-modules grub2-tools \
 	grub2-tools-efi grub2-tools-extra grub2-tools-minimal grubby kernel \
-	mokutil shim-x64 arch-install-scripts git unzip spice-vdagent || \
-	die "Failed to install system packages."
+	mokutil shim-x64 arch-install-scripts git unzip spice-vdagent iwlwifi-* \
+	microcode_ctl || die "Failed to install system packages."
 
 # Copy Network Info
 mv /mnt/etc/resolv.conf /mnt/etc/resolv.conf.orig || \
@@ -138,8 +138,12 @@ sed -i 's/rhgb quiet/quiet/' /etc/default/grub || \
 	die "Failed to remove boot splash."
 
 # Configure GRUB Bootloader
-rm -rf /boot/efi/EFI/fedora/grub.cfg /boot/grub2/grub2.cfg
-dnf reinstall -y shim-* grub2-efi-* grub2-common
+if [ "$BOOTMODE" = "UEFI" ]; then
+	rm -rf /boot/efi/EFI/fedora/grub.cfg /boot/grub2/grub2.cfg
+	dnf reinstall -y shim-* grub2-efi-* grub2-common
+else
+	install_grub "fedora"
+fi
 
 # Add signed Fedora Boot SHIM (for UEFI Secure Boot)
 if [ "$BOOTMODE" = "UEFI" ]; then
