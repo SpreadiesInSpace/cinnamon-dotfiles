@@ -436,14 +436,13 @@ set_video_card() {
 to $video_card based on provided input"; echo
 }
 
-# NixOS doesn't use this
+# Fedora/NixOS doesn't use this
 install_grub() {
 	# Configure GRUB Bootloader
 	local distro="${1:-}"
 	local cmd="grub-install"
 	# Use grub2-install for openSUSE and Fedora
 	[ "$distro" = "opensuse" ] && cmd="grub2-install"
-	[ "$distro" = "fedora" ] && cmd="grub2-install"
 	if [ "$BOOTMODE" = "UEFI" ]; then
 		# Install GRUB for UEFI
 		if [ "$REMOVABLE_BOOT" = "1" ]; then

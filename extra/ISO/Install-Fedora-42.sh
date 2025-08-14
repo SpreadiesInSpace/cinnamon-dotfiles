@@ -140,7 +140,6 @@ sed -i 's/rhgb quiet/quiet/' /etc/default/grub || \
 # Configure GRUB Bootloader
 rm -rf /boot/efi/EFI/fedora/grub.cfg /boot/grub2/grub2.cfg
 dnf reinstall -y shim-* grub2-efi-* grub2-common
-# install_grub "fedora"
 
 # Add signed Fedora Boot SHIM (for UEFI Secure Boot)
 if [ "$BOOTMODE" = "UEFI" ]; then
