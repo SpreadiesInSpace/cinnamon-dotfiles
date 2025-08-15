@@ -192,10 +192,13 @@ $userpasswd
 PASSWORD
 
 # Install Media Codecs
+dnf -y group install multimedia || \
+	die "Multimedia group install failed."
 dnf -y swap 'ffmpeg-free' 'ffmpeg' --allowerasing || \
 	die "Failed to swap ffmpeg-free with ffmpeg."
-dnf install -y ffmpeg --allowerasing || \
-	die "Failed to install ffmpeg."
+dnf -y upgrade @multimedia --setopt="install_weak_deps=False" \
+	--exclude=PackageKit-gstreamer-plugin || \
+	die "Failed to upgrade multimedia group."
 dnf group install -y sound-and-video || \
 	die "Failed to install sound-and-video group."
 
