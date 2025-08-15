@@ -69,8 +69,8 @@ export VERSION_ID="$VERSION_ID" || die "Failed to extract Fedora version."
 # Install Core Fedora Packages
 dnf --installroot=/mnt --releasever="$VERSION_ID" \
 	--setopt=max_parallel_downloads=10 \
-	--use-host-config group install -y core cinnamon-desktop multimedia || \
-	die "Failed to install core packages."
+	--use-host-config group install -y core cinnamon-desktop multimedia \
+	sound-and-video || die "Failed to install core packages."
 
 # Install System Packages
 dnf --installroot=/mnt --setopt=max_parallel_downloads=10 \
@@ -78,7 +78,7 @@ dnf --installroot=/mnt --setopt=max_parallel_downloads=10 \
 	grub2-common grub2-efi-x64 grub2-pc grub2-pc-modules grub2-tools \
 	grub2-tools-efi grub2-tools-extra grub2-tools-minimal grubby kernel \
 	mokutil shim-x64 arch-install-scripts git unzip spice-vdagent iwlwifi-* \
-	microcode_ctl || die "Failed to install system packages."
+	microcode_ctl ffmpeg || die "Failed to install system packages."
 
 # Copy Network Info
 mv /mnt/etc/resolv.conf /mnt/etc/resolv.conf.orig || \
@@ -192,15 +192,11 @@ $userpasswd
 PASSWORD
 
 # Install Media Codecs
-dnf -y group install multimedia || \
-	die "Multimedia group install failed."
 dnf -y swap 'ffmpeg-free' 'ffmpeg' --allowerasing || \
 	die "Failed to swap ffmpeg-free with ffmpeg."
 dnf -y upgrade @multimedia --setopt="install_weak_deps=False" \
 	--exclude=PackageKit-gstreamer-plugin || \
 	die "Failed to upgrade multimedia group."
-dnf group install -y sound-and-video || \
-	die "Failed to install sound-and-video group."
 
 # Turn SELinux back on
 fixfiles -F onboot || die "Failed to turn SELinux back on."
