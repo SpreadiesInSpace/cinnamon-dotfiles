@@ -191,7 +191,6 @@ $userpasswd
 $userpasswd
 PASSWORD
 
-<<skip
 # Add RPM Fusion
 fedora_ver="$(rpm -E %fedora)"
 free="https://mirrors.rpmfusion.org/free/fedora"
@@ -211,7 +210,6 @@ dnf -y upgrade @multimedia --setopt="install_weak_deps=False" \
 	die "Failed to upgrade multimedia group."
 dnf group install -y sound-and-video || \
 	die "Failed to install sound-and-video group."
-skip
 
 # Turn SELinux back on
 fixfiles -F onboot || die "Failed to turn SELinux back on."
