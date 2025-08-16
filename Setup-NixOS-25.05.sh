@@ -65,12 +65,12 @@ sed -i "s/f16poom/$username/g" "$CONFIG" || \
 	die "Failed to replace username in configuration.nix"
 
 # Prompt the user for hostname
-prompt_hostnme
+prompt_hostname
 sed -i "s/hostName = .*;/hostName = \"$hostname\";/g" "$CONFIG" || \
 	die "Failed to update hostname in configuration.nix"
 
 # Set Timezone
-prompt_timezone
+prompt_timezone "nixos"
 sed -i "s|^\(\s*time\.timeZone\s*=\s*\).*|\\1\"$timezone\";|" "$CONFIG"
 
 

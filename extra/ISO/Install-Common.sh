@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Source common functions
-if [ -f ./Master-Common.sh ]; then
+if [ ! -f ./Master-Common.sh ]; then
 	URL="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles"
 	URL="$URL/main/extra/ISO/Master-Common.sh"
 	curl -fsSL -o Master-Common.sh "$URL" || \
