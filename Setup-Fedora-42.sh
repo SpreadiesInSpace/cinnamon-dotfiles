@@ -52,7 +52,7 @@ dnf -y install "$free" "$nonfree" || \
 dnf install -y libavcodec-freeworld
 
 # Debloat if installed via cinnamon-ISO
-if [[ ! -f ".fedora-42.done" ]]; then
+if [[ -f ".fedora-42.done" ]]; then
 	bash unsorted/Fedora/Fedora-Bloat.sh
 	touch home/.fedora.gnome
 fi
