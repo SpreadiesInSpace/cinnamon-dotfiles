@@ -39,29 +39,20 @@ fi
 dnf -y update || die "System update failed."
 dnf -y install git || die "Git installation failed."
 
-# Add RPM Fusion & Install Media Codecs
+# Add RPM Fusion
+fedora_ver="$(rpm -E %fedora)"
+free="https://mirrors.rpmfusion.org/free/fedora"
+free="$free/rpmfusion-free-release-$fedora_ver.noarch.rpm"
+nonfree="https://mirrors.rpmfusion.org/nonfree/fedora"
+nonfree="$nonfree/rpmfusion-nonfree-release-$fedora_ver.noarch.rpm"
+dnf -y install "$free" "$nonfree" || \
+	die "Failed to add RPM Fusion repositories."
+
+# Install Media Codecs
+dnf install -y libavcodec-freeworld
+
+# Debloat if installed via cinnamon-ISO
 if [[ ! -f ".fedora-42.done" ]]; then
-	# Add RPM Fusion
-	fedora_ver="$(rpm -E %fedora)"
-	free="https://mirrors.rpmfusion.org/free/fedora"
-	free="$free/rpmfusion-free-release-$fedora_ver.noarch.rpm"
-	nonfree="https://mirrors.rpmfusion.org/nonfree/fedora"
-	nonfree="$nonfree/rpmfusion-nonfree-release-$fedora_ver.noarch.rpm"
-	dnf -y install "$free" "$nonfree" || \
-		die "Failed to add RPM Fusion repositories."
-	# Install Media Codecs
-	dnf4 -y group upgrade multimedia || \
-		die "Multimedia group upgrade failed."
-	dnf -y swap 'ffmpeg-free' 'ffmpeg' --allowerasing || \
-		die "Failed to swap ffmpeg-free with ffmpeg."
-	dnf -y upgrade @multimedia --setopt="install_weak_deps=False" \
-		--exclude=PackageKit-gstreamer-plugin || \
-		die "Failed to upgrade multimedia group."
-	dnf group install -y sound-and-video || \
-		die "Failed to install sound-and-video group."
-else
-	# Skip RPM Fusion & Codecs & Debloat if installed via cinnamon-ISO
-	echo "RPM Fusion & Codecs already installed via cinnamon-ISO. Skipping."
 	bash unsorted/Fedora/Fedora-Bloat.sh
 	touch home/.fedora.gnome
 fi

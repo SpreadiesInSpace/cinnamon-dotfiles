@@ -191,26 +191,6 @@ $userpasswd
 $userpasswd
 PASSWORD
 
-# Add RPM Fusion
-fedora_ver="$(rpm -E %fedora)"
-free="https://mirrors.rpmfusion.org/free/fedora"
-free="$free/rpmfusion-free-release-$fedora_ver.noarch.rpm"
-nonfree="https://mirrors.rpmfusion.org/nonfree/fedora"
-nonfree="$nonfree/rpmfusion-nonfree-release-$fedora_ver.noarch.rpm"
-dnf -y install "$free" "$nonfree" || \
-	die "Failed to add RPM Fusion repositories."
-
-# Install Media Codecs
-dnf -y group install multimedia || \
-	die "Multimedia group upgrade failed."
-dnf -y swap 'ffmpeg-free' 'ffmpeg' --allowerasing || \
-	die "Failed to swap ffmpeg-free with ffmpeg."
-dnf -y upgrade @multimedia --setopt="install_weak_deps=False" \
-	--exclude=PackageKit-gstreamer-plugin || \
-	die "Failed to upgrade multimedia group."
-dnf group install -y sound-and-video || \
-	die "Failed to install sound-and-video group."
-
 # Turn SELinux back on
 fixfiles -F onboot || die "Failed to turn SELinux back on."
 
