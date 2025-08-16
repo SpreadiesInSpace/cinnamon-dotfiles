@@ -4,34 +4,22 @@
 # - Make Variables for Theme Related Entries (for Light Mode)
 # - Suppress Synth Shell Prompt Output
 
-check_bash_requirement() {
-	if [ -z "$BASH_VERSION" ]; then
-		echo "Error: This script requires Bash for proper functionality" >&2
+# Source common functions
+cd ..
+[ -f ./Master-Common.sh ] || die "Master-Common.sh not found."
+source ./Master-Common.sh || die "Failed to source Master-Common.sh"
+cd home/ || die "Failed to return to /home directory."
 
-		# Check if sourced
-		if [[ "${BASH_SOURCE[0]}" != "${0}" ]] 2>/dev/null; then
-			return 1
-		else
-			echo "Please run with: bash $0" >&2
-			exit 1
-		fi
+# Only Theme-Common.sh uses this
+check_app() {
+	local app="$1"
+	local msg="${2:-Skipping $app configuration...}"
+
+	if ! command -v "$app" >/dev/null 2>&1; then
+		echo "$app not found. $msg"
+		return 1
 	fi
-}
-
-# Only proceed if Bash check passes
-check_bash_requirement || return 1 2>/dev/null || exit 1
-
-die() {
-	# Handle exits on error
-	printf "\033[1;31mError:\033[0m %s\n" "$*" >&2
-	exit 1
-}
-
-check_not_root() {
-	# Prevents script from being run as root
-	if [ "$EUID" -eq 0 ]; then
-		die "This script must NOT be run as root. Please run it as a regular user."
-	fi
+	return 0
 }
 
 check_dependencies() {
@@ -44,7 +32,7 @@ check_dependencies() {
 	fi
 
 	for cmd in "${deps[@]}"; do
-		if ! command -v "$cmd" >/dev/null 2>&1; then
+		if ! check_app "$cmd" ""; then  # Empty message to suppress output
 			if [ "$cmd" = "dconf" ]; then
 				missing+=("dconf (Debian-based systems need 'dconf-cli')")
 			else
@@ -72,18 +60,6 @@ check_dependencies() {
 		done
 		die "Resolve the above issues before continuing."
 	fi
-}
-
-# Only Theme-Common.sh functions use this
-check_app() {
-	local app="$1"
-	local msg="${2:-Skipping $app configuration...}"
-
-	if ! command -v "$app" >/dev/null 2>&1; then
-		echo "$app not found. $msg"
-		return 1
-	fi
-	return 0
 }
 
 install_icons_and_themes() {

@@ -71,7 +71,8 @@ EMERGE_DEFAULT_OPTS line in make.conf"
 	fi
 
 	# Set VIDEO_CARDS value in package.use
-	set_video_card || die "Failed to set video card."
+	set_video_card "/etc/portage/package.use/00video-cards" || \
+		die "Failed to set video card."
 
 	# Drop flag so this doesn't run again
 	touch "$MAKECONF_FLAG" || die "Failed to create $MAKECONF_FLAG flag."

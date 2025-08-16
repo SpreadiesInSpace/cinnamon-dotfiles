@@ -163,7 +163,8 @@ line in make.conf"
 fi
 
 # Set VIDEO_CARDS value in package.use
-echo; set_video_card || die "Failed to set video card."
+echo; set_video_card "/mnt/gentoo/etc/portage/package.use/00video-cards" \
+	|| die "Failed to set video card."
 
 # Signal that make.conf was configured during install phase
 touch /mnt/gentoo/etc/portage/.makeconf_configured || \

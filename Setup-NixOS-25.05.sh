@@ -65,35 +65,14 @@ sed -i "s/f16poom/$username/g" "$CONFIG" || \
 	die "Failed to replace username in configuration.nix"
 
 # Prompt the user for hostname
-while true; do
-	read -rp "Enter hostname: " hostname
-	# Trim leading and trailing whitespace
-	hostname="${hostname#"${hostname%%[![:space:]]*}"}"  # leading
-	hostname="${hostname%"${hostname##*[![:space:]]}"}"  # trailing
-	if [[ -z "$hostname" ]]; then
-		echo "Hostname cannot be empty."
-	elif [[ "$hostname" =~ ^[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?$ ]]; then
-		break
-	else
-		echo "Invalid hostname. Must start/end with a letter or number and may \
-include internal hyphens."
-	fi
-done
+prompt_hostnme
 sed -i "s/hostName = .*;/hostName = \"$hostname\";/g" "$CONFIG" || \
 	die "Failed to update hostname in configuration.nix"
 
 # Set Timezone
-while true; do
-	read -rp "Enter your timezone (e.g., Asia/Bangkok): " timezone
-	timezone="${timezone:-Asia/Bangkok}"  # default if empty
-	if [ -f "/etc/zoneinfo/$timezone" ]; then
-		echo "Timezone set to: $timezone"
-		# Use sed to update the time.timeZone value in the config
-		sed -i "s|^\(\s*time\.timeZone\s*=\s*\).*|\\1\"$timezone\";|" "$CONFIG"
-		break
-	fi
-	echo "Invalid timezone: $timezone"
-done
+prompt_timezone
+sed -i "s|^\(\s*time\.timeZone\s*=\s*\).*|\\1\"$timezone\";|" "$CONFIG"
+
 
 # Place Login Wallpaper
 echo "Setting Login Wallpaper..."
