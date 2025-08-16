@@ -69,8 +69,8 @@ export VERSION_ID="$VERSION_ID" || die "Failed to extract Fedora version."
 # Install Core Fedora Packages
 dnf --installroot=/mnt --releasever="$VERSION_ID" \
 	--setopt=max_parallel_downloads=10 \
-	--use-host-config group install -y core cinnamon-desktop multimedia \
-	sound-and-video || die "Failed to install core packages."
+	--use-host-config group install -y core cinnamon-desktop || \
+	die "Failed to install core packages."
 
 # Install System Packages
 dnf --installroot=/mnt --setopt=max_parallel_downloads=10 \
@@ -191,14 +191,27 @@ $userpasswd
 $userpasswd
 PASSWORD
 
+<<skip
+# Add RPM Fusion
+fedora_ver="$(rpm -E %fedora)"
+free="https://mirrors.rpmfusion.org/free/fedora"
+free="$free/rpmfusion-free-release-$fedora_ver.noarch.rpm"
+nonfree="https://mirrors.rpmfusion.org/nonfree/fedora"
+nonfree="$nonfree/rpmfusion-nonfree-release-$fedora_ver.noarch.rpm"
+dnf -y install "$free" "$nonfree" || \
+	die "Failed to add RPM Fusion repositories."
+
 # Install Media Codecs
+dnf -y group install multimedia || \
+	die "Multimedia group upgrade failed."
 dnf -y swap 'ffmpeg-free' 'ffmpeg' --allowerasing || \
 	die "Failed to swap ffmpeg-free with ffmpeg."
 dnf -y upgrade @multimedia --setopt="install_weak_deps=False" \
 	--exclude=PackageKit-gstreamer-plugin || \
 	die "Failed to upgrade multimedia group."
-dnf install ffmpeg --allowerasing || \
-	die "Failed to install ffmpeg."
+dnf group install -y sound-and-video || \
+	die "Failed to install sound-and-video group."
+skip
 
 # Turn SELinux back on
 fixfiles -F onboot || die "Failed to turn SELinux back on."
