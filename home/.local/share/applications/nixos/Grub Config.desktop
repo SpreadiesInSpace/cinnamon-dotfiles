@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Grub Config
+Exec=bash -c '\nwhile true; do\n  read -p "Enter GRUB timeout in seconds: " timeout\n  if [[ "$timeout" =~ ^[0-9]+$ ]]; then\n    sudo sed -i "s/^\\\\(\\\\s*\\\\)timeout\\\\s*=.*/\\\\1timeout = $timeout;/" /etc/nixos/configuration.nix || {\n      echo "Error: Failed to update timeout."\n      read -rp "Press Enter to exit..."\n      exit 1\n    }\n    sudo nixos-rebuild switch || {\n      echo "Error: nixos-rebuild failed."\n      read -rp "Press Enter to exit..."\n      exit 1\n    }\n    echo "Timeout updated and configuration applied successfully."\n    read -rp "Press Enter to exit..."\n    break\n  else\n    echo "Invalid input. Please enter a positive integer."\n  fi\ndone\n'
+Comment=Change the GRUB Timer
+Terminal=true
+PrefersNonDefaultGPU=false
+Icon=grub-customizer
+Type=Application
+Categories=System;FileTools
+Name[en_US]=Grub Config

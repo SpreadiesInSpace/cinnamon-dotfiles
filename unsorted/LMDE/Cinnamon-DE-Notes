@@ -1,0 +1,140 @@
+# Bash Scripts
+https://pastebin.com/3KEhUUzF
+
+# BTRFS Subvolumes (for Timeshift) - 1GiB EFI + Remaining BTRFS
+mkfs.vfat /dev/vda1
+mkfs.btrfs -f /dev/vda2
+mount /dev/vda2 /mnt
+btrfs su cr /mnt/@
+btrfs su cr /mnt/@home
+umount /mnt
+
+# BTRFS Mounts (ssd autodetects since 2011, space_cache=v2 default since Kernel 5.15)
+mount -o noatime,compress=zstd,discard=async,subvol=@ /dev/vda2 /mnt/ 
+mkdir -p /mnt/home
+mount -o noatime,compress=zstd,discard=async,subvol=@home /dev/vda2 /mnt/home 
+mkdir -p /mnt/boot/efi
+mount /dev/vda1 /mnt/boot/efi
+
+# BTRFS Mounts - Gentoo
+mkdir -p /mnt/gentoo
+mount -o noatime,compress=zstd,discard=async,subvol=@ /dev/vda2 /mnt/gentoo 
+mkdir -p /mnt/gentoo/home
+mount -o noatime,compress=zstd,discard=async,subvol=@home /dev/vda2 /mnt/gentoo/home 
+mkdir -p /mnt/gentoo/efi
+mount /dev/vda1 /mnt/gentoo/efi
+
+# Mount Shared Folder
+chmod 777 Share
+
+# virtio-9p
+sudo mount -t 9p -o trans=virtio /sharepoint /home/f16poom/Share;sudo nano /etc/fstab
+/sharepoint /home/f16poom/Share 9p trans=virtio,version=9p2000.L,rw 0 0
+
+# virtiofs
+sudo mount -t virtiofs /sharepoint /home/f16poom/Share;sudo nano /etc/fstab
+/sharepoint /home/f16poom/Share virtiofs rw,_netdev 0 0
+
+# Brave Browser Setup
+https://brave.com/linux/#release-channel-installation
+https://pastebin.com/J8hgRrde (t.ly/Kdi1)
+SpeedDial2 - s68buWh864jbF4
+
+# General Package List
+bleachbit celluloid filezilla flatpak gedit git gnome-calculator gnome-screenshot gnome-system-monitor gnome-terminal gparted gpaste grub-customizer gufw kdeconnect kvantum libreoffice ncdu neofetch neovim qbittorrent qt5ct rhythmbox timeshift virt-manager
+
+# Additiaonal Package List
+bottom brave git-cli grub-btrfs timeshift-autosnap
+
+# Distro Specific Apps
+
+Arch - bauh python-lxml beautifulsoup4 (pip)
+yay -S --mflags "--nocheck" guestfs-tools
+
+# Debian/Ubuntu - Synaptic
+
+# KDE Neon - Cinnamon 5.2.7
+sudo nano /etc/apt/sources.list
+deb [trusted=yes] https://mirror.kku.ac.th/linuxmint-packages una main upstream import backport
+
+# Mint Bloat
+baobab bulky celluloid drawing firefox gnome-calendar gnome-disk-utility hexchat hypnotix mint-artwork mint-backgrounds* mintbackup mintstick mintupdate numix* papirus-icon-theme pix pppoeconf redshift simple-scan thingy thunderbird transmission-gtk warpinator webapp-manager xed xreader xviewer mint-L* mint-x* mint-y* 
+
+# Fedora Bloat
+eom google-noto-seriff* ibus paper-icon-theme pidgin shotwell tracker-miners xawtv xfburn
+
+# Distro Specific Instructions
+
+# KDE Neon
+GRUB_RECORDFAIL_TIMEOUT=0
+
+# Puppy
+Set Drive to USB
+
+# Void
+Terminal Bold Color #27A268
+
+# Custom Keyboard Shortcuts
+xkill  
+gnome-terminal -- bash -c 'neofetch;exec bash;'
+gnome-screenshot -i
+gnome-system-monitor
+cinnamon-session-quit --power-off
+
+# System Shortcuts
+Log Out - Ctrl+Alt+End
+Lock Screen - Win+L
+
+# Clock Formatting
+Desktop 
+ %-l:%M %p   
+Screensaver
+%-l:%M %p
+ %A %B %-e
+Login Window
+%a, %-e %b %-l:%M %p 
+
+# Misc. Settings
+Windows Tiling - Maximize Top Edge
+Sounds - 70% Login Logout & Volume
+
+# Themes
+git clone https://github.com/jmattheis/gruvbox-dark-icons-gtk /usr/share/icons/gruvbox-dark-icons-gtk
+https://github.com/sainnhe/capitaine-cursors/releases
+https://www.pling.com/p/1681313/
+
+# Themes (Old)
+git clone https://github.com/vinceliuice/Qogir-icon-theme
+Mint-Y + Mint-Y-Dark-Drey
+
+# Fonts
+(Noto) Sans Regular 9
+Noto Sans Display Regular 10
+Cantarell Regular 11
+Source Code Pro Regular 10
+(Noto) Sans Bold 10
+
+# Taskbar Settings
+46px Size
+
+# Cinnamon Grouped Window List Padding (Cinnamon 5.4+)
+/usr/share/cinnamon/applets/grouped-window-list@cinnamon.org/appGroup.js
+setIconPadding(panelHeight) {
+    this.iconBox.style = 'padding: 5.5px';
+    if (!this.state.isHorizontal) return;
+    this.actor.style = 'padding-left: 0px; padding-right: 0px;';
+}
+
+# Cinnamon Menu Width 
+/usr/share/cinnamon/applets/menu@cinnamon.org/applet.js
+Applications Directory Width
+const MAX_BUTTON_WIDTH = "max-width: 10em;"; # (12 for Gruvbox)
+
+# Applications List Width
+this.applicationsBox.set_width(width + 22); // The answer to life... # (12 for Gruvbox)
+
+# Applets: Gpaste Reloaded, Drawer
+
+# Gpaste Setup
+gir1.2-gpaste-4.0
+https://github.com/Feuerfuchs/GPaste-Reloaded-Cinnamon-Applet/blob/master/gpaste-reloaded%40feuerfuchs.eu/GPasteHistoryItem.js

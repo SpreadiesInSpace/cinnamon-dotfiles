@@ -1,0 +1,17 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Version=1.1
+Type=Application
+Name=BleachBit
+Comment=Free space and maintain privacy
+GenericName=Unnecessary file cleaner
+TryExec=bleachbit
+Exec=bleachbit
+Icon=bleachbit
+Categories=System;FileTools;GTK;
+Keywords=cache;clean;free;performance;privacy;
+StartupNotify=true
+X-GNOME-UsesNotifications=true
+Name[en_US]=Bleachbit
+Hidden=true

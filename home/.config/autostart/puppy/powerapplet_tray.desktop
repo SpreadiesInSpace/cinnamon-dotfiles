@@ -1,0 +1,7 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+NoDisplay=false
+Name=powerapplet_tray
+Exec=powerapplet_tray
+X-GNOME-Autostart-enabled=false

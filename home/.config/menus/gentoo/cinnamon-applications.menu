@@ -1,0 +1,53 @@
+<?xml version="1.0" ?>
+<!DOCTYPE Menu
+  PUBLIC '-//freedesktop//DTD Menu 1.0//EN'
+  'http://standards.freedesktop.org/menu-spec/menu-1.0.dtd'>
+<Menu>
+	<Name>Applications</Name>
+	<MergeFile type="parent">/etc/xdg/menus/cinnamon-applications.menu</MergeFile>
+	<Menu>
+		<Name>Science</Name>
+		<Exclude>
+			<Filename>libreoffice-math.desktop</Filename>
+		</Exclude>
+		<AppDir>/home/f16poom/.local/share/applications</AppDir>
+		<Exclude>
+			<Filename>libreoffice24.8-math.desktop</Filename>
+		</Exclude>
+	</Menu>
+	<Menu>
+		<Name>Office</Name>
+		<Exclude>
+			<Filename>org.gnome.Evince.desktop</Filename>
+		</Exclude>
+		<AppDir>/home/f16poom/.local/share/applications</AppDir>
+		<Exclude>
+			<Filename>libreoffice24.8-startcenter.desktop</Filename>
+		</Exclude>
+		<Exclude>
+			<Filename>libreoffice24.8-base.desktop</Filename>
+		</Exclude>
+		<Exclude>
+			<Filename>libreoffice24.8-calc.desktop</Filename>
+		</Exclude>
+		<Exclude>
+			<Filename>libreoffice24.8-draw.desktop</Filename>
+		</Exclude>
+		<Exclude>
+			<Filename>libreoffice24.8-impress.desktop</Filename>
+		</Exclude>
+		<Exclude>
+			<Filename>libreoffice24.8-math.desktop</Filename>
+		</Exclude>
+		<Exclude>
+			<Filename>libreoffice24.8-writer.desktop</Filename>
+		</Exclude>
+	</Menu>
+	<Menu>
+		<Name>Graphics</Name>
+		<Exclude>
+			<Filename>libreoffice24.8-draw.desktop</Filename>
+		</Exclude>
+		<AppDir>/home/f16poom/.local/share/applications</AppDir>
+	</Menu>
+</Menu>

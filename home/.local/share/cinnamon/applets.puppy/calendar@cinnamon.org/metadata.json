@@ -1,0 +1,7 @@
+{
+ "uuid": "calendar@cinnamon.org",
+ "name": "Calendar",
+ "description": "The Cinnamon calendar applet",
+ "icon": "gnome-calendar",
+ "max-instances": -1
+}

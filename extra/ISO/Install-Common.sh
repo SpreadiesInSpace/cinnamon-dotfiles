@@ -1,0 +1,417 @@
+#!/bin/bash
+
+# Source common functions
+if [ ! -f ./Master-Common.sh ]; then
+	URL="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles"
+	URL="$URL/main/extra/ISO/Master-Common.sh"
+
+	# Try curl first, fallback to wget if curl is not available
+	if command -v curl >/dev/null 2>&1; then
+		curl -fsSL -o Master-Common.sh "$URL" || \
+			die "Failed to download Master-Common.sh"
+	elif command -v wget >/dev/null 2>&1; then
+		wget -qO Master-Common.sh "$URL" || \
+			die "Failed to download Master-Common.sh"
+	else
+		die "Neither curl nor wget is available for downloading Master-Common.sh"
+	fi
+fi
+source ./Master-Common.sh || die "Failed to source Master-Common.sh"
+
+detect_boot_mode() {
+	# Detect if booted in UEFI or BIOS mode
+	if [ -d /sys/firmware/efi ]; then
+		BOOTMODE="UEFI"
+		REMOVABLE_BOOT="0"
+		# Check if efivarfs is mounted
+		if ! grep -q 'efivarfs' /proc/mounts; then
+			echo "efivars not mounted. Attempting to mount efivarfs..."
+			if ! mount -t efivarfs efivarfs /sys/firmware/efi/efivars \
+				2>/dev/null; then
+				echo "Failed to mount efivarfs. Attempting to remount as read-write..."
+				if ! mount -o remount,rw,nosuid,nodev,noexec --types \
+					efivarfs efivarfs /sys/firmware/efi/efivars 2>/dev/null; then
+					# At this point, efivars exists but is not writable/mountable
+					if [ ! -w /sys/firmware/efi/efivars ]; then
+						# Writable access blocked — may be removable boot
+						REMOVABLE_BOOT="1"
+					fi
+					die "UEFI detected but efivarfs is not accessible.
+This is likely a permissions or kernel setting issue."
+				fi
+			fi
+		fi
+		# If efivarfs is mounted but not writable, mark as removable boot
+		if [ ! -w /sys/firmware/efi/efivars ]; then
+			REMOVABLE_BOOT="1"
+		fi
+	else
+		BOOTMODE="BIOS"
+		echo "WARNING: You are booted in BIOS mode."
+		echo "Continuing in BIOS mode."
+	fi
+}
+
+prompt_root_password() {
+	# Prompt for root password
+	while true; do
+		read -rsp "Enter new root password: " rootpasswd; echo
+		read -rsp "Confirm root password: " rootpasswd_confirm; echo
+		if [ -z "$rootpasswd" ]; then
+			echo "Root password cannot be empty."
+			continue
+		fi
+		if [ "$rootpasswd" != "$rootpasswd_confirm" ]; then
+			echo "Passwords do not match. Try again."
+			continue
+		fi
+		break
+	done
+}
+
+prompt_username() {
+	# Prompt for new username
+	while true; do
+		read -rp "Enter new username: " username
+		if [[ -z "$username" ]]; then
+			echo "Username cannot be empty."
+		elif [[ "$username" =~ ^[a-z_][a-z0-9_-]*$ ]]; then
+			break
+		else
+			echo "Invalid username. Use only lowercase letters, numbers, \
+underscores or hyphens."
+			echo "(cannot start with number or hyphen)"
+		fi
+	done
+}
+
+prompt_user_password() {
+	# Prompt for new user password
+	while true; do
+		read -rsp "Enter password for $username: " userpasswd; echo
+		read -rsp "Confirm password for $username: " userpasswd_confirm; echo
+		if [ -z "$userpasswd" ]; then
+			echo "User password cannot be empty."
+			continue
+		fi
+		if [ "$userpasswd" != "$userpasswd_confirm" ]; then
+			echo "Passwords do not match. Try again."
+			continue
+		fi
+		break
+	done
+}
+
+prompt_drive() {
+	# Prompt for drive to partition
+	echo; lsblk; echo
+	while true; do
+		read -rp "Enter drive to use (e.g., /dev/sda, /dev/nvme0n1, \
+/dev/mmcblk0): " drive
+		# Check if the drive is a valid block device and not a partition
+		if [[ "$drive" =~ ^/dev/(sd[a-z]+|nvme[0-9]+n[0-9]+|mmcblk[0-9]+|vd[a-z]+)$ ]] &&
+			[ -b "$drive" ]; then
+			echo "WARNING: This will erase all data on $drive"
+			read -rp "Are you sure you want to continue? [y/N]: " confirm
+			case "$confirm" in
+				[yY][eE][sS]|[yY]) break ;;
+				*) die "Aborting." ;;
+			esac
+		else
+			echo "Invalid drive: $drive"
+			echo "Please enter a valid drive without a partition number."
+			echo "(e.g., /dev/sda, /dev/nvme0n1, /dev/mmcblk0)"
+		fi
+	done
+}
+
+# Only NixOS uses this
+prompt_for_autologin() {
+	# Autologin Prompt
+	while true; do
+		read -rp "Enable autologin for $username? [y/N]: " autologin_input
+		if [[ "$autologin_input" =~ ^([yY]|[yY][eE][sS])$ ]]; then
+			enable_autologin=true
+			break
+		elif [[ "$autologin_input" =~ ^([nN]|[nN][oO])$ || \
+				-z "$autologin_input" ]]; then
+			enable_autologin=false
+			break
+		else
+			echo "Invalid input. Please answer y or n."
+		fi
+	done
+}
+
+partition_drive() {
+	local distro="${1:-}"
+	# Find parted binary
+	if command -v parted >/dev/null 2>&1; then
+		PARTED="parted"
+	elif [ -x /usr/sbin/parted ]; then
+		PARTED="/usr/sbin/parted"
+	else
+		die "parted not found. Cannot partition the drive."
+	fi
+
+	# Determine if we need separate /boot (Fedora requirement)
+	local need_boot_partition=false
+	[ "$distro" = "fedora" ] && need_boot_partition=true
+
+	if [ "$BOOTMODE" = "UEFI" ]; then
+		# Create GPT partition table
+		"$PARTED" -s "$drive" mklabel gpt || \
+			die "Failed to create GPT partition table."
+
+		if [ "$need_boot_partition" = true ]; then
+			# Fedora: ESP + /boot + root
+			"$PARTED" -s "$drive" mkpart primary fat32 1MiB 601MiB || \
+				die "Failed to create EFI partition."
+			"$PARTED" -s "$drive" set 1 esp on || \
+				die "Failed to set ESP flag."
+			"$PARTED" -s "$drive" mkpart primary ext4 601MiB 1625MiB || \
+				die "Failed to create boot partition."
+			"$PARTED" -s "$drive" mkpart primary btrfs 1625MiB 100% || \
+				die "Failed to create root partition."
+		else
+			# Other distros: ESP + root
+			"$PARTED" -s "$drive" mkpart primary fat32 1MiB 1050MiB || \
+				die "Failed to create EFI partition."
+			"$PARTED" -s "$drive" set 1 esp on || \
+				die "Failed to set ESP flag."
+			"$PARTED" -s "$drive" mkpart primary btrfs 1050MiB 100% || \
+				die "Failed to create root partition."
+		fi
+	else
+		# Create MBR partition table for BIOS
+		"$PARTED" -s "$drive" mklabel msdos || \
+			die "Failed to create MBR partition table."
+
+		if [ "$need_boot_partition" = true ]; then
+			# Fedora BIOS: /boot + root
+			"$PARTED" -s "$drive" mkpart primary ext4 1MiB 1025MiB || \
+				die "Failed to create boot partition."
+			"$PARTED" -s "$drive" set 1 boot on || \
+				die "Failed to set boot flag."
+			"$PARTED" -s "$drive" mkpart primary btrfs 1025MiB 100% || \
+				die "Failed to create root partition."
+		else
+			# Other distros BIOS: root only
+			"$PARTED" -s "$drive" mkpart primary btrfs 1MiB 100% || \
+				die "Failed to create root partition."
+			"$PARTED" -s "$drive" set 1 boot on || \
+				die "Failed to set boot flag."
+		fi
+	fi
+}
+
+partition_suffix() {
+	local distro="${1:-}"
+	# Determine correct partition suffix
+	local suffix=""
+	[[ "$drive" == *"nvme"* || "$drive" == *"mmcblk"* ]] && suffix="p"
+
+	# Determine if we need separate /boot (Fedora requirement)
+	local need_boot_partition=false
+	[ "$distro" = "fedora" ] && need_boot_partition=true
+
+	if [ "$BOOTMODE" = "UEFI" ]; then
+		if [ "$need_boot_partition" = true ]; then
+			# Fedora: ESP + /boot + root
+			EFI="${drive}${suffix}1"
+			BOOT="${drive}${suffix}2"
+			ROOT="${drive}${suffix}3"
+		else
+			# Other distros: ESP + root
+			EFI="${drive}${suffix}1"
+			ROOT="${drive}${suffix}2"
+			BOOT=""  # No separate boot partition
+		fi
+	else
+		if [ "$need_boot_partition" = true ]; then
+			# Fedora BIOS: /boot + root
+			BOOT="${drive}${suffix}1"
+			ROOT="${drive}${suffix}2"
+			EFI=""  # No EFI partition
+		else
+			# Other distros BIOS: root only
+			ROOT="${drive}${suffix}1"
+			BOOT=""  # No separate boot partition
+			EFI=""   # No EFI partition
+		fi
+	fi
+}
+
+format_partitions() {
+	# Format the partitions
+	if [ "$BOOTMODE" = "UEFI" ] && [ -n "$EFI" ]; then
+		mkfs.fat -F32 "$EFI" || die "Failed to format EFI partition."
+	fi
+	if [ -n "$BOOT" ]; then
+		mkfs.ext4 -F "$BOOT" || die "Failed to format boot partition."
+	fi
+	mkfs.btrfs -f "$ROOT" || die "Failed to format root partition."
+}
+
+create_btrfs_subvolumes() {
+	# Create BTRFS subvolumes
+	mount "$ROOT" /mnt || die "Failed to mount root partition."
+	btrfs su cr /mnt/@ || die "Failed to create subvolume @."
+	btrfs su cr /mnt/@home || die "Failed to create subvolume @home."
+	btrfs su cr /mnt/@.snapshots || \
+		die "Failed to create subvolume @.snapshots."
+	umount /mnt || die "Failed to unmount root partition."
+}
+
+mount_partitions() {
+	# Mount the partitions
+	local distro="${1:-}"
+	local MNT="/mnt"
+	[ "$distro" = "gentoo" ] && MNT="/mnt/gentoo"
+
+	mkdir -p "$MNT" || die "Failed to create $MNT."
+	mount -o noatime,compress=zstd,discard=async,subvol=@ "$ROOT" "$MNT" || \
+		die "Failed to mount root subvolume."
+
+	# Create and mount home
+	mkdir -p "$MNT/home" || die "Failed to create $MNT/home."
+	mount -o noatime,compress=zstd,discard=async,subvol=@home \
+		"$ROOT" "$MNT/home" || die "Failed to mount home subvolume."
+
+	# Mount snapshots subvolume (universal)
+	mkdir -p "$MNT/.snapshots" || die "Failed to create $MNT/.snapshots."
+	mount -o noatime,compress=zstd,discard=async,subvol=@.snapshots \
+		"$ROOT" "$MNT/.snapshots" || die "Failed to mount snapshots subvolume."
+
+	# Handle boot partition mounting
+	if [ -n "$BOOT" ]; then
+		# Separate /boot partition (Fedora)
+		mkdir -p "$MNT/boot" || die "Failed to create $MNT/boot."
+		mount "$BOOT" "$MNT/boot" || die "Failed to mount boot partition."
+
+		# Mount EFI inside /boot for Fedora
+		if [ "$BOOTMODE" = "UEFI" ] && [ -n "$EFI" ]; then
+			mkdir -p "$MNT/boot/efi" || die "Failed to create $MNT/boot/efi."
+			mount "$EFI" "$MNT/boot/efi" || die "Failed to mount EFI partition."
+		fi
+	elif [ "$BOOTMODE" = "UEFI" ] && [ -n "$EFI" ]; then
+		# Direct EFI mounting for other distros
+		if [ "$distro" = "nixos" ]; then
+			mkdir -p "$MNT/boot" || die "Failed to create $MNT/boot."
+			mount "$EFI" "$MNT/boot" || \
+				die "Failed to mount EFI partition to /boot."
+		else
+			mkdir -p "$MNT/boot/efi" || die "Failed to create $MNT/boot/efi."
+			mount "$EFI" "$MNT/boot/efi" || \
+				die "Failed to mount EFI partition to /boot/efi."
+		fi
+	fi
+}
+
+# Only Fedora/Gentoo/openSUSE/Slackware uses this
+mount_system_partitions() {
+	local distro="${1:-}"
+	# Mount System Partitions
+	local MNT="/mnt"
+	[ "$distro" = "gentoo" ] && MNT="/mnt/gentoo"
+
+	mkdir -p "$MNT"/{proc,sys,dev,run} || \
+		die "Failed to create system mount points."
+	mount --types proc /proc "$MNT/proc" || die "Failed to mount /proc."
+	mount --rbind /sys "$MNT/sys" || die "Failed to bind-mount /sys."
+	mount --make-rslave "$MNT/sys" || die "Failed to make /sys rslave."
+	mount --rbind /dev "$MNT/dev" || die "Failed to bind-mount /dev."
+	mount --make-rslave "$MNT/dev" || die "Failed to make /dev rslave."
+	mount --bind /run "$MNT/run" || die "Failed to bind-mount /run."
+	mount --make-slave "$MNT/run" || die "Failed to make /run slave."
+}
+
+# Only Gentoo uses this
+prompt_init_system() {
+	# Prompt for init system
+	while true; do
+		echo "Select your init system:"
+		echo
+		echo "1) OpenRC"
+		echo "2) systemd"
+		echo
+		read -rp "Enter the number corresponding to your init system: " \
+			init_system_number
+
+		case $init_system_number in
+			1) init_system="openrc"; break ;;
+			2) init_system="systemd"; break ;;
+			*) echo "Invalid selection, please try again." ;;
+		esac
+	done
+}
+
+# Fedora/NixOS doesn't use this
+install_grub() {
+	# Configure GRUB Bootloader
+	local distro="${1:-}"
+	local cmd="grub-install"
+	# Use grub2-install for openSUSE and Fedora
+	[ "$distro" = "opensuse" ] && cmd="grub2-install"
+	[ "$distro" = "fedora" ] && cmd="grub2-install"
+	if [ "$BOOTMODE" = "UEFI" ]; then
+		# Install GRUB for UEFI
+		if [ "$REMOVABLE_BOOT" = "1" ]; then
+			"$cmd" --target=x86_64-efi --efi-directory=/boot/efi \
+				--bootloader-id="$distro" --removable || \
+				die "Failed to install GRUB (UEFI removable)."
+		else
+			"$cmd" --target=x86_64-efi --efi-directory=/boot/efi \
+				--bootloader-id="$distro" || die "Failed to install GRUB (UEFI)."
+		fi
+	else
+		# Install GRUB for BIOS
+		"$cmd" --target=i386-pc --boot-directory=/boot "$drive" || \
+			die "Failed to install GRUB (BIOS)."
+	fi
+}
+
+clone_dotfiles() {
+	# Clone cinnamon-dotfiles repo as new user
+	local distro="${1:-}"
+
+	if [ "$distro" = "nixos" ]; then
+			# NixOS uses nixos-enter and creates multiple flag files
+			nixos-enter --root /mnt -c "su - $username -c '
+					cd \$HOME &&
+					git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles ||
+							{ echo \"Failed to clone repo.\"; exit 1; }
+					cd cinnamon-dotfiles ||
+							{ echo \"Failed to enter repo directory.\"; exit 1; }
+					touch .nixos-25.05.done .$distro.done ||
+							{ echo \"Failed to create flags.\"; exit 1; }
+					echo \"Reboot and run Theme.sh in cinnamon-dotfiles located in \
+\$HOME/cinnamon-dotfiles.\"'" || die "Failed to clone repo for NixOS."
+	else
+			cat << CLONE | su - "$username"
+cd && git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles || \
+	die "Failed to clone repo."
+cd cinnamon-dotfiles || die "Failed to enter repo directory."
+touch .$distro.done || die "Failed to create flag."
+echo "Reboot and run Setup.sh in cinnamon-dotfiles located in \
+\$HOME/cinnamon-dotfiles."
+CLONE
+	fi
+}
+
+# Only Void uses this
+set_monospace_font() {
+	# Create first-boot script to set monospace font (for gnome-terminal)
+	su - "$username" -c "
+	mkdir -p ~/.config/autostart || die 'Failed to create autostart directory.'
+	cat > ~/.config/autostart/set-font.desktop << 'MONOSPACE'
+[Desktop Entry]
+Type=Application
+Name=Set Monospace Font
+Exec=sh -c 'gsettings set org.gnome.desktop.interface monospace-font-name \"DejaVu Sans Mono 11\" && rm ~/.config/autostart/set-font.desktop'
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+MONOSPACE
+	" || die "Failed to create font setup script."
+}

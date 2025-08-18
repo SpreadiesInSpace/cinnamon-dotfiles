@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<!DOCTYPE Menu
+  PUBLIC '-//freedesktop//DTD Menu 1.0//EN'
+  'http://standards.freedesktop.org/menu-spec/menu-1.0.dtd'>
+<Menu>
+	<Name>Applications</Name>
+	<MergeFile type="parent">/etc/xdg/menus/cinnamon-applications.menu</MergeFile>
+	<Menu>
+		<Name>Other</Name>
+		<Exclude>
+			<Filename>gnome-online-accounts-gtk.desktop</Filename>
+		</Exclude>
+		<AppDir>/home/f16poom/.local/share/applications</AppDir>
+	</Menu>
+	<Menu>
+		<Name>Office</Name>
+		<Exclude>
+			<Filename>org.gnome.Evince.desktop</Filename>
+		</Exclude>
+		<AppDir>/home/f16poom/.local/share/applications</AppDir>
+	</Menu>
+</Menu>

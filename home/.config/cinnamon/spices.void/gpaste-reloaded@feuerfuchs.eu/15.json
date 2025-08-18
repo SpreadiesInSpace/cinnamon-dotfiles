@@ -1,0 +1,56 @@
+{
+    "shown-entries": {
+        "type": "header",
+        "description": "Shown entries"
+    },
+    "display-track-switch": {
+        "default": true,
+        "type": "checkbox",
+        "description": "Display 'Track clipboard changes'",
+        "value": true
+    },
+    "display-new-item": {
+        "default": true,
+        "type": "checkbox",
+        "description": "Display 'New item'",
+        "value": true
+    },
+    "display-searchbar": {
+        "default": true,
+        "type": "checkbox",
+        "description": "Display search bar",
+        "value": false
+    },
+    "display-gpaste-ui": {
+        "default": false,
+        "type": "checkbox",
+        "description": "Display 'GPaste Main Program'",
+        "value": false
+    },
+    "display-empty-history": {
+        "default": true,
+        "type": "checkbox",
+        "description": "Display 'Empty history'",
+        "value": true
+    },
+    "key-bindings": {
+        "type": "header",
+        "description": "Key bindings"
+    },
+    "kb-show-history": {
+        "type": "keybinding",
+        "description": "Show history",
+        "default": "<Super>h",
+        "value": "<Super>h"
+    },
+    "other": {
+        "type": "header",
+        "description": "Other"
+    },
+    "gpaste-settings": {
+        "type": "button",
+        "description": "GPaste Main Program",
+        "callback": "openUI"
+    },
+    "__md5__": "ee35d1a6f68bbd2a92cbc6a042aade04"
+}

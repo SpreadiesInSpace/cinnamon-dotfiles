@@ -1,0 +1,12 @@
+# required by app-crypt/swtpm-0.10.0::gentoo
+# required by app-emulation/libvirt-11.1.0::gentoo[qemu]
+# required by app-emulation/libvirt-glib-5.0.0::gentoo
+# required by app-emulation/virt-manager-5.0.0-r1::gentoo
+# required by app-emulation/virt-manager (argument)
+>=net-libs/gnutls-3.8.9-r1 pkcs11 tools
+# required by app-editors/gedit-plugins-46.0-r1::gentoo[git]
+# required by app-editors/gedit-plugins (argument)
+>=dev-libs/libgit2-glib-1.2.1-r1 python
+# required by app-backup/timeshift-23.07.1::guru
+# required by app-backup/timeshift (argument)
+>=x11-libs/xapp-2.8.5-r1 vala

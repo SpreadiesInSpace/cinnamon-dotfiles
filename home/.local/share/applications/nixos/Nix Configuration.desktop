@@ -1,0 +1,16 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Version=1.1
+Type=Application
+Name=NixOS Configuration
+Comment=
+GenericName=Nix Configuration
+Exec=gedit admin:///etc/nixos/configuration.nix
+Icon=software
+Categories=System;FileTools;GTK;
+Keywords=cache;clean;free;performance;privacy;
+StartupNotify=true
+X-GNOME-UsesNotifications=true
+Name[en_US]=Nix Configuration
+Terminal=false
+PrefersNonDefaultGPU=false

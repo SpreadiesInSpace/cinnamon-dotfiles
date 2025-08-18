@@ -1,0 +1,249 @@
+{
+    "additional-repositories": [
+        "multilib"
+    ],
+    "archinstall-language": "English",
+    "audio_config": {
+        "audio": "pipewire"
+    },
+    "bootloader": "Grub",
+    "config_version": "2.7.2",
+    "debug": false,
+    "disk_config": {
+        "config_type": "default_layout",
+        "device_modifications": [
+            {
+                "device": "/dev/vda",
+                "partitions": [
+                    {
+                        "btrfs": [],
+                        "dev_path": null,
+                        "flags": [
+                            "Boot",
+                            "ESP"
+                        ],
+                        "fs_type": "fat32",
+                        "mount_options": [],
+                        "mountpoint": "/boot",
+                        "obj_id": "5ea30473-0151-46c9-8e63-34e4bc3b91b8",
+                        "size": {
+                            "sector_size": {
+                                "unit": "B",
+                                "value": 512
+                            },
+                            "unit": "MiB",
+                            "value": 512
+                        },
+                        "start": {
+                            "sector_size": {
+                                "unit": "B",
+                                "value": 512
+                            },
+                            "unit": "MiB",
+                            "value": 1
+                        },
+                        "status": "create",
+                        "type": "primary"
+                    },
+                    {
+                        "btrfs": [
+                            {
+                                "compress": false,
+                                "mountpoint": "/",
+                                "name": "@",
+                                "nodatacow": false
+                            },
+                            {
+                                "compress": false,
+                                "mountpoint": "/home",
+                                "name": "@home",
+                                "nodatacow": false
+                            },
+                            {
+                                "compress": false,
+                                "mountpoint": "/var/log",
+                                "name": "@log",
+                                "nodatacow": false
+                            },
+                            {
+                                "compress": false,
+                                "mountpoint": "/var/cache/pacman/pkg",
+                                "name": "@pkg",
+                                "nodatacow": false
+                            },
+                            {
+                                "compress": false,
+                                "mountpoint": "/.snapshots",
+                                "name": "@.snapshots",
+                                "nodatacow": false
+                            }
+                        ],
+                        "dev_path": null,
+                        "flags": [],
+                        "fs_type": "btrfs",
+                        "mount_options": [
+                            "compress=zstd"
+                        ],
+                        "mountpoint": null,
+                        "obj_id": "ce11f655-9e52-4365-87b4-ee0f2232233f",
+                        "size": {
+                            "sector_size": {
+                                "unit": "B",
+                                "value": 512
+                            },
+                            "unit": "B",
+                            "value": 15567159296
+                        },
+                        "start": {
+                            "sector_size": {
+                                "unit": "B",
+                                "value": 512
+                            },
+                            "unit": "B",
+                            "value": 537919488
+                        },
+                        "status": "create",
+                        "type": "primary"
+                    }
+                ],
+                "wipe": true
+            }
+        ]
+    },
+    "hostname": "Arch",
+    "kernels": [
+        "linux"
+    ],
+    "locale_config": {
+        "kb_layout": "us",
+        "sys_enc": "UTF-8",
+        "sys_lang": "en_US"
+    },
+    "mirror_config": {
+        "custom_mirrors": [],
+        "mirror_regions": {
+            "China": [
+                "https://mirrors.xjtu.edu.cn/archlinux/$repo/os/$arch",
+                "https://mirrors.wsyu.edu.cn/archlinux/$repo/os/$arch",
+                "https://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch",
+                "https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch",
+                "https://mirrors.sjtug.sjtu.edu.cn/archlinux/$repo/os/$arch",
+                "https://mirrors.shanghaitech.edu.cn/archlinux/$repo/os/$arch",
+                "https://mirrors.qvq.net.cn/archlinux/$repo/os/$arch",
+                "https://mirrors.qlu.edu.cn/archlinux/$repo/os/$arch",
+                "https://mirrors.nju.edu.cn/archlinux/$repo/os/$arch",
+                "https://mirrors.neusoft.edu.cn/archlinux/$repo/os/$arch",
+                "https://mirrors.jxust.edu.cn/archlinux/$repo/os/$arch",
+                "https://mirrors.jlu.edu.cn/archlinux/$repo/os/$arch",
+                "https://mirrors.cqu.edu.cn/archlinux/$repo/os/$arch",
+                "https://mirrors.bfsu.edu.cn/archlinux/$repo/os/$arch",
+                "https://mirrors.aliyun.com/archlinux/$repo/os/$arch",
+                "https://mirror.nyist.edu.cn/archlinux/$repo/os/$arch",
+                "http://mirrors.zju.edu.cn/archlinux/$repo/os/$arch",
+                "http://mirrors.wsyu.edu.cn/archlinux/$repo/os/$arch",
+                "http://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch",
+                "http://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch",
+                "http://mirrors.shanghaitech.edu.cn/archlinux/$repo/os/$arch",
+                "http://mirrors.qvq.net.cn/archlinux/$repo/os/$arch",
+                "http://mirrors.nju.edu.cn/archlinux/$repo/os/$arch",
+                "http://mirrors.neusoft.edu.cn/archlinux/$repo/os/$arch",
+                "http://mirrors.jxust.edu.cn/archlinux/$repo/os/$arch",
+                "http://mirrors.jlu.edu.cn/archlinux/$repo/os/$arch",
+                "http://mirrors.cqu.edu.cn/archlinux/$repo/os/$arch",
+                "http://mirrors.bfsu.edu.cn/archlinux/$repo/os/$arch",
+                "http://mirrors.aliyun.com/archlinux/$repo/os/$arch",
+                "http://mirrors.163.com/archlinux/$repo/os/$arch",
+                "http://mirror.nyist.edu.cn/archlinux/$repo/os/$arch",
+                "http://mirror.lzu.edu.cn/archlinux/$repo/os/$arch"
+            ],
+            "Hong Kong": [
+                "https://mirror.xtom.com.hk/archlinux/$repo/os/$arch",
+                "https://mirror-hk.koddos.net/archlinux/$repo/os/$arch",
+                "https://hkg.mirror.rackspace.com/archlinux/$repo/os/$arch",
+                "https://asia.mirror.pkgbuild.com/$repo/os/$arch",
+                "https://arch-mirror.wtako.net/$repo/os/$arch",
+                "http://mirror.xtom.com.hk/archlinux/$repo/os/$arch",
+                "http://mirror-hk.koddos.net/archlinux/$repo/os/$arch",
+                "http://hkg.mirror.rackspace.com/archlinux/$repo/os/$arch"
+            ],
+            "Japan": [
+                "https://repo.jing.rocks/archlinux/$repo/os/$arch",
+                "https://mirrors.cat.net/archlinux/$repo/os/$arch",
+                "https://mirror.nishi.network/archlinux/$repo/os/$arch",
+                "https://jp.mirrors.cicku.me/archlinux/$repo/os/$arch",
+                "https://ftp.jaist.ac.jp/pub/Linux/ArchLinux/$repo/os/$arch",
+                "http://repo.jing.rocks/archlinux/$repo/os/$arch",
+                "http://mirrors.cat.net/archlinux/$repo/os/$arch",
+                "http://mirror.nishi.network/archlinux/$repo/os/$arch",
+                "http://jp.mirrors.cicku.me/archlinux/$repo/os/$arch",
+                "http://ftp.tsukuba.wide.ad.jp/Linux/archlinux/$repo/os/$arch",
+                "http://ftp.jaist.ac.jp/pub/Linux/ArchLinux/$repo/os/$arch"
+            ],
+            "South Korea": [
+                "https://seoul.mirror.pkgbuild.com/$repo/os/$arch",
+                "https://mirror.yuki.net.uk/archlinux/$repo/os/$arch",
+                "https://mirror.siwoo.org/archlinux/$repo/os/$arch",
+                "https://mirror.morgan.kr/archlinux/$repo/os/$arch",
+                "https://mirror.funami.tech/arch/$repo/os/$arch",
+                "https://kr.mirrors.cicku.me/archlinux/$repo/os/$arch",
+                "https://ftp.lanet.kr/pub/archlinux/$repo/os/$arch",
+                "http://mirror.yuki.net.uk/archlinux/$repo/os/$arch",
+                "http://mirror.siwoo.org/archlinux/$repo/os/$arch",
+                "http://mirror.morgan.kr/archlinux/$repo/os/$arch",
+                "http://mirror.funami.tech/arch/$repo/os/$arch",
+                "http://kr.mirrors.cicku.me/archlinux/$repo/os/$arch",
+                "http://ftp.lanet.kr/pub/archlinux/$repo/os/$arch",
+                "http://ftp.kaist.ac.kr/ArchLinux/$repo/os/$arch"
+            ],
+            "Taiwan": [
+                "https://ncuesaweb.ncue.edu.tw/linux/archlinux/$repo/os/$arch",
+                "https://mirror.archlinux.tw/ArchLinux/$repo/os/$arch",
+                "https://free.nchc.org.tw/arch/$repo/os/$arch",
+                "https://archlinux.cs.nycu.edu.tw/$repo/os/$arch",
+                "http://mirror.archlinux.tw/ArchLinux/$repo/os/$arch",
+                "http://ftp.tku.edu.tw/Linux/ArchLinux/$repo/os/$arch",
+                "http://free.nchc.org.tw/arch/$repo/os/$arch",
+                "http://archlinux.cs.nycu.edu.tw/$repo/os/$arch",
+                "http://archlinux.ccns.ncku.edu.tw/archlinux/$repo/os/$arch"
+            ],
+            "Thailand": [
+                "https://mirror.kku.ac.th/archlinux/$repo/os/$arch",
+                "https://mirror.cyberbits.asia/archlinux/$repo/os/$arch",
+                "http://mirror2.totbb.net/archlinux/$repo/os/$arch",
+                "http://mirror.kku.ac.th/archlinux/$repo/os/$arch"
+            ]
+        }
+    },
+    "network_config": {
+        "type": "nm"
+    },
+    "no_pkg_lookups": false,
+    "ntp": true,
+    "offline": false,
+    "packages": [
+        "git",
+        "spice-vdagent"
+    ],
+    "parallel downloads": 0,
+    "profile_config": {
+        "gfx_driver": "All open-source",
+        "greeter": "lightdm-slick-greeter",
+        "profile": {
+            "custom_settings": {
+                "Cinnamon": {}
+            },
+            "details": [
+                "Cinnamon"
+            ],
+            "main": "Desktop"
+        }
+    },
+    "script": "guided",
+    "silent": false,
+    "skip_ntp": false,
+    "skip_version_check": false,
+    "swap": true,
+    "timezone": "Asia/Bangkok",
+    "uki": false,
+    "version": "2.7.2"
+}

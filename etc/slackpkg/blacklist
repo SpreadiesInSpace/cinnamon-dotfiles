@@ -1,0 +1,48 @@
+# /etc/slackpkg/blacklist
+#
+# This is a blacklist file. Any packages listed here won't be
+# upgraded, removed, or installed by slackpkg.
+
+# aaa_libraries should NOT be blacklisted!
+#
+# You can blacklist using regular expressions.
+#
+# All of the following will be checked for the regex: 
+# Package series, name, version, arch, build, and fullname
+# When blacklisting packages, you can use extended regex on package names
+# (such as xorg-.* instead of xorg-server, xorg-docs, etc), and a trailing 
+# slash for package series ("n/", "ap/", "xap/", etc).
+#
+# To blacklist *only* the "xorg-server" package, use this:
+# xorg-server
+#
+# To blacklist *all* of the "xorg-server-*" packages, use this:
+# xorg-server.*
+#
+# To blacklist the entire KDE package set, use this:
+# kde/
+#
+# You will need to escape any special characters that are present in the
+# package name. For example, to blacklist the gcc-g++ package, use this:
+# gcc-g\+\+
+#
+# DON'T put any space(s) before or after the package name or regex.
+#
+# Automated upgrade of kernel packages may not be wanted in some situations;
+# uncomment the lines below if that fits your circumstances, but note that
+# kernel-headers should *not* be blacklisted:
+#
+#kernel-generic.*
+#kernel-huge.*
+#kernel-modules.*
+#kernel-source
+#
+[0-9]+_csb
+[0-9]+_SBo
+[0-9]+ponce
+[0-9]+_wsr
+[0-9]+alien
+[0-9]+cf
+[0-9]+_gfs
+[0-9]+slint
+mint-*

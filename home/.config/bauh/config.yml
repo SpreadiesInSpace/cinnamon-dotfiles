@@ -1,0 +1,49 @@
+backup:
+  downgrade: null
+  enabled: true
+  install: null
+  mode: incremental
+  remove_method: self
+  type: rsync
+  uninstall: null
+  upgrade: null
+boot:
+  load_apps: true
+disk:
+  trim:
+    after_upgrade: false
+download:
+  check_ssl: true
+  icons: true
+  multithreaded: false
+  multithreaded_client: null
+gems:
+- flatpak
+- appimage
+- arch
+locale: null
+memory_cache:
+  data_expiration: 3600
+  icon_expiration: 300
+store_root_password: true
+suggestions:
+  by_type: 15
+  enabled: true
+system:
+  notifications: true
+  single_dependency_checking: false
+ui:
+  auto_scale: false
+  hdpi: true
+  qt_style: kvantum
+  scale_factor: 1.0
+  system_theme: true
+  table:
+    max_displayed: 50
+  theme: sublime
+  tray:
+    default_icon: null
+    updates_icon: null
+updates:
+  ask_for_reboot: true
+  check_interval: 5

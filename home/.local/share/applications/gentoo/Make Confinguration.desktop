@@ -1,0 +1,11 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=Make Configuration
+Exec=gedit admin:///etc/portage/make.conf
+Comment=
+Terminal=false
+PrefersNonDefaultGPU=false
+Icon=software
+Type=Application
+Categories=System;FileTools
+Name[en_US]=Make Confinguration

@@ -1,0 +1,122 @@
+#
+# This file is part of the LibreOffice project.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+#
+# This file incorporates work covered by the following license notice:
+#
+#   Licensed to the Apache Software Foundation (ASF) under one or more
+#   contributor license agreements. See the NOTICE file distributed
+#   with this work for additional information regarding copyright
+#   ownership. The ASF licenses this file to you under the Apache
+#   License, Version 2.0 (the "License"); you may not use this file
+#   except in compliance with the License. You may obtain a copy of
+#   the License at http://www.apache.org/licenses/LICENSE-2.0 .
+#
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Icon=libreoffice-draw
+Type=Application
+Categories=Office;FlowChart;Graphics;2DGraphics;VectorGraphics;X-Red-Hat-Base;
+Exec=libreoffice --draw %U
+MimeType=application/clarisworks;application/pdf;application/vnd.corel-draw;application/vnd.ms-publisher;application/vnd.oasis.opendocument.graphics;application/vnd.oasis.opendocument.graphics-flat-xml;application/vnd.oasis.opendocument.graphics-template;application/vnd.quark.quarkxpress;application/vnd.stardivision.draw;application/vnd.sun.xml.draw;application/vnd.sun.xml.draw.template;application/vnd.visio;application/x-pagemaker;application/x-stardraw;application/x-wpg;image/x-emf;image/x-freehand;image/x-wmf;
+Name=LibreOffice Draw
+GenericName=Drawing Program
+GenericName[ar]=برنامج الرسم
+GenericName[ca]=Programa de dibuix
+GenericName[cs]=Kreslící program
+GenericName[da]=Tegneprogram
+GenericName[de]=Zeichnungsprogramm
+GenericName[en]=Drawing Program
+GenericName[en_GB]=Drawing Program
+GenericName[eo]=Desegna programo
+GenericName[es]=Programa de dibujo
+GenericName[fi]=Piirrosohjelma
+GenericName[fr]=Programme de dessin
+GenericName[hu]=Rajzolóprogram
+GenericName[it]=Programma di disegno
+GenericName[ja]=図形描画プログラム
+GenericName[ko]=그리기 프로그램
+GenericName[nl]=Tekenprogramma
+GenericName[pl]=Program do rysowania
+GenericName[pt]=Programa de desenho
+GenericName[pt_BR]=Programa de desenho
+GenericName[ro]=Program de desenare
+GenericName[ru]=Редактор рисунков
+GenericName[sk]=Kresliaci program
+GenericName[sl]=Program za risanje
+GenericName[tr]=Çizim Programı
+GenericName[uk]=Програма для малювання
+GenericName[zh_CN]=绘图程序
+GenericName[zh_TW]=繪圖程式
+Comment=Create and edit drawings, flow charts and logos.
+Comment[ar]=Create and edit drawings, flow charts and logos.
+Comment[ca]=Creeu i editeu dibuixos, diagrames de flux i logotips.
+Comment[cs]=Umožňuje vytvářet a upravovat kresby, vývojové diagramy a loga.
+Comment[da]=Opret og redigér tegninger, flowdiagrammer og logoer.
+Comment[de]=Erstellen und bearbeiten Sie Zeichnungen, Flussdiagramme und Logos.
+Comment[en]=Create and edit drawings, flow charts and logos.
+Comment[en_GB]=Create and edit drawings, flow charts and logos.
+Comment[eo]=Krei kaj redakti desegnaĵojn, stirfluajn diagramojn, kaj emblemojn.
+Comment[es]=Cree y edite dibujos, diagramas de flujo y logotipos.
+Comment[fi]=Luo ja muokkaa piirroksia, vuokaavioita ja logoja.
+Comment[fr]=Créer et modifier des dessins, des organigrammes et des logos.
+Comment[hu]=Rajzok, folyamatábrák és logók létrehozása és szerkesztése.
+Comment[it]=Crea e modifica disegni, diagrammi di flusso e loghi.
+Comment[ja]=図形描画、フローチャート、ロゴの作成と編集を行います。
+Comment[ko]=Create and edit drawings, flow charts and logos.
+Comment[nl]=Maak en bewerk tekeningen, stroomschema's en logo's.
+Comment[pl]=Twórz i edytuj rysunki, schematy blokowe i znaki graficzne.
+Comment[pt]=Crie e edite desenhos, fluxogramas e logotipos.
+Comment[pt_BR]=Crie e edite desenhos, fluxogramas e logotipos.
+Comment[ro]=Create and edit drawings, flow charts and logos.
+Comment[ru]=Создание и редактирование рисунков, диаграмм и логотипов.
+Comment[sk]=Umožňuje vytvárať a upravovať kresby, vývojové diagramy a logá.
+Comment[sl]=Ustvarjajte in urejajte risbe, slike, diagrame poteka in logotipe.
+Comment[tr]=Çizimler, akış şemaları ve logolar oluşturun ve düzenleyin.
+Comment[uk]=Створення та редагування рисунків, діаграм і логотипів.
+Comment[zh_CN]=创建和编辑图形、流程图以及徽标。
+Comment[zh_TW]=建立與編輯繪圖、流程圖與圖示。
+StartupNotify=true
+X-GIO-NoFuse=true
+Keywords=Vector;Schema;Diagram;Layout;OpenDocument Graphics;Microsoft Publisher;Microsoft Visio;Corel Draw;cdr;odg;svg;pdf;vsd;
+InitialPreference=5
+StartupWMClass=libreoffice-draw
+X-KDE-Protocols=file,http,webdav,webdavs
+
+Actions=NewDocument;
+NoDisplay=false
+[Desktop Action NewDocument]
+Name=New Drawing
+Name[ar]=رسم جديد
+Name[ca]=Dibuix nou
+Name[cs]=Nová kresba
+Name[da]=Ny tegning
+Name[de]=Neue Zeichnung
+Name[en]=New Drawing
+Name[en_GB]=New Drawing
+Name[eo]=Nova desegnaĵo
+Name[es]=Dibujo nuevo
+Name[fi]=Uusi piirros
+Name[fr]=Nouveau dessin
+Name[hu]=Új rajz
+Name[it]=Nuovo disegno
+Name[ja]=新規の図形描画
+Name[ko]=새 드로잉
+Name[nl]=Nieuwe tekening
+Name[pl]=Nowy rysunek
+Name[pt]=Novo desenho
+Name[pt_BR]=Novo desenho
+Name[ro]=Desen nou
+Name[ru]=Создать рисунок
+Name[sk]=Nová kresba
+Name[sl]=Nova risba
+Name[tr]=Yeni Çizim
+Name[uk]=Наступний малюнок
+Name[zh_CN]=新建绘图
+Name[zh_TW]=新增繪圖
+Icon=document-new
+Exec=libreoffice --draw

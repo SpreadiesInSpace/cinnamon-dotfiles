@@ -1,0 +1,35 @@
+[org/gnome/gedit/plugins]
+active-plugins=['terminal', 'git', 'bracketcompletion', 'spell', 'sort', 'quickopen', 'quickhighlight', 'modelines', 'filebrowser', 'docinfo']
+
+[org/gnome/gedit/plugins/filebrowser]
+filter-mode=@as []
+filter-pattern=''
+root='file:///'
+tree-view=true
+virtual-root='file:///root/'
+
+[org/gnome/gedit/preferences/editor]
+background-pattern='grid'
+display-line-numbers=true
+display-right-margin=false
+editor-font='SauceCodePro Nerd Font 10'
+highlight-current-line=true
+scheme='gruvbox-dark'
+use-default-font=false
+wrap-last-split-mode='word'
+
+[org/gnome/gedit/preferences/ui]
+bottom-panel-visible=true
+side-panel-visible=true
+statusbar-visible=true
+
+[org/gnome/gedit/state/file-chooser]
+open-recent=false
+
+[org/gnome/gedit/state/window]
+bottom-panel-active-page='GeditTerminalPanel'
+bottom-panel-size=76
+side-panel-active-page='GeditFileBrowserPanel'
+side-panel-size=271
+size=(960, 984)
+state=76672

@@ -1,0 +1,10 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=Grub Config
+Exec=xfce4-terminal -x bash -c 'sudo nano /etc/default/grub && sudo grub-mkconfig -o /boot/grub/grub.cfg; exit; exec bash;'
+Comment=
+Terminal=false
+PrefersNonDefaultGPU=false
+Icon=grub-customizer
+Type=Application
+Categories=System;FileTools

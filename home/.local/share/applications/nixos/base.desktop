@@ -1,0 +1,122 @@
+#
+# This file is part of the LibreOffice project.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+#
+# This file incorporates work covered by the following license notice:
+#
+#   Licensed to the Apache Software Foundation (ASF) under one or more
+#   contributor license agreements. See the NOTICE file distributed
+#   with this work for additional information regarding copyright
+#   ownership. The ASF licenses this file to you under the Apache
+#   License, Version 2.0 (the "License"); you may not use this file
+#   except in compliance with the License. You may obtain a copy of
+#   the License at http://www.apache.org/licenses/LICENSE-2.0 .
+#
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Icon=libreoffice-base
+Type=Application
+Categories=Office;Database;X-Red-Hat-Base;
+Exec=libreoffice --base %U
+MimeType=application/vnd.oasis.opendocument.base;application/vnd.sun.xml.base;
+Name=LibreOffice Base
+GenericName=Database Development
+GenericName[ar]=تطوير قواعد البيانات
+GenericName[ca]=Desenvolupament de bases de dades
+GenericName[cs]=Vývoj databáze
+GenericName[da]=Databaseudvikling
+GenericName[de]=Datenbankentwicklung
+GenericName[en]=Database Development
+GenericName[en_GB]=Database Development
+GenericName[eo]=Datumbaza evoluigo
+GenericName[es]=Desarrollo de bases de datos
+GenericName[fi]=Tietokantakehitys
+GenericName[fr]=Développement de base de données
+GenericName[hu]=Adatbázis-fejlesztés
+GenericName[it]=Sviluppo di database
+GenericName[ja]=データベース開発
+GenericName[ko]=데이터베이스 개발
+GenericName[nl]=Databaseontwikkeling
+GenericName[pl]=Opracowanie i rozwój bazy danych
+GenericName[pt]=Desenvolvimento da base de dados
+GenericName[pt_BR]=Desenvolvimento de banco de dados
+GenericName[ro]=Dezvoltare de baze de date
+GenericName[ru]=База данных
+GenericName[sk]=Vývoj databáz
+GenericName[sl]=Razvoj zbirk podatkov
+GenericName[tr]=Veritabanı Geliştirme
+GenericName[uk]=База даних
+GenericName[zh_CN]=数据库开发
+GenericName[zh_TW]=資料庫開發
+Comment=Manage databases, create queries and reports to track and manage your information.
+Comment[ar]=Manage databases, create queries and reports to track and manage your information.
+Comment[ca]=Gestioneu bases de dades i creeu consultes i informes per fer el seguiment i gestionar informació.
+Comment[cs]=Umožňuje vytvářet a spravovat databáze a vytvářet dotazy a sestavy pro sledování a správu informací.
+Comment[da]=Administrér databaser, opret forespørgsler og rapporter for at spore og administrere dine oplysninger.
+Comment[de]=Verwalten Sie Datenbanken, erstellen Sie Abfragen und Berichte, um Ihre Informationen zu verfolgen und zu verwalten.
+Comment[en]=Manage databases, create queries and reports to track and manage your information.
+Comment[en_GB]=Manage databases, create queries and reports to track and manage your information.
+Comment[eo]=Administri datumbazojn, krei informpetojn kaj raportojn por kontroli kaj administri viajn informojn.
+Comment[es]=Gestione bases de datos y cree consultas e informes para dar seguimiento a su información.
+Comment[fi]=Manage databases, create queries and reports to track and manage your information.
+Comment[fr]=Gérer des bases de données, créer des requêtes et des rapports pour suivre et gérer des informations.
+Comment[hu]=Adatbázisok kezelése, lekérdezések és jelentések készítése.
+Comment[it]=Gestisci i database e crea ricerche e rapporti per monitorare e organizzare le informazioni.
+Comment[ja]=データベースの管理、情報の追跡と管理を行うクエリーやレポートの作成などを行います。
+Comment[ko]=Manage databases, create queries and reports to track and manage your information.
+Comment[nl]=Beheer databases, maak query's en rapporten om uw informatie bij te houden en te beheren.
+Comment[pl]=Zarządzaj bazami danych, twórz kwerendy i raporty w celu śledzenia i zarządzania informacjami.
+Comment[pt]=Gestão de bases de dados, criação de consultas e relatórios para controlar e gerir as suas informações.
+Comment[pt_BR]=Gerencie bancos de dados, crie consultas e relatórios para monitorar e gerenciar suas informações.
+Comment[ro]=Manage databases, create queries and reports to track and manage your information.
+Comment[ru]=Управление базами данных, создание запросов и отчётов для отслеживания и управления информацией.
+Comment[sk]=Umožňuje vytvárať a spravovať databázy a vytvárať dotazy a zostavy na sledovanie a správu informácií.
+Comment[sl]=Upravljajte z zbirkami podatkov, ustvarjajte poizvedbe in poročila za sledenje in upravljanje s podatki.
+Comment[tr]=Veritabanlarını yönetin, bilgilerinizi takip etmek ve yönetmek için sorgular ve raporlar oluşturun.
+Comment[uk]=Управління базами даних, створення запитів і звітів для відслідковування та управління інформацією.
+Comment[zh_CN]=管理数据库，创建查询和报表以对信息进行跟踪和管理。
+Comment[zh_TW]=管理資料庫、建立查詢與報告以追蹤與管理您的資訊。
+StartupNotify=true
+X-GIO-NoFuse=true
+Keywords=Data;SQL;
+InitialPreference=5
+StartupWMClass=libreoffice-base
+X-KDE-Protocols=file,http,webdav,webdavs
+
+Actions=NewDocument;
+NoDisplay=false
+[Desktop Action NewDocument]
+Name=New Database
+Name[ar]=قاعدة بيانات جديدة
+Name[ca]=Base de dades nova
+Name[cs]=Nová databáze
+Name[da]=Ny database
+Name[de]=Neue Datenbank
+Name[en]=New Database
+Name[en_GB]=New Database
+Name[eo]=Nova datumbazo
+Name[es]=Base de datos nueva
+Name[fi]=Uusi tietokanta
+Name[fr]=Nouvelle base de données
+Name[hu]=Új adatbázis
+Name[it]=Nuovo database
+Name[ja]=新規のデータベース
+Name[ko]=새 데이터베이스
+Name[nl]=Nieuwe database
+Name[pl]=Nowa baza danych
+Name[pt]=Nova base de dados
+Name[pt_BR]=Novo banco de dados
+Name[ro]=Baze de date nouă
+Name[ru]=Создать базу данных
+Name[sk]=Nová databáza
+Name[sl]=Nova zbirka podatkov
+Name[tr]=Yeni Veritabanı
+Name[uk]=Нова база даних
+Name[zh_CN]=新建数据库
+Name[zh_TW]=新增資料庫
+Icon=document-new
+Exec=libreoffice --base

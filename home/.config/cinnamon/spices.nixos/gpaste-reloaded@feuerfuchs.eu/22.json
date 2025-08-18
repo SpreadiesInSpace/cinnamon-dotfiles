@@ -1,0 +1,62 @@
+{
+    "shown-entries": {
+        "type": "header",
+        "description": "Shown entries"
+    },
+    "always-show-icon": {
+        "default": true,
+        "type": "checkbox",
+        "description": "Show tray icon, even when the applet is not in use",
+        "value": true
+    },
+    "display-track-switch": {
+        "default": true,
+        "type": "checkbox",
+        "description": "Display 'Track clipboard changes'",
+        "value": true
+    },
+    "display-new-item": {
+        "default": true,
+        "type": "checkbox",
+        "description": "Display 'New item'",
+        "value": true
+    },
+    "display-searchbar": {
+        "default": true,
+        "type": "checkbox",
+        "description": "Display search bar",
+        "value": false
+    },
+    "display-gpaste-ui": {
+        "default": false,
+        "type": "checkbox",
+        "description": "Display 'GPaste Main Program'",
+        "value": false
+    },
+    "display-empty-history": {
+        "default": true,
+        "type": "checkbox",
+        "description": "Display 'Empty history'",
+        "value": true
+    },
+    "key-bindings": {
+        "type": "header",
+        "description": "Key bindings"
+    },
+    "kb-show-history": {
+        "type": "keybinding",
+        "description": "Show history",
+        "default": "<Super>h",
+        "value": "<Super>h"
+    },
+    "other": {
+        "type": "header",
+        "description": "Other"
+    },
+    "gpaste-settings": {
+        "type": "button",
+        "description": "GPaste Main Program",
+        "callback": "openUI"
+    },
+    "__md5__": "de586919f2bdc5fba03d8833bd896785"
+}

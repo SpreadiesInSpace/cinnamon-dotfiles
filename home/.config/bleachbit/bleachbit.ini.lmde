@@ -1,0 +1,56 @@
+﻿[bleachbit]
+auto_hide = True
+check_beta = False
+check_online_updates = False
+dark_mode = True
+debug = False
+delete_confirmation = True
+exit_done = False
+remember_geometry = True
+shred = False
+units_iec = False
+window_fullscreen = False
+window_maximized = False
+first_start = False
+version = 4.4.2
+window_x = 560
+window_y = 192
+window_width = 800
+window_height = 600
+hashsalt = d8eae33f14646015f232e31f2fbf81307db55f0989c7fd7a37e066b45df1240031f566e9642bb57ed1887f05b3657a742c71a1f2b47f7a9e7926f7f407b00b48
+
+[hashpath]
+
+
+[preserve_languages]
+en = True
+
+[tree]
+apt = True
+apt.autoclean = True
+apt.autoremove = True
+apt.clean = True
+apt.package_lists = True
+bash = True
+bash.history = True
+evolution = True
+evolution.cache = True
+journald = True
+journald.clean = True
+libreoffice = True
+libreoffice.history = True
+system = True
+system.desktop_entry = True
+system.cache = True
+system.clipboard = True
+system.custom = True
+system.localizations = True
+system.recent_documents = True
+system.rotated_logs = True
+system.tmp = True
+system.trash = True
+thumbnails = True
+thumbnails.cache = True
+x11 = True
+x11.debug_logs = True
+

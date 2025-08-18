@@ -1,0 +1,20 @@
+# All packages in that list will be showned but
+# unchecked by default
+#
+# You can greylist using regular expressions.
+#
+# Note that the regex will be applied with the command 'grep -wE'
+# at the entire pkglist row
+# SLACKPKGPLUS_slackpkgplus slackpkg+ 1.7.5 noarch 2mt slackpkg+-1.7.5-noarch-2mt ./SLACKPKGPLUS_slackpkgplus/pkg txz
+#
+# Also you may want to greylist ALL slackpkgplus repository;
+# useful if you want to run slackpkg install alienbob and select
+# only the wanted package (instead de-select all unwanted):
+#SLACKPKGPLUS_.*
+#
+# You may want to greylist kde and/or kdei
+#kde
+#kdei
+#
+#do not upgrade packages installed with sbopkg; use it instead
+#[0-9]+_SBo

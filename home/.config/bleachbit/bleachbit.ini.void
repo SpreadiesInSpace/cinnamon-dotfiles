@@ -1,0 +1,48 @@
+﻿[bleachbit]
+auto_hide = True
+check_beta = False
+check_online_updates = False
+dark_mode = True
+debug = False
+delete_confirmation = True
+exit_done = False
+kde_shred_menu_option = False
+remember_geometry = True
+shred = False
+units_iec = False
+window_maximized = False
+first_start = False
+version = 5.0.0
+window_x = 560
+window_y = 192
+window_width = 800
+window_height = 600
+hashsalt = 0784acc0a0dbd4353ed9f768be0f127d61f11e1335472fc4a8315e7f8a67e4ba1accb5388200e8074aba3252f72b70adc02258ed955bc119a1aa2f543ca837f4
+auto_detect_lang = True
+window_fullscreen = False
+
+[hashpath]
+
+[preserve_languages]
+en = True
+
+[tree]
+bash = True
+bash.history = True
+libreoffice = True
+libreoffice.history = True
+system = True
+system.cache = True
+system.clipboard = True
+system.custom = True
+system.desktop_entry = True
+system.localizations = True
+system.recent_documents = True
+system.rotated_logs = True
+system.tmp = True
+system.trash = True
+thumbnails = True
+thumbnails.cache = True
+x11 = True
+x11.debug_logs = True
+

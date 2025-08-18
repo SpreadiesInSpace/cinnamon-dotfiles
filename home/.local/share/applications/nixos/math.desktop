@@ -1,0 +1,122 @@
+#
+# This file is part of the LibreOffice project.
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+#
+# This file incorporates work covered by the following license notice:
+#
+#   Licensed to the Apache Software Foundation (ASF) under one or more
+#   contributor license agreements. See the NOTICE file distributed
+#   with this work for additional information regarding copyright
+#   ownership. The ASF licenses this file to you under the Apache
+#   License, Version 2.0 (the "License"); you may not use this file
+#   except in compliance with the License. You may obtain a copy of
+#   the License at http://www.apache.org/licenses/LICENSE-2.0 .
+#
+[Desktop Entry]
+Version=1.0
+Terminal=false
+NoDisplay=false
+Icon=libreoffice-math
+Type=Application
+Categories=Office;Education;Science;Math;X-Red-Hat-Base;
+Exec=libreoffice --math %U
+MimeType=application/mathml+xml;application/vnd.oasis.opendocument.formula;application/vnd.oasis.opendocument.formula-template;application/vnd.stardivision.math;application/vnd.sun.xml.math;application/x-starmath;text/mathml;
+Name=LibreOffice Math
+GenericName=Formula Editor
+GenericName[ar]=محرر المعادلات
+GenericName[ca]=Editor de fórmules
+GenericName[cs]=Editor vzorců
+GenericName[da]=Formeleditor
+GenericName[de]=Formeleditor
+GenericName[en]=Formula Editor
+GenericName[en_GB]=Formula Editor
+GenericName[eo]=Formuloredaktilo
+GenericName[es]=Editor de fórmulas
+GenericName[fi]=Kaavaeditori
+GenericName[fr]=Éditeur de formule
+GenericName[hu]=Képletszerkesztő
+GenericName[it]=Elaboratore di formule
+GenericName[ja]=数式エディター
+GenericName[ko]=수식 편집기
+GenericName[nl]=Formule-bewerker
+GenericName[pl]=Edytor formuł
+GenericName[pt]=Editor de fórmulas
+GenericName[pt_BR]=Editor de fórmulas
+GenericName[ro]=Editor de formule
+GenericName[ru]=Редактор формул
+GenericName[sk]=Editor vzorcov
+GenericName[sl]=Urejevalnik formul
+GenericName[tr]=Formül Düzenleyici
+GenericName[uk]=Редактор формул
+GenericName[zh_CN]=公式编辑器
+GenericName[zh_TW]=公式編輯器
+Comment=Create and edit scientific formulas and equations.
+Comment[ar]=Create and edit scientific formulas and equations.
+Comment[ca]=Creeu i editeu fórmules científiques i equacions.
+Comment[cs]=Umožňuje vytvářet a upravovat vědecké vzorce a rovnice.
+Comment[da]=Opret og redigér videnskabelige formler og ligninger.
+Comment[de]=Erstellen und bearbeiten Sie wissenschaftliche Formeln und Gleichungen.
+Comment[en]=Create and edit scientific formulas and equations.
+Comment[en_GB]=Create and edit scientific formulae and equations.
+Comment[eo]=Krei kaj redakti sciencajn formulojn kaj ekvaciojn.
+Comment[es]=Cree y edite fórmulas científicas y ecuaciones.
+Comment[fi]=Luo ja muokkaa tieteellisiä kaavoja ja yhtälöitä.
+Comment[fr]=Créer et modifier des formules et des équations scientifiques.
+Comment[hu]=Képletek és egyenletek létrehozása és szerkesztése.
+Comment[it]=Crea e modifica formule scientifiche ed equazioni.
+Comment[ja]=科学の公式や方程式などの作成と編集を行います。
+Comment[ko]=Create and edit scientific formulas and equations.
+Comment[nl]=Maak en bewerk wetenschappelijke formules en vergelijkingen.
+Comment[pl]=Twórz i edytuj wzory i równania naukowe.
+Comment[pt]=Crie e edite fórmulas científicas e equações.
+Comment[pt_BR]=Crie e edite fórmulas científicas e equações.
+Comment[ro]=Create and edit scientific formulas and equations.
+Comment[ru]=Создание и редактирование научных формул и уравнений.
+Comment[sk]=Umožňuje vytvárať a upravovať vedecké vzorce a rovnice.
+Comment[sl]=Ustvarjajte in urejajte znanstvene formule in enačbe.
+Comment[tr]=Bilimsel formüller ve denklemler oluşturun ve düzenleyin.
+Comment[uk]=Створення і редагування формул та рівнянь.
+Comment[zh_CN]=创建和编辑科学公式及方程。
+Comment[zh_TW]=建立與編輯科學公式與方程式。
+StartupNotify=true
+X-GIO-NoFuse=true
+Keywords=Equation;OpenDocument Formula;Formula;odf;MathML;
+InitialPreference=5
+StartupWMClass=libreoffice-math
+X-KDE-Protocols=file,http,webdav,webdavs
+
+Actions=NewDocument;
+[Desktop Action NewDocument]
+Name=New Formula
+Name[ar]=معادلة جديدة
+Name[ca]=Fórmula nova
+Name[cs]=Nový vzorec
+Name[da]=Ny formel
+Name[de]=Neue Formel
+Name[en]=New Formula
+Name[en_GB]=New Formula
+Name[eo]=Nova formulo
+Name[es]=Fórmula nueva
+Name[fi]=Uusi kaava
+Name[fr]=Nouvelle formule
+Name[hu]=Új képlet
+Name[it]=Nuova formula
+Name[ja]=新規の数式
+Name[ko]=새 수식
+Name[nl]=Nieuwe formule
+Name[pl]=Nowa formuła
+Name[pt]=Nova fórmula
+Name[pt_BR]=Nova fórmula
+Name[ro]=Formulă nouă
+Name[ru]=Создать формулу
+Name[sk]=Nový vzorec
+Name[sl]=Nova formula
+Name[tr]=Yeni Formül
+Name[uk]=Створити формулу
+Name[zh_CN]=新建公式
+Name[zh_TW]=新增公式
+Icon=document-new
+Exec=libreoffice --math

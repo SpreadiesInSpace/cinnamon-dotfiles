@@ -1,0 +1,247 @@
+/*========================Cinnamon 6.4 Tweaks========================*/
+/* .osd-window --> .media-keys-osd */
+.media-keys-osd {
+  margin-bottom: 1em;
+  border-radius: 9999px;
+  font-weight: bold;
+  spacing: 12px;
+  padding: 12px 24px;
+  background-color: rgba(29, 32, 33, 0.85); /* GTK dark background */ }
+  .media-keys-osd > * {
+    spacing: 12px; }
+  .media-keys-osd StIcon {
+    icon-size: 32px; }
+  .media-keys-osd StLabel:ltr {
+    margin-right: 6px; }
+  .media-keys-osd StLabel:rtl {
+    margin-left: 6px; }
+  .media-keys-osd .level {
+    min-width: 160px;
+    -barlevel-height: 6px;
+    -barlevel-background-color: #3c3836; /* GTK neutral gray */
+    -barlevel-active-background-color: #f9f5d7; /* GTK foreground */
+    -barlevel-amplify-color: #eedfb6; /* GTK accent */
+    -barlevel-amplify-separator-width: 3px; }
+    .media-keys-osd .level:ltr {
+      margin-right: 6px; }
+    .media-keys-osd .level:rtl {
+      margin-left: 6px; }
+  .media-keys-osd .level-bar {
+    border-radius: 8px;
+    background-color: #f9f5d7; /* GTK foreground */ }
+/* .media-keys end */
+
+/* .workspace-osd --> .workspace-switch-osd */
+.workspace-switch-osd {
+  text-shadow: black 5px 5px 5px;
+  font-weight: bold;
+  font-size: 12pt;
+  min-width: 140px;
+  margin-bottom: 1em;
+  border-radius: 9999px;
+  padding: 12px 36px 0 36px;
+  background-color: rgba(29, 32, 33, 0.85); /* GTK dark background */ }
+  .workspace-switch-osd-indicator-box {
+    spacing: 12px; }
+  .workspace-switch-osd-indicator {
+    background-color: #f9f5d7; /* GTK foreground */
+    padding: 2.66667px;
+    margin: 13.33333px;
+    border-radius: 32px; }
+    .workspace-switch-osd-indicator:active {
+      background-color: #eedfb6; /* GTK accent */
+      padding: 5.33333px;
+      margin: 10.66667px; }
+
+/* Additional Workspace Tweaks */
+.window-border {
+  border: 3px solid #eedfb6; /* GTK accent */
+  border-radius: 8px;
+}
+/* workspace-switch-osd end */
+
+/* new .audio-device-selection-dialog */
+.audio-device-selection-dialog .audio-selection-box .audio-selection-device, .polkit-dialog-user-combo, .sound-player StButton:small {
+  color: #f9f5d7; /* GTK foreground */
+  background-color: #242424; 
+  border-radius: 8px; /* Add rounded corners */ }
+  .audio-device-selection-dialog .audio-selection-box .audio-selection-device:focus, .polkit-dialog-user-combo:focus, .sound-player StButton:focus:small {
+    color: #f9f5d7; /* GTK foreground */
+    background-color: #242424;
+    box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, 0.4);
+    border-radius: 8px; }
+  .audio-device-selection-dialog .audio-selection-box .audio-selection-device:hover, .polkit-dialog-user-combo:hover, .sound-player StButton:hover:small {
+    color: #eee0b7; /* GTK accent */
+    background-color: #32302f; /* Slightly lighter background */
+    border-radius: 8px; }
+  .audio-device-selection-dialog .audio-selection-box .audio-selection-device:insensitive, .polkit-dialog-user-combo:insensitive, .sound-player StButton:insensitive:small {
+    color: #a89984; /* GTK muted text */
+    background-color: #242424;
+    border-radius: 8px; }
+  .audio-device-selection-dialog .audio-selection-box .audio-selection-device:selected, .polkit-dialog-user-combo:selected, .sound-player StButton:selected:small, .audio-device-selection-dialog .audio-selection-box .audio-selection-device:active, .polkit-dialog-user-combo:active, .sound-player StButton:active:small {
+    color: #f9f5d7; /* GTK foreground */
+    background-color: #656565;
+    border-radius: 8px; }
+  .audio-device-selection-dialog .audio-selection-box .audio-selection-device:checked, .polkit-dialog-user-combo:checked, .sound-player StButton:checked:small {
+    color: #f9f5d7; /* GTK foreground */
+    background-color: #656565;
+    border-radius: 8px; }
+/* new .audio-device-selection-dialog end*/
+
+/* .modal-dialog --> .dialog */
+.dialog .dialog-button, .dialog .dialog-button:destructive-action, .dialog .dialog-button:default {
+  font-weight: bold;
+  padding: 12px;
+  border-radius: 12px;
+  color: #f9f5d7; /* GTK foreground */
+  background-color: #1d2021; /* GTK background */ }
+  .dialog .dialog-button:focus {
+    color: #f9f5d7;
+    background-color: #1d2021;
+    box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, 0.2); }
+  .dialog .dialog-button:hover {
+    color: #eee0b7; /* GTK accent color */
+    background-color: #32302f; /* Slightly lighter background */ }
+  .dialog .dialog-button:active, .dialog .dialog-button:checked {
+    color: #f9f5d7;
+    background-color: #504945; /* Darker gray */ }
+  .dialog .dialog-button:insensitive {
+    color: rgba(249, 245, 215, 0.5);
+    background-color: #32302f; }
+
+.dialog .dialog-button:default {
+  color: #f9f5d7;
+  background-color: #458588; /* GTK blue */ }
+  .dialog .dialog-button:hover:default {
+    color: #eee0b7;
+    background-color: #689d6a; /* Softer blue-green */ }
+  .dialog .dialog-button:active:default, .dialog .dialog-button:checked:default {
+    color: #f9f5d7;
+    background-color: #427b58; }
+  .dialog .dialog-button:insensitive:default {
+    border-color: #3c3836;
+    color: rgba(249, 245, 215, 0.5);
+    background-color: #32302f; }
+
+.dialog .dialog-button:destructive-action {
+  color: #f9f5d7;
+  background-color: #ea6962; /* Gruvbox Material Red */ }
+  .dialog .dialog-button:hover:destructive-action {
+    color: #f9f5d7;
+    background-color: #cc5c55; /* Darker shade for hover */ }
+  .dialog .dialog-button:active:destructive-action, .dialog .dialog-button:checked:destructive-action {
+    color: #f9f5d7;
+    background-color: #b54f49; /* Even darker shade for active/checked */ }
+  .dialog .dialog-button:insensitive:destructive-action {
+    border-color: #3c3836;
+    color: rgba(249, 245, 215, 0.5);
+    background-color: #32302f; }
+
+.dialog {
+  background-color: #242424; /* Keep stock Cinnamon background */
+  color: #d5c4a1; /* Gruvbox muted text */
+  border-radius: 18px;
+  border: 1px solid #333333; /* Keep stock border */
+  padding: 18px; }
+  .dialog .dialog-content-box {
+    margin-top: 8px;
+    margin-bottom: 16px;
+    spacing: 32px;
+    max-width: 28em; }
+  .dialog .confirm-dialog-title {
+    text-align: center;
+    color: #eee0b7; /* Gruvbox accent */ }
+
+.dialog-list {
+  spacing: 18px; }
+  .dialog-list .dialog-list-title {
+    text-align: center;
+    color: #eee0b7; /* Gruvbox accent */ }
+  .dialog-list .dialog-list-scrollview {
+    max-height: 200px; }
+  .dialog-list .dialog-list-box {
+    spacing: 1em; }
+    .dialog-list .dialog-list-box .dialog-list-item {
+      spacing: 1em; }
+      .dialog-list .dialog-list-box .dialog-list-item .dialog-list-item-title {
+        font-weight: bold;
+        color: #eedfb6; /* Softer Gruvbox yellow */ }
+      .dialog-list .dialog-list-box .dialog-list-item .dialog-list-item-description {
+        color: #a89984; /* Gruvbox gray */ }
+/* .dialog end */
+
+/* new .resize-popup */
+.resize-popup, .workspace-switch-osd, .info-osd, .media-keys-osd, #Tooltip, #LookingGlassDialog {
+  color: #f9f5d7; /* GTK foreground */
+  background-color: rgba(29, 32, 33, 0.99); /* GTK dark background */
+  border: 1px solid rgba(60, 56, 54, 0.99); /* Gruvbox border */
+  border-radius: 8px;
+  text-align: center;
+  padding: 24px; }
+  
+.resize-popup {
+  padding: 12px; }
+/* .resize-popup end */
+
+/* .polkit-dialog --> .prompt-dialog */
+.prompt-dialog-error-label, .prompt-dialog-info-label, .prompt-dialog-null-label, .run-dialog-description, .message-dialog-content .message-dialog-caption, .dialog-list .dialog-list-box .dialog-list-item .dialog-list-item-description, .calendar-event-countdown, .caps-lock-warning-label {
+  font-weight: 400;
+  font-size: 0.818em;
+  color: #d5c4a1; /* Gruvbox muted text */
+}
+
+.prompt-dialog {
+  width: 26em; }
+  .prompt-dialog .dialog-content-box {
+    spacing: 16px;
+    margin-bottom: 12px; }
+  .prompt-dialog-password-entry {
+    width: 20em; }
+  .prompt-dialog-password-layout {
+    spacing: 8px; }
+  .prompt-dialog-error-label, .prompt-dialog-info-label, .prompt-dialog-null-label {
+    text-align: center;
+    color: #a89984; /* GTK muted text */ }
+  .prompt-dialog-error-label {
+    color: #ea6962; /* Gruvbox Material Red */ }
+    
+.prompt-dialog-password-entry {
+  padding: 6px 10px;
+  height: 1.8em;
+  border-radius: 12px;
+  background-color: #1d2021;
+  color: #f9f5d7;
+  border: 1px solid #3c3836; }
+  .prompt-dialog-password-entry:focus {
+    border: 2px solid #eee0b7;
+    background-color: rgba(249, 245, 215, 0.08);
+    color: #f9f5d7; }
+
+/* Additional Polkit Tweaks */
+.polkit-dialog-user-layout {
+  text-align: center;
+  spacing: 2px;
+  color: #d5c4a1; /* Gruvbox muted text */ }
+
+.polkit-dialog-user-combo {
+  border-radius: 8px;
+  padding: 6px 36px;
+  color: #f9f5d7; /* GTK foreground */ }
+  .polkit-dialog-user-combo:insensitive {
+    color: #a89984; /* GTK disabled text */ }
+/* .prompt-dialog end */
+
+/* .run-dialog-label --> .end-session-dialog */
+.end-session-dialog {
+  min-width: 40em; }
+  .end-session-dialog .dialog-content-box {
+    spacing: 0; }
+  .end-session-dialog .dialog-list {
+    spacing: 0; }
+    .end-session-dialog .dialog-list .dialog-list-title {
+      color: #eedfb6; /* Softer Gruvbox yellow */
+      background-color: rgba(249, 245, 215, 0.1); /* Slightly transparent GTK accent */
+      padding: 9px;
+      border-radius: 8px;
+      margin: 4px 0; }
+/* .end-session end */
