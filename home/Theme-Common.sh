@@ -352,7 +352,7 @@ copy_bashrc_and_etc() {
 		echo "# Skip sourcing user .bashrc if running in tty" | \
 			sudo tee /root/.bashrc >/dev/null 2>&1 \
 			|| die "Failed to append root bashrc."
-		echo 'if [[ $(tty) == /dev/tty[0-9]* ]]; then' | \
+		echo "if [[ \$(tty) == /dev/tty[0-9]* ]]; then" | \
 			sudo tee -a /root/.bashrc >/dev/null 2>&1 \
 			|| die "Failed to append root bashrc."
 		echo '    return'  | sudo tee -a /root/.bashrc >/dev/null 2>&1 \
