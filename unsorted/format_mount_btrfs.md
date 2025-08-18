@@ -10,23 +10,26 @@ parted -s /dev/vda mkpart primary btrfs 1050MiB 100%
 ```bash
 parted -s /dev/vda mklabel msdos
 parted -s /dev/vda mkpart primary btrfs 1MiB 100%
+parted -s /dev/vda set 1 boot on
 ```
 
-### BTRFS Subvolumes (for Timeshift)
+### BTRFS Subvolumes (Timeshift and Snapper compatible)
 ```bash
 mkfs.vfat /dev/vda1 # GPT Only
 mkfs.btrfs -f /dev/vda2 # /dev/vda for MBR
 mount /dev/vda2 /mnt # /dev/vda for MBR
 btrfs su cr /mnt/@
 btrfs su cr /mnt/@home
+btrfs su cr /mnt/@.snapshots
 umount /mnt
 ```
 
 ### BTRFS Mounts (ssd autodetects since 2011, space_cache=v2 default since Kernel 5.15)
 ```bash
-mount -o noatime,compress=zstd,discard=async,subvol=@ /dev/vda2 /mnt/ 
+mount -o noatime,compress=zstd,discard=async,subvol=@ /dev/vda2 /mnt/
 mkdir -p /mnt/home
-mount -o noatime,compress=zstd,discard=async,subvol=@home /dev/vda2 /mnt/home 
+mount -o noatime,compress=zstd,discard=async,subvol=@home /dev/vda2 /mnt/home
+mount -o noatime,compress=zstd,discard=async,subvol=@.snapshots /dev/vda2 /mnt/.snapshots
 mkdir -p /mnt/boot/efi # UEFI Only
 mount /dev/vda1 /mnt/boot/efi # UEFI Only
 ```
@@ -34,8 +37,9 @@ mount /dev/vda1 /mnt/boot/efi # UEFI Only
 ### BTRFS Mounts - Gentoo
 ```bash
 mkdir -p /mnt/gentoo
-mount -o noatime,compress=zstd,discard=async,subvol=@ /dev/vda2 /mnt/gentoo 
+mount -o noatime,compress=zstd,discard=async,subvol=@ /dev/vda2 /mnt/gentoo
 mkdir -p /mnt/gentoo/home
-mount -o noatime,compress=zstd,discard=async,subvol=@home /dev/vda2 /mnt/gentoo/home 
+mount -o noatime,compress=zstd,discard=async,subvol=@home /dev/vda2 /mnt/gentoo/home
+mount -o noatime,compress=zstd,discard=async,subvol=@.snapshots /dev/vda2 /mnt/gentoo/.snapshots
 mkdir -p /mnt/gentoo/efi # UEFI Only
 mount /dev/vda1 /mnt/gentoo/efi # UEFI Only
