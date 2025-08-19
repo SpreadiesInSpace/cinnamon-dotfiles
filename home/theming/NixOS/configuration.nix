@@ -36,7 +36,7 @@ in
       # splashImage = null;
     };
   };
-  
+
   networking = {
     hostName = "NixOS";
     networkmanager.enable = true;
@@ -87,11 +87,11 @@ in
       pulse.enable = true;
     };
   };
-  
+
   xdg.portal.enable = true;
   virtualisation.libvirtd.enable = true;
   systemd.extraConfig = "DefaultTimeoutStopSec=15s\n";
-  
+  zramSwap.enable = true;
   # sound.enable = true;
   # hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -168,13 +168,13 @@ in
       GTK_THEME = theme.name;
     };
   };
-  
+
   qt = {
     enable = true;
     style = "kvantum";
     platformTheme = "qt5ct";
   };
-  
+
   programs = {
     kdeconnect.enable = true;
     dconf.enable = true;

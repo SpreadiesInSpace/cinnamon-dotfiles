@@ -3,17 +3,13 @@
 # All-in-one zRAM swap script with autostart setup
 die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
 
-# Check if running on NixOS
-is_nixos() {
-	[ -f /etc/os-release ] && grep -q "^ID=nixos" /etc/os-release
-}
-
 # Check for unsupported distributions
 check_unsupported_distros() {
 	if [ -f /etc/os-release ]; then
 		if grep -q "^ID.*slackware" /etc/os-release || \
 			 grep -q "^ID=fedora" /etc/os-release || \
-			 grep -q "^ID.*suse" /etc/os-release; then
+			 grep -q "^ID.*suse" /etc/os-release || \
+			 grep -q "^ID=nixos" /etc/os-release; then
 			local distro_name
 			distro_name=$(grep "^PRETTY_NAME=" /etc/os-release | \
 										cut -d'"' -f2)
@@ -204,9 +200,6 @@ if [[ $EUID -ne 0 ]]; then
 	# Not running as root - re-exec with sudo
 	case "$1" in
 		"--install")
-			if is_nixos; then
-				die "Autostart installation not supported on NixOS. Use --test instead."
-			fi
 			echo "Installing and configuring zRAM autostart..."
 			exec sudo bash "$SCRIPT_FULL_PATH" --install
 			;;
@@ -218,19 +211,7 @@ if [[ $EUID -ne 0 ]]; then
 			echo "Testing zRAM swap setup..."
 			exec sudo bash "$SCRIPT_FULL_PATH" --test
 			;;
-		"")
-			if is_nixos; then
-				echo "NixOS detected - running zRAM setup directly..."
-				exec sudo bash "$SCRIPT_FULL_PATH" --test
-			else
-				echo "Usage: $0 [--install|--remove|--test]"
-				echo "  --install     Install zRAM autostart"
-				echo "  --remove      Remove zRAM autostart"
-				echo "  --test        Test zRAM swap setup (no autostart)"
-				exit 1
-			fi
-			;;
-		*)
+		"" | *)
 			echo "Usage: $0 [--install|--remove|--test]"
 			echo "  --install     Install zRAM autostart"
 			echo "  --remove      Remove zRAM autostart"
@@ -252,7 +233,7 @@ else
 			uninstall_autostart
 			;;
 		*)
-			# Default case: just setup zRAM (covers --test, NixOS, and no args)
+			# Default case: just setup zRAM (covers --test and no args)
 			setup_zram
 			;;
 	esac
