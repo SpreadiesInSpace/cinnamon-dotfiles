@@ -69,7 +69,7 @@ zypper --gpg-auto-import-keys --root /mnt ar --refresh \
 	die "Failed to add openSUSE repo."
 zypper --gpg-auto-import-keys --root /mnt in -y --download-in-advance dracut \
 	kernel-default grub2 grub2-i386-pc grub2-x86_64-efi shim zypper bash man \
-	shadow util-linux nano arch-install-scripts || \
+	shadow util-linux nano arch-install-scripts systemd-zram-service || \
 	die "Failed to install base packages."
 
 # Copy Repos
@@ -185,6 +185,9 @@ echo "$username:$userpasswd" | chpasswd || \
 # Enabling System Services
 systemctl enable NetworkManager || \
 	die "Failed to enable NetworkManager."
+
+# Enable zRAM swap
+zramswapon || die "Failed to enable zRAM swap."
 
 # Clean up
 rm -rf Install-Common.sh
