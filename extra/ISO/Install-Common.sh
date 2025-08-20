@@ -353,11 +353,6 @@ prompt_init_system() {
 configure_zram() {
 	local distro="${1:-}"
 
-	# Precompute half RAM in MB capped at 8192
-	MEM_TOTAL_MB=$(awk '/^MemTotal:/ { printf "%.0f", $2/1024 }' /proc/meminfo)
-	ZRAM_HALF_MB=$(( MEM_TOTAL_MB / 2 ))
-	[ $ZRAM_HALF_MB -gt 8192 ] && ZRAM_HALF_MB=8192
-
 	# Determine sysctl destination
 	if [ "$distro" = "void" ]; then
 		SYSCTL_FILE="/etc/sysctl.conf"
@@ -367,7 +362,7 @@ configure_zram() {
 
 	# Apply sysctl tuning
 	{
-		cat <<'SYSCTL'
+		cat << 'SYSCTL'
 # zRAM optimization
 vm.watermark_boost_factor = 0
 vm.watermark_scale_factor = 125
@@ -385,9 +380,12 @@ SYSCTL
 
 		# Slackware zram config
 		{
-			cat <<'ZRAM'
+			cat << 'ZRAM'
 ZRAM_ENABLE=1
-MEMTOTAL=$(awk '/^MemTotal:/ { print $2 }' /proc/meminfo)
+MEM_TOTAL_MB=$(awk '/^MemTotal:/ { printf "%.0f", $2/1024 }' /proc/meminfo)
+ZRAM_HALF_MB=$(( MEM_TOTAL_MB / 2 ))
+[ $ZRAM_HALF_MB -gt 8192 ] && ZRAM_HALF_MB=8192
+MEMTOTAL=$(( ZRAM_HALF_MB * 1024 ))
 ZRAMSIZE=$MEMTOTAL
 ZRAMNUMBER=1
 ZRAMCOMPRESSION=zstd
@@ -396,15 +394,21 @@ ZRAM
 		} > /etc/default/zram || die "Failed to write zram config."
 
 	elif [ "$distro" = "void" ]; then
+		# Calculate static values for Void zramen
+		MEM_TOTAL_MB=$(awk '/^MemTotal:/ { printf "%.0f", $2/1024 }' \
+			/proc/meminfo)
+		ZRAM_HALF_MB=$(( MEM_TOTAL_MB / 2 ))
+		[ $ZRAM_HALF_MB -gt 8192 ] && ZRAM_HALF_MB=8192
+
 		# Backup existing zramen config
 		if [ -f /etc/sv/zramen/conf ]; then
 			cp /etc/sv/zramen/conf "/etc/sv/zramen/conf.orig" || \
 				die "Failed to backup zramen config."
 		fi
 
-		# Void zramen config
+		# Void zramen config (zramen doesn't support dynamic calculation)
 		{
-			cat <<ZRAMEN
+			cat << ZRAMEN
 export ZRAM_COMP_ALGORITHM=zstd
 export ZRAM_PRIORITY=100
 export ZRAM_SIZE=$ZRAM_HALF_MB
@@ -418,9 +422,12 @@ ZRAMEN
 	elif [ "$distro" = "gentoo" ]; then
 		# Create /etc/local.d/zram.start
 		{
-			cat <<ZRAMSTART
+			cat << 'ZRAMSTART'
 #!/bin/bash
 modprobe zram
+MEM_TOTAL_MB=$(awk '/^MemTotal:/ { printf "%.0f", $2/1024 }' /proc/meminfo)
+ZRAM_HALF_MB=$(( MEM_TOTAL_MB / 2 ))
+[ $ZRAM_HALF_MB -gt 8192 ] && ZRAM_HALF_MB=8192
 echo ${ZRAM_HALF_MB}M > /sys/block/zram0/disksize
 mkswap /dev/zram0
 swapon /dev/zram0 -p 100
@@ -429,7 +436,7 @@ ZRAMSTART
 
 		# Create /etc/local.d/zram.stop
 		{
-			cat <<'ZRAMSTOP'
+			cat << 'ZRAMSTOP'
 #!/bin/bash
 swapoff /dev/zram0
 echo 1 > /sys/block/zram0/reset
@@ -444,7 +451,7 @@ ZRAMSTOP
 	else
 		# systemd zram-generator config
 		{
-			cat <<'ZRAM'
+			cat << 'ZRAM'
 [zram0]
 zram-size = min(ram / 2, 8192)
 compression-algorithm = zstd
