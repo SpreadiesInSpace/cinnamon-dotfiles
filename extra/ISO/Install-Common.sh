@@ -471,6 +471,31 @@ ZRAM
 	fi
 }
 
+# Fedora/NixOS doesn't use this
+install_grub() {
+	# Configure GRUB Bootloader
+	local distro="${1:-}"
+	local cmd="grub-install"
+	# Use grub2-install for openSUSE and Fedora
+	[ "$distro" = "opensuse" ] && cmd="grub2-install"
+	[ "$distro" = "fedora" ] && cmd="grub2-install"
+	if [ "$BOOTMODE" = "UEFI" ]; then
+		# Install GRUB for UEFI
+		if [ "$REMOVABLE_BOOT" = "1" ]; then
+			"$cmd" --target=x86_64-efi --efi-directory=/boot/efi \
+				--bootloader-id="$distro" --removable || \
+				die "Failed to install GRUB (UEFI removable)."
+		else
+			"$cmd" --target=x86_64-efi --efi-directory=/boot/efi \
+				--bootloader-id="$distro" || die "Failed to install GRUB (UEFI)."
+		fi
+	else
+		# Install GRUB for BIOS
+		"$cmd" --target=i386-pc --boot-directory=/boot "$drive" || \
+			die "Failed to install GRUB (BIOS)."
+	fi
+}
+
 clone_dotfiles() {
 	# Clone cinnamon-dotfiles repo as new user
 	local distro="${1:-}"
