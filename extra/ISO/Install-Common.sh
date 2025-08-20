@@ -50,6 +50,7 @@ This is likely a permissions or kernel setting issue."
 		echo "WARNING: You are booted in BIOS mode."
 		echo "Continuing in BIOS mode."
 	fi
+	export REMOVABLE_BOOT
 }
 
 prompt_root_password() {
@@ -141,6 +142,7 @@ prompt_for_autologin() {
 			echo "Invalid input. Please answer y or n."
 		fi
 	done
+	export enable_autologin
 }
 
 partition_drive() {
@@ -344,6 +346,7 @@ prompt_init_system() {
 			*) echo "Invalid selection, please try again." ;;
 		esac
 	done
+	export init_system
 }
 
 # NixOS doesn't use this
