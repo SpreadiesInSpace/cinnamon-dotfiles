@@ -61,7 +61,7 @@ mount_partitions
 # Install Essential packages
 pacstrap -K /mnt base linux linux-firmware cinnamon lightdm \
 	lightdm-slick-greeter gnome-terminal spice-vdagent sudo bash-completion \
-		grub efibootmgr git networkmanager nano unzip wget || \
+		grub efibootmgr git networkmanager nano unzip wget zram-generator || \
 		die "Failed to install base packages."
 
 # Generate fstab
@@ -127,6 +127,9 @@ install_grub
 # Set GRUB timeout to 0
 sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub || \
 	die "Failed to set GRUB_TIMEOUT."
+
+# Configure zRAM
+configure_zram
 
 # Generate Grub Config
 grub-mkconfig -o /boot/grub/grub.cfg || \

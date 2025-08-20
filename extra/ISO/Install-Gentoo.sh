@@ -180,6 +180,10 @@ if [ "$GENTOO_INIT" = "openrc" ]; then
 	GIT_PKGS="$GIT_PKGS app-emulation/virt-what"
 	OPENRC_PKGS="app-admin/sysklogd sys-process/cronie net-misc/chrony"
 	SYSTEM_PKGS="$SYSTEM_PKGS $OPENRC_PKGS"
+else
+	# systemd Packages
+	SYSTEMD_PKGS="sys-apps/zram-generator"
+	SYSTEM_PKGS="$SYSTEM_PKGS $SYSTEMD_PKGS"
 fi
 
 # CPU Check
@@ -377,6 +381,13 @@ install_grub
 # Set GRUB timeout to 0
 sed -i '/^#*GRUB_TIMEOUT=/s/^#*GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' \
 	/etc/default/grub || die "Failed to set GRUB_TIMEOUT."
+
+# Configure zRAM
+if [ "$GENTOO_INIT" = "systemd" ]; then
+	configure_zram
+else
+	configure_zram "gentoo"
+fi
 
 # Generate Grub Config
 grub-mkconfig -o /boot/grub/grub.cfg || die "Failed to generate GRUB config."

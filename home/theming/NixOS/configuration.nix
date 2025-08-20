@@ -86,12 +86,27 @@ in
       };
       pulse.enable = true;
     };
+    zram-generator = {
+      enable = true;
+      settings = {
+        "zram0" = {
+          zram-size = "min(ram / 2, 8192)";
+          compression-algorithm = "zstd";
+        };
+      };
+    };
+  };
+
+  boot.kernel.sysctl = {
+    "vm.watermark_boost_factor" = 0;
+    "vm.watermark_scale_factor" = 125;
+    "vm.page-cluster" = 0;
+    "vm.swappiness" = 180;
   };
 
   xdg.portal.enable = true;
   virtualisation.libvirtd.enable = true;
   systemd.extraConfig = "DefaultTimeoutStopSec=15s\n";
-  zramSwap.enable = true;
   # sound.enable = true;
   # hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;

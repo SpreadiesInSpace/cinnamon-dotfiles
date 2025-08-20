@@ -123,7 +123,7 @@ sed -i '/none.*swap.*defaults,pri=/d' /etc/fstab || \
 
 # Generate /etc/default/grub
 cat >> /etc/default/grub << 'ETC' || die "Failed to create /etc/default/grub"
-GRUB_TIMEOUT=0
+GRUB_TIMEOUT=5
 GRUB_DISTRIBUTOR="$(sed 's, release .*$,,g' /etc/system-release)"
 GRUB_DEFAULT=saved
 GRUB_DISABLE_SUBMENU=true
@@ -132,6 +132,10 @@ GRUB_CMDLINE_LINUX="rhgb quiet"
 GRUB_DISABLE_RECOVERY="true"
 GRUB_ENABLE_BLSCFG=true
 ETC
+
+# Backup original /etc/default/grub
+cp /etc/default/grub /etc/default/grub.orig || \
+	die "Failed to backup original /etc/default/grub."
 
 # Remove boot splash
 sed -i 's/rhgb quiet/quiet/' /etc/default/grub || \
@@ -149,6 +153,13 @@ if [ "$BOOTMODE" = "UEFI" ]; then
 else
 	install_grub "fedora"
 fi
+
+# Set GRUB timeout to 0
+sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub || \
+	die "Failed to set GRUB_TIMEOUT."
+
+# Configure zRAM
+configure_zram
 
 # Regenerate Grub Config
 grub2-mkconfig -o /boot/grub2/grub.cfg || \

@@ -169,6 +169,9 @@ install_grub
 sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub || \
 	die "Failed to set GRUB_TIMEOUT."
 
+# Configure zRAM
+configure_zram "slackware"
+
 # Generate Grub Config
 /var/log/setup/setup.*.mkinitrd || \
 	die "Failed to make initrd and generate GRUB config."

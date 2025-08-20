@@ -69,7 +69,7 @@ zypper --gpg-auto-import-keys --root /mnt ar --refresh \
 	die "Failed to add openSUSE repo."
 zypper --gpg-auto-import-keys --root /mnt in -y --download-in-advance dracut \
 	kernel-default grub2 grub2-i386-pc grub2-x86_64-efi shim zypper bash man \
-	shadow util-linux nano arch-install-scripts systemd-zram-service || \
+	shadow util-linux nano arch-install-scripts zram-generator || \
 	die "Failed to install base packages."
 
 # Copy Repos
@@ -133,6 +133,9 @@ install_grub "opensuse"
 # Set GRUB timeout to 0
 sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub || \
 	die "Failed to set GRUB_TIMEOUT."
+
+# Configure zRAM
+configure_zram
 
 # Generate Grub Config
 grub2-mkconfig -o /boot/grub2/grub.cfg || \

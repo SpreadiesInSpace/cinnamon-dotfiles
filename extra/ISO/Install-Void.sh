@@ -67,10 +67,10 @@ XBPS_ARCH=$ARCH xbps-install -Syu -r /mnt -R "$REPO" base-system cinnamon \
 	gnome-terminal spice-vdagent xorg-minimal xorg-input-drivers \
 	xorg-video-drivers NetworkManager alsa-pipewire libspa-bluetooth pipewire \
 	wireplumber git xtools xmirror nano sudo grub grub-x86_64-efi \
-	bash-completion unzip || die "Failed to install base packages."
+	bash-completion unzip zramen || die "Failed to install base packages."
 
 # Enable Services
-for service in dbus lightdm NetworkManager polkitd spice-vdagentd; do
+for service in dbus lightdm NetworkManager polkitd spice-vdagentd zramen; do
 	chroot /mnt ln -sfv /etc/sv/$service /etc/runit/runsvdir/default || \
 		die "Failed to enable service $service."
 done
@@ -147,6 +147,9 @@ install_grub
 # Set GRUB timeout to 0
 sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub || \
 	die "Failed to set GRUB_TIMEOUT."
+
+# Configure zRAM
+configure_zram "void"
 
 # Generate Grub Config (xbps-reconfigure -fa takes care of this)
 # grub-mkconfig -o /boot/grub/grub.cfg  || \
