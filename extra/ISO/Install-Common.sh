@@ -358,6 +358,11 @@ configure_zram() {
 		SYSCTL_FILE="/etc/sysctl.conf"
 	else
 		SYSCTL_FILE="/etc/sysctl.d/99-zram.conf"
+		# Create the directory if it doesn't exist
+		if [ ! -d "$(dirname "$SYSCTL_FILE")" ]; then
+			mkdir -p "$(dirname "$SYSCTL_FILE")" || \
+				die "Failed to create $(dirname "$SYSCTL_FILE") directory."
+		fi
 	fi
 
 	# Apply sysctl tuning
@@ -463,17 +468,24 @@ ZRAM
 		GRUB_FILE="/etc/default/grub"
 		PARAM="zswap.enabled=0"
 
-		if grep -q '^GRUB_CMDLINE_LINUX=' "$GRUB_FILE"; then
+		# Check if GRUB_CMDLINE_LINUX exists (commented or uncommented)
+		if grep -q '^\s*#*\s*GRUB_CMDLINE_LINUX=' "$GRUB_FILE" 2>/dev/null; then
+			# Remove any existing zswap.enabled parameter
 			sed -i -E \
-				's/^(GRUB_CMDLINE_LINUX="[^"]*)\bzswap\.enabled=[^" ]* *([^"]*)"/\1\2"/' \
-				"$GRUB_FILE" || die "Failed to strip old zswap.enabled in GRUB."
-			sed -i -E \
-				"s/^(GRUB_CMDLINE_LINUX=\"[^\"]*)\"/\1 $PARAM\"/" \
-				"$GRUB_FILE" || die "Failed to append zswap.enabled=0 to GRUB."
+				's/^(\s*#*\s*GRUB_CMDLINE_LINUX="[^"]*)\s*zswap\.enabled=[^" ]*\s*([^"]*)"/\1 \2"/' \
+				"$GRUB_FILE" || die "Failed to remove existing zswap.enabled from GRUB."
+
+			# Uncomment the line if it's commented
+			sed -i 's/^\s*#\s*\(GRUB_CMDLINE_LINUX=\)/\1/' "$GRUB_FILE" || \
+				die "Failed to uncomment GRUB_CMDLINE_LINUX."
+
+			# Add the new parameter
+			sed -i -E "s/^(GRUB_CMDLINE_LINUX=\"[^\"]*)\"/\1 $PARAM\"/" \
+				"$GRUB_FILE" || die "Failed to add zswap.enabled=0 to GRUB."
 		else
-			{
-				echo "GRUB_CMDLINE_LINUX=\"$PARAM\""
-			} >> "$GRUB_FILE" || die "Failed to write GRUB_CMDLINE_LINUX."
+			# No GRUB_CMDLINE_LINUX line exists, create it
+			echo "GRUB_CMDLINE_LINUX=\"$PARAM\"" >> "$GRUB_FILE" || \
+				die "Failed to write GRUB_CMDLINE_LINUX."
 		fi
 	fi
 }
