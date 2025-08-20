@@ -5,6 +5,9 @@ die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
 [ -f ./Setup-Common.sh ] || die "Setup-Common.sh not found."
 source ./Setup-Common.sh || die "Failed to source Setup-Common.sh"
 
+# Declare variables that will be set by sourced functions
+declare enable_autologin is_vm username
+
 # Check if the script is run as root
 check_if_root
 

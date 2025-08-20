@@ -11,6 +11,10 @@ curl -fsSL -o Install-Common.sh "$URL" || \
 [ -f ./Install-Common.sh ] || die "Install-Common.sh not found."
 source ./Install-Common.sh || die "Failed to source Install-Common.sh"
 
+# Declare variables that will be set by sourced functions
+declare username hostname timezone drive enable_autologin rootpasswd
+declare userpasswd
+
 # Check if script is run as root
 check_if_root
 
