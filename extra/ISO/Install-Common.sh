@@ -374,7 +374,7 @@ SYSCTL
 	if [ "$distro" = "slackware" ]; then
 		# Backup existing zram config
 		if [ -f /etc/default/zram ]; then
-			cp /etc/default/zram "/etc/default/zram.bak.orig" || \
+			cp /etc/default/zram "/etc/default/zram.orig" || \
 				die "Failed to backup zram config."
 		fi
 
