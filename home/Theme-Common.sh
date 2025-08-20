@@ -666,6 +666,7 @@ copy_vscodium_config() {
 	# Backup VSCodium config & plugins
 	local timestamp
 	timestamp=$(date +%s)
+
 	echo "Configuring VSCodium..."
 	if [ -d ~/.config/VSCodium ]; then
 		mv ~/.config/VSCodium ~/.config/VSCodium.old."$timestamp"
@@ -673,6 +674,8 @@ copy_vscodium_config() {
 	if [ -d ~/.vscode-oss ]; then
 		mv ~/.vscode-oss ~/.vscode-oss.old."$timestamp"
 	fi
+	# Ensure codium directory is removed if script fails
+	trap 'rm -rf codium/' EXIT
 
 	# Copy VSCodium config and plugins to appropriate directory
 	git clone https://github.com/spreadiesinspace/codium >/dev/null 2>&1 || \
