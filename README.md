@@ -23,7 +23,7 @@ bash <(curl -fsSL https://tinyurl.com/cinnamon-ISO)
 ```
 ```bash
 # For Slackware Current (no curl or internet by default)
-dhcpcd && sleep 10
+dhcpcd && sleep 15
 bash <(wget -qO- https://tinyurl.com/cinnamon-ISO)
 ```
 ```bash
