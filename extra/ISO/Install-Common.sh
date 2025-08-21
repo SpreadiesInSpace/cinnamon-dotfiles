@@ -53,6 +53,40 @@ This is likely a permissions or kernel setting issue."
 	export REMOVABLE_BOOT
 }
 
+time_sync() {
+	# Sync time and hardware clock
+	echo "Synchronizing system time..."
+	NTP_POOL="${NTP_POOL:-pool.ntp.org}"
+	local success=false
+
+	# Try commands in order: timedatectl, chronyc, chronyd, ntpd & ntpdate
+	if [ "$success" = false ] && command -v timedatectl >/dev/null 2>&1; then
+		{ timedatectl set-ntp true 2>/dev/null || \
+			systemctl restart systemd-timesyncd 2>/dev/null || \
+			systemctl start systemd-timesyncd 2>/dev/null; } && success=true
+	fi
+	if [ "$success" = false ] && command -v chronyc >/dev/null 2>&1 && \
+		 pgrep chronyd >/dev/null 2>&1; then
+		{ chronyc -a "burst 4/4" && chronyc -a makestep; } && success=true
+	elif [ "$success" = false ] && command -v chronyd >/dev/null 2>&1; then
+		chronyd -q "server $NTP_POOL iburst" 2>/dev/null && success=true
+	fi
+	if [ "$success" = false ] && command -v ntpd >/dev/null 2>&1; then
+		pkill ntpd 2>/dev/null || true
+		{ ntpd -gq -p "$NTP_POOL" 2>/dev/null || \
+			ntpdate -s "$NTP_POOL" 2>/dev/null; } && success=true
+	elif [ "$success" = false ] && command -v ntpdate >/dev/null 2>&1; then
+		ntpdate -s "$NTP_POOL" 2>/dev/null && success=true
+	fi
+
+	# Sync hardware clock if any method succeeds
+	if [ "$success" = true ] && command -v hwclock >/dev/null 2>&1; then
+		hwclock --systohc --utc 2>/dev/null || \
+			echo "Warning: Could not sync hardware clock"
+	fi
+	[ "$success" = true ]
+}
+
 prompt_root_password() {
 	# Prompt for root password
 	while true; do

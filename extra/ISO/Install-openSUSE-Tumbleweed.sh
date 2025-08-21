@@ -17,6 +17,9 @@ check_if_root
 # Detect if booted in UEFI or BIOS mode
 detect_boot_mode
 
+# Sync time and hardware clock
+time_sync
+
 # Enable Parallel Downloads
 export ZYPP_PCK_PRELOAD=1 || die "Failed to enable parallel downloads."
 

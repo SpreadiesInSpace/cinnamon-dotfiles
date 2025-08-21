@@ -20,6 +20,9 @@ check_if_root
 # Detect if booted in UEFI or BIOS mode
 detect_boot_mode
 
+# Sync time and hardware clock
+time_sync
+
 # Prompt for root password
 prompt_root_password
 
@@ -66,9 +69,6 @@ SCRIPT_DIR="$(pwd)"
 
 # Move to Mounted Root Partition
 cd /mnt/gentoo || die "Failed to change directory to /mnt/gentoo."
-
-# Sync Time
-hwclock --systohc --utc
 
 # Grab the Latest Systemd Stage 3 Desktop Profile
 GENTOO_MIRROR="https://distfiles.gentoo.org"

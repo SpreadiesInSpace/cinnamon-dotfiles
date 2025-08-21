@@ -17,6 +17,9 @@ check_if_root
 # Detect if booted in UEFI or BIOS mode
 detect_boot_mode
 
+# Sync time and hardware clock
+time_sync
+
 # Auto-detect and mount installation media
 SeTmedia || die "Failed to detect or mount installation media."
 clear
