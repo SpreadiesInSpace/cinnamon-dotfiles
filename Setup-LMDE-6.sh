@@ -32,8 +32,8 @@ apt upgrade -y || die "Failed to upgrade system."
 apt install -y git curl || die "Failed to install git and curl."
 
 # Install Bottom
-VERSION="0.10.2"
-FILE_VERSION="0.10.2-1"
+VERSION="0.11.1"
+FILE_VERSION="0.11.1-1"
 # Define the source URL using the version and file version variables
 BTM="https://github.com/ClementTsang/bottom/releases"
 BTM="$BTM/download/${VERSION}/bottom_${FILE_VERSION}_amd64.deb"

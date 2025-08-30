@@ -65,10 +65,19 @@ curl -fsS https://dl.brave.com/install.sh | sh || \
 	die "Failed to install Brave Browser."
 
 # Install Bottom
-dnf -y copr enable atim/bottom || \
-	die "Failed to enable COPR repo for Bottom."
-dnf -y install bottom || \
-	die "Failed to install Bottom."
+VERSION="0.11.1"
+FILE_VERSION="0.11.1-1"
+# Define the source URL using the version and file version variables
+BTM="https://github.com/ClementTsang/bottom/releases"
+BTM="$BTM/download/${VERSION}/bottom-${FILE_VERSION}.x86_64.rpm"
+# Download the specified version using curl
+curl -LO "$BTM" || die "Failed to download Bottom package."
+# Install the downloaded package
+rpm -i bottom-${FILE_VERSION}.x86_64.rpm || \
+	die "Failed to install Bottom package."
+# Remove the downloaded package file
+rm bottom-${FILE_VERSION}.x86_64.rpm || \
+	die "Failed to remove downloaded Bottom package file."
 
 # Install Neofetch
 neofetch_url="https://archives.fedoraproject.org/pub/archive/fedora"

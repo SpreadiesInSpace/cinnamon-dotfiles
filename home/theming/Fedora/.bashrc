@@ -34,7 +34,7 @@ export PS1="\[\e[38;5;9m\][\[\e[38;5;11m\]\u\[\e[38;5;2m\]@\[\e[38;5;12m\]\h \
 HISTCONTROL=ignoreboth
 
 # Bottom Gruvbox Color Scheme
-alias btm='btm --color gruvbox'
+alias btm='btm --theme gruvbox'
 
 # Fedora Cleaning
 alias cleanExtra='sudo rpm -e --nodeps cinnamon-themes mint-x-icons \
