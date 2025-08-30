@@ -62,19 +62,20 @@ time_sync() {
 	# Try commands in order: timedatectl, chronyc, chronyd, ntpd & ntpdate
 	if [ "$success" = false ] && command -v timedatectl >/dev/null 2>&1; then
 		{ timedatectl set-ntp true 2>/dev/null || \
-			systemctl restart systemd-timesyncd 2>/dev/null || \
-			systemctl start systemd-timesyncd 2>/dev/null; } && success=true
+				systemctl restart systemd-timesyncd 2>/dev/null || \
+				systemctl start systemd-timesyncd 2>/dev/null; } && success=true
 	fi
 	if [ "$success" = false ] && command -v chronyc >/dev/null 2>&1 && \
-		 pgrep chronyd >/dev/null 2>&1; then
-		{ chronyc -a "burst 4/4" && chronyc -a makestep; } && success=true
+			 pgrep chronyd >/dev/null 2>&1; then
+		{ chronyc -a "burst 4/4" && chronyc -a makestep; } >/dev/null 2>&1 && \
+			success=true
 	elif [ "$success" = false ] && command -v chronyd >/dev/null 2>&1; then
-		chronyd -q "server $NTP_POOL iburst" 2>/dev/null && success=true
+		chronyd -q "server $NTP_POOL iburst" >/dev/null 2>&1 && success=true
 	fi
 	if [ "$success" = false ] && command -v ntpd >/dev/null 2>&1; then
 		pkill ntpd 2>/dev/null || true
 		{ ntpd -gq -p "$NTP_POOL" 2>/dev/null || \
-			ntpdate -s "$NTP_POOL" 2>/dev/null; } && success=true
+				ntpdate -s "$NTP_POOL" 2>/dev/null; } && success=true
 	elif [ "$success" = false ] && command -v ntpdate >/dev/null 2>&1; then
 		ntpdate -s "$NTP_POOL" 2>/dev/null && success=true
 	fi
