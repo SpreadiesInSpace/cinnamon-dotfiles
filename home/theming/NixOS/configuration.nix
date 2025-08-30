@@ -139,6 +139,7 @@ in
       gparted
       # guestfs-tools
       haruna
+      libnotify
       libreoffice
       ncdu
       neofetch

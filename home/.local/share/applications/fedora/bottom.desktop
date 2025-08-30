@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=bottom
+GenericName=System Monitor
+Comment=A customizable cross-platform graphical process/system monitor for the terminal.
+Exec=btm --theme gruvbox
+Terminal=true
+Type=Application
+Categories=Utility;System;ConsoleOnly;Monitor;
+StartupNotify=false
+PrefersNonDefaultGPU=false
+Icon=terminator

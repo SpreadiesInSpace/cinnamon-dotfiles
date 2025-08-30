@@ -152,7 +152,7 @@ zypper in -y -t pattern basic_desktop || \
 zypper al mint-x-icon-theme mint-y-icon-theme || \
 	die "Failed to lock Mint icon themes."
 zypper rm -y busybox-which || die "Failed to remove busybox-which."
-zypper in -y cinnamon gnome-terminal spice-vdagent \
+zypper in -y cinnamon gnome-terminal spice-vdagent libnotify-tools \
 	lightdm-gtk-greeter-settings btrfsprogs sudo bash-completion git unzip \
 	|| die "Failed to install Cinnamon and base packages."
 

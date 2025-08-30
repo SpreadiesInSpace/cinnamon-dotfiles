@@ -164,7 +164,7 @@
             "org.gnome.Terminal.desktop"
         ],
         "value": [
-            "Mount CIFS Share.desktop",
+            "bottom.desktop",
             "filezilla.desktop",
             "brave-browser.desktop",
             "SBO Package.desktop",
