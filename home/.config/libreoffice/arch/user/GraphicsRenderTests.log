@@ -1,6 +1,6 @@
 Graphics Backend used: svp
-Passed Tests: 66
-Quirky Tests: 36
+Passed Tests: 67
+Quirky Tests: 35
 Failed Tests: 1
 Skipped Tests: 6
 
@@ -25,7 +25,6 @@ testHalfEllipseAAWithPolyLine
 testHalfEllipseAAWithPolyLineB2D
 testHalfEllipseWithPolygon
 testHalfEllipseAAWithPolygon
-testTextDrawing
 testDrawRectangleOnSize1028WithPixel
 testDrawRectangleOnSize4096WithPixel
 testDrawRectangleOnSize1028WithLine
