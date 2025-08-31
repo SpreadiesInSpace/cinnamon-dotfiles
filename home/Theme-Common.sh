@@ -674,8 +674,9 @@ copy_vscodium_config() {
 	if [ -d ~/.vscode-oss ]; then
 		mv ~/.vscode-oss ~/.vscode-oss.old."$timestamp"
 	fi
+
 	# Ensure codium directory is removed if script fails
-	trap 'rm -rf codium/' EXIT
+	trap 'rm -rf codium/' ERR INT TERM
 
 	# Copy VSCodium config and plugins to appropriate directory
 	git clone https://github.com/spreadiesinspace/codium >/dev/null 2>&1 || \
@@ -769,7 +770,8 @@ setup_synth_shell_config() {
 
 	echo "Configuring Synth Shell Prompt..."
 	# Ensure synth-shell-prompt is removed if script fails
-	trap 'rm -rf synth-shell-prompt/' EXIT
+	trap 'rm -rf synth-shell-prompt/' ERR INT TERM
+
 	# Clone Synth-Shell and run setup
 	git clone --recursive \
 		https://github.com/andresgongora/synth-shell-prompt.git >/dev/null 2>&1 \

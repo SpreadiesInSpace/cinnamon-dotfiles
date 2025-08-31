@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # Turn SELinux back on if script is interrupted
-trap 'fixfiles -F onboot' EXIT
+trap 'fixfiles -F onboot' ERR INT TERM
 
 # Download and source common functions
 echo "Sourcing functions..."

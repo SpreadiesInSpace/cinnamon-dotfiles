@@ -52,7 +52,7 @@ pacman -S --needed --noconfirm base-devel git || \
 	die "Failed to install git."
 
 # Remove passwordless sudo if script is interrupted
-trap 'rm -f /etc/sudoers.d/99_${SUDO_USER}_nopasswd' EXIT
+trap 'rm -f /etc/sudoers.d/99_${SUDO_USER}_nopasswd' ERR INT TERM
 
 # Temporarily allow passwordless sudo for current user
 echo "$SUDO_USER ALL=(ALL) NOPASSWD: ALL" > \
@@ -64,7 +64,7 @@ chmod 0440 /etc/sudoers.d/99_"${SUDO_USER}"_nopasswd || \
 # Install yay
 cat << 'EOF' | su - "$SUDO_USER"
 die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
-trap 'rm -rf yay-bin' EXIT
+trap 'rm -rf yay-bin' ERR INT TERM
 echo "Configuring yay..."
 git clone https://aur.archlinux.org/yay-bin.git >/dev/null 2>&1 || \
 	die "Failed to download yay."

@@ -4,7 +4,7 @@
 source ./Theme-Common.sh
 
 # Ensure tmp is removed if script fails
-trap 'rm -rf tmp' EXIT
+trap 'rm -rf tmp' ERR INT TERM
 
 # Clone icons and fonts
 mkdir tmp
