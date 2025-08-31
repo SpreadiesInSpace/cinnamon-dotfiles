@@ -675,24 +675,38 @@ copy_vscodium_config() {
 		mv ~/.vscode-oss ~/.vscode-oss.old."$timestamp"
 	fi
 
-	# Ensure codium directory is removed if script fails
-	trap 'rm -rf codium/' ERR INT TERM
+	# Cleanup function
+	cleanup_codium() {
+		cd .. 2>/dev/null || true
+		rm -rf codium/ 2>/dev/null || true
+	}
 
 	# Copy VSCodium config and plugins to appropriate directory
 	git clone https://github.com/spreadiesinspace/codium >/dev/null 2>&1 || \
 		die "Failed to download VSCodium config."
-	cd codium/ || die "Failed to move to codium folder."
-	cp -npr VSCodium/ ~/.config/ || die "Failed to copy VSCodium config."
-	bash extensions-restore.sh >/dev/null 2>&1 || \
+
+	cd codium/ || {
+		cleanup_codium
+		die "Failed to move to codium folder."
+	}
+
+	cp -npr VSCodium/ ~/.config/ || {
+		cleanup_codium
+		die "Failed to copy VSCodium config."
+	}
+
+	bash extensions-restore.sh >/dev/null 2>&1 || {
+		cleanup_codium
 		die "Failed to install VSCodium extensions."
+	}
 
-	# Set VSCodium as default (user only)
-	bash Default-Apps-VSCodium.sh || \
+	bash Default-Apps-VSCodium.sh || {
+		cleanup_codium
 		die "Failed to set VSCodium as default editor."
+	}
 
-	# Cleanup
-	cd ..
-	rm -rf codium/
+	# Normal cleanup
+	cleanup_codium
 }
 
 # Only Fedora/LMDE/NixOS uses this
