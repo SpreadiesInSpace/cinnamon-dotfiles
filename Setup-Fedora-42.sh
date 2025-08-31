@@ -52,12 +52,24 @@ dnf -y install "$free" "$nonfree" || \
 	die "Failed to add RPM Fusion repositories."
 
 # Install Media Codecs
-dnf install -y libavcodec-freeworld
+dnf install -y libavcodec-freeworld || \
+	die "Failed to install libavcodec-freeworld."
+dnf -y group install multimedia || \
+	die "Failed to install multimedia group."
+dnf -y swap 'ffmpeg-free' 'ffmpeg' --allowerasing || \
+	die "Failed to switch to full ffmpeg."
+dnf -y upgrade @multimedia --setopt="install_weak_deps=False" \
+	--exclude=PackageKit-gstreamer-plugin || \
+		die "Failed to install gstreamer compenents."
+dnf -y group install sound-and-video || \
+	die "Failed to install sound-and-video group."
 
 # Debloat if installed via cinnamon-ISO
 if [[ -f ".fedora-42.done" ]]; then
-	bash unsorted/Fedora/Fedora-Bloat.sh
-	touch home/.fedora.gnome
+	bash unsorted/Fedora/Fedora-Bloat.sh || \
+		die "Failed to remove bloat."
+	touch home/.fedora.gnome || \
+		die "Failed to set gnome-software flag."
 fi
 
 # Install Brave
