@@ -121,6 +121,7 @@ number of CPU cores."
 slpkg update || die "Failed to sync slpkg."
 
 # Update Slackware Packages
+touch /var/log/slpkg/deps.log || true
 slpkg upgrade -y -o "slack" || die "Failed to update slack packages."
 slpkg upgrade -y -o "slack_extra" \
 	|| die "Failed to update slack_extra packages."
@@ -273,9 +274,9 @@ sbo_packages=(
 	"gnome-screenshot"
 	"kvantum-qt5"
 	"haruna"
-	#"lightdm"
-	#"lightdm-settings"
-	#"lightdm-slick-greeter"
+	"lightdm"
+	"lightdm-settings"
+	"lightdm-slick-greeter"
 	"ncdu"
 	"qt6ct"
 	"timeshift"
@@ -305,8 +306,6 @@ slpkg install -y -P -B "${slint_packages[@]}" -o slint -O || \
 
 # Install Cinnamon, LightDM and set Default DE System-Wide
 slpkg install -y -P -B '*' -o csb || die "Failed to install Cinnamon"
-slpkg install -y -P -B -O lightdm lightdm-settings lightdm-slick-greeter || \
-	die "Failed to install LightDM"
 ln -sf /etc/X11/xinit/xinitrc.cinnamon-session /etc/X11/xinit/xinitrc || \
 	die "Failed to create symlink for xinitrc."
 ln -sf /etc/X11/xinit/xinitrc.cinnamon-session /etc/X11/xsession || \
