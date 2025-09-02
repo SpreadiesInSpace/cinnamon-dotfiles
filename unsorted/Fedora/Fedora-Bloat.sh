@@ -30,8 +30,8 @@ dnf remove -y \
 dnf --setopt=max_parallel_downloads=10 install -y gnome-software \
 	kde-connect ufw || die "Failed to install ufw."
 systemctl daemon-reload || die "Failed to reload systemd daemon."
-ufw allow "KDE Connect" || die "Failed to allow KDE Connect in UFW."
 ufw enable || die "Failed to enable UFW."
+ufw allow "KDE Connect" || die "Failed to allow KDE Connect in UFW."
 
 # Remove PackageKit cache
 rm -rf /var/cache/PackageKit || \
