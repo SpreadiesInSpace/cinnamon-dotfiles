@@ -19,7 +19,7 @@ systemctl disable --now abrtd.service >/dev/null 2>&1 || true
 
 # Remove Bloat
 dnf remove -y \
-	baobab bulky celluloid drawing firefox firewalld gnome-calendar hexchat hp* \
+	baobab bulky celluloid drawing firefox gnome-calendar hexchat hp* \
 	hypnotix mint-artwork mint-backgrounds* mintbackup mintstick mintupdate \
 	numix* papirus-icon-theme pix pppoeconf redshift simple-scan thingy \
 	thunderbird transmission-gtk warpinator webapp-manager xed xreader xviewer \
@@ -32,6 +32,7 @@ dnf --setopt=max_parallel_downloads=10 install -y gnome-software \
 systemctl daemon-reload || die "Failed to reload systemd daemon."
 ufw enable || die "Failed to enable UFW."
 ufw allow "KDE Connect" || die "Failed to allow KDE Connect in UFW."
+dnf remove -y firewalld
 
 # Remove PackageKit cache
 rm -rf /var/cache/PackageKit || \
