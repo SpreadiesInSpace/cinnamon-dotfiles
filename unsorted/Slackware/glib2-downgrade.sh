@@ -15,7 +15,7 @@ wget -c -T 10 -t 10 -q --show-progress "$glib2" || \
 	die "Failed to download glib2 package."
 installpkg glib2-2.84.4-x86_64-1.txz || \
 	die "Failed to install glib2 package."
-rm installpkg glib2-2.84.4-x86_64-1.txz || \
+rm glib2-2.84.4-x86_64-1.txz || \
 	die "Failed to remove glib2 package file."
 sed -i 's/^\(PACKAGES *= *\["mint"\)\]/\1, "glib2"]/' \
 	/etc/slpkg/blacklist.toml || \
