@@ -10,11 +10,12 @@ export PS1="\[\e[38;5;9m\][\[\e[38;5;11m\]\u\[\e[38;5;2m\]@\[\e[38;5;12m\]\h \
 # Ignore History with Space
 HISTCONTROL=ignoreboth
 
-# Update and Cleanup
-alias UC='updateAll;sudo bleachbit;exit'
-
 # Bottom Gruvbox Color Scheme
 alias btm='btm --theme gruvbox'
+
+# Elevated Power Actions
+alias poweroff='loginctl poweroff'
+alias reboot='loginctl reboot'
 
 # Slackware Cleaning
 alias cleanAll='sudo find /var/log -type f -name "*.log" -exec truncate -s 0 \
@@ -36,8 +37,11 @@ echo "LazySync complete!"'
 alias updateApp='sudo sbocheck; sudo sboupgrade --all; updateSlpkg; \
 sudo grub-mkconfig -o /boot/grub/grub.cfg; flatpak update -y; updateNeovim'
 alias updateAll='updateApp && cleanAll'
-alias updateRestart='updateAll; sudo reboot'
-alias updateShutdown='updateAll; sudo poweroff'
+alias updateRestart='updateAll; reboot'
+alias updateShutdown='updateAll; poweroff'
+
+# Update and Cleanup
+alias UC='updateAll;sudo bleachbit;exit'
 
 # Skip Synth Shell prompt in virtual console or nvim's embedded terminal
 if [[ $(tty) == /dev/tty[0-9]* ]] || \

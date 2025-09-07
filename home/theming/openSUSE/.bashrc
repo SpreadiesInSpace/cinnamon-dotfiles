@@ -22,6 +22,10 @@ HISTCONTROL=ignoreboth
 # Bottom Gruvbox Color Scheme
 alias btm='btm --theme gruvbox'
 
+# Elevated Power Actions
+alias poweroff='systemctl poweroff'
+alias reboot='systemctl reboot'
+
 # openSUSE Cleaning
 alias cleanAll='sudo zypper rm *-lang *-doc; \
 sudo rm -rf /usr/share/themes/Mint-*; flatpak remove --unused; \
@@ -30,8 +34,7 @@ sudo zypper clean -a; sudo zypper purge-kernels; \
 sudo snapper delete 1-100; rm -rf ~/.cache/*; sudo rm /tmp/* -rf; \
 sudo journalctl --vacuum-size=50M; \
 sudo journalctl --vacuum-time=4weeks; SystemMaxUse=50M; \
-sudo bleachbit -c --preset && bleachbit -c --preset; \
-sudo -E bleachbit; exit'
+sudo bleachbit -c --preset && bleachbit -c --preset'
 
 # openSUSE Update
 alias updateNeovim='echo "Performing LazySync..."; \
@@ -40,11 +43,11 @@ echo "LazySync complete!"'
 alias updateApp='sudo zypper ref; sudo zypper dup; flatpak update -y; \
 updateNeovim'
 alias updateAll='updateApp && cleanAll'
-alias updateRestart='updateAll; systemctl reboot'
-alias updateShutdown='updateAll; systemctl poweroff'
+alias updateRestart='updateAll; reboot'
+alias updateShutdown='updateAll; poweroff'
 
 # Update and Cleanup
-alias UC='updateAll;sudo bleachbit;exit'
+alias UC='updateAll;sudo -E bleachbit;exit'
 
 # Skip Synth Shell prompt in virtual console or nvim's embedded terminal
 if [[ $(tty) == /dev/tty[0-9]* ]] || \

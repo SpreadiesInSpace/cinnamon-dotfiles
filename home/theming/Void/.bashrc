@@ -21,6 +21,10 @@ HISTCONTROL=ignoreboth
 # Bottom Gruvbox Color Scheme
 alias btm='btm --theme gruvbox'
 
+# Elevated Power Actions
+alias poweroff='loginctl poweroff'
+alias reboot='loginctl reboot'
+
 # Void Cleaning
 alias cleanAll='flatpak remove --unused; sudo flatpak repair; \
 sudo xbps-remove -yROo; sudo vkpurge rm all; rm -rf ~/.cache/*; \
@@ -35,8 +39,8 @@ echo "LazySync complete!"'
 alias updateApp='sudo xbps-install -Su xbps && sudo xbps-install -Suvy; \
 updateXdeb; flatpak update -y; updateNeovim'
 alias updateAll='updateApp && cleanAll'
-alias updateRestart='updateAll; sudo reboot'
-alias updateShutdown='updateAll; sudo poweroff'
+alias updateRestart='updateAll; reboot'
+alias updateShutdown='updateAll; poweroff'
 
 # Update and Cleanup
 alias UC='updateAll;sudo bleachbit;exit'

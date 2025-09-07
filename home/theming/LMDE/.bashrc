@@ -118,9 +118,6 @@ fi
 export PS1="\[\e[38;5;9m\][\[\e[38;5;11m\]\u\[\e[38;5;2m\]@\[\e[38;5;12m\]\h \
 \[\e[38;5;5m\]\w\[\e[38;5;9m\]]\[\e[0m\]\$ "
 
-# Update and Cleanup
-alias UC='updateAll;sudo bleachbit;exit'
-
 # Bottom Gruvbox Color Scheme
 alias btm='btm --theme gruvbox'
 
@@ -145,6 +142,9 @@ flatpak update -y | updateNeovim'
 alias updateAll='updateApp && cleanAll'
 alias updateRestart='updateAll; systemctl reboot'
 alias updateShutdown='updateAll; systemctl poweroff'
+
+# Update and Cleanup
+alias UC='updateAll;sudo bleachbit;exit'
 
 # LMDE Neofetch
 alias neofetch='neofetch --ascii ${HOME}/LMDEAscii.txt'

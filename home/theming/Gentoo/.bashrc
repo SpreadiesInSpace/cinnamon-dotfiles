@@ -22,11 +22,19 @@ export PS1="\[\e[38;5;9m\][\[\e[38;5;11m\]\u\[\e[38;5;2m\]@\[\e[38;5;12m\]\h \
 # Ignore History with Space
 HISTCONTROL=ignoreboth
 
-# Update and Cleanup
-alias UC='updateAll;sudo bleachbit;exit'
-
 # Bottom Gruvbox Color Scheme
 alias btm='btm --theme gruvbox'
+
+# Elevated Power Actions
+if eselect profile show | grep -q systemd; then
+	# systemd
+	alias poweroff='systemctl poweroff'
+	alias reboot='systemctl reboot'
+else
+	# OpenRC
+	alias poweroff='loginctl poweroff'
+	alias reboot='loginctl reboot'
+fi
 
 # Gentoo Cleaning
 alias cleanAll='sudo emerge -aq --depclean; flatpak remove --unused; \
@@ -49,8 +57,11 @@ alias updateApp='updateSync; \
 sudo emerge -avqDuN --with-bdeps=y @world; flatpak update -y; \
 updateNeovim; sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias updateAll='updateApp && cleanAll'
-alias updateRestart='updateAll; systemctl reboot'
-alias updateShutdown='updateAll; systemctl poweroff'
+alias updateRestart='updateAll; reboot'
+alias updateShutdown='updateAll; poweroff'
+
+# Update and Cleanup
+alias UC='updateAll;sudo bleachbit;exit'
 
 # Skip Synth Shell prompt in virtual console or nvim's embedded terminal
 if [[ $(tty) == /dev/tty[0-9]* ]] || \
