@@ -72,7 +72,7 @@ XBPS_ARCH=$ARCH xbps-install -Syu -r /mnt -R "$REPO" base-system cinnamon \
 	gnome-terminal spice-vdagent xorg-minimal xorg-input-drivers \
 	xorg-video-drivers NetworkManager alsa-pipewire libspa-bluetooth pipewire \
 	wireplumber git xtools xmirror nano sudo grub grub-x86_64-efi \
-	bash-completion unzip zramen || \
+	bash-completion unzip zramen blueman || \
 	die "Failed to install base packages."
 
 # Enable Services

@@ -180,6 +180,7 @@ SYSTEM_PKGS="sys-kernel/gentoo-kernel-bin sys-fs/genfstab \
 	sys-fs/xfsprogs sys-fs/e2fsprogs sys-fs/dosfstools sys-fs/btrfs-progs \
 	sys-fs/f2fs-tools sys-fs/ntfs3g sys-block/io-scheduler-udev-rules \
 	app-arch/unzip app-admin/sudo"
+PHYSICAL_PKGS="net-wireless/blueman sys-kernel/linux-firmware"
 
 # OpenRC Packages
 if [ "$GENTOO_INIT" = "openrc" ]; then
@@ -199,7 +200,7 @@ IS_INTEL="false"
 # Ensure variables are exported before chroot
 export drive hostname timezone username rootpasswd userpasswd BOOTMODE \
 	REMOVABLE_BOOT GENTOO_INIT SYNC_URI_V3 SYNC_URI GIT_PKGS SYSTEM_PKGS \
-	IS_INTEL || \
+	PHYSICAL_PKGS IS_INTEL || \
 	die "Failed to export required variables."
 
 #=========================== Extra Variables - END ============================
@@ -316,10 +317,10 @@ if { [ "$GENTOO_INIT" = "systemd" ] && systemd-detect-virt --vm; } || \
 else
 	# Physical machine - add firmware
 	if [ "$IS_INTEL" = "true" ]; then
-		emerge -vq $SYSTEM_PKGS sys-kernel/linux-firmware \
-			sys-firmware/intel-microcode || die "Failed to install system packages."
+		emerge -vq $SYSTEM_PKGS $PHYSICAL_PKGS sys-firmware/intel-microcode || \
+			die "Failed to install system packages."
 	else
-		emerge -vq $SYSTEM_PKGS sys-kernel/linux-firmware || \
+		emerge -vq $SYSTEM_PKGS $PHYSICAL_PKGS || \
 			die "Failed to install system packages."
 	fi
 fi

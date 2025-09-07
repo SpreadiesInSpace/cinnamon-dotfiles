@@ -62,7 +62,7 @@ dnf -y swap 'ffmpeg-free' 'ffmpeg' --allowerasing || \
 	die "Failed to switch to full ffmpeg."
 dnf -y upgrade @multimedia --setopt="install_weak_deps=False" \
 	--exclude=PackageKit-gstreamer-plugin || \
-		die "Failed to install gstreamer compenents."
+	die "Failed to install gstreamer compenents."
 dnf -y group install sound-and-video || \
 	die "Failed to install sound-and-video group."
 

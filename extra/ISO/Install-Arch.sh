@@ -63,7 +63,7 @@ create_btrfs_subvolumes
 mount_partitions
 
 # Install Essential packages
-pacstrap -K /mnt base linux linux-firmware cinnamon lightdm \
+pacstrap -K /mnt base blueman linux linux-firmware cinnamon lightdm \
 	lightdm-slick-greeter gnome-terminal spice-vdagent sudo bash-completion \
 		grub efibootmgr git networkmanager nano unzip wget zram-generator || \
 		die "Failed to install base packages."
