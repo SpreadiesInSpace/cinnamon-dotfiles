@@ -117,11 +117,6 @@ echo "app-emulation/qemu glusterfs iscsi opengl pipewire spice usbredir vde virg
 	tee /etc/portage/package.use/qemu || \
 	die "Failed to set USE flags for qemu."
 
-# Temporary Python Versions Fix
-# echo "x11-apps/lightdm-gtk-greeter-settings PYTHON_SINGLE_TARGET: python3_12" | \
-#	tee /etc/portage/package.use/python || \
-#	die "Failed to set USE flags for python."
-
 # Sync Repository + All Overlays
 emaint sync -a || \
 	die "Failed to sync repositories and overlays."

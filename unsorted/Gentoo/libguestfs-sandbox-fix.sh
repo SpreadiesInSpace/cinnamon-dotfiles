@@ -9,7 +9,8 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 # For guestfs-tools (libguestfs currently triggers sandbox violation)
-mkdir -p /etc/portage/{env,package.env} || die "Failed to make env directory."
+mkdir -p /etc/portage/{env,package.env} || \
+	die "Failed to make env directory."
 echo 'FEATURES="-sandbox -usersandbox"' > /etc/portage/env/no-sandbox.conf \
 	|| die "Failed to make no-sandbox flags config file."
 echo 'app-emulation/libguestfs no-sandbox.conf' >> \
