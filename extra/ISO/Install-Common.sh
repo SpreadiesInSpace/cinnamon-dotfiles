@@ -16,7 +16,8 @@ if [ ! -f ./Master-Common.sh ]; then
 		die "Neither curl nor wget is available for downloading Master-Common.sh"
 	fi
 fi
-source ./Master-Common.sh || die "Failed to source Master-Common.sh"
+source ./Master-Common.sh || \
+	die "Failed to source Master-Common.sh"
 
 detect_boot_mode() {
 	# Detect if booted in UEFI or BIOS mode
@@ -282,19 +283,25 @@ partition_suffix() {
 format_partitions() {
 	# Format the partitions
 	if [ "$BOOTMODE" = "UEFI" ] && [ -n "$EFI" ]; then
-		mkfs.fat -F32 "$EFI" || die "Failed to format EFI partition."
+		mkfs.fat -F32 "$EFI" || \
+		die "Failed to format EFI partition."
 	fi
 	if [ -n "$BOOT" ]; then
-		mkfs.ext4 -F "$BOOT" || die "Failed to format boot partition."
+		mkfs.ext4 -F "$BOOT" || \
+		die "Failed to format boot partition."
 	fi
-	mkfs.btrfs -f "$ROOT" || die "Failed to format root partition."
+	mkfs.btrfs -f "$ROOT" || \
+		die "Failed to format root partition."
 }
 
 create_btrfs_subvolumes() {
 	# Create BTRFS subvolumes
-	mount "$ROOT" /mnt || die "Failed to mount root partition."
-	btrfs su cr /mnt/@ || die "Failed to create subvolume @."
-	btrfs su cr /mnt/@home || die "Failed to create subvolume @home."
+	mount "$ROOT" /mnt || \
+		die "Failed to mount root partition."
+	btrfs su cr /mnt/@ || \
+		die "Failed to create subvolume @."
+	btrfs su cr /mnt/@home || \
+		die "Failed to create subvolume @home."
 	btrfs su cr /mnt/@.snapshots || \
 		die "Failed to create subvolume @.snapshots."
 	umount /mnt || die "Failed to unmount root partition."
@@ -306,39 +313,50 @@ mount_partitions() {
 	local MNT="/mnt"
 	[ "$distro" = "gentoo" ] && MNT="/mnt/gentoo"
 
-	mkdir -p "$MNT" || die "Failed to create $MNT."
+	mkdir -p "$MNT" || \
+		die "Failed to create $MNT."
 	mount -o noatime,compress=zstd,discard=async,subvol=@ "$ROOT" "$MNT" || \
 		die "Failed to mount root subvolume."
 
 	# Create and mount home
-	mkdir -p "$MNT/home" || die "Failed to create $MNT/home."
+	mkdir -p "$MNT/home" || \
+		die "Failed to create $MNT/home."
 	mount -o noatime,compress=zstd,discard=async,subvol=@home \
-		"$ROOT" "$MNT/home" || die "Failed to mount home subvolume."
+		"$ROOT" "$MNT/home" || \
+		die "Failed to mount home subvolume."
 
 	# Mount snapshots subvolume (universal)
-	mkdir -p "$MNT/.snapshots" || die "Failed to create $MNT/.snapshots."
+	mkdir -p "$MNT/.snapshots" || \
+		die "Failed to create $MNT/.snapshots."
 	mount -o noatime,compress=zstd,discard=async,subvol=@.snapshots \
-		"$ROOT" "$MNT/.snapshots" || die "Failed to mount snapshots subvolume."
+		"$ROOT" "$MNT/.snapshots" || \
+		die "Failed to mount snapshots subvolume."
 
 	# Handle boot partition mounting
 	if [ -n "$BOOT" ]; then
 		# Separate /boot partition (Fedora)
-		mkdir -p "$MNT/boot" || die "Failed to create $MNT/boot."
-		mount "$BOOT" "$MNT/boot" || die "Failed to mount boot partition."
+		mkdir -p "$MNT/boot" || \
+			die "Failed to create $MNT/boot."
+		mount "$BOOT" "$MNT/boot" || \
+			die "Failed to mount boot partition."
 
 		# Mount EFI inside /boot for Fedora
 		if [ "$BOOTMODE" = "UEFI" ] && [ -n "$EFI" ]; then
-			mkdir -p "$MNT/boot/efi" || die "Failed to create $MNT/boot/efi."
-			mount "$EFI" "$MNT/boot/efi" || die "Failed to mount EFI partition."
+			mkdir -p "$MNT/boot/efi" || \
+				die "Failed to create $MNT/boot/efi."
+			mount "$EFI" "$MNT/boot/efi" || \
+				die "Failed to mount EFI partition."
 		fi
 	elif [ "$BOOTMODE" = "UEFI" ] && [ -n "$EFI" ]; then
 		# Direct EFI mounting for other distros
 		if [ "$distro" = "nixos" ]; then
-			mkdir -p "$MNT/boot" || die "Failed to create $MNT/boot."
+			mkdir -p "$MNT/boot" || \
+				die "Failed to create $MNT/boot."
 			mount "$EFI" "$MNT/boot" || \
 				die "Failed to mount EFI partition to /boot."
 		else
-			mkdir -p "$MNT/boot/efi" || die "Failed to create $MNT/boot/efi."
+			mkdir -p "$MNT/boot/efi" || \
+				die "Failed to create $MNT/boot/efi."
 			mount "$EFI" "$MNT/boot/efi" || \
 				die "Failed to mount EFI partition to /boot/efi."
 		fi
@@ -354,13 +372,20 @@ mount_system_partitions() {
 
 	mkdir -p "$MNT"/{proc,sys,dev,run} || \
 		die "Failed to create system mount points."
-	mount --types proc /proc "$MNT/proc" || die "Failed to mount /proc."
-	mount --rbind /sys "$MNT/sys" || die "Failed to bind-mount /sys."
-	mount --make-rslave "$MNT/sys" || die "Failed to make /sys rslave."
-	mount --rbind /dev "$MNT/dev" || die "Failed to bind-mount /dev."
-	mount --make-rslave "$MNT/dev" || die "Failed to make /dev rslave."
-	mount --bind /run "$MNT/run" || die "Failed to bind-mount /run."
-	mount --make-slave "$MNT/run" || die "Failed to make /run slave."
+	mount --types proc /proc "$MNT/proc" || \
+		die "Failed to mount /proc."
+	mount --rbind /sys "$MNT/sys" || \
+		die "Failed to bind-mount /sys."
+	mount --make-rslave "$MNT/sys" || \
+		die "Failed to make /sys rslave."
+	mount --rbind /dev "$MNT/dev" || \
+		die "Failed to bind-mount /dev."
+	mount --make-rslave "$MNT/dev" || \
+		die "Failed to make /dev rslave."
+	mount --bind /run "$MNT/run" || \
+		die "Failed to bind-mount /run."
+	mount --make-slave "$MNT/run" || \
+		die "Failed to make /run slave."
 }
 
 # Only Gentoo uses this
@@ -508,7 +533,8 @@ ZRAM
 			# Remove any existing zswap.enabled parameter
 			sed -i -E \
 				's/^(\s*#*\s*GRUB_CMDLINE_LINUX="[^"]*)\s*zswap\.enabled=[^" ]*\s*([^"]*)"/\1 \2"/' \
-				"$GRUB_FILE" || die "Failed to remove existing zswap.enabled from GRUB."
+				"$GRUB_FILE" || \
+				die "Failed to remove existing zswap.enabled from GRUB."
 
 			# Uncomment the line if it's commented
 			sed -i 's/^\s*#\s*\(GRUB_CMDLINE_LINUX=\)/\1/' "$GRUB_FILE" || \
@@ -516,7 +542,8 @@ ZRAM
 
 			# Add the new parameter
 			sed -i -E "s/^(GRUB_CMDLINE_LINUX=\"[^\"]*)\"/\1 $PARAM\"/" \
-				"$GRUB_FILE" || die "Failed to add zswap.enabled=0 to GRUB."
+				"$GRUB_FILE" || \
+				die "Failed to add zswap.enabled=0 to GRUB."
 		else
 			# No GRUB_CMDLINE_LINUX line exists, create it
 			echo "GRUB_CMDLINE_LINUX=\"$PARAM\"" >> "$GRUB_FILE" || \
@@ -541,7 +568,8 @@ install_grub() {
 				die "Failed to install GRUB (UEFI removable)."
 		else
 			"$cmd" --target=x86_64-efi --efi-directory=/boot/efi \
-				--bootloader-id="$distro" || die "Failed to install GRUB (UEFI)."
+				--bootloader-id="$distro" || \
+				die "Failed to install GRUB (UEFI)."
 		fi
 	else
 		# Install GRUB for BIOS

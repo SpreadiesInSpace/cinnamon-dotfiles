@@ -40,7 +40,8 @@ prompt_drive
 
 # Update keyring (for older ISOs)
 echo "Initializing and populating Pacman keyring..."
-pacman-key --init || die "Failed to initialize Pacman keyring."
+pacman-key --init || \
+	die "Failed to initialize Pacman keyring."
 pacman-key --populate archlinux || \
 	die "Failed to populate Arch Linux keys"
 pacman -Sy --needed --noconfirm archlinux-keyring || \
@@ -68,7 +69,8 @@ pacstrap -K /mnt base linux linux-firmware cinnamon lightdm \
 		die "Failed to install base packages."
 
 # Generate fstab
-genfstab -U /mnt >> /mnt/etc/fstab || die "Failed to generate fstab."
+genfstab -U /mnt >> /mnt/etc/fstab || \
+	die "Failed to generate fstab."
 
 # Copy common functions to chroot environment
 cp Install-Common.sh /mnt/ || \
@@ -76,7 +78,8 @@ cp Install-Common.sh /mnt/ || \
 
 # Ensure variables are exported before chroot
 export drive hostname timezone username rootpasswd userpasswd BOOTMODE \
-	REMOVABLE_BOOT || die "Failed to export required variables."
+	REMOVABLE_BOOT || \
+	die "Failed to export required variables."
 
 # Entering Chroot
 cat << EOF | arch-chroot /mnt || die "Failed to enter chroot."

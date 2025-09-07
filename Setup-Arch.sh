@@ -35,8 +35,8 @@ declare -A options=(
 )
 for key in "${!options[@]}"; do
 	if ! grep -q "^$key" /etc/pacman.conf; then
-		sed -i "/^# Misc options/a ${options[$key]}" /etc/pacman.conf \
-			|| die "Failed to configure pacman option: $key."
+		sed -i "/^# Misc options/a ${options[$key]}" /etc/pacman.conf || \
+		die "Failed to configure pacman option: $key."
 	fi
 done
 

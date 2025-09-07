@@ -26,7 +26,8 @@ clear
 
 # Install glibc-zoneinfo for timezone validation
 installpkg /var/log/mount/slackware64/a/glibc-zoneinfo-*.t?z \
-	>/dev/null 2>&1 || die "Failed to install glibc-zoneinfo."
+	>/dev/null 2>&1 || \
+	die "Failed to install glibc-zoneinfo."
 
 # Prompt for root password
 prompt_root_password
@@ -114,7 +115,8 @@ done; echo
 echo "Running ldconfig..."
 [ -x /mnt/sbin/ldconfig ] || \
 	die "ldconfig not found or not executable at /mnt/sbin/ldconfig"
-/mnt/sbin/ldconfig -r /mnt || die "Failed to run ldconfig."
+/mnt/sbin/ldconfig -r /mnt || \
+	die "Failed to run ldconfig."
 
 # Copy Network Info
 [ ! -e /etc/resolv.conf ] && die "Source resolv.conf does not exist."

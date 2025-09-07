@@ -15,7 +15,8 @@ curl -fsSL -o Install-Common.sh "$URL" || \
 source ./Install-Common.sh || die "Failed to source Install-Common.sh"
 
 # Temporarily disable SELinux
-setenforce 0 || die "Failed to disable SELinux"
+setenforce 0 || \
+	die "Failed to disable SELinux"
 
 # Disable Problem Reporting
 systemctl disable --now abrtd.service >/dev/null 2>&1 || true
@@ -66,8 +67,10 @@ mount_partitions
 mount_system_partitions
 
 # Declare Version
-source /etc/os-release || die "Failed to source /etc/os-release."
-export VERSION_ID="$VERSION_ID" || die "Failed to extract Fedora version."
+source /etc/os-release || \
+	die "Failed to source /etc/os-release."
+export VERSION_ID="$VERSION_ID" || \
+	die "Failed to extract Fedora version."
 
 # Install Core Fedora Packages
 dnf --installroot=/mnt --releasever="$VERSION_ID" \
@@ -81,7 +84,8 @@ dnf --installroot=/mnt --setopt=max_parallel_downloads=10 \
 	grub2-common grub2-efi-x64 grub2-pc grub2-pc-modules grub2-tools \
 	grub2-tools-efi grub2-tools-extra grub2-tools-minimal grubby kernel \
 	mokutil shim-x64 arch-install-scripts git unzip spice-vdagent iwlwifi-* \
-	microcode_ctl || die "Failed to install system packages."
+	microcode_ctl || \
+	die "Failed to install system packages."
 
 # Copy Network Info
 mv /mnt/etc/resolv.conf /mnt/etc/resolv.conf.orig || \
@@ -96,7 +100,8 @@ cp Install-Common.sh /mnt/ || \
 
 # Ensure variables are exported before chroot
 export drive hostname timezone username rootpasswd userpasswd BOOTMODE \
-	REMOVABLE_BOOT || die "Failed to export required variables."
+	REMOVABLE_BOOT || \
+	die "Failed to export required variables."
 
 # Chrooting
 cat << EOF | chroot /mnt /bin/bash || die "Failed to enter chroot."

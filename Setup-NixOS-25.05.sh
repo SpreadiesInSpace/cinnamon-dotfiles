@@ -58,7 +58,8 @@ configure_nixos_settings "$CONFIG" "$username" "$hostname" "$timezone" \
 setup_login_wallpaper "$CONFIG"
 
 # Reconfigures system
-nixos-rebuild switch --upgrade || die "Failed to rebuild NixOS."
+nixos-rebuild switch --upgrade || \
+	die "Failed to rebuild NixOS."
 
 # Enable Flathub for Flatpak
 enable_flathub

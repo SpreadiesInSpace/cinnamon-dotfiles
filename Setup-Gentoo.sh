@@ -44,7 +44,8 @@ else
 	configure_make_conf "/etc/portage/make.conf" "old.$(date +%s)" "false"
 
 	# Set VIDEO_CARDS value in package.use
-	set_video_card || die "Failed to set video card."
+	set_video_card || \
+		die "Failed to set video card."
 
 	# Drop flag so this doesn't run again
 	mark_makeconf_configured
@@ -64,7 +65,8 @@ if [[ ! -f "$FLAG" ]]; then
 	eselect repository add gentoo git \
 		https://github.com/gentoo-mirror/gentoo.git || \
 		die "Failed to enable Git-based Gentoo repository."
-	touch "$FLAG" || die "Failed to create git sync flag."
+	touch "$FLAG" || \
+		die "Failed to create git sync flag."
 	rm -rf /var/db/repos/gentoo || \
 		die "Failed to remove existing gentoo repository."
 	echo "Switched to git for repository sync."
@@ -76,7 +78,8 @@ fi
 eselect repository add sunny-overlay git \
 	https://github.com/dguglielmi/sunny-overlay.git || \
 	die "Failed to add sunny-overlay repository."
-eselect repository enable guru || die "Failed to enable guru repository."
+eselect repository enable guru || \
+	die "Failed to enable guru repository."
 eselect repository enable gentoo-zh || \
 	die "Failed to enable gentoo-zh repository."
 
@@ -120,7 +123,8 @@ echo "app-emulation/qemu glusterfs iscsi opengl pipewire spice usbredir vde virg
 #	die "Failed to set USE flags for python."
 
 # Sync Repository + All Overlays
-emaint sync -a || die "Failed to sync repositories and overlays."
+emaint sync -a || \
+	die "Failed to sync repositories and overlays."
 
 # Select appropriate Gentoo profile based on init system
 if [ "$GENTOO_INIT" = "systemd" ]; then
@@ -140,8 +144,10 @@ echo "media-sound/pulseaudio -daemon" | \
 	die "Failed to set USE flags for pulseaudio."
 
 # Emerge changes and cleanup
-emerge -vqDuN @world || die "Failed to emerge world update."
-emerge -q --depclean || die "Failed to clean up unused dependencies."
+emerge -vqDuN @world || \
+	die "Failed to emerge world update."
+emerge -q --depclean || \
+	die "Failed to clean up unused dependencies."
 
 # All Packages
 packages=(
@@ -307,10 +313,7 @@ set_lightdm_display_for_vm
 # Set timeout for stopping services during shutdown via drop in file
 if [ "$GENTOO_INIT" = "systemd" ]; then
 	set_systemd_timeout_stop
-fi
-
-# Reload the systemd configuration
-if [ "$GENTOO_INIT" = "systemd" ]; then
+	# Reload the systemd configuration
 	reload_systemd_daemon
 fi
 

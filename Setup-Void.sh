@@ -35,7 +35,8 @@ REPO="https://repo-fi.voidlinux.org/"
 # REPO="https://repo-de.voidlinux.org/"
 # REPO="https://mirror.vofr.net/voidlinux/"
 # REPO="https://repo-fastly.voidlinux.org/"
-xmirror -s "$REPO" || die "Failed to set the mirror with xmirror."
+xmirror -s "$REPO" || \
+	die "Failed to set the mirror with xmirror."
 
 # Install multilib and nonfree repos
 xbps-install -Sy void-repo-nonfree void-repo-multilib \
@@ -175,14 +176,18 @@ packages=(
 )
 
 # Install Packages
-xbps-install -Sy "${packages[@]}" || die "Failed to install packages."
+xbps-install -Sy "${packages[@]}" || \
+	die "Failed to install packages."
 
 # Protect neofetch from being removed
-xbps-pkgdb -m hold neofetch || die "Failed to hold neofetch package."
+xbps-pkgdb -m hold neofetch || \
+	die "Failed to hold neofetch package."
 
 # Install Brave and VSCodium
-cd home/theming/Void || die "Failed to move to theming/Void folder."
-./update_xdeb.sh || die "Failed to install Brave/VSCodium."
+cd home/theming/Void || \
+	die "Failed to move to theming/Void folder."
+./update_xdeb.sh || \
+	die "Failed to install Brave/VSCodium."
 cd ..
 
 # Configure PipeWire
@@ -204,8 +209,8 @@ set_qemu_permissions
 echo "Enabling services..."
 for service in dbus lightdm NetworkManager polkitd spice-vdagentd \
 		libvirtd virtlockd virtlogd; do
-	ln -sf /etc/sv/$service /etc/runit/runsvdir/default \
-		|| die "Failed to enable $service."
+	ln -sf /etc/sv/$service /etc/runit/runsvdir/default || \
+		die "Failed to enable $service."
 done
 
 # Let services start

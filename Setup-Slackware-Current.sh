@@ -31,24 +31,29 @@ SBO="https://github.com/sbopkg/sbopkg/releases/download/0.38.3"
 SBO="$SBO/sbopkg-0.38.3-noarch-1_wsr.tgz"
 wget -c -T 10 -t 10 -q --show-progress "$SBO" || \
 	die "Failed to download sbopkg package."
-installpkg sbopkg-0.38.3-noarch-1_wsr.tgz \
-	|| die "Failed to install sbopkg package."
-rm sbopkg-0.38.3-noarch-1_wsr.tgz \
-	|| die "Failed to remove sbopkg package file."
+installpkg sbopkg-0.38.3-noarch-1_wsr.tgz || \
+	die "Failed to install sbopkg package."
+rm sbopkg-0.38.3-noarch-1_wsr.tgz || \
+	die "Failed to remove sbopkg package file."
 
 # Point sbopkg to current repo & sync
 SBO_CONF="/etc/sbopkg/sbopkg.conf"
 sed -i "s/REPO_BRANCH=\${REPO_BRANCH:-15.0}/REPO_BRANCH=\${REPO_BRANCH:-current}/g" \
-	"$SBO_CONF" || die "Failed to update REPO_BRANCH."
+	"$SBO_CONF" || \
+	die "Failed to update REPO_BRANCH."
 sed -i "s/REPO_NAME=\${REPO_NAME:-SBo}/REPO_NAME=\${REPO_NAME:-SBo-git}/g" \
-	"$SBO_CONF" || die "Failed to update REPO_NAME."
-sbopkg -r || die "Failed to sync sbopkg repository."
+	"$SBO_CONF" || \
+	die "Failed to update REPO_NAME."
+sbopkg -r || \
+	die "Failed to sync sbopkg repository."
 
 # Install sbotools (for slpkg)
-sbopkg -i sbotools || die "Failed to install sbotools."
+sbopkg -i sbotools || \
+	die "Failed to install sbotools."
 sboconfig -r https://github.com/Ponce/slackbuilds.git || \
 	die "Failed to configure sbotools repository."
-sbosnap fetch || die "Failed to fetch sbosnap."
+sbosnap fetch || \
+	die "Failed to fetch sbosnap."
 
 # Update MAKEFLAGS in /etc/sbotools/sbotools.conf to match CPU cores
 cores=$(nproc)
@@ -58,7 +63,8 @@ sboconfig -j "$cores" || \
 # For Virt-Manager & accessing samba shares (15.0 needs dnsmasq and samba)
 cp /etc/samba/smb.conf-sample /etc/samba/smb.conf || \
 	die "Failed to copy Samba config."
-sh /etc/rc.d/rc.samba start || die "Failed to start Samba service."
+sh /etc/rc.d/rc.samba start || \
+	die "Failed to start Samba service."
 
 # Install slpkg
 packages=(
@@ -71,7 +77,8 @@ for package in "${packages[@]}"; do
 	# Install headlessly but fallback to prompt if any package fails
 	if ! sboinstall -r "$package"; then
 		echo "Install failed for $package, falling back to prompt..."
-		sboinstall "$package" || die "Failed to install $package."
+		sboinstall "$package" || \
+			die "Failed to install $package."
 	fi
 done
 
@@ -118,13 +125,15 @@ echo "Updated MAKEFLAGS in /etc/slpkg/slpkg.toml to -j$cores based on the \
 number of CPU cores."
 
 # Sync slpkg
-slpkg update || die "Failed to sync slpkg."
+slpkg update || \
+	die "Failed to sync slpkg."
 
 # Update Slackware Packages
 touch /var/log/slpkg/deps.log || true
-slpkg upgrade -y -o "slack" || die "Failed to update slack packages."
-slpkg upgrade -y -o "slack_extra" \
-	|| die "Failed to update slack_extra packages."
+slpkg upgrade -y -o "slack" || \
+	die "Failed to update slack packages."
+slpkg upgrade -y -o "slack_extra" || \
+	die "Failed to update slack_extra packages."
 
 # Update Bootloader Entries (in case Kernel Gets Updated)
 if command -v grub-mkconfig >/dev/null 2>&1; then
@@ -134,10 +143,12 @@ if command -v grub-mkconfig >/dev/null 2>&1; then
 elif [ -f /boot/efi/EFI/Slackware/elilo.conf ] || \
 	[ -f /boot/efi/EFI/ELILO/elilo.conf ]; then
 	echo "Detected ELILO bootloader."
-	eliloconfig || die "Failed to update ELILO configuration."
+	eliloconfig || \
+		die "Failed to update ELILO configuration."
 elif [ -f /etc/lilo.conf ]; then
 	echo "Detected LILO bootloader."
-	lilo || die "Failed to update LILO configuration."
+	lilo || \
+		die "Failed to update LILO configuration."
 else
 	echo "No recognized bootloader found."
 	die "Bootloader configuration not updated."
@@ -263,7 +274,8 @@ slpkg install -y -P -B "${gnome_packages[@]}" -o gnome || \
 	die "Failed to install gnome packages."
 
 # Add LightDM group
-groupadd -g 380 lightdm || die "Failed to create group 'lightdm'."
+groupadd -g 380 lightdm || \
+	die "Failed to create group 'lightdm'."
 useradd -d /var/lib/lightdm -s /bin/false -u 380 -g 380 lightdm || \
 	die "Failed to create user 'lightdm'."
 

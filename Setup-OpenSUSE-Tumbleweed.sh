@@ -27,7 +27,8 @@ prompt_for_vm
 display_status "$enable_autologin" "$is_vm"
 
 # Enable Parallel Downloads during Setup
-export ZYPP_PCK_PRELOAD=1 || die "Failed to enable parallel downloads."
+export ZYPP_PCK_PRELOAD=1 || \
+	die "Failed to enable parallel downloads."
 
 # Enable Parallel Downloads Persistently
 if ! grep -q "^ZYPP_PCK_PRELOAD=1" /etc/environment; then
@@ -42,11 +43,14 @@ echo "set enable-bracketed-paste" >> /root/.inputrc || \
 	die "Failed to update /root/.inputrc"
 
 # Update system and install packages
-zypper ref || die "Failed to refresh repositories."
-zypper dup -y || die "Failed to perform system update."
+zypper ref || \
+	die "Failed to refresh repositories."
+zypper dup -y || \
+	die "Failed to perform system update."
 
 # Install git
-zypper in -y git || die "Failed to install git."
+zypper in -y git || \
+	die "Failed to install git."
 
 # Install Media Codecs
 CODEC="https://ftp.gwdg.de/pub/linux/misc/packman/suse"
@@ -54,7 +58,8 @@ CODEC="$CODEC/openSUSE_Tumbleweed/Essentials/"
 REPO="packman-essentials"
 zypper --gpg-auto-import-keys ar -cfp 90 "$CODEC" "$REPO" || \
 	die "Failed to add Packman repository."
-zypper --gpg-auto-import-keys ref || die "Failed to refresh repositories"
+zypper --gpg-auto-import-keys ref || \
+	die "Failed to refresh repositories"
 zypper dup --from "$REPO" -y --allow-vendor-change || \
 	die "Failed to update from Packman repository."
 zypper in --from "$REPO" -y ffmpeg \
@@ -83,7 +88,8 @@ metadata_expire=1h
 EOF
 } > /etc/zypp/repos.d/vscodium.repo || \
 	die "Failed to add VSCodium repository."
-zypper in -y codium || die "Failed to install VSCodium."
+zypper in -y codium || \
+	die "Failed to install VSCodium."
 
 # For Cinnamon and Opi
 zypper rm -y busybox-which busybox-diffutils
@@ -162,25 +168,32 @@ packages=(
 
 # Install packages headlessly if installed via openSUSE-Install.sh
 if [[ -f .opensuse-tumbleweed.done ]]; then
-	zypper in -y "${packages[@]}" || die "Failed to install packages."
+	zypper in -y "${packages[@]}" || \
+		die "Failed to install packages."
 else
-	zypper in "${packages[@]}" || die "Failed to install packages."
+	zypper in "${packages[@]}" || \
+		die "Failed to install packages."
 fi
 
 # Remove devhelp
-zypper rm -y devhelp* || die "Failed to remove devhelp."
-zypper al devhelp* || die "Failed to add devhelp to avoid reinstallation."
+zypper rm -y devhelp* || \
+	die "Failed to remove devhelp."
+zypper al devhelp* || \
+	die "Failed to add devhelp to avoid reinstallation."
 
 # Install neofetch
 neofetch_url="https://download.opensuse.org/repositories/utilities"
 neofetch_url="$neofetch_url/openSUSE_Factory/utilities.repo"
 zypper --gpg-auto-import-keys ar $neofetch_url || \
 	die "Failed to add neofetch repository."
-zypper --gpg-auto-import-keys ref || die "Failed to refresh repositories."
-zypper in -y neofetch || die "Failed to install neofetch."
+zypper --gpg-auto-import-keys ref || \
+	die "Failed to refresh repositories."
+zypper in -y neofetch || \
+	die "Failed to install neofetch."
 
 # Protect neofetch from being replaced by neowofetch
-zypper al neofetch || die "Failed to add neofetch to the blacklist."
+zypper al neofetch || \
+	die "Failed to add neofetch to the blacklist."
 
 # Install Additional Tools for Virt Manager
 zypper in -y -t pattern kvm_server kvm_tools || \

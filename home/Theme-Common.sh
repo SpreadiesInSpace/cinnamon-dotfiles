@@ -78,18 +78,25 @@ install_icons_and_themes() {
 
 	# Extract icons
 	echo "Extracting Icons..."
-	mv .icons/*.zip "$PWD" || die "Failed to move icon zip files."
-	unzip -q "$ICON_ZIP" || die "Failed to unzip $ICON_ZIP."
-	unzip -q "$CURSOR_ZIP" || die "Failed to unzip $CURSOR_ZIP."
+	mv .icons/*.zip "$PWD" || \
+		die "Failed to move icon zip files."
+	unzip -q "$ICON_ZIP" || \
+		die "Failed to unzip $ICON_ZIP."
+	unzip -q "$CURSOR_ZIP" || \
+		die "Failed to unzip $CURSOR_ZIP."
 	mv "$ICON_EXTRACTED" ".icons/$ICON_RENAME" || \
 		die "Failed to rename extracted icon directory."
-	mv "$CURSOR_DIR" .icons/ || die "Failed to move cursor directory."
+	mv "$CURSOR_DIR" .icons/ || \
+		die "Failed to move cursor directory."
 
 	# Extract themes
 	echo "Extracting Themes..."
-	mv .themes/*.zip "$PWD" || die "Failed to move theme zip files."
-	unzip -q "$THEME_ZIP" || die "Failed to unzip $THEME_ZIP."
-	mv "$THEME_DIR" .themes/ || die "Failed to move extracted theme directory."
+	mv .themes/*.zip "$PWD" || \
+		die "Failed to move theme zip files."
+	unzip -q "$THEME_ZIP" || \
+		die "Failed to unzip $THEME_ZIP."
+	mv "$THEME_DIR" .themes/ || \
+		die "Failed to move extracted theme directory."
 
 	# Always install to user directories
 	echo "Installing Icons and Themes..."
@@ -133,17 +140,20 @@ override_qt_cursor_theme() {
 		mkdir -p ~/.icons/default
 		rm -rf ~/.icons/default/*
 		ln -sf ~/.icons/"Capitaine Cursors (Gruvbox) - White/"* \
-			~/.icons/default/ || die "Failed to override cursor theme."
+			~/.icons/default/ || \
+			die "Failed to override cursor theme."
 		sudo mkdir -p /root/.icons/default
 		sudo rm -rf /root/.icons/default/*
 		sudo ln -sf ~/.icons/"Capitaine Cursors (Gruvbox) - White/"* \
-			/root/.icons/default/ || die "Failed to override cursor theme."
+			/root/.icons/default/ || \
+			die "Failed to override cursor theme."
 	else
 		rm -rf ~/.icons/default
 		sudo mkdir -p /usr/share/icons/default
 		sudo rm -rf /usr/share/icons/default/*
 		sudo ln -sf "/usr/share/icons/Capitaine Cursors (Gruvbox) - White/"* \
-			/usr/share/icons/default/ || die "Failed to override cursor theme."
+			/usr/share/icons/default/ || \
+			die "Failed to override cursor theme."
 	fi
 }
 
@@ -161,18 +171,18 @@ enable_flatpak_theme_override() {
 
 	echo "Setting GTK & QT Flatpak Theme Override..."
 	# Enable GTK & QT Flatpak Theming Override
-	sudo flatpak override --filesystem="$HOME/.themes" \
-		|| die "Failed to override Flatpak themes directory."
-	sudo flatpak override --filesystem="$HOME/.icons" \
-		|| die "Failed to override Flatpak icons directory."
-	sudo flatpak override --env=GTK_THEME=Gruvbox-Dark-BL \
-		|| die "Failed to override Flatpak GTK themes."
-	sudo flatpak override --env=ICON_THEME=gruvbox-dark-icons-gtk \
-		|| die "Failed to override Flatpak icons."
-	sudo flatpak override --filesystem=xdg-config/Kvantum:ro \
-		|| die "Failed to override Flatpak kvantum themes."
-	sudo flatpak override --env=QT_STYLE_OVERRIDE=kvantum \
-		|| die "Failed to override Flatpak kvantum QT style."
+	sudo flatpak override --filesystem="$HOME/.themes" || \
+		die "Failed to override Flatpak themes directory."
+	sudo flatpak override --filesystem="$HOME/.icons" || \
+		die "Failed to override Flatpak icons directory."
+	sudo flatpak override --env=GTK_THEME=Gruvbox-Dark-BL || \
+		die "Failed to override Flatpak GTK themes."
+	sudo flatpak override --env=ICON_THEME=gruvbox-dark-icons-gtk || \
+		die "Failed to override Flatpak icons."
+	sudo flatpak override --filesystem=xdg-config/Kvantum:ro || \
+		die "Failed to override Flatpak kvantum themes."
+	sudo flatpak override --env=QT_STYLE_OVERRIDE=kvantum || \
+		die "Failed to override Flatpak kvantum QT style."
 }
 
 copy_bleachbit_config() {
@@ -229,9 +239,12 @@ symlink_fonts() {
 
 copy_sounds_and_wallpapers() {
 	# Copies sounds and wallpapers to home directory
-	bash wallpapers.sh || die "Failed to execute wallpapers.sh."
-	cp -npr sounds/ ~/ || die "Failed to copy sounds."
-	cp -npr wallpapers/ ~/ || die "Failed to copy wallpapers."
+	bash wallpapers.sh || \
+		die "Failed to execute wallpapers.sh."
+	cp -npr sounds/ ~/ || \
+		die "Failed to copy sounds."
+	cp -npr wallpapers/ ~/ || \
+		die "Failed to copy wallpapers."
 }
 
 copy_applets() {
@@ -239,7 +252,8 @@ copy_applets() {
 	local applet_variant=$1
 	echo "Configuring Cinnamon Applets..."
 	cp -npr .local/share/cinnamon/"$applet_variant"/* \
-		~/.local/share/cinnamon/applets/ || die "Failed to copy applets."
+		~/.local/share/cinnamon/applets/ || \
+		die "Failed to copy applets."
 }
 
 copy_kdeglobals() {
@@ -293,7 +307,8 @@ copy_haruna_config() {
 	if [ -d ~/.config/haruna ]; then
 		mv ~/.config/haruna ~/.config/haruna.old."$timestamp"
 	fi
-	cp -npr .config/haruna/ ~/.config/ || die "Failed to copy haruna config."
+	cp -npr .config/haruna/ ~/.config/ || \
+		die "Failed to copy haruna config."
 }
 
 copy_cinnamon_spice_settings() {
@@ -329,20 +344,26 @@ copy_bashrc_and_etc() {
 
 	echo "Backing Up .bashrc and Adding New bash Aliases..."
 	if [ "$distro" = "nixos" ]; then
-		cd theming/ || die "Failed to move to theming folder."
+		cd theming/ || \
+			die "Failed to move to theming folder."
 		cp -npr NixOS/* ~/; rm ~/configuration.nix >/dev/null 2>&1 || true
 		sudo cp /root/.bashrc /root/.bashrc.old."$timestamp" \
 			>/dev/null 2>&1 || true
-		sudo cp NixOS/.bashrc.root /root/.bashrc || die "Failed to copy bashrc."
-		sudo cp NixOS/NixAscii.txt /root/ || die "Failed to copy NixOS ASCII."
+		sudo cp NixOS/.bashrc.root /root/.bashrc || \
+			die "Failed to copy bashrc."
+		sudo cp NixOS/NixAscii.txt /root/ || \
+			die "Failed to copy NixOS ASCII."
 		cp ~/.bashrc ~/.bashrc.old."$timestamp" \
 			>/dev/null 2>&1 || true
-		cat NixOS/.bashrc > bashrc || die "Failed to copy bashrc."
-		mv bashrc ~/.bashrc || die "Failed to move bashrc."
+		cat NixOS/.bashrc > bashrc || \
+			die "Failed to copy bashrc."
+		mv bashrc ~/.bashrc || \
+			die "Failed to move bashrc."
 		cd ..
 	else
 		# Copies distro-specific theming files to home directory
-		cp -npr "theming/$distro/"* ~/  || die "Failed to copy theming files."
+		cp -npr "theming/$distro/"* ~/  || \
+			die "Failed to copy theming files."
 
 		# Preserve old root .bashrc with timestamp
 		sudo cp /root/.bashrc /root/.bashrc.old."$timestamp" \
@@ -350,21 +371,22 @@ copy_bashrc_and_etc() {
 
 		# Create minimal root .bashrc with tty check and source user .bashrc
 		echo "# Skip sourcing user .bashrc if running in tty" | \
-			sudo tee /root/.bashrc >/dev/null 2>&1 \
-			|| die "Failed to append root bashrc."
+			sudo tee /root/.bashrc >/dev/null 2>&1 || \
+			die "Failed to append root bashrc."
 		echo "if [[ \$(tty) == /dev/tty[0-9]* ]]; then" | \
-			sudo tee -a /root/.bashrc >/dev/null 2>&1 \
-			|| die "Failed to append root bashrc."
-		echo '    return'  | sudo tee -a /root/.bashrc >/dev/null 2>&1 \
-			|| die "Failed to append root bashrc."
-		echo 'fi' | sudo tee -a /root/.bashrc >/dev/null 2>&1 \
-			|| die "Failed to append root bashrc."
+			sudo tee -a /root/.bashrc >/dev/null 2>&1 || \
+			die "Failed to append root bashrc."
+		echo '    return'  | sudo tee -a /root/.bashrc >/dev/null 2>&1 || \
+			die "Failed to append root bashrc."
+		echo 'fi' | sudo tee -a /root/.bashrc >/dev/null 2>&1 || \
+			die "Failed to append root bashrc."
 		echo "source $HOME/.bashrc" | sudo tee -a /root/.bashrc >/dev/null 2>&1 \
 			|| die "Failed to append root bashrc."
 
 		# Preserve and replace user .bashrc with timestamp
 		cp ~/.bashrc ~/.bashrc.old."$timestamp" >/dev/null 2>&1 || true
-		cp "theming/$distro/.bashrc" ~/.bashrc || die "Failed to copy bashrc."
+		cp "theming/$distro/.bashrc" ~/.bashrc || \
+			die "Failed to copy bashrc."
 	fi
 }
 
@@ -451,7 +473,8 @@ copy_qtct_configs() {
 	# Handle qt5ct
 	mv ~/.config/qt5ct ~/.config/qt5ct.old."$timestamp" \
 		>/dev/null 2>&1 || true
-	cp -npr .config/qt5ct/ ~/.config/ || die "Failed to copy qt5ct config."
+	cp -npr .config/qt5ct/ ~/.config/ || \
+		die "Failed to copy qt5ct config."
 	sudo mv /root/.config/qt5ct /root/.config/qt5ct.old."$timestamp" \
 		>/dev/null 2>&1 || true
 	sudo ln -sf ~/.config/qt5ct/ /root/.config/ || \
@@ -460,7 +483,8 @@ copy_qtct_configs() {
 	# Handle qt6ct
 	mv ~/.config/qt6ct ~/.config/qt6ct.old."$timestamp" \
 		>/dev/null 2>&1 || true
-	cp -npr .config/qt6ct/ ~/.config/ || die "Failed to copy qt6ct config."
+	cp -npr .config/qt6ct/ ~/.config/ || \
+		die "Failed to copy qt6ct config."
 	sudo mv /root/.config/qt6ct /root/.config/qt6ct.old."$timestamp" \
 		>/dev/null 2>&1 || true
 	sudo ln -sf ~/.config/qt6ct/ /root/.config/ || \
@@ -599,7 +623,8 @@ copy_profile_picture() {
 	mv ~/.face ~/.face.old."$timestamp" >/dev/null 2>&1 || true
 
 	# Copy new profile picture
-	cp -npr .face ~/ || die "Failed to set profile picture."
+	cp -npr .face ~/ || \
+		die "Failed to set profile picture."
 }
 
 import_desktop_config() {
@@ -721,10 +746,12 @@ set_cinnamon_menu_icon() {
 
 	# Replace the hardcoded path with $HOME-based path on line 91
 	sed -i "91s|\"value\": \"${original_path}\"|\"value\": \"${new_path}\"|g" \
-		"$json_file" || die "Failed to set menu icon path."
+		"$json_file" || \
+		die "Failed to set menu icon path."
 
 	# Move the icon file to .icons
-	mv ~/"$icon_file" ~/.icons/ || die "Failed to move menu icon."
+	mv ~/"$icon_file" ~/.icons/ || \
+		die "Failed to move menu icon."
 }
 
 set_cinnamon_background_and_sounds() {
@@ -824,7 +851,8 @@ install_nvchad() {
 
 	# Clone NVChad starter config
 	git clone https://github.com/NvChad/starter ~/.config/nvim \
-		>/dev/null 2>&1 || die "Failed to download NvChad."
+		>/dev/null 2>&1 || \
+		die "Failed to download NvChad."
 
 	# Backup and copy custom chadrc.lua config
 	[ -f ~/.config/nvim/lua/chadrc.lua ] && mv ~/.config/nvim/lua/chadrc.lua \
@@ -860,7 +888,8 @@ configure_nanorc_basic() {
 	echo "Configuring nano..."
 	if ! grep -q '^include "/usr/share/nano/\*.nanorc"' /etc/nanorc; then
 		echo 'include "/usr/share/nano/*.nanorc"' | sudo tee -a /etc/nanorc > \
-			/dev/null || die "Failed to enable syntax highlighting for nano."
+			/dev/null || \
+			die "Failed to enable syntax highlighting for nano."
 	fi
 	if ! grep -q '^set softwrap' /etc/nanorc; then
 		echo 'set softwrap' | sudo tee -a /etc/nanorc > /dev/null || \

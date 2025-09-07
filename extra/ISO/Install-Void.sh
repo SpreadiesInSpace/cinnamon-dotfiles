@@ -39,7 +39,8 @@ prompt_timezone
 prompt_drive
 
 # Refresh repository and install tools
-xbps-install -Sy parted xtools || die "Failed to install parted and xtools."
+xbps-install -Sy parted xtools || \
+	die "Failed to install parted and xtools."
 
 # Partition the drive
 partition_drive
@@ -62,7 +63,8 @@ REPO=https://repo-fi.voidlinux.org/current
 # REPO=https://mirror.vofr.net/voidlinux/current
 # REPO=https://repo-fastly.voidlinux.org/current
 ARCH=x86_64
-mkdir -p /mnt/var/db/xbps/keys || die "Failed to create /mnt/var/db/xbps/keys."
+mkdir -p /mnt/var/db/xbps/keys || \
+	die "Failed to create /mnt/var/db/xbps/keys."
 cp /var/db/xbps/keys/* /mnt/var/db/xbps/keys/ || \
 	die "Failed to copy XBPS keys."
 XBPS_ARCH=$ARCH xbps-install -Syu -r /mnt -R "$REPO" base-system cinnamon \
@@ -70,7 +72,8 @@ XBPS_ARCH=$ARCH xbps-install -Syu -r /mnt -R "$REPO" base-system cinnamon \
 	gnome-terminal spice-vdagent xorg-minimal xorg-input-drivers \
 	xorg-video-drivers NetworkManager alsa-pipewire libspa-bluetooth pipewire \
 	wireplumber git xtools xmirror nano sudo grub grub-x86_64-efi \
-	bash-completion unzip zramen || die "Failed to install base packages."
+	bash-completion unzip zramen || \
+	die "Failed to install base packages."
 
 # Enable Services
 for service in dbus lightdm NetworkManager polkitd spice-vdagentd zramen; do
@@ -83,7 +86,8 @@ cp --dereference /etc/resolv.conf /mnt/etc/ || \
 	die "Failed to copy resolv.conf."
 
 # Generate fstab
-xgenfstab -U /mnt > /mnt/etc/fstab || die "Failed to generate fstab."
+xgenfstab -U /mnt > /mnt/etc/fstab || \
+	die "Failed to generate fstab."
 
 # Copy common functions to chroot environment
 cp Install-Common.sh /mnt/ || \
@@ -91,7 +95,8 @@ cp Install-Common.sh /mnt/ || \
 
 # Ensure variables are exported before chroot
 export drive hostname timezone username rootpasswd userpasswd BOOTMODE \
-	REMOVABLE_BOOT || die "Failed to export required variables."
+	REMOVABLE_BOOT || \
+	die "Failed to export required variables."
 
 # Entering Chroot
 cat << EOF | xchroot /mnt /bin/bash || die "Failed to enter chroot."

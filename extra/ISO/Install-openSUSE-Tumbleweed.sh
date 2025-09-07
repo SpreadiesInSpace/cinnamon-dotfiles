@@ -21,7 +21,8 @@ detect_boot_mode
 time_sync
 
 # Enable Parallel Downloads
-export ZYPP_PCK_PRELOAD=1 || die "Failed to enable parallel downloads."
+export ZYPP_PCK_PRELOAD=1 || \
+	die "Failed to enable parallel downloads."
 
 # Fix openSUSE's line break paste issue
 echo "set enable-bracketed-paste" >> ~/.inputrc || \
@@ -90,7 +91,8 @@ cp Install-Common.sh /mnt/ || \
 
 # Ensure variables are exported before chroot
 export drive hostname timezone username rootpasswd userpasswd BOOTMODE \
-	REMOVABLE_BOOT || die "Failed to export required variables."
+	REMOVABLE_BOOT || \
+	die "Failed to export required variables."
 
 # Chrooting
 cat << EOF | chroot /mnt /bin/bash || die "Failed to enter chroot."

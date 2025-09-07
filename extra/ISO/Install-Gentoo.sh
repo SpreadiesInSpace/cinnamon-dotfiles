@@ -68,7 +68,8 @@ SCRIPT_DIR="$(pwd)"
 #====================== Gentoo Install - The Stage File =======================
 
 # Move to Mounted Root Partition
-cd /mnt/gentoo || die "Failed to change directory to /mnt/gentoo."
+cd /mnt/gentoo || \
+	die "Failed to change directory to /mnt/gentoo."
 
 # Grab the Latest Systemd Stage 3 Desktop Profile
 GENTOO_MIRROR="https://distfiles.gentoo.org"
@@ -128,13 +129,15 @@ fi
 # If all verifications passed, extract the tarball
 echo; echo "All verifications passed. Extracting tarball..."
 tar xpf "$STAGE3_TARBALL" --xattrs-include='*.*' --numeric-owner \
-	-C /mnt/gentoo || die "Failed to extract tarball."
+	-C /mnt/gentoo || \
+	die "Failed to extract tarball."
 
 # Pull make.conf with use flags, jobs, licenses, mirrors, etc already set
 configure_make_conf "/mnt/gentoo/etc/portage/make.conf" "stage3" "true"
 
 # Set VIDEO_CARDS value in package.use
-echo; write_video_card "mnt" || die "Failed to set video card."
+echo; write_video_card "mnt" || \
+	die "Failed to set video card."
 
 # Signal that make.conf was configured during install phase
 mark_makeconf_configured "mnt"
@@ -196,7 +199,8 @@ IS_INTEL="false"
 # Ensure variables are exported before chroot
 export drive hostname timezone username rootpasswd userpasswd BOOTMODE \
 	REMOVABLE_BOOT GENTOO_INIT SYNC_URI_V3 SYNC_URI GIT_PKGS SYSTEM_PKGS \
-	IS_INTEL || die "Failed to export required variables."
+	IS_INTEL || \
+	die "Failed to export required variables."
 
 #=========================== Extra Variables - END ============================
 

@@ -61,7 +61,8 @@ create_btrfs_subvolumes
 mount_partitions "nixos"
 
 # Generate NixOS config
-nixos-generate-config --root /mnt || die "Failed to generate NixOS config."
+nixos-generate-config --root /mnt || \
+	die "Failed to generate NixOS config."
 
 # Download custom NixOS config
 CONF="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles"
@@ -78,14 +79,16 @@ cp "$CONFIG" "$CONFIG.old.${timestamp}" || \
 	die "Failed to back up configuration.nix"
 
 # Copy custom configuration.nix
-cp configuration.nix "$CONFIG" || die "Failed to copy configuration.nix"
+cp configuration.nix "$CONFIG" || \
+	die "Failed to copy configuration.nix"
 
 # Configure all NixOS settings
 configure_nixos_settings "$CONFIG" "$username" "$hostname" "$timezone" \
 	"$enable_autologin" "$drive"
 
 # Install NixOS
-nixos-install --no-root-passwd || die "Failed to install NixOS."
+nixos-install --no-root-passwd || \
+	die "Failed to install NixOS."
 
 # Ensure variables are exported before chroot
 export username rootpasswd userpasswd || \

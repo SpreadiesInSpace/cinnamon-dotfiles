@@ -39,8 +39,10 @@ else
 fi
 
 # Update system and install git
-dnf -y update || die "System update failed."
-dnf -y install git || die "Git installation failed."
+dnf -y update || \
+	die "System update failed."
+dnf -y install git || \
+	die "Git installation failed."
 
 # Add RPM Fusion
 fedora_ver="$(rpm -E %fedora)"
@@ -83,7 +85,8 @@ FILE_VERSION="0.11.1-1"
 BTM="https://github.com/ClementTsang/bottom/releases"
 BTM="$BTM/download/${VERSION}/bottom-${FILE_VERSION}.x86_64.rpm"
 # Download the specified version using curl
-curl -LO "$BTM" || die "Failed to download Bottom package."
+curl -LO "$BTM" || \
+	die "Failed to download Bottom package."
 # Install the downloaded package
 rpm -i bottom-${FILE_VERSION}.x86_64.rpm || \
 	die "Failed to install Bottom package."
@@ -114,7 +117,8 @@ metadata_expire=1h
 EOF
 } > /etc/yum.repos.d/vscodium.repo || \
 	die "Failed to add VSCodium repository."
-dnf install -y codium || die "Failed to install VSCodium."
+dnf install -y codium || \
+	die "Failed to install VSCodium."
 
 # All packages
 packages=(
@@ -186,7 +190,8 @@ packages=(
 )
 
 # Install Packages
-dnf -y install "${packages[@]}" || die "Failed to install packages."
+dnf -y install "${packages[@]}" || \
+	die "Failed to install packages."
 
 # Enable Flathub for Flatpak
 enable_flathub

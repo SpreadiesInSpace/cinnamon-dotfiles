@@ -68,18 +68,22 @@ configure_pipewire() {
 	mkdir -p /etc/pipewire/pipewire.conf.d || \
 		die "Failed to make PipeWire directory."
 	ln -sf /usr/share/examples/wireplumber/10-wireplumber.conf \
-		/etc/pipewire/pipewire.conf.d/ || die "Failed to symlink WirePlumber."
+		/etc/pipewire/pipewire.conf.d/ || \
+		die "Failed to symlink WirePlumber."
 
 	# Configure PipeWire-Pluse
 	ln -sf /usr/share/examples/pipewire/20-pipewire-pulse.conf \
-		/etc/pipewire/pipewire.conf.d/ || die "Failed to symlink pipewire-pulse."
+		/etc/pipewire/pipewire.conf.d/ || \
+		die "Failed to symlink pipewire-pulse."
 
 	# Configure PipeWire ALSA
-	mkdir -p /etc/alsa/conf.d || die "Failed to make PipeWire ALSA directory."
+	mkdir -p /etc/alsa/conf.d || \
+		die "Failed to make PipeWire ALSA directory."
 	ln -sf /usr/share/alsa/alsa.conf.d/50-pipewire.conf /etc/alsa/conf.d || \
 		die "Failed to symlink PipeWire config."
 	ln -sf /usr/share/alsa/alsa.conf.d/99-pipewire-default.conf \
-		/etc/alsa/conf.d || die "Failed to symlink PipeWire default config."
+		/etc/alsa/conf.d || \
+		die "Failed to symlink PipeWire default config."
 
 	# Autostart PipeWire
 	ln -sf /usr/share/applications/pipewire.desktop /etc/xdg/autostart || \
