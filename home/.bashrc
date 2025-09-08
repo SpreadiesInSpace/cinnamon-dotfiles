@@ -206,9 +206,9 @@ alias btm='btm --theme gruvbox'
 # Skip Synth Shell if not in gnome-terminal, gedit, codium, or xfce4-terminal
 term=$(ps -h -o comm -p $PPID)
 if [[ $term != *gnome-terminal* ]] && \
-   [[ $term != "gedit" ]] && \
-   [[ $term != "codium" ]] && \
-   [[ $term != *xfce4-terminal* ]]; then
+	 [[ $term != "gedit" ]] && \
+	 [[ $term != "codium" ]] && \
+	 [[ $term != *xfce4-terminal* ]]; then
 	return
 fi
 

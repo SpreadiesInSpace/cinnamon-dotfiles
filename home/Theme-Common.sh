@@ -353,12 +353,6 @@ copy_bashrc_and_etc() {
 			die "Failed to copy bashrc."
 		sudo cp NixOS/NixAscii.txt /root/ || \
 			die "Failed to copy NixOS ASCII."
-		cp ~/.bashrc ~/.bashrc.old."$timestamp" \
-			>/dev/null 2>&1 || true
-		cat NixOS/.bashrc > bashrc || \
-			die "Failed to copy bashrc."
-		mv bashrc ~/.bashrc || \
-			die "Failed to move bashrc."
 		cd ..
 	else
 		# Copies distro-specific theming files to home directory
@@ -382,12 +376,19 @@ copy_bashrc_and_etc() {
 			die "Failed to append root bashrc."
 		echo "source $HOME/.bashrc" | sudo tee -a /root/.bashrc >/dev/null 2>&1 \
 			|| die "Failed to append root bashrc."
-
-		# Preserve and replace user .bashrc with timestamp
-		cp ~/.bashrc ~/.bashrc.old."$timestamp" >/dev/null 2>&1 || true
-		cp "theming/$distro/.bashrc" ~/.bashrc || \
-			die "Failed to copy bashrc."
 	fi
+
+	# Preserve and replace user .bashrc with timestamp
+	cp ~/.bashrc ~/.bashrc.old."$timestamp" >/dev/null 2>&1 || true
+	cp .bashrc ~/.bashrc || \
+		die "Failed to copy bashrc."
+
+	# Backup and copy .bashrc.d folder to appropriate directory
+	if [ -d ~/.bashrc.d ]; then
+		mv ~/.bashrc.d ~/.bashrc.d.old."$timestamp"
+	fi
+	cp -npr .bashrc.d/ ~/.bashrc.d/  || \
+		die "Failed to copy .bashrc.d directory."
 }
 
 copy_neofetch_config() {
