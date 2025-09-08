@@ -23,7 +23,7 @@ alias cleanAll='sudo find /var/log -type f -name "*.log" -exec truncate -s 0 \
 flatpak uninstall --unused; sudo flatpak repair; rm -rf ~/.cache/*; \
 sudo bleachbit -c --preset && bleachbit -c --preset'
 
-# Slackware Update
+# For slpkg
 updateSlpkg() {
 	sudo slpkg update
 	sudo slpkg upgrade -P -B
@@ -31,6 +31,8 @@ updateSlpkg() {
 		sudo slpkg upgrade -P -B -o "$repo"
 	done
 }
+
+# Slackware Update
 alias updateNeovim='echo "Performing LazySync..."; \
 nvim --headless "+Lazy! sync" +qa > /dev/null 2>&1; \
 echo "LazySync complete!"'
