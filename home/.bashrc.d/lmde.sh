@@ -7,11 +7,17 @@ die() { echo -e "\033[1;31mError:\033[0m $*" >&2; return 1; }
 
 # Debian Cleaning
 cleanKernel() {
-	sudo apt-get purge $(dpkg-query -W -f'${Package}\n' 'linux-*' | \
+	local packages
+	mapfile -t packages < <(dpkg-query -W -f'${Package}\n' 'linux-*' | \
 		sed -nr 's/.*-([0-9]+(\.[0-9]+){2}-[^-]+).*/\1 &/p' | \
 		linux-version sort | \
-		awk '($1==c){exit} {print $2}' c="$(uname -r | cut -f1,2 -d-)") || \
-		true
+		awk '($1==c){exit} {print $2}' c="$(uname -r | cut -f1,2 -d-)")
+
+	if (( ${#packages[@]} > 0 )); then
+		sudo apt-get purge "${packages[@]}" || true
+	else
+		echo "No old kernels to remove"
+	fi
 }
 
 cleanAll() {

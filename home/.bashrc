@@ -27,10 +27,10 @@ HISTFILESIZE=2000       # Commands in history file
 # Shell options
 shopt -s histappend     # Append to history file, don't overwrite
 shopt -s checkwinsize   # Update LINES and COLUMNS after each command
-# shopt -s cdspell      # Auto-correct minor spelling errors in cd commands
+shopt -s cdspell        # Auto-correct minor spelling errors in cd commands
+shopt -s extglob        # Use extra globbing features
+shopt -s globstar       # Allow ** for recursive directory matching
 # shopt -s dotglob      # Include .files when globbing
-# shopt -s extglob      # Use extra globbing features
-# shopt -s globstar     # Allow ** for recursive directory matching
 # shopt -s nullglob     # Expand unmatched globs to nothing instead of literal
 # shopt -o noclobber    # Prevent output redirection from overwriting files
 
@@ -117,68 +117,40 @@ s() {
 }
 
 # Extract files. Ignore files with improper extensions.
-extract () {
-	local x
-	ee() { # Echo and execute
-		echo "Extracting with: $*"
-		if "$@"; then
-			echo "Successfully extracted"
-		else
-			echo "Failed to extract $2" >&2
-			return 1
+extract() {
+	local c e i
+
+	(($#)) || return
+
+	for i; do
+		c=''
+		e=1
+
+		if [[ ! -r $i ]]; then
+			echo "$0: file is unreadable: \`$i'" >&2
+			continue
 		fi
-	}
-	for x in "$@"; do
-		[[ -f $x ]] || { echo "File not found: $x" >&2; continue; }
-		case "$x" in
-			*.tar.bz2 | *.tbz2 )
-				command -v tar >/dev/null || \
-					{ echo "tar not found" >&2; continue; }
-				ee tar xvjf "$x" ;;
-			*.tar.gz | *.tgz )
-				command -v tar >/dev/null || \
-					{ echo "tar not found" >&2; continue; }
-				ee tar xvzf "$x" ;;
-			*.tar.xz | *.txz )
-				command -v tar >/dev/null || \
-					{ echo "tar not found" >&2; continue; }
-				ee tar xvJf "$x" ;;
-			*.bz2 )
-				command -v bunzip2 >/dev/null || \
-					{ echo "bunzip2 not found" >&2; continue; }
-				ee bunzip2 "$x" ;;
-			*.xz )
-				command -v unxz >/dev/null || \
-					{ echo "unxz not found" >&2; continue; }
-				ee unxz "$x" ;;
-			*.rar )
-				command -v unrar >/dev/null || \
-					{ echo "unrar not found" >&2; continue; }
-				ee unrar x "$x" ;;
-			*.gz )
-				command -v gunzip >/dev/null || \
-					{ echo "gunzip not found" >&2; continue; }
-				ee gunzip "$x" ;;
-			*.tar )
-				command -v tar >/dev/null || \
-					{ echo "tar not found" >&2; continue; }
-				ee tar xvf "$x" ;;
-			*.zip )
-				command -v unzip >/dev/null || \
-					{ echo "unzip not found" >&2; continue; }
-				ee unzip "$x" ;;
-			*.Z )
-				command -v uncompress >/dev/null || \
-					{ echo "uncompress not found" >&2; continue; }
-				ee uncompress "$x" ;;
-			*.7z )
-				command -v 7z >/dev/null || \
-					{ echo "7z not found" >&2; continue; }
-				ee 7z x "$x" ;;
-			*)
-				echo "Unsupported file type: $x" >&2 ;;
+
+		case $i in
+			*.t@(gz|lz|xz|b@(2|z?(2))|a@(z|r?(.@(Z|bz?(2)|gz|lzma|xz|zst)))))
+						c=(bsdtar xvf);;
+			*.7z)  c=(7z x);;
+			*.Z)   c=(uncompress);;
+			*.bz2) c=(bunzip2);;
+			*.exe) c=(cabextract);;
+			*.gz)  c=(gunzip);;
+			*.rar) c=(unrar x);;
+			*.xz)  c=(unxz);;
+			*.zip) c=(unzip);;
+			*.zst) c=(unzstd);;
+			*)     echo "$0: unrecognized file extension: \`$i'" >&2
+						continue;;
 		esac
+
+		command "${c[@]}" "$i"
+		((e = e || $?))
 	done
+	return "$e"
 }
 
 # Set gedit embedded gnome-terminal path to home directory
@@ -214,12 +186,12 @@ fi
 # Synth Shell Prompt
 if [ "$distro" = "nixos" ]; then
 	if [ -f "$HOME/.bashrc.d/synth-shell-prompt.sh" ] && \
-		[ -n "$( echo $- | grep i )" ]; then
+		echo "$-" | grep -q i; then
 		source ~/.bashrc.d/synth-shell-prompt.sh
 	fi
 else
 	if [ -f "$HOME/.config/synth-shell/synth-shell-prompt.sh" ] && \
-		[ -n "$( echo $- | grep i )" ]; then
+		echo "$-" | grep -q i; then
 		source "$HOME/.config/synth-shell/synth-shell-prompt.sh"
 	fi
 fi
