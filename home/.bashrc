@@ -27,13 +27,12 @@ HISTFILESIZE=2000       # Commands in history file
 # Shell options
 shopt -s histappend     # Append to history file, don't overwrite
 shopt -s checkwinsize   # Update LINES and COLUMNS after each command
-shopt -s cdspell        # Auto-correct minor spelling errors in cd commands
-shopt -s dotglob        # Include .files when globbing
-shopt -s extglob        # Use extra globbing features
-shopt -s globstar       # Allow ** for recursive directory matching
-shopt -s nullglob       # Expand unmatched globs to nothing instead of literal
-shopt -o noclobber \
-	>/dev/null 2>&1       # Prevent output redirection from overwriting files
+# shopt -s cdspell      # Auto-correct minor spelling errors in cd commands
+# shopt -s dotglob      # Include .files when globbing
+# shopt -s extglob      # Use extra globbing features
+# shopt -s globstar     # Allow ** for recursive directory matching
+# shopt -s nullglob     # Expand unmatched globs to nothing instead of literal
+# shopt -o noclobber    # Prevent output redirection from overwriting files
 
 # Enable color support for ls and grep
 if [ -x /usr/bin/dircolors ]; then

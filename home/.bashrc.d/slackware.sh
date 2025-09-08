@@ -12,7 +12,7 @@ cleanAll() {
 	sudo sboclean -w || true
 	yes | sudo slpkg clean-tmp || true
 	flatpak uninstall --unused || true
-	sudo flatpak repair || true
+	sudo flatpak repair || die "Failed to repair flatpak packages."
 	rm -rf ~/.cache/* || true
 	sudo bleachbit -c --preset || true
 	bleachbit -c --preset || true
@@ -33,16 +33,37 @@ updateSlpkg() {
 
 updateNeovim() {
 	echo "Performing LazySync..."
-	nvim --headless "+Lazy! sync" +qa > /dev/null 2>&1 || true
+	nvim --headless "+Lazy! sync" +qa > /dev/null 2>&1 || \
+		die "LazySync failed."
 	echo "LazySync complete!"
+}
+
+updateBootloader() {
+	if command -v grub-mkconfig >/dev/null 2>&1; then
+		echo "Detected GRUB bootloader."
+		grub-mkconfig -o /boot/grub/grub.cfg || \
+			die "Failed to generate GRUB config."
+	elif [ -f /boot/efi/EFI/Slackware/elilo.conf ] || \
+		[ -f /boot/efi/EFI/ELILO/elilo.conf ]; then
+		echo "Detected ELILO bootloader."
+		eliloconfig || \
+			die "Failed to update ELILO configuration."
+	elif [ -f /etc/lilo.conf ]; then
+		echo "Detected LILO bootloader."
+		lilo || \
+			die "Failed to update LILO configuration."
+	else
+		echo "No recognized bootloader found."
+		die "Bootloader configuration not updated."
+	fi
 }
 
 updateApp() {
 	sudo sbocheck || true
 	sudo sboupgrade --all || true
 	updateSlpkg || true
-	sudo grub-mkconfig -o /boot/grub/grub.cfg || true
-	flatpak update -y || true
+	updateBootloader || true
+	flatpak update -y || die "Failed to update flatpak packages."
 	updateNeovim || true
 }
 

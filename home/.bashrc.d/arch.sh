@@ -14,7 +14,7 @@ cleanCache() {
 
 cleanAll() {
 	flatpak remove --unused || true
-	sudo flatpak repair || true
+	sudo flatpak repair || die "Failed to repair flatpak packages."
 	sudo rm -rf /var/lib/systemd/coredump/* || true
 	sudo pacman -Scc --noconfirm || true
 	rm -rf ~/.cache/* || true
@@ -28,13 +28,14 @@ cleanAll() {
 # Arch Update
 updateNeovim() {
 	echo "Performing LazySync..."
-	nvim --headless "+Lazy! sync" +qa > /dev/null 2>&1 || true
+	nvim --headless "+Lazy! sync" +qa > /dev/null 2>&1 || \
+		die "LazySync failed."
 	echo "LazySync complete!"
 }
 
 updateApp() {
 	yay || die "Failed to update packages."
-	flatpak update -y || true
+	flatpak update -y || die "Failed to update flatpak packages."
 	updateNeovim || true
 }
 

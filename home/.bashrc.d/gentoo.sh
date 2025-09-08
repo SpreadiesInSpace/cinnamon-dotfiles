@@ -9,7 +9,7 @@ die() { echo -e "\033[1;31mError:\033[0m $*" >&2; return 1; }
 cleanAll() {
 	sudo emerge -aq --depclean || true
 	flatpak remove --unused || true
-	sudo flatpak repair || true
+	sudo flatpak repair || die "Failed to repair flatpak packages."
 	if [ "$(ps -p 1 -o comm=)" = "systemd" ] 2>/dev/null; then
 		sudo rm -rf /var/lib/systemd/coredump/* || true
 		sudo journalctl --vacuum-size=50M || true
@@ -41,15 +41,16 @@ updatePortage() {
 
 updateNeovim() {
 	echo "Performing LazySync..."
-	nvim --headless "+Lazy! sync" +qa > /dev/null 2>&1 || true
+	nvim --headless "+Lazy! sync" +qa > /dev/null 2>&1 || \
+		die "LazySync failed."
 	echo "LazySync complete!"
 }
 
 updateApp() {
-	updateSync || return 1
+	updateSync || die "Failed to sync repos."
 	sudo emerge -avqDuN --with-bdeps=y @world || \
 		die "Failed to update packages."
-	flatpak update || true
+	flatpak update -y || die "Failed to update flatpak packages."
 	updateNeovim || true
 	sudo grub-mkconfig -o /boot/grub/grub.cfg || true
 }

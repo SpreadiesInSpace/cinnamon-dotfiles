@@ -16,7 +16,7 @@ cleanKernel() {
 
 cleanAll() {
 	flatpak remove --unused || true
-	sudo flatpak repair || true
+	sudo flatpak repair || die "Failed to repair flatpak packages."
 	sudo rm -rf /var/lib/systemd/coredump/* || true
 	sudo apt clean -y || true
 	sudo apt autoclean -y || true
@@ -34,14 +34,15 @@ updateNeovim() {
 		"${HOME}"/update_neovim.sh || true
 	fi
 	echo "Performing LazySync..."
-	nvim --headless "+Lazy! sync" +qa > /dev/null 2>&1 || true
+	nvim --headless "+Lazy! sync" +qa > /dev/null 2>&1 || \
+		die "LazySync failed."
 	echo "LazySync complete!"
 }
 
 updateApp() {
 	sudo apt update -y || die "Failed to update package lists."
-	sudo apt full-upgrade -y || die "Failed to upgrade packages."
-	flatpak update -y || true
+	sudo apt full-upgrade || die "Failed to upgrade packages."
+	flatpak update -y || die "Failed to update flatpak packages."
 	updateNeovim || true
 }
 
@@ -50,11 +51,11 @@ updateAll() {
 }
 
 updateRestart() {
-	updateAll && sudo systemctl reboot || true
+	updateAll && reboot || true
 }
 
 updateShutdown() {
-	updateAll && sudo systemctl poweroff || true
+	updateAll && poweroff || true
 }
 
 # Update and Cleanup

@@ -8,7 +8,7 @@ die() { echo -e "\033[1;31mError:\033[0m $*" >&2; return 1; }
 # Void Cleaning
 cleanAll () {
 	flatpak remove --unused || true
-	sudo flatpak repair || true
+	sudo flatpak repair || die "Failed to repair flatpak packages."
 	sudo xbps-remove -yROo || true
 	sudo vkpurge rm all || true
 	rm -rf ~/.cache/* || true
@@ -26,15 +26,16 @@ updateXdeb() {
 
 updateNeovim() {
 	echo "Performing LazySync..."
-	nvim --headless "+Lazy! sync" +qa > /dev/null 2>&1 || true
+	nvim --headless "+Lazy! sync" +qa > /dev/null 2>&1 || \
+		die "LazySync failed."
 	echo "LazySync complete!"
 }
 
 updateApp() {
 	sudo xbps-install -Su xbps || die "Failed to update xbps."
-	sudo xbps-install -Suvy || die "Failed to update packages."
+	sudo xbps-install -Suv || die "Failed to update packages."
 	updateXdeb || true
-	flatpak update -y || true
+	flatpak update -y || die "Failed to update flatpak packages."
 	updateNeovim || true
 }
 

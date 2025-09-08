@@ -16,8 +16,9 @@ cleanExtra() {
 }
 
 cleanAll() {
+	sudo dnf autoremove -y || true
 	flatpak remove --unused || true
-	sudo flatpak repair || true
+	sudo flatpak repair || die "Failed to repair flatpak packages."
 	cleanExtra || true
 	sudo dnf clean all || true
 	rm -rf ~/.cache/* || true
@@ -37,14 +38,14 @@ cleanKernel() {
 # Fedora Update
 updateNeovim() {
 	echo "Performing LazySync..."
-	nvim --headless "+Lazy! sync" +qa > /dev/null 2>&1 || true
+	nvim --headless "+Lazy! sync" +qa > /dev/null 2>&1 || \
+		die "LazySync failed."
 	echo "LazySync complete!"
 }
 
 updateApp() {
-	sudo dnf upgrade -y || die "Failed to update packages."
-	sudo dnf autoremove -y || true
-	flatpak update || true
+	sudo dnf upgrade || die "Failed to update packages."
+	flatpak update -y || die "Failed to update flatpak packages."
 	updateNeovim || true
 }
 
