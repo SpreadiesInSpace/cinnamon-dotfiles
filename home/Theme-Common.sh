@@ -371,7 +371,6 @@ copy_bashrc_and_etc() {
 		# NixOS Special Case
 		cp -npr .bashrc.d/synth-shell-prompt.sh ~/.bashrc.d/  || \
 			die "Failed to copy synth-shell-prompt.sh."
-		rm ~/configuration.nix >/dev/null 2>&1 || true
 		sudo cp "theming/$distro/.bashrc.root" /root/.bashrc || \
 			die "Failed to copy root bashrc."
 		sudo cp "theming/$distro/NixAscii.txt" /root/ || \

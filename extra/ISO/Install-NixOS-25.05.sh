@@ -66,7 +66,7 @@ nixos-generate-config --root /mnt || \
 
 # Download custom NixOS config
 CONF="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles"
-CONF="$CONF/refs/heads/main/home/theming/NixOS/configuration.nix"
+CONF="$CONF/refs/heads/main/etc/nixos/configuration.nix"
 curl -fsSL -o configuration.nix "$CONF" || \
 	die "Failed to download custom configuration.nix"
 

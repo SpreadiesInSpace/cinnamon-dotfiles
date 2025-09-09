@@ -47,7 +47,7 @@ cp "$CONFIG" "$CONFIG.old.${timestamp}" || \
 	die "Failed to back up configuration.nix"
 
 # Copy custom configuration.nix
-cp ./home/theming/NixOS/configuration.nix "$CONFIG" || \
+cp ./etc/nixos/configuration.nix "$CONFIG" || \
 	die "Failed to copy configuration.nix"
 
 # Configure all NixOS settings
