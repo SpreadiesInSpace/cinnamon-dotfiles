@@ -343,26 +343,40 @@ copy_bashrc_and_etc() {
 	timestamp=$(date +%s)
 
 	echo "Backing Up .bashrc and Adding New bash Aliases..."
+	# Backup .bashrc.d directory with timestamp
+	if [ -d ~/.bashrc.d ]; then
+		mv ~/.bashrc.d ~/.bashrc.d.old."$timestamp"
+	fi
+
+	# Copy new .bashrc.d alias scripts to appropriate directory
+	mkdir -p ~/.bashrc.d/
+	cp -npr ".bashrc.d/$distro.sh" ~/.bashrc.d/  || \
+		die "Failed to copy .bashrc.d alias."
+
+	# Preserve and replace user .bashrc with timestamp
+	cp ~/.bashrc ~/.bashrc.old."$timestamp" >/dev/null 2>&1 || true
+	cp .bashrc ~/.bashrc || \
+		die "Failed to copy bashrc."
+
+	# Copies distro-specific theming files to home directory
+	cp -npr "theming/$distro/"* ~/  || \
+		die "Failed to copy theming files."
+
+	# Preserve old root .bashrc with timestamp
+	sudo cp /root/.bashrc /root/.bashrc.old."$timestamp" \
+		>/dev/null 2>&1 || true
+
+	# Root .bashrc handling
 	if [ "$distro" = "nixos" ]; then
-		cd theming/ || \
-			die "Failed to move to theming folder."
-		cp -npr NixOS/* ~/; rm ~/configuration.nix >/dev/null 2>&1 || true
-		sudo cp /root/.bashrc /root/.bashrc.old."$timestamp" \
-			>/dev/null 2>&1 || true
-		sudo cp NixOS/.bashrc.root /root/.bashrc || \
-			die "Failed to copy bashrc."
-		sudo cp NixOS/NixAscii.txt /root/ || \
+		# NixOS Special Case
+		cp -npr .bashrc.d/synth-shell-prompt.sh ~/.bashrc.d/  || \
+			die "Failed to copy synth-shell-prompt.sh."
+		rm ~/configuration.nix >/dev/null 2>&1 || true
+		sudo cp "theming/$distro/.bashrc.root" /root/.bashrc || \
+			die "Failed to copy root bashrc."
+		sudo cp "theming/$distro/NixAscii.txt" /root/ || \
 			die "Failed to copy NixOS ASCII."
-		cd ..
 	else
-		# Copies distro-specific theming files to home directory
-		cp -npr "theming/$distro/"* ~/  || \
-			die "Failed to copy theming files."
-
-		# Preserve old root .bashrc with timestamp
-		sudo cp /root/.bashrc /root/.bashrc.old."$timestamp" \
-			>/dev/null 2>&1 || true
-
 		# Create minimal root .bashrc with tty check and source user .bashrc
 		echo "# Skip sourcing user .bashrc if running in tty" | \
 			sudo tee /root/.bashrc >/dev/null 2>&1 || \
@@ -377,18 +391,6 @@ copy_bashrc_and_etc() {
 		echo "source $HOME/.bashrc" | sudo tee -a /root/.bashrc >/dev/null 2>&1 \
 			|| die "Failed to append root bashrc."
 	fi
-
-	# Preserve and replace user .bashrc with timestamp
-	cp ~/.bashrc ~/.bashrc.old."$timestamp" >/dev/null 2>&1 || true
-	cp .bashrc ~/.bashrc || \
-		die "Failed to copy bashrc."
-
-	# Backup and copy .bashrc.d folder to appropriate directory
-	if [ -d ~/.bashrc.d ]; then
-		mv ~/.bashrc.d ~/.bashrc.d.old."$timestamp"
-	fi
-	cp -npr .bashrc.d/ ~/.bashrc.d/  || \
-		die "Failed to copy .bashrc.d directory."
 }
 
 copy_neofetch_config() {

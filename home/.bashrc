@@ -53,35 +53,9 @@ fi
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:'
 export GCC_COLORS="${GCC_COLORS}locus=01:quote=01"
 
-# Source distro-specific and common configuration files
+# Source configuration files from ~/.bashrc.d/ if they exist
 if [ -d ~/.bashrc.d ]; then
-	distro=""
-	if [ -f /etc/os-release ]; then
-		. /etc/os-release
-		case "$ID" in
-			arch) distro="arch" ;;
-			fedora) distro="fedora" ;;
-			gentoo) distro="gentoo" ;;
-			linuxmint) distro="lmde" ;;
-			nixos) distro="nixos" ;;
-			opensuse*) distro="opensuse" ;;
-			slackware) distro="slackware" ;;
-			void) distro="void" ;;
-		esac
-	fi
-
-	# Source the distro-specific script
-	if [ -n "$distro" ] && [ -f "$HOME/.bashrc.d/${distro}.sh" ]; then
-		. "$HOME/.bashrc.d/${distro}.sh"
-	fi
-
-	# Source remaining common scripts
 	for rc in ~/.bashrc.d/*.sh; do
-		case "$(basename "$rc")" in
-			arch.sh|fedora.sh|gentoo.sh|lmde.sh|nixos.sh| \
-			opensuse.sh|slackware.sh|void.sh)
-				continue ;;
-		esac
 		[ -f "$rc" ] && . "$rc"
 	done
 fi
@@ -183,15 +157,22 @@ if [[ $term != *gnome-terminal* ]] && \
 	return
 fi
 
-# Synth Shell Prompt
-if [ "$distro" = "nixos" ]; then
-	if [ -f "$HOME/.bashrc.d/synth-shell-prompt.sh" ] && \
-		echo "$-" | grep -q i; then
-		source ~/.bashrc.d/synth-shell-prompt.sh
-	fi
-else
-	if [ -f "$HOME/.config/synth-shell/synth-shell-prompt.sh" ] && \
-		echo "$-" | grep -q i; then
-		source "$HOME/.config/synth-shell/synth-shell-prompt.sh"
+# Load Synth Shell Prompt only in specific terminals
+term=$(ps -h -o comm -p $PPID)
+if [[ $term == *gnome-terminal* ]] || \
+   [[ $term == "gedit" ]] || \
+   [[ $term == "codium" ]] || \
+   [[ $term == *xfce4-terminal* ]]; then
+	
+	if [ "$distro" = "nixos" ]; then
+		if [ -f "$HOME/.bashrc.d/synth-shell-prompt.sh" ] && \
+			echo "$-" | grep -q i; then
+			source ~/.bashrc.d/synth-shell-prompt.sh
+		fi
+	else
+		if [ -f "$HOME/.config/synth-shell/synth-shell-prompt.sh" ] && \
+			echo "$-" | grep -q i; then
+			source "$HOME/.config/synth-shell/synth-shell-prompt.sh"
+		fi
 	fi
 fi

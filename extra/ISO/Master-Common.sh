@@ -44,6 +44,26 @@ check_not_root() {
 	fi
 }
 
+# TODO: Use this for Install and Setup(?) scripts
+get_distro() {
+	# usage distro=$(get_distro)
+	local distro=""
+	if [ -f /etc/os-release ]; then
+		. /etc/os-release
+		case "$ID" in
+			arch) distro="arch" ;;
+			fedora) distro="fedora" ;;
+			gentoo) distro="gentoo" ;;
+			linuxmint) distro="lmde" ;;
+			nixos) distro="nixos" ;;
+			opensuse*) distro="opensuse" ;;
+			slackware) distro="slackware" ;;
+			void) distro="void" ;;
+		esac
+	fi
+	echo "$distro"
+}
+
 prompt_hostname() {
 	# Prompt for hostname
 	while true; do
