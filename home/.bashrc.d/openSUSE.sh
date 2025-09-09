@@ -7,54 +7,54 @@ die() { echo -e "\033[1;31mError:\033[0m $*" >&2; return 1; }
 
 # openSUSE Cleaning
 cleanAll() {
-	sudo zypper rm --no-confirm '*-lang' '*-doc' || true
-	sudo rm -rf /usr/share/themes/Mint-* || true
-	flatpak remove --unused || true
-	sudo flatpak repair || die "Failed to repair flatpak packages."
-	sudo rm -rf /var/lib/systemd/coredump/* || true
-	sudo zypper clean -a || true
-	sudo zypper purge-kernels || true
-	if command -v snapper >/dev/null 2>&1; then
-		sudo snapper delete 1-100 || true
-	fi
-	rm -rf ~/.cache/* || true
-	sudo rm -rf /tmp/* || true
-	sudo journalctl --vacuum-size=50M || true
-	sudo journalctl --vacuum-time=4weeks || true
-	sudo bleachbit -c --preset || true
-	bleachbit -c --preset || true
+  sudo zypper rm --no-confirm '*-lang' '*-doc' || true
+  sudo rm -rf /usr/share/themes/Mint-* || true
+  flatpak remove --unused || true
+  sudo flatpak repair || die "Failed to repair flatpak packages."
+  sudo rm -rf /var/lib/systemd/coredump/* || true
+  sudo zypper clean -a || true
+  sudo zypper purge-kernels || true
+  if command -v snapper >/dev/null 2>&1; then
+    sudo snapper delete 1-100 || true
+  fi
+  rm -rf ~/.cache/* || true
+  sudo rm -rf /tmp/* || true
+  sudo journalctl --vacuum-size=50M || true
+  sudo journalctl --vacuum-time=4weeks || true
+  sudo bleachbit -c --preset || true
+  bleachbit -c --preset || true
 }
 
 # openSUSE Update
 updateNeovim() {
-	echo "Performing LazySync..."
-	nvim --headless "+Lazy! sync" +qa > /dev/null 2>&1 || \
-		die "LazySync failed."
-	echo "LazySync complete!"
+  echo "Performing LazySync..."
+  nvim --headless "+Lazy! sync" +qa > /dev/null 2>&1 || \
+    die "LazySync failed."
+  echo "LazySync complete!"
 }
 
 updateApp() {
-	sudo zypper ref || die "Failed to refresh repositories."
-	sudo zypper dup || die "Failed to perform distribution upgrade."
-	flatpak update -y || die "Failed to update flatpak packages."
-	updateNeovim || true
+  sudo zypper ref || die "Failed to refresh repositories."
+  sudo zypper dup || die "Failed to perform distribution upgrade."
+  flatpak update -y || die "Failed to update flatpak packages."
+  updateNeovim || true
 }
 
 updateAll() {
-	updateApp && cleanAll || true
+  updateApp && cleanAll || true
 }
 
 updateRestart() {
-	updateAll && reboot || true
+  updateAll && reboot || true
 }
 
 updateShutdown() {
-	updateAll && poweroff || true
+  updateAll && poweroff || true
 }
 
 # Update and Cleanup
 UC() {
-	updateAll || true
-	sudo -E bleachbit || true
-	exit
+  updateAll || true
+  sudo -E bleachbit || true
+  exit
 }
