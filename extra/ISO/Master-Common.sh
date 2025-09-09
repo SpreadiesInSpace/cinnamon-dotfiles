@@ -60,7 +60,7 @@ get_distro() {
       void) distro="void" ;;
     esac
   fi
-  echo "Detected OS: $distro"
+  echo "Detected OS: $ID"
 }
 
 prompt_hostname() {
