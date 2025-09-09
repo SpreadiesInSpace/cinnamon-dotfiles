@@ -2,8 +2,8 @@
 
 # Install Neofetch
 echo "deb http://deb.debian.org/debian bookworm main" > \
-	/etc/apt/sources.list.d/bookworm-neofetch.list || \
-	die "Failed to add bookworm repo."
+  /etc/apt/sources.list.d/bookworm-neofetch.list || \
+  die "Failed to add bookworm repo."
 apt update || die "APT update failed."
 apt install -y neofetch -t bookworm || die "Failed to install neofetch."
 
@@ -11,19 +11,19 @@ apt install -y neofetch -t bookworm || die "Failed to install neofetch."
 echo "Package: neofetch
 Pin: version *
 Pin-Priority: 1001" > /etc/apt/preferences.d/pin-neofetch || \
-	die "Failed to pin neofetch."
+  die "Failed to pin neofetch."
 
 # Remove the source
 rm /etc/apt/sources.list.d/bookworm-neofetch.list || \
-	die "Failed to remove bookworm repo."
+  die "Failed to remove bookworm repo."
 apt update || die "APT update failed."
 
 # All packages
 packages=(
-	#"neofetch"
-	"qt6-style-kvantum"
-	"qt-style-kvantum-themes"
-	"btm"
+  #"neofetch"
+  "qt6-style-kvantum"
+  "qt-style-kvantum-themes"
+  "btm"
 )
 
 # Install Packages

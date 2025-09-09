@@ -29,37 +29,37 @@ display_status "$enable_autologin" "$is_vm"
 # Check if Color, ParallelDownloads, and ILoveCandy are in /etc/pacman.conf
 echo "Configuring pacman..."
 declare -A options=(
-	["Color"]="Color"
-	["ParallelDownloads"]="ParallelDownloads = 5"
-	["ILoveCandy"]="ILoveCandy"
+  ["Color"]="Color"
+  ["ParallelDownloads"]="ParallelDownloads = 5"
+  ["ILoveCandy"]="ILoveCandy"
 )
 for key in "${!options[@]}"; do
-	if ! grep -q "^$key" /etc/pacman.conf; then
-		sed -i "/^# Misc options/a ${options[$key]}" /etc/pacman.conf || \
-		die "Failed to configure pacman option: $key."
-	fi
+  if ! grep -q "^$key" /etc/pacman.conf; then
+    sed -i "/^# Misc options/a ${options[$key]}" /etc/pacman.conf || \
+    die "Failed to configure pacman option: $key."
+  fi
 done
 
 # Update MAKEFLAGS /etc/makepkg.conf to match CPU cores
 cores=$(nproc)
 echo "Set MAKEFLAGS to --jobs=$cores"
 sed -i "s/^#*\\s*MAKEFLAGS=.*/MAKEFLAGS=\"--jobs=$cores\"/" \
-	/etc/makepkg.conf || \
-	die "Failed to update MAKEFLAGS in /etc/makepkg.conf."
+  /etc/makepkg.conf || \
+  die "Failed to update MAKEFLAGS in /etc/makepkg.conf."
 
 # Install base-devel and git
 pacman -S --needed --noconfirm base-devel git || \
-	die "Failed to install git."
+  die "Failed to install git."
 
 # Remove passwordless sudo if script is interrupted
 trap 'rm -f /etc/sudoers.d/99_${SUDO_USER}_nopasswd' ERR INT TERM
 
 # Temporarily allow passwordless sudo for current user
 echo "$SUDO_USER ALL=(ALL) NOPASSWD: ALL" > \
-	/etc/sudoers.d/99_"${SUDO_USER}"_nopasswd || \
-		die "Failed to modify sudoers file for $SUDO_USER."
+  /etc/sudoers.d/99_"${SUDO_USER}"_nopasswd || \
+    die "Failed to modify sudoers file for $SUDO_USER."
 chmod 0440 /etc/sudoers.d/99_"${SUDO_USER}"_nopasswd || \
-	die "Failed to set proper permissions for sudoers file."
+  die "Failed to set proper permissions for sudoers file."
 
 # Install yay
 cat << 'EOF' | su - "$SUDO_USER"
@@ -67,7 +67,7 @@ die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
 trap 'rm -rf yay-bin' ERR INT TERM
 echo "Configuring yay..."
 git clone https://aur.archlinux.org/yay-bin.git >/dev/null 2>&1 || \
-	die "Failed to download yay."
+  die "Failed to download yay."
 cd yay-bin || die "Failed to enter yay-bin directory."
 makepkg -si --noconfirm >/dev/null 2>&1 || die "Failed to install yay."
 cd ..
@@ -75,94 +75,94 @@ rm -rf yay-bin
 
 # All packages
 packages=(
-	# System utilities
-	"bash-completion"
-	"file-roller"
-	"flatpak"
-	"gparted"
-	"grub-customizer"
-	"ncdu"
-	"neofetch"
-	"timeshift"
-	"unzip"
-	"wget"
-	"xorg-xkill"
-	"xorg-xrandr"
-	# Network utilities
-	"filezilla"
-	"gvfs"
-	"gvfs-afc"
-	"gvfs-gphoto2"
-	"gvfs-mtp"
-	"gvfs-nfs"
-	"gvfs-smb"
-	"kdeconnect"
-	"samba"
-	# Desktop environment and related packages
-	"cinnamon"
-	"eog"
-	"evince"
-	"ffmpegthumbnailer"
-	"gedit"
-	"gedit-plugins"
-	"gnome-calculator"
-	"gnome-disk-utility"
-	"gnome-keyring"
-	"gnome-screenshot"
-	"gnome-system-monitor"
-	"gnome-terminal"
-	"gthumb"
-	"gufw"
-	"haruna"
-	"kvantum"
-	"kvantum-qt5"
-	"lightdm"
-	"lightdm-settings"
-	"lightdm-slick-greeter"
-	"nemo-fileroller"
-	"nemo-image-converter"
-	"nemo-preview"
-	"nemo-share"
-	"qt5ct"
-	"qt6ct"
-	"rhythmbox"
-	"vscodium-bin"
-	# Applications
-	"bauh"
-	"bleachbit"
-	"brave-bin"
-	"bottom"
-	"gpaste"
-	"libreoffice-fresh"
-	"neovim"
-	"qbittorrent"
-	"reflector-simple"
-	"spice-vdagent"
-	"noto-fonts"
-	"noto-fonts-emoji"
-	"xclip"
-	# For NvChad
-	"gcc"
-	"make"
-	"ripgrep"
-	# Virtualization tools
-	"virt-manager"
-	"qemu-desktop"
-	"libvirt"
-	"edk2-ovmf"
-	"dnsmasq"
-	"vde2"
-	"bridge-utils"
-	"iptables"
-	"dmidecode"
-	"guestfs-tools"
-	"qemu-block-gluster"
-	"qemu-block-iscsi"
+  # System utilities
+  "bash-completion"
+  "file-roller"
+  "flatpak"
+  "gparted"
+  "grub-customizer"
+  "ncdu"
+  "neofetch"
+  "timeshift"
+  "unzip"
+  "wget"
+  "xorg-xkill"
+  "xorg-xrandr"
+  # Network utilities
+  "filezilla"
+  "gvfs"
+  "gvfs-afc"
+  "gvfs-gphoto2"
+  "gvfs-mtp"
+  "gvfs-nfs"
+  "gvfs-smb"
+  "kdeconnect"
+  "samba"
+  # Desktop environment and related packages
+  "cinnamon"
+  "eog"
+  "evince"
+  "ffmpegthumbnailer"
+  "gedit"
+  "gedit-plugins"
+  "gnome-calculator"
+  "gnome-disk-utility"
+  "gnome-keyring"
+  "gnome-screenshot"
+  "gnome-system-monitor"
+  "gnome-terminal"
+  "gthumb"
+  "gufw"
+  "haruna"
+  "kvantum"
+  "kvantum-qt5"
+  "lightdm"
+  "lightdm-settings"
+  "lightdm-slick-greeter"
+  "nemo-fileroller"
+  "nemo-image-converter"
+  "nemo-preview"
+  "nemo-share"
+  "qt5ct"
+  "qt6ct"
+  "rhythmbox"
+  "vscodium-bin"
+  # Applications
+  "bauh"
+  "bleachbit"
+  "brave-bin"
+  "bottom"
+  "gpaste"
+  "libreoffice-fresh"
+  "neovim"
+  "qbittorrent"
+  "reflector-simple"
+  "spice-vdagent"
+  "noto-fonts"
+  "noto-fonts-emoji"
+  "xclip"
+  # For NvChad
+  "gcc"
+  "make"
+  "ripgrep"
+  # Virtualization tools
+  "virt-manager"
+  "qemu-desktop"
+  "libvirt"
+  "edk2-ovmf"
+  "dnsmasq"
+  "vde2"
+  "bridge-utils"
+  "iptables"
+  "dmidecode"
+  "guestfs-tools"
+  "qemu-block-gluster"
+  "qemu-block-iscsi"
 )
 
 # Install Packages
 yay -Syu --needed --noconfirm "${packages[@]}" || \
-	die "Failed to install packages."
+  die "Failed to install packages."
 EOF
 
 # Remove temporary passwordless sudo access
@@ -183,11 +183,11 @@ set_qemu_permissions
 # Enable and start services
 echo "Enabling services..."
 systemctl enable libvirtd >/dev/null 2>&1 || \
-	die "Failed to enable libvirtd service."
+  die "Failed to enable libvirtd service."
 systemctl enable lightdm >/dev/null 2>&1 || \
-	die "Failed to enable lightdm service."
+  die "Failed to enable lightdm service."
 systemctl enable NetworkManager >/dev/null 2>&1 || \
-	die "Failed to enable NetworkManager service."
+  die "Failed to enable NetworkManager service."
 
 # Only enable net-autostart if in physical machine
 manage_virsh_network

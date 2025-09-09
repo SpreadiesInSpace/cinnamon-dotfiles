@@ -2,10 +2,10 @@
 
 # Exit early if NixOS is installed via cinnamon-ISO
 if [ -f ".nixos-25.05.done" ]; then
-	echo "This NixOS install was done via Install-NixOS.sh."
-	echo "Now run Theme.sh with the following command:"
-	echo "./Theme.sh"
-	exit 0
+  echo "This NixOS install was done via Install-NixOS.sh."
+  echo "Now run Theme.sh with the following command:"
+  echo "./Theme.sh"
+  exit 0
 fi
 
 # Source common functions
@@ -44,22 +44,22 @@ CONFIG="/etc/nixos/configuration.nix"
 # Back up old configuration.nix
 timestamp=$(date +%s)
 cp "$CONFIG" "$CONFIG.old.${timestamp}" || \
-	die "Failed to back up configuration.nix"
+  die "Failed to back up configuration.nix"
 
 # Copy custom configuration.nix
 cp ./etc/nixos/configuration.nix "$CONFIG" || \
-	die "Failed to copy configuration.nix"
+  die "Failed to copy configuration.nix"
 
 # Configure all NixOS settings
 configure_nixos_settings "$CONFIG" "$username" "$hostname" "$timezone" \
-	"$enable_autologin"
+  "$enable_autologin"
 
 # Place Login Wallpaper
 setup_login_wallpaper "$CONFIG"
 
 # Reconfigures system
 nixos-rebuild switch --upgrade || \
-	die "Failed to rebuild NixOS."
+  die "Failed to rebuild NixOS."
 
 # Enable Flathub for Flatpak
 enable_flathub

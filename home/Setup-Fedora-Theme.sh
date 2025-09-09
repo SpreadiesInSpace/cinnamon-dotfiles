@@ -13,10 +13,10 @@ check_dependencies
 
 # Disable Gnome Software Automatic Updates if installed via cinnamon-ISO
 if [[ -f ".fedora.gnome" ]]; then
-	gsettings set org.gnome.software allow-updates false || \
-		die "Failed to disable Gnome Software updates."
-	gsettings set org.gnome.software download-updates false || \
-		die "Failed to disable Gnome Software auto-downloads."
+  gsettings set org.gnome.software allow-updates false || \
+    die "Failed to disable Gnome Software updates."
+  gsettings set org.gnome.software download-updates false || \
+    die "Failed to disable Gnome Software auto-downloads."
 fi
 
 # Install icons and themes

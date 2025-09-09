@@ -6,7 +6,7 @@ die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
 # Download noto-fonts-cjk
 URL="https://archlinux.org/packages/extra/any/noto-fonts-cjk/download/"
 wget -c -T 10 -t 10 -q --show-progress --content-disposition "$URL" || \
-	die "Failed to download noto-fonts-cjk."
+  die "Failed to download noto-fonts-cjk."
 
 # Unpack
 zstd -d ./*.pkg.tar.zst || die "Decompression failed."
@@ -15,7 +15,7 @@ tar -xf ./*.pkg.tar || die "Extraction failed."
 # Install
 echo "Installing noto-fonts-cjk."
 sudo cp -npr usr/share/fonts/noto-cjk/ /usr/share/fonts/ || \
-	die "Failed to copy noto-fonts-cjk to /usr/share/fonts"
+  die "Failed to copy noto-fonts-cjk to /usr/share/fonts"
 
 # Symlink
 mkdir -p ~/.fonts || die "Failed to make .fonts folder."

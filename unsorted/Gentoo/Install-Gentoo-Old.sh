@@ -83,29 +83,29 @@ gpg --verify latest-stage3.txt 2>/dev/null || die "GPG verification of latest-st
 # Parse the stage3 tarball path from the verified file
 STAGE3_TARBALL_PATH=$(awk '/^[^#].*\.tar\.xz/ { print $1; exit }' latest-stage3.txt)
 if [[ -z "$STAGE3_TARBALL_PATH" ]]; then
-	 die "Failed to parse the stage3 tarball path from latest-stage3.txt."
+   die "Failed to parse the stage3 tarball path from latest-stage3.txt."
 fi
 STAGE3_TARBALL=$(basename "$STAGE3_TARBALL_PATH")
 
 # Download tarball and verification files
 echo; echo "Downloading stage3 tarball and verification files..."
 for suffix in "" ".asc" ".DIGESTS" ".sha256"; do
-	wget -c -T 10 -t 10 -q --show-progress "$RELEASES_URL/$STAGE3_TARBALL_PATH$suffix" || die "Failed to download $RELEASES_URL/$STAGE3_TARBALL_PATH$suffix"
+  wget -c -T 10 -t 10 -q --show-progress "$RELEASES_URL/$STAGE3_TARBALL_PATH$suffix" || die "Failed to download $RELEASES_URL/$STAGE3_TARBALL_PATH$suffix"
 done
 
 # Verify GPG signatures
 echo; echo "Verifying GPG signatures..."
 for ext in asc DIGESTS sha256; do
-	echo "- Checking $STAGE3_TARBALL.$ext..."
-	if ! gpg --verify "$STAGE3_TARBALL.$ext" 2>/dev/null; then
-		die "GPG verification of $STAGE3_TARBALL.$ext failed! Aborting..."
-	fi
+  echo "- Checking $STAGE3_TARBALL.$ext..."
+  if ! gpg --verify "$STAGE3_TARBALL.$ext" 2>/dev/null; then
+    die "GPG verification of $STAGE3_TARBALL.$ext failed! Aborting..."
+  fi
 done
 
 # Verify SHA256 hash
 echo; echo "Verifying SHA256 checksum..."
 if ! sha256sum --check "$STAGE3_TARBALL.sha256" 2>/dev/null; then
-	die "SHA256 verification failed! Aborting..."
+  die "SHA256 verification failed! Aborting..."
 fi
 
 # If all verifications passed, extract the tarball
@@ -119,9 +119,9 @@ path="/mnt/gentoo/etc/portage/make.conf"
 # Backup and exit on failure
 cp "$path" "$path.stage3" || die "Failed to back up $path."
 curl -fsSL "$url" -o "$path" || {
-	echo "Failed to fetch $url, restoring original make.conf."
-	mv "$path.stage3" "$path"
-	die "Failed to fetch $url."
+  echo "Failed to fetch $url, restoring original make.conf."
+  mv "$path.stage3" "$path"
+  die "Failed to fetch $url."
 }
 echo; echo "make.conf updated successfully"
 
@@ -161,11 +161,11 @@ mount --make-slave /mnt/gentoo/run || die "Failed to set /mnt/gentoo/run as slav
 
 # Fix /dev/shm if it's a broken symlink (common on non-Gentoo ISOs)
 if test -L /dev/shm; then
-	echo "Fixing /dev/shm symlink..."
-	rm /dev/shm || die "Failed to remove /dev/shm symlink."
-	mkdir /dev/shm || die "Failed to create /dev/shm directory."
-	mount -t tmpfs -o nosuid,nodev,noexec shm /dev/shm || die "Failed to mount tmpfs on /dev/shm."
-	chmod 1777 /dev/shm /run/shm || die "Failed to set permissions on /dev/shm or /run/shm."
+  echo "Fixing /dev/shm symlink..."
+  rm /dev/shm || die "Failed to remove /dev/shm symlink."
+  mkdir /dev/shm || die "Failed to create /dev/shm directory."
+  mount -t tmpfs -o nosuid,nodev,noexec shm /dev/shm || die "Failed to mount tmpfs on /dev/shm."
+  chmod 1777 /dev/shm /run/shm || die "Failed to set permissions on /dev/shm or /run/shm."
 fi
 
 # Copy common functions to chroot environment
@@ -193,17 +193,17 @@ priority = 9999" > /etc/portage/binrepos.conf/gentoo.conf || die "Failed to writ
 
 # Set BINHOST sync URI based on CPU support for AVX2.
 if grep -q "avx2" /proc/cpuinfo; then
-	echo "sync-uri = http://download.nus.edu.sg/mirror/gentoo/releases/amd64/binpackages/23.0/x86-64-v3/" >> /etc/portage/binrepos.conf/gentoo.conf || die "Failed to write AVX2 binhost URI."
-	echo "Use x86-64-v3 optimized binaries for AVX2-capable CPUs."
+  echo "sync-uri = http://download.nus.edu.sg/mirror/gentoo/releases/amd64/binpackages/23.0/x86-64-v3/" >> /etc/portage/binrepos.conf/gentoo.conf || die "Failed to write AVX2 binhost URI."
+  echo "Use x86-64-v3 optimized binaries for AVX2-capable CPUs."
 else
-	echo "sync-uri = https://distfiles.gentoo.org/releases/amd64/binpackages/23.0/x86-64/" >> /etc/portage/binrepos.conf/gentoo.conf || die "Failed to write baseline binhost URI."
-	echo "Use baseline x86-64 binaries for broader compatibility."
+  echo "sync-uri = https://distfiles.gentoo.org/releases/amd64/binpackages/23.0/x86-64/" >> /etc/portage/binrepos.conf/gentoo.conf || die "Failed to write baseline binhost URI."
+  echo "Use baseline x86-64 binaries for broader compatibility."
 fi
 
 # Only remove if there are known issues
 if [ -d /etc/portage/gnupg ] && [ ! -w /etc/portage/gnupg ]; then
-		echo "Fixing GPG directory permissions..."
-		rm -rf /etc/portage/gnupg/ || die "Failed to remove problematic GPG directory."
+    echo "Fixing GPG directory permissions..."
+    rm -rf /etc/portage/gnupg/ || die "Failed to remove problematic GPG directory."
 fi
 
 # Verify GPG.
@@ -277,14 +277,14 @@ emerge -qv sys-kernel/gentoo-kernel-bin sys-fs/genfstab net-misc/networkmanager 
 
 # Skip firmware installation for VMs
 if ! systemd-detect-virt --vm &>/dev/null; then
-	echo "Physical machine detected. Installing firmware..."
-	emerge -vq sys-kernel/linux-firmware || die "Failed to install sys-kernel/linux-firmware."
-	grep -q "GenuineIntel" /proc/cpuinfo && {
-		echo "Intel CPU detected. Installing intel-microcode..."
-		emerge -vq sys-firmware/intel-microcode || die "Failed to install sys-firmware/intel-microcode."
-	} || echo "Non-Intel CPU detected. Skipping intel-microcode."
+  echo "Physical machine detected. Installing firmware..."
+  emerge -vq sys-kernel/linux-firmware || die "Failed to install sys-kernel/linux-firmware."
+  grep -q "GenuineIntel" /proc/cpuinfo && {
+    echo "Intel CPU detected. Installing intel-microcode..."
+    emerge -vq sys-firmware/intel-microcode || die "Failed to install sys-firmware/intel-microcode."
+  } || echo "Non-Intel CPU detected. Skipping intel-microcode."
 else
-	echo "VM detected. Skipping firmware and microcode installation."
+  echo "VM detected. Skipping firmware and microcode installation."
 fi
 
 #=============== Gentoo Install - Configuring the System ===============

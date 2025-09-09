@@ -67,7 +67,7 @@ timestamp=$(date +%s)
 [ -d ~/.config/xfce4 ] && mv ~/.config/xfce4 ~/.config/xfce4.old."$timestamp"
 cp -npr .config/xfce4/ ~/.config/
 if sudo test -d /root/.config/xfce4; then
-	sudo mv /root/.config/xfce4 /root/.config/xfce4.old."$timestamp"
+  sudo mv /root/.config/xfce4 /root/.config/xfce4.old."$timestamp"
 fi
 sudo cp -npr .config/xfce4/ /root/.config/
 

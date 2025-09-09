@@ -41,79 +41,79 @@ rm nvim-linux-x86_64.appimage
 
 # All packages
 packages=(
-	# System utilities
-	"build-essential"
-	"file-roller"
-	"flatpak"
-	"gparted"
-	#"grub-customizer"
-	"ncdu"
-	"neofetch"
-	#"timeshift"
-	"unzip"
-	"x11-xserver-utils"
-	# Network utilities
-	"filezilla"
-	"gvfs"
-	"gvfs-backends"
-	"kdeconnect"
-	"samba"
-	# Desktop environment and related packages
-	"cinnamon"
-	"dconf-cli"
-	"dconf-editor"
-	#"lightdm"
-	#"lightdm-settings"
-	#"slick-greeter"
-	"eog"
-	"evince"
-	"ffmpegthumbnailer"
-	"gedit"
-	"gedit-plugins"
-	"gnome-calculator"
-	"gnome-screenshot"
-	"gnome-system-monitor"
-	"gnome-terminal"
-	"gthumb"
-	"gufw"
-	"gvfs*"
-	"haruna"
-	"nemo"
-	"nemo-fileroller"
-	"qt5-style-kvantum"
-	"qt5-style-kvantum-themes"
-	"qt5ct"
-	"qt6ct"
-	"rhythmbox"
-	# Applications
-	"bleachbit"
-	"gir1.2-gpaste-2"
-	"gpaste-2"
-	"libreoffice"
-	"libreoffice-gtk3"
-	"libreoffice-style-elementary"
-	"qbittorrent"
-	# "rmlint"
-	"spice-vdagent"
-	"fonts-noto-core"
-	"fonts-noto-color-emoji"
-	"xclip"
-	# For NvChad
-	"gcc"
-	"make"
-	"ripgrep"
-	# Virtualization tools
-	"virt-manager"
-	"qemu-system"
-	"qemu-utils"
-	"libvirt-clients"
-	"libvirt-daemon-system"
-	"libvirt-daemon"
-	"bridge-utils"
-	"virtinst"
-	"iptables"
-	"dmidecode"
-	"guestfs-tools"
+  # System utilities
+  "build-essential"
+  "file-roller"
+  "flatpak"
+  "gparted"
+  #"grub-customizer"
+  "ncdu"
+  "neofetch"
+  #"timeshift"
+  "unzip"
+  "x11-xserver-utils"
+  # Network utilities
+  "filezilla"
+  "gvfs"
+  "gvfs-backends"
+  "kdeconnect"
+  "samba"
+  # Desktop environment and related packages
+  "cinnamon"
+  "dconf-cli"
+  "dconf-editor"
+  #"lightdm"
+  #"lightdm-settings"
+  #"slick-greeter"
+  "eog"
+  "evince"
+  "ffmpegthumbnailer"
+  "gedit"
+  "gedit-plugins"
+  "gnome-calculator"
+  "gnome-screenshot"
+  "gnome-system-monitor"
+  "gnome-terminal"
+  "gthumb"
+  "gufw"
+  "gvfs*"
+  "haruna"
+  "nemo"
+  "nemo-fileroller"
+  "qt5-style-kvantum"
+  "qt5-style-kvantum-themes"
+  "qt5ct"
+  "qt6ct"
+  "rhythmbox"
+  # Applications
+  "bleachbit"
+  "gir1.2-gpaste-2"
+  "gpaste-2"
+  "libreoffice"
+  "libreoffice-gtk3"
+  "libreoffice-style-elementary"
+  "qbittorrent"
+  # "rmlint"
+  "spice-vdagent"
+  "fonts-noto-core"
+  "fonts-noto-color-emoji"
+  "xclip"
+  # For NvChad
+  "gcc"
+  "make"
+  "ripgrep"
+  # Virtualization tools
+  "virt-manager"
+  "qemu-system"
+  "qemu-utils"
+  "libvirt-clients"
+  "libvirt-daemon-system"
+  "libvirt-daemon"
+  "bridge-utils"
+  "virtinst"
+  "iptables"
+  "dmidecode"
+  "guestfs-tools"
 )
 
 # Update system and install packages
@@ -127,23 +127,23 @@ cp /etc/libvirt/libvirtd.conf /etc/libvirt/libvirtd.conf.old
 
 # Check for 'unix_sock_group' entry
 if ! grep -q "^unix_sock_group = \"libvirt\"$" /etc/libvirt/libvirtd.conf; then
-	echo 'unix_sock_group = "libvirt"' | tee -a /etc/libvirt/libvirtd.conf
+  echo 'unix_sock_group = "libvirt"' | tee -a /etc/libvirt/libvirtd.conf
 else
-	sed -i '/^#*unix_sock_group = "libvirt"/s/^#*//' /etc/libvirt/libvirtd.conf
+  sed -i '/^#*unix_sock_group = "libvirt"/s/^#*//' /etc/libvirt/libvirtd.conf
 fi
 
 # Check for 'unix_sock_ro_perms' entry
 if ! grep -q "^unix_sock_ro_perms = \"0777\"$" /etc/libvirt/libvirtd.conf; then
-	echo 'unix_sock_ro_perms = "0777"' | tee -a /etc/libvirt/libvirtd.conf
+  echo 'unix_sock_ro_perms = "0777"' | tee -a /etc/libvirt/libvirtd.conf
 else
-	sed -i '/^#*unix_sock_ro_perms = "0777"/s/^#*//' /etc/libvirt/libvirtd.conf
+  sed -i '/^#*unix_sock_ro_perms = "0777"/s/^#*//' /etc/libvirt/libvirtd.conf
 fi
 
 # Check for 'unix_sock_rw_perms' entry
 if ! grep -q "^unix_sock_rw_perms = \"0770\"$" /etc/libvirt/libvirtd.conf; then
-	echo 'unix_sock_rw_perms = "0770"' | tee -a /etc/libvirt/libvirtd.conf
+  echo 'unix_sock_rw_perms = "0770"' | tee -a /etc/libvirt/libvirtd.conf
 else
-	sed -i '/^#*unix_sock_rw_perms = "0770"/s/^#*//' /etc/libvirt/libvirtd.conf
+  sed -i '/^#*unix_sock_rw_perms = "0770"/s/^#*//' /etc/libvirt/libvirtd.conf
 fi
 
 # Preserve old QEMU configuration (for Virtual Machine Manager)
@@ -151,22 +151,22 @@ cp /etc/libvirt/qemu.conf /etc/libvirt/qemu.conf.old
 
 # Check for 'user' entry
 if ! grep -q "^user = \"$username\"$" /etc/libvirt/qemu.conf; then
-	echo "user = \"$username\"" | tee -a /etc/libvirt/qemu.conf
+  echo "user = \"$username\"" | tee -a /etc/libvirt/qemu.conf
 fi
 
 # Check for 'group' entry
 if ! grep -q "^group = \"$username\"$" /etc/libvirt/qemu.conf; then
-	echo "group = \"$username\"" | tee -a /etc/libvirt/qemu.conf
+  echo "group = \"$username\"" | tee -a /etc/libvirt/qemu.conf
 fi
 
 # Check for 'swtpm_user' entry
 if ! grep -q "^swtpm_user = \"$username\"$" /etc/libvirt/qemu.conf; then
-	echo "swtpm_user = \"$username\"" | tee -a /etc/libvirt/qemu.conf
+  echo "swtpm_user = \"$username\"" | tee -a /etc/libvirt/qemu.conf
 fi
 
 # Check for 'swtpm_group' entry
 if ! grep -q "^swtpm_group = \"$username\"$" /etc/libvirt/qemu.conf; then
-	echo "swtpm_group = \"$username\"" | tee -a /etc/libvirt/qemu.conf
+  echo "swtpm_group = \"$username\"" | tee -a /etc/libvirt/qemu.conf
 fi
 
 # Enable and start the libvirtd service
@@ -179,7 +179,7 @@ virsh net-autostart default
 # Add the current user to the necessary groups
 groups=(libvirt libvirt-qemu kvm input disk video audio)
 for group in "${groups[@]}"; do
-	usermod -aG "$group" "$username"
+  usermod -aG "$group" "$username"
 done
 
 # Place modified .xinitrc (for Cinnamon), preserving old one
@@ -196,20 +196,20 @@ cp /etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf.old
 awk -i inplace '
 /^\[Seat:\*\]/ {a=1}
 a==1 && /^#?greeter-hide-users=/ {
-	print "greeter-hide-users=false"
-	next
+  print "greeter-hide-users=false"
+  next
 }
 a==1 && /^#?display-setup-script=/ {
-	print "#display-setup-script=xrandr --output Virtual-1 --mode 1920x1080 --rate 60"
-	next
+  print "#display-setup-script=xrandr --output Virtual-1 --mode 1920x1080 --rate 60"
+  next
 }
 a==1 && /^#?autologin-user=/ {
-	print "#autologin-user='"$username"'"
-	next
+  print "#autologin-user='"$username"'"
+  next
 }
 a==1 && /^#?autologin-session=/ {
-	print "autologin-session=cinnamon"
-	next
+  print "autologin-session=cinnamon"
+  next
 }
 {print}
 ' /etc/lightdm/lightdm.conf
@@ -236,23 +236,23 @@ cat <<EOL > /etc/fonts/local.conf
 <?xml version="1.0"?>
 <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
 <fontconfig>
-	<match target="font">
-		<edit name="antialias" mode="assign">
-			<bool>true</bool>
-		</edit>
-		<edit name="hinting" mode="assign">
-			<bool>true</bool>
-		</edit>
-		<edit mode="assign" name="rgba">
-			<const>rgb</const>
-		</edit>
-		<edit mode="assign" name="hintstyle">
-			<const>hintslight</const>
-		</edit>
-		<edit mode="assign" name="lcdfilter">
-			<const>lcddefault</const>
-		</edit>
-	</match>
+  <match target="font">
+    <edit name="antialias" mode="assign">
+      <bool>true</bool>
+    </edit>
+    <edit name="hinting" mode="assign">
+      <bool>true</bool>
+    </edit>
+    <edit mode="assign" name="rgba">
+      <const>rgb</const>
+    </edit>
+    <edit mode="assign" name="hintstyle">
+      <const>hintslight</const>
+    </edit>
+    <edit mode="assign" name="lcdfilter">
+      <const>lcddefault</const>
+    </edit>
+  </match>
 </fontconfig>
 EOL
 # Append Xft settings to ~/.Xresources, preserving old one

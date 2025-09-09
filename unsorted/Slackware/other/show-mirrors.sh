@@ -14,18 +14,18 @@ CONFIG_FILE="/etc/captain-slack/cptn-main.ini"
 
 # Parse the ini file and export variables
 function source_config() {
-		local section=""
-		while IFS="=" read -r key value; do
-				if [[ $key =~ ^\[(.*)\]$ ]]; then
-						section="${BASH_REMATCH[1]}"
-				elif [[ -n $key && -n $value && $key != ";"* && $section != "" ]]; then
-						key=$(echo "$key" | xargs)  # Trim whitespace
-						value=$(echo "$value" | xargs)  # Trim whitespace
-						value=$(eval echo "$value")  # Resolve variables like $APP_HOME
-						export "$key"="$value"  # Export as environment variable
-						echo "$key = $value"  # Automatically echo the key-value pair
-				fi
-		done < "$CONFIG_FILE"
+  local section=""
+  while IFS="=" read -r key value; do
+    if [[ $key =~ ^\[(.*)\]$ ]]; then
+      section="${BASH_REMATCH[1]}"
+    elif [[ -n $key && -n $value && $key != ";"* && $section != "" ]]; then
+      key=$(echo "$key" | xargs)  # Trim whitespace
+      value=$(echo "$value" | xargs)  # Trim whitespace
+      value=$(eval echo "$value")  # Resolve variables like $APP_HOME
+      export "$key"="$value"  # Export as environment variable
+      echo "$key = $value"  # Automatically echo the key-value pair
+    fi
+  done < "$CONFIG_FILE"
 }
 
 # Call the function to source the config
@@ -63,11 +63,11 @@ sed -i 's/^/"&/; s/$/"/' ftp.mirrors.txt
 sed -i 's/^/"&/; s/$/"/' rsync.mirrors.txt
 
 for file in http.mirrors.txt ftp.mirrors.txt rsync.mirrors.txt; do
-		sed -i '1s/^/mirrors=(\n/' "$file"
+  sed -i '1s/^/mirrors=(\n/' "$file"
 done
 
 for file in http.mirrors.txt ftp.mirrors.txt rsync.mirrors.txt; do
-		echo ")" >> "$file"
+  echo ")" >> "$file"
 done
 
 
@@ -92,32 +92,32 @@ fi
 # Loop through mirrors and ping each one
 # shellcheck disable=SC2154
 for mirror in "${mirrors[@]}"; do
-		# Skip mirrors from w3.org
-		if [[ "$mirror" == *"w3.org"* ]]; then
-				continue
-		fi
+    # Skip mirrors from w3.org
+    if [[ "$mirror" == *"w3.org"* ]]; then
+        continue
+    fi
 
-		# Extract the hostname (remove protocol and path)
-		hostname=$(echo "$mirror" | awk -F'/' '{print $3}')
+    # Extract the hostname (remove protocol and path)
+    hostname=$(echo "$mirror" | awk -F'/' '{print $3}')
 
-		# Ping the mirror hostname and get the average response time
-		ping_time=$(ping -c 1 -W 1 "$hostname" | grep 'time=' | awk -F 'time=' '{print $2}' | awk '{print $1}')
+    # Ping the mirror hostname and get the average response time
+    ping_time=$(ping -c 1 -W 1 "$hostname" | grep 'time=' | awk -F 'time=' '{print $2}' | awk '{print $1}')
 
-		# If the ping was successful and we got a valid time
-		if [[ -n "$ping_time" ]]; then
-				echo "Pinged $hostname: $ping_time ms"
-				# Store the mirror and its ping time in the associative array
-				mirror_times["$mirror"]="$ping_time"
-		else
-				echo "Failed to ping $hostname"
-		fi
+    # If the ping was successful and we got a valid time
+    if [[ -n "$ping_time" ]]; then
+        echo "Pinged $hostname: $ping_time ms"
+        # Store the mirror and its ping time in the associative array
+        mirror_times["$mirror"]="$ping_time"
+    else
+        echo "Failed to ping $hostname"
+    fi
 done
 
 
 # Check if any mirrors responded
 if [ ${#mirror_times[@]} -eq 0 ]; then
-		echo "No mirrors responded."
-		exit 1
+    echo "No mirrors responded."
+    exit 1
 fi
 echo ""
 echo ""
@@ -125,7 +125,7 @@ echo ""
 echo "Top 5 fastest mirrors for your location:"
 
 for mirror in "${!mirror_times[@]}" ; do
-		echo "$mirror ${mirror_times[$mirror]}"
+    echo "$mirror ${mirror_times[$mirror]}"
 done | sort -k2 -n | head -n 5
 echo ""
 #echo "Captain-Slack: Ignore http://www.w3.org/* if it appears."

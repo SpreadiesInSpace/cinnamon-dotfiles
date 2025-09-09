@@ -15,8 +15,8 @@ terminal-border: "0"
 
 # Logo image
 + image {
-	left = 50%-128
-	top = 50%-256
+  left = 50%-128
+  top = 50%-256
     file = "gruvboxlogo.png"
 }
 

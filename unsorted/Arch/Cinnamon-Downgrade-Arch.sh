@@ -6,9 +6,9 @@ sudo cp pacman.conf /etc/pacman.conf
 
 # Downgrade Cinnamon and dependencies to version 6.2.9
 yay -Syyu cinnamon cinnamon-control-center cinnamon-desktop cinnamon-menus \
-	cinnamon-screensaver cinnamon-session cinnamon-settings-daemon cjs muffin \
-	nemo nemo-fileroller nemo-image-converter nemo-preview nemo-share xapp \
-	xdg-desktop-portal-xapp
+  cinnamon-screensaver cinnamon-session cinnamon-settings-daemon cjs muffin \
+  nemo nemo-fileroller nemo-image-converter nemo-preview nemo-share xapp \
+  xdg-desktop-portal-xapp
 
 # Resore old pacman.conf
 sudo mv /etc/pacman.conf.og /etc/pacman.conf
@@ -17,11 +17,11 @@ sudo mv /etc/pacman.conf.og /etc/pacman.conf
 declare -A options=(["IgnorePkg"]="IgnorePkg = cinnamon cinnamon-control-center cinnamon-desktop cinnamon-menus cinnamon-screensaver cinnamon-session cinnamon-settings-daemon cjs muffin nemo nemo-fileroller nemo-image-converter nemo-preview nemo-share xapp xdg-desktop-portal-xapp")
 # Loop over the options
 for key in "${!options[@]}"; do
-	# Check if the option is already in the file
-	if ! grep -q "^$key" /etc/pacman.conf; then
-		# If not, add it under the # Misc options section
-		sudo sed -i "/^# Misc options/a ${options[$key]}" /etc/pacman.conf
-	fi
+  # Check if the option is already in the file
+  if ! grep -q "^$key" /etc/pacman.conf; then
+    # If not, add it under the # Misc options section
+    sudo sed -i "/^# Misc options/a ${options[$key]}" /etc/pacman.conf
+  fi
 done
 
 # Refresh cache

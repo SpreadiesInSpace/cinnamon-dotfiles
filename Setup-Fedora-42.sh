@@ -29,20 +29,20 @@ display_status "$enable_autologin" "$is_vm"
 # Enable Parallel Downloads
 echo "Configuring DNF..."
 if ! grep -q "^max_parallel_downloads=10$" /etc/dnf/dnf.conf; then
-	echo 'max_parallel_downloads=10' | tee -a /etc/dnf/dnf.conf \
-	>/dev/null 2>&1 || \
-	die "Failed to enable parallel downloads in /etc/dnf/dnf.conf"
+  echo 'max_parallel_downloads=10' | tee -a /etc/dnf/dnf.conf \
+  >/dev/null 2>&1 || \
+  die "Failed to enable parallel downloads in /etc/dnf/dnf.conf"
 else
-	sed -i '/^#*max_parallel_downloads=10/s/^#*//' \
-	/etc/dnf/dnf.conf || \
-	die "Failed to modify parallel downloads setting in /etc/dnf/dnf.conf"
+  sed -i '/^#*max_parallel_downloads=10/s/^#*//' \
+  /etc/dnf/dnf.conf || \
+  die "Failed to modify parallel downloads setting in /etc/dnf/dnf.conf"
 fi
 
 # Update system and install git
 dnf -y update || \
-	die "System update failed."
+  die "System update failed."
 dnf -y install git || \
-	die "Git installation failed."
+  die "Git installation failed."
 
 # Add RPM Fusion
 fedora_ver="$(rpm -E %fedora)"
@@ -51,32 +51,32 @@ free="$free/rpmfusion-free-release-$fedora_ver.noarch.rpm"
 nonfree="https://mirrors.rpmfusion.org/nonfree/fedora"
 nonfree="$nonfree/rpmfusion-nonfree-release-$fedora_ver.noarch.rpm"
 dnf -y install "$free" "$nonfree" || \
-	die "Failed to add RPM Fusion repositories."
+  die "Failed to add RPM Fusion repositories."
 
 # Install Media Codecs
 dnf install -y libavcodec-freeworld || \
-	die "Failed to install libavcodec-freeworld."
+  die "Failed to install libavcodec-freeworld."
 dnf -y group install multimedia || \
-	die "Failed to install multimedia group."
+  die "Failed to install multimedia group."
 dnf -y swap 'ffmpeg-free' 'ffmpeg' --allowerasing || \
-	die "Failed to switch to full ffmpeg."
+  die "Failed to switch to full ffmpeg."
 dnf -y upgrade @multimedia --setopt="install_weak_deps=False" \
-	--exclude=PackageKit-gstreamer-plugin || \
-	die "Failed to install gstreamer compenents."
+  --exclude=PackageKit-gstreamer-plugin || \
+  die "Failed to install gstreamer compenents."
 dnf -y group install sound-and-video || \
-	die "Failed to install sound-and-video group."
+  die "Failed to install sound-and-video group."
 
 # Debloat if installed via cinnamon-ISO
 if [[ -f ".fedora-42.done" ]]; then
-	bash unsorted/Fedora/Fedora-Bloat.sh || \
-		die "Failed to remove bloat."
-	touch home/.fedora.gnome || \
-		die "Failed to set gnome-software flag."
+  bash unsorted/Fedora/Fedora-Bloat.sh || \
+    die "Failed to remove bloat."
+  touch home/.fedora.gnome || \
+    die "Failed to set gnome-software flag."
 fi
 
 # Install Brave
 curl -fsS https://dl.brave.com/install.sh | sh || \
-	die "Failed to install Brave Browser."
+  die "Failed to install Brave Browser."
 
 # Install Bottom
 VERSION="0.11.1"
@@ -86,26 +86,26 @@ BTM="https://github.com/ClementTsang/bottom/releases"
 BTM="$BTM/download/${VERSION}/bottom-${FILE_VERSION}.x86_64.rpm"
 # Download the specified version using curl
 curl -LO "$BTM" || \
-	die "Failed to download Bottom package."
+  die "Failed to download Bottom package."
 # Install the downloaded package
 rpm -i bottom-${FILE_VERSION}.x86_64.rpm || \
-	die "Failed to install Bottom package."
+  die "Failed to install Bottom package."
 # Remove the downloaded package file
 rm bottom-${FILE_VERSION}.x86_64.rpm || \
-	die "Failed to remove downloaded Bottom package file."
+  die "Failed to remove downloaded Bottom package file."
 
 # Install Neofetch
 neofetch_url="https://archives.fedoraproject.org/pub/archive/fedora"
 neofetch_url="$neofetch_url/linux/releases/40/Everything/x86_64/os"
 neofetch_url="$neofetch_url/Packages/n/neofetch-7.1.0-12.fc40.noarch.rpm"
 dnf -y install "$neofetch_url" || \
-	die "Failed to install Neofetch."
+  die "Failed to install Neofetch."
 
 # Install VSCodium
 VSC="https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg"
 rpmkeys --import "$VSC" || die "Failed to import VSCodium GPG key."
 {
-	cat << EOF
+  cat << EOF
 [gitlab.com_paulcarroty_vscodium_repo]
 name=download.vscodium.com
 baseurl=https://download.vscodium.com/rpms/
@@ -116,82 +116,82 @@ gpgkey=$VSC
 metadata_expire=1h
 EOF
 } > /etc/yum.repos.d/vscodium.repo || \
-	die "Failed to add VSCodium repository."
+  die "Failed to add VSCodium repository."
 dnf install -y codium || \
-	die "Failed to install VSCodium."
+  die "Failed to install VSCodium."
 
 # All packages
 packages=(
-	# System utilities
-	"file-roller"
-	"flatpak"
-	"gparted"
-	#"grub-customizer"
-	"ncdu"
-	#"neofetch"
-	"timeshift"
-	"unzip"
-	"xkill"
-	"xrandr"
-	# Network utilities
-	"filezilla"
-	"gvfs"
-	"gvfs-afc"
-	"gvfs-gphoto2"
-	"gvfs-mtp"
-	"gvfs-nfs"
-	"gvfs-smb"
-	"kde-connect"
-	"kf6-qqc2-desktop-style"
-	"samba"
-	# Desktop environment and related packages
-	"cinnamon"
-	# "dnfdragora"
-	"eog"
-	"evince"
-	"ffmpegthumbnailer"
-	"gedit"
-	"gedit-plugins"
-	"gnome-calculator"
-	"gnome-disk-utility"
-	"gnome-screenshot"
-	"gnome-software"
-	"gnome-system-monitor"
-	"gnome-terminal"
-	"gthumb"
-	"haruna"
-	#"ufw"
-	"kvantum"
-	"kvantum-qt6"
-	"lightdm"
-	"lightdm-settings"
-	"slick-greeter"
-	"nemo"
-	"nemo-extensions"
-	"qt5ct"
-	"qt6ct"
-	"rhythmbox"
-	# Applications
-	"bleachbit"
-	"gpaste"
-	"libreoffice"
-	"neovim"
-	"qbittorrent"
-	"spice-vdagent"
-	"google-noto-fonts-common"
-	"google-noto-emoji-fonts"
-	# For NvChad
-	"gcc"
-	"make"
-	"ripgrep"
-	# Virtualization tools
-	"guestfs-tools"
-	"@virtualization"
+  # System utilities
+  "file-roller"
+  "flatpak"
+  "gparted"
+  #"grub-customizer"
+  "ncdu"
+  #"neofetch"
+  "timeshift"
+  "unzip"
+  "xkill"
+  "xrandr"
+  # Network utilities
+  "filezilla"
+  "gvfs"
+  "gvfs-afc"
+  "gvfs-gphoto2"
+  "gvfs-mtp"
+  "gvfs-nfs"
+  "gvfs-smb"
+  "kde-connect"
+  "kf6-qqc2-desktop-style"
+  "samba"
+  # Desktop environment and related packages
+  "cinnamon"
+  # "dnfdragora"
+  "eog"
+  "evince"
+  "ffmpegthumbnailer"
+  "gedit"
+  "gedit-plugins"
+  "gnome-calculator"
+  "gnome-disk-utility"
+  "gnome-screenshot"
+  "gnome-software"
+  "gnome-system-monitor"
+  "gnome-terminal"
+  "gthumb"
+  "haruna"
+  #"ufw"
+  "kvantum"
+  "kvantum-qt6"
+  "lightdm"
+  "lightdm-settings"
+  "slick-greeter"
+  "nemo"
+  "nemo-extensions"
+  "qt5ct"
+  "qt6ct"
+  "rhythmbox"
+  # Applications
+  "bleachbit"
+  "gpaste"
+  "libreoffice"
+  "neovim"
+  "qbittorrent"
+  "spice-vdagent"
+  "google-noto-fonts-common"
+  "google-noto-emoji-fonts"
+  # For NvChad
+  "gcc"
+  "make"
+  "ripgrep"
+  # Virtualization tools
+  "guestfs-tools"
+  "@virtualization"
 )
 
 # Install Packages
 dnf -y install "${packages[@]}" || \
-	die "Failed to install packages."
+  die "Failed to install packages."
 
 # Enable Flathub for Flatpak
 enable_flathub

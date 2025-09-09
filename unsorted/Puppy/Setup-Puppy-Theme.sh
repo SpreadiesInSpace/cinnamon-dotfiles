@@ -227,19 +227,19 @@ cp -vnr wallpapers/Login_Wallpaper.jpg /boot/
 # Check if syntax highlighting configurations are already in nanorc, preserving old one
 cp /etc/nanorc /etc/nanorc.old
 if ! grep -q "^include \"/usr/share/nano/\*.nanorc\"" /etc/nanorc; then
-	echo 'include "/usr/share/nano/*.nanorc"' | tee -a /etc/nanorc
+  echo 'include "/usr/share/nano/*.nanorc"' | tee -a /etc/nanorc
 fi
 if ! grep -q "^include \"/usr/share/nano/extra/\*.nanorc\"" /etc/nanorc; then
-	echo 'include "/usr/share/nano/extra/*.nanorc"' | tee -a /etc/nanorc
+  echo 'include "/usr/share/nano/extra/*.nanorc"' | tee -a /etc/nanorc
 fi
 
 # Check if environment variables for QT & Additional Theming are already set, preserving old one
 cp /etc/environment /etc/environment.old
 if ! grep -q "^QT_QPA_PLATFORMTHEME=qt5ct" /etc/environment; then
-	echo 'QT_QPA_PLATFORMTHEME=qt5ct' | tee -a /etc/environment
+  echo 'QT_QPA_PLATFORMTHEME=qt5ct' | tee -a /etc/environment
 fi
 if ! grep -q "^GTK_THEME=Gruvbox-Dark-BL" /etc/environment; then
-	echo 'GTK_THEME=Gruvbox-Dark-BL' | tee -a /etc/environment
+  echo 'GTK_THEME=Gruvbox-Dark-BL' | tee -a /etc/environment
 fi
 
 # Set Default Apps (puppyapps)

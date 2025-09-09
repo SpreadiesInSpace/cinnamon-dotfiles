@@ -28,11 +28,11 @@ display_status "$enable_autologin" "$is_vm"
 
 # Update system and install git and curl
 apt update || \
-	die "Failed to update system."
+  die "Failed to update system."
 apt upgrade -y || \
-	die "Failed to upgrade system."
+  die "Failed to upgrade system."
 apt install -y git curl || \
-	die "Failed to install git and curl."
+  die "Failed to install git and curl."
 
 # Install Bottom
 VERSION="0.11.1"
@@ -42,131 +42,131 @@ BTM="https://github.com/ClementTsang/bottom/releases"
 BTM="$BTM/download/${VERSION}/bottom_${FILE_VERSION}_amd64.deb"
 # Download the specified version using curl
 curl -LO "$BTM" || \
-	die "Failed to download Bottom package."
+  die "Failed to download Bottom package."
 # Install the downloaded package
 dpkg -i bottom_${FILE_VERSION}_amd64.deb || \
-	die "Failed to install Bottom package."
+  die "Failed to install Bottom package."
 # Remove the downloaded package file
 rm bottom_${FILE_VERSION}_amd64.deb || \
-	die "Failed to remove downloaded Bottom package file."
+  die "Failed to remove downloaded Bottom package file."
 
 # Install Brave Browser
 curl -fsS https://dl.brave.com/install.sh | sh || \
-	die "Failed to install Brave Browser."
+  die "Failed to install Brave Browser."
 
 # Install Neovim AppImage
 NVIM="https://github.com/neovim/neovim/releases/latest/download"
 NVIM="$NVIM/nvim-linux-x86_64.appimage"
 curl -LO "$NVIM" || \
-	die "Failed to download Neovim AppImage."
+  die "Failed to download Neovim AppImage."
 chmod u+x nvim-linux-x86_64.appimage || \
-	die "Failed to make Neovim AppImage executable."
+  die "Failed to make Neovim AppImage executable."
 ./nvim-linux-x86_64.appimage --appimage-extract || \
-	die "Failed to extract Neovim AppImage."
+  die "Failed to extract Neovim AppImage."
 ./squashfs-root/AppRun --version || \
-	die "Failed to check Neovim version."
+  die "Failed to check Neovim version."
 rm -rf /squashfs-root/ || \
-	die "Failed to remove extracted Neovim AppImage files."
+  die "Failed to remove extracted Neovim AppImage files."
 mv squashfs-root / || die "Failed to move extracted Neovim files."
 rm -rf /usr/bin/nvim || die "Failed to remove existing Neovim binary."
 ln -s /squashfs-root/AppRun /usr/bin/nvim || \
-	die "Failed to create symlink for Neovim."
+  die "Failed to create symlink for Neovim."
 rm nvim-linux-x86_64.appimage || die "Failed to remove Neovim AppImage file."
 
 # Install VSCodium
 VSC="https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg"
 wget -qO - "$VSC" \
-	| gpg --dearmor \
-	| dd of=/usr/share/keyrings/vscodium-archive-keyring.gpg || \
-	die "Failed to import VSCodium GPG key."
+  | gpg --dearmor \
+  | dd of=/usr/share/keyrings/vscodium-archive-keyring.gpg || \
+  die "Failed to import VSCodium GPG key."
 keyring="/usr/share/keyrings/vscodium-archive-keyring.gpg"
 repo_url="https://download.vscodium.com/debs"
 echo "deb [arch=amd64,arm64 signed-by=$keyring] $repo_url vscodium main" \
-	| tee /etc/apt/sources.list.d/vscodium.list \
-	> /dev/null || \
-	die "Failed to add VSCodium repository."
+  | tee /etc/apt/sources.list.d/vscodium.list \
+  > /dev/null || \
+  die "Failed to add VSCodium repository."
 apt update || \
-	die "APT update failed."
+  die "APT update failed."
 apt install -y codium || \
-	die "Failed to install VSCodium."
+  die "Failed to install VSCodium."
 
 # All packages
 packages=(
-	# System utilities
-	"build-essential"
-	"file-roller"
-	"flatpak"
-	"gparted"
-	"grub-customizer"
-	"ncdu"
-	"neofetch"
-	"timeshift"
-	"unzip"
-	"x11-xserver-utils"
-	# Network utilities
-	"filezilla"
-	"gvfs"
-	"gvfs-backends"
-	"kdeconnect"
-	"samba"
-	# Desktop environment and related packages
-	"cinnamon"
-	"dconf-cli"
-	"lightdm"
-	"lightdm-settings"
-	"slick-greeter"
-	"eog"
-	"evince"
-	"gedit"
-	"gedit-plugins"
-	"gnome-calculator"
-	"gnome-disk-utility"
-	"gnome-screenshot"
-	"gnome-system-monitor"
-	"gnome-terminal"
-	"gthumb"
-	"gufw"
-	"haruna"
-	#"mint-meta-codecs"
-	"nemo"
-	"nemo-fileroller"
-	"qt5-style-kvantum"
-	"qt5-style-kvantum-themes"
-	"qt5ct"
-	"qt6ct"
-	"rhythmbox"
-	# Applications
-	"bleachbit"
-	"gir1.2-gpaste-2"
-	"gpaste-2"
-	"libreoffice"
-	"libreoffice-style-elementary"
-	"qbittorrent"
-	"spice-vdagent"
-	"fonts-noto-core"
-	"fonts-noto-color-emoji"
-	"xclip"
-	# For NvChad
-	"gcc"
-	"make"
-	"ripgrep"
-	# Virtualization tools
-	"virt-manager"
-	"qemu-system"
-	"qemu-utils"
-	"libvirt-clients"
-	"libvirt-daemon-system"
-	"libvirt-daemon"
-	"bridge-utils"
-	"virtinst"
-	"iptables"
-	"dmidecode"
-	"guestfs-tools"
+  # System utilities
+  "build-essential"
+  "file-roller"
+  "flatpak"
+  "gparted"
+  "grub-customizer"
+  "ncdu"
+  "neofetch"
+  "timeshift"
+  "unzip"
+  "x11-xserver-utils"
+  # Network utilities
+  "filezilla"
+  "gvfs"
+  "gvfs-backends"
+  "kdeconnect"
+  "samba"
+  # Desktop environment and related packages
+  "cinnamon"
+  "dconf-cli"
+  "lightdm"
+  "lightdm-settings"
+  "slick-greeter"
+  "eog"
+  "evince"
+  "gedit"
+  "gedit-plugins"
+  "gnome-calculator"
+  "gnome-disk-utility"
+  "gnome-screenshot"
+  "gnome-system-monitor"
+  "gnome-terminal"
+  "gthumb"
+  "gufw"
+  "haruna"
+  #"mint-meta-codecs"
+  "nemo"
+  "nemo-fileroller"
+  "qt5-style-kvantum"
+  "qt5-style-kvantum-themes"
+  "qt5ct"
+  "qt6ct"
+  "rhythmbox"
+  # Applications
+  "bleachbit"
+  "gir1.2-gpaste-2"
+  "gpaste-2"
+  "libreoffice"
+  "libreoffice-style-elementary"
+  "qbittorrent"
+  "spice-vdagent"
+  "fonts-noto-core"
+  "fonts-noto-color-emoji"
+  "xclip"
+  # For NvChad
+  "gcc"
+  "make"
+  "ripgrep"
+  # Virtualization tools
+  "virt-manager"
+  "qemu-system"
+  "qemu-utils"
+  "libvirt-clients"
+  "libvirt-daemon-system"
+  "libvirt-daemon"
+  "bridge-utils"
+  "virtinst"
+  "iptables"
+  "dmidecode"
+  "guestfs-tools"
 )
 
 # Install Packages
 apt install -y "${packages[@]}" || \
-	die "Failed to install packages."
+  die "Failed to install packages."
 
 # Enable Flathub for Flatpak
 enable_flathub

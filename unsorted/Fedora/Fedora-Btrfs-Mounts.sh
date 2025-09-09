@@ -2,25 +2,25 @@
 
 # Partition the drive # partition_drive
 parted "$drive" --script \
-	mklabel gpt \
-	mkpart SYS fat32 1MiB 601MiB \
-	mkpart BOOT ext4 601MiB 1625MiB \
-	mkpart ROOT ext4 1625MiB 100% \
-	set 1 esp on
+  mklabel gpt \
+  mkpart SYS fat32 1MiB 601MiB \
+  mkpart BOOT ext4 601MiB 1625MiB \
+  mkpart ROOT ext4 1625MiB 100% \
+  set 1 esp on
 
 # Determine correct partition suffix
 partition_suffix() {
-	# Determine correct partition suffix
-	local suffix=""
-	[[ "$drive" == *"nvme"* || "$drive" == *"mmcblk"* ]] && suffix="p"
-	if [ "$BOOTMODE" = "UEFI" ]; then
-		SYS="${drive}${suffix}1"
-		BOOT="${drive}${suffix}2"
-		ROOT="${drive}${suffix}3"
-	else
-		BOOT="${drive}${suffix}1"
-		ROOT="${drive}${suffix}2"
-	fi
+  # Determine correct partition suffix
+  local suffix=""
+  [[ "$drive" == *"nvme"* || "$drive" == *"mmcblk"* ]] && suffix="p"
+  if [ "$BOOTMODE" = "UEFI" ]; then
+    SYS="${drive}${suffix}1"
+    BOOT="${drive}${suffix}2"
+    ROOT="${drive}${suffix}3"
+  else
+    BOOT="${drive}${suffix}1"
+    ROOT="${drive}${suffix}2"
+  fi
 }
 partition_suffix
 
@@ -41,18 +41,18 @@ umount /mnt
 
 # Mount the partitions
 mount -o noatime,compress=zstd,discard=async,subvol=@ \
-	"$ROOT" /mnt
+  "$ROOT" /mnt
 mkdir -p /mnt/{boot,home,.snapshots,var/{log,cache,lib/libvirt/images}}
 mount -o noatime,compress=zstd,discard=async,subvol=@home \
-	"$ROOT" /mnt/home
+  "$ROOT" /mnt/home
 mount -o noatime,compress=zstd,discard=async,subvol=@images \
-	"$ROOT" /mnt/var/lib/libvirt/images
+  "$ROOT" /mnt/var/lib/libvirt/images
 mount -o noatime,compress=zstd,discard=async,subvol=@log \
-	"$ROOT" /mnt/var/log
+  "$ROOT" /mnt/var/log
 mount -o noatime,compress=zstd,discard=async,subvol=@cache \
-	"$ROOT" /mnt/var/cache
+  "$ROOT" /mnt/var/cache
 mount -o noatime,compress=zstd,discard=async,subvol=@.snapshots \
-	"$ROOT" /mnt/.snapshots
+  "$ROOT" /mnt/.snapshots
 mount "$BOOT" /mnt/boot
 mkdir /mnt/boot/efi # EFI Only
 mount "$SYS" /mnt/boot/efi # EFI Only
