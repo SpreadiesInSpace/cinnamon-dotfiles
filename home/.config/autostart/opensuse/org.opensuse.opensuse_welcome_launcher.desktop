@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Welcome launcher
+Exec=/usr/bin/opensuse-welcome-launcher
+Icon=org.opensuse.opensuse_welcome_launcher
+Comment=The openSUSE Welcome launcher utility.
+Categories=Qt;System;Documentation
+GenericName=Welcome launcher Utility
+X-GNOME-Autostart-enabled=false

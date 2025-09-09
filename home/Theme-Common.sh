@@ -376,19 +376,85 @@ copy_bashrc_and_etc() {
     sudo cp "theming/$distro/NixAscii.txt" /root/ || \
       die "Failed to copy NixOS ASCII."
   else
-    # Create minimal root .bashrc with tty check and source user .bashrc
-    echo "# Skip sourcing user .bashrc if running in tty" | \
+    # Create root .bashrc with tty check and source user .bashrc
+    echo "# Only continue if we're in a supported terminal (check process tree)" | \
       sudo tee /root/.bashrc >/dev/null 2>&1 || \
       die "Failed to append root bashrc."
-    echo "if [[ \$(tty) == /dev/tty[0-9]* ]]; then" | \
+    echo "check_terminal_support() {" | \
       sudo tee -a /root/.bashrc >/dev/null 2>&1 || \
       die "Failed to append root bashrc."
-    echo '    return'  | sudo tee -a /root/.bashrc >/dev/null 2>&1 || \
+    echo "  local pid=\$PPID" | \
+      sudo tee -a /root/.bashrc >/dev/null 2>&1 || \
       die "Failed to append root bashrc."
-    echo 'fi' | sudo tee -a /root/.bashrc >/dev/null 2>&1 || \
+    echo "  local max_depth=5" | \
+      sudo tee -a /root/.bashrc >/dev/null 2>&1 || \
       die "Failed to append root bashrc."
-    echo "source $HOME/.bashrc" | sudo tee -a /root/.bashrc >/dev/null 2>&1 \
-      || die "Failed to append root bashrc."
+    echo "  local depth=0" | \
+      sudo tee -a /root/.bashrc >/dev/null 2>&1 || \
+      die "Failed to append root bashrc."
+    echo "  " | \
+      sudo tee -a /root/.bashrc >/dev/null 2>&1 || \
+      die "Failed to append root bashrc."
+    echo "  while [ \$depth -lt \$max_depth ] && [ \$pid -gt 1 ]; do" | \
+      sudo tee -a /root/.bashrc >/dev/null 2>&1 || \
+      die "Failed to append root bashrc."
+    echo "    local comm=\$(ps -h -o comm -p \$pid 2>/dev/null)" | \
+      sudo tee -a /root/.bashrc >/dev/null 2>&1 || \
+      die "Failed to append root bashrc."
+    echo "    if [[ \$comm == *gnome-terminal* ]] || \\" | \
+      sudo tee -a /root/.bashrc >/dev/null 2>&1 || \
+      die "Failed to append root bashrc."
+    echo "       [[ \$comm == \"gedit\" ]] || \\" | \
+      sudo tee -a /root/.bashrc >/dev/null 2>&1 || \
+      die "Failed to append root bashrc."
+    echo "       [[ \$comm == \"codium\" ]] || \\" | \
+      sudo tee -a /root/.bashrc >/dev/null 2>&1 || \
+      die "Failed to append root bashrc."
+    echo "       [[ \$comm == *xfce4-terminal* ]]; then" | \
+      sudo tee -a /root/.bashrc >/dev/null 2>&1 || \
+      die "Failed to append root bashrc."
+    echo "      return 0  # Found supported terminal" | \
+      sudo tee -a /root/.bashrc >/dev/null 2>&1 || \
+      die "Failed to append root bashrc."
+    echo "    fi" | \
+      sudo tee -a /root/.bashrc >/dev/null 2>&1 || \
+      die "Failed to append root bashrc."
+    echo "    pid=\$(ps -h -o ppid -p \$pid 2>/dev/null | tr -d ' ')" | \
+      sudo tee -a /root/.bashrc >/dev/null 2>&1 || \
+      die "Failed to append root bashrc."
+    echo "    ((depth++))" | \
+      sudo tee -a /root/.bashrc >/dev/null 2>&1 || \
+      die "Failed to append root bashrc."
+    echo "  done" | \
+      sudo tee -a /root/.bashrc >/dev/null 2>&1 || \
+      die "Failed to append root bashrc."
+    echo "  return 1  # No supported terminal found" | \
+      sudo tee -a /root/.bashrc >/dev/null 2>&1 || \
+      die "Failed to append root bashrc."
+    echo "}" | \
+      sudo tee -a /root/.bashrc >/dev/null 2>&1 || \
+      die "Failed to append root bashrc."
+    echo "" | \
+      sudo tee -a /root/.bashrc >/dev/null 2>&1 || \
+      die "Failed to append root bashrc."
+    echo "if ! check_terminal_support; then" | \
+      sudo tee -a /root/.bashrc >/dev/null 2>&1 || \
+      die "Failed to append root bashrc."
+    echo "  # PS1 Prompt (fallback if Synth Shell not loaded)" | \
+      sudo tee -a /root/.bashrc >/dev/null 2>&1 || \
+      die "Failed to append root bashrc."
+    echo "  export PS1=\"\\[\\e[38;5;9m\\][\\[\\e[38;5;11m\\]\\u\\[\\e[38;5;2m\\]@\\[\\e[38;5;12m\\]\\h \\[\\e[38;5;5m\\]\\w\\[\\e[38;5;9m\\]]\\[\\e[0m\\]\\$ \"" | \
+      sudo tee -a /root/.bashrc >/dev/null 2>&1 || \
+      die "Failed to append root bashrc."
+    echo "  return" | \
+      sudo tee -a /root/.bashrc >/dev/null 2>&1 || \
+      die "Failed to append root bashrc."
+    echo "fi" | \
+      sudo tee -a /root/.bashrc >/dev/null 2>&1 || \
+      die "Failed to append root bashrc."
+    echo "" | \
+      sudo tee -a /root/.bashrc >/dev/null 2>&1 || \
+      die "Failed to append root bashrc."
   fi
 }
 

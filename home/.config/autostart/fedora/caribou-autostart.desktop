@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Caribou
+Exec=/usr/libexec/caribou
+AutostartCondition=GSettings org.cinnamon.desktop.a11y.applications screen-keyboard-enabled
+X-GNOME-AutoRestart=true
+OnlyShowIn=X-Cinnamon;
+X-GNOME-Autostart-enabled=true
