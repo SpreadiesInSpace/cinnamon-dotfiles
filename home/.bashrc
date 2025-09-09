@@ -42,7 +42,7 @@ shopt -s globstar       # Allow ** for recursive directory matching
 
 # Detect distribution
 get_distro() {
-	local distro=""
+	distro=""
 	if [ -f /etc/os-release ]; then
 		. /etc/os-release
 		case "$ID" in
@@ -57,7 +57,7 @@ get_distro() {
 		esac
 	fi
 }
-distro=$(get_distro)
+get_distro
 
 #============================ Color Configuration =============================
 

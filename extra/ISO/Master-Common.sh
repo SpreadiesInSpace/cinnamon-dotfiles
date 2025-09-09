@@ -46,7 +46,6 @@ check_not_root() {
 
 # TODO: Use this for Install and Setup(?) scripts
 get_distro() {
-	# usage distro=$(get_distro)
 	local distro=""
 	if [ -f /etc/os-release ]; then
 		. /etc/os-release
@@ -61,7 +60,7 @@ get_distro() {
 			void) distro="void" ;;
 		esac
 	fi
-	echo "$distro"
+	echo "Detected OS: $distro"
 }
 
 prompt_hostname() {
