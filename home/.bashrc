@@ -1,6 +1,8 @@
 # ~/.bashrc
 # This file is sourced by all *interactive* bash shells on startup
 
+#=============================== Initial Setup ================================
+
 # If not running interactively, don't do anything
 if [[ $- != *i* ]] ; then
 	return
@@ -19,13 +21,15 @@ if ! [[ "$PATH" =~ $HOME/.local/bin:$HOME/bin: ]]; then
 fi
 export PATH
 
-# History configuration
+#=========================== History Configuration ============================
+
 HISTCONTROL=ignoreboth  # Ignore duplicates and lines starting with space
 HISTSIZE=1000           # Commands in memory
 HISTFILESIZE=2000       # Commands in history file
-
-# Shell options
 shopt -s histappend     # Append to history file, don't overwrite
+
+#=============================== Shell Options ================================
+
 shopt -s checkwinsize   # Update LINES and COLUMNS after each command
 shopt -s cdspell        # Auto-correct minor spelling errors in cd commands
 shopt -s extglob        # Use extra globbing features
@@ -33,6 +37,8 @@ shopt -s globstar       # Allow ** for recursive directory matching
 # shopt -s dotglob      # Include .files when globbing
 # shopt -s nullglob     # Expand unmatched globs to nothing instead of literal
 # shopt -o noclobber    # Prevent output redirection from overwriting files
+
+#=========================== Distribution Detection ===========================
 
 # Detect distribution
 get_distro() {
@@ -53,6 +59,8 @@ get_distro() {
 }
 distro=$(get_distro)
 
+#============================ Color Configuration =============================
+
 # Set colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:'
 export GCC_COLORS="${GCC_COLORS}locus=01:quote=01"
@@ -72,6 +80,8 @@ elif command -v ls >/dev/null 2>&1; then
 	alias grep='grep --color=auto' 2>/dev/null || alias grep='grep'
 fi
 
+#======================== External Configuration Files ========================
+
 # Source configuration files from ~/.bashrc.d/ if they exist
 if [ -d ~/.bashrc.d ]; then
 	for rc in ~/.bashrc.d/*.sh; do
@@ -85,6 +95,8 @@ for alias_file in ~/.bash_aliases ~/.alias; do
 		. "$alias_file"
 	fi
 done
+
+#========================= System Tools Configuration =========================
 
 # Make less more friendly for non-text files
 if [ -x /usr/bin/lesspipe ] && [ "$distro" != "gentoo" ]; then
@@ -100,7 +112,7 @@ if ! shopt -oq posix; then
 	fi
 fi
 
-#=========================== Aliases and Functions ===========================
+#=========================== Aliases and Functions ============================
 
 # Elevated Power Actions
 if [ "$(ps -p 1 -o comm=)" = "systemd" ] 2>/dev/null; then
@@ -111,7 +123,7 @@ else
 	alias reboot='loginctl reboot'
 fi
 
-# Do sudo, or sudo the last command if no argument given
+# Smart sudo: run sudo with args, or sudo the previous command if no args
 s() {
 	if [[ $# == 0 ]]; then
 		sudo "$(history -p '!!')"
@@ -187,3 +199,7 @@ fi
 # PS1 Prompt (fallback if Synth Shell not loaded)
 export PS1="\[\e[38;5;9m\][\[\e[38;5;11m\]\u\[\e[38;5;2m\]@\[\e[38;5;12m\]\h \
 \[\e[38;5;5m\]\w\[\e[38;5;9m\]]\[\e[0m\]\$ "
+
+#============================ User Customizations =============================
+# Add your personal aliases, functions, and settings below this line
+
