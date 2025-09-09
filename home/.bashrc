@@ -72,6 +72,9 @@ if [ -x /usr/bin/dircolors ]; then
 	else
 		eval "$(dircolors -b)"
 	fi
+	# Customize problematic colors for better visibility
+	export LS_COLORS="${LS_COLORS}:ow=01;33:tw=01;32"
+	export GREP_COLORS="${GREP_COLORS}:mt=01;31:fn=01;35:ln=01;36:se=01;30"
 	alias ls='ls --color=auto'
 	alias grep='grep --color=auto'
 elif command -v ls >/dev/null 2>&1; then
