@@ -34,6 +34,29 @@ shopt -s globstar       # Allow ** for recursive directory matching
 # shopt -s nullglob     # Expand unmatched globs to nothing instead of literal
 # shopt -o noclobber    # Prevent output redirection from overwriting files
 
+# Detect distribution
+get_distro() {
+	local distro=""
+	if [ -f /etc/os-release ]; then
+		. /etc/os-release
+		case "$ID" in
+			arch) distro="arch" ;;
+			fedora) distro="fedora" ;;
+			gentoo) distro="gentoo" ;;
+			linuxmint) distro="lmde" ;;
+			nixos) distro="nixos" ;;
+			opensuse*) distro="opensuse" ;;
+			slackware) distro="slackware" ;;
+			void) distro="void" ;;
+		esac
+	fi
+}
+distro=$(get_distro)
+
+# Set colored GCC warnings and errors
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:'
+export GCC_COLORS="${GCC_COLORS}locus=01:quote=01"
+
 # Enable color support for ls and grep
 if [ -x /usr/bin/dircolors ]; then
 	if test -r ~/.dircolors; then
@@ -48,10 +71,6 @@ elif command -v ls >/dev/null 2>&1; then
 	alias ls='ls --color=auto' 2>/dev/null || alias ls='ls'
 	alias grep='grep --color=auto' 2>/dev/null || alias grep='grep'
 fi
-
-# Colored GCC warnings and errors
-export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:'
-export GCC_COLORS="${GCC_COLORS}locus=01:quote=01"
 
 # Source configuration files from ~/.bashrc.d/ if they exist
 if [ -d ~/.bashrc.d ]; then
@@ -79,6 +98,17 @@ if ! shopt -oq posix; then
 	elif [ -f /etc/bash_completion ]; then
 		. /etc/bash_completion
 	fi
+fi
+
+#=========================== Aliases and Functions ===========================
+
+# Elevated Power Actions
+if [ "$(ps -p 1 -o comm=)" = "systemd" ] 2>/dev/null; then
+	alias poweroff='systemctl poweroff'
+	alias reboot='systemctl reboot'
+else
+	alias poweroff='loginctl poweroff'
+	alias reboot='loginctl reboot'
 fi
 
 # Do sudo, or sudo the last command if no argument given
@@ -127,34 +157,20 @@ extract() {
 	return "$e"
 }
 
+#========================= Special terminal handling ==========================
+
 # Set gedit embedded gnome-terminal path to home directory
 if [[ $(ps -o comm= $PPID) == "gedit" ]]; then
 	cd ~ || exit
 fi
 
-# PS1 Prompt
-export PS1="\[\e[38;5;9m\][\[\e[38;5;11m\]\u\[\e[38;5;2m\]@\[\e[38;5;12m\]\h \
-\[\e[38;5;5m\]\w\[\e[38;5;9m\]]\[\e[0m\]\$ "
-
-# Elevated Power Actions
-if [ "$(ps -p 1 -o comm=)" = "systemd" ] 2>/dev/null; then
-	alias poweroff='systemctl poweroff'
-	alias reboot='systemctl reboot'
-else
-	alias poweroff='loginctl poweroff'
-	alias reboot='loginctl reboot'
-fi
-
-# Bottom Gruvbox Color Scheme
-alias btm='btm --theme gruvbox'
-
 # Load Synth Shell Prompt only in specific terminals
 term=$(ps -h -o comm -p $PPID)
 if [[ $term == *gnome-terminal* ]] || \
-   [[ $term == "gedit" ]] || \
-   [[ $term == "codium" ]] || \
-   [[ $term == *xfce4-terminal* ]]; then
-	
+	 [[ $term == "gedit" ]] || \
+	 [[ $term == "codium" ]] || \
+	 [[ $term == *xfce4-terminal* ]]; then
+
 	if [ "$distro" = "nixos" ]; then
 		if [ -f "$HOME/.bashrc.d/synth-shell-prompt.sh" ] && \
 			echo "$-" | grep -q i; then
@@ -167,3 +183,7 @@ if [[ $term == *gnome-terminal* ]] || \
 		fi
 	fi
 fi
+
+# PS1 Prompt (fallback if Synth Shell not loaded)
+export PS1="\[\e[38;5;9m\][\[\e[38;5;11m\]\u\[\e[38;5;2m\]@\[\e[38;5;12m\]\h \
+\[\e[38;5;5m\]\w\[\e[38;5;9m\]]\[\e[0m\]\$ "
