@@ -120,6 +120,10 @@ systemctl set-default graphical || \
 # Disable Problem Reporting
 systemctl disable abrtd.service >/dev/null 2>&1 || true
 
+# Enable Services
+systemctl enable bluetooth || \
+  die "Failed to enable services."
+
 # Generate fstab
 genfstab -U / > /etc/fstab || die "Failed to generate fstab."
 

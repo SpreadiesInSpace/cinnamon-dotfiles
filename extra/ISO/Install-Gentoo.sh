@@ -352,9 +352,13 @@ if [ "$GENTOO_INIT" = "systemd" ]; then
   # systemd-firstboot --prompt
   systemctl preset-all --preset-mode=enable-only || \
     die "Failed to preset systemd services."
+  # Enable Services
+  systemctl enable bluetooth || \
+    die "Failed to enable services."
 else
   rc-update add sysklogd default || die "Failed to enable sysklogd service."
   rc-update add cronie default || die "Failed to enable cronie service."
+  rc-update add bluetooth default || die "Failed to enable bluetooth service."
 fi
 
 # Configure networking based on init system

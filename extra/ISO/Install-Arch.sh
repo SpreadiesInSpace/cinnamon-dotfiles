@@ -124,7 +124,7 @@ a==1 && /^#?greeter-session=/ {
   die "Failed to set greeter-session for LightDM."
 
 # Enable Services
-systemctl enable lightdm NetworkManager || \
+systemctl enable lightdm NetworkManager bluetooth || \
   die "Failed to enable services."
 
 # Configure GRUB Bootloader

@@ -191,8 +191,8 @@ echo "$username:$userpasswd" | chpasswd || \
   die "Failed to set user password."
 
 # Enabling System Services
-systemctl enable NetworkManager || \
-  die "Failed to enable NetworkManager."
+systemctl enable NetworkManager bluetooth || \
+  die "Failed to enable services."
 
 # Enable zRAM swap
 zramswapon || die "Failed to enable zRAM swap."
