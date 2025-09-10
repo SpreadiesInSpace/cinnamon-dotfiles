@@ -29,10 +29,7 @@ cleanAll() {
 }
 
 cleanKernel() {
-  if old_kernels=$(dnf repoquery --installonly \
-    --latest-limit=-1 -q 2>/dev/null); then
-    sudo dnf remove "$old_kernels" || true
-  fi
+  sudo dnf remove $(dnf repoquery --installonly --latest-limit=-1 -q) || true
 }
 
 # Fedora Update
