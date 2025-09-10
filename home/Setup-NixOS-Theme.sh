@@ -21,7 +21,7 @@ override_qt_cursor_theme "nixos"
 enable_flatpak_theme_override
 
 # Backup and copy BleachBit config to appropriate directories
-copy_bleachbit_config "nixos"
+copy_bleachbit_config "NixOS"
 
 # Copies fonts to appropriate directories *
 copy_fonts "nixos"
