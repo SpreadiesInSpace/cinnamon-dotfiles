@@ -21,7 +21,7 @@ override_qt_cursor_theme "nixos"
 enable_flatpak_theme_override
 
 # Backup and copy BleachBit config to appropriate directories
-copy_bleachbit_config "NixOS"
+copy_bleachbit_config "nixos"
 
 # Copies fonts to appropriate directories *
 copy_fonts "nixos"
@@ -48,7 +48,7 @@ copy_cinnamon_spice_settings "nixos"
 copy_personal_shortcuts "nixos"
 
 # Backup and copy .bashrc and etc to home directory
-copy_bashrc_and_etc "nixos"
+copy_bashrc_and_etc "NixOS"
 
 # Backup and copy neofetch config file to appropriate directory
 copy_neofetch_config "nixos"
