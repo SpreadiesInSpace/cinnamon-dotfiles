@@ -158,15 +158,6 @@ manage_virsh_network() {
       virsh net-destroy default >/dev/null 2>&1 || true
     fi
 
-    # Add libvirtDisable alias to user's .bashrc for VMs
-    echo "" >> "/home/$username/.bashrc" || \
-      die "Failed to add newline to .bashrc."
-    echo "# Disable libvirt default network (for VMs)" \
-      >> "/home/$username/.bashrc" || die "Failed to add comment to .bashrc."
-    echo "alias libvirtDisable='sudo virsh net-autostart default --disable; \\
-      sudo virsh net-destroy default'" >> "/home/$username/.bashrc" || \
-      die "Failed to add libvirtDisable alias to .bashrc."
-
     # Restart libvirtd based on distro
     if [ "$distro" = "void" ]; then
       sv restart libvirtd >/dev/null 2>&1 || true
