@@ -39,18 +39,18 @@ updateNeovim() {
 }
 
 updateBootloader() {
-  if command -v grub-mkconfig >/dev/null 2>&1; then
+  if command -v sudo grub-mkconfig >/dev/null 2>&1; then
     echo "Detected GRUB bootloader."
-    grub-mkconfig -o /boot/grub/grub.cfg || \
+    sudo grub-mkconfig -o /boot/grub/grub.cfg || \
       die "Failed to generate GRUB config."
   elif [ -f /boot/efi/EFI/Slackware/elilo.conf ] || \
     [ -f /boot/efi/EFI/ELILO/elilo.conf ]; then
     echo "Detected ELILO bootloader."
-    eliloconfig || \
+    sudo eliloconfig || \
       die "Failed to update ELILO configuration."
   elif [ -f /etc/lilo.conf ]; then
     echo "Detected LILO bootloader."
-    lilo || \
+    sudo lilo || \
       die "Failed to update LILO configuration."
   else
     echo "No recognized bootloader found."
