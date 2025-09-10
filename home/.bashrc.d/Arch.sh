@@ -16,13 +16,13 @@ cleanAll() {
   flatpak remove --unused || true
   sudo flatpak repair || die "Failed to repair flatpak packages."
   sudo rm -rf /var/lib/systemd/coredump/* || true
-  sudo pacman -Scc --noconfirm || true
+  yes | sudo pacman -Scc || true
   rm -rf ~/.cache/* || true
   sudo journalctl --vacuum-size=50M || true
   sudo journalctl --vacuum-time=4weeks || true
   sudo bleachbit -c --preset || true
   bleachbit -c --preset || true
-  cleanCache || true
+  sudo pacman -Rns $(pacman -Qtdq) || true
 }
 
 # Arch Update
