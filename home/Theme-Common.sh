@@ -885,7 +885,7 @@ setup_synth_shell_config() {
   git clone --recursive \
     https://github.com/andresgongora/synth-shell-prompt.git >/dev/null 2>&1 \
     || die "Failed to download Synth Shell Prompt."
-  no | synth-shell-prompt/setup.sh >/dev/null 2>&1
+  yes "no" | synth-shell-prompt/setup.sh >/dev/null 2>&1
   yes | sudo synth-shell-prompt/setup.sh >/dev/null 2>&1
   rm -rf synth-shell-prompt/
 
