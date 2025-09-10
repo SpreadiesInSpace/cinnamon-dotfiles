@@ -179,6 +179,10 @@ if [[ $(ps -o comm= $PPID) == "gedit" ]]; then
   cd ~ || exit
 fi
 
+# PS1 Prompt
+export PS1="\[\e[38;5;9m\][\[\e[38;5;11m\]\u\[\e[38;5;2m\]@\[\e[38;5;12m\]\h \
+\[\e[38;5;5m\]\w\[\e[38;5;9m\]]\[\e[0m\]\$ "
+
 # Load Synth Shell Prompt only in specific terminals
 term=$(ps -h -o comm -p $PPID)
 if [[ $term == *gnome-terminal* ]] || \
@@ -189,7 +193,7 @@ if [[ $term == *gnome-terminal* ]] || \
   if [ "$distro" = "nixos" ]; then
     if [ -f "$HOME/.bashrc.d/synth-shell-prompt.sh" ] && \
       echo "$-" | grep -q i; then
-      source ~/.bashrc.d/synth-shell-prompt.sh
+      source "$HOME/.bashrc.d/synth-shell-prompt.sh"
     fi
   else
     if [ -f "$HOME/.config/synth-shell/synth-shell-prompt.sh" ] && \
@@ -198,10 +202,6 @@ if [[ $term == *gnome-terminal* ]] || \
     fi
   fi
 fi
-
-# PS1 Prompt (fallback if Synth Shell not loaded)
-export PS1="\[\e[38;5;9m\][\[\e[38;5;11m\]\u\[\e[38;5;2m\]@\[\e[38;5;12m\]\h \
-\[\e[38;5;5m\]\w\[\e[38;5;9m\]]\[\e[0m\]\$ "
 
 # Clean up temporary variables
 unset term distro get_distro rc alias_file

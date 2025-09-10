@@ -367,7 +367,7 @@ copy_bashrc_and_etc() {
     >/dev/null 2>&1 || true
 
   # Root .bashrc handling
-  if [ "$distro" = "nixos" ]; then
+  if [ "$distro" = "NixOS" ]; then
     # NixOS Special Case
     cp -npr .bashrc.d/synth-shell-prompt.sh ~/.bashrc.d/  || \
       die "Failed to copy synth-shell-prompt.sh."
