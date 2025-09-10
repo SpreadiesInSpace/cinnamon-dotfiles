@@ -6,12 +6,6 @@
 die() { echo -e "\033[1;31mError:\033[0m $*" >&2; return 1; }
 
 # Arch Cleaning
-cleanCache() {
-  if orphans=$(pacman -Qtdq 2>/dev/null); then
-    sudo pacman -Rns "$orphans" || true
-  fi
-}
-
 cleanAll() {
   flatpak remove --unused || true
   sudo flatpak repair || die "Failed to repair flatpak packages."
