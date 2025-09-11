@@ -819,7 +819,7 @@ setup_synth_shell_config() {
     https://github.com/andresgongora/synth-shell-prompt.git >/dev/null 2>&1 \
     || die "Failed to download Synth Shell Prompt."
   yes "no" | synth-shell-prompt/setup.sh >/dev/null 2>&1
-  yes | sudo synth-shell-prompt/setup.sh >/dev/null 2>&1
+  yes "no" | sudo synth-shell-prompt/setup.sh >/dev/null 2>&1
   rm -rf synth-shell-prompt/
 
   # Place Synth-Shell config, preserving old ones with timestamped backup
