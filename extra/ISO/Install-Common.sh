@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Source common functions
+die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
 if [ ! -f ./Master-Common.sh ]; then
   URL="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles"
   URL="$URL/main/extra/ISO/Master-Common.sh"
