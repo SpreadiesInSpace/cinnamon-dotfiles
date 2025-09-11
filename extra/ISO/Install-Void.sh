@@ -78,7 +78,7 @@ XBPS_ARCH=$ARCH xbps-install -Syu -r /mnt -R "$REPO" base-system cinnamon \
 # Enable Services
 services="bluetoothd dbus lightdm NetworkManager polkitd spice-vdagentd zramen"
 for service in $services; do
-  chroot /mnt ln -sfv /etc/sv/$service /etc/runit/runsvdir/default || \
+  chroot /mnt ln -sfv "/etc/sv/$service" /etc/runit/runsvdir/default || \
     die "Failed to enable service $service."
 done
 
