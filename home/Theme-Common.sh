@@ -385,11 +385,10 @@ copy_bashrc_and_etc() {
       die "Failed to copy synth-shell-prompt.sh."
     sudo cp "theming/$distro/NixAscii.txt" /root/ || \
       die "Failed to copy NixOS ASCII."
-  else
-    # Copy root .bashrc to appropriate directory
-    sudo cp -prf root.bashrc /root/.bashrc || \
-      die "Failed to copy root .bashrc" 
   fi
+  # Copy root .bashrc to appropriate directory
+  sudo cp -prf root.bashrc /root/.bashrc || \
+    die "Failed to copy root .bashrc" 
 }
 
 copy_neofetch_config() {
