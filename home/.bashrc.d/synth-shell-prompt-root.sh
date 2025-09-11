@@ -1,28 +1,5 @@
-# Only continue if we're in a supported terminal (check process tree)
-check_terminal_support() {
-  local pid=$PPID
-  local max_depth=5
-  local depth=0
-
-  while [ $depth -lt $max_depth ] && [ $pid -gt 1 ]; do
-    local comm=$(ps -h -o comm -p $pid 2>/dev/null)
-    if [[ $comm == *gnome-terminal* ]] || \
-       [[ $comm == "gedit" ]] || \
-       [[ $comm == "codium" ]] || \
-       [[ $comm == *xfce4-terminal* ]]; then
-      return 0  # Found supported terminal
-    fi
-    pid=$(ps -h -o ppid -p $pid 2>/dev/null | tr -d ' ')
-    ((depth++))
-  done
-  return 1  # No supported terminal found
-}
-
-if ! check_terminal_support; then
-  # PS1 Prompt (fallback if Synth Shell not loaded)
-  export PS1="\[\e[38;5;9m\][\[\e[38;5;11m\]\u\[\e[38;5;2m\]@\[\e[38;5;12m\]\h \[\e[38;5;5m\]\w\[\e[38;5;9m\]]\[\e[0m\]\$ "
-  return
-fi
+#!/usr/bin/env bash
+# ~/.bashrc.d/synth-shell-prompt.sh
 
 ##  +-----------------------------------+-----------------------------------+
 ##  |                                                                       |

@@ -190,16 +190,9 @@ if [[ $term == *gnome-terminal* ]] || \
    [[ $term == "codium" ]] || \
    [[ $term == *xfce4-terminal* ]]; then
 
-  if [ "$distro" = "nixos" ]; then
-    if [ -f "$HOME/.bashrc.d/synth-shell-prompt.sh" ] && \
-      echo "$-" | grep -q i; then
-      source "$HOME/.bashrc.d/synth-shell-prompt.sh"
-    fi
-  else
-    if [ -f "$HOME/.config/synth-shell/synth-shell-prompt.sh" ] && \
-      echo "$-" | grep -q i; then
-      source "$HOME/.config/synth-shell/synth-shell-prompt.sh"
-    fi
+  if [ -f "$HOME/.config/synth-shell/synth-shell-prompt.sh" ] && \
+    echo "$-" | grep -q i; then
+    source "$HOME/.config/synth-shell/synth-shell-prompt.sh"
   fi
 fi
 
