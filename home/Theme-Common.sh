@@ -444,9 +444,9 @@ copy_bashrc_and_etc() {
     echo "  # PS1 Prompt (fallback if Synth Shell not loaded)" | \
       sudo tee -a /root/.bashrc >/dev/null 2>&1 || \
       die "Failed to append root bashrc."
-    echo "  export PS1=\"\\[\\e[38;5;9m\\][\\[\\e[38;5;11m\\]\\u\\[\\e[38;5;2m\\]@\\[\\e[38;5;12m\\]\\h \\[\\e[38;5;5m\\]\\w\\[\\e[38;5;9m\\]]\\[\\e[0m\\]\\$ \"" | \
-      sudo tee -a /root/.bashrc >/dev/null 2>&1 || \
-      die "Failed to append root bashrc."
+    root_ps1="  export PS1=\"\\[\\e[38;5;9m\\][\\[\\e[38;5;11m\\]\\u\\[\\e[38;5;2m\\]@\\[\\e[38;5;12m\\]\\h \\[\\e[38;5;5m\\]\\w\\[\\e[38;5;9m\\]]\\[\\e[0m\\]\\$ \""
+    printf "%s\n" "$root_ps1" | sudo tee -a /root/.bashrc >/dev/null 2>&1 || \
+        die "Failed to append root bashrc."
     echo "  return" | \
       sudo tee -a /root/.bashrc >/dev/null 2>&1 || \
       die "Failed to append root bashrc."
