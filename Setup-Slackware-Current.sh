@@ -48,7 +48,7 @@ sbopkg -r || \
   die "Failed to sync sbopkg repository."
 
 # Install sbotools (for slpkg)
-sbopkg -i sbotools || \
+sbopkg -B -i sbotools || \
   die "Failed to install sbotools."
 sboconfig -r https://github.com/Ponce/slackbuilds.git || \
   die "Failed to configure sbotools repository."
