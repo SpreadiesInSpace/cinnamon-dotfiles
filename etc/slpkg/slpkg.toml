@@ -70,7 +70,7 @@ EDITOR = "nano"
 # Enable or disable to use the terminal selector for interactive shell
 # scripts. Selector allows you to display checkbox to choose packages.
 # Default is true. [true/false]
-TERMINAL_SELECTOR = true
+TERMINAL_SELECTOR = false
 
 # View missing dependencies as main packages from
 # the repository. Some repositories include packages only
@@ -93,7 +93,7 @@ VIEW_MISSING_DEPS = false
 #   than the one in the repository.
 #
 # The default value is true. [true/false]
-PACKAGE_METHOD = true
+PACKAGE_METHOD = false
 
 # Enable or disable the ability to downgrade packages.
 # This setting only works if the 'package' method is set
@@ -172,7 +172,7 @@ DOWNLOADER = "wget"
 # -q: Suppress Wget's output.
 # --show-progress: Force display of the progress bar.
 # Default is "-c -q --progress=bar:force:noscroll --show-progress".
-WGET_OPTIONS = "-c -q --progress=bar:force:noscroll --show-progress"
+WGET_OPTIONS = "-c -T 10 -t 10 -q --progress=bar:force:noscroll --show-progress"
 
 # Specify options for the Curl downloader.
 CURL_OPTIONS = ""
