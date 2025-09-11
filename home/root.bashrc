@@ -1,6 +1,8 @@
 # ~/.bashrc
 # This file is sourced by all *interactive* bash shells on startup (as root)
 
+#========================= Special terminal handling ==========================
+
 # PS1 Prompt
 export PS1="\[\e[38;5;9m\][\[\e[38;5;11m\]\u\[\e[38;5;2m\]@\[\e[38;5;12m\]\h \
 \[\e[38;5;5m\]\w\[\e[38;5;9m\]]\[\e[0m\]# "
@@ -33,3 +35,7 @@ if check_terminal_support; then
     source "$HOME/.config/synth-shell/synth-shell-prompt.sh"
   fi
 fi
+
+#============================ User Customizations =============================
+# Add your personal aliases, functions, and settings below this line
+
