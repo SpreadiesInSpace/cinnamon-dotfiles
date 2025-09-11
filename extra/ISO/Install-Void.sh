@@ -91,7 +91,7 @@ xgenfstab -U /mnt > /mnt/etc/fstab || \
   die "Failed to generate fstab."
 
 # Copy common functions to chroot environment
-cp Install-Common.sh /mnt/ || \
+cp Install-Common.sh Master-Common.sh /mnt/ || \
   die "Failed to copy Install-Common.sh to chroot."
 
 # Ensure variables are exported before chroot
@@ -168,7 +168,7 @@ configure_zram "void"
 xbps-reconfigure -fa || die "Failed to reconfigure system."
 
 # Clean up
-rm -rf Install-Common.sh
+rm -rf Install-Common.sh Master-Common.sh
 
 # Clone cinnamon-dotfiles repo as new user
 clone_dotfiles "void"

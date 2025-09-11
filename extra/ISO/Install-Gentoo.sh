@@ -163,7 +163,8 @@ if test -L /dev/shm; then
 fi
 
 # Copy common functions to chroot environment
-cp "$SCRIPT_DIR/Install-Common.sh" /mnt/gentoo/ || \
+cp "$SCRIPT_DIR/Install-Common.sh" "$SCRIPT_DIR/Master-Common.sh" \
+  /mnt/gentoo/ || \
   die "Failed to copy Install-Common.sh to chroot."
 
 #====================== Extra Variables (Used in Chroot) ======================
@@ -417,7 +418,7 @@ echo "root:$rootpasswd" | chpasswd || die "Failed to set root password."
 echo "$username:$userpasswd" | chpasswd || die "Failed to set user password."
 
 # Cleanup
-rm /stage3-*.tar.* Install-Common.sh latest-stage3.txt || \
+rm /stage3-*.tar.* Install-Common.sh Master-Common.sh latest-stage3.txt || \
   die "Failed to remove Stage 3 tarball."
 
 # Clone cinnamon-dotfiles repo as new user

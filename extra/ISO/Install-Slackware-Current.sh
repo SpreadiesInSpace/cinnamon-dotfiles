@@ -124,7 +124,7 @@ cp --dereference /etc/resolv.conf /mnt/etc/ || \
   die "Failed to copy resolv.conf."
 
 # Copy common functions to chroot environment
-cp Install-Common.sh /mnt/ || \
+cp Install-Common.sh Master-Common.sh /mnt/ || \
   die "Failed to copy Install-Common.sh to chroot."
 
 # Define arch-install-scripts source and SlackBuild (for genfstab)
@@ -300,7 +300,7 @@ sed -i '/^\[Autologin\]/,/^\[/ {
 }' /etc/sddm.conf || die "Failed to configure autologin in sddm.conf."
 
 # Clean up
-rm -rf Install-Common.sh
+rm -rf Install-Common.sh Master-Common.sh
 
 # Clone cinnamon-dotfiles repo as new user
 clone_dotfiles "slackware-current"

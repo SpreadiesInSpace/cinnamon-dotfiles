@@ -86,7 +86,7 @@ cp --dereference /etc/resolv.conf /mnt/etc/ || \
   die "Failed to copy resolv.conf."
 
 # Copy common functions to chroot environment
-cp Install-Common.sh /mnt/ || \
+cp Install-Common.sh Master-Common.sh /mnt/ || \
   die "Failed to copy Install-Common.sh to chroot."
 
 # Ensure variables are exported before chroot
@@ -198,7 +198,7 @@ systemctl enable NetworkManager bluetooth || \
 zramswapon || die "Failed to enable zRAM swap."
 
 # Clean up
-rm -rf Install-Common.sh
+rm -rf Install-Common.sh Master-Common.sh
 
 # Clone cinnamon-dotfiles repo as new user
 clone_dotfiles "opensuse-tumbleweed"
