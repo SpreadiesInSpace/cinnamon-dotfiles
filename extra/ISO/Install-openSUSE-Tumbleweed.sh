@@ -194,9 +194,6 @@ echo "$username:$userpasswd" | chpasswd || \
 systemctl enable NetworkManager bluetooth || \
   die "Failed to enable services."
 
-# Enable zRAM swap
-zramswapon || die "Failed to enable zRAM swap."
-
 # Clean up
 rm -rf Install-Common.sh Master-Common.sh
 
