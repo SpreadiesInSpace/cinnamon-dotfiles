@@ -10,9 +10,28 @@ if [ -d ~/.config/BraveSoftware/ ]; then
     die "Failed to backup old Brave Profile."
 fi
 
-# Clone Brave Gruvbox Example Profile
-git clone https://github.com/spreadiesinspace/BraveSoftware \
-  ~/.config/BraveSoftware || die "Failed to download new Brave profile."
-rm -rf ~/.config/BraveSoftware/.git/ || die "Failed to remove .git"
-rm -rf ~/.config/BraveSoftware/update_brave_settings.sh || \
-  die "Failed to remove .git"
+# Download and extract Brave profile
+ZIP_URL="https://github.com/spreadiesinspace/BraveSoftware/archive/refs/heads/main.zip"
+ZIP_NAME="brave-profile.zip"
+EXTRACT_DIR="BraveSoftware-main"
+
+echo "Downloading Brave profile archive..."
+if command -v curl &>/dev/null; then
+  curl -sL -C - --retry 10 --connect-timeout 10 "$ZIP_URL" -o "$ZIP_NAME" || \
+    die "Failed to download profile archive."
+elif command -v wget &>/dev/null; then
+  wget -q -c -T 10 -t 10 "$ZIP_URL" -O "$ZIP_NAME" || \
+    die "Failed to download profile archive."
+else
+  die "Neither curl nor wget is available."
+fi
+
+echo "Extracting archive..."
+unzip -n "$ZIP_NAME" &>/dev/null || die "Failed to extract archive."
+rm "$ZIP_NAME"
+
+# Move extracted contents to final location
+mv "$EXTRACT_DIR" ~/.config/BraveSoftware || \
+  die "Failed to move profile to destination."
+
+echo "Brave profile setup complete!"
