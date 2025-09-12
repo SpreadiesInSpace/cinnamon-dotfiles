@@ -331,9 +331,6 @@ chmod -x /root/.xinitrc || \
 chmod -x /root/.xsession || \
   die "Failed to modify permissions for /root/.xsession."
 
-# Temporarily downgrade and block glib2 from upgrading so Cinnamon runs
-bash unsorted/Slackware/glib2-downgrade.sh
-
 # Set polkit permissions for wheel group users
 set_polkit_perms
 
