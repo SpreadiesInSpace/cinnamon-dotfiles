@@ -11,7 +11,8 @@ if [ -d ~/.config/BraveSoftware/ ]; then
 fi
 
 # Download and extract Brave profile
-ZIP_URL="https://github.com/spreadiesinspace/BraveSoftware/archive/refs/heads/main.zip"
+ZIP_URL="https://github.com/spreadiesinspace/BraveSoftware"
+ZIP_URL="$ZIP_URL/archive/refs/heads/main.zip"
 ZIP_NAME="brave-profile.zip"
 EXTRACT_DIR="BraveSoftware-main"
 

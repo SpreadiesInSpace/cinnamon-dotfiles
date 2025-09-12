@@ -15,6 +15,15 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
+# Time any command and show elapsed duration
+timed() {
+    local start_time=$(date +%s)
+    "$@"
+    local end_time=$(date +%s)
+    local elapsed=$((end_time - start_time))
+    echo -e "${GREEN}Time elapsed: $((elapsed/60))m $((elapsed%60))s${NC}"
+}
+
 # Root check
 if [ "$EUID" -eq 0 ]; then
   echo -e "${RED}This script must NOT be run as root. Please execute it as a \
@@ -97,9 +106,9 @@ for script in "${scripts[@]}"; do
     echo -e "${GREEN}Detected flag: $pretty_name. Running $script...${NC}"
     chmod +x "$script"
     if [[ "$script" == "Setup-NixOS-25.05.sh" ]]; then
-      nix-shell -p unzip --run "sudo bash $script"
+      timed nix-shell -p unzip --run "sudo bash $script"
     else
-      sudo bash "$script"
+      timed sudo bash "$script"
     fi
     exit 0
   fi
@@ -120,9 +129,9 @@ select script in "${scripts[@]}" "Exit"; do
     echo -e "${GREEN}Running $script...${NC}"
     chmod +x "$script"
     if [[ "$script" == "Setup-NixOS-25.05.sh" ]]; then
-      nix-shell -p unzip --run "sudo bash $script"
+      timed nix-shell -p unzip --run "sudo bash $script"
     else
-      sudo bash "$script"
+      timed sudo bash "$script"
     fi
     break
   else

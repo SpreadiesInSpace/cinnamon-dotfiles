@@ -15,16 +15,26 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
+# Time any command and show elapsed duration
+timed() {
+    local start_time=$(date +%s)
+    "$@"
+    local end_time=$(date +%s)
+    local elapsed=$((end_time - start_time))
+    echo -e "${GREEN}Time elapsed: $((elapsed/60))m $((elapsed%60))s${NC}"
+}
+
 # Install script URLs and names
 URL="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles"
+URL="$URL/main/extra/ISO"
 declare -A installs=(
-  [1]="$URL/main/extra/ISO/Install-Arch.sh"
-  [2]="$URL/main/extra/ISO/Install-Fedora-42.sh"
-  [3]="$URL/main/extra/ISO/Install-Gentoo.sh"
-  [4]="$URL/main/extra/ISO/Install-NixOS-25.05.sh"
-  [5]="$URL/main/extra/ISO/Install-openSUSE-Tumbleweed.sh"
-  [6]="$URL/main/extra/ISO/Install-Slackware-Current.sh"
-  [7]="$URL/main/extra/ISO/Install-Void.sh"
+  [1]="$URL/Install-Arch.sh"
+  [2]="$URL/Install-Fedora-42.sh"
+  [3]="$URL/Install-Gentoo.sh"
+  [4]="$URL/Install-NixOS-25.05.sh"
+  [5]="$URL/Install-openSUSE-Tumbleweed.sh"
+  [6]="$URL/Install-Slackware-Current.sh"
+  [7]="$URL/Install-Void.sh"
 )
 
 declare -A names=(
@@ -75,9 +85,9 @@ select _ in "${options[@]}"; do
       echo -e "${GREEN}Running $filename...${NC}"
 
       if [[ "$REPLY" == "6" ]]; then
-        bash "$filename"  # Slackware: run non-sudo
+        timed bash "$filename"  # Slackware: run non-sudo
       else
-        sudo bash "$filename"
+        timed sudo bash "$filename"
       fi
       break
       ;;

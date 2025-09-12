@@ -10,6 +10,15 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
+# Time any command and show elapsed duration
+timed() {
+    local start_time=$(date +%s)
+    "$@"
+    local end_time=$(date +%s)
+    local elapsed=$((end_time - start_time))
+    echo -e "${GREEN}Time elapsed: $((elapsed/60))m $((elapsed%60))s${NC}"
+}
+
 # Theme script list
 scripts=(
   "Setup-Arch-Theme.sh"
@@ -31,9 +40,10 @@ for script in "${scripts[@]}"; do
     pretty_name="$(tr '[:lower:]' '[:upper:]' <<< "${flag:1:1}")${flag:2:-5}"
     echo -e "${GREEN}Detected flag: $pretty_name. Running $script...${NC}"
     # Move to Theme Setup Scripts Directory
-    cd home/ || { echo -e "${RED}Directory not found. Exiting.${NC}"; exit 1; }
+    cd home/ || \
+      { echo -e "${RED}Directory not found. Exiting.${NC}"; exit 1; }
     chmod +x "$script"
-    bash "$script"
+    timed bash "$script"
     exit 0
   fi
 done
@@ -54,7 +64,7 @@ select script in "${scripts[@]}" "Exit"; do
     fi
     echo -e "${GREEN}Running $script...${NC}"
     chmod +x "$script"
-    bash "$script"
+    timed bash "$script"
     break
   else
     echo -e "${RED}Invalid choice. Try again.${NC}"
