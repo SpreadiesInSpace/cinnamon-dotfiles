@@ -11,11 +11,16 @@ YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
 # Time any command and show elapsed duration
+# Usage: timed <command>
 timed() {
-    local start_time=$(date +%s)
+    local start_time
+    local end_time
+    local elapsed
+
+    start_time=$(date +%s)
     "$@"
-    local end_time=$(date +%s)
-    local elapsed=$((end_time - start_time))
+    end_time=$(date +%s)
+    elapsed=$((end_time - start_time))
     echo -e "${GREEN}Time elapsed: $((elapsed/60))m $((elapsed%60))s${NC}"
 }
 
