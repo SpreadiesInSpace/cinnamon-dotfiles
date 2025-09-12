@@ -34,4 +34,6 @@ rm "$ZIP_NAME"
 mv "$EXTRACT_DIR" ~/.config/BraveSoftware || \
   die "Failed to move profile to destination."
 
+# Clean Up
+rm -rf ~/.config/BraveSoftware/push.sh || die "Failed to clean up."
 echo "Brave profile setup complete!"
