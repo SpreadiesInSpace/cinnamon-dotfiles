@@ -3,13 +3,13 @@
 # Gentoo Linux specific aliases and functions
 
 # Minimum Error Handling
-die() { echo -e "\033[1;31mError:\033[0m $*" >&2; return 1; }
+bdie() { echo -e "\033[1;31mError:\033[0m $*" >&2; return 1; }
 
 # Gentoo Cleaning
 cleanAll() {
   sudo emerge -aq --depclean || true
   flatpak remove --unused || true
-  sudo flatpak repair || die "Failed to repair flatpak packages."
+  sudo flatpak repair || bdie "Failed to repair flatpak packages."
   if [ "$(ps -p 1 -o comm=)" = "systemd" ] 2>/dev/null; then
     sudo rm -rf /var/lib/systemd/coredump/* || true
     sudo journalctl --vacuum-size=50M || true
@@ -31,26 +31,26 @@ cleanKernel() {
 
 # Gentoo Update
 updateSync() {
-  sudo emaint -a sync || die "Failed to sync repositories."
+  sudo emaint -a sync || bdie "Failed to sync repositories."
 }
 
 updatePortage() {
   sudo emerge --oneshot sys-apps/portage || \
-    die "Failed to update Portage."
+    bdie "Failed to update Portage."
 }
 
 updateNeovim() {
   echo "Performing LazySync..."
   nvim --headless "+Lazy! sync" +qa > /dev/null 2>&1 || \
-    die "LazySync failed."
+    bdie "LazySync failed."
   echo "LazySync complete!"
 }
 
 updateApp() {
-  updateSync || die "Failed to sync repos."
+  updateSync || bdie "Failed to sync repos."
   sudo emerge -avqDuN --with-bdeps=y @world || \
-    die "Failed to update packages."
-  flatpak update -y || die "Failed to update flatpak packages."
+    bdie "Failed to update packages."
+  flatpak update -y || bdie "Failed to update flatpak packages."
   updateNeovim || true
   sudo grub-mkconfig -o /boot/grub/grub.cfg || true
 }

@@ -5,7 +5,7 @@
 # NixOS Cleaning
 cleanAll() {
   flatpak remove --unused || true
-  sudo flatpak repair || die "Failed to repair flatpak packages."
+  sudo flatpak repair || bdie "Failed to repair flatpak packages."
   sudo rm -rf /var/lib/systemd/coredump/* || true
   rm -rf ~/.cache/* || true
   sudo rm /nix/var/nix/gcroots/auto/* || true
@@ -26,13 +26,13 @@ cleanAll() {
 updateNeovim() {
   echo "Performing LazySync..."
   nvim --headless "+Lazy! sync" +qa > /dev/null 2>&1 || \
-    die "LazySync failed."
+    bdie "LazySync failed."
   echo "LazySync complete!"
 }
 
 updateApp() {
-  sudo nixos-rebuild switch --upgrade || die "Failed to update packages."
-  flatpak update -y || die "Failed to update flatpak packages."
+  sudo nixos-rebuild switch --upgrade || bdie "Failed to update packages."
+  flatpak update -y || bdie "Failed to update flatpak packages."
   updateNeovim || true
 }
 

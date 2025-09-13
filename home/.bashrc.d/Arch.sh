@@ -3,12 +3,12 @@
 # Arch Linux specific aliases and functions
 
 # Minimum Error Handling
-die() { echo -e "\033[1;31mError:\033[0m $*" >&2; return 1; }
+bdie() { echo -e "\033[1;31mError:\033[0m $*" >&2; return 1; }
 
 # Arch Cleaning
 cleanAll() {
   flatpak remove --unused || true
-  sudo flatpak repair || die "Failed to repair flatpak packages."
+  sudo flatpak repair || bdie "Failed to repair flatpak packages."
   sudo rm -rf /var/lib/systemd/coredump/* || true
   yes | sudo pacman -Scc || true
   rm -rf ~/.cache/* || true
@@ -23,13 +23,13 @@ cleanAll() {
 updateNeovim() {
   echo "Performing LazySync..."
   nvim --headless "+Lazy! sync" +qa > /dev/null 2>&1 || \
-    die "LazySync failed."
+    bdie "LazySync failed."
   echo "LazySync complete!"
 }
 
 updateApp() {
-  yay || die "Failed to update packages."
-  flatpak update -y || die "Failed to update flatpak packages."
+  yay || bdie "Failed to update packages."
+  flatpak update -y || bdie "Failed to update flatpak packages."
   updateNeovim || true
 }
 

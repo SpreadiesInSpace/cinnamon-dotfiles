@@ -9,6 +9,11 @@
 # https://tinyurl.com/cinnamon-ISO (Setup-ISO.sh)
 # https://tinyurl.com/cinnamon-dotfiles (this repo)
 
+# PWD Check
+die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
+[[ "$(basename "$PWD")" == "cinnamon-dotfiles" ]] || \
+  die "Run from cinnamon-dotfiles directory"
+
 # Colors
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -31,9 +36,7 @@ timed() {
 
 # Root check
 if [ "$EUID" -eq 0 ]; then
-  echo -e "${RED}This script must NOT be run as root. Please execute it as a \
-regular user.${NC}"
-  exit 1
+  die "This script must NOT be run as root. Please run it as a regular user."
 fi
 
 # Repo details
@@ -55,8 +58,7 @@ TOP_DIR="$(dirname "$SCRIPT_DIR")"
 if [[ "$(basename "$TOP_DIR")" == "cinnamon-dotfiles" ]]; then
   echo -e "${GREEN}Already inside cinnamon-dotfiles. Skipping download and \
 extraction.${NC}"
-  cd "$TOP_DIR" || \
-    { echo -e "${RED}Failed to enter directory. Exiting.${NC}"; exit 1; }
+  cd "$TOP_DIR" || die "Failed to enter directory."
 else
   if [[ ! -d "cinnamon-dotfiles" ]]; then
     echo -e "${YELLOW}Downloading cinnamon-dotfiles archive...${NC}"
@@ -65,17 +67,15 @@ else
     elif command -v wget &>/dev/null; then
       wget -q -c -T 10 -t 10 "$ZIP_URL" -O "$ZIP_NAME"
     else
-      echo -e "${RED}Error: Neither curl nor wget is available.${NC}"
-      exit 1
+      die "Neither curl nor wget is available."
     fi
 
     echo -e "${YELLOW}Unzipping archive...${NC}"
     if grep -qi nixos /etc/os-release; then
       nix-shell -p unzip --run "unzip -n '$ZIP_NAME'" &>/dev/null || \
-        { echo -e "${RED}Unzip failed (NixOS). Exiting.${NC}"; exit 1; }
+        die "Unzip failed (NixOS)."
     else
-      unzip -n "$ZIP_NAME" &>/dev/null || \
-        { echo -e "${RED}Unzip failed. Exiting.${NC}"; exit 1; }
+      unzip -n "$ZIP_NAME" &>/dev/null || die "Unzip failed."
     fi
     rm "$ZIP_NAME"
 
@@ -85,8 +85,7 @@ else
 Skipping download and extraction.${NC}"
   fi
 
-  cd cinnamon-dotfiles || \
-    { echo -e "${RED}Directory not found. Exiting.${NC}"; exit 1; }
+  cd cinnamon-dotfiles || die "Directory not found."
 fi
 
 # Setup script list
@@ -127,10 +126,7 @@ select script in "${scripts[@]}" "Exit"; do
     echo -e "${GREEN}Exiting.${NC}"
     exit 0
   elif [[ -n "$script" ]]; then
-    if [[ ! -f "$script" ]]; then
-      echo -e "${RED}Script $script not found. Exiting.${NC}"
-      exit 1
-    fi
+    [[ -f "$script" ]] || die "Script $script not found."
     echo -e "${GREEN}Running $script...${NC}"
     chmod +x "$script"
     if [[ "$script" == "Setup-NixOS-25.05.sh" ]]; then

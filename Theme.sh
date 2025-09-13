@@ -4,6 +4,11 @@
 # bash <(curl -sL https://tinyurl.com/cinnamon-theme)
 # bash <(wget -qO- https://tinyurl.com/cinnamon-theme)
 
+# PWD Check
+die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
+[[ "$(basename "$PWD")" == "cinnamon-dotfiles" ]] || \
+  die "Run from cinnamon-dotfiles directory"
+
 # Colors
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -45,9 +50,9 @@ for script in "${scripts[@]}"; do
     pretty_name="$(tr '[:lower:]' '[:upper:]' <<< "${flag:1:1}")${flag:2:-5}"
     echo -e "${GREEN}Detected flag: $pretty_name. Running $script...${NC}"
     # Move to Theme Setup Scripts Directory
-    cd home/ || \
-      { echo -e "${RED}Directory not found. Exiting.${NC}"; exit 1; }
-    chmod +x "$script"
+    cd home/ || die "Directory 'home/' not found."
+    [[ -f "$script" ]] || die "Script '$script' not found in home/ directory."
+    chmod +x "$script" || die "Failed to make '$script' executable."
     timed bash "$script"
     exit 0
   fi
@@ -56,19 +61,16 @@ done
 # No flags found — show prompt
 echo -e "${YELLOW}No theme flag found. Choose a theme script to run:${NC}"
 # Move to Theme Setup Scripts Directory
-cd home/ || { echo -e "${RED}Directory not found. Exiting.${NC}"; exit 1; }
+cd home/ || die "Directory 'home/' not found."
 PS3="Select a number: "
 select script in "${scripts[@]}" "Exit"; do
   if [[ "$script" == "Exit" ]]; then
     echo -e "${GREEN}Exiting.${NC}"
     exit 0
   elif [[ -n "$script" ]]; then
-    if [[ ! -f "$script" ]]; then
-      echo -e "${RED}Script $script not found. Exiting.${NC}"
-      exit 1
-    fi
+    [[ -f "$script" ]] || die "Script '$script' not found in home/ directory."
     echo -e "${GREEN}Running $script...${NC}"
-    chmod +x "$script"
+    chmod +x "$script" || die "Failed to make '$script' executable."
     timed bash "$script"
     break
   else

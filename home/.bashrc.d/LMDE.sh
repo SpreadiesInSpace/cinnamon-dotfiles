@@ -3,7 +3,7 @@
 # LMDE specific aliases and functions
 
 # Minimum Error Handling
-die() { echo -e "\033[1;31mError:\033[0m $*" >&2; return 1; }
+bdie() { echo -e "\033[1;31mError:\033[0m $*" >&2; return 1; }
 
 # Debian Cleaning
 cleanKernel() {
@@ -22,7 +22,7 @@ cleanKernel() {
 
 cleanAll() {
   flatpak remove --unused || true
-  sudo flatpak repair || die "Failed to repair flatpak packages."
+  sudo flatpak repair || bdie "Failed to repair flatpak packages."
   sudo rm -rf /var/lib/systemd/coredump/* || true
   sudo apt clean -y || true
   sudo apt autoclean -y || true
@@ -41,14 +41,14 @@ updateNeovim() {
   fi
   echo "Performing LazySync..."
   nvim --headless "+Lazy! sync" +qa > /dev/null 2>&1 || \
-    die "LazySync failed."
+    bdie "LazySync failed."
   echo "LazySync complete!"
 }
 
 updateApp() {
-  sudo apt update -y || die "Failed to update package lists."
-  sudo apt full-upgrade || die "Failed to upgrade packages."
-  flatpak update -y || die "Failed to update flatpak packages."
+  sudo apt update -y || bdie "Failed to update package lists."
+  sudo apt full-upgrade || bdie "Failed to upgrade packages."
+  flatpak update -y || bdie "Failed to update flatpak packages."
   updateNeovim || true
 }
 

@@ -9,6 +9,9 @@
 # https://tinyurl.com/cinnamon-setup (Setup.sh)
 # https://tinyurl.com/cinnamon-dotfiles (this repo)
 
+# Minimal Error Handling function
+die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
+
 # Colors
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -71,10 +74,7 @@ select _ in "${options[@]}"; do
     [1-7])
       url="${installs[$REPLY]}"
       filename="${names[$REPLY]}"
-      if [[ -z "$url" ]]; then
-        echo -e "${RED}Invalid choice. Exiting.${NC}"
-        exit 1
-      fi
+      [[ -n "$url" ]] || die "Invalid choice. Exiting."
 
       echo -e "${YELLOW}Downloading $filename...${NC}"
       if command -v curl &>/dev/null; then
@@ -82,8 +82,7 @@ select _ in "${options[@]}"; do
       elif command -v wget &>/dev/null; then
         wget -q -c -T 10 -t 10 "$url" -O "$filename"
       else
-        echo -e "${RED}Error: Neither curl nor wget found. Exiting.${NC}"
-        exit 1
+        die "Neither curl nor wget found."
       fi
 
       chmod +x "$filename"

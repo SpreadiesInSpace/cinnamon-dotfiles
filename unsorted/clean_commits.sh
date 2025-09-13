@@ -1,7 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Minimal Error Handling function
 die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
+
+# PWD Check
+[[ -f "uptime.sh" && -f "../Master-Common.sh" ]] || \
+  die "Run from cinnamon-dotfiles/unsorted/ directory"
 
 # Go to cinnamon-dotfiles/ and remove git history
 cd ..

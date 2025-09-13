@@ -3,7 +3,7 @@
 # Fedora Linux specific aliases and functions
 
 # Minimum Error Handling
-die() { echo -e "\033[1;31mError:\033[0m $*" >&2; return 1; }
+bdie() { echo -e "\033[1;31mError:\033[0m $*" >&2; return 1; }
 
 # Fedora Cleaning
 cleanExtra() {
@@ -18,7 +18,7 @@ cleanExtra() {
 cleanAll() {
   sudo dnf autoremove -y || true
   flatpak remove --unused || true
-  sudo flatpak repair || die "Failed to repair flatpak packages."
+  sudo flatpak repair || bdie "Failed to repair flatpak packages."
   cleanExtra || true
   sudo dnf clean all || true
   rm -rf ~/.cache/* || true
@@ -41,13 +41,13 @@ cleanKernel() {
 updateNeovim() {
   echo "Performing LazySync..."
   nvim --headless "+Lazy! sync" +qa > /dev/null 2>&1 || \
-    die "LazySync failed."
+    bdie "LazySync failed."
   echo "LazySync complete!"
 }
 
 updateApp() {
-  sudo dnf upgrade || die "Failed to update packages."
-  flatpak update -y || die "Failed to update flatpak packages."
+  sudo dnf upgrade || bdie "Failed to update packages."
+  flatpak update -y || bdie "Failed to update flatpak packages."
   updateNeovim || true
 }
 
