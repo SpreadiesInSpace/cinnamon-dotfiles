@@ -5,7 +5,7 @@ die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
 
 # PWD Check
 [[ -d "../../boot/grub/themes/gruvbox-dark" ]] || \
-  die "Run from cinnamon-dotfiles/extra/grub-btrfs-setup/ directory"
+  die "Run from cinnamon-dotfiles/extra/grub-btrfs-setup/ directory."
 
 # Prevents script from being run as root
 if [ "$EUID" -eq 0 ]; then

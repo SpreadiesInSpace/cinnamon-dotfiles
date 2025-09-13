@@ -3,6 +3,10 @@
 # Minimal Error Handling
 die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
 
+# PWD Check
+[[ -f "../../extra/ISO/Install-Common.sh" ]] || \
+  die "Run from cinnamon-dotfiles/unsorted/LMDE directory."
+
 # Install zram-generator
 apt update || die "APT Update Failed."
 apt install -y systemd-zram-generator || \
