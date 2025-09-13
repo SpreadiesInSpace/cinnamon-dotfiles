@@ -9,10 +9,8 @@
 # https://tinyurl.com/cinnamon-ISO (Setup-ISO.sh)
 # https://tinyurl.com/cinnamon-dotfiles (this repo)
 
-# PWD Check
+# Minimal Error Handling function
 die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
-[[ "$(basename "$PWD")" == "cinnamon-dotfiles" ]] || \
-  die "Run from cinnamon-dotfiles directory"
 
 # Colors
 RED='\033[0;31m'
