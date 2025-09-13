@@ -175,15 +175,15 @@ extract() {
 # Time any command and show elapsed duration
 # Usage: timed <command>
 timed() {
-    local start_time
-    local end_time
-    local elapsed
+  local start_time
+  local end_time
+  local elapsed
 
-    start_time=$(date +%s)
-    "$@"
-    end_time=$(date +%s)
-    elapsed=$((end_time - start_time))
-    echo -e "${GREEN}Time elapsed: $((elapsed/60))m $((elapsed%60))s${NC}"
+  start_time=$(date +%s)
+  "$@"
+  end_time=$(date +%s)
+  elapsed=$((end_time - start_time))
+  echo -e "${GREEN}Time elapsed: $((elapsed/60))m $((elapsed%60))s${NC}"
 }
 
 #========================= Special terminal handling ==========================
