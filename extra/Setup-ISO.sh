@@ -90,7 +90,7 @@ select _ in "${options[@]}"; do
 
       if [[ "$REPLY" == "6" ]]; then
         # Slackware ISO doesn't have sudo
-        bash "$filename"
+        /bin/time -f "Time Elapsed: %E" bash "$filename"
       else
         timed sudo bash "$filename"
       fi
