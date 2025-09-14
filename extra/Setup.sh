@@ -29,7 +29,7 @@ timed() {
   "$@"
   end_time=$(date +%s)
   elapsed=$((end_time - start_time))
-  echo -e "${GREEN}Time elapsed: $((elapsed/60))m $((elapsed%60))s${NC}"
+  echo -e "${GREEN}Time Elapsed: $((elapsed/60))m $((elapsed%60))s${NC}"
 }
 
 # Root check

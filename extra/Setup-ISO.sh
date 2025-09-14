@@ -29,7 +29,7 @@ timed() {
   "$@"
   end_time=$(date +%s)
   elapsed=$((end_time - start_time))
-  echo -e "${GREEN}Time elapsed: $((elapsed/60))m $((elapsed%60))s${NC}"
+  echo -e "${GREEN}Time Elapsed: $((elapsed/60))m $((elapsed%60))s${NC}"
 }
 
 # Install script URLs and names
@@ -89,6 +89,7 @@ select _ in "${options[@]}"; do
       echo -e "${GREEN}Running $filename...${NC}"
 
       if [[ "$REPLY" == "6" ]]; then
+        TIMEFORMAT="Time Elapsed: %0lR"
         time "$filename"  # Slackware: run non-sudo
       else
         timed sudo bash "$filename"
