@@ -90,7 +90,7 @@ select _ in "${options[@]}"; do
 
       if [[ "$REPLY" == "6" ]]; then
         TIMEFORMAT="Time Elapsed: %0lR"
-        time "$filename"  # Slackware: run non-sudo
+        time bash "$filename"  # Slackware: run non-sudo
       else
         timed sudo bash "$filename"
       fi
