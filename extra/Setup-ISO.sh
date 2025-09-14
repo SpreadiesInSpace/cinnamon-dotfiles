@@ -89,7 +89,8 @@ select _ in "${options[@]}"; do
       echo -e "${GREEN}Running $filename...${NC}"
 
       if [[ "$REPLY" == "6" ]]; then
-        timed bash "$filename"  # Slackware: run non-sudo
+        # Slackware ISO doesn't have sudo
+        bash "$filename"
       else
         timed sudo bash "$filename"
       fi
