@@ -297,7 +297,7 @@ format_partitions() {
 
 create_btrfs_subvolumes() {
   # Create BTRFS subvolumes
-  mount "$ROOT" /mnt || \
+  mount -t btrfs "$ROOT" /mnt || \
     die "Failed to mount root partition."
   btrfs su cr /mnt/@ || \
     die "Failed to create subvolume @."
