@@ -316,20 +316,21 @@ mount_partitions() {
 
   mkdir -p "$MNT" || \
     die "Failed to create $MNT."
-  mount -o noatime,compress=zstd,discard=async,subvol=@ "$ROOT" "$MNT" || \
+  mount -t btrfs -o noatime,compress=zstd,discard=async,subvol=@ \
+    "$ROOT" "$MNT" || \
     die "Failed to mount root subvolume."
 
   # Create and mount home
   mkdir -p "$MNT/home" || \
     die "Failed to create $MNT/home."
-  mount -o noatime,compress=zstd,discard=async,subvol=@home \
+  mount -t btrfs -o noatime,compress=zstd,discard=async,subvol=@home \
     "$ROOT" "$MNT/home" || \
     die "Failed to mount home subvolume."
 
   # Mount snapshots subvolume (universal)
   mkdir -p "$MNT/.snapshots" || \
     die "Failed to create $MNT/.snapshots."
-  mount -o noatime,compress=zstd,discard=async,subvol=@.snapshots \
+  mount -t btrfs -o noatime,compress=zstd,discard=async,subvol=@.snapshots \
     "$ROOT" "$MNT/.snapshots" || \
     die "Failed to mount snapshots subvolume."
 
