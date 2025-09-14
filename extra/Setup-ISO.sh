@@ -89,8 +89,7 @@ select _ in "${options[@]}"; do
       echo -e "${GREEN}Running $filename...${NC}"
 
       if [[ "$REPLY" == "6" ]]; then
-        TIMEFORMAT="Time Elapsed: %0lR"
-        time bash "$filename"  # Slackware: run non-sudo
+        timed bash "$filename"  # Slackware: run non-sudo
       else
         timed sudo bash "$filename"
       fi
