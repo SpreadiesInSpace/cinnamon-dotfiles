@@ -70,8 +70,6 @@ dnf -y group install sound-and-video || \
 if [[ -f ".fedora-42.done" ]]; then
   bash unsorted/Fedora/Fedora-Bloat.sh || \
     die "Failed to remove bloat."
-  touch home/.fedora.gnome || \
-    die "Failed to set gnome-software flag."
 fi
 
 # Install Brave

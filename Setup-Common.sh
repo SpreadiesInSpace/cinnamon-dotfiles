@@ -50,7 +50,7 @@ display_status() {
   echo "Is VM: $2"
 }
 
-# Only Gentoo/openSUSE/Slackware uses this
+# Only Gentoo/Slackware uses this
 set_polkit_perms() {
   # Set polkit permissions for wheel group users
   cat << 'EOF' | tee /etc/polkit-1/rules.d/10-admin.rules > /dev/null || \
@@ -59,6 +59,15 @@ polkit.addAdminRule(function(action, subject) {
   return ["unix-group:wheel"];
 });
 EOF
+}
+
+# Only openSUSE uses this
+disable_polkit_agent() {
+  # Disable Cinnamon 6.4's built in polkit
+  sudo -u "$username" \
+    env XDG_RUNTIME_DIR="/run/user/$(id -u "$username")" \
+    gsettings set org.cinnamon enable-polkit-agent false || \
+    die "Failed to disable built in polkit."
 }
 
 # Only Void uses this

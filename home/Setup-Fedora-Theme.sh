@@ -11,14 +11,6 @@ check_not_root
 # Check for missing dependencies
 check_dependencies
 
-# Disable Gnome Software Automatic Updates if installed via cinnamon-ISO
-if [[ -f ".fedora.gnome" ]]; then
-  gsettings set org.gnome.software allow-updates false || \
-    die "Failed to disable Gnome Software updates."
-  gsettings set org.gnome.software download-updates false || \
-    die "Failed to disable Gnome Software auto-downloads."
-fi
-
 # Install icons and themes
 install_icons_and_themes
 

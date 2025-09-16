@@ -42,3 +42,13 @@ rm -rf /var/cache/PackageKit || \
 echo "Refreshing Metadata Cache..."
 pkcon refresh force -c -1 >/dev/null 2>&1 || \
   die "Failed to refresh metadata cache."
+
+# Disable Gnome Software Automatic Updates
+sudo -u "$SUDO_USER" \
+  env XDG_RUNTIME_DIR="/run/user/$(id -u "$SUDO_USER")" \
+  gsettings set org.gnome.software allow-updates false || \
+  die "Failed to disable Gnome Software updates."
+sudo -u "$SUDO_USER" \
+  env XDG_RUNTIME_DIR="/run/user/$(id -u "$SUDO_USER")" \
+  gsettings set org.gnome.software download-updates false || \
+  die "Failed to disable Gnome Software auto-downloads."

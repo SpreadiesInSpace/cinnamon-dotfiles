@@ -131,13 +131,6 @@ install_icons_and_themes() {
     die "Failed to clean up extracted directories."
 }
 
-# Nothing currently uses this
-disable_polkit_agent() {
-  # Disable Cinnamon 6.4's built in polkit
-  dconf write /org/cinnamon/enable-polkit-agent "false" || \
-    die "Failed to disable built in polkit."
-}
-
 override_qt_cursor_theme() {
   # Override Cursor Theme for QT Apps
   local distro="${1:-}"
