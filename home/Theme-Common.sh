@@ -936,7 +936,7 @@ configure_nanorc_extra() {
   fi
 }
 
-# NixOS doesn't use this, openSUSE needs 2 ZYPP variables
+# NixOS doesn't use this
 set_qt_and_gtk_environment() {
   # Backup old config and set QT and GTK theming variables
   local timestamp
@@ -953,11 +953,22 @@ set_qt_and_gtk_environment() {
       sudo tee -a /etc/environment > /dev/null || \
         die "Failed to override QT theme in /etc/environment."
   fi
-
   if ! grep -q "^GTK_THEME=Gruvbox-Dark-BL" /etc/environment; then
     echo 'GTK_THEME=Gruvbox-Dark-BL' | \
       sudo tee -a /etc/environment > /dev/null || \
         die "Failed to override GTK theme in /etc/environment."
+  fi
+
+  # Set HiDPI for QT Apps
+  if ! grep -q "^QT_AUTO_SCREEN_SCALE_FACTOR=1" /etc/environment; then
+    echo 'QT_AUTO_SCREEN_SCALE_FACTOR=1' | \
+      sudo tee -a /etc/environment > /dev/null || \
+        die "Failed to enable QT automatic DPI scaling detection."
+  fi
+  if ! grep -q "^QT_ENABLE_HIGHDPI_SCALING=1" /etc/environment; then
+    echo 'QT_ENABLE_HIGHDPI_SCALING=1' | \
+      sudo tee -a /etc/environment > /dev/null || \
+        die "Failed to enable QT HiDPI scaling support."
   fi
 }
 
