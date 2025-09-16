@@ -11,6 +11,13 @@ cd .. || die "Failed to move up one directory."
 source ./Master-Common.sh || die "Failed to source Master-Common.sh"
 cd home/ || die "Failed to return to /home directory."
 
+# VM Flag
+if [[ -f ".vm" ]]; then
+  is_vm=true
+else
+  is_vm=false
+fi
+
 # Only Theme-Common.sh uses this
 check_app() {
   local app="$1"
@@ -212,6 +219,14 @@ copy_bleachbit_config() {
   sudo mkdir -p "$(dirname "$root_target")"
   sudo cp -prf "$src_file" "$root_target" || \
     die "Failed to copy BleachBit config."
+
+  # Extra VM Handling
+  if [ "$is_vm" = true ]; then
+    cp -npr ~/.config/autostart ~/.config/autostart.old."$timestamp" || true
+    mkdir -p ~/.config/autostart
+    cp -npr .config/autostart/"$distro"/* ~/.config/autostart
+    cp -npr toggle_share.sh ~/
+  fi
 }
 
 copy_fonts() {
@@ -759,8 +774,13 @@ set_cinnamon_background_and_sounds() {
 
   echo "Setting Wallpaper..."
   # Set Wallpaper
+  if [ "$is_vm" = true ]; then
+    wallpaper="Desktop_Wallpaper.png"
+  else
+    wallpaper="Desktop_Wallpaper_Dark.png"
+  fi
   gsettings set org.cinnamon.desktop.background picture-uri \
-    file://"${HOME}"/wallpapers/Desktop_Wallpaper.png || \
+    "file://${HOME}/wallpapers/${wallpaper}" || \
     die "Failed to set wallpaper."
   mkdir -p ~/Pictures
   ln -sf ~/wallpapers/* ~/Pictures || \

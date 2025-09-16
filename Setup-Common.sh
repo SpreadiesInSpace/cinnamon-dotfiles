@@ -33,6 +33,7 @@ prompt_for_vm() {
     read -rp "Is this a Virtual Machine? [y/N]: " response
     if [[ "$response" =~ ^([yY]|[yY][eE][sS])$ ]]; then
       is_vm=true
+      sudo -u "$username" touch home/.vm
       break
     elif [[ "$response" =~ ^([nN]|[nN][oO])$ || -z "$response" ]]; then
       is_vm=false
