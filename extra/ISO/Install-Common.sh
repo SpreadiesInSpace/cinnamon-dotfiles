@@ -182,6 +182,23 @@ prompt_for_autologin() {
   export enable_autologin
 }
 
+# Only NixOS uses this
+prompt_for_vm() {
+  # VM Prompt
+  while true; do
+    read -rp "Is this a Virtual Machine? [y/N]: " response
+    if [[ "$response" =~ ^([yY]|[yY][eE][sS])$ ]]; then
+      is_vm=true
+      break
+    elif [[ "$response" =~ ^([nN]|[nN][oO])$ || -z "$response" ]]; then
+      is_vm=false
+      break
+    else
+      echo "Invalid input. Please answer y or n."
+    fi
+  done
+}
+
 partition_drive() {
   local distro="${1:-}"
   # Find parted binary
@@ -594,6 +611,9 @@ clone_dotfiles() {
         { echo \"Failed to enter repo directory.\"; exit 1; }
       touch .nixos-25.05.done .$distro.done ||
         { echo \"Failed to create flags.\"; exit 1; }
+      if [ \"$is_vm\" = true ]; then
+        touch home/.vm || { echo \"Failed to create VM flag.\"; exit 1; }
+      fi
       echo \"Reboot and run Theme.sh in cinnamon-dotfiles located in \
 \$HOME/cinnamon-dotfiles.\"'" || die "Failed to clone repo for NixOS."
   else

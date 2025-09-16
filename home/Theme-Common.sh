@@ -12,10 +12,9 @@ source ./Master-Common.sh || die "Failed to source Master-Common.sh"
 cd home/ || die "Failed to return to /home directory."
 
 # VM Flag
+is_vm=false
 if [[ -f ".vm" ]]; then
   is_vm=true
-else
-  is_vm=false
 fi
 
 # Only Theme-Common.sh uses this

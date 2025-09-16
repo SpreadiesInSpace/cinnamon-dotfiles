@@ -45,6 +45,9 @@ prompt_drive
 # Autologin Prompt
 prompt_for_autologin
 
+# VM Prompt
+prompt_for_vm
+
 # Partition the drive
 partition_drive
 

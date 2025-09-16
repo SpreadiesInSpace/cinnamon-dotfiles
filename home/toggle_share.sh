@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Toggle Share Mount Script
 # Mounts or unmounts a 9p virtio share to ~/Share
