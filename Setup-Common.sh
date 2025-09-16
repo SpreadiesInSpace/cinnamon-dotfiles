@@ -50,8 +50,12 @@ display_status() {
   echo "Is VM: $2"
 }
 
-# Only Gentoo/Slackware uses this
+# Only Gentoo/openSUSE/Slackware uses this
 set_polkit_perms() {
+  # Ensure the rules directory exists with proper permissions
+  mkdir -p /etc/polkit-1/rules.d
+  chmod 755 /etc/polkit-1/rules.d
+  
   # Set polkit permissions for wheel group users
   cat << 'EOF' | tee /etc/polkit-1/rules.d/10-admin.rules > /dev/null || \
     die "Failed to set polkit rules."
@@ -59,9 +63,13 @@ polkit.addAdminRule(function(action, subject) {
   return ["unix-group:wheel"];
 });
 EOF
+
+  # Set proper ownership and permissions on the rules file
+  chown root:root /etc/polkit-1/rules.d/10-admin.rules
+  chmod 644 /etc/polkit-1/rules.d/10-admin.rules
 }
 
-# Only openSUSE uses this
+# Nothing uses this
 disable_polkit_agent() {
   # Disable Cinnamon 6.4's built in polkit
   sudo -u "$username" \

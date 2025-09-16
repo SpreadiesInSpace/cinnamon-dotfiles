@@ -201,7 +201,6 @@ zypper in -y -t pattern kvm_server kvm_tools || \
 
 # Set polkit permissions for wheel group users
 set_polkit_perms
-disable_polkit_agent
 
 # Enable Flathub for Flatpak
 enable_flathub
