@@ -182,6 +182,8 @@ in
     ];
     variables = {
       GTK_THEME = theme.name;
+      QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+      QT_ENABLE_HIGHDPI_SCALING = "1";
     };
   };
 
@@ -189,8 +191,6 @@ in
     enable = true;
     style = "kvantum";
     platformTheme = "qt5ct";
-    QT_AUTO_SCREEN_SCALE_FACTOR = "1";
-    QT_ENABLE_HIGHDPI_SCALING = "1";
   };
 
   programs = {
