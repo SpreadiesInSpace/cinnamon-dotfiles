@@ -221,10 +221,13 @@ copy_bleachbit_config() {
 
   # Extra VM Handling
   if [ "$is_vm" = true ]; then
-    cp -npr ~/.config/autostart ~/.config/autostart.old."$timestamp" || true
+    # Configure Autostart Entries
     mkdir -p ~/.config/autostart
     cp -npr .config/autostart/"$distro"/* ~/.config/autostart
+    # Set up VM Shares
     cp -npr toggle_share.sh ~/
+    cp -npr .local/share/applications/toggle-share.desktop \
+      ~/.local/share/applications/
   fi
 }
 

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Toggle Share
+Exec=bash -c '$HOME/toggle_share.sh'
+Comment=
+Terminal=false
+PrefersNonDefaultGPU=false
+Icon=krusader_red
+Type=Application
+Categories=System;FileTools
+Name[en_US]=Toggle Share
