@@ -683,6 +683,20 @@ apply_gedit_and_gnome_terminal_config() {
   # Set gedit sidebar root to user's home directory
   dconf write /org/gnome/gedit/plugins/filebrowser/virtual-root \
     "'file:///home/$(whoami)'" || die "Failed to apply gedit settings."
+  
+  # Gentoo gedit admin:///etc/portage/make.conf INI syntax highlighting
+  if [[ "$distro" == "Gentoo" ]]; then
+    # Create the local language specs directory
+    mkdir -p ~/.local/share/libgedit-gtksourceview-300/language-specs
+    # Copy the existing INI language specification
+    cp /usr/share/libgedit-gtksourceview-300/language-specs/ini.lang \
+      ~/.local/share/libgedit-gtksourceview-300/language-specs/ || \
+      die "Failed to copy existing INI language specification."
+    # Add make.conf to the globs pattern in the INI language spec
+    sed -i 's/<property name="globs">\([^<]*\)</<property name="globs">\1;make.conf</' \
+      ~/.local/share/libgedit-gtksourceview-300/language-specs/ini.lang || \
+      die "Failed to add make.conf to globs pattern in INI language spec."
+  fi
 }
 
 set_default_apps() {
