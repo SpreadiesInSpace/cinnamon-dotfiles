@@ -67,7 +67,7 @@ mkdir -p /mnt/var/db/xbps/keys || \
   die "Failed to create /mnt/var/db/xbps/keys."
 cp /var/db/xbps/keys/* /mnt/var/db/xbps/keys/ || \
   die "Failed to copy XBPS keys."
-retry XBPS_ARCH=$ARCH xbps-install -Syu -r /mnt -R "$REPO" base-system \
+XBPS_ARCH=$ARCH retry xbps-install -Syu -r /mnt -R "$REPO" base-system \
   dejavu-fonts-ttf lightdm lightdm-gtk-greeter-settings lightdm-gtk3-greeter \
   cinnamon gnome-terminal spice-vdagent xorg-minimal xorg-input-drivers \
   xorg-video-drivers NetworkManager alsa-pipewire libspa-bluetooth pipewire \
