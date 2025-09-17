@@ -647,7 +647,7 @@ XFCE4TERM
 
 # Only Void uses this
 set_monospace_font() {
-  # Create first-boot script to set monospace font (for gnome-terminal)
+  # Create first-boot script to set monospace font for gnome-terminal
   su - "$username" -c "
   mkdir -p ~/.config/autostart || die 'Failed to create autostart directory.'
   cat > ~/.config/autostart/set-font.desktop << 'MONOSPACE'
