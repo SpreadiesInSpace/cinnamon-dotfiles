@@ -6,8 +6,15 @@ echo "Sourcing functions..."
 die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
 URL="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles"
 URL="$URL/main/extra/ISO/Install-Common.sh"
-curl -fsSL -o Install-Common.sh "$URL" || \
-  die "Failed to download Install-Common.sh"
+if command -v wget >/dev/null 2>&1; then
+  wget -qO Install-Common.sh "$URL" || \
+    die "Failed to download Install-Common.sh with wget"
+elif command -v curl >/dev/null 2>&1; then
+  curl -fsSL -o Install-Common.sh "$URL" || \
+    die "Failed to download Install-Common.sh with curl"
+else
+  die "Neither wget nor curl is available"
+fi
 [ -f ./Install-Common.sh ] || die "Install-Common.sh not found."
 source ./Install-Common.sh || die "Failed to source Install-Common.sh"
 
@@ -81,8 +88,17 @@ LATEST_TXT_URL="$RELEASES_URL/latest-$STAGE3_BASENAME.txt"
 
 # Download the latest stage3 list
 echo; echo "Downloading latest stage3 list..."
-wget -c -T 10 -t 10 -q --show-progress "$LATEST_TXT_URL" -O latest-stage3.txt \
-  || die "Failed to download $LATEST_TXT_URL."
+if command -v wget >/dev/null 2>&1; then
+  wget -c -T 10 -t 10 -q --show-progress "$LATEST_TXT_URL" -O \
+    latest-stage3.txt || \
+    die "Failed to download $LATEST_TXT_URL with wget."
+elif command -v curl >/dev/null 2>&1; then
+  curl -fsSL -C - --retry 10 --connect-timeout 10 "$LATEST_TXT_URL" -o \
+    latest-stage3.txt || \
+    die "Failed to download $LATEST_TXT_URL with curl."
+else
+  die "Neither wget nor curl found."
+fi
 
 # Import Gentoo release key via WKD
 echo; echo "Importing Gentoo release key..."
@@ -106,9 +122,18 @@ STAGE3_TARBALL=$(basename "$STAGE3_TARBALL_PATH")
 # Download tarball and verification files
 echo; echo "Downloading stage3 tarball and verification files..."
 for suffix in "" ".asc" ".DIGESTS" ".sha256"; do
-  wget -c -T 10 -t 10 -q --show-progress \
+  if command -v wget >/dev/null 2>&1; then
+    wget -c -T 10 -t 10 -q --show-progress \
     "$RELEASES_URL/$STAGE3_TARBALL_PATH$suffix" || \
-      die "Failed to download $RELEASES_URL/$STAGE3_TARBALL_PATH$suffix"
+    die "Failed to download $RELEASES_URL/$STAGE3_TARBALL_PATH$suffix (wget)"
+  elif command -v curl >/dev/null 2>&1; then
+    curl -fsSL -C - --retry 10 --connect-timeout 10 \
+    "$RELEASES_URL/$STAGE3_TARBALL_PATH$suffix" -o \
+    "$(basename "$STAGE3_TARBALL_PATH$suffix")" || \
+    die "Failed to download $RELEASES_URL/$STAGE3_TARBALL_PATH$suffix (curl)"
+  else
+    die "Neither wget nor curl found."
+  fi
 done
 
 # Verify GPG signatures
