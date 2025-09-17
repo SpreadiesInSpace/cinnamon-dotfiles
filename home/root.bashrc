@@ -12,7 +12,7 @@ check_terminal_support() {
   local max_depth=5
   local depth=0
   local comm
-  
+
   # Check process tree
   while [ $depth -lt $max_depth ] && [ "$pid" -gt 1 ]; do
     comm=$(ps -h -o comm -p "$pid" 2>/dev/null)

@@ -55,7 +55,7 @@ set_polkit_perms() {
   # Ensure the rules directory exists with proper permissions
   mkdir -p /etc/polkit-1/rules.d
   chmod 755 /etc/polkit-1/rules.d
-  
+
   # Set polkit permissions for wheel group users
   cat << 'EOF' | tee /etc/polkit-1/rules.d/10-admin.rules > /dev/null || \
     die "Failed to set polkit rules."

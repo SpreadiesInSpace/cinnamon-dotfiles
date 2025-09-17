@@ -399,7 +399,7 @@ copy_bashrc_and_etc() {
   fi
   # Copy root .bashrc to appropriate directory
   sudo cp -prf root.bashrc /root/.bashrc || \
-    die "Failed to copy root .bashrc" 
+    die "Failed to copy root .bashrc"
 }
 
 copy_neofetch_config() {
@@ -683,7 +683,7 @@ apply_gedit_and_gnome_terminal_config() {
   # Set gedit sidebar root to user's home directory
   dconf write /org/gnome/gedit/plugins/filebrowser/virtual-root \
     "'file:///home/$(whoami)'" || die "Failed to apply gedit settings."
-  
+
   # Gentoo gedit admin:///etc/portage/make.conf INI syntax highlighting
   if [[ "$distro" == "Gentoo" ]]; then
     # Create the local language specs directory
