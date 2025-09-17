@@ -60,7 +60,7 @@ retry() {
 
     echo "Retrying in ${delay}s..."
     sleep $delay
-    delay=$((delay * 2))
+    delay=$((delay + 2))
     attempt=$((attempt + 1))
   done
 }
