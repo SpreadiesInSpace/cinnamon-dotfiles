@@ -124,26 +124,41 @@ prompt_timezone() {
 
 # Only Install-Gentoo.sh uses this
 prompt_video_card() {
+  local link="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation"
+  link="$link/Base#VIDEO_CARDS"
+  # Show detected hardware info if available
+  if command -v lspci &> /dev/null; then
+    gpu_info=$(lspci | grep -i VGA)
+    if [[ -n "$gpu_info" ]]; then
+      echo "Detected graphics hardware:"
+      echo "$gpu_info"
+      echo
+    fi
+  fi
+
   # Prompt for video card
   while true; do
-    echo "Select your video card type:"
+    echo "Select your video card:"
     echo
-    echo "1) amdgpu radeonsi"
-    echo "2) nvidia"
-    echo "3) intel"
-    echo "4) nouveau (open source)"
-    echo "5) virgl (QEMU/KVM)"
-    echo "6) vc4 (Raspberry Pi)"
-    echo "7) d3d12 (WSL)"
-    echo "8) other"
+    echo "1) Intel (intel) - Intel graphics (integrated and Arc GPUs)"
+    echo "2) AMD (amdgpu radeonsi) - AMD since Sea Islands"
+    echo "3) NVIDIA (nvidia) - NVIDIA cards with proprietary drivers"
+    echo "4) Nouveau (nouveau) - NVIDIA cards with open source drivers"
+    echo "5) VirtIO-GPU (virgl) - Virtual machines (QEMU/KVM)"
+    echo "6) VideoCore IV (vc4) - Raspberry Pi (legacy)"
+    echo "7) D3D12 (d3d12) - Windows Subsystem for Linux"
+    echo "8) Other/Manual entry"
+    echo
+    echo "See $link"
+    echo "for more details."
     echo
     read -rp "Enter the number corresponding to your video card: " \
       video_card_number
 
     case $video_card_number in
-      1) video_card="amdgpu radeonsi"; break ;;
-      2) video_card="nvidia"; break ;;
-      3) video_card="intel"; break ;;
+      1) video_card="intel"; break ;;
+      2) video_card="amdgpu radeonsi"; break ;;
+      3) video_card="nvidia"; break ;;
       4) video_card="nouveau"; break ;;
       5) video_card="virgl"; break ;;
       6) video_card="vc4"; break ;;
