@@ -155,7 +155,7 @@ else
 fi
 
 # Install Bash Completion for csb
-slpkg install -y -P -B bash-completion -o "slack_extra" || \
+retry slpkg install -y -P -B bash-completion -o "slack_extra" || \
   die "Failed to install bash-completion."
 
 # Alien packages
@@ -165,7 +165,7 @@ alien_packages=(
 )
 
 # Install packages from Alien over SBo to reduce compile times
-slpkg install -y -P -B "${alien_packages[@]}" -o alien -O || \
+retry slpkg install -y -P -B "${alien_packages[@]}" -o alien -O || \
   die "Failed to install alienbob packages."
 
 # All packages
@@ -240,7 +240,7 @@ packages=(
 )
 
 # Install packages from Conraid over SBo to reduce compile times
-slpkg install -y -P -B "${packages[@]}" -o conraid || \
+retry slpkg install -y -P -B "${packages[@]}" -o conraid || \
   die "Failed to install conraid packages."
 
 # GFS packages
@@ -270,7 +270,7 @@ gnome_packages=(
 )
 
 # Install packages from GFS over SBo to reduce compile times
-slpkg install -y -P -B "${gnome_packages[@]}" -o gnome || \
+retry slpkg install -y -P -B "${gnome_packages[@]}" -o gnome || \
   die "Failed to install gnome packages."
 
 # Add LightDM group
@@ -298,11 +298,11 @@ sbo_packages=(
 )
 
 # Install Packages
-slpkg install -y -P -B "${sbo_packages[@]}" || \
-  die "Failed to install packages."
+retry slpkg install -y -P -B "${sbo_packages[@]}" || \
+  die "Failed to install SBo packages."
 
 # Install bottom seperately to prevent download fails.
-slpkg install -y -P -B bottom || \
+retry slpkg install -y -P -B bottom || \
   die "Failed to install bottom."
 
 # Slint packages
@@ -313,11 +313,11 @@ slint_packages=(
 )
 
 # Install packages from Slint over SBo to reduce compile times
-slpkg install -y -P -B "${slint_packages[@]}" -o slint -O || \
+retry slpkg install -y -P -B "${slint_packages[@]}" -o slint -O || \
   die "Failed to install slint packages."
 
 # Install Cinnamon, LightDM and set Default DE System-Wide
-slpkg install -y -P -B '*' -o csb || die "Failed to install Cinnamon"
+retry slpkg install -y -P -B '*' -o csb || die "Failed to install Cinnamon"
 ln -sf /etc/X11/xinit/xinitrc.cinnamon-session /etc/X11/xinit/xinitrc || \
   die "Failed to create symlink for xinitrc."
 ln -sf /etc/X11/xinit/xinitrc.cinnamon-session /etc/X11/xsession || \
