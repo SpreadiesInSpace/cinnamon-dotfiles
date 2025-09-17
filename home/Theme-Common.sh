@@ -219,6 +219,7 @@ copy_bleachbit_config() {
     cp -npr .config/autostart/"$distro"/* ~/.config/autostart
     # Set up VM Shares
     cp -npr toggle_share.sh ~/
+    mkdir -p ~/.local/share/applications
     cp -npr .local/share/applications/toggle-share.desktop \
       ~/.local/share/applications/
   fi
