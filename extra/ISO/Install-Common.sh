@@ -628,6 +628,23 @@ CLONE
   fi
 }
 
+# Only Slackware uses this
+set_xfce4_terminal() {
+  # Create first-boot script to configure xfce4-terminal
+  su - "$username" -c "
+  mkdir -p ~/.config/autostart || die 'Failed to create autostart directory.'
+  cat > ~/.config/autostart/xfce4-terminal-config.desktop << 'XFCE4TERM'
+[Desktop Entry]
+Type=Application
+Name=Configure XFCE4 Terminal
+Exec=sh -c 'xfconf-query -c xfce4-terminal -p /scrolling-unlimited -s true && rm ~/.config/autostart/xfce4-terminal-config.desktop'
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+XFCE4TERM
+  " || die "Failed to create xfce4-terminal configuration script."
+}
+
 # Only Void uses this
 set_monospace_font() {
   # Create first-boot script to set monospace font (for gnome-terminal)

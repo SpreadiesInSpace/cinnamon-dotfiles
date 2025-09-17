@@ -303,11 +303,7 @@ sed -i '/^\[Autologin\]/,/^\[/ {
 rm -rf Install-Common.sh Master-Common.sh
 
 # Configure xfce4-terminal for unlimited scrollback
-su - "$username" -c "
-  xfconf-query -c xfce4-terminal -p /scrolling-unlimited -s true" || \
-  die "Failed to configure xfce4-terminal for user."
-xfconf-query -c xfce4-terminal -p /scrolling-unlimited -s true || \
-  die "Failed to set unlimited scrollback for root."
+set_xfce4_terminal
 
 # Clone cinnamon-dotfiles repo as new user
 clone_dotfiles "slackware-current"
