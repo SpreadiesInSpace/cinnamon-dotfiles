@@ -628,20 +628,6 @@ CLONE
   fi
 }
 
-# Only Slackware uses this
-set_xfce4_terminal() {
-  # Configure xfce4-terminal for unlimited scrollback
-  su - "$username" -c "
-  mkdir -p ~/.config/xfce4/xfconf/xfce-perchannel-xml || die 'Failed to create xfconf directory.'
-  cat > ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-terminal.xml << 'XFCE4XML'
-<?xml version=\"1.0\" encoding=\"UTF-8\"?>
-<channel name=\"xfce4-terminal\" version=\"1.0\">
-<property name=\"scrolling-unlimited\" type=\"bool\" value=\"true\"/>
-</channel>
-XFCE4XML
-  " || die "Failed to create xfce4-terminal configuration."
-}
-
 # Only Void uses this
 set_monospace_font() {
   # Create first-boot script to set monospace font for gnome-terminal

@@ -302,9 +302,6 @@ sed -i '/^\[Autologin\]/,/^\[/ {
 # Clean up
 rm -rf Install-Common.sh Master-Common.sh
 
-# Configure xfce4-terminal for unlimited scrollback
-set_xfce4_terminal
-
 # Clone cinnamon-dotfiles repo as new user
 clone_dotfiles "slackware-current"
 EOF
