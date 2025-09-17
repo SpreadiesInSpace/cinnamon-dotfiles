@@ -45,8 +45,9 @@ check_not_root() {
 }
 
 retry() {
-  local max_attempts=3
+  local max_attempts=5
   local attempt=1
+  local delay=1
 
   while [ $attempt -le $max_attempts ]; do
     if "$@"; then
@@ -57,8 +58,9 @@ retry() {
       return 1
     fi
 
-    echo "Retrying..."
-    sleep 5
+    echo "Retrying in ${delay}s..."
+    sleep $delay
+    delay=$((delay * 2))
     attempt=$((attempt + 1))
   done
 }
