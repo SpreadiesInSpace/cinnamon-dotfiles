@@ -104,7 +104,7 @@ for pkg_set in "${package_sets[@]}"; do
     pkg_name=$(basename "$pkg")
     printf "\r    [%s/%s] Installing: %-60s" \
       "$pkg_count" "$total_pkgs" "$pkg_name"
-    installpkg --root /mnt "$pkg" >/dev/null 2>&1 || \
+    retry installpkg --root /mnt "$pkg" >/dev/null 2>&1 || \
       die "Failed to install package $pkg_name."
     ((pkg_count++))
   done
@@ -211,10 +211,10 @@ done
 
 # Download arch-install-scripts source and SlackBuild (for genfstab)
 echo "Installing arch-install-scripts..."
-wget -q "$AIS" \
+retry wget -q "$AIS" \
   -O arch-install-scripts-v29.tar.gz || \
   die "Failed to download arch-install-scripts source."
-wget -q "$AIS_SLACKBUILD" \
+retry wget -q "$AIS_SLACKBUILD" \
   -O arch-install-scripts-slackbuild.tar.gz || \
   die "Failed to download SlackBuild."
 
@@ -301,6 +301,13 @@ sed -i '/^\[Autologin\]/,/^\[/ {
 
 # Clean up
 rm -rf Install-Common.sh Master-Common.sh
+
+# Configure xfce4-terminal for unlimited scrollback
+su - "$username" -c "
+  xfconf-query -c xfce4-terminal -p /scrolling-unlimited -s true" || \
+  die "Failed to configure xfce4-terminal for user."
+xfconf-query -c xfce4-terminal -p /scrolling-unlimited -s true || \
+  die "Failed to set unlimited scrollback for root."
 
 # Clone cinnamon-dotfiles repo as new user
 clone_dotfiles "slackware-current"

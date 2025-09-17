@@ -27,11 +27,11 @@ prompt_for_vm
 display_status "$enable_autologin" "$is_vm"
 
 # Update system and install git and curl
-apt update || \
+retry apt update || \
   die "Failed to update system."
-apt upgrade -y || \
+retry apt upgrade -y || \
   die "Failed to upgrade system."
-apt install -y git curl || \
+retry apt install -y git curl || \
   die "Failed to install git and curl."
 
 # Install Bottom
@@ -41,7 +41,7 @@ FILE_VERSION="0.11.1-1"
 BTM="https://github.com/ClementTsang/bottom/releases"
 BTM="$BTM/download/${VERSION}/bottom_${FILE_VERSION}_amd64.deb"
 # Download the specified version using curl
-curl -LO "$BTM" || \
+retry curl -LO "$BTM" || \
   die "Failed to download Bottom package."
 # Install the downloaded package
 dpkg -i bottom_${FILE_VERSION}_amd64.deb || \
@@ -51,13 +51,13 @@ rm bottom_${FILE_VERSION}_amd64.deb || \
   die "Failed to remove downloaded Bottom package file."
 
 # Install Brave Browser
-curl -fsS https://dl.brave.com/install.sh | sh || \
+retry curl -fsS https://dl.brave.com/install.sh | sh || \
   die "Failed to install Brave Browser."
 
 # Install Neovim AppImage
 NVIM="https://github.com/neovim/neovim/releases/latest/download"
 NVIM="$NVIM/nvim-linux-x86_64.appimage"
-curl -LO "$NVIM" || \
+retry curl -LO "$NVIM" || \
   die "Failed to download Neovim AppImage."
 chmod u+x nvim-linux-x86_64.appimage || \
   die "Failed to make Neovim AppImage executable."
@@ -75,7 +75,7 @@ rm nvim-linux-x86_64.appimage || die "Failed to remove Neovim AppImage file."
 
 # Install VSCodium
 VSC="https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg"
-wget -qO - "$VSC" \
+retry wget -qO - "$VSC" \
   | gpg --dearmor \
   | dd of=/usr/share/keyrings/vscodium-archive-keyring.gpg || \
   die "Failed to import VSCodium GPG key."
@@ -85,9 +85,9 @@ echo "deb [arch=amd64,arm64 signed-by=$keyring] $repo_url vscodium main" \
   | tee /etc/apt/sources.list.d/vscodium.list \
   > /dev/null || \
   die "Failed to add VSCodium repository."
-apt update || \
+retry apt update || \
   die "APT update failed."
-apt install -y codium || \
+retry apt install -y codium || \
   die "Failed to install VSCodium."
 
 # All packages
@@ -165,7 +165,7 @@ packages=(
 )
 
 # Install Packages
-apt install -y "${packages[@]}" || \
+retry apt install -y "${packages[@]}" || \
   die "Failed to install packages."
 
 # Enable Flathub for Flatpak

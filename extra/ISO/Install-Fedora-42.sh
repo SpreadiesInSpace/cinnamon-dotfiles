@@ -73,13 +73,13 @@ export VERSION_ID="$VERSION_ID" || \
   die "Failed to extract Fedora version."
 
 # Install Core Fedora Packages
-dnf --installroot=/mnt --releasever="$VERSION_ID" \
+retry dnf --installroot=/mnt --releasever="$VERSION_ID" \
   --setopt=max_parallel_downloads=10 \
   --use-host-config group install -y core cinnamon-desktop || \
   die "Failed to install core packages."
 
 # Install System Packages
-dnf --installroot=/mnt --setopt=max_parallel_downloads=10 \
+retry dnf --installroot=/mnt --setopt=max_parallel_downloads=10 \
   install -y glibc-langpack-en btrfs-progs efi-filesystem efibootmgr fwupd \
   grub2-common grub2-efi-x64 grub2-pc grub2-pc-modules grub2-tools \
   grub2-tools-efi grub2-tools-extra grub2-tools-minimal grubby kernel \
@@ -157,7 +157,7 @@ sed -i 's/rhgb quiet/quiet/' /etc/default/grub || \
 if [ "$BOOTMODE" = "UEFI" ]; then
   # Reinstall these to regenerate grub.cfg
   rm -rf /boot/efi/EFI/fedora/grub.cfg /boot/grub2/grub2.cfg
-  dnf reinstall -y shim-* grub2-efi-* grub2-common
+  retry dnf reinstall -y shim-* grub2-efi-* grub2-common
   # Add signed Fedora Boot SHIM (for UEFI Secure Boot)
   efibootmgr -c -d "$drive" -p 1 -L "Fedora (Custom)" \
     -l \\EFI\FEDORA\\SHIMX64.EFI || \

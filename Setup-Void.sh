@@ -27,7 +27,7 @@ prompt_for_vm
 display_status "$enable_autologin" "$is_vm"
 
 # Install tools
-xbps-install -Sy xbps git xtools xmirror || \
+retry xbps-install -Sy xbps git xtools xmirror || \
   die "Failed to install git and xtools."
 
 # Use xmirror to select a mirror
@@ -39,10 +39,10 @@ xmirror -s "$REPO" || \
   die "Failed to set the mirror with xmirror."
 
 # Install multilib and nonfree repos
-xbps-install -Sy void-repo-nonfree void-repo-multilib \
+retry xbps-install -Sy void-repo-nonfree void-repo-multilib \
   void-repo-multilib-nonfree || \
     die "Failed to install multilib and nonfree repositories."
-xbps-install -Syu || \
+retry xbps-install -Syu || \
   die "Failed to update system after adding repositories."
 
 # All packages (adapt package names as needed for Void Linux)
@@ -176,7 +176,7 @@ packages=(
 )
 
 # Install Packages
-xbps-install -Sy "${packages[@]}" || \
+retry xbps-install -Sy "${packages[@]}" || \
   die "Failed to install packages."
 
 # Protect neofetch from being removed

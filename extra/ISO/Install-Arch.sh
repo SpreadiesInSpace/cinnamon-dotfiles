@@ -44,7 +44,7 @@ pacman-key --init || \
   die "Failed to initialize Pacman keyring."
 pacman-key --populate archlinux || \
   die "Failed to populate Arch Linux keys"
-pacman -Sy --needed --noconfirm archlinux-keyring || \
+retry pacman -Sy --needed --noconfirm archlinux-keyring || \
   die "Failed to update archlinux-keyring."
 
 # Partition the drive
@@ -63,7 +63,7 @@ create_btrfs_subvolumes
 mount_partitions
 
 # Install Essential packages
-pacstrap -K /mnt base blueman linux linux-firmware cinnamon lightdm \
+retry pacstrap -K /mnt base blueman linux linux-firmware cinnamon lightdm \
   lightdm-slick-greeter gnome-terminal spice-vdagent sudo bash-completion \
     grub efibootmgr git networkmanager nano unzip wget zram-generator || \
     die "Failed to install base packages."

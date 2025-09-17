@@ -718,7 +718,8 @@ copy_vscodium_config() {
   }
 
   # Copy VSCodium config and plugins to appropriate directory
-  git clone https://github.com/spreadiesinspace/codium >/dev/null 2>&1 || \
+  retry git clone https://github.com/spreadiesinspace/codium \
+    >/dev/null 2>&1 || \
     die "Failed to download VSCodium config."
 
   cd codium/ || {
@@ -830,7 +831,7 @@ setup_synth_shell_config() {
   trap 'rm -rf synth-shell-prompt/' ERR INT TERM
 
   # Clone Synth-Shell and run setup
-  git clone --recursive \
+  retry git clone --recursive \
     https://github.com/andresgongora/synth-shell-prompt.git >/dev/null 2>&1 \
     || die "Failed to download Synth Shell Prompt."
   yes "no" | synth-shell-prompt/setup.sh >/dev/null 2>&1
@@ -866,7 +867,7 @@ install_nvchad() {
   [ -d ~/.cache/nvim ] && mv ~/.cache/nvim ~/.cache/nvim.old."$timestamp"
 
   # Clone NVChad starter config
-  git clone https://github.com/NvChad/starter ~/.config/nvim \
+  retry git clone https://github.com/NvChad/starter ~/.config/nvim \
     >/dev/null 2>&1 || \
     die "Failed to download NvChad."
 

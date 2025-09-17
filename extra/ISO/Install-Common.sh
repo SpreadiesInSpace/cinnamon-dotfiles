@@ -601,30 +601,36 @@ clone_dotfiles() {
   # Clone cinnamon-dotfiles repo as new user
   local distro="${1:-}"
 
+  # Ensure variables are exported before subshell entry
+  export -f retry
+  export -f die
+
   if [ "$distro" = "nixos" ]; then
     # NixOS uses nixos-enter and creates multiple flag files
     nixos-enter --root /mnt -c "su - $username -c '
-      cd \$HOME &&
-      git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles ||
-        { echo \"Failed to clone repo.\"; exit 1; }
-      cd cinnamon-dotfiles ||
-        { echo \"Failed to enter repo directory.\"; exit 1; }
-      touch .nixos-25.05.done .$distro.done ||
-        { echo \"Failed to create flags.\"; exit 1; }
+      cd \$HOME || die \"Failed to cd to home directory.\"
+      retry git clone \
+        https://github.com/SpreadiesInSpace/cinnamon-dotfiles || \
+        die \"Failed to clone repo.\"
+      cd cinnamon-dotfiles || die \"Failed to cd into repo.\"
+      touch .nixos-25.05.done .$distro.done
       if [ \"$is_vm\" = true ]; then
-        touch home/.vm || { echo \"Failed to create VM flag.\"; exit 1; }
+        touch home/.vm
       fi
-      echo \"Reboot and run Theme.sh in cinnamon-dotfiles located in \
-\$HOME/cinnamon-dotfiles.\"'" || die "Failed to clone repo for NixOS."
+      echo \"Reboot and run Theme.sh in cinnamon-dotfiles located in\" \
+        \"\$HOME/cinnamon-dotfiles.\"
+    '" || die "Failed to clone repo for NixOS."
   else
-    cat << CLONE | su - "$username"
-cd && git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles || \
-  die "Failed to clone repo."
-cd cinnamon-dotfiles || die "Failed to enter repo directory."
-touch .$distro.done || die "Failed to create flag."
-echo "Reboot and run Setup.sh in cinnamon-dotfiles located in \
-\$HOME/cinnamon-dotfiles."
-CLONE
+    su - "$username" -c "
+      cd || die 'Failed to cd to home directory.'
+      retry git clone \
+        https://github.com/SpreadiesInSpace/cinnamon-dotfiles || \
+        die 'Failed to clone repo.'
+      cd cinnamon-dotfiles || die 'Failed to cd into repo.'
+      touch .$distro.done
+      echo 'Reboot and run Setup.sh in cinnamon-dotfiles located in' \
+        '\$HOME/cinnamon-dotfiles.'
+    " || die "Failed to clone repo."
   fi
 }
 

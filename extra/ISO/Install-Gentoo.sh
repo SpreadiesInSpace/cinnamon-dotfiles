@@ -217,7 +217,7 @@ source Install-Common.sh || \
 source /etc/profile || die "Failed to source /etc/profile."
 
 # Sync Snapshot
-emerge-webrsync || die "Failed to run emerge-webrsync."
+retry emerge-webrsync || die "Failed to run emerge-webrsync."
 
 # Set Binary Package Repo.
 echo "[binhost]
@@ -248,7 +248,7 @@ fi
 echo && getuto || die "Failed to verify GPG keys with getuto."
 
 # Install packages for Gentoo git sync
-emerge -vquN $GIT_PKGS || die "Failed to install packages for git sync."
+retry emerge -vquN $GIT_PKGS || die "Failed to install packages for git sync."
 
 # Switch from rsync to git for faster repository sync times
 eselect repository remove -f gentoo || \
@@ -263,10 +263,11 @@ touch /var/db/repos/.synced-git-repo || \
   die "Failed to create .synced-git-repo flag file."
 
 # Sync Repository
-emaint sync -r gentoo || die "Failed to sync the Gentoo repository using Git."
+retry emaint sync -r gentoo || \
+  die "Failed to sync the Gentoo repository using Git."
 
 # Update portage if there happens to be a new version
-emerge -1uqv sys-apps/portage || die "Failed to update Portage."
+retry emerge -1uqv sys-apps/portage || die "Failed to update Portage."
 
 # Select appropriate Gentoo profile based on init system
 if [ "$GENTOO_INIT" = "systemd" ]; then
@@ -278,11 +279,11 @@ else
 fi
 
 # Set CPU Flags (TO DO: make it work in chroot heredoc)
-# emerge -1uqv app-portage/cpuid2cpuflags
+# retry emerge -1uqv app-portage/cpuid2cpuflags
 # echo "*/* $(cpuid2cpuflags)" > /etc/portage/package.use/00-cpu-flags
 
 # Update World Set
-emerge -vqDuN @world || die "Failed to update the world set."
+retry emerge -vqDuN @world || die "Failed to update the world set."
 
 # Remove Obsolete Packages
 emerge -q --depclean || die "Failed to remove obsolete packages."
@@ -314,14 +315,14 @@ echo "sys-kernel/installkernel grub dracut" > \
 if { [ "$GENTOO_INIT" = "systemd" ] && systemd-detect-virt --vm; } || \
    virt-what | grep -q .; then
     # VM - just the system packages (including OpenRC if selected)
-    emerge -vq $SYSTEM_PKGS || die "Failed to install system packages."
+    retry emerge -vq $SYSTEM_PKGS || die "Failed to install system packages."
 else
   # Physical machine - add firmware
   if [ "$IS_INTEL" = "true" ]; then
-    emerge -vq $SYSTEM_PKGS $PHYSICAL_PKGS sys-firmware/intel-microcode || \
-      die "Failed to install system packages."
+    retry emerge -vq $SYSTEM_PKGS $PHYSICAL_PKGS sys-firmware/intel-microcode \
+      || die "Failed to install system packages."
   else
-    emerge -vq $SYSTEM_PKGS $PHYSICAL_PKGS || \
+    retry emerge -vq $SYSTEM_PKGS $PHYSICAL_PKGS || \
       die "Failed to install system packages."
   fi
 fi

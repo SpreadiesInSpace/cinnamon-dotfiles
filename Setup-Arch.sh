@@ -48,7 +48,7 @@ sed -i "s/^#*\\s*MAKEFLAGS=.*/MAKEFLAGS=\"--jobs=$cores\"/" \
   die "Failed to update MAKEFLAGS in /etc/makepkg.conf."
 
 # Install base-devel and git
-pacman -S --needed --noconfirm base-devel git || \
+retry pacman -S --needed --noconfirm base-devel git || \
   die "Failed to install git."
 
 # Remove passwordless sudo if script is interrupted
@@ -61,12 +61,17 @@ echo "$SUDO_USER ALL=(ALL) NOPASSWD: ALL" > \
 chmod 0440 /etc/sudoers.d/99_"${SUDO_USER}"_nopasswd || \
   die "Failed to set proper permissions for sudoers file."
 
+# Ensure variables are declared for subshell entry
+die_func=$(declare -f die)
+retry_func=$(declare -f retry)
+
 # Install yay
-cat << 'EOF' | su - "$SUDO_USER"
-die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
+cat << EOF | su - "$SUDO_USER"
+$die_func
+$retry_func
 trap 'rm -rf yay-bin' ERR INT TERM
 echo "Configuring yay..."
-git clone https://aur.archlinux.org/yay-bin.git >/dev/null 2>&1 || \
+retry git clone https://aur.archlinux.org/yay-bin.git >/dev/null 2>&1 || \
   die "Failed to download yay."
 cd yay-bin || die "Failed to enter yay-bin directory."
 makepkg -si --noconfirm >/dev/null 2>&1 || die "Failed to install yay."
@@ -161,7 +166,7 @@ packages=(
 )
 
 # Install Packages
-yay -Syu --needed --noconfirm "${packages[@]}" || \
+retry yay -Syu --needed --noconfirm "\${packages[@]}" || \
   die "Failed to install packages."
 EOF
 

@@ -44,15 +44,15 @@ sed -i "s/REPO_BRANCH=\${REPO_BRANCH:-15.0}/REPO_BRANCH=\${REPO_BRANCH:-current}
 sed -i "s/REPO_NAME=\${REPO_NAME:-SBo}/REPO_NAME=\${REPO_NAME:-SBo-git}/g" \
   "$SBO_CONF" || \
   die "Failed to update REPO_NAME."
-sbopkg -r || \
+retry sbopkg -r || \
   die "Failed to sync sbopkg repository."
 
 # Install sbotools (for slpkg)
-sbopkg -B -i sbotools || \
+retry sbopkg -B -i sbotools || \
   die "Failed to install sbotools."
 sboconfig -r https://github.com/Ponce/slackbuilds.git || \
   die "Failed to configure sbotools repository."
-sbosnap fetch || \
+retry sbosnap fetch || \
   die "Failed to fetch sbosnap."
 
 # Update MAKEFLAGS in /etc/sbotools/sbotools.conf to match CPU cores
@@ -75,9 +75,9 @@ packages=(
 )
 for package in "${packages[@]}"; do
   # Install headlessly but fallback to prompt if any package fails
-  if ! sboinstall -r "$package"; then
+  if ! retry sboinstall -r "$package"; then
     echo "Install failed for $package, falling back to prompt..."
-    sboinstall "$package" || \
+    retry sboinstall "$package" || \
       die "Failed to install $package."
   fi
 done
@@ -101,7 +101,7 @@ for url in "${!files[@]}"; do
     cp "$local_path" "${local_path}.old.${timestamp}" || \
       die "Failed to backup $local_path."
   fi
-  if curl -fsSL -o "$local_path" "$url"; then
+  if retry curl -fsSL -o "$local_path" "$url"; then
     echo "File $local_path updated successfully."
   else
     echo "Failed to download $url."
@@ -125,14 +125,14 @@ echo "Updated MAKEFLAGS in /etc/slpkg/slpkg.toml to -j$cores based on the \
 number of CPU cores."
 
 # Sync slpkg
-slpkg update || \
+retry slpkg update || \
   die "Failed to sync slpkg."
 
 # Update Slackware Packages
 touch /var/log/slpkg/deps.log || true
-slpkg upgrade -y -o "slack" || \
+retry slpkg upgrade -y -o "slack" || \
   die "Failed to update slack packages."
-slpkg upgrade -y -o "slack_extra" || \
+retry slpkg upgrade -y -o "slack_extra" || \
   die "Failed to update slack_extra packages."
 
 # Update Bootloader Entries (in case Kernel Gets Updated)

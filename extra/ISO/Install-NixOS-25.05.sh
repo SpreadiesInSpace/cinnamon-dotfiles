@@ -70,7 +70,7 @@ nixos-generate-config --root /mnt || \
 # Download custom NixOS config
 CONF="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles"
 CONF="$CONF/refs/heads/main/etc/nixos/configuration.nix"
-curl -fsSL -o configuration.nix "$CONF" || \
+retry curl -fsSL -o configuration.nix "$CONF" || \
   die "Failed to download custom configuration.nix"
 
 # Set Config File Variable
@@ -90,7 +90,7 @@ configure_nixos_settings "$CONFIG" "$username" "$hostname" "$timezone" \
   "$enable_autologin" "$drive"
 
 # Install NixOS
-nixos-install --no-root-passwd || \
+retry nixos-install --no-root-passwd || \
   die "Failed to install NixOS."
 
 # Ensure variables are exported before chroot

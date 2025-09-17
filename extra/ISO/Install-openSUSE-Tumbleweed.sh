@@ -47,7 +47,7 @@ prompt_timezone
 prompt_drive
 
 # Refresh (for older ISOs)
-zypper ref
+retry zypper ref
 
 # Partition the drive
 partition_drive
@@ -68,10 +68,10 @@ mount_partitions
 mount_system_partitions
 
 # Installing the Base System
-zypper --gpg-auto-import-keys --root /mnt ar --refresh \
+retry zypper --gpg-auto-import-keys --root /mnt ar --refresh \
   https://download.opensuse.org/tumbleweed/repo/oss/ oss || \
   die "Failed to add openSUSE repo."
-zypper --gpg-auto-import-keys --root /mnt in -y --download-in-advance dracut \
+retry zypper --gpg-auto-import-keys --root /mnt in -y --download-in-advance dracut \
   kernel-default grub2 grub2-i386-pc grub2-x86_64-efi shim zypper bash man \
   shadow util-linux nano arch-install-scripts zram-generator blueman || \
   die "Failed to install base packages."
@@ -105,7 +105,7 @@ source Install-Common.sh || \
 source /etc/profile || die "Failed to source /etc/profile."
 
 # Sync Repos
-zypper --gpg-auto-import-keys ref || \
+retry zypper --gpg-auto-import-keys ref || \
   die "Failed to refresh zypper repositories."
 
 # Remove Dangling Repo (at this point, all proper repos have been generated)
@@ -147,14 +147,14 @@ grub2-mkconfig -o /boot/grub2/grub.cfg || \
   die "Failed to generate GRUB config."
 
 # Install Basic Desktop
-zypper in -y -t pattern basic_desktop || \
+retry zypper in -y -t pattern basic_desktop || \
   die "Failed to install basic desktop pattern."
 
 # Install Cinnamon Desktop Environment
 zypper al mint-x-icon-theme mint-y-icon-theme || \
   die "Failed to lock Mint icon themes."
 zypper rm -y busybox-which || die "Failed to remove busybox-which."
-zypper in -y cinnamon gnome-terminal spice-vdagent libnotify-tools \
+retry zypper in -y cinnamon gnome-terminal spice-vdagent libnotify-tools \
   lightdm-gtk-greeter-settings btrfsprogs sudo bash-completion git unzip \
   || die "Failed to install Cinnamon and base packages."
 

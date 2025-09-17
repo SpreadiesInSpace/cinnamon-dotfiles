@@ -52,7 +52,8 @@ else
 fi
 
 # Install Essentials
-emerge -vquN app-eselect/eselect-repository app-editors/nano dev-vcs/git || \
+retry emerge -vquN app-eselect/eselect-repository app-editors/nano \
+  dev-vcs/git || \
   die "Failed to install essential packages."
 
 # Switch from rsync to git for faster repository sync times
@@ -118,7 +119,7 @@ echo "app-emulation/qemu glusterfs iscsi opengl pipewire spice usbredir vde virg
   die "Failed to set USE flags for qemu."
 
 # Sync Repository + All Overlays
-emaint sync -a || \
+retry emaint sync -a || \
   die "Failed to sync repositories and overlays."
 
 # Select appropriate Gentoo profile based on init system
@@ -139,7 +140,7 @@ echo "media-sound/pulseaudio -daemon" | \
   die "Failed to set USE flags for pulseaudio."
 
 # Emerge changes and cleanup
-emerge -vqDuN @world || \
+retry emerge -vqDuN @world || \
   die "Failed to emerge world update."
 emerge -q --depclean || \
   die "Failed to clean up unused dependencies."

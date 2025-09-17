@@ -8,7 +8,8 @@ trap 'rm -rf wallpapers/' EXIT
 
 # Clone wallpapers
 echo "Downloading wallpapers..."
-git clone https://github.com/SpreadiesInSpace/wallpapers >/dev/null 2>&1 || \
+retry git clone https://github.com/SpreadiesInSpace/wallpapers \
+  >/dev/null 2>&1 || \
   die "Failed to download wallpapers."
 
 # Clean Up

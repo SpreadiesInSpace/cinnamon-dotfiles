@@ -44,6 +44,25 @@ check_not_root() {
   fi
 }
 
+retry() {
+  local max_attempts=3
+  local attempt=1
+
+  while [ $attempt -le $max_attempts ]; do
+    if "$@"; then
+      return 0
+    fi
+
+    if [ $attempt -eq $max_attempts ]; then
+      return 1
+    fi
+
+    echo "Retrying..."
+    sleep 5
+    attempt=$((attempt + 1))
+  done
+}
+
 # TODO: Use this for Install and Setup(?) scripts
 get_distro() {
   local distro=""

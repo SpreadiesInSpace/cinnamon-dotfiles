@@ -9,8 +9,9 @@ trap 'rm -rf tmp' ERR INT TERM
 # Clone icons and fonts
 mkdir tmp
 echo "Downloading Icons and Fonts..."
-git clone https://github.com/SpreadiesInSpace/cinnamon-extras tmp >/dev/null \
-  2>&1 || die "Failed to Download Icons and Fonts."
+retry git clone https://github.com/SpreadiesInSpace/cinnamon-extras tmp \
+  >/dev/null 2>&1 || \
+  die "Failed to Download Icons and Fonts."
 
 # Clean Up
 rm -rf tmp/.git

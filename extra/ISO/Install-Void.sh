@@ -39,7 +39,7 @@ prompt_timezone
 prompt_drive
 
 # Refresh repository and install tools
-xbps-install -Sy parted xtools || \
+retry xbps-install -Sy parted xtools || \
   die "Failed to install parted and xtools."
 
 # Partition the drive
@@ -67,9 +67,9 @@ mkdir -p /mnt/var/db/xbps/keys || \
   die "Failed to create /mnt/var/db/xbps/keys."
 cp /var/db/xbps/keys/* /mnt/var/db/xbps/keys/ || \
   die "Failed to copy XBPS keys."
-XBPS_ARCH=$ARCH xbps-install -Syu -r /mnt -R "$REPO" base-system cinnamon \
+retry XBPS_ARCH=$ARCH xbps-install -Syu -r /mnt -R "$REPO" base-system \
   dejavu-fonts-ttf lightdm lightdm-gtk-greeter-settings lightdm-gtk3-greeter \
-  gnome-terminal spice-vdagent xorg-minimal xorg-input-drivers \
+  cinnamon gnome-terminal spice-vdagent xorg-minimal xorg-input-drivers \
   xorg-video-drivers NetworkManager alsa-pipewire libspa-bluetooth pipewire \
   wireplumber git xtools xmirror nano sudo grub grub-x86_64-efi \
   bash-completion unzip zramen blueman || \
