@@ -630,19 +630,16 @@ CLONE
 
 # Only Slackware uses this
 set_xfce4_terminal() {
-  # Create first-boot script to configure xfce4-terminal
+  # Configure xfce4-terminal for unlimited scrollback
   su - "$username" -c "
-  mkdir -p ~/.config/autostart || die 'Failed to create autostart directory.'
-  cat > ~/.config/autostart/xfce4-terminal-config.desktop << 'XFCE4TERM'
-[Desktop Entry]
-Type=Application
-Name=Configure XFCE4 Terminal
-Exec=sh -c 'xfconf-query -c xfce4-terminal -p /scrolling-unlimited -s true && rm ~/.config/autostart/xfce4-terminal-config.desktop'
-Hidden=false
-NoDisplay=false
-X-GNOME-Autostart-enabled=true
-XFCE4TERM
-  " || die "Failed to create xfce4-terminal configuration script."
+  mkdir -p ~/.config/xfce4/xfconf/xfce-perchannel-xml || die 'Failed to create xfconf directory.'
+  cat > ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-terminal.xml << 'XFCE4XML'
+<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<channel name=\"xfce4-terminal\" version=\"1.0\">
+<property name=\"scrolling-unlimited\" type=\"bool\" value=\"true\"/>
+</channel>
+XFCE4XML
+  " || die "Failed to create xfce4-terminal configuration."
 }
 
 # Only Void uses this
