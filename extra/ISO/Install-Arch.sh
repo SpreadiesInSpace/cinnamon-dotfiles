@@ -72,6 +72,10 @@ retry pacstrap -K /mnt base blueman linux linux-firmware cinnamon lightdm \
 genfstab -U /mnt >> /mnt/etc/fstab || \
   die "Failed to generate fstab."
 
+# Enable Services
+systemctl --root=/mnt enable lightdm NetworkManager bluetooth || \
+  die "Failed to enable services."
+
 # Copy common functions to chroot environment
 cp Install-Common.sh Master-Common.sh /mnt/ || \
   die "Failed to copy Install-Common.sh to chroot."
@@ -122,10 +126,6 @@ a==1 && /^#?greeter-session=/ {
 {print}
 ' /etc/lightdm/lightdm.conf || \
   die "Failed to set greeter-session for LightDM."
-
-# Enable Services
-systemctl enable lightdm NetworkManager bluetooth || \
-  die "Failed to enable services."
 
 # Configure GRUB Bootloader
 install_grub
