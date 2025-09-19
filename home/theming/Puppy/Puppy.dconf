@@ -39,7 +39,7 @@ exec='gnome-terminal'
 exec-arg='--'
 
 [org/cinnamon/desktop/background]
-picture-options='stretched'
+picture-options='zoom'
 picture-uri='file:///root/Pictures/Desktop_Wallpaper_Dark.png'
 
 [org/cinnamon/desktop/background/slideshow]

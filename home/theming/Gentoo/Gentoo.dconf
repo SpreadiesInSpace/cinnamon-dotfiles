@@ -28,7 +28,7 @@ exec='gnome-terminal'
 exec-arg='--'
 
 [org/cinnamon/desktop/background]
-picture-options='stretched'
+picture-options='zoom'
 picture-uri='file:///home/f16poom/wallpapers/Desktop_Wallpaper.png'
 
 [org/cinnamon/desktop/interface]
