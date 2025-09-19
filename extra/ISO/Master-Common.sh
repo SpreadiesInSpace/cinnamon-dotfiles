@@ -44,13 +44,6 @@ check_not_root() {
   fi
 }
 
-check_not_chroot () {
-  # Check if the script is running in chroot
-  if systemd-detect-virt --chroot >/dev/null 2>&1; then
-    die "This script cannot be run inside a chroot environment."
-  fi
-}
-
 retry() {
   local max_attempts=5
   local attempt=1

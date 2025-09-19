@@ -14,9 +14,6 @@ check_if_root
 # Check if the script is run from the root account
 check_if_not_root_account
 
-# Check if the script is running in chroot
-check_not_chroot
-
 # Get the current username
 get_current_username
 
