@@ -20,6 +20,7 @@ cleanExtra() {
 
 cleanAll() {
   cleanKernel
+  cleanExtra
   flatpak remove --unused || \
     warn "Failed to remove unused flatpak packages."
   sudo flatpak repair || \
@@ -28,7 +29,6 @@ cleanAll() {
     warn "Failed to clean systemd coredumps."
   sudo zypper clean -a || \
     warn "Failed to clean zypper cache."
-  cleanExtra
   if command -v snapper >/dev/null 2>&1; then
     sudo snapper delete 1-100 || \
       warn "Failed to delete snapper snapshots."

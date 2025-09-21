@@ -22,23 +22,23 @@ cleanExtra() {
     mint-y-icons mint-y-theme mint-themes \
     mint-themes-gtk3 mint-themes-gtk4 || \
     warn "Failed to remove mint themes."
-  sudo rm -rf /var/lib/systemd/coredump/* || \
-    warn "Failed to clean systemd coredumps."
-  sudo rm -rf /var/tmp/.guestfs-1000/* || \
-    warn "Failed to clean guestfs temporary files."
   sudo rm -rf /var/cache/PackageKit/ || \
     warn "Failed to clean PackageKit cache."
 }
 
 cleanAll() {
   cleanKernel
+  cleanExtra
   sudo dnf autoremove -y || \
     warn "Failed to autoremove packages."
   flatpak remove --unused || \
     warn "Failed to remove unused flatpak packages."
   sudo flatpak repair || \
     warn "Failed to repair flatpak packages."
-  cleanExtra
+  sudo rm -rf /var/lib/systemd/coredump/* || \
+    warn "Failed to clean systemd coredumps."
+  sudo rm -rf /var/tmp/.guestfs-1000/* || \
+    warn "Failed to clean guestfs temporary files."
   sudo dnf clean all || \
     warn "Failed to clean dnf cache."
   rm -rf ~/.cache/* || \
