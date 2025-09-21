@@ -11,6 +11,9 @@ check_not_root
 # Check for missing dependencies
 check_dependencies
 
+# VM Prompt
+prompt_for_vm
+
 # Install icons and themes
 install_icons_and_themes
 

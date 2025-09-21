@@ -11,12 +11,6 @@ cd .. || die "Failed to move up one directory."
 source ./Master-Common.sh || die "Failed to source Master-Common.sh"
 cd home/ || die "Failed to return to /home directory."
 
-# VM Flag
-is_vm=false
-if [[ -f ".vm" ]]; then
-  is_vm=true
-fi
-
 # Only Theme-Common.sh uses this
 check_app() {
   local app="$1"
@@ -66,6 +60,28 @@ check_dependencies() {
       printf '  - %s\n' "$item"
     done
     die "Resolve the above issues before continuing."
+  fi
+}
+
+prompt_for_vm() {
+  if [[ -f ".vm" ]]; then
+    is_vm=true
+  elif [[ -f ".physical" ]]; then
+    is_vm=false
+  else
+    # Only prompt if neither .vm nor .physical file exists
+    while true; do
+      read -rp "Is this a Virtual Machine? [y/N]: " response
+      if [[ "$response" =~ ^([yY]|[yY][eE][sS])$ ]]; then
+        is_vm=true
+        break
+      elif [[ "$response" =~ ^([nN]|[nN][oO])$ || -z "$response" ]]; then
+        is_vm=false
+        break
+      else
+        echo "Invalid input. Please answer y or n."
+      fi
+    done
   fi
 }
 

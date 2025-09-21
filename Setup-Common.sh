@@ -37,6 +37,7 @@ prompt_for_vm() {
       break
     elif [[ "$response" =~ ^([nN]|[nN][oO])$ || -z "$response" ]]; then
       is_vm=false
+      sudo -u "$username" touch home/.physical
       break
     else
       echo "Invalid input. Please answer y or n."
