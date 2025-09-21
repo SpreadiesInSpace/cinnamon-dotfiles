@@ -1,20 +1,24 @@
 #!/bin/bash
-# ~/.bashrc.d/void.sh
+# ~/.bashrc.d/Void.sh
 # Void Linux specific aliases and functions
 
 # Warning-based Error Handling
 warn() { echo -e "\033[1;33mWarning:\033[0m $*" >&2; return 1; }
 
 # Void Cleaning
+cleanKernel() {
+  sudo vkpurge rm all || \
+  warn "Failed to remove old kernels."
+}
+
 cleanAll() {
+  cleanKernel
   flatpak remove --unused || \
     warn "Failed to remove unused flatpak packages."
   sudo flatpak repair || \
     warn "Failed to repair flatpak packages."
   sudo xbps-remove -yROo || \
     warn "No orphaned packages to remove."
-  sudo vkpurge rm all || \
-    warn "Failed to remove old kernels."
   rm -rf ~/.cache/* || \
     warn "Failed to clean user cache."
   sudo rm -rf /var/cache/xbps || \

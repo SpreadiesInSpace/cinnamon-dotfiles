@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# ~/.bashrc.d/nixos.sh
+# ~/.bashrc.d/NixOS.sh
 # NixOS specific aliases and functions
 
 # Warning-based Error Handling

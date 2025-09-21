@@ -1,12 +1,17 @@
 #!/bin/bash
-# ~/.bashrc.d/gentoo.sh
+# ~/.bashrc.d/Gentoo.sh
 # Gentoo Linux specific aliases and functions
 
 # Warning-based Error Handling
 warn() { echo -e "\033[1;33mWarning:\033[0m $*" >&2; return 1; }
 
 # Gentoo Cleaning
+cleanKernel() {
+  sudo eclean-kernel -a || warn "Failed to clean old kernels."
+}
+
 cleanAll() {
+  cleanKernel
   sudo emerge -aq --depclean || \
     warn "Failed to clean dependencies."
   flatpak remove --unused || \
@@ -37,10 +42,6 @@ cleanAll() {
     warn "Failed to run system bleachbit cleanup."
   bleachbit -c --preset || \
     warn "Failed to run user bleachbit cleanup."
-}
-
-cleanKernel() {
-  sudo eclean-kernel -a || warn "Failed to clean old kernels."
 }
 
 # Gentoo Update

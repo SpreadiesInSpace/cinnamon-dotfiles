@@ -1,5 +1,5 @@
 #!/bin/bash
-# ~/.bashrc.d/lmde.sh
+# ~/.bashrc.d/LMDE.sh
 # LMDE specific aliases and functions
 
 # Warning-based Error Handling
@@ -22,6 +22,7 @@ cleanKernel() {
 }
 
 cleanAll() {
+  cleanKernel
   flatpak remove --unused || \
     warn "Failed to remove unused flatpak packages."
   sudo flatpak repair || \

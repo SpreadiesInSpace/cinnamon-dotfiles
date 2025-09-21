@@ -1,5 +1,5 @@
 #!/bin/bash
-# ~/.bashrc.d/arch.sh
+# ~/.bashrc.d/Arch.sh
 # Arch Linux specific aliases and functions
 
 # Warning-based Error Handling

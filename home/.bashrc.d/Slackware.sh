@@ -1,5 +1,5 @@
 #!/bin/bash
-# ~/.bashrc.d/slackware.sh
+# ~/.bashrc.d/Slackware.sh
 # Slackware Current specific aliases and functions
 
 # Warning-based Error Handling

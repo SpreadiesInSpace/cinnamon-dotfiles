@@ -1,11 +1,22 @@
 #!/bin/bash
-# ~/.bashrc.d/fedora.sh
+# ~/.bashrc.d/Fedora.sh
 # Fedora Linux specific aliases and functions
 
 # Warning-based Error Handling
 warn() { echo -e "\033[1;33mWarning:\033[0m $*" >&2; return 1; }
 
 # Fedora Cleaning
+cleanKernel() {
+  local old_kernels
+  old_kernels=$(dnf repoquery --installonly --latest-limit=-1 -q)
+  if [ -n "$old_kernels" ]; then
+    sudo dnf remove "$old_kernels" || \
+      warn "Failed to remove old kernels."
+  else
+    echo "No old kernels to remove"
+  fi
+}
+
 cleanExtra() {
   sudo rpm -e --nodeps cinnamon-themes mint-x-icons \
     mint-y-icons mint-y-theme mint-themes \
@@ -20,14 +31,14 @@ cleanExtra() {
 }
 
 cleanAll() {
+  cleanKernel
   sudo dnf autoremove -y || \
     warn "Failed to autoremove packages."
   flatpak remove --unused || \
     warn "Failed to remove unused flatpak packages."
   sudo flatpak repair || \
     warn "Failed to repair flatpak packages."
-  cleanExtra || \
-    warn "Failed to clean extra files."
+  cleanExtra
   sudo dnf clean all || \
     warn "Failed to clean dnf cache."
   rm -rf ~/.cache/* || \
@@ -40,17 +51,6 @@ cleanAll() {
     warn "Failed to run system bleachbit cleanup."
   bleachbit -c --preset || \
     warn "Failed to run user bleachbit cleanup."
-}
-
-cleanKernel() {
-  local old_kernels
-  old_kernels=$(dnf repoquery --installonly --latest-limit=-1 -q)
-  if [ -n "$old_kernels" ]; then
-    sudo dnf remove "$old_kernels" || \
-      warn "Failed to remove old kernels."
-  else
-    echo "No old kernels to remove"
-  fi
 }
 
 # Fedora Update
