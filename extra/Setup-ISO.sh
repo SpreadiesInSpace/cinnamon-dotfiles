@@ -89,7 +89,7 @@ select _ in "${options[@]}"; do
       echo -e "${GREEN}Running $filename...${NC}"
 
       if [[ "$REPLY" == "6" ]]; then
-        # Slackware ISO doesn't have sudo
+        # Slackware ISO doesn't have sudo & timed breaks after time_sync
         /bin/time -f "Time Elapsed: %E" bash "$filename"
       else
         timed sudo bash "$filename"
