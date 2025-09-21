@@ -136,22 +136,19 @@ retry slpkg upgrade -y -o "slack_extra" || \
   die "Failed to update slack_extra packages."
 
 # Update Bootloader Entries (in case Kernel Gets Updated)
-if command -v grub-mkconfig >/dev/null 2>&1; then
-  echo "Detected GRUB bootloader."
-  grub-mkconfig -o /boot/grub/grub.cfg || \
-    die "Failed to generate GRUB config."
+if [ -f /etc/lilo.conf ]; then
+  echo "Detected LILO bootloader."
+  lilo || die "Failed to update LILO configuration."
 elif [ -f /boot/efi/EFI/Slackware/elilo.conf ] || \
   [ -f /boot/efi/EFI/ELILO/elilo.conf ]; then
   echo "Detected ELILO bootloader."
-  eliloconfig || \
-    die "Failed to update ELILO configuration."
-elif [ -f /etc/lilo.conf ]; then
-  echo "Detected LILO bootloader."
-  lilo || \
-    die "Failed to update LILO configuration."
+  eliloconfig || die "Failed to update ELILO configuration."
+elif command -v grub-mkconfig >/dev/null 2>&1; then
+  echo "Detected GRUB bootloader."
+  grub-mkconfig -o /boot/grub/grub.cfg || \
+    die "Failed to generate GRUB config."
 else
-  echo "No recognized bootloader found."
-  die "Bootloader configuration not updated."
+  die "No recognized bootloader found."
 fi
 
 # Install Bash Completion for csb

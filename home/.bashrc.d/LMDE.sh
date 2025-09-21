@@ -2,8 +2,8 @@
 # ~/.bashrc.d/lmde.sh
 # LMDE specific aliases and functions
 
-# Minimum Error Handling
-bdie() { echo -e "\033[1;31mError:\033[0m $*" >&2; return 1; }
+# Warning-based Error Handling
+warn() { echo -e "\033[1;33mWarning:\033[0m $*" >&2; return 1; }
 
 # Debian Cleaning
 cleanKernel() {
@@ -14,24 +14,36 @@ cleanKernel() {
     awk '($1==c){exit} {print $2}' c="$(uname -r | cut -f1,2 -d-)")
 
   if (( ${#packages[@]} > 0 )); then
-    sudo apt-get purge "${packages[@]}" || true
+    sudo apt-get purge "${packages[@]}" || \
+      warn "Failed to remove old kernels."
   else
     echo "No old kernels to remove"
   fi
 }
 
 cleanAll() {
-  flatpak remove --unused || true
-  sudo flatpak repair || bdie "Failed to repair flatpak packages."
-  sudo rm -rf /var/lib/systemd/coredump/* || true
-  sudo apt clean -y || true
-  sudo apt autoclean -y || true
-  sudo apt autoremove -y || true
-  rm -rf ~/.cache/* || true
-  sudo journalctl --vacuum-size=50M || true
-  sudo journalctl --vacuum-time=4weeks || true
-  sudo bleachbit -c --preset || true
-  bleachbit -c --preset || true
+  flatpak remove --unused || \
+    warn "Failed to remove unused flatpak packages."
+  sudo flatpak repair || \
+    warn "Failed to repair flatpak packages."
+  sudo rm -rf /var/lib/systemd/coredump/* || \
+    warn "Failed to clean systemd coredumps."
+  sudo apt clean -y || \
+    warn "Failed to clean apt cache."
+  sudo apt autoclean -y || \
+    warn "Failed to autoclean apt cache."
+  sudo apt autoremove -y || \
+    warn "Failed to autoremove packages."
+  rm -rf ~/.cache/* || \
+    warn "Failed to clean user cache."
+  sudo journalctl --vacuum-size=50M || \
+    warn "Failed to vacuum journalctl by size."
+  sudo journalctl --vacuum-time=4weeks || \
+    warn "Failed to vacuum journalctl by time."
+  sudo bleachbit -c --preset || \
+    warn "Failed to run system bleachbit cleanup."
+  bleachbit -c --preset || \
+    warn "Failed to run user bleachbit cleanup."
 }
 
 # Debian Update
@@ -41,15 +53,15 @@ updateNeovim() {
   fi
   echo "Performing LazySync..."
   nvim --headless "+Lazy! sync" +qa > /dev/null 2>&1 || \
-    bdie "LazySync failed."
+    warn "LazySync failed."
   echo "LazySync complete!"
 }
 
 updateApp() {
-  sudo apt update -y || bdie "Failed to update package lists."
-  sudo apt full-upgrade || bdie "Failed to upgrade packages."
-  flatpak update -y || bdie "Failed to update flatpak packages."
-  updateNeovim || true
+  sudo apt update -y || warn "Failed to update package lists."
+  sudo apt full-upgrade || warn "Failed to upgrade packages."
+  flatpak update -y || warn "Failed to update flatpak packages."
+  updateNeovim || warn "Failed to update Neovim."
 }
 
 updateAll() {
@@ -66,8 +78,8 @@ updateShutdown() {
 
 # Update and Cleanup
 UC() {
-  updateAll || true
-  sudo bleachbit || true
+  updateAll || warn "Failed to complete update."
+  sudo bleachbit || warn "Final bleachbit cleanup failed."
   exit
 }
 
