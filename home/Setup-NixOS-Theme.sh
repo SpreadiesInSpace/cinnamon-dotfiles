@@ -96,7 +96,7 @@ set_cinnamon_menu_icon "NixOS-Start.png"
 set_cinnamon_background_and_sounds
 
 # Install Synth-Shell Prompt
-# setup_synth_shell_config "arch"
+setup_synth_shell_config "nixos"
 
 # Backup old configs and install NVChad for neovim
 install_nvchad

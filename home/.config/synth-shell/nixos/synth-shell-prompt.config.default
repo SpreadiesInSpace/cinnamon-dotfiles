@@ -1,0 +1,134 @@
+##==============================================================================
+## COLORS
+##
+## Control the color and format scheme of the bash prompt.
+## The prompt is divided into segments, listed below starting from the left:
+## -  USER: shows the user's name.
+## -  HOST: shows the host's name.
+## -   PWD: shows the current directory.
+## -   GIT: if inside a git repository, shows the name of current branch.
+## - PYENV: if inside a Python Virtual environment.
+## -    TF: if inside a Terraform Workspace.
+## - CLOCK: shows current time in H:M format.
+## - INPUT: actual bash input.
+##
+## Valid color options:
+## - white black light-gray dark-gray
+##   red green yellow blue cyan purple
+##   light-red light-green light-yellow light-blue light-cyan light-purple
+## - Values in the range [0-255] for 256 bit colors. To check all number-color
+##   pairs for your terminal, you may run the following snippet by HaleTom:
+##     curl -s https://gist.githubusercontent.com/HaleTom/89ffe32783f89f403bba96bd7bcd1263/raw/ | bash
+##   or search something like "bash 256 color codes" on the internet.
+##
+##==============================================================================
+
+
+##==============================================================================
+## MAIN FORMAT
+##==============================================================================
+format="USER HOST PWD GIT PYENV TF KUBE"
+
+separator_char='\uE0B0'           # Separation character, '\uE0B0'=triangle
+separator_padding_left=''         # Add char or string to the left of the separator
+separator_padding_right=''        # Add char or string to the right of the separator
+segment_padding=' '               # Add char or string around segment text
+enable_vertical_padding=true      # Add extra new line over prompt
+enable_command_on_new_line=false  # Add new line between prompt and command
+
+
+
+##==============================================================================
+## USER
+##==============================================================================
+font_color_user="white"
+background_user="blue"
+texteffect_user="bold"
+
+
+
+##==============================================================================
+## HOST
+##==============================================================================
+font_color_host="white"
+background_host="light-blue"
+texteffect_host="bold"
+
+
+
+##==============================================================================
+## PWD (working dir)
+##==============================================================================
+font_color_pwd="dark-gray"
+background_pwd="white"
+texteffect_pwd="bold"
+
+max_pwd_char="25"
+pwd_trunc_symbol="…"
+
+
+
+##==============================================================================
+## GIT
+##==============================================================================
+font_color_git="light-gray"
+background_git="dark-gray"
+texteffect_git="bold"
+
+git_symbol_synced=''
+git_symbol_unpushed=' ▲'
+git_symbol_unpulled=' ▼'
+git_symbol_unpushedunpulled=' ◆'
+git_symbol_dirty=' ◔'
+git_symbol_dirty_unpushed=' ◔ △'
+git_symbol_dirty_unpulled=' ◔ ▽'
+git_symbol_dirty_unpushedunpulled=' ◔ ◇'
+git_symbol_stash='🗎'
+git_update_period_minutes=15	# Use -1 to disable automatic updates
+
+
+
+##==============================================================================
+## PYENV
+##==============================================================================
+font_color_pyenv="white"
+background_pyenv="blue"
+texteffect_pyenv="bold"
+
+
+
+##==============================================================================
+## KUBERNETES
+##==============================================================================
+font_color_kube="white"
+background_kube="purple"
+texteffect_kube="bold"
+
+
+
+##==============================================================================
+## TERRAFORM WORKSPACE
+##==============================================================================
+font_color_tf="purple"
+background_tf="light-purple"
+texteffect_tf="bold"
+
+
+
+##==============================================================================
+## CLOCK
+##==============================================================================
+font_color_clock="white"
+background_clock="light-blue"
+texteffect_clock="bold"
+
+clock_format="%H:%M"
+
+
+
+##==============================================================================
+## INPUT (user typed command)
+##==============================================================================
+font_color_input="45"
+background_input="none"
+texteffect_input="bold"

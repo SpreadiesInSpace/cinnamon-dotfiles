@@ -378,25 +378,6 @@ copy_bashrc_and_etc() {
   sudo cp /root/.bashrc /root/.bashrc.old."$timestamp" \
     >/dev/null 2>&1 || true
 
-  # Root .bashrc handling
-  if [ "$distro" = "NixOS" ]; then
-    # Preserve and replace user synth-shell directory with timestamp
-    if [ -d ~/.config/synth-shell ]; then
-      mv ~/.config/synth-shell ~/.config/synth-shell.old."$timestamp"
-    fi
-    mkdir -p ~/.config/synth-shell
-    cp -npr .bashrc.d/synth-shell-prompt.sh ~/.config/synth-shell/ || \
-      die "Failed to copy synth-shell-prompt.sh."
-    # Preserve and replace root synth-shell directory with timestamp
-    sudo mv /root/.config/synth-shell \
-      /root/.config/synth-shell.old."$timestamp" >/dev/null 2>&1 || true
-    sudo mkdir -p /root/.config/synth-shell
-    sudo cp -prf .bashrc.d/synth-shell-prompt-root.sh \
-      /root/.config/synth-shell/synth-shell-prompt.sh || \
-      die "Failed to copy synth-shell-prompt.sh."
-    sudo cp "theming/$distro/NixAscii.txt" /root/ || \
-      die "Failed to copy NixOS ASCII."
-  fi
   # Copy root .bashrc to appropriate directory
   sudo cp -prf root.bashrc /root/.bashrc || \
     die "Failed to copy root .bashrc"
@@ -835,7 +816,6 @@ set_cinnamon_background_and_sounds() {
   done
 }
 
-# NixOS doesn't use this
 setup_synth_shell_config() {
   local distro="${1:-}"
   local timestamp
