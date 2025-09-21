@@ -376,6 +376,12 @@ copy_bashrc_and_etc() {
     mv ~/.bashrc.d ~/.bashrc.d.old."$timestamp"
   fi
 
+  # Copy ASCII to /root/ if NixOS
+  if [ "$distro" = "NixOS" ]; then
+    sudo cp "theming/$distro/NixAscii.txt" /root/ || \
+      die "Failed to copy NixOS ASCII."
+  fi
+
   # Copy new .bashrc.d alias scripts to appropriate directory
   mkdir -p ~/.bashrc.d/
   cp -npr ".bashrc.d/$distro.sh" ~/.bashrc.d/  || \
