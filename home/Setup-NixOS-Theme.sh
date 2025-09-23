@@ -123,5 +123,11 @@ install_nvchad
 # Restarts Cinnamon
 restart_cinnamon
 
+# Rebuild if installed via cinnamon-ISO
+if [[ -f ".rebuild" ]]; then
+  echo "Rebuilding..."
+  sudo nixos-rebuild switch >/dev/null 2>&1
+fi
+
 # Display Logoff Message
 print_finish_message

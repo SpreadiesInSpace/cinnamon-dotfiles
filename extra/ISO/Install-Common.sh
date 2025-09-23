@@ -627,7 +627,7 @@ clone_dotfiles() {
         { echo \"Failed to clone repo.\"; exit 1; }
       cd cinnamon-dotfiles ||
         { echo \"Failed to enter repo directory.\"; exit 1; }
-      touch .nixos-25.05.done .$distro.done ||
+      touch .nixos-25.05.done .$distro.done home/.rebuild ||
         { echo \"Failed to create flags.\"; exit 1; }
       if [ \"$is_vm\" = true ]; then
         touch home/.vm || { echo \"Failed to create VM flag.\"; exit 1; }
@@ -649,18 +649,31 @@ CLONE
 setup_grub_theme() {
   # Setup GRUB theme
   local distro="${1:-}"
-
+  local dir="/mnt/home/$username/cinnamon-dotfiles"
+  dir="$dir/boot/grub/themes/gruvbox-dark/"
   if [ "$distro" = "NixOS" ]; then
-    # NixOS uses nixos-enter
-    nixos-enter --root /mnt -c "
-      cd /home/$username/cinnamon-dotfiles/extra/grub-theme-setup/ ||
-        { echo \"Failed to enter GRUB theme directory.\"; exit 1; }
-      bash $distro.sh ||
-        { echo \"Failed to setup GRUB theme.\"; exit 1; }"
+    if [ ! -d "$dir" ]; then
+      die "GRUB theme source not found in cinnamon-dotfiles"
+    fi
+
+    mkdir -p /mnt/boot/grub/themes || \
+      die "Failed to create GRUB themes directory."
+    cp -rf "$dir" \
+      /mnt/boot/grub/themes/ || \
+      die "Failed to copy Gruvbox GRUB theme."
+
+    # Modify the NixOS configuration to enable the theme
+    local config_file="/mnt/etc/nixos/configuration.nix"
+    sed -i '/^\s*grub = {/,/^\s*};/ {
+      s/^\(\s*\)#\s*theme = /\1theme = /
+      s/^\(\s*\)#\s*splashImage = /\1splashImage = /
+    }' "$config_file" || \
+      die "Failed to uncomment grub theme lines in configuration.nix"
+
   else
     cd "/home/$username/cinnamon-dotfiles/extra/grub-theme-setup/" ||
       die "Failed to enter GRUB theme directory."
-    bash "$distro.sh" || die "Failed to setup GRUB theme."
+    bash "$distro.sh" >/dev/null 2>&1 || die "Failed to setup GRUB theme."
   fi
 }
 

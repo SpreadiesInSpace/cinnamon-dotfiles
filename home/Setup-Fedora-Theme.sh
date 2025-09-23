@@ -11,6 +11,14 @@ check_not_root
 # Check for missing dependencies
 check_dependencies
 
+# Disable Gnome Software Automatic Updates if installed via cinnamon-ISO
+if [[ -f ".fedora.gnome" ]]; then
+  gsettings set org.gnome.software allow-updates false || \
+    die "Failed to disable Gnome Software updates."
+  gsettings set org.gnome.software download-updates false || \
+    die "Failed to disable Gnome Software auto-downloads."
+fi
+
 # VM Prompt
 prompt_for_vm
 

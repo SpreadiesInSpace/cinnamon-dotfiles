@@ -6,7 +6,7 @@ die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
 source ./Setup-Common.sh || die "Failed to source Setup-Common.sh"
 
 # Declare variables that will be set by sourced functions
-declare enable_autologin is_vm
+declare username enable_autologin is_vm
 
 # Check if the script is run as root
 check_if_root
@@ -70,6 +70,7 @@ retry dnf -y group install sound-and-video || \
 if [[ -f ".fedora-42.done" ]]; then
   bash unsorted/Fedora/Fedora-Bloat.sh || \
     die "Failed to remove bloat."
+  sudo -u "$username" touch home/.fedora.gnome
 fi
 
 # Install Brave
