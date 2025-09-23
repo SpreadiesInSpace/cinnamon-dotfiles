@@ -23,7 +23,7 @@ eselect repository enable guru || \
 emaint sync -r guru || die "Failed to sync the guru repository."
 
 # Use systemd for grub-btrfs
-if [ "$GENTOO_INIT" = "openrc" ]; then
+if [ "$GENTOO_INIT" = "systemd" ]; then
 echo "app-backup/grub-btrfs systemd" | \
   tee /etc/portage/package.use/grub-btrfs > /dev/null || \
   die "Failed to set USE flag for grub-btrfs."
