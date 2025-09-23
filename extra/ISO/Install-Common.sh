@@ -143,8 +143,8 @@ prompt_user_password() {
 prompt_grub_timeout() {
   # Prompt for GRUB timeout
   while true; do
-    read -rp "Enter GRUB timeout in seconds [default: 0]: " grub_timeout
-    grub_timeout="${grub_timeout:-0}"  # default if empty
+    read -rp "Enter GRUB timeout in seconds [default: 3]: " grub_timeout
+    grub_timeout="${grub_timeout:-3}"  # default if empty
 
     # Validate input is numeric and within range
     if [[ "$grub_timeout" =~ ^[0-9]+$ ]] &&
