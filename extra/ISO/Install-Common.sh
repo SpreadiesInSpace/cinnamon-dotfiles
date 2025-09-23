@@ -148,11 +148,11 @@ prompt_grub_timeout() {
 
     # Validate input is numeric and within range
     if [[ "$grub_timeout" =~ ^[0-9]+$ ]] &&
-       [ "$grub_timeout" -ge 0 ] && [ "$grub_timeout" -le 60 ]; then
+       [ "$grub_timeout" -ge 0 ] && [ "$grub_timeout" -le 10 ]; then
       echo "GRUB timeout set to: $grub_timeout seconds"
       break
     else
-      echo "Invalid timeout. Please enter a number between 0 and 60."
+      echo "Invalid timeout. Please enter a number between 0 and 10."
     fi
   done
   export grub_timeout
