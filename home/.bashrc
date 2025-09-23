@@ -38,27 +38,6 @@ shopt -s globstar       # Allow ** for recursive directory matching
 # shopt -s nullglob     # Expand unmatched globs to nothing instead of literal
 # shopt -o noclobber    # Prevent output redirection from overwriting files
 
-#=========================== Distribution Detection ===========================
-
-# Detect distribution
-get_distro() {
-  distro=""
-  if [ -f /etc/os-release ]; then
-    . /etc/os-release
-    case "$ID" in
-      arch) distro="arch" ;;
-      fedora) distro="fedora" ;;
-      gentoo) distro="gentoo" ;;
-      linuxmint) distro="lmde" ;;
-      nixos) distro="nixos" ;;
-      opensuse*) distro="opensuse" ;;
-      slackware) distro="slackware" ;;
-      void) distro="void" ;;
-    esac
-  fi
-}
-get_distro
-
 #============================ Color Configuration =============================
 
 # Set colored GCC warnings and errors
@@ -102,7 +81,7 @@ done
 #========================= System Tools Configuration =========================
 
 # Make less more friendly for non-text files
-if [ -x /usr/bin/lesspipe ] && [ "$distro" != "gentoo" ]; then
+if [ -x /usr/bin/lesspipe ] && [ ! -f /etc/gentoo-release ]; then
   eval "$(SHELL=/bin/sh lesspipe)"
 fi
 
@@ -211,7 +190,7 @@ if [[ $term == *gnome-terminal* ]] || \
 fi
 
 # Clean up temporary variables
-unset term distro get_distro rc alias_file
+unset term rc alias_file
 
 #============================ User Customizations =============================
 # Add your personal aliases, functions, and settings below this line
