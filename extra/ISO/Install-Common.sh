@@ -143,16 +143,16 @@ prompt_user_password() {
 prompt_grub_timeout() {
   # Prompt for GRUB timeout
   while true; do
-    read -rp "Enter GRUB timeout in seconds [0-30, default: 5]: " grub_timeout
-    grub_timeout="${grub_timeout:-5}"  # default if empty
+    read -rp "Enter GRUB timeout in seconds [default: 0]: " grub_timeout
+    grub_timeout="${grub_timeout:-0}"  # default if empty
 
     # Validate input is numeric and within range
     if [[ "$grub_timeout" =~ ^[0-9]+$ ]] &&
-       [ "$grub_timeout" -ge 0 ] && [ "$grub_timeout" -le 30 ]; then
+       [ "$grub_timeout" -ge 0 ] && [ "$grub_timeout" -le 60 ]; then
       echo "GRUB timeout set to: $grub_timeout seconds"
       break
     else
-      echo "Invalid timeout. Please enter a number between 0 and 30."
+      echo "Invalid timeout. Please enter a number between 0 and 60."
     fi
   done
   export grub_timeout
@@ -658,9 +658,9 @@ setup_grub_theme() {
       bash $distro.sh ||
         { echo \"Failed to setup GRUB theme.\"; exit 1; }"
   else
-    cd /home/$username/cinnamon-dotfiles/extra/grub-theme-setup/ ||
+    cd "/home/$username/cinnamon-dotfiles/extra/grub-theme-setup/" ||
       die "Failed to enter GRUB theme directory."
-    bash $distro.sh || die "Failed to setup GRUB theme."
+    bash "$distro.sh" || die "Failed to setup GRUB theme."
   fi
 }
 
