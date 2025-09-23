@@ -27,7 +27,7 @@ enable_flatpak_theme_override
 copy_bleachbit_config "arch"
 
 # Copies fonts to appropriate directories
-copy_fonts
+copy_fonts "arch"
 
 # Copies sounds and wallpapers to home directory
 copy_sounds_and_wallpapers
