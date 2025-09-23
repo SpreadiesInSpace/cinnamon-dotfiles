@@ -81,7 +81,7 @@ get_distro() {
       void) distro="void" ;;
     esac
   fi
-  echo "Detected OS: $ID"
+  echo "Detected OS: $distro"
 }
 
 prompt_hostname() {
@@ -105,11 +105,16 @@ include"
 
 prompt_timezone() {
   # Prompt for timezone
-  local distro="${1:-}"
   local zoneinfo_dir="/usr/share/zoneinfo"
 
-  # If NixOS, use /etc/zoneinfo instead
-  [ "$distro" = "nixos" ] && zoneinfo_dir="/etc/zoneinfo"
+  if [ ! -d "$zoneinfo_dir" ]; then
+    if [ -d "/etc/zoneinfo" ]; then
+      zoneinfo_dir="/etc/zoneinfo"
+    else
+      echo "No timezone database found. Skipping timezone prompt."
+      return
+    fi
+  fi
 
   while true; do
     read -rp "Enter your timezone (e.g., Asia/Bangkok): " timezone

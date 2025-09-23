@@ -140,6 +140,24 @@ prompt_user_password() {
   done
 }
 
+prompt_grub_timeout() {
+  # Prompt for GRUB timeout
+  while true; do
+    read -rp "Enter GRUB timeout in seconds [0-30, default: 5]: " grub_timeout
+    grub_timeout="${grub_timeout:-5}"  # default if empty
+
+    # Validate input is numeric and within range
+    if [[ "$grub_timeout" =~ ^[0-9]+$ ]] &&
+       [ "$grub_timeout" -ge 0 ] && [ "$grub_timeout" -le 30 ]; then
+      echo "GRUB timeout set to: $grub_timeout seconds"
+      break
+    else
+      echo "Invalid timeout. Please enter a number between 0 and 30."
+    fi
+  done
+  export grub_timeout
+}
+
 prompt_drive() {
   # Prompt for drive to partition
   echo; lsblk; echo
@@ -615,7 +633,7 @@ clone_dotfiles() {
         touch home/.vm || { echo \"Failed to create VM flag.\"; exit 1; }
       fi
       echo \"Reboot and run Theme.sh in cinnamon-dotfiles located in \
-\$HOME/cinnamon-dotfiles.\"'" || die "Failed to clone repo for NixOS."
+\$HOME/cinnamon-dotfiles.\"'"
   else
     cat << CLONE | su - "$username"
 cd && git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles || \
@@ -625,6 +643,24 @@ touch .$distro.done || die "Failed to create flag."
 echo "Reboot and run Setup.sh in cinnamon-dotfiles located in \
 \$HOME/cinnamon-dotfiles."
 CLONE
+  fi
+}
+
+setup_grub_theme() {
+  # Setup GRUB theme
+  local distro="${1:-}"
+
+  if [ "$distro" = "nixos" ]; then
+    # NixOS uses nixos-enter
+    nixos-enter --root /mnt -c "
+      cd /home/$username/cinnamon-dotfiles/extra/grub-theme-setup/ ||
+        { echo \"Failed to enter GRUB theme directory.\"; exit 1; }
+      bash $distro.sh ||
+        { echo \"Failed to setup GRUB theme.\"; exit 1; }"
+  else
+    cd /home/$username/cinnamon-dotfiles/extra/grub-theme-setup/ ||
+      die "Failed to enter GRUB theme directory."
+    bash $distro.sh || die "Failed to setup GRUB theme."
   fi
 }
 

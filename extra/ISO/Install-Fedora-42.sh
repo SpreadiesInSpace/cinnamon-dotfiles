@@ -45,6 +45,9 @@ prompt_hostname
 # Prompt for timezone
 prompt_timezone
 
+# Prompt for GRUB timeout
+prompt_grub_timeout
+
 # Prompt for drive to partition
 prompt_drive
 
@@ -100,7 +103,7 @@ cp Install-Common.sh Master-Common.sh /mnt/ || \
 
 # Ensure variables are exported before chroot
 export drive hostname timezone username rootpasswd userpasswd BOOTMODE \
-  REMOVABLE_BOOT || \
+  REMOVABLE_BOOT grub_timeout || \
   die "Failed to export required variables."
 
 # Chrooting
@@ -166,8 +169,9 @@ else
   install_grub "fedora"
 fi
 
-# Set GRUB timeout to 0
-sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub || \
+# Set GRUB timeout
+sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=$grub_timeout/' \
+  /etc/default/grub || \
   die "Failed to set GRUB_TIMEOUT."
 
 # Configure zRAM
@@ -222,4 +226,7 @@ rm -rf Install-Common.sh Master-Common.sh
 
 # Clone cinnamon-dotfiles repo as new user
 clone_dotfiles "fedora-42"
+
+# Setup GRUB theme
+setup_grub_theme "Fedora"
 EOF

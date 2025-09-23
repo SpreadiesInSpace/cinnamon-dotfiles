@@ -45,6 +45,9 @@ prompt_hostname
 # Prompt for timezone
 prompt_timezone
 
+# Prompt for GRUB timeout
+prompt_grub_timeout
+
 # Prompt for drive to partition
 prompt_drive
 
@@ -192,7 +195,7 @@ cp "$SCRIPT_DIR/Install-Common.sh" "$SCRIPT_DIR/Master-Common.sh" \
   /mnt/gentoo/ || \
   die "Failed to copy Install-Common.sh to chroot."
 
-#====================== Extra Variables (Used in Chroot) ======================
+#============================== Chroot Variables ==============================
 
 # Binary Repos
 SYNC_URI_V3="http://download.nus.edu.sg/mirror/gentoo/releases/amd64"
@@ -226,10 +229,10 @@ IS_INTEL="false"
 # Ensure variables are exported before chroot
 export drive hostname timezone username rootpasswd userpasswd BOOTMODE \
   REMOVABLE_BOOT GENTOO_INIT SYNC_URI_V3 SYNC_URI GIT_PKGS SYSTEM_PKGS \
-  PHYSICAL_PKGS IS_INTEL || \
+  PHYSICAL_PKGS IS_INTEL grub_timeout || \
   die "Failed to export required variables."
 
-#=========================== Extra Variables - END ============================
+#=========================== Chroot Variables - END ===========================
 
 # Entering Chroot
 cat << EOF | chroot /mnt/gentoo /bin/bash || die "Failed to enter chroot."
@@ -417,8 +420,8 @@ fi
 # Configure GRUB Bootloader
 install_grub
 
-# Set GRUB timeout to 0
-sed -i '/^#*GRUB_TIMEOUT=/s/^#*GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' \
+# Set GRUB timeout
+sed -i '/^#*GRUB_TIMEOUT=/s/^#*GRUB_TIMEOUT=.*/GRUB_TIMEOUT=$grub_timeout/' \
   /etc/default/grub || die "Failed to set GRUB_TIMEOUT."
 
 # Configure zRAM
@@ -449,4 +452,7 @@ rm /stage3-*.tar.* Install-Common.sh Master-Common.sh latest-stage3.txt || \
 
 # Clone cinnamon-dotfiles repo as new user
 clone_dotfiles "gentoo"
+
+# Setup GRUB theme
+setup_grub_theme "Gentoo"
 EOF

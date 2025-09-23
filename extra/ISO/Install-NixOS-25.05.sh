@@ -37,7 +37,10 @@ prompt_user_password
 prompt_hostname
 
 # Prompt for timezone
-prompt_timezone "nixos"
+prompt_timezone
+
+# Prompt for GRUB timeout
+prompt_grub_timeout
 
 # Prompt for drive to partition
 prompt_drive
@@ -94,7 +97,7 @@ retry nixos-install --no-root-passwd || \
   die "Failed to install NixOS."
 
 # Ensure variables are exported before chroot
-export username rootpasswd userpasswd || \
+export username rootpasswd userpasswd grub_timeout || \
   die "Failed to export required variables."
 
 # Set Passwords
@@ -112,5 +115,13 @@ nixos-enter --root /mnt -c 'echo "Enabling Flathub..." && \
 # Place Login Wallpaper
 setup_login_wallpaper "$CONFIG" "/mnt"
 
+# Set GRUB timeout
+sed -i "s/^\\(\\s*\\)timeout\\s*=.*/\\1timeout = $grub_timeout;/" \
+  "$CONFIG" || \
+  die "Failed to set GRUB_TIMEOUT."
+
 # Clone cinnamon-dotfiles repo as new user
 clone_dotfiles "nixos"
+
+# Setup GRUB theme
+setup_grub_theme "NixOS"

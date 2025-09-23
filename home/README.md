@@ -96,23 +96,21 @@ cd cinnamon-dotfiles/home
  - [ ] virt-manager
  - [ ] vscodium ***# Gruvbox Dark Hard theme appiled***
  
-## Brave Theming
+## Brave Gruvbox Dark Profile
 
-> The Brave gruvbox profile is NOT applied in the script. The theme is located
-> in extra/brave-gruvbox.sh
+> The Brave gruvbox-dark profile is NOT applied in the script. The setup
+> script is located in extra/brave-gruvbox.sh
 
-## Grub Theming
+## GRUB Gruvbox Dark Theme
 
-> The Grub theme is NOT applied in the script. The profile is located in
-> boot/grub/themes/gruvbox-dark
+> The GRUB gruvbox-dark theme is applied only if installed via cinnamon-ISO.
+> The setup scripts for all distros are located in extra/grub-theme-setup
 
-## Grub-Btrfs & Theming Setup
+## Grub-Btrfs Setup
 
-> If you use btrfs and would like to set up grub-btrfs and apply the
-> gruvbox-dark theme at the same time, the setup scripts for all distros
-> are located in extra/grub-btrfs-setup.
+> The grub-btrfs setup scripts are located in extra/grub-btrfs-setup
 
 ## Gruvbox-Light Theme
 
-> This is a work in progress, but all the files needed are located in
+> This is a work in progress, but all the files are located in
 > extra/gruvbox-light.
