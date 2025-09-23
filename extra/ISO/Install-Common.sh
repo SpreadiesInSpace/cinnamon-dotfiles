@@ -160,23 +160,32 @@ prompt_grub_timeout() {
 
 prompt_drive() {
   # Prompt for drive to partition
-  echo; lsblk; echo
+  echo; lsblk -dpo NAME,SIZE,MODEL; echo
+
+  # Check if the drive is a valid block device and not a partition
+  local regex='^/dev/(sd[a-z]+|nvme[0-9]+n[0-9]+|mmcblk[0-9]+|vd[a-z]+)$'
+
   while true; do
-    read -rp "Enter drive to use (e.g., /dev/sda, /dev/nvme0n1, \
-/dev/mmcblk0): " drive
-    # Check if the drive is a valid block device and not a partition
-    if [[ "$drive" =~ ^/dev/(sd[a-z]+|nvme[0-9]+n[0-9]+|mmcblk[0-9]+|vd[a-z]+)$ ]] &&
-      [ -b "$drive" ]; then
+    echo "Enter drive to use (e.g., /dev/sda, /dev/nvme0n1, /dev/mmcblk0):"
+    read -r drive
+
+    if [[ "$drive" =~ $regex ]] && [ -b "$drive" ]; then
+      if mount | grep -q "^$drive"; then
+        die "Drive $drive has mounted partitions. Aborting."
+      fi
+
       echo "WARNING: This will erase all data on $drive"
-      read -rp "Are you sure you want to continue? [y/N]: " confirm
-      case "$confirm" in
-        [yY][eE][sS]|[yY]) break ;;
-        *) die "Aborting." ;;
-      esac
+      while true; do
+        read -rp "Are you sure you want to continue? [y/N]: " confirm
+        case "$confirm" in
+          [yY][eE][sS]|[yY]) break 2 ;;  # exit both loops
+          [nN][oO]|[nN]|'') die "Aborting." ;;
+          *) echo "Invalid input. Please answer y or n." ;;
+        esac
+      done
     else
       echo "Invalid drive: $drive"
-      echo "Please enter a valid drive without a partition number."
-      echo "(e.g., /dev/sda, /dev/nvme0n1, /dev/mmcblk0)"
+      echo "Enter a valid drive without a partition number"
     fi
   done
 }
@@ -681,7 +690,7 @@ setup_grub_theme() {
 set_monospace_font() {
   # Create first-boot script to set monospace font for gnome-terminal
   su - "$username" -c "
-  mkdir -p ~/.config/autostart || die 'Failed to create autostart directory.'
+  mkdir -p ~/.config/autostart
   cat > ~/.config/autostart/set-font.desktop << 'MONOSPACE'
 [Desktop Entry]
 Type=Application

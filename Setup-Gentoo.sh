@@ -114,7 +114,8 @@ echo "media-video/ffmpegthumbnailer gnome" | \
 echo "gnome-extra/nemo tracker" | \
   tee /etc/portage/package.use/nemo || \
   die "Failed to set USE flags for nemo."
-echo "app-emulation/qemu glusterfs iscsi opengl pipewire spice usbredir vde virgl virtfs zstd" | \
+echo "app-emulation/qemu glusterfs iscsi opengl pipewire spice usbredir vde \
+virgl virtfs zstd" | \
   tee /etc/portage/package.use/qemu || \
   die "Failed to set USE flags for qemu."
 

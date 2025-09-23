@@ -74,9 +74,9 @@ mount_system_partitions
 retry zypper --gpg-auto-import-keys --root /mnt ar --refresh \
   https://download.opensuse.org/tumbleweed/repo/oss/ oss || \
   die "Failed to add openSUSE repo."
-retry zypper --gpg-auto-import-keys --root /mnt in -y --download-in-advance dracut \
-  kernel-default grub2 grub2-i386-pc grub2-x86_64-efi shim zypper bash man \
-  shadow util-linux nano arch-install-scripts zram-generator blueman || \
+retry zypper --gpg-auto-import-keys --root /mnt in -y --download-in-advance \
+  dracut kernel-default grub2 grub2-i386-pc grub2-x86_64-efi shim zypper bash \
+  shadow util-linux nano arch-install-scripts zram-generator man blueman || \
   die "Failed to install base packages."
 
 # Copy Repos
