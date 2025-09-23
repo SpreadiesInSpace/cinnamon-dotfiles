@@ -650,7 +650,7 @@ setup_grub_theme() {
   # Setup GRUB theme
   local distro="${1:-}"
 
-  if [ "$distro" = "nixos" ]; then
+  if [ "$distro" = "NixOS" ]; then
     # NixOS uses nixos-enter
     nixos-enter --root /mnt -c "
       cd /home/$username/cinnamon-dotfiles/extra/grub-theme-setup/ ||
