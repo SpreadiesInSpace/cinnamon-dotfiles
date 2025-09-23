@@ -148,9 +148,7 @@ prompt_grub_timeout() {
 
     # Validate input is numeric and within range
     if [[ "$grub_timeout" =~ ^[0-9]+$ ]] &&
-       [ "$grub_timeout" -ge 0 ] && 
-       [[ ! "$grub_timeout" =~ [[:space:]] ]] &&
-       [ "$grub_timeout" -le 10 ]; then
+       [ "$grub_timeout" -ge 0 ] && [ "$grub_timeout" -le 10 ]; then
       echo "GRUB timeout set to: $grub_timeout seconds"
       break
     else
