@@ -87,7 +87,7 @@ retry dnf --installroot=/mnt --setopt=max_parallel_downloads=10 \
   grub2-common grub2-efi-x64 grub2-pc grub2-pc-modules grub2-tools \
   grub2-tools-efi grub2-tools-extra grub2-tools-minimal grubby kernel \
   mokutil shim-x64 arch-install-scripts git unzip spice-vdagent iwlwifi-* \
-  microcode_ctl google-noto-sans-math-fonts || \
+  microcode_ctl || \
   die "Failed to install system packages."
 
 # Copy Network Info

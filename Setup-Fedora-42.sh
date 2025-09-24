@@ -179,6 +179,7 @@ packages=(
   "spice-vdagent"
   "google-noto-fonts-common"
   "google-noto-emoji-fonts"
+  "google-noto-sans-math-fonts"
   # For NvChad
   "gcc"
   "make"
