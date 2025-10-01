@@ -105,7 +105,7 @@ packages=(
   "gparted"
   "grub-customizer"
   "ncdu"
-  "neofetch"
+  #"neofetch"
   "timeshift"
   "xkill"
   "xrandr"
@@ -179,16 +179,16 @@ packages=(
 retry xbps-install -Sy "${packages[@]}" || \
   die "Failed to install packages."
 
-# Protect neofetch from being removed
-xbps-pkgdb -m hold neofetch || \
-  die "Failed to hold neofetch package."
-
-# Install Brave and VSCodium
+# Install Brave, VSCodium & neofetch
 cd home/theming/Void || \
   die "Failed to move to theming/Void folder."
 ./update_xdeb.sh || \
   die "Failed to install Brave/VSCodium."
 cd ..
+
+# Protect neofetch from being removed
+xbps-pkgdb -m hold neofetch || \
+  die "Failed to hold neofetch package."
 
 # Configure PipeWire
 configure_pipewire

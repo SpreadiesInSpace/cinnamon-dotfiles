@@ -152,6 +152,44 @@ convert_and_install_vscodium() {
   fi
 }
 
+# Function to check and download neofetch
+check_and_download_neofetch() {
+  VERSION="7.1.0"
+  DEB_URL="http://ftp.de.debian.org/debian/pool/main/n/neofetch"
+  DEB_URL="$DEB_URL/neofetch_7.1.0-4_all.deb"
+  
+  echo "Latest neofetch version: $VERSION"
+
+  if command -v neofetch &>/dev/null; then
+    INSTALLED_VERSION=$(neofetch --version | \
+      grep -oP 'Neofetch \K\d+\.\d+\.\d+') || \
+      die "Failed to get installed neofetch version."
+    echo "Installed version: $INSTALLED_VERSION"
+    if [[ "$INSTALLED_VERSION" == "$VERSION" ]]; then
+      echo "Neofetch is already up to date."
+      return 1
+    fi
+  else
+    echo "Neofetch is not currently installed."
+  fi
+
+  echo "Downloading neofetch $VERSION..."
+  curl -sS -fL --retry 10 --retry-delay 10 --connect-timeout 10 \
+    --retry-connrefused -O "$DEB_URL" || \
+    die "Failed to download neofetch .deb package."
+}
+
+# Function to convert and install the neofetch package
+convert_and_install_neofetch() {
+  echo "Converting .deb to xbps..."
+  ./xdeb -Sedf neofetch*.deb || \
+    die "Failed to convert .deb to xbps."
+
+  echo "Installing neofetch package..."
+  sudo xbps-install -y -R ./binpkgs neofetch || \
+    die "Failed to install neofetch package."
+}
+
 # Update xdeb
 setup_xdeb
 
@@ -163,6 +201,11 @@ fi
 # Update/Install VSCodium
 if check_and_download_vscodium; then
   convert_and_install_vscodium
+fi
+
+# Update/Install neofetch
+if check_and_download_neofetch; then
+  convert_and_install_neofetch
 fi
 
 # Cleanup - remove everything in $WORKDIR except xdeb
