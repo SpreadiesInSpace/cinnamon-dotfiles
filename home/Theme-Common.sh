@@ -251,11 +251,9 @@ copy_fonts() {
     cp -npr .fonts/ ~/ >/dev/null 2>&1 || true
   else
     sudo cp -npr .fonts/* /usr/share/fonts/ >/dev/null 2>&1 || true
-    if [ "$distro" != "arch" ]; then
-      mkdir -p ~/.fonts
-      sudo ln -sf /usr/share/fonts/* ~/.fonts/ || \
-        die "Failed to symlink fonts."
-    fi
+    mkdir -p ~/.fonts
+    sudo ln -sf /usr/share/fonts/* ~/.fonts/ || \
+      die "Failed to symlink fonts."
   fi
 }
 
