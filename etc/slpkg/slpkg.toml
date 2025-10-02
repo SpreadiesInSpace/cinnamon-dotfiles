@@ -70,7 +70,7 @@ EDITOR = "nano"
 # Enable or disable to use the terminal selector for interactive shell
 # scripts. Selector allows you to display checkbox to choose packages.
 # Default is true. [true/false]
-TERMINAL_SELECTOR = false
+TERMINAL_SELECTOR = true
 
 # View missing dependencies as main packages from
 # the repository. Some repositories include packages only

@@ -124,6 +124,11 @@ sed -i "s/^MAKEFLAGS = \"-j[0-9]*\"/MAKEFLAGS = \"-j$cores\"/" \
 echo "Updated MAKEFLAGS in /etc/slpkg/slpkg.toml to -j$cores based on the \
 number of CPU cores."
 
+# Temporarily set TERMINAL_SELECTOR to false for headless slpkg operations
+sed -i 's/^TERMINAL_SELECTOR = true$/TERMINAL_SELECTOR = false/' \
+  /etc/slpkg/slpkg.toml || \
+  die "Failed to set TERMINAL_SELECTOR for slpkg.toml"
+
 # Sync slpkg
 retry slpkg update || \
   die "Failed to sync slpkg."
@@ -333,6 +338,11 @@ set_polkit_perms
 
 # Temporary mozjs128 fix for Cinnamon
 bash unsorted/Slackware/mozjs128.sh
+
+# Set TERMINAL_SELECTOR back to true
+sed -i 's/^TERMINAL_SELECTOR = false$/TERMINAL_SELECTOR = true/' \
+  /etc/slpkg/slpkg.toml || \
+  die "Failed to set TERMINAL_SELECTOR for slpkg.toml"
 
 # Enable Flathub for Flatpak
 enable_flathub
