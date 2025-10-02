@@ -38,7 +38,8 @@ rm sbopkg-0.38.3-noarch-1_wsr.tgz || \
 
 # Point sbopkg to current repo & sync
 SBO_CONF="/etc/sbopkg/sbopkg.conf"
-sed -i "s/REPO_BRANCH=\${REPO_BRANCH:-15.0}/REPO_BRANCH=\${REPO_BRANCH:-current}/g" \
+sed -i \
+"s/REPO_BRANCH=\${REPO_BRANCH:-15.0}/REPO_BRANCH=\${REPO_BRANCH:-current}/g" \
   "$SBO_CONF" || \
   die "Failed to update REPO_BRANCH."
 sed -i "s/REPO_NAME=\${REPO_NAME:-SBo}/REPO_NAME=\${REPO_NAME:-SBo-git}/g" \
