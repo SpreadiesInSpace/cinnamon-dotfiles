@@ -331,6 +331,9 @@ chmod -x /root/.xsession || \
 # Set polkit permissions for wheel group users
 set_polkit_perms
 
+# Temporary mozjs128 fix for Cinnamon
+bash unsorted/Slackware/mozjs128.sh
+
 # Enable Flathub for Flatpak
 enable_flathub
 
