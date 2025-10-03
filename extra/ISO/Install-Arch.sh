@@ -133,8 +133,11 @@ a==1 && /^#?greeter-session=/ {
 # Configure GRUB Bootloader
 install_grub
 
+# Set GRUB_GFXMODE
+set_grub_gfxmode
+
 # Set GRUB timeout
-sed -i "s/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=$grub_timeout/" \
+sed -i "/^#*GRUB_TIMEOUT=/s/^#*GRUB_TIMEOUT=.*/GRUB_TIMEOUT=$grub_timeout/" \
   /etc/default/grub || \
   die "Failed to set GRUB_TIMEOUT."
 

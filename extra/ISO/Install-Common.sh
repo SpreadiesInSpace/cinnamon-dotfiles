@@ -624,6 +624,32 @@ install_grub() {
   fi
 }
 
+# NixOS doesn't use this
+set_grub_gfxmode() {
+  local gfx="1920x1200,1920x1080,auto"
+  # Set GRUB_GFXMODE
+  if grep -q "^GRUB_GFXMODE=$gfx" /etc/default/grub; then
+    # Already set correctly - skip
+    :
+  elif grep -q '^GRUB_GFXMODE=' /etc/default/grub; then
+    # Uncommented line exists - comment it out and add new one below
+    sed -i "/^GRUB_GFXMODE=/{ s/^/# /; a\\GRUB_GFXMODE=$gfx
+  }" /etc/default/grub || die "Failed to set GRUB_GFXMODE."
+  elif grep -q "^#GRUB_GFXMODE=$gfx" /etc/default/grub; then
+    # Commented line with correct value exists - uncomment it
+    sed -i "s/^#GRUB_GFXMODE=$gfx/GRUB_GFXMODE=$gfx/" \
+      /etc/default/grub
+  elif grep -q '^#GRUB_GFXMODE=' /etc/default/grub; then
+    # Commented line exists - add new line below
+    sed -i "/^#GRUB_GFXMODE=/a\\GRUB_GFXMODE=$gfx" \
+      /etc/default/grub || die "Failed to set GRUB_GFXMODE."
+  else
+    # No line exists - add it
+    echo "GRUB_GFXMODE=$gfx" >> /etc/default/grub || \
+      die "Failed to add GRUB_GFXMODE."
+  fi
+}
+
 clone_dotfiles() {
   # Clone cinnamon-dotfiles repo as new user
   local distro="${1:-}"

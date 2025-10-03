@@ -269,9 +269,29 @@ set_lightdm_display_for_vm() {
     output=$(basename "$(dirname "$output_path")")
     output="${output#*-}"  # Strip 'cardX-' prefix
     if [[ -n "$output" ]]; then
-      sed -i "/^\[Seat:\*\]/,/^\[.*\]/ {
-        s|^#*display-setup-script=.*|display-setup-script=xrandr --output $output --mode 1920x1080 --rate 60|
-      }" /etc/lightdm/lightdm.conf || \
+      # Read available modes from sysfs
+      modes_file=$(dirname "$output_path")/modes
+      if [ -f "$modes_file" ]; then
+        available_modes=$(cat "$modes_file")
+        # Check for preferred resolution: prefer 1920x1080 over 1920x1200
+        if echo "$available_modes" | grep -q "1920x1080"; then
+          mode="1920x1080"
+        elif echo "$available_modes" | grep -q "1920x1200"; then
+          mode="1920x1200"
+        else
+          mode="auto"
+        fi
+      else
+        mode="auto"
+      fi
+      # Set the display-setup-script
+      if [ "$mode" = "auto" ]; then
+        xrandr_cmd="xrandr --output $output --auto"
+      else
+        xrandr_cmd="xrandr --output $output --mode $mode"
+      fi
+      sed -i "/^\[Seat:\*\]/,/^\[.*\]/ s|^#*display-setup-script=.*|display-setup-script=$xrandr_cmd|" \
+        /etc/lightdm/lightdm.conf || \
         die "Failed to update lightdm.conf with display-setup-script."
     fi
   fi

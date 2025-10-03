@@ -30,8 +30,8 @@ in
       enable = true;
       efiSupport = true;
       device = "nodev";
-      gfxmodeEfi = "1920x1080";
-      gfxmodeBios = "1920x1080";
+      gfxmodeEfi = "1920x1200,1920x1080,auto";
+      gfxmodeBios = "1920x1200,1920x1080,auto";
       # theme = "/boot/grub/themes/gruvbox-dark";
       # splashImage = null;
     };
@@ -53,7 +53,7 @@ in
   services = {
     xserver = {
       enable = true;
-      resolutions = [ { x = 1920; y = 1080; } ];
+      # resolutions = [ { x = 1920; y = 1080; } ];
       xkb.layout = "us";
       xkb.variant = "";
       desktopManager.cinnamon.enable = true;

@@ -420,9 +420,13 @@ fi
 # Configure GRUB Bootloader
 install_grub
 
+# Set GRUB_GFXMODE
+set_grub_gfxmode
+
 # Set GRUB timeout
-sed -i '/^#*GRUB_TIMEOUT=/s/^#*GRUB_TIMEOUT=.*/GRUB_TIMEOUT=$grub_timeout/' \
-  /etc/default/grub || die "Failed to set GRUB_TIMEOUT."
+sed -i "/^#*GRUB_TIMEOUT=/s/^#*GRUB_TIMEOUT=.*/GRUB_TIMEOUT=$grub_timeout/" \
+  /etc/default/grub || \
+  die "Failed to set GRUB_TIMEOUT."
 
 # Configure zRAM
 if [ "$GENTOO_INIT" = "systemd" ]; then
