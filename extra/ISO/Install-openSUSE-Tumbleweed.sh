@@ -168,9 +168,9 @@ retry zypper in -y cinnamon gnome-terminal spice-vdagent libnotify-tools \
 # Install Recommended Packages (excluding Snapper & Firefox)
 zypper al snapper* || die "Failed to lock snapper packages."
 zypper -n inr || die "Failed to install recommended packages."
-zypper rm -y MozillaFirefox* *-lang *-doc || \
+zypper rm -y 'MozillaFirefox*' '*-lang' '*-doc' || \
   die "Failed to remove Firefox, language packs, and docs."
-zypper al MozillaFirefox* *-lang *-doc || \
+zypper al 'MozillaFirefox*' '*-lang' '*-doc' || \
   die "Failed to lock Firefox, language packs, and docs."
 
 # Configure lightdm

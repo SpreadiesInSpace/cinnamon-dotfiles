@@ -273,16 +273,18 @@ if [ -d /etc/portage/gnupg ] && [ ! -w /etc/portage/gnupg ]; then
 fi
 
 # Verify GPG.
-echo && getuto || die "Failed to verify GPG keys with getuto."
+echo; getuto || die "Failed to verify GPG keys with getuto."
 
 # Install packages for Gentoo git sync
-retry emerge -vquN $GIT_PKGS || die "Failed to install packages for git sync."
+retry emerge -vquN "$GIT_PKGS" || \
+  die "Failed to install packages for git sync."
 
 # Switch from rsync to git for faster repository sync times
 eselect repository remove -f gentoo || \
   die "Failed to remove rsync-based Gentoo repository."
-eselect repository add gentoo git https://github.com/gentoo-mirror/gentoo.git \
-  || die "Failed to enable Git-based Gentoo repository."
+eselect repository add gentoo git \
+  https://github.com/gentoo-mirror/gentoo.git || \
+  die "Failed to enable Git-based Gentoo repository."
 rm -rf /var/db/repos/gentoo || \
   die "Failed to remove existing gentoo repository."
 
@@ -330,7 +332,8 @@ locale-gen || die "Failed to generate locales."
 eselect locale set en_US.utf8 || die "Failed to set locale to en_US.utf8."
 
 # Reload Environment
-env-update && source /etc/profile || die "Failed to reload environment."
+env-update || die "Failed to update environment."
+source /etc/profile || die "Failed to reload environment."
 
 #=============== Gentoo Install - Configuring the Linux Kernel ================
 
@@ -343,14 +346,16 @@ echo "sys-kernel/installkernel grub dracut" > \
 if { [ "$GENTOO_INIT" = "systemd" ] && systemd-detect-virt --vm; } || \
    virt-what | grep -q .; then
     # VM - just the system packages (including OpenRC if selected)
-    retry emerge -vq $SYSTEM_PKGS || die "Failed to install system packages."
+    retry emerge -vq "$SYSTEM_PKGS" || \
+      die "Failed to install system packages."
 else
   # Physical machine - add firmware
   if [ "$IS_INTEL" = "true" ]; then
-    retry emerge -vq $SYSTEM_PKGS $PHYSICAL_PKGS sys-firmware/intel-microcode \
-      || die "Failed to install system packages."
+    retry emerge -vq "$SYSTEM_PKGS" "$PHYSICAL_PKGS" \
+      sys-firmware/intel-microcode || \
+      die "Failed to install system packages."
   else
-    retry emerge -vq $SYSTEM_PKGS $PHYSICAL_PKGS || \
+    retry emerge -vq "$SYSTEM_PKGS" "$PHYSICAL_PKGS" || \
       die "Failed to install system packages."
   fi
 fi

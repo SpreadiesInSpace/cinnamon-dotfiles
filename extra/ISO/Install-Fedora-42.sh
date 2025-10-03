@@ -137,9 +137,9 @@ sed -i '/none.*swap.*defaults,pri=/d' /etc/fstab || \
   die "Failed to remove zram entries from fstab."
 
 # Generate /etc/default/grub
-cat >> /etc/default/grub << 'ETC' || die "Failed to create /etc/default/grub"
-GRUB_TIMEOUT=5
-GRUB_DISTRIBUTOR="$(sed 's, release .*$,,g' /etc/system-release)"
+cat > /etc/default/grub << ETC || die "Failed to create /etc/default/grub"
+GRUB_TIMEOUT=$grub_timeout
+GRUB_DISTRIBUTOR="\$(sed 's, release .*\$,,g' /etc/system-release)"
 GRUB_DEFAULT=saved
 GRUB_DISABLE_SUBMENU=true
 GRUB_TERMINAL_OUTPUT="console"
@@ -163,7 +163,7 @@ if [ "$BOOTMODE" = "UEFI" ]; then
   retry dnf reinstall -y shim-* grub2-efi-* grub2-common
   # Add signed Fedora Boot SHIM (for UEFI Secure Boot)
   efibootmgr -c -d "$drive" -p 1 -L "Fedora (Custom)" \
-    -l \\EFI\FEDORA\\SHIMX64.EFI || \
+    -l \\EFI\\FEDORA\\SHIMX64.EFI || \
     die "Failed to add signed Fedora Boot SHIM."
 else
   install_grub "fedora"
@@ -171,11 +171,6 @@ fi
 
 # Set GRUB_GFXMODE
 set_grub_gfxmode
-
-# Set GRUB timeout
-sed -i "/^#*GRUB_TIMEOUT=/s/^#*GRUB_TIMEOUT=.*/GRUB_TIMEOUT=$grub_timeout/" \
-  /etc/default/grub || \
-  die "Failed to set GRUB_TIMEOUT."
 
 # Configure zRAM
 configure_zram
