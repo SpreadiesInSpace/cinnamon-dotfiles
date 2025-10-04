@@ -51,6 +51,35 @@ display_status() {
   echo "Is VM: $2"
 }
 
+# Only Fedora uses this
+fix_rpmfusion_mirrors() {
+  # Fix RPM Fusion mirrors
+  local repo_files=(
+    "/etc/yum.repos.d/rpmfusion-free.repo"
+    "/etc/yum.repos.d/rpmfusion-free-updates.repo"
+    "/etc/yum.repos.d/rpmfusion-nonfree.repo"
+    "/etc/yum.repos.d/rpmfusion-nonfree-updates.repo"
+  )
+
+  for repo_file in "${repo_files[@]}"; do
+    if [ -f "$repo_file" ]; then
+      # Backup the original file
+      cp "$repo_file" "$repo_file.bak" 2>/dev/null || true
+
+      # Comment out metalink/mirrorlist lines
+      sed -i 's/^\(metalink=\)/#\1/' "$repo_file" || \
+        die "Failed to comment metalink in $repo_file"
+      sed -i 's/^\(mirrorlist=\)/#\1/' "$repo_file" || \
+        die "Failed to comment mirrorlist in $repo_file"
+
+      # Uncomment baseurl lines
+      sed -i 's/^#\(baseurl=\)/\1/' "$repo_file" || \
+        die "Failed to uncomment baseurl in $repo_file"
+      echo "Fixed: $repo_file"
+    fi
+  done
+}
+
 # Only Gentoo/openSUSE/Slackware uses this
 set_polkit_perms() {
   # Ensure the rules directory exists with proper permissions

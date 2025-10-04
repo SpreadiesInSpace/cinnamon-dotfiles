@@ -53,6 +53,9 @@ nonfree="$nonfree/rpmfusion-nonfree-release-$fedora_ver.noarch.rpm"
 retry dnf -y install "$free" "$nonfree" || \
   die "Failed to add RPM Fusion repositories."
 
+# Fix RPM Fusion mirrors
+fix_rpmfusion_mirrors
+
 # Install Media Codecs
 retry dnf install -y libavcodec-freeworld || \
   die "Failed to install libavcodec-freeworld."
