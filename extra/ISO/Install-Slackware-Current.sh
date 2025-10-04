@@ -132,7 +132,7 @@ cp Install-Common.sh Master-Common.sh /mnt/ || \
 
 # Define arch-install-scripts source and SlackBuild (for genfstab)
 AIS="https://gitlab.archlinux.org/archlinux/arch-install-scripts"
-AIS="$AIS/-/archive/v29/arch-install-scripts-v29.tar.gz"
+AIS="$AIS/-/archive/v30/arch-install-scripts-v30.tar.gz"
 AIS_SLACKBUILD="https://slackbuilds.org/slackbuilds/15.0"
 AIS_SLACKBUILD="$AIS_SLACKBUILD/system/arch-install-scripts.tar.gz"
 
@@ -219,7 +219,7 @@ done
 # Download arch-install-scripts source and SlackBuild (for genfstab)
 echo "Installing arch-install-scripts..."
 retry wget -q "$AIS" \
-  -O arch-install-scripts-v29.tar.gz || \
+  -O arch-install-scripts-v30.tar.gz || \
   die "Failed to download arch-install-scripts source."
 retry wget -q "$AIS_SLACKBUILD" \
   -O arch-install-scripts-slackbuild.tar.gz || \
@@ -228,13 +228,13 @@ retry wget -q "$AIS_SLACKBUILD" \
 # Extract SlackBuild and move the source into place
 tar -xf arch-install-scripts-slackbuild.tar.gz >/dev/null 2>&1 \
   || die "Failed to extract SlackBuild."
-mv arch-install-scripts-v29.tar.gz arch-install-scripts/ \
+mv arch-install-scripts-v30.tar.gz arch-install-scripts/ \
   || die "Failed to move source tarball."
 
 # Build, install and cleanup
 cd arch-install-scripts || die "Missing arch-install-scripts directory"
 ./arch-install-scripts.SlackBuild >/dev/null 2>&1 || die "SlackBuild failed."
-installpkg /tmp/arch-install-scripts-29-noarch-1_SBo.tgz >/dev/null 2>&1 || \
+installpkg /tmp/arch-install-scripts-30-noarch-1_SBo.tgz >/dev/null 2>&1 || \
   die "installpkg failed"
 cd .. && rm -rf arch-install-scripts* || \
   die "Cleanup for arch-install-scripts failed."
