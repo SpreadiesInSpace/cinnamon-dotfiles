@@ -126,7 +126,7 @@ prompt_timezone() {
       echo "Timezone set to: $timezone"
       break
     fi
-    echo "Invalid timezone: $timezone"; echo
+    echo "Invalid timezone: $timezone"
   done
 }
 
