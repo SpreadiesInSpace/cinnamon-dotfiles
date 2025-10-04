@@ -75,7 +75,6 @@ fix_rpmfusion_mirrors() {
       # Uncomment baseurl lines
       sed -i 's/^#\(baseurl=\)/\1/' "$repo_file" || \
         die "Failed to uncomment baseurl in $repo_file"
-      echo "Fixed: $repo_file"
     fi
   done
 }
