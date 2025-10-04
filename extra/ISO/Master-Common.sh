@@ -118,7 +118,7 @@ prompt_timezone() {
   fi
 
   while true; do
-    echo "For a complete list of valid timezone identifiers, see:"
+    echo; echo "For a complete list of valid timezone identifiers, see:"
     echo "$tz_wiki"; echo
     read -rp "Enter your timezone (e.g., Asia/Bangkok): " timezone
     timezone="${timezone:-Asia/Bangkok}"  # default if empty
