@@ -276,8 +276,7 @@ fi
 echo; getuto || die "Failed to verify GPG keys with getuto."
 
 # Install packages for Gentoo git sync
-retry emerge -vquN "$GIT_PKGS" || \
-  die "Failed to install packages for git sync."
+retry emerge -vquN $GIT_PKGS || die "Failed to install packages for git sync."
 
 # Switch from rsync to git for faster repository sync times
 eselect repository remove -f gentoo || \
@@ -346,16 +345,14 @@ echo "sys-kernel/installkernel grub dracut" > \
 if { [ "$GENTOO_INIT" = "systemd" ] && systemd-detect-virt --vm; } || \
    virt-what | grep -q .; then
     # VM - just the system packages (including OpenRC if selected)
-    retry emerge -vq "$SYSTEM_PKGS" || \
-      die "Failed to install system packages."
+    retry emerge -vq $SYSTEM_PKGS || die "Failed to install system packages."
 else
   # Physical machine - add firmware
   if [ "$IS_INTEL" = "true" ]; then
-    retry emerge -vq "$SYSTEM_PKGS" "$PHYSICAL_PKGS" \
-      sys-firmware/intel-microcode || \
-      die "Failed to install system packages."
+    retry emerge -vq $SYSTEM_PKGS $PHYSICAL_PKGS sys-firmware/intel-microcode \
+      || die "Failed to install system packages."
   else
-    retry emerge -vq "$SYSTEM_PKGS" "$PHYSICAL_PKGS" || \
+    retry emerge -vq $SYSTEM_PKGS $PHYSICAL_PKGS || \
       die "Failed to install system packages."
   fi
 fi

@@ -106,6 +106,7 @@ include"
 prompt_timezone() {
   # Prompt for timezone
   local zoneinfo_dir="/usr/share/zoneinfo"
+  local tz_wiki="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones"
 
   if [ ! -d "$zoneinfo_dir" ]; then
     if [ -d "/etc/zoneinfo" ]; then
@@ -117,13 +118,15 @@ prompt_timezone() {
   fi
 
   while true; do
+    echo "For a complete list of valid timezone identifiers, see:"
+    echo "$tz_wiki"; echo
     read -rp "Enter your timezone (e.g., Asia/Bangkok): " timezone
     timezone="${timezone:-Asia/Bangkok}"  # default if empty
     if [ -f "$zoneinfo_dir/$timezone" ]; then
       echo "Timezone set to: $timezone"
       break
     fi
-    echo "Invalid timezone: $timezone"
+    echo "Invalid timezone: $timezone"; echo
   done
 }
 
