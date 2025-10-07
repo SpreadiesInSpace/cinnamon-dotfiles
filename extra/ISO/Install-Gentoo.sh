@@ -322,8 +322,8 @@ ln -sf "/usr/share/zoneinfo/$timezone" /etc/localtime || \
   die "Failed to set timezone."
 hwclock --systohc || die "Failed to set hardware clock."
 
-# Locale Generation (uncomment en_US.UTF-8 UTF-8 in /etc/locale.gen)
-sed -i 's/^#\s*\(en_US.UTF-8 UTF-8\)/\1/' /etc/locale.gen || \
+# Locale Generation (uncomment en_US.UTF-8 in /etc/locale.gen)
+sed -i 's/^#\s*\(en_US\.UTF-8\s\+UTF-8\)/\1/' /etc/locale.gen || \
   die "Failed to uncomment locale in /etc/locale.gen."
 locale-gen || die "Failed to generate locales."
 
