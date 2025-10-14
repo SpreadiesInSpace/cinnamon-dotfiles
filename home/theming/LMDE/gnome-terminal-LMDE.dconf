@@ -1,3 +1,6 @@
+[org/gnome/terminal/legacy]
+default-show-menubar=true
+
 [org/gnome/terminal/legacy/profiles:]
 default='f1479fe0-0607-4d89-995f-e22c38773a93'
 list=['f1479fe0-0607-4d89-995f-e22c38773a93']

@@ -6,7 +6,7 @@
 * [Arch](https://archlinux.org/download/)
 * [Fedora 42](https://fedoraproject.org/spins/cinnamon/download/)
 * [Gentoo](https://www.gentoo.org/downloads/)
-* [Linux Mint (Debian Edition 7)](https://linuxmint.com/edition.php?id=325)
+* [Linux Mint (Debian Edition)](https://linuxmint.com/edition.php?id=325)
 * [NixOS 25.05](https://nixos.org/download/#nixos-iso)
 * [openSUSE Tumbleweed*](https://get.opensuse.org/tumbleweed/#download)
 * [Slackware Current](https://us.slackware.nl/slackware/slackware64-current-iso/)
