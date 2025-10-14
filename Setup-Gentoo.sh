@@ -85,6 +85,9 @@ eselect repository enable gentoo-zh || \
   die "Failed to enable gentoo-zh repository."
 
 # Allow select unstable packages to be merged
+echo "www-client/brave-bin ~amd64" | \
+  tee /etc/portage/package.accept_keywords/brave-bin || \
+  die "Failed to add brave-bin to package.accept_keywords."
 echo "x11-misc/gpaste ~amd64" | \
   tee /etc/portage/package.accept_keywords/gpaste || \
   die "Failed to add gpaste to package.accept_keywords."
