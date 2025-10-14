@@ -34,22 +34,6 @@ retry apt upgrade -y || \
 retry apt install -y git curl || \
   die "Failed to install git and curl."
 
-# Install Bottom
-VERSION="0.11.1"
-FILE_VERSION="0.11.1-1"
-# Define the source URL using the version and file version variables
-BTM="https://github.com/ClementTsang/bottom/releases"
-BTM="$BTM/download/${VERSION}/bottom_${FILE_VERSION}_amd64.deb"
-# Download the specified version using curl
-retry curl -LO "$BTM" || \
-  die "Failed to download Bottom package."
-# Install the downloaded package
-dpkg -i bottom_${FILE_VERSION}_amd64.deb || \
-  die "Failed to install Bottom package."
-# Remove the downloaded package file
-rm bottom_${FILE_VERSION}_amd64.deb || \
-  die "Failed to remove downloaded Bottom package file."
-
 # Install Brave Browser
 retry curl -fsS https://dl.brave.com/install.sh | sh || \
   die "Failed to install Brave Browser."
@@ -90,6 +74,24 @@ retry apt update || \
 retry apt install -y codium || \
   die "Failed to install VSCodium."
 
+# Install Neofetch
+echo "deb http://deb.debian.org/debian bookworm main" > \
+  /etc/apt/sources.list.d/bookworm-neofetch.list || \
+  die "Failed to add bookworm repo."
+apt update || die "APT update failed."
+apt install -y neofetch -t bookworm || die "Failed to install neofetch."
+
+# Pin the package to prevent changes
+echo "Package: neofetch
+Pin: version *
+Pin-Priority: 1001" > /etc/apt/preferences.d/pin-neofetch || \
+  die "Failed to pin neofetch."
+
+# Remove the source
+rm /etc/apt/sources.list.d/bookworm-neofetch.list || \
+  die "Failed to remove bookworm repo."
+apt update || die "APT update failed."
+
 # All packages
 packages=(
   # System utilities
@@ -99,7 +101,7 @@ packages=(
   "gparted"
   "grub-customizer"
   "ncdu"
-  "neofetch"
+  #"neofetch"
   "timeshift"
   "unzip"
   "x11-xserver-utils"
@@ -134,9 +136,12 @@ packages=(
   "qt5-style-kvantum-themes"
   "qt5ct"
   "qt6ct"
+  "qt6-style-kvantum"
+  "qt-style-kvantum-themes"
   "rhythmbox"
   # Applications
   "bleachbit"
+  "btm"
   "gir1.2-gpaste-2"
   "gpaste-2"
   "libreoffice"

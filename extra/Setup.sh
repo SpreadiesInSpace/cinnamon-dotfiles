@@ -91,7 +91,7 @@ scripts=(
   "Setup-Arch.sh"
   "Setup-Fedora-42.sh"
   "Setup-Gentoo.sh"
-  "Setup-LMDE-6.sh"
+  "Setup-LMDE-7.sh"
   "Setup-NixOS-25.05.sh"
   "Setup-OpenSUSE-Tumbleweed.sh"
   "Setup-Slackware-Current.sh"
