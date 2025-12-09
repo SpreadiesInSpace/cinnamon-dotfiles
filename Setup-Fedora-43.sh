@@ -81,8 +81,8 @@ retry curl -fsS https://dl.brave.com/install.sh | sh || \
   die "Failed to install Brave Browser."
 
 # Install Bottom
-VERSION="0.11.1"
-FILE_VERSION="0.11.1-1"
+VERSION="0.11.4"
+FILE_VERSION="0.11.4-1"
 # Define the source URL using the version and file version variables
 BTM="https://github.com/ClementTsang/bottom/releases"
 BTM="$BTM/download/${VERSION}/bottom-${FILE_VERSION}.x86_64.rpm"
