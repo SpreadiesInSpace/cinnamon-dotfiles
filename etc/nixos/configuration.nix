@@ -106,7 +106,9 @@ in
 
   xdg.portal.enable = true;
   virtualisation.libvirtd.enable = true;
-  systemd.extraConfig = "DefaultTimeoutStopSec=15s\n";
+  systemd.settings.Manager = {
+    DefaultTimeoutStopSec = "15s";
+  };
   # sound.enable = true;
   # hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
