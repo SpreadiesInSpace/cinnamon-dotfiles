@@ -662,7 +662,7 @@ clone_dotfiles() {
         { echo \"Failed to clone repo.\"; exit 1; }
       cd cinnamon-dotfiles ||
         { echo \"Failed to enter repo directory.\"; exit 1; }
-      touch .nixos-25.05.done .$distro.done home/.rebuild ||
+      touch .nixos-25.11.done .$distro.done home/.rebuild ||
         { echo \"Failed to create flags.\"; exit 1; }
       if [ \"$is_vm\" = true ]; then
         touch home/.vm || { echo \"Failed to create VM flag.\"; exit 1; }
