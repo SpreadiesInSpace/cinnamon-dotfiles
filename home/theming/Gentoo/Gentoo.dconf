@@ -282,6 +282,7 @@ display-line-numbers=true
 display-right-margin=false
 highlight-current-line=true
 scheme='gruvbox-dark'
+style-scheme-for-dark-theme-variant='gruvbox-dark'
 use-default-font=true
 wrap-last-split-mode='word'
 
