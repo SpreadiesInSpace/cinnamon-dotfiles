@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<FileZilla3 version="3.69.3" platform="*nix">
+<FileZilla3 version="3.69.5" platform="*nix">
 	<Settings>
 		<Setting name="Use Pasv mode">1</Setting>
 		<Setting name="Limit local ports">0</Setting>
@@ -130,9 +130,9 @@
 		<Setting name="Local filelist sortorder">0 0</Setting>
 		<Setting name="Remote filelist sortorder">0 0</Setting>
 		<Setting name="Remote recursive operation list refresh">0</Setting>
-		<Setting name="Window position and size">1 251 44 1440 406 </Setting>
 		<Setting name="Resolve local symlinks" platform="unix">0</Setting>
-		<Setting name="Greeting version">3.69.3</Setting>
+		<Setting name="Greeting version">3.69.5</Setting>
+		<Setting name="Window position and size">1 960 0 960 896 </Setting>
 		<Setting name="Tab data" sensitive="1">
 			<Tabs>
 				<Tab selected="1">
