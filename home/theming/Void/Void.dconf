@@ -308,21 +308,15 @@ last-save-directory='file:///home/f16poom/Share/Screenshots'
 
 [org/gnome/gnome-system-monitor]
 current-tab='processes'
-graph-data-points=30
 maximized=false
-network-total-in-bits=false
 show-dependencies=false
-show-whose-processes='all'
+show-whose-processes='user'
 window-height=480
-window-state=(637, 495, 639, 305)
-window-width=679
+window-width=635
 
-[org/gnome/gnome-system-monitor/disktreenew]
-col-6-visible=true
-col-6-width=0
-columns-order=[6]
-sort-col=1
-sort-order=0
+[org/gnome/gnome-system-monitor/proctree]
+col-26-visible=false
+col-26-width=0
 
 [org/gnome/gnome-system-monitor/proctree]
 col-0-visible=true

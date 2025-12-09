@@ -338,7 +338,7 @@ chmod -x /root/.xsession || \
 set_polkit_perms
 
 # Temporary mozjs128 fix for Cinnamon
-bash unsorted/Slackware/mozjs128.sh
+# bash unsorted/Slackware/mozjs128.sh
 
 # Set TERMINAL_SELECTOR back to true
 sed -i 's/^TERMINAL_SELECTOR = false$/TERMINAL_SELECTOR = true/' \

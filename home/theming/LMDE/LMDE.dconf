@@ -307,6 +307,7 @@ display-line-numbers=true
 display-right-margin=false
 highlight-current-line=true
 scheme='gruvbox-dark'
+style-scheme-for-dark-theme-variant='gruvbox-dark'
 use-default-font=true
 wrap-last-split-mode='word'
 
@@ -320,11 +321,14 @@ open-recent=false
 
 [org/gnome/gedit/state/window]
 bottom-panel-active-page='GeditTerminalPanel'
-bottom-panel-size=76
+bottom-panel-size=102
+height=984
+maximized=false
 side-panel-active-page='GeditFileBrowserPanel'
 side-panel-size=271
 size=(960, 984)
 state=76672
+width=960
 
 [org/gnome/gnome-screenshot]
 delay=3
@@ -332,15 +336,16 @@ include-pointer=false
 last-save-directory='file:///home/f16poom/Share/Screenshots'
 
 [org/gnome/gnome-system-monitor]
+current-tab='processes'
 maximized=false
-network-total-in-bits=false
 show-dependencies=false
-show-whose-processes='all'
-window-state=(640, 500, 643, 294)
+show-whose-processes='user'
+window-height=480
+window-width=665
 
-[org/gnome/gnome-system-monitor/disktreenew]
-col-6-visible=true
-col-6-width=0
+[org/gnome/gnome-system-monitor/proctree]
+col-26-visible=false
+col-26-width=0
 
 [org/gnome/rhythmbox]
 maximized=true
