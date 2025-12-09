@@ -206,7 +206,7 @@ in
   fonts.packages = with pkgs; [
     cantarell-fonts
     noto-fonts
-    noto-fonts-emoji
+    noto-fonts-color-emoji
     nerd-fonts.sauce-code-pro
     # (nerdfonts.override { fonts = [ "SourceCodePro" ]; })
   ];
