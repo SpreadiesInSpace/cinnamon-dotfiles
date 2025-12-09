@@ -196,7 +196,6 @@ packages=(
   "qbittorrent"
   "libtorrent-rasterbar" # for qBittorrent
   "qt5ct"
-  "ufw"
   "vscodium-bin"
   # For NvChad
   #"gcc"
@@ -295,6 +294,7 @@ sbo_packages=(
   "ncdu"
   "qt6ct"
   "timeshift"
+  "ufw"
   "ripgrep" # for neovim
   "libiscsi" # for Virt-Manager
   "glusterfs" # for Virt-Manager
