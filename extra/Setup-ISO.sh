@@ -37,7 +37,7 @@ URL="https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles"
 URL="$URL/main/extra/ISO"
 declare -A installs=(
   [1]="$URL/Install-Arch.sh"
-  [2]="$URL/Install-Fedora-42.sh"
+  [2]="$URL/Install-Fedora-43.sh"
   [3]="$URL/Install-Gentoo.sh"
   [4]="$URL/Install-NixOS-25.11.sh"
   [5]="$URL/Install-openSUSE-Tumbleweed.sh"
@@ -47,7 +47,7 @@ declare -A installs=(
 
 declare -A names=(
   [1]="Install-Arch.sh"
-  [2]="Install-Fedora-42.sh"
+  [2]="Install-Fedora-43.sh"
   [3]="Install-Gentoo.sh"
   [4]="Install-NixOS-25.11.sh"
   [5]="Install-openSUSE-Tumbleweed.sh"
@@ -59,7 +59,7 @@ declare -A names=(
 echo -e "${YELLOW}Which installer would you like to run?${NC}"
 options=(
   "Arch Linux"
-  "Fedora 42"
+  "Fedora 43"
   "Gentoo"
   "NixOS 25.11"
   "openSUSE Tumbleweed"

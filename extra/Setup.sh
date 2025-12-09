@@ -89,7 +89,7 @@ fi
 # Setup script list
 scripts=(
   "Setup-Arch.sh"
-  "Setup-Fedora-42.sh"
+  "Setup-Fedora-43.sh"
   "Setup-Gentoo.sh"
   "Setup-LMDE-7.sh"
   "Setup-NixOS-25.11.sh"

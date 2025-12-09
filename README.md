@@ -4,7 +4,7 @@
 
 ## Supported Distros (with ISO download links)
 * [Arch](https://archlinux.org/download/)
-* [Fedora 42](https://fedoraproject.org/spins/cinnamon/download/)
+* [Fedora 43](https://fedoraproject.org/spins/cinnamon/download/)
 * [Gentoo](https://www.gentoo.org/downloads/)
 * [Linux Mint (Debian Edition)](https://linuxmint.com/edition.php?id=325)
 * [NixOS 25.11](https://nixos.org/download/#nixos-iso)
@@ -18,7 +18,7 @@
 *Supports UEFI and BIOS, x86_64 Only*
 
 ```bash
-# For Arch, Fedora 42, Gentoo, NixOS 25.11 & openSUSE Tumbleweed
+# For Arch, Fedora 43, Gentoo, NixOS 25.11 & openSUSE Tumbleweed
 bash <(curl -fsSL https://tinyurl.com/cinnamon-ISO)
 ```
 ```bash
