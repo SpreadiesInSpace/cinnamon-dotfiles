@@ -175,6 +175,9 @@ else
     die "Failed to install packages."
 fi
 
+# Only openSUSE uses this
+cinnamon_env_fix
+
 # Remove devhelp
 zypper rm -y devhelp* || \
   die "Failed to remove devhelp."

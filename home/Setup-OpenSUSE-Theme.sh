@@ -72,7 +72,7 @@ copy_menu_preferences "openSUSE"
 copy_qbittorrent_config "arch"
 
 # Backup and copy LibreOffice config to appropriate directory
-copy_libreoffice_config "opensuse"
+copy_libreoffice_config "fedora"
 
 # Backup and copy Filezilla config to appropriate directory
 copy_filezilla_config

@@ -165,6 +165,9 @@ retry zypper in -y cinnamon gnome-terminal spice-vdagent libnotify-tools \
   lightdm-gtk-greeter-settings btrfsprogs sudo bash-completion git unzip \
   || die "Failed to install Cinnamon and base packages."
 
+# Only openSUSE uses this
+cinnamon_env_fix
+
 # Install Recommended Packages (excluding Snapper & Firefox)
 zypper al snapper* || die "Failed to lock snapper packages."
 zypper -n inr || die "Failed to install recommended packages."
