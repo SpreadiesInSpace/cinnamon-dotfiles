@@ -339,9 +339,9 @@ last-save-directory='file:///home/f16poom/Share/Screenshots'
 current-tab='processes'
 maximized=false
 show-dependencies=false
-show-whose-processes='user'
+show-whose-processes='all'
 window-height=480
-window-width=665
+window-width=635
 
 [org/gnome/gnome-system-monitor/proctree]
 col-26-visible=false

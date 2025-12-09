@@ -292,43 +292,15 @@ last-save-directory='file:///home/f16poom/Share/Screenshots'
 
 [org/gnome/gnome-system-monitor]
 current-tab='processes'
-graph-data-points=30
 maximized=false
-network-total-in-bits=false
 show-dependencies=false
 show-whose-processes='all'
 window-height=480
-window-state=(637, 495, 639, 305)
-window-width=667
-
-[org/gnome/gnome-system-monitor/disktreenew]
-col-6-visible=true
-col-6-width=0
+window-width=635
 
 [org/gnome/gnome-system-monitor/proctree]
-col-0-visible=true
-col-0-width=173
-col-1-visible=true
-col-1-width=92
-col-12-visible=true
-col-12-width=36
-col-15-visible=true
-col-15-width=76
-col-2-visible=true
-col-2-width=73
-col-21-visible=true
-col-21-width=71
-col-24-visible=true
-col-24-width=88
-col-25-visible=true
-col-25-width=100
-col-26-visible=true
-col-26-width=30
-col-8-visible=true
-col-8-width=58
-columns-order=[0, 12, 1, 2, 3, 4, 6, 7, 8, 15, 9, 10, 11, 13, 14, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26]
-sort-col=1
-sort-order=0
+col-26-visible=false
+col-26-width=0
 
 [org/gnome/rhythmbox]
 maximized=true
