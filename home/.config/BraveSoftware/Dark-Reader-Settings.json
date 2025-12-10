@@ -1,13 +1,122 @@
 {
-    "schemeVersion": 2,
-    "enabled": true,
-    "fetchNews": true,
-    "theme": {
+  "schemeVersion": 2,
+  "enabled": true,
+  "fetchNews": true,
+  "theme": {
+    "mode": 1,
+    "brightness": 100,
+    "contrast": 100,
+    "grayscale": 0,
+    "sepia": 50,
+    "useFont": false,
+    "fontFamily": "Open Sans",
+    "textStroke": 0,
+    "engine": "dynamicTheme",
+    "stylesheet": "",
+    "darkSchemeBackgroundColor": "#181a1b",
+    "darkSchemeTextColor": "#e8e6e3",
+    "lightSchemeBackgroundColor": "#dcdad7",
+    "lightSchemeTextColor": "#181a1b",
+    "scrollbarColor": "",
+    "selectionColor": "auto",
+    "styleSystemControls": false,
+    "lightColorScheme": "Default",
+    "darkColorScheme": "Default",
+    "immediateModify": false
+  },
+  "presets": [],
+  "customThemes": [
+    {
+      "builtIn": true,
+      "theme": {
         "mode": 1,
         "brightness": 100,
         "contrast": 100,
         "grayscale": 0,
-        "sepia": 50,
+        "sepia": 0,
+        "useFont": false,
+        "fontFamily": "Open Sans",
+        "textStroke": 0,
+        "engine": "cssFilter",
+        "stylesheet": "",
+        "darkSchemeBackgroundColor": "#181a1b",
+        "darkSchemeTextColor": "#e8e6e3",
+        "lightSchemeBackgroundColor": "#dcdad7",
+        "lightSchemeTextColor": "#181a1b",
+        "scrollbarColor": "",
+        "selectionColor": "auto",
+        "styleSystemControls": false,
+        "lightColorScheme": "Default",
+        "darkColorScheme": "Default",
+        "immediateModify": false
+      },
+      "url": [
+        "*.officeapps.live.com"
+      ]
+    },
+    {
+      "builtIn": true,
+      "theme": {
+        "mode": 1,
+        "brightness": 100,
+        "contrast": 100,
+        "grayscale": 0,
+        "sepia": 0,
+        "useFont": false,
+        "fontFamily": "Open Sans",
+        "textStroke": 0,
+        "engine": "cssFilter",
+        "stylesheet": "",
+        "darkSchemeBackgroundColor": "#181a1b",
+        "darkSchemeTextColor": "#e8e6e3",
+        "lightSchemeBackgroundColor": "#dcdad7",
+        "lightSchemeTextColor": "#181a1b",
+        "scrollbarColor": "",
+        "selectionColor": "auto",
+        "styleSystemControls": false,
+        "lightColorScheme": "Default",
+        "darkColorScheme": "Default",
+        "immediateModify": false
+      },
+      "url": [
+        "*.sharepoint.com"
+      ]
+    },
+    {
+      "builtIn": true,
+      "theme": {
+        "mode": 1,
+        "brightness": 100,
+        "contrast": 100,
+        "grayscale": 0,
+        "sepia": 0,
+        "useFont": false,
+        "fontFamily": "Open Sans",
+        "textStroke": 0,
+        "engine": "cssFilter",
+        "stylesheet": "",
+        "darkSchemeBackgroundColor": "#181a1b",
+        "darkSchemeTextColor": "#e8e6e3",
+        "lightSchemeBackgroundColor": "#dcdad7",
+        "lightSchemeTextColor": "#181a1b",
+        "scrollbarColor": "",
+        "selectionColor": "auto",
+        "styleSystemControls": false,
+        "lightColorScheme": "Default",
+        "darkColorScheme": "Default",
+        "immediateModify": false
+      },
+      "url": [
+        "docs.google.com"
+      ]
+    },
+    {
+      "theme": {
+        "mode": 1,
+        "brightness": 100,
+        "contrast": 100,
+        "grayscale": 0,
+        "sepia": 100,
         "useFont": false,
         "fontFamily": "Open Sans",
         "textStroke": 0,
@@ -23,221 +132,88 @@
         "lightColorScheme": "Default",
         "darkColorScheme": "Default",
         "immediateModify": false
-    },
-    "presets": [],
-    "customThemes": [
-        {
-            "builtIn": true,
-            "theme": {
-                "mode": 1,
-                "brightness": 100,
-                "contrast": 100,
-                "grayscale": 0,
-                "sepia": 0,
-                "useFont": false,
-                "fontFamily": "Open Sans",
-                "textStroke": 0,
-                "engine": "cssFilter",
-                "stylesheet": "",
-                "darkSchemeBackgroundColor": "#181a1b",
-                "darkSchemeTextColor": "#e8e6e3",
-                "lightSchemeBackgroundColor": "#dcdad7",
-                "lightSchemeTextColor": "#181a1b",
-                "scrollbarColor": "",
-                "selectionColor": "auto",
-                "styleSystemControls": false,
-                "lightColorScheme": "Default",
-                "darkColorScheme": "Default",
-                "immediateModify": false
-            },
-            "url": [
-                "*.officeapps.live.com"
-            ]
-        },
-        {
-            "builtIn": true,
-            "theme": {
-                "mode": 1,
-                "brightness": 100,
-                "contrast": 100,
-                "grayscale": 0,
-                "sepia": 0,
-                "useFont": false,
-                "fontFamily": "Open Sans",
-                "textStroke": 0,
-                "engine": "cssFilter",
-                "stylesheet": "",
-                "darkSchemeBackgroundColor": "#181a1b",
-                "darkSchemeTextColor": "#e8e6e3",
-                "lightSchemeBackgroundColor": "#dcdad7",
-                "lightSchemeTextColor": "#181a1b",
-                "scrollbarColor": "",
-                "selectionColor": "auto",
-                "styleSystemControls": false,
-                "lightColorScheme": "Default",
-                "darkColorScheme": "Default",
-                "immediateModify": false
-            },
-            "url": [
-                "*.sharepoint.com"
-            ]
-        },
-        {
-            "builtIn": true,
-            "theme": {
-                "mode": 1,
-                "brightness": 100,
-                "contrast": 100,
-                "grayscale": 0,
-                "sepia": 0,
-                "useFont": false,
-                "fontFamily": "Open Sans",
-                "textStroke": 0,
-                "engine": "cssFilter",
-                "stylesheet": "",
-                "darkSchemeBackgroundColor": "#181a1b",
-                "darkSchemeTextColor": "#e8e6e3",
-                "lightSchemeBackgroundColor": "#dcdad7",
-                "lightSchemeTextColor": "#181a1b",
-                "scrollbarColor": "",
-                "selectionColor": "auto",
-                "styleSystemControls": false,
-                "lightColorScheme": "Default",
-                "darkColorScheme": "Default",
-                "immediateModify": false
-            },
-            "url": [
-                "docs.google.com"
-            ]
-        },
-        {
-            "theme": {
-                "mode": 1,
-                "brightness": 100,
-                "contrast": 100,
-                "grayscale": 0,
-                "sepia": 100,
-                "useFont": false,
-                "fontFamily": "Open Sans",
-                "textStroke": 0,
-                "engine": "dynamicTheme",
-                "stylesheet": "",
-                "darkSchemeBackgroundColor": "#181a1b",
-                "darkSchemeTextColor": "#e8e6e3",
-                "lightSchemeBackgroundColor": "#dcdad7",
-                "lightSchemeTextColor": "#181a1b",
-                "scrollbarColor": "",
-                "selectionColor": "auto",
-                "styleSystemControls": false,
-                "lightColorScheme": "Default",
-                "darkColorScheme": "Default",
-                "immediateModify": false
-            },
-            "url": [
-                "myanimelist.net"
-            ]
-        },
-        {
-            "theme": {
-                "mode": 1,
-                "brightness": 100,
-                "contrast": 100,
-                "grayscale": 0,
-                "sepia": 50,
-                "useFont": false,
-                "fontFamily": "Open Sans",
-                "textStroke": 0,
-                "engine": "dynamicTheme",
-                "stylesheet": "",
-                "darkSchemeBackgroundColor": "#181a1b",
-                "darkSchemeTextColor": "#e8e6e3",
-                "lightSchemeBackgroundColor": "#dcdad7",
-                "lightSchemeTextColor": "#181a1b",
-                "scrollbarColor": "",
-                "selectionColor": "auto",
-                "styleSystemControls": false,
-                "lightColorScheme": "Default",
-                "darkColorScheme": "Default",
-                "immediateModify": false
-            },
-            "url": [
-                "discord.com"
-            ]
-        }
-    ],
-    "enabledByDefault": true,
-    "enabledFor": [
-        "animepahe.ru",
-        "www.netflix.com"
-    ],
-    "disabledFor": [
-        "www.youtube.com",
-        "mirrors.slackware.com",
-        "mirror.slackbuilds.org",
-        "slackware.uk",
-        "www.microsoft.com",
-        "www.startpage.com"
-    ],
-    "changeBrowserTheme": false,
-    "syncSettings": true,
-    "syncSitesFixes": false,
-    "automation": {
-        "behavior": "OnOff",
-        "enabled": false,
-        "mode": ""
-    },
-    "time": {
-        "activation": "18:00",
-        "deactivation": "9:00"
-    },
-    "location": {
-        "latitude": null,
-        "longitude": null
-    },
-    "previewNewDesign": false,
-    "previewNewestDesign": false,
-    "enableForPDF": true,
-    "enableForProtectedPages": false,
-    "enableContextMenus": false,
-    "detectDarkTheme": false,
-    "automationBehaviour": "OnOff",
-    "displayedNews": [
-        "detect-dark-theme",
-        "mobile",
-        "filter-mode",
-        "news-2023",
-        "thanks-2023",
-        "g-search-crash"
-    ],
-    "installation": {
-        "date": 1742418314390,
-        "reason": "install",
-        "version": "4.9.103"
-    },
-    "readNews": [
-        "chrome-favorites-2021",
-        "thanks-2021",
-        "5m-users",
-        "v4-9-16",
-        "v4-9",
-        "attention",
-        "dr-5-announcement",
-        "2m-users",
-        "automation",
-        "product-hunt-golden-kitty-2018",
-        "time-settings",
-        "safari",
-        "500k-users",
-        "stylish",
-        "product-hunt",
-        "custom-site-settings",
-        "thanks-for-contribution",
-        "dynamic-theme",
-        "no-war",
-        "detect-dark-theme",
-        "mobile",
-        "news-2023",
-        "filter-mode",
-        "v5-survey"
-    ]
+      },
+      "url": [
+        "myanimelist.net"
+      ]
+    }
+  ],
+  "enabledByDefault": true,
+  "enabledFor": [
+    "animepahe.ru",
+    "www.netflix.com"
+  ],
+  "disabledFor": [
+    "www.youtube.com",
+    "mirrors.slackware.com",
+    "mirror.slackbuilds.org",
+    "slackware.uk",
+    "www.microsoft.com",
+    "www.startpage.com",
+    "yflix.to",
+    "www.reddit.com",
+    "animepahe.si"
+  ],
+  "changeBrowserTheme": false,
+  "syncSettings": true,
+  "syncSitesFixes": false,
+  "automation": {
+    "behavior": "OnOff",
+    "enabled": false,
+    "mode": ""
+  },
+  "time": {
+    "activation": "18:00",
+    "deactivation": "9:00"
+  },
+  "location": {
+    "latitude": null,
+    "longitude": null
+  },
+  "previewNewDesign": false,
+  "previewNewestDesign": false,
+  "enableForPDF": true,
+  "enableForProtectedPages": false,
+  "enableContextMenus": false,
+  "detectDarkTheme": false,
+  "automationBehaviour": "OnOff",
+  "displayedNews": [
+    "detect-dark-theme",
+    "mobile",
+    "filter-mode",
+    "news-2023",
+    "thanks-2023",
+    "g-search-crash"
+  ],
+  "installation": {
+    "date": 1742418314390,
+    "reason": "install",
+    "version": "4.9.103"
+  },
+  "readNews": [
+    "chrome-favorites-2021",
+    "thanks-2021",
+    "5m-users",
+    "v4-9-16",
+    "v4-9",
+    "attention",
+    "dr-5-announcement",
+    "2m-users",
+    "automation",
+    "product-hunt-golden-kitty-2018",
+    "time-settings",
+    "safari",
+    "500k-users",
+    "stylish",
+    "product-hunt",
+    "custom-site-settings",
+    "thanks-for-contribution",
+    "dynamic-theme",
+    "no-war",
+    "detect-dark-theme",
+    "mobile",
+    "news-2023",
+    "filter-mode",
+    "v5-survey"
+  ]
 }
