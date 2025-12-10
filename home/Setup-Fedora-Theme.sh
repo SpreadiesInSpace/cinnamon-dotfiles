@@ -25,6 +25,9 @@ prompt_for_vm
 # Install icons and themes
 install_icons_and_themes
 
+# Configure MIME type icons for custom file types
+configure_icons
+
 # Override Cursor Theme for QT Apps
 override_qt_cursor_theme "default"
 

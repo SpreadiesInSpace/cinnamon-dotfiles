@@ -147,6 +147,57 @@ install_icons_and_themes() {
     die "Failed to clean up extracted directories."
 }
 
+configure_icons() {
+  # Configure MIME type icons for custom file types
+  local timestamp
+  timestamp=$(date +%s)
+
+  echo "Configuring MIME Type Icons..."
+
+  # Create MIME packages directory
+  mkdir -p ~/.local/share/mime/packages || \
+    die "Failed to create MIME packages directory."
+
+  # Backup existing override files if they exist
+  [ -f ~/.local/share/mime/packages/qcow2-override.xml ] && \
+    mv ~/.local/share/mime/packages/qcow2-override.xml \
+      ~/.local/share/mime/packages/qcow2-override.xml.old."$timestamp"
+
+  [ -f ~/.local/share/mime/packages/code-workspace-override.xml ] && \
+    mv ~/.local/share/mime/packages/code-workspace-override.xml \
+      ~/.local/share/mime/packages/code-workspace-override.xml.old."$timestamp"
+
+  # Create qcow2 MIME override
+  cat > ~/.local/share/mime/packages/qcow2-override.xml << 'EOF' || \
+    die "Failed to create qcow2 MIME override."
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="application/x-qemu-disk">
+    <comment>QEMU disk image</comment>
+    <icon name="application-x-raw-disk-image"/>
+    <glob pattern="*.qcow2"/>
+  </mime-type>
+</mime-info>
+EOF
+
+  # Create code-workspace MIME override
+  cat > ~/.local/share/mime/packages/code-workspace-override.xml << 'EOF' || \
+    die "Failed to create code-workspace MIME override."
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="application/x-code-workspace">
+    <comment>VS Code workspace</comment>
+    <icon name="workspace-switcher"/>
+    <glob pattern="*.code-workspace"/>
+  </mime-type>
+</mime-info>
+EOF
+
+  # Update MIME database
+  update-mime-database ~/.local/share/mime || \
+    die "Failed to update MIME database."
+}
+
 override_qt_cursor_theme() {
   # Override Cursor Theme for QT Apps
   local distro="${1:-}"
