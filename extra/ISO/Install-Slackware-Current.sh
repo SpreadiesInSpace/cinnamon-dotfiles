@@ -51,10 +51,10 @@ prompt_grub_timeout
 prompt_drive
 
 # Partition the drive
-partition_drive
+partition_drive "default"
 
 # Determine correct partition suffix
-partition_suffix
+partition_suffix "default"
 
 # Format the partitions
 format_partitions
@@ -63,10 +63,10 @@ format_partitions
 create_btrfs_subvolumes
 
 # Mount the partitions
-mount_partitions
+mount_partitions "default"
 
 # Mount System Partitions
-mount_system_partitions
+mount_system_partitions "default"
 
 # Re-mount ISO inside chroot
 mkdir -p /mnt/var/log/mount || \

@@ -64,10 +64,10 @@ format_partitions
 create_btrfs_subvolumes
 
 # Mount the partitions
-mount_partitions
+mount_partitions "default"
 
 # Mount System Partitions
-mount_system_partitions
+mount_system_partitions "default"
 
 # Declare Version
 source /etc/os-release || \

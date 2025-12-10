@@ -52,10 +52,10 @@ prompt_for_autologin
 prompt_for_vm
 
 # Partition the drive
-partition_drive
+partition_drive "default"
 
 # Determine correct partition suffix
-partition_suffix
+partition_suffix "default"
 
 # Format the partitions
 format_partitions

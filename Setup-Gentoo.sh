@@ -48,7 +48,7 @@ else
     die "Failed to set video card."
 
   # Drop flag so this doesn't run again
-  mark_makeconf_configured
+  mark_makeconf_configured "default"
 fi
 
 # Install Essentials
@@ -293,7 +293,7 @@ else
 fi
 
 # Only enable net-autostart if in physical machine
-manage_virsh_network
+manage_virsh_network "default"
 
 # Add the current user to the necessary groups
 add_user_to_groups libvirt kvm input disk video pipewire

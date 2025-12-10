@@ -18,7 +18,7 @@ prompt_for_vm
 install_icons_and_themes
 
 # Override Cursor Theme for QT Apps
-override_qt_cursor_theme
+override_qt_cursor_theme "default"
 
 # Enable GTK & QT Flatpak Theming Override
 enable_flatpak_theme_override
@@ -27,7 +27,7 @@ enable_flatpak_theme_override
 copy_bleachbit_config "gentoo"
 
 # Copies fonts to appropriate directories
-copy_fonts
+copy_fonts "default"
 
 # Copies sounds and wallpapers to home directory
 copy_sounds_and_wallpapers
@@ -39,7 +39,7 @@ copy_applets "applets.640"
 copy_kdeglobals
 
 # Symlink kdeglobals to color-schemes for KDE applications like haruna
-symlink_kdeglobals
+symlink_kdeglobals "default"
 
 # Backup and copy Haruna config to appropriate directory
 copy_haruna_config

@@ -51,10 +51,10 @@ retry pacman -Sy --needed --noconfirm archlinux-keyring || \
   die "Failed to update archlinux-keyring."
 
 # Partition the drive
-partition_drive
+partition_drive "default"
 
 # Determine correct partition suffix
-partition_suffix
+partition_suffix "default"
 
 # Format the partitions
 format_partitions
@@ -63,7 +63,7 @@ format_partitions
 create_btrfs_subvolumes
 
 # Mount the partitions
-mount_partitions
+mount_partitions "default"
 
 # Install Essential packages
 retry pacstrap -K /mnt base blueman linux linux-firmware cinnamon lightdm \

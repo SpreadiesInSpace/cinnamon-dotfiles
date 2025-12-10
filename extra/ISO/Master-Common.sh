@@ -210,7 +210,7 @@ write_video_card() {
 set_video_card() {
   # Set VIDEO_CARDS value in package.use
   prompt_video_card
-  write_video_card
+  write_video_card "default"
 }
 
 # Only Gentoo uses this

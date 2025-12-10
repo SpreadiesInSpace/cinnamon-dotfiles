@@ -213,7 +213,7 @@ echo "Enabling services..."
 systemctl enable libvirtd --now >/dev/null 2>&1
 
 # Only enable net-autostart if in physical machine
-manage_virsh_network
+manage_virsh_network "default"
 
 # Add user to necessary groups
 add_user_to_groups libvirt kvm input disk video audio
@@ -222,7 +222,7 @@ add_user_to_groups libvirt kvm input disk video audio
 backup_lightdm_config
 
 # Modify lightdm.conf in-place
-modify_lightdm_conf
+modify_lightdm_conf "default"
 
 # Ensure autologin group exists and add user
 ensure_autologin_group

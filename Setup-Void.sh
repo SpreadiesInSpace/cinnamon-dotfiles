@@ -226,7 +226,7 @@ add_user_to_groups libvirt kvm input disk video audio
 backup_lightdm_config
 
 # Modify lightdm.conf in-place
-modify_lightdm_conf
+modify_lightdm_conf "default"
 
 # Ensure autologin group exists and add user
 ensure_autologin_group

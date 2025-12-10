@@ -195,7 +195,7 @@ systemctl enable NetworkManager >/dev/null 2>&1 || \
   die "Failed to enable NetworkManager service."
 
 # Only enable net-autostart if in physical machine
-manage_virsh_network
+manage_virsh_network "default"
 
 # Add user to necessary groups
 add_user_to_groups libvirt libvirt-qemu kvm input disk video audio
