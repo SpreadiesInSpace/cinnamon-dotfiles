@@ -671,7 +671,7 @@ clone_dotfiles() {
           { echo \"Failed to create physical flag.\"; exit 1; }
       fi
       echo \"Reboot and run Theme.sh in cinnamon-dotfiles located in \
-\$HOME/cinnamon-dotfiles.\"'"
+\$HOME/cinnamon-dotfiles\"'"
   else
     cat << CLONE | su - "$username"
 cd && git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles || \
@@ -679,7 +679,7 @@ cd && git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles || \
 cd cinnamon-dotfiles || die "Failed to enter repo directory."
 touch .$distro.done || die "Failed to create flag."
 echo "Reboot and run Setup.sh in cinnamon-dotfiles located in \
-\$HOME/cinnamon-dotfiles."
+\$HOME/cinnamon-dotfiles"
 CLONE
   fi
 }
