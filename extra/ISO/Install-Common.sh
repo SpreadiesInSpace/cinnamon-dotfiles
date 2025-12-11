@@ -666,6 +666,9 @@ clone_dotfiles() {
         { echo \"Failed to create flags.\"; exit 1; }
       if [ \"$is_vm\" = true ]; then
         touch home/.vm || { echo \"Failed to create VM flag.\"; exit 1; }
+      else
+        touch home/.physical || \
+          { echo \"Failed to create physical flag.\"; exit 1; }
       fi
       echo \"Reboot and run Theme.sh in cinnamon-dotfiles located in \
 \$HOME/cinnamon-dotfiles.\"'"
