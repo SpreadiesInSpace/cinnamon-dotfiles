@@ -130,12 +130,23 @@ install_icons_and_themes() {
   cp -npr .themes/* ~/.themes/ || \
     die "Failed to copy themes to user directory."
 
+  # Symlink GTK4 theme
+  echo "Configuring GTK4 theme..."
+  mkdir -p ~/.config/gtk-4.0
+  ln -sf ~/.themes/Gruvbox-Dark-BL/gtk-4.0/* ~/.config/gtk-4.0/ || \
+    die "Failed to symlink GTK4 theme."
+
   # If not NixOS, also install to system-wide directories
   if ! grep -qi "nixos" /etc/os-release; then
     sudo cp -npr .icons/* /usr/share/icons/ || \
       die "Failed to copy icons to system directory."
     sudo cp -npr .themes/* /usr/share/themes/ || \
       die "Failed to copy themes to system directory."
+    # Symlink GTK4 theme system-wide
+    sudo mkdir -p /root/.config/gtk-4.0
+    sudo ln -sf /usr/share/themes/Gruvbox-Dark-BL/gtk-4.0/* \
+      /root/.config/gtk-4.0/ || \
+      die "Failed to symlink GTK4 theme system-wide."
   fi
 
   # Move ZIPs back & clean up
@@ -244,6 +255,10 @@ enable_flatpak_theme_override() {
     die "Failed to override Flatpak icons directory."
   sudo flatpak override --env=GTK_THEME=Gruvbox-Dark-BL || \
     die "Failed to override Flatpak GTK themes."
+  flatpak override --user --filesystem=xdg-config/gtk-4.0 || \
+    die "Failed to override Flatpak GTK4 themes."
+  sudo flatpak override --filesystem=xdg-config/gtk-4.0 || \
+    die "Failed to override Flatpak GTK4 themes system-wide."
   sudo flatpak override --env=ICON_THEME=gruvbox-dark-icons-gtk || \
     die "Failed to override Flatpak icons."
   sudo flatpak override --filesystem=xdg-config/Kvantum:ro || \

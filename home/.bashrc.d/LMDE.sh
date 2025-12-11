@@ -7,11 +7,16 @@ warn() { echo -e "\033[1;33mWarning:\033[0m $*" >&2; return 1; }
 
 # Debian Cleaning
 cleanKernel() {
-  local packages
+  local packages current_version
+  # Get current kernel version (e.g., "6.12.65+deb13")
+  current_version=$(uname -r | sed 's/-amd64$//')
   mapfile -t packages < <(dpkg-query -W -f'${Package}\n' 'linux-*' | \
-    sed -nr 's/.*-([0-9]+(\.[0-9]+){2}-[^-]+).*/\1 &/p' | \
-    linux-version sort | \
-    awk '($1==c){exit} {print $2}' c="$(uname -r | cut -f1,2 -d-)")
+    grep -E '^linux-(image|headers|kbuild)-[0-9]+\.[0-9]+\.[0-9]+' | \
+    grep -v -- "$current_version" | \
+    sed -nr 's/.*-([0-9]+(\.[0-9]+){2}[-+][^-]+).*/\1 &/p' | \
+    linux-version sort --reverse | \
+    tail -n +2 | \
+    awk '{print $2}')
 
   if (( ${#packages[@]} > 0 )); then
     sudo apt-get purge "${packages[@]}" || \
