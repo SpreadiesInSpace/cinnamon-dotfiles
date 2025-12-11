@@ -304,12 +304,8 @@ sbo_packages=(
 retry slpkg install -y -P -B "${sbo_packages[@]}" || \
   die "Failed to install SBo packages."
 
-# Install ripgrep w/out parallel downloads to prevent download fails.
-retry slpkg install -y -B ripgrep || \
-  die "Failed to install bottom."
-
-# Install bottom seperately to prevent download fails.
-retry slpkg install -y -P -B bottom || \
+# Install w/out parallel downloads to prevent download fails.
+retry slpkg install -y -B bottom ripgrep || \
   die "Failed to install bottom."
 
 # Slint packages
