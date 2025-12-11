@@ -56,6 +56,6 @@ cd cinnamon-dotfiles
 *See this [README](https://github.com/SpreadiesInSpace/cinnamon-dotfiles/tree/main/home#readme) for theming details.*
 
 ## Screenshots - [Link](https://github.com/SpreadiesInSpace/cinnamon-dotfiles/blob/main/screenshots/CinnamonGruvbox2024.png)
-![LMDE Screenshots](https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/screenshots/CinnamonGruvbox2024.png "GTK, QT and Flatpak apps all thoroughly themed.")
+![LMDE Screenshots](https://raw.githubusercontent.com/SpreadiesInSpace/cinnamon-dotfiles/main/screenshots/CinnamonGruvbox2024.png "GTK, QT, Flatpak & Terminal Apps all thoroughly themed.")
 ## Wallpapers - [Link](https://github.com/SpreadiesInSpace/wallpapers)
 ![Cinnamon Gruvbox Wallpapers](https://raw.githubusercontent.com/SpreadiesInSpace/unsorted/main/Collection/wallpapers.gif "I made the light/dark Cinnamon logo wallpapers.")
