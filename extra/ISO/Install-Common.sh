@@ -21,9 +21,22 @@ source ./Master-Common.sh || \
   die "Failed to source Master-Common.sh"
 
 detect_boot_mode() {
+  # Ensure 64-bit System
+  if [ "$(uname -m)" != "x86_64" ]; then
+    die "This script requires a 64-bit x86_64 system."
+  fi
   # Detect if booted in UEFI or BIOS mode
-  if [ -d /sys/firmware/efi ]; then
+  if [ -f /sys/firmware/efi/fw_platform_size ]; then
     BOOTMODE="UEFI"
+    UEFI_BITS=$(cat /sys/firmware/efi/fw_platform_size 2>/dev/null)
+    if [ "$UEFI_BITS" = "32" ]; then
+      die "32-bit UEFI detected. This script only supports 64-bit UEFI.
+Please reboot in BIOS/CSM mode or use a 64-bit UEFI system."
+    elif [ "$UEFI_BITS" = "64" ]; then
+      echo "64-bit UEFI mode detected."
+    else
+      die "Unable to determine UEFI bitness. Platform may be unsupported."
+    fi
     REMOVABLE_BOOT="0"
     # Check if efivarfs is mounted
     if ! grep -q 'efivarfs' /proc/mounts; then
@@ -33,11 +46,6 @@ detect_boot_mode() {
         echo "Failed to mount efivarfs. Attempting to remount as read-write..."
         if ! mount -o remount,rw,nosuid,nodev,noexec --types \
           efivarfs efivarfs /sys/firmware/efi/efivars 2>/dev/null; then
-          # At this point, efivars exists but is not writable/mountable
-          if [ ! -w /sys/firmware/efi/efivars ]; then
-            # Writable access blocked — may be removable boot
-            REMOVABLE_BOOT="1"
-          fi
           die "UEFI detected but efivarfs is not accessible.
 This is likely a permissions or kernel setting issue."
         fi
@@ -52,7 +60,7 @@ This is likely a permissions or kernel setting issue."
     echo "WARNING: You are booted in BIOS mode."
     echo "Continuing in BIOS mode."
   fi
-  export REMOVABLE_BOOT
+  export BOOTMODE REMOVABLE_BOOT
 }
 
 time_sync() {
