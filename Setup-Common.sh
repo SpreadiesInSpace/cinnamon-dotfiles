@@ -52,10 +52,10 @@ display_status() {
 
   # Confirm before proceeding
   while true; do
-    read -rp "Continue with these settings? [y/N]: " confirm
-    if [[ "$confirm" =~ ^([yY]|[yY][eE][sS])$ ]]; then
+    read -rp "Continue with these settings? [Y/n]: " confirm
+    if [[ "$confirm" =~ ^([yY]|[yY][eE][sS])$ || -z "$confirm" ]]; then
       break
-    elif [[ "$confirm" =~ ^([nN]|[nN][oO])$ || -z "$confirm" ]]; then
+    elif [[ "$confirm" =~ ^([nN]|[nN][oO])$ ]]; then
       die "Setup cancelled by user."
     else
       echo "Invalid input. Please answer y or n."
