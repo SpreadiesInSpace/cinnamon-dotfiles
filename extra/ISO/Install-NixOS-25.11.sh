@@ -51,9 +51,6 @@ prompt_for_autologin
 # VM Prompt
 prompt_for_vm
 
-# Confirm before proceeding
-prompt_confirm
-
 # Partition the drive
 partition_drive "default"
 
