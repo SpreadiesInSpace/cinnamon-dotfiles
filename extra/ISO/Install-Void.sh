@@ -41,6 +41,9 @@ prompt_grub_timeout
 # Prompt for drive to partition
 prompt_drive
 
+# Confirm before proceeding
+prompt_confirm
+
 # Refresh repository and install tools
 retry xbps-install -Sy parted xtools || \
   die "Failed to install parted and xtools."

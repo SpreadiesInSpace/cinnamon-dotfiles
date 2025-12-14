@@ -49,6 +49,9 @@ prompt_grub_timeout
 # Prompt for drive to partition
 prompt_drive
 
+# Confirm before proceeding
+prompt_confirm
+
 # Refresh (for older ISOs)
 retry zypper ref
 

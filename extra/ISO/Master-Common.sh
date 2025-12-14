@@ -130,6 +130,20 @@ prompt_timezone() {
   done
 }
 
+prompt_confirm() {
+  # Confirm before proceeding
+  while true; do
+    read -rp "Continue with these settings? [Y/n]: " confirm
+    if [[ "$confirm" =~ ^([yY]|[yY][eE][sS])$ || -z "$confirm" ]]; then
+      break
+    elif [[ "$confirm" =~ ^([nN]|[nN][oO])$ ]]; then
+      die "Setup cancelled by user."
+    else
+      echo "Invalid input. Please answer y or n."
+    fi
+  done
+}
+
 # Only Install-Gentoo.sh uses this
 prompt_video_card() {
   local link="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation"

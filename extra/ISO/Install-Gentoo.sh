@@ -57,6 +57,9 @@ prompt_init_system
 # Prompt for video card
 prompt_video_card
 
+# Confirm before proceeding
+prompt_confirm
+
 # Partition the drive
 partition_drive "default"
 

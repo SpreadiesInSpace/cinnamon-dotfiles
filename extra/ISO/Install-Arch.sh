@@ -41,6 +41,9 @@ prompt_grub_timeout
 # Prompt for drive to partition
 prompt_drive
 
+# Confirm before proceeding
+prompt_confirm
+
 # Update keyring (for older ISOs)
 echo "Initializing and populating Pacman keyring..."
 pacman-key --init || \

@@ -50,6 +50,9 @@ prompt_grub_timeout
 # Prompt for drive to partition
 prompt_drive
 
+# Confirm before proceeding
+prompt_confirm
+
 # Partition the drive
 partition_drive "default"
 

@@ -26,6 +26,9 @@ prompt_for_vm
 # Display Status from Prompts
 display_status "$enable_autologin" "$is_vm"
 
+# Confirm before proceeding
+prompt_confirm
+
 # Enable Parallel Downloads
 echo "Configuring DNF..."
 if ! grep -q "^max_parallel_downloads=10$" /etc/dnf/dnf.conf; then

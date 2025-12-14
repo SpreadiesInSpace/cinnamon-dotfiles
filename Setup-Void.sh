@@ -26,6 +26,9 @@ prompt_for_vm
 # Display Status from Prompts
 display_status "$enable_autologin" "$is_vm"
 
+# Confirm before proceeding
+prompt_confirm
+
 # Install tools
 retry xbps-install -Sy xbps git xtools xmirror || \
   die "Failed to install git and xtools."

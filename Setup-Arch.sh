@@ -26,6 +26,9 @@ prompt_for_vm
 # Display Status from Prompts
 display_status "$enable_autologin" "$is_vm"
 
+# Confirm before proceeding
+prompt_confirm
+
 # Check if Color, ParallelDownloads, and ILoveCandy are in /etc/pacman.conf
 echo "Configuring pacman..."
 declare -A options=(

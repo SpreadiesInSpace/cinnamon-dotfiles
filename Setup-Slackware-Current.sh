@@ -26,6 +26,9 @@ prompt_for_vm
 # Display Status from Prompts
 display_status "$enable_autologin" "$is_vm"
 
+# Confirm before proceeding
+prompt_confirm
+
 # Install sbopkg (for sbotools)
 SBO="https://github.com/sbopkg/sbopkg/releases/download/0.38.3"
 SBO="$SBO/sbopkg-0.38.3-noarch-1_wsr.tgz"
