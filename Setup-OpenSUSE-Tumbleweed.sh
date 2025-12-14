@@ -26,9 +26,6 @@ prompt_for_vm
 # Display Status from Prompts
 display_status "$enable_autologin" "$is_vm"
 
-# Confirm before proceeding
-prompt_confirm
-
 # Enable Parallel Downloads during Setup
 export ZYPP_PCK_PRELOAD=1 || \
   die "Failed to enable parallel downloads."

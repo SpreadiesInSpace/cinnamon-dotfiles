@@ -38,9 +38,6 @@ prompt_timezone "nixos"
 # Display Status from Prompts
 display_status "$enable_autologin" "$is_vm"
 
-# Confirm before proceeding
-prompt_confirm
-
 # Declare config file
 CONFIG="/etc/nixos/configuration.nix"
 

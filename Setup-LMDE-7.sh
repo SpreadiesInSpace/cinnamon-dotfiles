@@ -26,9 +26,6 @@ prompt_for_vm
 # Display Status from Prompts
 display_status "$enable_autologin" "$is_vm"
 
-# Confirm before proceeding
-prompt_confirm
-
 # Update system and install git and curl
 retry apt update || \
   die "Failed to update system."

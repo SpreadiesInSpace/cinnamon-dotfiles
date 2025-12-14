@@ -26,9 +26,6 @@ prompt_for_vm
 # Display Status from Prompts
 display_status "$enable_autologin" "$is_vm"
 
-# Confirm before proceeding
-prompt_confirm
-
 # Detect Init System
 if eselect profile show | grep -q systemd; then
   GENTOO_INIT="systemd"
