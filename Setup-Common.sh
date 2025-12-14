@@ -49,7 +49,7 @@ display_status() {
   # Display Status from Prompts
   echo "Autologin: $1"
   echo "Is VM: $2"
-  
+
   # Confirm before proceeding
   while true; do
     read -rp "Continue with these settings? [y/N]: " confirm

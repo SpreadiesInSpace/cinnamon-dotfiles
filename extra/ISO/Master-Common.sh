@@ -415,9 +415,9 @@ setup_login_wallpaper() {
 cinnamon_env_fix() {
   # Comment out Cinnamon desktop environment setting (temp fix)
   local file="/usr/share/cinnamon/js/ui/main.js"
-  
+
   [ -f "$file" ] || die "$file not found."
-  
+
   if ! sed -n '315p' "$file" | grep -q "^[[:space:]]*//"; then
     sudo sed -i '315s/^/\/\/ /' "$file" || \
       die "Failed to comment out Cinnamon desktop env setting."
