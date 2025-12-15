@@ -185,21 +185,14 @@ zypper al devhelp* || \
   die "Failed to add devhelp to avoid reinstallation."
 
 # Install neofetch
-neofetch_repo="https://download.opensuse.org/repositories/utilities"
-neofetch_repo="$neofetch_repo/openSUSE_Factory/utilities.repo"
-zypper --gpg-auto-import-keys ar $neofetch_repo || \
+neofetch_url="https://download.opensuse.org/repositories/utilities"
+neofetch_url="$neofetch_url/openSUSE_Factory/utilities.repo"
+zypper --gpg-auto-import-keys ar $neofetch_url || \
   die "Failed to add neofetch repository."
 retry zypper --gpg-auto-import-keys ref || \
   die "Failed to refresh repositories."
-neofetch_pkg=neofetch-7.1.0-lp160.23.1.noarch.rpm
-neofetch_url="https://download.opensuse.org/repositories/utilities/16.0/"
-neofetch_url="$neofetch_url/noarch/$neofetch_pkg"
-wget -c -T 10 -t 10 -q --show-progress "$neofetch_url" || \
-  die "Failed to download neofetch RPM."
-retry zypper in -y "$neofetch_pkg" || \
+retry zypper in -y neofetch || \
   die "Failed to install neofetch."
-rm -rf "$neofetch_pkg" || \
-  die "Failed to remove neofetch RPM."
 
 # Protect neofetch from being replaced by neowofetch
 zypper al neofetch || \
