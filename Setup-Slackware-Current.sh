@@ -161,6 +161,27 @@ fi
 retry slpkg install -y -P -B bash-completion -o "slack_extra" || \
   die "Failed to install bash-completion."
 
+# Install Cinnamon, LightDM and set Default DE System-Wide
+retry slpkg install -y -P -B '*' -o csb || die "Failed to install Cinnamon"
+ln -sf /etc/X11/xinit/xinitrc.cinnamon-session /etc/X11/xinit/xinitrc || \
+  die "Failed to create symlink for xinitrc."
+ln -sf /etc/X11/xinit/xinitrc.cinnamon-session /etc/X11/xsession || \
+  die "Failed to create symlink for xsession."
+cp /etc/X11/xinit/xinitrc.cinnamon-session /root/.xinitrc || \
+  die "Failed to copy xinitrc to /root."
+cp /etc/X11/xinit/xinitrc.cinnamon-session /root/.xsession || \
+  die "Failed to copy xsession to /root."
+chmod -x /root/.xinitrc || \
+  die "Failed to modify permissions for /root/.xinitrc."
+chmod -x /root/.xsession || \
+  die "Failed to modify permissions for /root/.xsession."
+
+# Set polkit permissions for wheel group users
+set_polkit_perms
+
+# Temporary mozjs128 fix for Cinnamon
+# bash unsorted/Slackware/mozjs128.sh
+
 # Alien packages
 alien_packages=(
   "libreoffice"
@@ -318,27 +339,6 @@ slint_packages=(
 # Install packages from Slint over SBo to reduce compile times
 retry slpkg install -y -P -B "${slint_packages[@]}" -o slint -O || \
   die "Failed to install slint packages."
-
-# Install Cinnamon, LightDM and set Default DE System-Wide
-retry slpkg install -y -P -B '*' -o csb || die "Failed to install Cinnamon"
-ln -sf /etc/X11/xinit/xinitrc.cinnamon-session /etc/X11/xinit/xinitrc || \
-  die "Failed to create symlink for xinitrc."
-ln -sf /etc/X11/xinit/xinitrc.cinnamon-session /etc/X11/xsession || \
-  die "Failed to create symlink for xsession."
-cp /etc/X11/xinit/xinitrc.cinnamon-session /root/.xinitrc || \
-  die "Failed to copy xinitrc to /root."
-cp /etc/X11/xinit/xinitrc.cinnamon-session /root/.xsession || \
-  die "Failed to copy xsession to /root."
-chmod -x /root/.xinitrc || \
-  die "Failed to modify permissions for /root/.xinitrc."
-chmod -x /root/.xsession || \
-  die "Failed to modify permissions for /root/.xsession."
-
-# Set polkit permissions for wheel group users
-set_polkit_perms
-
-# Temporary mozjs128 fix for Cinnamon
-# bash unsorted/Slackware/mozjs128.sh
 
 # Set TERMINAL_SELECTOR back to true
 sed -i 's/^TERMINAL_SELECTOR = false$/TERMINAL_SELECTOR = true/' \
