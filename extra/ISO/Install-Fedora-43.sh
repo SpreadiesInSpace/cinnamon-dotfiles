@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # Turn SELinux back on if script is interrupted
-# trap 'fixfiles -F onboot' ERR INT TERM
+trap 'fixfiles -F onboot' ERR INT TERM
 
 # Download and source common functions
 echo "Sourcing functions..."
@@ -218,7 +218,7 @@ PASSWORD
 
 # Turn SELinux back on (permissive mode)
 sed -i 's/^SELINUX=.*/SELINUX=permissive/' /etc/sysconfig/selinux
-# fixfiles -F onboot || die "Failed to turn SELinux back on."
+fixfiles -F onboot || die "Failed to turn SELinux back on."
 
 # Clean up
 rm -rf Install-Common.sh Master-Common.sh
