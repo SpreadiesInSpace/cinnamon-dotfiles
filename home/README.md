@@ -30,6 +30,7 @@ cd cinnamon-dotfiles/home
 *The script will break if these aren't installed.*
 
  - [ ] dconf (Debian-based systems need dconf-cli)
+ - [ ] dbus-launch (provided by the dbus-x11 package for some distros)
  - [ ] git
  - [ ] gsettings
  - [ ] kvantummanager

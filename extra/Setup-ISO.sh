@@ -39,20 +39,22 @@ declare -A installs=(
   [1]="$URL/Install-Arch.sh"
   [2]="$URL/Install-Fedora-43.sh"
   [3]="$URL/Install-Gentoo.sh"
-  [4]="$URL/Install-NixOS-25.11.sh"
-  [5]="$URL/Install-openSUSE-Tumbleweed.sh"
-  [6]="$URL/Install-Slackware-Current.sh"
-  [7]="$URL/Install-Void.sh"
+  [4]="$URL/Install-LMDE-7.sh"
+  [5]="$URL/Install-NixOS-25.11.sh"
+  [6]="$URL/Install-openSUSE-Tumbleweed.sh"
+  [7]="$URL/Install-Slackware-Current.sh"
+  [8]="$URL/Install-Void.sh"
 )
 
 declare -A names=(
   [1]="Install-Arch.sh"
   [2]="Install-Fedora-43.sh"
   [3]="Install-Gentoo.sh"
-  [4]="Install-NixOS-25.11.sh"
-  [5]="Install-openSUSE-Tumbleweed.sh"
-  [6]="Install-Slackware-Current.sh"
-  [7]="Install-Void.sh"
+  [4]="Install-LMDE-7.sh"
+  [5]="Install-NixOS-25.11.sh"
+  [6]="Install-openSUSE-Tumbleweed.sh"
+  [7]="Install-Slackware-Current.sh"
+  [8]="Install-Void.sh"
 )
 
 # Prompt menu
@@ -61,6 +63,7 @@ options=(
   "Arch Linux"
   "Fedora 43"
   "Gentoo"
+  "LMDE 7"
   "NixOS 25.11"
   "openSUSE Tumbleweed"
   "Slackware Current"
@@ -71,14 +74,14 @@ PS3="Select a number: "
 
 select _ in "${options[@]}"; do
   case $REPLY in
-    [1-7])
+    [1-8])
       url="${installs[$REPLY]}"
       filename="${names[$REPLY]}"
       [[ -n "$url" ]] || die "Invalid choice. Exiting."
 
       echo -e "${YELLOW}Downloading $filename...${NC}"
       if command -v curl &>/dev/null; then
-        curl -sL -C - --retry 10 --connect-timeout 10 "$url" -o "$filename"
+        curl -fssSL -C - --retry 10 --connect-timeout 10 "$url" -o "$filename"
       elif command -v wget &>/dev/null; then
         wget -q -c -T 10 -t 10 "$url" -O "$filename"
       else
@@ -88,7 +91,7 @@ select _ in "${options[@]}"; do
       chmod +x "$filename"
       echo -e "${GREEN}Running $filename...${NC}"
 
-      if [[ "$REPLY" == "6" ]]; then
+      if [[ "$REPLY" == "7" ]]; then
         # Slackware ISO doesn't have sudo & timed breaks after time_sync
         /bin/time -f "Time Elapsed: %E" bash "$filename"
       else
@@ -96,7 +99,7 @@ select _ in "${options[@]}"; do
       fi
       break
       ;;
-    8)
+    9)
       echo -e "${GREEN}Exiting.${NC}"
       exit 0
       ;;

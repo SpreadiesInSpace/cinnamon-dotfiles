@@ -417,7 +417,7 @@ mount_partitions() {
   fi
 }
 
-# Only Fedora/Gentoo/openSUSE/Slackware uses this
+# Only Fedora/Gentoo/LMDE/openSUSE/Slackware uses this
 mount_system_partitions() {
   local distro="${1:-}"
   # Mount System Partitions

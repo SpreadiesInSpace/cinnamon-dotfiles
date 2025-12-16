@@ -34,6 +34,12 @@ retry apt upgrade -y || \
 retry apt install -y git curl || \
   die "Failed to install git and curl."
 
+# Debloat if installed via cinnamon-ISO
+if [[ -f ".lmde-7.done" ]]; then
+  bash unsorted/LMDE/LMDE-Bloat.sh || \
+    die "Failed to remove bloat."
+fi
+
 # Install Brave Browser
 retry curl -fsS https://dl.brave.com/install.sh | sh || \
   die "Failed to install Brave Browser."
@@ -144,6 +150,7 @@ packages=(
   "gir1.2-gpaste-2"
   "gpaste-2"
   "libreoffice"
+  "libreoffice-gtk3"
   "libreoffice-style-elementary"
   "qbittorrent"
   "spice-vdagent"

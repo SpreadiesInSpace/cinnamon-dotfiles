@@ -16,8 +16,12 @@ fi
 cd ../.. || die "Failed to change directory to project root."
 mkdir -p /boot/grub/themes || \
   die "Failed to create GRUB themes directory."
-mv /boot/grub/themes/linuxmint /boot/grub/themes/linuxmint.original || \
-  die "Failed to rename original linuxmint theme."
+timestamp=$(date +%s)
+if [ -d /boot/grub/themes/linuxmint ]; then
+  mv /boot/grub/themes/linuxmint \
+    /boot/grub/themes/linuxmint.old."$timestamp" || \
+    die "Failed to rename original linuxmint theme."
+fi
 cp -rf boot/grub/themes/gruvbox-dark /boot/grub/themes/ || \
   die "Failed to copy Gruvbox GRUB theme."
 mv /boot/grub/themes/gruvbox-dark /boot/grub/themes/linuxmint || \

@@ -25,7 +25,10 @@ check_app() {
 
 check_dependencies() {
   local missing=()
-  local deps=(dconf git gsettings kvantummanager qt5ct qt6ct sudo unzip)
+  local deps=(
+    dconf dbus-launch git gsettings kvantummanager
+    qt5ct qt6ct sudo unzip
+  )
 
   # Verify array has elements
   if [ ${#deps[@]} -eq 0 ]; then
@@ -131,7 +134,12 @@ install_icons_and_themes() {
     die "Failed to copy themes to user directory."
 
   # Symlink GTK4 theme
+  local timestamp
+  timestamp=$(date +%s)
   echo "Configuring GTK4 theme..."
+  if [ -d ~/.config/gtk-4.0 ]; then
+    mv ~/.config/gtk-4.0 ~/.config/gtk-4.0.old."$timestamp"
+  fi
   mkdir -p ~/.config/gtk-4.0
   ln -sf ~/.themes/Gruvbox-Dark-BL/gtk-4.0/* ~/.config/gtk-4.0/ || \
     die "Failed to symlink GTK4 theme."
