@@ -104,7 +104,7 @@ retry arch-chroot /mnt apt install -y amd64-microcode arch-install-scripts \
   linuxmint-keyring mesa-va-drivers mesa-vulkan-drivers mint-common \
   mint-info-cinnamon mintinstall mintreport mint-meta-cinnamon mintsources \
   mintupdate mintsystem nano network-manager pipewire pipewire-alsa \
-  pipewire-pulse pulseaudio-utils python3-dbus slick-greeter pice-vdagent \
+  pipewire-pulse pulseaudio-utils python3-dbus slick-greeter spice-vdagent \
   sudo systemd-zram-generator unzip util-linux-extra wget wireplumber \
   xorg xserver-xorg-core xserver-xorg-input-libinput xserver-xorg-video-all \
     || die "Failed to install system packages."
