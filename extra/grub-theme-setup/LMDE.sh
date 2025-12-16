@@ -28,7 +28,7 @@ mv /boot/grub/themes/gruvbox-dark /boot/grub/themes/linuxmint || \
   die "Failed to rename Gruvbox theme to linuxmint."
 
 # Update /etc/default/grub to use the new theme
-GRUB_THEME_LINE='GRUB_THEME="/boot/grub/themes/gruvbox-dark/theme.txt"'
+GRUB_THEME_LINE='GRUB_THEME="/boot/grub/themes/linuxmint/theme.txt"'
 sed -i "/^GRUB_THEME=/s|^GRUB_THEME=.*|$GRUB_THEME_LINE|" \
   /etc/default/grub || \
   die "Failed to set GRUB_THEME line in /etc/default/grub."
