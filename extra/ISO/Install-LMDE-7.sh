@@ -63,7 +63,14 @@ create_btrfs_subvolumes
 mount_partitions "default"
 
 # Install the Base System
-retry debootstrap trixie /mnt || \
+if [ "$BOOTMODE" = "UEFI" ]; then
+  GRUB_PKG="grub-efi-amd64"
+else
+  GRUB_PKG="grub-pc"
+fi
+retry debootstrap \
+  --include linux-image-amd64,"$GRUB_PKG",locales,ca-certificates \
+  --arch amd64 trixie /mnt || \
    die "Failed to install base packages."
 
 # Copy sources from ISO to installed system
@@ -77,27 +84,6 @@ cp /etc/apt/sources.list.d/official-package-repositories.list \
 cp -r /etc/apt/{preferences.d,trusted.gpg.d} /mnt/etc/apt/ || \
   die "Failed to copy APT preferences."
 
-# Temporarily change HTTPS to HTTP for initial setup (w/ backup)
-cp /mnt/etc/apt/sources.list.d/official-package-repositories.list \
-  /mnt/etc/apt/sources.list.d/official-package-repositories.list.https || \
-  die "Failed to backup official-package-repositories.list."
-sed -i 's|https://|http://|g' \
-  /mnt/etc/apt/sources.list.d/official-package-repositories.list || \
-  die "Failed to convert official-package-repositories.list to HTTP."
-
-# Install System Packages
-retry arch-chroot /mnt apt update || \
-  die "Failed to refresh APT repositories."
-
-# Install System Packages (Add mint packages)
-if [ "$BOOTMODE" = "UEFI" ]; then
-  GRUB_PKG="grub-efi-amd64"
-else
-  GRUB_PKG="grub-pc"
-fi
-retry arch-chroot /mnt apt install -y ca-certificates "$GRUB_PKG" locales || \
-  die "Failed to install system packages."
-
 # Locale Generation (uncomment en_US.UTF-8 UTF-8 in /etc/locale.gen)
 arch-chroot /mnt sed -i 's/^#\s*\(en_US.UTF-8 UTF-8\)/\1/' /etc/locale.gen || \
   die "Failed to uncomment locale."
@@ -107,16 +93,13 @@ arch-chroot /mnt locale-gen || die "Failed to generate locale."
 arch-chroot /mnt echo "LANG=en_US.UTF-8" > /etc/locale.conf || \
   die "Failed to set locale."
 
-# Restore HTTPS sources after ca-certificates is installed
-mv /mnt/etc/apt/sources.list.d/official-package-repositories.list.https \
-  /mnt/etc/apt/sources.list.d/official-package-repositories.list || \
-  die "Failed to restore HTTPS official-package-repositories.list."
-
 # Install System Packages
+retry arch-chroot /mnt apt update || \
+  die "Failed to refresh APT repositories."
 retry arch-chroot /mnt apt install -y amd64-microcode arch-install-scripts \
   bash-completion blueman btrfs-progs cinnamon dbus dbus-user-session \
-  dbus-x11 firmware-linux-nonfree git gnome-terminal gvfs gvfs-backends \
-  gvfs-daemons gvfs-fuse intel-microcode libnotify-bin lightdm \
+  dbus-x11 dialog firmware-iwlwifi firmware-linux firmware-linux-nonfree \
+  ffmpegthumbnailer git gnome-terminal intel-microcode libnotify-bin lightdm \
   linux-image-amd64 mesa-va-drivers mesa-vulkan-drivers mint-common \
   mint-info-cinnamon mintinstall mintsources mintupdate nano network-manager \
   pipewire pipewire-alsa pipewire-pulse pulseaudio-utils python3-dbus \
