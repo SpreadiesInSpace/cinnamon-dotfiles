@@ -235,7 +235,7 @@ touch /etc/portage/package.use/zzz_autounmask || \
   die "Failed to create autounmask file."
 
 # Temporary libguestfs sandbox violation fix
-bash unsorted/Gentoo/libguestfs-sandbox-fix.sh
+# bash unsorted/Gentoo/libguestfs-sandbox-fix.sh
 
 # Install Packages
 if [ "$GENTOO_INIT" = "systemd" ]; then
