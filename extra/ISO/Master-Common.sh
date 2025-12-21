@@ -302,6 +302,20 @@ mark_makeconf_configured() {
   touch "$flag_file" || die "Failed to create $flag_file flag."
 }
 
+# Only LMDE uses this
+set_keyboard_layout() {
+  local prefix="${1:-}"
+  local kb="keyboard-configuration keyboard-configuration"
+  local cmd="debconf-set-selections"
+  
+  [[ "$prefix" == "mnt" ]] && cmd="arch-chroot /mnt $cmd"
+  
+  echo "$kb/layout select English (US)" | $cmd || \
+    die "Failed to set keyboard layout."
+  echo "$kb/variant select English (US)" | $cmd || \
+    die "Failed to set keyboard variant."
+}
+
 # Only NixOS uses this
 setup_nixos_config() {
   local config_path="$1"

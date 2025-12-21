@@ -176,6 +176,7 @@ packages=(
 )
 
 # Install Packages
+set_keyboard_layout "default"
 retry apt install -y "${packages[@]}" || \
   die "Failed to install packages."
 
