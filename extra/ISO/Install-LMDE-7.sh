@@ -96,7 +96,6 @@ arch-chroot /mnt echo "LANG=en_US.UTF-8" > /etc/locale.conf || \
 # Install System Packages
 retry arch-chroot /mnt apt update || \
   die "Failed to refresh APT repositories."
-set_keyboard_layout "mnt"
 retry arch-chroot /mnt apt install -y amd64-microcode arch-install-scripts \
   bash-completion blueman bluez-firmware btrfs-progs cinnamon dbus \
   dbus-user-session dbus-x11 dialog firmware-iwlwifi firmware-linux \
