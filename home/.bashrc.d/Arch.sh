@@ -13,6 +13,8 @@ cleanAll() {
     warn "Failed to repair flatpak packages."
   sudo rm -rf /var/lib/systemd/coredump/* || \
     warn "Failed to clean systemd coredumps."
+  sudo rm -rf /var/cache/pacman/pkg/* || \
+    warn "Failed to clean pacman pkg directory."
   yes | sudo pacman -Scc || \
     warn "Failed to clean pacman cache."
   rm -rf ~/.cache/* || \
