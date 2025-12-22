@@ -176,7 +176,7 @@ packages=(
 )
 
 # Install Packages
-retry apt install -y "${packages[@]}" || \
+DEBIAN_FRONTEND=noninteractive retry apt install -y "${packages[@]}" || \
   die "Failed to install packages."
 
 # Enable Flathub for Flatpak
