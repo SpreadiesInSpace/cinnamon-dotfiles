@@ -7,6 +7,7 @@ source ./Setup-Common.sh || die "Failed to source Setup-Common.sh"
 
 # Declare variables that will be set by sourced functions
 declare enable_autologin is_vm
+export DEBIAN_FRONTEND=noninteractive
 
 # Check if the script is run as root
 check_if_root
@@ -176,7 +177,7 @@ packages=(
 )
 
 # Install Packages
-DEBIAN_FRONTEND=noninteractive retry apt install -y "${packages[@]}" || \
+retry apt install -y "${packages[@]}" || \
   die "Failed to install packages."
 
 # Enable Flathub for Flatpak
