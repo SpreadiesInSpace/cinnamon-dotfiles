@@ -71,15 +71,19 @@ updateApp() {
 }
 
 updateAll() {
-  updateApp && cleanAll || true
+  if updateApp; then
+    cleanAll
+  fi
 }
 
 updateRestart() {
-  updateAll && reboot || true
+  updateAll
+  reboot
 }
 
 updateShutdown() {
-  updateAll && poweroff || true
+  updateAll
+  poweroff
 }
 
 # Update and Cleanup
