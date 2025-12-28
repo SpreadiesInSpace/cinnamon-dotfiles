@@ -311,6 +311,10 @@ fi
 # retry emerge -1uqv app-portage/cpuid2cpuflags
 # echo "*/* $(cpuid2cpuflags)" > /etc/portage/package.use/00-cpu-flags
 
+# Temporary Mesa Fix
+FEATURES="-getbinpkg" emerge -1Dvq mesa_clc || \
+  die "Failed to emerge mesa_clc."
+
 # Update World Set
 retry emerge -vqDuN @world || die "Failed to update the world set."
 
@@ -340,7 +344,7 @@ source /etc/profile || die "Failed to reload environment."
 echo "sys-kernel/installkernel grub dracut" > \
   /etc/portage/package.use/installkernel || \
   die "Failed to update /etc/portage/package.use/installkernel."
-
+z
 # Install System Packages
 if { [ "$GENTOO_INIT" = "systemd" ] && systemd-detect-virt --vm; } || \
    virt-what | grep -q .; then
