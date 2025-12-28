@@ -104,8 +104,8 @@ MIRROR = "https://mirror.nl.leaseweb.net/slackware/slackware64-current/testing/"
 
 [ALIEN]
 ENABLE = true
-MIRROR = "https://slackware.nl/people/alien/sbrepos/current/x86_64/"
-# MIRROR = "https://us.slackware.nl/people/alien/sbrepos/current/x86_64/"
+# MIRROR = "https://slackware.nl/people/alien/sbrepos/current/x86_64/"
+MIRROR = "https://us.slackware.nl/people/alien/sbrepos/current/x86_64/"
 
 [MULTILIB]
 ENABLE = false
@@ -132,8 +132,8 @@ MIRROR = "https://slackware.uk/msb/15.0/1.28/x86_64/"
 
 [CSB]
 ENABLE = true
-MIRROR = "https://slackware.uk/csb/current/x86_64/"
-# MIRROR = "https://us.slackware.nl/csb/current/x86_64/"
+# MIRROR = "https://slackware.uk/csb/current/x86_64/"
+MIRROR = "https://us.slackware.nl/csb/current/x86_64/"
 
 [CONRAID]
 ENABLE = true
