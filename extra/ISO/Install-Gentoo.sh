@@ -344,7 +344,7 @@ source /etc/profile || die "Failed to reload environment."
 echo "sys-kernel/installkernel grub dracut" > \
   /etc/portage/package.use/installkernel || \
   die "Failed to update /etc/portage/package.use/installkernel."
-z
+
 # Install System Packages
 if { [ "$GENTOO_INIT" = "systemd" ] && systemd-detect-virt --vm; } || \
    virt-what | grep -q .; then
