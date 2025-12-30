@@ -367,27 +367,42 @@ create_btrfs_subvolumes() {
 }
 
 mount_partitions() {
-  # Mount the partitions
   local distro="${1:-}"
   local MNT="/mnt"
   [ "$distro" = "gentoo" ] && MNT="/mnt/gentoo"
-  mkdir -p "$MNT"/{home,.snapshots,var/log,var/cache,tmp} || \
-    die "Failed to create subvolume directories."
+  
+  # Mount the partitions
+  mkdir -p "$MNT" || \
+    die "Failed to create $MNT."
   mount -t btrfs -o noatime,compress=zstd,discard=async,subvol=@ \
     "$ROOT" "$MNT" || \
     die "Failed to mount root subvolume."
+
+  # Create and mount home & snapshots subvolumes
+  mkdir -p "$MNT/home" || \
+    die "Failed to create $MNT/home."
   mount -t btrfs -o noatime,compress=zstd,discard=async,subvol=@home \
     "$ROOT" "$MNT/home" || \
     die "Failed to mount home subvolume."
+  mkdir -p "$MNT/.snapshots" || \
+    die "Failed to create $MNT/.snapshots."
   mount -t btrfs -o noatime,compress=zstd,discard=async,subvol=@.snapshots \
     "$ROOT" "$MNT/.snapshots" || \
     die "Failed to mount snapshots subvolume."
+
+  # Mount additional subcolumes for snapshot exclusion
+  mkdir -p "$MNT/var/log" || \
+    die "Failed to create $MNT/var/log."
   mount -t btrfs -o noatime,compress=zstd,discard=async,subvol=@log \
     "$ROOT" "$MNT/var/log" || \
     die "Failed to mount var/log subvolume."
+  mkdir -p "$MNT/var/cache" || \
+    die "Failed to create $MNT/var/cache."
   mount -t btrfs -o noatime,compress=zstd,discard=async,subvol=@cache \
     "$ROOT" "$MNT/var/cache" || \
     die "Failed to mount var/cache subvolume."
+  mkdir -p "$MNT/tmp" || \
+    die "Failed to create $MNT/tmp."
   mount -t btrfs -o noatime,compress=zstd,discard=async,subvol=@tmp \
     "$ROOT" "$MNT/tmp" || \
     die "Failed to mount tmp subvolume."
