@@ -367,11 +367,10 @@ create_btrfs_subvolumes() {
 }
 
 mount_partitions() {
+  # Mount the partitions
   local distro="${1:-}"
   local MNT="/mnt"
   [ "$distro" = "gentoo" ] && MNT="/mnt/gentoo"
-  
-  # Mount the partitions
   mkdir -p "$MNT" || \
     die "Failed to create $MNT."
   mount -t btrfs -o noatime,compress=zstd,discard=async,subvol=@ \
@@ -390,7 +389,7 @@ mount_partitions() {
     "$ROOT" "$MNT/.snapshots" || \
     die "Failed to mount snapshots subvolume."
 
-  # Mount additional subcolumes for snapshot exclusion
+  # Create and mount additional subvolumes for snapshot exclusion
   mkdir -p "$MNT/var/log" || \
     die "Failed to create $MNT/var/log."
   mount -t btrfs -o noatime,compress=zstd,discard=async,subvol=@log \
