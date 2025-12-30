@@ -357,6 +357,12 @@ create_btrfs_subvolumes() {
     die "Failed to create subvolume @home."
   btrfs su cr /mnt/@.snapshots || \
     die "Failed to create subvolume @.snapshots."
+  btrfs su cr /mnt/@log || \
+    die "Failed to create subvolume @log."
+  btrfs su cr /mnt/@cache || \
+    die "Failed to create subvolume @cache."
+  btrfs su cr /mnt/@tmp || \
+    die "Failed to create subvolume @tmp."
   umount /mnt || die "Failed to unmount root partition."
 }
 
@@ -365,26 +371,30 @@ mount_partitions() {
   local distro="${1:-}"
   local MNT="/mnt"
   [ "$distro" = "gentoo" ] && MNT="/mnt/gentoo"
-
-  mkdir -p "$MNT" || \
-    die "Failed to create $MNT."
+  mkdir -p "$MNT"/{home,.snapshots,var/log,var/cache,tmp} || \
+    die "Failed to create subvolume directories."
   mount -t btrfs -o noatime,compress=zstd,discard=async,subvol=@ \
     "$ROOT" "$MNT" || \
     die "Failed to mount root subvolume."
-
-  # Create and mount home
   mkdir -p "$MNT/home" || \
     die "Failed to create $MNT/home."
   mount -t btrfs -o noatime,compress=zstd,discard=async,subvol=@home \
     "$ROOT" "$MNT/home" || \
     die "Failed to mount home subvolume."
-
-  # Mount snapshots subvolume (universal)
   mkdir -p "$MNT/.snapshots" || \
     die "Failed to create $MNT/.snapshots."
   mount -t btrfs -o noatime,compress=zstd,discard=async,subvol=@.snapshots \
     "$ROOT" "$MNT/.snapshots" || \
     die "Failed to mount snapshots subvolume."
+  mount -t btrfs -o noatime,compress=zstd,discard=async,subvol=@log \
+    "$ROOT" "$MNT/var/log" || \
+    die "Failed to mount var/log subvolume."
+  mount -t btrfs -o noatime,compress=zstd,discard=async,subvol=@cache \
+    "$ROOT" "$MNT/var/cache" || \
+    die "Failed to mount var/cache subvolume."
+  mount -t btrfs -o noatime,compress=zstd,discard=async,subvol=@tmp \
+    "$ROOT" "$MNT/tmp" || \
+    die "Failed to mount tmp subvolume."
 
   # Handle boot partition mounting
   if [ -n "$BOOT" ]; then
