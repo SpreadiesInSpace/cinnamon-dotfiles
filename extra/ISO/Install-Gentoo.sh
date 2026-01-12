@@ -312,8 +312,8 @@ fi
 # echo "*/* $(cpuid2cpuflags)" > /etc/portage/package.use/00-cpu-flags
 
 # Temporary Mesa Fix
-FEATURES="-getbinpkg" emerge -1Dvq mesa_clc || \
-  die "Failed to emerge mesa_clc."
+# FEATURES="-getbinpkg" emerge -1Dvq mesa_clc || \
+#   die "Failed to emerge mesa_clc."
 
 # Update World Set
 retry emerge -vqDuN @world || die "Failed to update the world set."
