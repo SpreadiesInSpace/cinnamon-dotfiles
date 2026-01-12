@@ -20,7 +20,7 @@ apt remove -y \
   mint-artwork mint-backgrounds* mint-cursor-themes mintbackup mintstick \
   numix* papirus-icon-theme pix pppoeconf redshift simple-scan thingy \
   thunderbird transmission-gtk warpinator webapp-manager xed xreader \
-  xviewer mint-L* mint-x* mint-y* yelp
+  xviewer mint-L* mint-x* mint-y* yelp ibus*
 
 # Remove specific icon themes
 rm -rf \
