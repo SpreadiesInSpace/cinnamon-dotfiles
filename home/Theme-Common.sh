@@ -848,6 +848,11 @@ set_cinnamon_menu_icon() {
   local original_search_path="/home/f16poom"
   local new_search_path="${HOME}"
 
+  # Copy Cinnamenu applet
+  cp -npr .local/share/cinnamon/Cinnamenu@json/ \
+    ~/.local/share/cinnamon/applets/ || \
+    die "Failed to copy Cinnamenu applet."
+
   # Replace the hardcoded search-start-folder path (line 176)
   sed -i "s|\"value\": \"${original_search_path}\"|\"value\": \"${new_search_path}\"|g" \
     "$json_file" || \
