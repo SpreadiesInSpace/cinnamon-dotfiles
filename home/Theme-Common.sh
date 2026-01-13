@@ -246,7 +246,7 @@ override_qt_cursor_theme() {
 enable_flatpak_theme_override() {
 
   # Ensure flatpak is available
-  check_app "flatpak"
+  check_app "flatpak" || return 0
 
   # Ensure Flathub exists
   flatpak remotes | grep -q flathub || {
@@ -284,7 +284,7 @@ copy_bleachbit_config() {
   local root_target="/root/.config/bleachbit/bleachbit.ini"
 
   # Ensure BleachBit is available
-  check_app "bleachbit"
+  check_app "bleachbit" || return 0
 
   echo "Configuring BleachBit..."
   # Backup and copy BleachBit config to appropriate directories
@@ -402,7 +402,7 @@ copy_haruna_config() {
   timestamp=$(date +%s)
 
   # Ensure haruna is available
-  check_app "haruna"
+  check_app "haruna" || return 0
 
   echo "Configuring Haruna..."
   # Backup and copy Haruna config to appropriate directory
@@ -485,7 +485,7 @@ copy_neofetch_config() {
   timestamp=$(date +%s)
 
   # Ensure neofetch is available
-  check_app "neofetch"
+  check_app "neofetch" || return 0
 
   echo "Configuring neofetch..."
   # Backup and copy neofetch config file to appropriate directory
@@ -584,7 +584,7 @@ copy_gedit_theme() {
   # Copies Gedit Theme to appropriate directory
 
   # Ensure gedit is available
-  check_app "gedit"
+  check_app "gedit" || return 0
 
   # User directory
   mkdir -p ~/.local/share/libgedit-gtksourceview-300/styles
@@ -604,7 +604,7 @@ copy_gedit_old_theme() {
   # Copies Gedit Theme to appropriate directory
 
   # Ensure gedit is available
-  check_app "gedit"
+  check_app "gedit" || return 0
 
   # User directory
   mkdir -p ~/.local/share/gedit/styles
@@ -639,7 +639,7 @@ copy_qbittorrent_config() {
   timestamp=$(date +%s)
 
   # Ensure qBittorrent is available
-  check_app "qbittorrent"
+  check_app "qbittorrent" || return 0
 
   echo "Configuring qBittorrent..."
   # Backup the old config with timestamp
@@ -665,9 +665,9 @@ copy_libreoffice_config() {
 
   # Ensure LibreOffice is available
   if grep -qi "gentoo" /etc/os-release; then
-    check_app "libreoffice-bin"
+    check_app "libreoffice-bin" || return 0
   else
-    check_app "libreoffice"
+    check_app "libreoffice" || return 0
   fi
 
   echo "Configuring LibreOffice..."
@@ -692,7 +692,7 @@ copy_filezilla_config() {
   timestamp=$(date +%s)
 
   # Ensure FileZilla is available
-  check_app "filezilla"
+  check_app "filezilla" || return 0
 
   echo "Configuring FileZilla..."
   # Backup the old config with timestamp
@@ -737,8 +737,8 @@ apply_gedit_and_gnome_terminal_config() {
   local gedit_config="${2:-}"
 
   # Ensure gedit and gnome-terminal is available
-  check_app "gedit"
-  check_app "gnome-terminal"
+  check_app "gedit" || return 0
+  check_app "gnome-terminal" || return 0
 
   if [[ "$distro" == "openSUSE" ]]; then
     # Use gnomesu for openSUSE
@@ -789,7 +789,7 @@ set_default_apps() {
 
 copy_vscodium_config() {
   # Ensure VSCodium is available
-  check_app "codium"
+  check_app "codium" || return 0
 
   # Backup VSCodium config & plugins
   local timestamp
@@ -982,7 +982,7 @@ setup_synth_shell_config() {
 install_nvchad() {
 
   # Ensure nvim is available
-  check_app "nvim"
+  check_app "nvim" || return 0
 
   # Timestamp for unique backups
   local timestamp
@@ -1025,7 +1025,7 @@ configure_nanorc_basic() {
   timestamp=$(date +%s)
 
   # Ensure nano is available
-  check_app "nano"
+  check_app "nano" || return 0
 
   # Backup the old nanorc file with timestamp
   sudo cp /etc/nanorc /etc/nanorc.old."$timestamp" >/dev/null 2>&1 || true
@@ -1051,7 +1051,7 @@ configure_nanorc_basic() {
 configure_nanorc_extra() {
 
   # Ensure nano is available
-  check_app "nano"
+  check_app "nano" || return 0
 
   # Adds extra nano syntax highlighting rules
   if ! grep -q '^include "/usr/share/nano/extra/\*.nanorc"' /etc/nanorc; then
