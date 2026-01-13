@@ -168,8 +168,8 @@ sed -i "/^#*GRUB_TIMEOUT=/s/^#*GRUB_TIMEOUT=.*/GRUB_TIMEOUT=$grub_timeout/" \
 configure_zram "void"
 
 # Generate Grub Config (xbps-reconfigure -fa takes care of this)
-# grub-mkconfig -o /boot/grub/grub.cfg  || \
-  die "Failed to generate GRUB config"
+# grub-mkconfig -o /boot/grub/grub.cfg || \
+#   die "Failed to generate GRUB config"
 
 # Reconfigure System
 xbps-reconfigure -fa || die "Failed to reconfigure system."
