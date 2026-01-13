@@ -52,7 +52,7 @@ name='Force Quit'
 
 [org/cinnamon/desktop/keybindings/custom-keybindings/custom1]
 binding=['<Super>k']
-command="gnome-terminal -- bash -c 'neofetch;echo;exec bash;'"
+command="gnome-terminal -- bash -c 'neofetch;exec bash;'"
 name='Neofetch'
 
 [org/cinnamon/desktop/keybindings/custom-keybindings/custom2]
