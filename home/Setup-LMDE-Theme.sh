@@ -96,8 +96,8 @@ set_default_apps "LMDE"
 # Backup and copy VSCodium config + plugins to appropriate directory
 copy_vscodium_config
 
-# Define the home directory (For Menu Applet Icon) *
-set_cinnamon_menu_icon "linuxmint-logo-filled-ring.svg"
+# Set Cinnamon Menu Icon
+set_cinnamon_menu_icon "linuxmint-logo-filled-ring.svg" "21"
 
 # Sets Background and Sounds
 set_cinnamon_background_and_sounds

@@ -8,9 +8,9 @@ volume=1.0
 [org/cinnamon]
 alttab-switcher-delay=100
 command-history=['reboot']
-enabled-applets=['panel1:left:0:menu@cinnamon.org:0', 'panel1:left:2:grouped-window-list@cinnamon.org:2', 'panel1:right:7:removable-drives@cinnamon.org:7', 'panel1:right:8:network@cinnamon.org:10', 'panel1:right:9:sound@cinnamon.org:11', 'panel1:right:10:calendar@cinnamon.org:13', 'panel1:right:5:show-hide-applets@mohammad-sn:16', 'panel1:right:4:notifications@cinnamon.org:17', 'panel1:right:3:systray@cinnamon.org:18', 'panel1:right:2:xapp-status@cinnamon.org:19', 'panel1:right:1:power@cinnamon.org:21', 'panel1:right:6:gpaste-reloaded@feuerfuchs.eu:22']
-favorite-apps=['virt-manager.desktop', 'Grub Config.desktop', 'cinnamon-settings.desktop', 'org.qbittorrent.qBittorrent.desktop', 'timeshift-gtk.desktop', 'cinnamon-settings-default.desktop']
-next-applet-id=23
+enabled-applets=['panel1:left:1:grouped-window-list@cinnamon.org:2', 'panel1:right:8:removable-drives@cinnamon.org:7', 'panel1:right:9:network@cinnamon.org:10', 'panel1:right:10:sound@cinnamon.org:11', 'panel1:right:11:calendar@cinnamon.org:13', 'panel1:right:6:show-hide-applets@mohammad-sn:16', 'panel1:right:5:notifications@cinnamon.org:17', 'panel1:right:4:systray@cinnamon.org:18', 'panel1:right:3:xapp-status@cinnamon.org:19', 'panel1:right:2:power@cinnamon.org:21', 'panel1:right:7:gpaste-reloaded@feuerfuchs.eu:22', 'panel1:left:0:Cinnamenu@json:23']
+favorite-apps=['cinnamon-settings-default.desktop', 'timeshift-gtk.desktop', 'org.qbittorrent.qBittorrent.desktop', 'cinnamon-settings.desktop', 'Grub Config.desktop', 'virt-manager.desktop']
+next-applet-id=24
 panel-edit-mode=false
 panel-zone-symbolic-icon-sizes='[{"panelId": 1, "left": 28, "center": 28, "right": 16}]'
 panels-height=['1:46']

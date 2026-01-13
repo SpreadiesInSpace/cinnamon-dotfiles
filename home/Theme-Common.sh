@@ -838,8 +838,41 @@ copy_vscodium_config() {
   cleanup_codium
 }
 
-# Only Fedora/LMDE/NixOS uses this
 set_cinnamon_menu_icon() {
+  # Set Cinnamon Menu Icon
+  echo "Setting Cinnamon Menu Icon..."
+  # Replaces hardcoded Cinnamon menu icon path with $HOME-based path
+  local icon_file="${1:-none}"  # Default to "none" if not provided
+  local json_number="${2:-21}"  # Default to 21.json if not provided
+  local json_file="${HOME}/.config/cinnamon/spices/Cinnamenu@json/${json_number}.json"
+  local original_search_path="/home/f16poom"
+  local new_search_path="${HOME}"
+
+  # Replace the hardcoded search-start-folder path (line 176)
+  sed -i "s|\"value\": \"${original_search_path}\"|\"value\": \"${new_search_path}\"|g" \
+    "$json_file" || \
+    die "Failed to set search folder path."
+
+  # Only process icon if one was provided (not "none")
+  if [[ "$icon_file" != "none" ]]; then
+    local original_icon_path="/home/f16poom/.icons/${icon_file}"
+    local new_icon_path="${HOME}/.icons/${icon_file}"
+
+    # Replace the hardcoded icon path (line 586)
+    sed -i "s|\"value\": \"${original_icon_path}\"|\"value\": \"${new_icon_path}\"|g" \
+      "$json_file" || \
+      die "Failed to set menu icon path."
+
+    # Move the icon file to .icons if it exists in home
+    if [[ -f ~/"$icon_file" ]]; then
+      mv ~/"$icon_file" ~/.icons/ || \
+        die "Failed to move menu icon."
+    fi
+  fi
+}
+
+# Only Fedora/LMDE/NixOS uses this
+set_cinnamon_menu_icon_old() {
 
   echo "Setting Cinnamon Menu Icon..."
   # Replaces hardcoded Cinnamon menu icon path with $HOME-based path

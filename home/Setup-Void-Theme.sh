@@ -98,6 +98,9 @@ set_default_apps "Void"
 # Backup and copy VSCodium config + plugins to appropriate directory
 copy_vscodium_config
 
+# Set Cinnamon Menu Icon
+set_cinnamon_menu_icon "none" "21"
+
 # Sets Background and Sounds
 set_cinnamon_background_and_sounds
 

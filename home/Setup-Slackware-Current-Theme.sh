@@ -107,6 +107,9 @@ set_default_apps "Slackware"
 # Backup and copy VSCodium config + plugins to appropriate directory
 copy_vscodium_config
 
+# Set Cinnamon Menu Icon
+set_cinnamon_menu_icon "none" "24"
+
 # Sets Background and Sounds
 set_cinnamon_background_and_sounds
 

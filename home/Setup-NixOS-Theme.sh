@@ -95,8 +95,8 @@ set_default_apps "NixOS"
 # Backup and copy VSCodium config + plugins to appropriate directory
 copy_vscodium_config
 
-# Define the home directory (For Menu Applet Icon) *
-set_cinnamon_menu_icon "NixOS-Start.png"
+# Set Cinnamon Menu Icon
+set_cinnamon_menu_icon "NixOS-Start.png" "23"
 
 # Sets Background and Sounds
 set_cinnamon_background_and_sounds

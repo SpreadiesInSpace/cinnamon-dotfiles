@@ -103,8 +103,8 @@ set_default_apps "Fedora"
 # Backup and copy VSCodium config + plugins to appropriate directory
 copy_vscodium_config
 
-# Define the home directory (For Menu Applet Icon) *
-set_cinnamon_menu_icon "goa-account-fedora.svg"
+# Set Cinnamon Menu Icon
+set_cinnamon_menu_icon "goa-account-fedora.svg" "21"
 
 # Sets Background and Sounds
 set_cinnamon_background_and_sounds
