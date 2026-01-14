@@ -66,6 +66,12 @@ retry zypper in --from "$REPO" -y ffmpeg \
   gstreamer-plugins-{good,bad,ugly,libav} libavcodec || \
   die "Failed to install media codecs."
 
+# Replace firewalld with ufw if installed via cinnamon-ISO
+if [[ -f ".opensuse-tumbleweed.done" ]]; then
+  retry zypper rm -y firewalld
+  retry zypper in -y ufw
+fi
+
 # Install Brave
 retry curl -fsS https://dl.brave.com/install.sh | sh || \
   die "Failed to install Brave Browser."
