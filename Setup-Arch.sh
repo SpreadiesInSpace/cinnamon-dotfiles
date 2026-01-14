@@ -126,7 +126,7 @@ packages=(
   "lightdm-slick-greeter"
   "nemo-fileroller"
   "nemo-image-converter"
-  "nemo-preview"
+  #"nemo-preview" # Skip compiling clutter stack
   "nemo-share"
   "qt5ct"
   "qt6ct"
