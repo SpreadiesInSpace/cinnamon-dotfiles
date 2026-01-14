@@ -121,6 +121,9 @@ echo "app-emulation/qemu glusterfs iscsi opengl pipewire spice usbredir vde \
 virgl virtfs zstd" | \
   tee /etc/portage/package.use/qemu || \
   die "Failed to set USE flags for qemu."
+echo "x11-themes/kvantum qt5 qt6" | \
+  tee /etc/portage/package.use/kvantum || \
+  die "Failed to set USE flags for kvantum."
 
 # Sync Repository + All Overlays
 retry emaint sync -a || \
