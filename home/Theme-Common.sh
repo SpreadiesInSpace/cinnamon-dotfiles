@@ -535,7 +535,7 @@ Gruvbox-Dark-Brown=kdeconnect-app, kdeconnect-sms" >> \
       die "Failed to append kvantum config."
     sudo mv /root/.config/Kvantum /root/.config/Kvantum.old."$timestamp" \
       >/dev/null 2>&1 || true
-    kvantummanager --set gruvbox-fallnn || \
+    kvantummanager --set gruvbox-fallnn >/dev/null 2>&1 || \
       die "Failed to set kvantum theme."
     sudo ln -sf ~/.config/Kvantum /root/.config/ || \
       die "Failed to symlink kvantum config."
@@ -546,7 +546,7 @@ Gruvbox-Dark-Brown=kdeconnect-app, kdeconnect-sms" >> \
       die "Failed to copy kvantum config."
     sudo mv /root/.config/Kvantum /root/.config/Kvantum.old."$timestamp" \
       >/dev/null 2>&1 || true
-    kvantummanager --set "$theme_variant" || \
+    kvantummanager --set "$theme_variant" >/dev/null 2>&1 || \
       die "Failed to set kvantum theme."
     sudo ln -sf ~/.config/Kvantum /root/.config/ || \
       die "Failed to symlink kvantum config."

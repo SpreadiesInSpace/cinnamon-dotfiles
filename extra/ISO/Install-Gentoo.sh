@@ -313,10 +313,6 @@ retry emerge -1uqv app-portage/cpuid2cpuflags || \
 echo "*/* \$(cpuid2cpuflags)" > /etc/portage/package.use/00-cpu-flags || \
   die "Failed to set CPU flags."
 
-# Temporary Mesa Fix
-# FEATURES="-getbinpkg" emerge -1Dvq mesa_clc || \
-#   die "Failed to emerge mesa_clc."
-
 # Update World Set
 retry emerge -vqDuN @world || die "Failed to update the world set."
 
