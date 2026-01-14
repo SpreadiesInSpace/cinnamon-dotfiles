@@ -307,9 +307,11 @@ else
     die "Failed to set OpenRC system profile."
 fi
 
-# Set CPU Flags (TO DO: make it work in chroot heredoc)
-# retry emerge -1uqv app-portage/cpuid2cpuflags
-# echo "*/* $(cpuid2cpuflags)" > /etc/portage/package.use/00-cpu-flags
+# Set CPU Flags
+retry emerge -1uqv app-portage/cpuid2cpuflags || \
+  die "Failed to install cpuid2cpuflags."
+echo "*/* \$(cpuid2cpuflags)" > /etc/portage/package.use/00-cpu-flags || \
+  die "Failed to set CPU flags."
 
 # Temporary Mesa Fix
 # FEATURES="-getbinpkg" emerge -1Dvq mesa_clc || \

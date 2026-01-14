@@ -157,7 +157,7 @@ packages=(
   # Unstable Packages
   "x11-misc/gpaste"
   "app-admin/grub-customizer"
-  #"x11-apps/lightdm-gtk-greeter-settings" # clashes with gobject-introspection
+  #"x11-apps/lightdm-gtk-greeter-settings"
   "x11-themes/kvantum"
   "app-backup/timeshift" # triggers use flag change
   # Desktop environment related packages
