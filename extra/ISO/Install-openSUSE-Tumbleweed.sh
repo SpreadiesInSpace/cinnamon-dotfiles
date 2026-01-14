@@ -162,7 +162,7 @@ zypper al mint-x-icon-theme mint-y-icon-theme || \
   die "Failed to lock Mint icon themes."
 zypper rm -y busybox-which || die "Failed to remove busybox-which."
 retry zypper in -y cinnamon gnome-terminal spice-vdagent libnotify-tools \
-  lightdm-gtk-greeter-settings btrfsprogs sudo bash-completion git unzip \
+  lightdm-slick-greeter btrfsprogs sudo bash-completion git unzip \
   || die "Failed to install Cinnamon and base packages."
 
 # Only openSUSE uses this
