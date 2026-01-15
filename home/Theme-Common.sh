@@ -1078,8 +1078,8 @@ set_qt_and_gtk_environment() {
       sudo tee -a /etc/environment > /dev/null || \
         die "Failed to override QT theme in /etc/environment."
   fi
-  if ! grep -q "^GTK_THEME=Gruvbox-Dark-BL" /etc/environment; then
-    echo 'GTK_THEME=Gruvbox-Dark-BL' | \
+  if ! grep -q "^#GTK_THEME=Gruvbox-Dark-BL" /etc/environment; then
+    echo '#GTK_THEME=Gruvbox-Dark-BL' | \
       sudo tee -a /etc/environment > /dev/null || \
         die "Failed to override GTK theme in /etc/environment."
   fi
