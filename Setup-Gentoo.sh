@@ -124,6 +124,9 @@ virgl virtfs zstd" | \
 echo "x11-themes/kvantum qt5 qt6" | \
   tee /etc/portage/package.use/kvantum || \
   die "Failed to set USE flags for kvantum."
+echo "gnome-base/gvfs keyring samba" | \
+  tee /etc/portage/package.use/gvfs || \
+  die "Failed to set USE flags for gvfs."
 
 # Sync Repository + All Overlays
 retry emaint sync -a || \
