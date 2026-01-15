@@ -181,8 +181,7 @@ else
 fi
 
 # Replace lightdm-gtk-greeter with lightdm-slick-greeter
-zypper rm -y lightdm-gtk-greeter || \
-  die "Failed to remove lightdm-gtk-greeter"
+zypper rm -y lightdm-gtk-greeter || true
 
 # Only openSUSE uses this
 cinnamon_env_fix
