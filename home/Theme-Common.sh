@@ -739,10 +739,6 @@ apply_gedit_and_gnome_terminal_config() {
   local distro="${1:-}"
   local gedit_config="${2:-}"
 
-  # Ensure gedit and gnome-terminal is available
-  check_app "gedit" || return 0
-  check_app "gnome-terminal" || return 0
-
   if [[ "$distro" == "openSUSE" ]]; then
     # Use gnomesu for openSUSE
     cat "theming/$distro/gnome-terminal-$distro.dconf" \

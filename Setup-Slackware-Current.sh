@@ -235,7 +235,7 @@ packages=(
   "numactl"
   "libvirt"
   "libvirt-glib"
-  "libvirt-python"
+  "python-libvirt-python"
   "gtk-vnc"
   "spice"
   "spice-gtk"
@@ -269,12 +269,12 @@ retry slpkg install -y -P -B "${packages[@]}" -o conraid || \
 # GFS packages
 gnome_packages=(
   "eog"
-  "evince"
+  "evince4"
   "libgxps" # for evince
   "file-roller"
   "libportal" # for file-roller
   # For flatpak
-  "libstemmer"
+  #"libstemmer"
   "libxmlb"
   "malcontent"
   "flatpak"
@@ -289,7 +289,7 @@ gnome_packages=(
   "gnome-system-monitor"
   "gnome-disk-utility"
   "gpaste"
-  # "rhythmbox" # using Elisa instead
+  #"rhythmbox" # using Elisa instead
 )
 
 # Install packages from GFS over SBo to reduce compile times
