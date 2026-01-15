@@ -155,6 +155,9 @@ install_icons_and_themes() {
     sudo ln -sf /usr/share/themes/Gruvbox-Dark-BL/gtk-4.0/* \
       /root/.config/gtk-4.0/ || \
       die "Failed to symlink GTK4 theme system-wide."
+    else
+      sudo ln -sf ~/.config/gtk-4.0/ /root/.config/ || \
+      die "Failed to symlink GTK4 theme." 
   fi
 
   # Move ZIPs back & clean up
