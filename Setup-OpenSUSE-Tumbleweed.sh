@@ -180,6 +180,10 @@ else
     die "Failed to install packages."
 fi
 
+# Replace lightdm-gtk-greeter with lightdm-slick-greeter
+zypper rm -y lightdm-gtk-greeter || \
+  die "Failed to remove lightdm-gtk-greeter"
+
 # Only openSUSE uses this
 cinnamon_env_fix
 

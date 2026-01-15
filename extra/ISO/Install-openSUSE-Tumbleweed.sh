@@ -164,6 +164,8 @@ zypper rm -y busybox-which || die "Failed to remove busybox-which."
 retry zypper in -y cinnamon gnome-terminal spice-vdagent libnotify-tools \
   lightdm-slick-greeter btrfsprogs sudo bash-completion git unzip \
   || die "Failed to install Cinnamon and base packages."
+zypper rm -y lightdm-gtk-greeter || \
+  die "Failed to remove lightdm-gtk-greeter"
 
 # Only openSUSE uses this
 cinnamon_env_fix
