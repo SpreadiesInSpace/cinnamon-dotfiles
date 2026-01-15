@@ -84,9 +84,9 @@ copy_filezilla_config
 copy_profile_picture
 
 # Backup and copy bauh config to appropriate directory
-timestamp=$(date +%s)
-[ -d ~/.config/bauh ] && mv ~/.config/bauh ~/.config/bauh.old."$timestamp"
-cp -npr .config/bauh/ ~/.config/
+# timestamp=$(date +%s)
+# [ -d ~/.config/bauh ] && mv ~/.config/bauh ~/.config/bauh.old."$timestamp"
+# cp -npr .config/bauh/ ~/.config/
 
 # Backup and Import Entire Desktop Configuration
 import_desktop_config "Arch"
