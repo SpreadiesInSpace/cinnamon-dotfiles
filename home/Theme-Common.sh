@@ -156,6 +156,7 @@ install_icons_and_themes() {
       /root/.config/gtk-4.0/ || \
       die "Failed to symlink GTK4 theme system-wide."
     else
+      sudo mkdir -p /root/.config/gtk-4.0
       sudo ln -sf ~/.config/gtk-4.0/ /root/.config/ || \
       die "Failed to symlink GTK4 theme." 
   fi
