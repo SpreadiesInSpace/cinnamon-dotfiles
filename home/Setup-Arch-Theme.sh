@@ -83,11 +83,6 @@ copy_filezilla_config
 # Backup and copy Profile Picture to home directory
 copy_profile_picture
 
-# Backup and copy bauh config to appropriate directory
-# timestamp=$(date +%s)
-# [ -d ~/.config/bauh ] && mv ~/.config/bauh ~/.config/bauh.old."$timestamp"
-# cp -npr .config/bauh/ ~/.config/
-
 # Backup and Import Entire Desktop Configuration
 import_desktop_config "Arch"
 
