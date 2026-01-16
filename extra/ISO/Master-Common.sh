@@ -356,8 +356,9 @@ configure_nixos_settings() {
 
   # Configure autologin
   if [ "$enable_autologin" = false ]; then
-    sed -i '74s/^\( *enable *= *\)true;/\1false;/' "$config_path" || \
-      die "Failed to modify autologin setting."
+    sed -i '/autoLogin.*{/,/}/ {
+      s/enable *= *true/enable = false/
+    }' "$config_path" || die "Failed to modify autologin setting."
   fi
 
   # Handle BIOS mode configuration
