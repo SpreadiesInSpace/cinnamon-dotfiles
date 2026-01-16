@@ -3,84 +3,91 @@
   PUBLIC '-//freedesktop//DTD Menu 1.0//EN'
   'http://standards.freedesktop.org/menu-spec/menu-1.0.dtd'>
 <Menu>
-	<Name>Applications</Name>
-	<MergeFile type="parent">/usr/local/etc/xdg/menus/cinnamon-applications.menu</MergeFile>
-	<Menu>
-		<Name>Development</Name>
-		<DirectoryDir>/home/f16poom/.local/share/desktop-directories</DirectoryDir>
-		<Exclude>
-			<Filename>org.gtk.Demo4.desktop</Filename>
-		</Exclude>
-		<AppDir>/home/f16poom/.local/share/applications</AppDir>
-		<Exclude>
-			<Filename>org.gnome.Glade.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.gtk.IconBrowser4.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.gtk.gtk4.NodeEditor.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.gtk.WidgetFactory4.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>org.gtk.PrintEditor4.desktop</Filename>
-		</Exclude>
-		<Exclude>
-			<Filename>gtk3-widget-factory.desktop</Filename>
-		</Exclude>
-	</Menu>
-	<Menu>
-		<Name>Education</Name>
-		<DirectoryDir>/home/f16poom/.local/share/desktop-directories</DirectoryDir>
-		<Exclude>
-			<Filename>libreoffice-math.desktop</Filename>
-		</Exclude>
-		<AppDir>/home/f16poom/.local/share/applications</AppDir>
-	</Menu>
-	<Menu>
-		<Name>Administration</Name>
-		<Include>
-			<Filename>alacarte-made-a849ad83-dacf-11ee-9829-25e4556bc829.desktop</Filename>
-		</Include>
-		<Layout>
-			<Merge type="menus"/>
-			<Filename>cinnamon.desktop</Filename>
-			<Filename>cinnamon2d.desktop</Filename>
-			<Filename>gkbd-keyboard-display.desktop</Filename>
-			<Filename>org.gnome.Terminal.desktop</Filename>
-			<Filename>tint2.desktop</Filename>
-			<Filename>cinnamon-settings-users.desktop</Filename>
-			<Filename>virt-manager.desktop</Filename>
-			<Filename>xterm.desktop</Filename>
-			<Merge type="files"/>
-		</Layout>
-		<Include>
-			<Filename>BleachBit.desktop</Filename>
-		</Include>
-		<AppDir>/home/f16poom/.local/share/applications</AppDir>
-		<Include>
-			<Filename>Environment Settings.desktop</Filename>
-		</Include>
-		<Include>
-			<Filename>Boot Options.desktop</Filename>
-		</Include>
-		<Include>
-			<Filename>Mount CIFS Share.desktop</Filename>
-		</Include>
-		<Include>
-			<Filename>Services_Settings.desktop</Filename>
-		</Include>
-	</Menu>
-	<Menu>
-		<Name>Other</Name>
-	</Menu>
-	<Menu>
-		<Name>Office</Name>
-		<Exclude>
-			<Filename>org.gnome.Evince.desktop</Filename>
-		</Exclude>
-		<AppDir>/home/f16poom/.local/share/applications</AppDir>
-	</Menu>
+  <Name>Applications</Name>
+  <MergeFile type="parent">/usr/local/etc/xdg/menus/cinnamon-applications.menu</MergeFile>
+  <Menu>
+    <Name>Development</Name>
+    <DirectoryDir>/home/f16poom/.local/share/desktop-directories</DirectoryDir>
+    <Exclude>
+      <Filename>org.gtk.Demo4.desktop</Filename>
+    </Exclude>
+    <AppDir>/home/f16poom/.local/share/applications</AppDir>
+    <Exclude>
+      <Filename>org.gnome.Glade.desktop</Filename>
+    </Exclude>
+    <Exclude>
+      <Filename>org.gtk.IconBrowser4.desktop</Filename>
+    </Exclude>
+    <Exclude>
+      <Filename>org.gtk.gtk4.NodeEditor.desktop</Filename>
+    </Exclude>
+    <Exclude>
+      <Filename>org.gtk.WidgetFactory4.desktop</Filename>
+    </Exclude>
+    <Exclude>
+      <Filename>org.gtk.PrintEditor4.desktop</Filename>
+    </Exclude>
+    <Exclude>
+      <Filename>gtk3-widget-factory.desktop</Filename>
+    </Exclude>
+  </Menu>
+  <Menu>
+    <Name>Education</Name>
+    <DirectoryDir>/home/f16poom/.local/share/desktop-directories</DirectoryDir>
+    <Exclude>
+      <Filename>libreoffice-math.desktop</Filename>
+    </Exclude>
+    <AppDir>/home/f16poom/.local/share/applications</AppDir>
+  </Menu>
+  <Menu>
+    <Name>Administration</Name>
+    <Include>
+      <Filename>alacarte-made-a849ad83-dacf-11ee-9829-25e4556bc829.desktop</Filename>
+    </Include>
+    <Layout>
+      <Merge type="menus"/>
+      <Filename>cinnamon.desktop</Filename>
+      <Filename>cinnamon2d.desktop</Filename>
+      <Filename>gkbd-keyboard-display.desktop</Filename>
+      <Filename>org.gnome.Terminal.desktop</Filename>
+      <Filename>tint2.desktop</Filename>
+      <Filename>cinnamon-settings-users.desktop</Filename>
+      <Filename>virt-manager.desktop</Filename>
+      <Filename>xterm.desktop</Filename>
+      <Merge type="files"/>
+    </Layout>
+    <Include>
+      <Filename>BleachBit.desktop</Filename>
+    </Include>
+    <AppDir>/home/f16poom/.local/share/applications</AppDir>
+    <Include>
+      <Filename>Environment Settings.desktop</Filename>
+    </Include>
+    <Include>
+      <Filename>Boot Options.desktop</Filename>
+    </Include>
+    <Include>
+      <Filename>Mount CIFS Share.desktop</Filename>
+    </Include>
+    <Include>
+      <Filename>Services_Settings.desktop</Filename>
+    </Include>
+  </Menu>
+  <Menu>
+    <Name>Other</Name>
+  </Menu>
+  <Menu>
+    <Name>Office</Name>
+    <Exclude>
+      <Filename>org.gnome.Evince.desktop</Filename>
+    </Exclude>
+    <AppDir>/home/f16poom/.local/share/applications</AppDir>
+  </Menu>
+  <Menu>
+    <Name>Preferences</Name>
+    <Include>
+      <Filename>cinnamon-menu-editor.desktop</Filename>
+    </Include>
+    <AppDir>/home/f16poom/.local/share/applications</AppDir>
+  </Menu>
 </Menu>
