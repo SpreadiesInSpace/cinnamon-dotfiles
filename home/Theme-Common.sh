@@ -36,7 +36,7 @@ check_dependencies() {
   fi
 
   for cmd in "${deps[@]}"; do
-    if ! check_app "$cmd" ""; then  # Empty message to suppress output
+    if ! check_app "$cmd" "" >/dev/null 2>&1; then
       if [ "$cmd" = "dconf" ]; then
         missing+=("dconf (Debian-based systems need 'dconf-cli')")
       else
@@ -139,6 +139,9 @@ install_icons_and_themes() {
   echo "Configuring GTK4 theme..."
   if [ -d ~/.config/gtk-4.0 ]; then
     mv ~/.config/gtk-4.0 ~/.config/gtk-4.0.old."$timestamp"
+  fi
+  if [ -d /root/.config/gtk-4.0 ]; then
+    sudo mv /root/.config/gtk-4.0 ~/.config/gtk-4.0.old."$timestamp"
   fi
   mkdir -p ~/.config/gtk-4.0
   ln -sf ~/.themes/Gruvbox-Dark-BL/gtk-4.0/* ~/.config/gtk-4.0/ || \
