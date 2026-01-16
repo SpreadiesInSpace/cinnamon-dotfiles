@@ -2,14 +2,9 @@
 
 let
   user = "f16poom";
-  # unstable = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz") { config = config.nixpkgs.config; };
-  # unstable = import <nixos-unstable> { config = config.nixpkgs.config; };
-  # nixpkgs_23_05 = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-23.05.tar.gz") { config = config.nixpkgs.config; };
-  # nixpkgs_23_05 = import <nixos-23.05> { config = config.nixpkgs.config; };
-  nixpkgs_23_05 = import (builtins.fetchGit {
-    url = "https://github.com/NixOS/nixpkgs";
-    ref = "nixos-23.05";
-  }) { config = config.nixpkgs.config; };
+  nixpkgs_23_05 = import (fetchTarball
+    "https://github.com/NixOS/nixpkgs/archive/nixos-23.05.tar.gz"
+  ) { config = config.nixpkgs.config; };
   theme = {
     package = nixpkgs_23_05.gruvbox-gtk-theme;
     name = "Gruvbox-Dark-BL";
@@ -113,8 +108,6 @@ in
   systemd.settings.Manager = {
     DefaultTimeoutStopSec = "15s";
   };
-  # sound.enable = true;
-  # hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
 
   users.users.${user} = {
@@ -150,10 +143,8 @@ in
       ncdu
       neofetch
       neovim
-      # unstable.neovim
       qbittorrent
       ripgrep
-      # rmlint
       rhythmbox
       timeshift
       unzip
@@ -181,7 +172,6 @@ in
       pix
       sound-theme-freedesktop
       xed-editor
-      # xplayer
       xreader
       xviewer
       warpinator
@@ -212,7 +202,6 @@ in
     noto-fonts
     noto-fonts-color-emoji
     nerd-fonts.sauce-code-pro
-    # (nerdfonts.override { fonts = [ "SourceCodePro" ]; })
   ];
 
   system.stateVersion = "22.05";
