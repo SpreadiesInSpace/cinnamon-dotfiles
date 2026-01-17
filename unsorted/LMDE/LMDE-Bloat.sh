@@ -17,10 +17,10 @@ grub-mkconfig -o /boot/grub/grub.cfg || \
 # Remove Bloat
 apt remove -y \
   baobab bulky celluloid drawing firefox gnome-calendar hexchat hypnotix \
-  mint-artwork mint-backgrounds* mint-cursor-themes mintbackup mintstick \
-  numix* papirus-icon-theme pix pppoeconf redshift simple-scan thingy \
-  thunderbird transmission-gtk warpinator webapp-manager xed xreader \
-  xviewer mint-L* mint-x* mint-y* yelp ibus*
+  ibus* mint-artwork mint-backgrounds* mint-cursor-themes mint-L* mint-x* \
+  mint-y* mintbackup mintstick mintwelcome numix* papirus-icon-theme pix \
+  pppoeconf redshift simple-scan thingy thunderbird transmission-gtk \
+  warpinator webapp-manager xed xreader xviewer yelp
 
 # Remove specific icon themes
 rm -rf \
