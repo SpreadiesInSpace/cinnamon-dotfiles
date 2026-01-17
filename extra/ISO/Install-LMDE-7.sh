@@ -107,7 +107,7 @@ retry arch-chroot /mnt bash -c \
   mintinstall mintreport mint-meta-cinnamon mintsources mintupdate \
   mintsystem nano network-manager pipewire pipewire-alsa \
   pipewire-pulse pulseaudio-utils python3-dbus slick-greeter \
-  spice-vdagent sudo systemd-zram-generator unzip util-linux-extra \
+  spice-vdagent sudo systemd-zram-generator unzip util-linux-extra vainfo \
   wget wireplumber xorg xserver-xorg-core xserver-xorg-input-libinput \
   xserver-xorg-video-all' || die "Failed to install packages."
 
