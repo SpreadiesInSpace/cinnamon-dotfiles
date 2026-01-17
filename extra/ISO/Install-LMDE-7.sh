@@ -94,25 +94,28 @@ arch-chroot /mnt echo "LANG=en_US.UTF-8" > /etc/locale.conf || \
   die "Failed to set locale."
 
 # Install System Packages
-retry arch-chroot /mnt apt update || \
-  die "Failed to refresh APT repositories."
 retry arch-chroot /mnt bash -c \
   'DEBIAN_FRONTEND=noninteractive apt install -y \
   amd64-microcode arch-install-scripts bash-completion \
   blueman bluez-firmware btrfs-progs cinnamon dbus \
-  dbus-user-session dbus-x11 dialog firmware-iwlwifi \
-  firmware-linux firmware-linux-nonfree ffmpegthumbnailer \
-  git gnome-terminal grub2-theme-mint intel-microcode \
-  intel-media-va-driver libnotify-bin lightdm \
-  linuxmint-keyring mesa-va-drivers mesa-vulkan-drivers \
-  mint-common mint-info-cinnamon mintinstall mintreport \
-  mint-meta-cinnamon mintsources mintupdate mintsystem \
-  nano network-manager pipewire pipewire-alsa \
-  pipewire-pulse pulseaudio-utils python3-dbus \
-  slick-greeter spice-vdagent sudo systemd-zram-generator \
-  unzip util-linux-extra vainfo wget wireplumber xorg \
-  xserver-xorg-core xserver-xorg-input-libinput \
-  xserver-xorg-video-all' || die "Failed to install packages."
+  dbus-user-session dbus-x11 dialog firmware-atheros \
+  firmware-bnx2 firmware-bnx2x firmware-brcm80211 \
+  firmware-intel-graphics firmware-intel-misc \
+  firmware-intel-sound firmware-iwlwifi firmware-linux \
+  firmware-linux-nonfree firmware-misc-nonfree \
+  firmware-realtek firmware-sof-signed \
+  ffmpegthumbnailer git gnome-terminal grub2-theme-mint \
+  intel-microcode intel-media-va-driver libnotify-bin \
+  lightdm linuxmint-keyring mesa-va-drivers \
+  mesa-vulkan-drivers mint-common mint-info-cinnamon \
+  mintinstall mintreport mint-meta-cinnamon mintsources \
+  mintupdate mintsystem nano network-manager pipewire \
+  pipewire-alsa pipewire-pulse pulseaudio-utils \
+  python3-dbus slick-greeter spice-vdagent sudo \
+  systemd-zram-generator unzip util-linux-extra vainfo \
+  wget wireplumber xorg xserver-xorg-core \
+  xserver-xorg-input-libinput xserver-xorg-video-all' \
+  || die "Failed to install packages."
 
 # Generate fstab
 genfstab -U /mnt >> /mnt/etc/fstab || \
