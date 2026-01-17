@@ -83,12 +83,13 @@ retry dnf --installroot=/mnt --releasever="$VERSION_ID" \
 
 # Install System Packages
 retry dnf --installroot=/mnt --setopt=max_parallel_downloads=10 \
-  install -y arch-install-scripts btrfs-progs efi-filesystem \
-  efibootmgr fwupd git glibc-langpack-en grub2-common \
-  grub2-efi-x64 grub2-pc grub2-pc-modules grub2-tools \
-  grub2-tools-efi grub2-tools-extra grub2-tools-minimal \
-  grubby iwlwifi-* kernel microcode_ctl mokutil shim-x64 \
-  spice-vdagent unzip || \
+  install -y alsa-sof-firmware arch-install-scripts btrfs-progs \
+  efi-filesystem efibootmgr fwupd git glibc-langpack-en \
+  grub2-common grub2-efi-x64 grub2-pc grub2-pc-modules \
+  grub2-tools grub2-tools-efi grub2-tools-extra \
+  grub2-tools-minimal grubby intel-vsc-firmware iwlegacy-firmware \
+  iwlwifi-* kernel libertas-firmware microcode_ctl mokutil \
+  shim-x64 spice-vdagent unzip || \
   die "Failed to install system packages."
 
 # Copy Network Info
