@@ -42,11 +42,11 @@ prompt_timezone
 # Prompt for GRUB timeout
 prompt_grub_timeout
 
-# Prompt for drive to partition
-prompt_drive
-
 # Autologin Prompt
 prompt_for_autologin
+
+# Prompt for drive to partition
+prompt_drive
 
 # VM Prompt
 prompt_for_vm

@@ -167,13 +167,13 @@ prompt_grub_timeout() {
 }
 
 prompt_drive() {
-  # Prompt for drive to partition
-  echo; lsblk -dpo NAME,SIZE,MODEL; echo
 
   # Check if the drive is a valid block device and not a partition
   local regex='^/dev/(sd[a-z]+|nvme[0-9]+n[0-9]+|mmcblk[0-9]+|vd[a-z]+)$'
 
   while true; do
+    # Prompt for drive to partition
+    echo; lsblk -dpo NAME,SIZE,MODEL; echo
     echo "Enter drive to use (e.g., /dev/sda, /dev/nvme0n1, /dev/mmcblk0):"
     read -r drive
 
