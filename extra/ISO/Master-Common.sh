@@ -123,7 +123,7 @@ prompt_timezone() {
     read -rp "Enter your timezone (e.g., Asia/Bangkok): " timezone
     timezone="${timezone:-Asia/Bangkok}"  # default if empty
     if [ -f "$zoneinfo_dir/$timezone" ]; then
-      echo "Timezone set to: $timezone"
+      echo "Timezone set to: $timezone"; echo
       break
     fi
     echo "Invalid timezone: $timezone"
@@ -173,10 +173,10 @@ prompt_video_card() {
       6) video_card="vc4"; break ;;
       7) video_card="d3d12"; break ;;
       8) read -rp "Enter the video card type: " video_card; break ;;
-      *) echo "Invalid selection, please try again." ;;
+      *) echo; echo "Invalid selection, please try again." ;;
     esac
   done
-  echo; echo "Video card selection: $video_card"; echo
+  echo "Video card selection: $video_card"; echo
 }
 
 # Only Install-Gentoo.sh uses this
