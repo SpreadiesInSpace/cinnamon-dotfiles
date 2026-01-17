@@ -116,6 +116,9 @@ retry arch-chroot /mnt bash -c \
   wget wireplumber xorg xserver-xorg-core \
   xserver-xorg-input-libinput xserver-xorg-video-all' \
   || die "Failed to install packages."
+retry arch-chroot /mnt bash -c \
+  'DEBIAN_FRONTEND=noninteractive apt remove -y mintwelcome' \
+  || die "Failed to install packages."
 
 # Generate fstab
 genfstab -U /mnt >> /mnt/etc/fstab || \
