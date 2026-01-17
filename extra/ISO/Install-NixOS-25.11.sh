@@ -45,11 +45,11 @@ prompt_grub_timeout
 # Autologin Prompt
 prompt_for_autologin
 
-# Prompt for drive to partition
-prompt_drive
-
 # VM Prompt
 prompt_for_vm
+
+# Prompt for drive to partition
+prompt_drive
 
 # Partition the drive
 partition_drive "default"
