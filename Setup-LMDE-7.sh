@@ -181,7 +181,7 @@ retry apt install -y "${packages[@]}" || \
   die "Failed to install packages."
 
 # Remove ibus
-retry apt purge -y ibus || true
+retry apt purge -y ibus yelp || true
 
 # Enable Flathub for Flatpak
 enable_flathub
