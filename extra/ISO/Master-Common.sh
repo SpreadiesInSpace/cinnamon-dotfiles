@@ -134,18 +134,19 @@ prompt_timezone() {
 prompt_video_card() {
   local link="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation"
   link="$link/Base#VIDEO_CARDS"
-  # Show detected hardware info if available
+  # Detect hardware info
   if command -v lspci &> /dev/null; then
     gpu_info=$(lspci | grep -i VGA)
+  fi
+
+  # Prompt for video card
+  while true; do
+    # Show detected hardware info if available
     if [[ -n "$gpu_info" ]]; then
       echo "Detected graphics hardware:"
       echo "$gpu_info"
       echo
     fi
-  fi
-
-  # Prompt for video card
-  while true; do
     echo "Select your video card:"
     echo
     echo "1) Intel (intel) - Intel graphics (integrated and Arc GPUs)"
