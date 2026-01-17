@@ -127,6 +127,18 @@ echo "x11-themes/kvantum qt5 qt6" | \
 echo "gnome-base/gvfs keyring samba" | \
   tee /etc/portage/package.use/gvfs || \
   die "Failed to set USE flags for gvfs."
+echo "app-admin/eclean-kernel zstd" | \
+  tee /etc/portage/package.use/eclean-kernel || \
+  die "Failed to set USE flags for eclean-kernel."
+echo "app-emulation/libguestfs libvirt" | \
+  tee /etc/portage/package.use/libguestfs || \
+  die "Failed to set USE flags for libguestfs."
+echo "app-emulation/guestfs-tools libvirt" | \
+  tee /etc/portage/package.use/guestfs-tools || \
+  die "Failed to set USE flags for guestfs-tools."
+echo "x11-libs/xapp introspection vala" | \
+  tee /etc/portage/package.use/xapp || \
+  die "Failed to set USE flags for xapp."
 
 # Sync Repository + All Overlays
 retry emaint sync -a || \
@@ -142,7 +154,7 @@ else
 fi
 
 # Enable Sound (Pipewire)
-echo "media-video/pipewire sound-server" | \
+echo "media-video/pipewire echo-cancel flatpak sound-server" | \
   tee /etc/portage/package.use/pipewire || \
   die "Failed to set USE flags for pipewire."
 echo "media-sound/pulseaudio -daemon" | \
@@ -162,7 +174,7 @@ packages=(
   "app-admin/grub-customizer"
   #"x11-apps/lightdm-gtk-greeter-settings"
   "x11-themes/kvantum"
-  "app-backup/timeshift" # triggers use flag change
+  "app-backup/timeshift"
   # Desktop environment related packages
   "x11-base/xorg-server"
   "gnome-extra/cinnamon"
@@ -189,7 +201,6 @@ packages=(
   "app-editors/vscodium"
   # System utilities
   "app-admin/eclean-kernel"
-  "dev-python/zstandard" # for eclean-kernel
   "app-arch/file-roller"
   "sys-apps/flatpak"
   "sys-apps/xdg-desktop-portal-gtk"
@@ -222,9 +233,9 @@ packages=(
   "dev-build/make"
   "sys-apps/ripgrep"
   # Virtualization Tools
-  "app-emulation/virt-manager" # triggers use flag change
+  "app-emulation/virt-manager"
   "app-emulation/qemu"
-  "app-emulation/libvirt" # triggers use flag change
+  "app-emulation/libvirt"
   "sys-firmware/edk2-bin"
   "net-dns/dnsmasq"
   "net-misc/vde"

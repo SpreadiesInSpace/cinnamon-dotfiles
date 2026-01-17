@@ -4,6 +4,7 @@ list=['f1479fe0-0607-4d89-995f-e22c38773a93']
 
 [org/gnome/terminal/legacy/profiles:/:f1479fe0-0607-4d89-995f-e22c38773a93]
 allow-bold=true
+audible-bell=false
 background-color='#282828282828'
 bold-color='#EBEBDBDBB2B2'
 bold-color-same-as-fg=true
