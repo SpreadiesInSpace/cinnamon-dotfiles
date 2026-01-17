@@ -176,7 +176,7 @@ prompt_video_card() {
       *) echo; echo "Invalid selection, please try again." ;;
     esac
   done
-  echo "Video card selection: $video_card"; echo
+  echo "Video card selection: $video_card"
 }
 
 # Only Install-Gentoo.sh uses this
