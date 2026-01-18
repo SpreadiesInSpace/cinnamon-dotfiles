@@ -303,6 +303,17 @@ mark_makeconf_configured() {
   touch "$flag_file" || die "Failed to create $flag_file flag."
 }
 
+# Only Gentoo uses this
+enable_pipewire() {
+  # Enable Pipewire
+  echo "media-video/pipewire echo-cancel flatpak sound-server" | \
+    tee /etc/portage/package.use/pipewire || \
+    die "Failed to set USE flags for pipewire."
+  echo "media-sound/pulseaudio -daemon" | \
+    tee /etc/portage/package.use/pulseaudio || \
+    die "Failed to set USE flags for pulseaudio."
+}
+
 # Only NixOS uses this
 setup_nixos_config() {
   local config_path="$1"

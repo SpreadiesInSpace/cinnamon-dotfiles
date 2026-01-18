@@ -51,16 +51,15 @@ else
   mark_makeconf_configured "default"
 fi
 
-# Install Essentials
-retry emerge -vquN app-eselect/eselect-repository app-editors/nano \
-  dev-vcs/git || \
-  die "Failed to install essential packages."
-
 # Switch from rsync to git for faster repository sync times
 FLAG="/var/db/repos/.synced-git-repo"
 
 # Skip this if run previously
 if [[ ! -f "$FLAG" ]]; then
+  # Install Essentials
+  retry emerge -vquN app-eselect/eselect-repository app-editors/nano \
+    dev-vcs/git || \
+    die "Failed to install essential packages."
   eselect repository remove -f gentoo || \
     die "Failed to remove rsync-based Gentoo repository."
   eselect repository add gentoo git \
@@ -144,28 +143,28 @@ echo "x11-libs/xapp introspection vala" | \
 retry emaint sync -a || \
   die "Failed to sync repositories and overlays."
 
-# Select appropriate Gentoo profile based on init system
-if [ "$GENTOO_INIT" = "systemd" ]; then
-  eselect profile set default/linux/amd64/23.0/desktop/gnome/systemd || \
-    die "Failed to set systemd system profile."
+# Profile selection, world update, and pipewire configuration
+if [[ -f ".gentoo.done" ]]; then
+  echo "Installed via cinnamon-ISO. Skipping profile, @world update, and pipewire config..."
 else
-  eselect profile set default/linux/amd64/23.0/desktop || \
-    die "Failed to set OpenRC system profile."
+  # Select appropriate Gentoo profile based on init system
+  if [ "$GENTOO_INIT" = "systemd" ]; then
+    eselect profile set default/linux/amd64/23.0/desktop/gnome/systemd || \
+      die "Failed to set systemd system profile."
+  else
+    eselect profile set default/linux/amd64/23.0/desktop || \
+      die "Failed to set OpenRC system profile."
+  fi
+
+  # Enable Pipewire
+  enable_pipewire
+
+  # Update World Set & Cleanup
+  retry emerge -vqDuN @world || \
+    die "Failed to emerge world update."
+  emerge -q --depclean || \
+    die "Failed to clean up unused dependencies."
 fi
-
-# Enable Sound (Pipewire)
-echo "media-video/pipewire echo-cancel flatpak sound-server" | \
-  tee /etc/portage/package.use/pipewire || \
-  die "Failed to set USE flags for pipewire."
-echo "media-sound/pulseaudio -daemon" | \
-  tee /etc/portage/package.use/pulseaudio || \
-  die "Failed to set USE flags for pulseaudio."
-
-# Emerge changes and cleanup
-retry emerge -vqDuN @world || \
-  die "Failed to emerge world update."
-emerge -q --depclean || \
-  die "Failed to clean up unused dependencies."
 
 # All Packages
 packages=(

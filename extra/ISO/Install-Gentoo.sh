@@ -313,6 +313,9 @@ retry emerge -1uqv app-portage/cpuid2cpuflags || \
 echo "*/* \$(cpuid2cpuflags)" > /etc/portage/package.use/00-cpu-flags || \
   die "Failed to set CPU flags."
 
+# Enable Pipewire
+enable_pipewire
+
 # Update World Set
 retry emerge -vqDuN @world || die "Failed to update the world set."
 
