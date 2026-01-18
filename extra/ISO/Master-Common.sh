@@ -255,19 +255,19 @@ configure_make_conf() {
   cores=$(nproc) || die "Failed to retrieve number of CPU cores."
 
   # Set MAKEOPTS (load limit = cores + 1)
-  local makeopts_load_limit=$((cores + 1))
-  sed -i "s/^MAKEOPTS=.*/MAKEOPTS=\"-j$cores -l$makeopts_load_limit\"/" \
+  local makeopts_limit=$((cores + 1))
+  sed -i "s/^MAKEOPTS=.*/MAKEOPTS=\"-j$cores -l$makeopts_limit\"/" \
     "$target_path" || die "Failed to update MAKEOPTS in make.conf."
-  echo "Set MAKEOPTS to -j$cores -l$makeopts_load_limit"
+  echo "Set MAKEOPTS to -j$cores -l$makeopts_limit"
 
   # Set EMERGE_DEFAULT_OPTS (load limit as 90% of cores)
-  local load_limit
-  load_limit=$(awk "BEGIN {printf \"%.1f\", $cores * 0.9}") || \
+  local limit
+  limit=$(awk "BEGIN {printf \"%.1f\", $cores * 0.9}") || \
     die "Failed to calculate emerge load limit."
   sed -i \
-    "s/^EMERGE_DEFAULT_OPTS=.*/EMERGE_DEFAULT_OPTS=\"-j$cores -l$load_limit\"/" \
+    "s/^EMERGE_DEFAULT_OPTS=.*/EMERGE_DEFAULT_OPTS=\"-j$cores -l$limit\"/" \
     "$target_path" || die "Failed to update EMERGE_DEFAULT_OPTS in make.conf."
-  echo "Set EMERGE_DEFAULT_OPTS to -j$cores -l$load_limit"
+  echo "Set EMERGE_DEFAULT_OPTS to -j$cores -l$limit"
 
   # Check available RAM and disable parallel emerges if insufficient
   local ram_gb

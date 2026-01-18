@@ -850,10 +850,10 @@ set_cinnamon_menu_icon() {
   echo "Setting Cinnamon Menu Icon..."
   # Replaces hardcoded Cinnamon menu icon path with $HOME-based path
   local icon_file="${1:-none}"  # Default to "none" if not provided
-  local json_number="${2:-21}"  # Default to 21.json if not provided
-  local json_file="${HOME}/.config/cinnamon/spices/Cinnamenu@json/${json_number}.json"
-  local original_search_path="/home/f16poom"
-  local new_search_path="${HOME}"
+  local json="${2:-21}"  # Default to 21.json if not provided
+  local json_file="${HOME}/.config/cinnamon/spices/Cinnamenu@json/${json}.json"
+  local original_path="/home/f16poom"
+  local new_path="${HOME}"
 
   # Copy Cinnamenu applet
   cp -npr .local/share/cinnamon/Cinnamenu@json/ \
@@ -861,17 +861,17 @@ set_cinnamon_menu_icon() {
     die "Failed to copy Cinnamenu applet."
 
   # Replace the hardcoded search-start-folder path (line 176)
-  sed -i "s|\"value\": \"${original_search_path}\"|\"value\": \"${new_search_path}\"|g" \
+  sed -i "s|\"value\": \"${original_path}\"|\"value\": \"${new_path}\"|g" \
     "$json_file" || \
     die "Failed to set search folder path."
 
   # Only process icon if one was provided (not "none")
   if [[ "$icon_file" != "none" ]]; then
-    local original_icon_path="/home/f16poom/.icons/${icon_file}"
-    local new_icon_path="${HOME}/.icons/${icon_file}"
+    local original_icon="/home/f16poom/.icons/${icon_file}"
+    local new_icon="${HOME}/.icons/${icon_file}"
 
     # Replace the hardcoded icon path (line 586)
-    sed -i "s|\"value\": \"${original_icon_path}\"|\"value\": \"${new_icon_path}\"|g" \
+    sed -i "s|\"value\": \"${original_icon}\"|\"value\": \"${new_icon}\"|g" \
       "$json_file" || \
       die "Failed to set menu icon path."
 

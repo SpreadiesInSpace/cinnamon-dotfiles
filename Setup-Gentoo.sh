@@ -145,7 +145,8 @@ retry emaint sync -a || \
 
 # Profile selection, world update, and pipewire configuration
 if [[ -f ".gentoo.done" ]]; then
-  echo "Installed via cinnamon-ISO. Skipping profile, @world update, and pipewire config..."
+  echo "Installed via cinnamon-ISO. Skipping profile, @world" \
+    "update, and pipewire config..."
 else
   # Select appropriate Gentoo profile based on init system
   if [ "$GENTOO_INIT" = "systemd" ]; then
