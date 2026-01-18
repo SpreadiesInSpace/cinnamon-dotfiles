@@ -347,14 +347,16 @@ echo "sys-kernel/installkernel grub dracut" > \
 if { [ "$GENTOO_INIT" = "systemd" ] && systemd-detect-virt --vm; } || \
    virt-what | grep -q .; then
     # VM - just the system packages (including OpenRC if selected)
-    retry emerge -vq $SYSTEM_PKGS || die "Failed to install system packages."
+    retry emerge -vquN $SYSTEM_PKGS || \
+    die "Failed to install system packages."
 else
   # Physical machine - add firmware
   if [ "$IS_INTEL" = "true" ]; then
-    retry emerge -vq $SYSTEM_PKGS $PHYSICAL_PKGS sys-firmware/intel-microcode \
-      || die "Failed to install system packages."
+    retry emerge -vquN $SYSTEM_PKGS $PHYSICAL_PKGS \
+      sys-firmware/intel-microcode || \
+      die "Failed to install system packages."
   else
-    retry emerge -vq $SYSTEM_PKGS $PHYSICAL_PKGS || \
+    retry emerge -vquN $SYSTEM_PKGS $PHYSICAL_PKGS || \
       die "Failed to install system packages."
   fi
 fi
