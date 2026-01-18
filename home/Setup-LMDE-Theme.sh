@@ -66,7 +66,6 @@ copy_kvantum_themes "gruvbox-fallnn"
 copy_qtct_configs
 
 # Copies Gedit Theme to appropriate directory
-copy_gedit_old_theme
 copy_gedit_theme
 
 # Copies Menu Preferences to appropriate directory

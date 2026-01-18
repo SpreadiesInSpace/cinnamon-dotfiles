@@ -161,7 +161,7 @@ install_icons_and_themes() {
     else
       sudo mkdir -p /root/.config/gtk-4.0
       sudo ln -sf ~/.config/gtk-4.0/* /root/.config/gtk-4.0/ || \
-      die "Failed to symlink GTK4 theme system-wide." 
+      die "Failed to symlink GTK4 theme system-wide."
   fi
 
   # Move ZIPs back & clean up
@@ -589,24 +589,28 @@ copy_qtct_configs() {
 
 copy_gedit_theme() {
   # Copies Gedit Theme to appropriate directory
+  local path=".local/share/libgedit-gtksourceview-300/styles"
+  local theme_file="gruvbox-dark-gedit46.xml"
 
   # Ensure gedit is available
   check_app "gedit" || return 0
 
   # User directory
-  mkdir -p ~/.local/share/libgedit-gtksourceview-300/styles
-  cp -npr gruvbox-dark-gedit46.xml \
-    ~/.local/share/libgedit-gtksourceview-300/styles || \
-    die "Failed to copy gedit theme."
+  mkdir -p ~/$path || \
+    die "Failed to create user gedit styles directory."
+  cp -npr "$path/$theme_file" \
+    ~/$path/ || \
+    die "Failed to copy gedit theme to user directory."
 
   # Root directory
-  sudo mkdir -p /root/.local/share/libgedit-gtksourceview-300/styles
-  sudo cp -prf gruvbox-dark-gedit46.xml \
-    /root/.local/share/libgedit-gtksourceview-300/styles || \
-    die "Failed to copy gedit theme."
+  sudo mkdir -p /root/$path || \
+    die "Failed to create root gedit styles directory."
+  sudo cp -npr "$path/$theme_file" \
+    /root/$path/ || \
+    die "Failed to copy gedit theme to root directory."
 }
 
-# Gentoo/LMDE uses this
+# Gentoo/LMDE used this
 copy_gedit_old_theme() {
   # Copies Gedit Theme to appropriate directory
 
@@ -879,7 +883,7 @@ set_cinnamon_menu_icon() {
   fi
 }
 
-# Only Fedora/LMDE/NixOS uses this
+# Only Fedora/LMDE/NixOS used this
 set_cinnamon_menu_icon_old() {
 
   echo "Setting Cinnamon Menu Icon..."
