@@ -996,6 +996,8 @@ install_nvchad() {
   [ -d ~/.config/nvim ] && mv ~/.config/nvim ~/.config/nvim.old."$timestamp"
   [ -d ~/.local/share/nvim ] && mv \
     ~/.local/share/nvim ~/.local/share/nvim.old."$timestamp"
+  [ -d ~/.local/state/nvim ] && mv \
+    ~/.local/state/nvim ~/.local/state/nvim.old."$timestamp"
   [ -d ~/.cache/nvim ] && mv ~/.cache/nvim ~/.cache/nvim.old."$timestamp"
 
   # Clone NVChad starter config
