@@ -297,10 +297,8 @@ retry slpkg install -y -P -B "${gnome_packages[@]}" -o gnome || \
   die "Failed to install gnome packages."
 
 # Add LightDM group
-groupadd -g 380 lightdm || \
-  die "Failed to create group 'lightdm'."
-useradd -d /var/lib/lightdm -s /bin/false -u 380 -g 380 lightdm || \
-  die "Failed to create user 'lightdm'."
+groupadd -g 380 lightdm || true
+useradd -d /var/lib/lightdm -s /bin/false -u 380 -g 380 lightdm || true
 
 # SBo packages
 sbo_packages=(
