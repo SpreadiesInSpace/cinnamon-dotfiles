@@ -95,6 +95,9 @@ arch-chroot /mnt echo "LANG=en_US.UTF-8" > /etc/locale.conf || \
 
 # Install System Packages
 retry arch-chroot /mnt bash -c \
+  'DEBIAN_FRONTEND=noninteractive apt update' \
+  || die "Failed to install packages."
+retry arch-chroot /mnt bash -c \
   'DEBIAN_FRONTEND=noninteractive apt install -y \
   amd64-microcode arch-install-scripts bash-completion \
   blueman bluez-firmware btrfs-progs cinnamon dbus \
