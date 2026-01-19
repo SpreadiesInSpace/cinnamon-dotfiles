@@ -203,7 +203,7 @@ SYNC_URI_V3="$SYNC_URI_V3/binpackages/23.0/x86-64-v3/"
 SYNC_URI="https://distfiles.gentoo.org/releases/amd64/binpackages/23.0/x86-64/"
 
 # Package Lists (accounts for Init System and CPU)
-GIT_PKGS="app-eselect/eselect-repository dev-vcs/git"
+GIT_PKGS="app-eselect/eselect-repository app-editors/nano dev-vcs/git"
 SYSTEM_PKGS="sys-kernel/gentoo-kernel-bin sys-fs/genfstab \
   net-misc/networkmanager gnome-extra/nm-applet app-shells/bash-completion \
   sys-fs/xfsprogs sys-fs/e2fsprogs sys-fs/dosfstools sys-fs/btrfs-progs \
