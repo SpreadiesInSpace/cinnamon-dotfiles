@@ -95,8 +95,8 @@ arch-chroot /mnt echo "LANG=en_US.UTF-8" > /etc/locale.conf || \
 
 # Install System Packages
 retry arch-chroot /mnt bash -c \
-  'DEBIAN_FRONTEND=noninteractive apt update' \
-  || die "Failed to install packages."
+  'DEBIAN_FRONTEND=noninteractive apt update' || \
+  die "Failed to install packages."
 retry arch-chroot /mnt bash -c \
   'DEBIAN_FRONTEND=noninteractive apt install -y \
   amd64-microcode arch-install-scripts bash-completion \
@@ -117,11 +117,11 @@ retry arch-chroot /mnt bash -c \
   python3-dbus slick-greeter spice-vdagent sudo \
   systemd-zram-generator unzip util-linux-extra vainfo \
   wget wireplumber xorg xserver-xorg-core \
-  xserver-xorg-input-libinput xserver-xorg-video-all' \
-  || die "Failed to install packages."
+  xserver-xorg-input-libinput xserver-xorg-video-all' || \
+  die "Failed to install packages."
 retry arch-chroot /mnt bash -c \
-  'DEBIAN_FRONTEND=noninteractive apt remove -y mintwelcome' \
-  || die "Failed to install packages."
+  'DEBIAN_FRONTEND=noninteractive apt remove -y mintwelcome' || \
+  die "Failed to install packages."
 
 # Generate fstab
 genfstab -U /mnt >> /mnt/etc/fstab || \
