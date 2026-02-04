@@ -309,8 +309,8 @@ retry slpkg install -y -P -B libxmlb -o "slack" || \
   die "Failed to install libxmlb."
 
 # Add LightDM group
-groupadd -g 380 lightdm || true
-useradd -d /var/lib/lightdm -s /bin/false -u 380 -g 380 lightdm || true
+# groupadd -g 380 lightdm || true
+# useradd -d /var/lib/lightdm -s /bin/false -u 380 -g 380 lightdm || true
 
 # SBo packages
 sbo_packages=(
@@ -319,9 +319,9 @@ sbo_packages=(
   "gnome-screenshot"
   "kvantum-qt5"
   "haruna"
-  "lightdm"
-  "lightdm-settings"
-  "lightdm-slick-greeter"
+  #"lightdm"
+  #"lightdm-settings"
+  #"lightdm-slick-greeter"
   "ncdu"
   "qt6ct"
   "timeshift"
