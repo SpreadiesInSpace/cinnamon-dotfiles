@@ -254,7 +254,7 @@ packages=(
   "usbredir"
   "vde2"
   "virglrenderer"
-  "qemu" # TARGETS=x86_64-softmmu
+  #"qemu" # TARGETS=x86_64-softmmu
   "libbpf" # for conraid's qemu
   "jack" # for conraid's qemu
   "virtiofsd"
@@ -265,6 +265,14 @@ packages=(
 # Install packages from Conraid over SBo to reduce compile times
 retry slpkg install -y -P -B "${packages[@]}" -o conraid || \
   die "Failed to install conraid packages."
+
+# Install Self-Compiled qemu from SBo
+git clone https://github.com/spreadiesinspace/qemu || \
+  die "Failed to download QEMU."
+cd qemu/ || die "Moving to qemu directory failed."
+./install.sh || die "Failed to install QEMU."
+cd ..
+rm -rf qemu/
 
 # GFS packages
 gnome_packages=(
@@ -295,6 +303,10 @@ gnome_packages=(
 # Install packages from GFS over SBo to reduce compile times
 retry slpkg install -y -P -B "${gnome_packages[@]}" -o gnome || \
   die "Failed to install gnome packages."
+
+# Install libxmlb for flatpak
+retry slpkg install -y -P -B libxmlb -o "slack" || \
+  die "Failed to install libxmlb."
 
 # Add LightDM group
 groupadd -g 380 lightdm || true
@@ -332,6 +344,7 @@ slint_packages=(
   "kvantum-qt6" # for qBittorrent
   "kwindowsystem6" # for kvantum-qt6
   "md4c" # for kvantum-qt6
+  "icu4c77" # for gedit
 )
 
 # Install packages from Slint over SBo to reduce compile times
