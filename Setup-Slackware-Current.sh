@@ -179,9 +179,6 @@ chmod -x /root/.xsession || \
 # Set polkit permissions for wheel group users
 set_polkit_perms
 
-# Temporary mozjs128 fix for Cinnamon
-# bash unsorted/Slackware/mozjs128.sh
-
 # Alien packages
 alien_packages=(
   "libreoffice"
@@ -307,10 +304,6 @@ retry slpkg install -y -P -B "${gnome_packages[@]}" -o gnome || \
 # Install libxmlb for flatpak
 retry slpkg install -y -P -B libxmlb -o "slack" || \
   die "Failed to install libxmlb."
-
-# Add LightDM group
-# groupadd -g 380 lightdm || true
-# useradd -d /var/lib/lightdm -s /bin/false -u 380 -g 380 lightdm || true
 
 # SBo packages
 sbo_packages=(

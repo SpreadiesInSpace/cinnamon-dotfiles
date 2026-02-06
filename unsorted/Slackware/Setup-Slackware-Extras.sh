@@ -20,6 +20,9 @@ fi
 # Old slpkg version needed this
 touch /var/log/slpkg/deps.log || die "Failed to create deps.log"
 
+# Temporary mozjs128 fix for Cinnamon
+bash unsorted/Slackware/mozjs128.sh
+
 # Replace Slackware Current's appstream-glib with gfs for file-roller (GFS 46)
 # -O avoids pulling in dependencies like the entire Gnome DE
 slpkg install -y gnome-terminal -o gnome -O  || \
@@ -38,3 +41,9 @@ slpkg install -y libpeas gedit-plugins || \
   die "Failed to install libpeas gedit-plugins."
 slpkg install -y libpeas -o gnome || \
   die "Failed to install libpeas for gnome."
+
+# Add LightDM group
+groupadd -g 380 lightdm || \
+  die "Failed to create group 'lightdm'."
+useradd -d /var/lib/lightdm -s /bin/false -u 380 -g 380 lightdm || \
+  die "Failed to create user 'lightdm'."
