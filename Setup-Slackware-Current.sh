@@ -281,7 +281,6 @@ gnome_packages=(
   "evince4"
   "libgxps" # for evince
   "file-roller"
-  "libportal" # for file-roller
   "flatpak"
   "malcontent" # for flatpak
   # For gedit
