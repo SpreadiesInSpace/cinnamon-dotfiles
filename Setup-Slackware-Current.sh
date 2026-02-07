@@ -333,7 +333,6 @@ slint_packages=(
   "kvantum-qt6" # for qBittorrent
   "kwindowsystem6" # for kvantum-qt6
   "md4c" # for kvantum-qt6
-  "icu4c77" # for gedit
 )
 
 # Install packages from Slint over SBo to reduce compile times
