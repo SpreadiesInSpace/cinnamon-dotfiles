@@ -282,11 +282,8 @@ gnome_packages=(
   "libgxps" # for evince
   "file-roller"
   "libportal" # for file-roller
-  # For flatpak
-  #"libstemmer"
-  #"libxmlb"
-  "malcontent"
   "flatpak"
+  "malcontent" # for flatpak
   # For gedit
   "libgedit-amtk"
   "libgedit-gtksourceview"
