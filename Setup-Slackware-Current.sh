@@ -277,6 +277,7 @@ rm -rf qemu/
 
 # GFS packages
 gnome_packages=(
+  "aaa_gnome"
   "eog"
   "evince4"
   "libgxps" # for evince
