@@ -280,7 +280,7 @@ gnome_packages=(
   "libportal" # for file-roller
   # For flatpak
   #"libstemmer"
-  "libxmlb"
+  #"libxmlb"
   "malcontent"
   "flatpak"
   # For gedit
@@ -302,8 +302,8 @@ retry slpkg install -y -P -B "${gnome_packages[@]}" -o gnome || \
   die "Failed to install gnome packages."
 
 # Install libxmlb for flatpak
-retry slpkg install -y -P -B libxmlb -o "slack" || \
-  die "Failed to install libxmlb."
+# retry slpkg install -y -P -B libxmlb -o "slack" || \
+#   die "Failed to install libxmlb."
 
 # SBo packages
 sbo_packages=(
