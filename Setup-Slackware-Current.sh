@@ -176,6 +176,10 @@ chmod -x /root/.xinitrc || \
 chmod -x /root/.xsession || \
   die "Failed to modify permissions for /root/.xsession."
 
+# Add LightDM user
+useradd -d /var/lib/lightdm -s /bin/false -u 380 -g 380 lightdm || \
+  die "Failed to create user 'lightdm'."
+
 # Set polkit permissions for wheel group users
 set_polkit_perms
 
@@ -300,10 +304,6 @@ gnome_packages=(
 # Install packages from GFS over SBo to reduce compile times
 retry slpkg install -y -P -B "${gnome_packages[@]}" -o gnome || \
   die "Failed to install gnome packages."
-
-# Install libxmlb for flatpak
-# retry slpkg install -y -P -B libxmlb -o "slack" || \
-#   die "Failed to install libxmlb."
 
 # SBo packages
 sbo_packages=(
