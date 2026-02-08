@@ -751,8 +751,8 @@ apply_gedit_and_gnome_terminal_config() {
     # Use gnomesu for openSUSE
     cat "theming/$distro/gnome-terminal-$distro.dconf" \
         "theming/$gedit_config" > combined.dconf
-    gnomesu dconf load / < "combined.dconf" || \
-      die "Failed to apply gedit and/or gnome-terminal dconf."
+    gnomesu dconf load / < "combined.dconf" >/dev/null 2>&1 || \
+      echo "Failed to apply gedit and/or gnome-terminal dconf."
     rm combined.dconf >/dev/null 2>&1 || true
   else
     # Use sudo cat with pipe for other distros
