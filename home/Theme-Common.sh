@@ -747,21 +747,21 @@ apply_gedit_and_gnome_terminal_config() {
   local distro="${1:-}"
   local gedit_config="${2:-}"
 
-  if [[ "$distro" == "openSUSE" ]]; then
+  # if [[ "$distro" == "openSUSE" ]]; then
     # Use gnomesu for openSUSE
-    cat "theming/$distro/gnome-terminal-$distro.dconf" \
-        "theming/$gedit_config" > combined.dconf
-    gnomesu dconf load / < "combined.dconf" >/dev/null 2>&1 || \
-      echo "Failed to apply gedit and/or gnome-terminal dconf."
-    rm combined.dconf >/dev/null 2>&1 || true
-  else
+    # cat "theming/$distro/gnome-terminal-$distro.dconf" \
+    #     "theming/$gedit_config" > combined.dconf
+    # gnomesu dconf load / < "combined.dconf" || \
+    #   die "Failed to apply gedit and/or gnome-terminal dconf."
+    # rm combined.dconf >/dev/null 2>&1 || true
+  # else
     # Use sudo cat with pipe for other distros
     sudo cat "theming/$distro/gnome-terminal-$distro.dconf" | \
       sudo dbus-launch dconf load / || \
       die "Failed to apply gnome-terminal dconf."
     sudo cat "theming/$gedit_config" | sudo dbus-launch dconf load / || \
       die "Failed to apply gedit dconf."
-  fi
+  # fi
   # Remove gnome-terminal dconf copied from earlier functions
   rm ~/gnome-terminal-"$distro".dconf >/dev/null 2>&1 || true
   # Set gedit sidebar root to user's home directory
