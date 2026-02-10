@@ -110,7 +110,11 @@ for script in "${scripts[@]}"; do
     if [[ "$script" == "Setup-NixOS-25.11.sh" ]]; then
       timed nix-shell -p unzip --run "sudo bash $script"
     else
-      timed sudo bash "$script"
+      if [ -n "$SUDO_PASSWORD" ]; then
+        timed echo "$SUDO_PASSWORD" | sudo -S bash "$script"
+      else
+        timed sudo bash "$script"
+      fi
     fi
     exit 0
   fi
