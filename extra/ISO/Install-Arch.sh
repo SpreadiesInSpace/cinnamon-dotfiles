@@ -169,3 +169,6 @@ clone_dotfiles "arch"
 # Setup GRUB theme
 setup_grub_theme "Arch"
 EOF
+
+# Run Setup Script
+setup_chroot "arch"
