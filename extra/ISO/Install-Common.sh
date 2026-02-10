@@ -707,9 +707,7 @@ clone_dotfiles() {
       else
         touch home/.physical || \
           { echo \"Failed to create physical flag.\"; exit 1; }
-      fi
-      # echo \"Reboot and run Theme.sh in cinnamon-dotfiles located in \
-\$HOME/cinnamon-dotfiles\"'"
+      fi'"
   else
     cat << CLONE | su - "$username"
 cd && git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles || \
@@ -726,8 +724,6 @@ if [ "$enable_autologin" = true ]; then
 else
   touch home/.autologinfalse || die "Failed to create autologin flag."
 fi
-# echo "Reboot and run Setup.sh in cinnamon-dotfiles located in \
-\$HOME/cinnamon-dotfiles"
 CLONE
   fi
 }
@@ -765,25 +761,28 @@ setup_grub_theme() {
 
 # NixOS doesn't use this
 setup_chroot() {
+  # Run Setup Script
+  local distro="${1:-}"
+  local MNT="/mnt"
+  local CHROOT="chroot"
+  # Gentoo uses /mnt/gentoo instead of /mnt
+  [ "$distro" = "gentoo" ] && MNT="/mnt/gentoo"
   if [[ ! -f ".debug" ]]; then
-    # Run Setup Script
-    local distro="${1:-}"
-    local MNT="/mnt"
-    local CHROOT="chroot"
-    # Gentoo uses /mnt/gentoo instead of /mnt
-    [ "$distro" = "gentoo" ] && MNT="/mnt/gentoo"
     # Prefer xchroot, then arch-chroot, fall back to chroot
     command -v xchroot >/dev/null 2>&1 && CHROOT="xchroot"
     command -v arch-chroot >/dev/null 2>&1 && 
       [ "$distro" != "slackware" ] && CHROOT="arch-chroot"
-      echo "Basic install complete. Running post-install setup..."
-    $CHROOT "$MNT" su - "$username" -c "
+    echo "Basic install complete. Running post-install setup..."
+    retry $CHROOT "$MNT" su - "$username" -c "
       cd ~/cinnamon-dotfiles &&
       SUDO_PASSWORD='$userpasswd' bash Setup.sh
     " || die "Post-install setup failed."
     # Place cinnamon-ISO flag if successful
     $CHROOT "$MNT" su - "$username" \
       -c "touch ~/cinnamon-dotfiles/.iso.done"
+  else
+    echo "Reboot and run Setup.sh in cinnamon-dotfiles located in"
+    echo "/home/$username/cinnamon-dotfiles"
   fi
 }
 
