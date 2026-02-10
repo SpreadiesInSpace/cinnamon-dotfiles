@@ -248,6 +248,7 @@ prompt_drive() {
       [ -n "${init_system:-}" ] && echo "Init System: $init_system"
       [ -n "${video_card:-}" ] && echo "Video Card: $video_card"
       echo "----------------------------------------------------"
+      echo
       echo "WARNING: This will erase all data on $drive"
       while true; do
         read -rp "Continue with these settings? [y/N]: " confirm
