@@ -236,8 +236,7 @@ prompt_drive() {
         die "Drive $drive has mounted partitions. Aborting."
       fi
       # Display Status from Prompts
-      echo "----------------------------------------------------"
-      echo "WARNING: This will erase all data on $drive"
+      echo
       echo "----------------------------------------------------"
       echo "Hostname: $hostname"
       echo "Timezone: $timezone"
@@ -249,6 +248,7 @@ prompt_drive() {
       [ -n "${init_system:-}" ] && echo "Init System: $init_system"
       [ -n "${video_card:-}" ] && echo "Video Card: $video_card"
       echo "----------------------------------------------------"
+      echo "WARNING: This will erase all data on $drive"
       while true; do
         read -rp "Continue with these settings? [y/N]: " confirm
         case "$confirm" in
