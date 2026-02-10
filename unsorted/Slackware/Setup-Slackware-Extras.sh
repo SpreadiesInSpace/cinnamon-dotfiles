@@ -28,13 +28,9 @@ bash unsorted/Slackware/mozjs128.sh
 slpkg install -y gnome-terminal -o gnome -O  || \
   die "Failed to install gnome-terminal."
 
-# Install Self-Compiled qemu from SBo
-git clone https://github.com/spreadiesinspace/qemu || \
-  die "Failed to download QEMU."
-cd qemu/ || die "Moving to qemu directory failed."
-./install.sh || die "Failed to install QEMU."
-cd ..
-rm -rf qemu/
+# Start spice-vdagent service (it already autostarts by default)
+/etc/rc.d/rc.spice-vdagent start || \
+  die "Failed to start spice-vdagent service."
 
 # Workaround for gedit-plugins to compile (GFS 46, broken)
 slpkg install -y libpeas gedit-plugins || \

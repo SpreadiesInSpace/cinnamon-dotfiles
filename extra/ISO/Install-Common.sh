@@ -768,33 +768,21 @@ setup_chroot() {
   # Run Setup Script
   local distro="${1:-}"
   local MNT="/mnt"
+  local CHROOT="chroot"
   # Gentoo uses /mnt/gentoo instead of /mnt
   [ "$distro" = "gentoo" ] && MNT="/mnt/gentoo"
-  echo "Basic install complete. Running post-install setup..."
-  # Determine which chroot command to use
-  if command -v arch-chroot >/dev/null 2>&1 &&
-     [ "$distro" != "slackware" ]; then
-    arch-chroot "$MNT" su - "$username" -c "
-      cd ~/cinnamon-dotfiles &&
-      SUDO_PASSWORD='$userpasswd' bash Setup.sh || exit 1
-      touch .iso.done
-    " || die "Post-install setup failed."
-  elif [ "$distro" = "void" ] &&
-       command -v xchroot >/dev/null 2>&1; then
-    xchroot "$MNT" su - "$username" -c "
-      cd ~/cinnamon-dotfiles &&
-      SUDO_PASSWORD='$userpasswd' bash Setup.sh || exit 1
-      touch .iso.done
-    " || die "Post-install setup failed."
-  else
-    chroot "$MNT" /bin/bash -c "
-      source /etc/profile
-      su - $username -c '
-        cd ~/cinnamon-dotfiles &&
-        SUDO_PASSWORD=\"$userpasswd\" bash Setup.sh || exit 1
-        touch .iso.done'
-    " || die "Post-install setup failed."
-  fi
+  # Prefer xchroot, then arch-chroot, fall back to chroot
+  command -v xchroot >/dev/null 2>&1 && CHROOT="xchroot"
+  command -v arch-chroot >/dev/null 2>&1 && 
+    [ "$distro" != "slackware" ] && CHROOT="arch-chroot"
+    echo "Basic install complete. Running post-install setup..."
+  $CHROOT "$MNT" su - "$username" -c "
+    cd ~/cinnamon-dotfiles &&
+    SUDO_PASSWORD='$userpasswd' bash Setup.sh
+  " || die "Post-install setup failed."
+  # Place cinnamon-ISO flag if successful
+  $CHROOT "$MNT" su - "$username" \
+    -c "touch ~/cinnamon-dotfiles/.iso.done"
 }
 
 # Only Void uses this

@@ -276,12 +276,7 @@ retry slpkg install -y -P -B "${packages[@]}" -o conraid || \
   die "Failed to install conraid packages."
 
 # Install Self-Compiled qemu from SBo
-git clone https://github.com/spreadiesinspace/qemu || \
-  die "Failed to download QEMU."
-cd qemu/ || die "Moving to qemu directory failed."
-./install.sh || die "Failed to install QEMU."
-cd ..
-rm -rf qemu/
+bash unsorted/Slackware/qemu.sh
 
 # GFS packages
 gnome_packages=(
@@ -355,10 +350,6 @@ sed -i 's/^TERMINAL_SELECTOR = false$/TERMINAL_SELECTOR = true/' \
 
 # Enable Flathub for Flatpak
 enable_flathub
-
-# Start spice-vdagent service (it already autostarts by default)
-/etc/rc.d/rc.spice-vdagent start || \
-  die "Failed to start spice-vdagent service."
 
 # Check if the block for libvirt already exists
 if ! grep -q '# Start libvirt' /etc/rc.d/rc.local; then
