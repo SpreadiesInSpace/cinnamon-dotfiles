@@ -48,6 +48,12 @@ prompt_timezone
 # Prompt for GRUB timeout
 prompt_grub_timeout
 
+# Autologin Prompt
+prompt_for_autologin
+
+# VM Prompt
+prompt_for_vm
+
 # Prompt for drive to partition
 prompt_drive
 
@@ -105,7 +111,7 @@ cp Install-Common.sh Master-Common.sh /mnt/ || \
 
 # Ensure variables are exported before chroot
 export drive hostname timezone username rootpasswd userpasswd BOOTMODE \
-  REMOVABLE_BOOT grub_timeout || \
+  REMOVABLE_BOOT grub_timeout enable_autologin is_vm || \
   die "Failed to export required variables."
 
 # Chrooting
@@ -231,3 +237,6 @@ clone_dotfiles "fedora-43"
 # Setup GRUB theme
 setup_grub_theme "Fedora"
 EOF
+
+# Run Setup Script
+setup_chroot "fedora"

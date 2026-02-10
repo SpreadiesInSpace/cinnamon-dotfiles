@@ -166,38 +166,6 @@ prompt_grub_timeout() {
   export grub_timeout
 }
 
-prompt_drive() {
-
-  # Check if the drive is a valid block device and not a partition
-  local regex='^/dev/(sd[a-z]+|nvme[0-9]+n[0-9]+|mmcblk[0-9]+|vd[a-z]+)$'
-
-  while true; do
-    # Prompt for drive to partition
-    echo; lsblk -dpo NAME,SIZE,MODEL; echo
-    echo "Enter drive to use (e.g., /dev/sda, /dev/nvme0n1, /dev/mmcblk0):"
-    read -r drive
-
-    if [[ "$drive" =~ $regex ]] && [ -b "$drive" ]; then
-      if mount | grep -q "^$drive"; then
-        die "Drive $drive has mounted partitions. Aborting."
-      fi
-
-      echo "WARNING: This will erase all data on $drive"
-      while true; do
-        read -rp "Are you sure you want to continue? [y/N]: " confirm
-        case "$confirm" in
-          [yY][eE][sS]|[yY]) break 2 ;;  # exit both loops
-          [nN][oO]|[nN]|'') die "Aborting." ;;
-          *) echo "Invalid input. Please answer y or n." ;;
-        esac
-      done
-    else
-      echo "Invalid drive: $drive"
-      echo "Enter a valid drive without a partition number"
-    fi
-  done
-}
-
 prompt_for_autologin() {
   # Autologin Prompt
   while true; do
@@ -231,6 +199,69 @@ prompt_for_vm() {
     fi
   done
   export is_vm
+}
+
+# Only Gentoo uses this
+prompt_init_system() {
+  # Prompt for init system
+  while true; do
+    echo "Select your init system:"
+    echo
+    echo "1) OpenRC"
+    echo "2) systemd"
+    echo
+    read -rp "Enter the number corresponding to your init system: " \
+      init_system_number
+
+    case $init_system_number in
+      1) init_system="openrc"; break ;;
+      2) init_system="systemd"; break ;;
+      *) echo "Invalid selection, please try again." ;;
+    esac
+  done
+  export init_system
+}
+
+prompt_drive() {
+  # Check if the drive is a valid block device and not a partition
+  local regex='^/dev/(sd[a-z]+|nvme[0-9]+n[0-9]+|mmcblk[0-9]+|vd[a-z]+)$'
+  # Prompt for drive to partition
+  while true; do
+    echo; lsblk -dpo NAME,SIZE,MODEL; echo
+    echo "Enter drive to use (e.g., /dev/sda, /dev/nvme0n1, /dev/mmcblk0):"
+    read -r drive
+    # shellcheck disable=SC2154
+    if [[ "$drive" =~ $regex ]] && [ -b "$drive" ]; then
+      if mount | grep -q "^$drive"; then
+        die "Drive $drive has mounted partitions. Aborting."
+      fi
+      # Display Status from Prompts
+      echo
+      echo "WARNING: This will erase all data on $drive"
+      echo "----------------------------------------"
+      echo "Hostname: $hostname"
+      echo "Timezone: $timezone"
+      echo "Username: $username"
+      echo "GRUB Timeout: $grub_timeout"
+      echo "Autologin: $enable_autologin"
+      echo "Virtual Machine: $is_vm"
+      # Only display if set (Gentoo)
+      [ -n "${init_system:-}" ] && echo "Init System: $init_system"
+      [ -n "${video_card:-}" ] && echo "Video Card: $video_card"
+      echo "----------------------------------------"
+      while true; do
+        read -rp "Continue with these settings? [y/N]: " confirm
+        case "$confirm" in
+          [yY][eE][sS]|[yY]) break 2 ;;  # exit both loops
+          [nN][oO]|[nN]|'') die "Aborting." ;;
+          *) echo "Invalid input. Please answer y or n." ;;
+        esac
+      done
+    else
+      echo "Invalid drive: $drive"
+      echo "Enter a valid drive without a partition number"
+    fi
+  done
 }
 
 partition_drive() {
@@ -459,27 +490,6 @@ mount_system_partitions() {
     die "Failed to bind-mount /run."
   mount --make-slave "$MNT/run" || \
     die "Failed to make /run slave."
-}
-
-# Only Gentoo uses this
-prompt_init_system() {
-  # Prompt for init system
-  while true; do
-    echo "Select your init system:"
-    echo
-    echo "1) OpenRC"
-    echo "2) systemd"
-    echo
-    read -rp "Enter the number corresponding to your init system: " \
-      init_system_number
-
-    case $init_system_number in
-      1) init_system="openrc"; break ;;
-      2) init_system="systemd"; break ;;
-      *) echo "Invalid selection, please try again." ;;
-    esac
-  done
-  export init_system
 }
 
 # NixOS doesn't use this

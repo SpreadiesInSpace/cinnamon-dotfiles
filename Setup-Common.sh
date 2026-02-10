@@ -75,7 +75,7 @@ display_status() {
 
   # Display Status from Prompts
   echo "Autologin: $1"
-  echo "Is VM: $2"
+  echo "Virtual Machine: $2"
 
   # Confirm before proceeding
   while true; do

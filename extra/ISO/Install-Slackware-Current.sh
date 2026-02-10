@@ -47,6 +47,12 @@ prompt_timezone
 # Prompt for GRUB timeout
 prompt_grub_timeout
 
+# Autologin Prompt
+prompt_for_autologin
+
+# VM Prompt
+prompt_for_vm
+
 # Prompt for drive to partition
 prompt_drive
 
@@ -138,7 +144,7 @@ AIS_SLACKBUILD="$AIS_SLACKBUILD/system/arch-install-scripts.tar.gz"
 
 # Ensure variables are exported before chroot
 export drive hostname timezone username rootpasswd userpasswd BOOTMODE \
-  REMOVABLE_BOOT AIS AIS_SLACKBUILD grub_timeout || \
+  REMOVABLE_BOOT AIS AIS_SLACKBUILD grub_timeout enable_autologin is_vm || \
   die "Failed to export required variables."
 
 # Entering Chroot
@@ -315,3 +321,6 @@ clone_dotfiles "slackware-current"
 # Setup GRUB theme
 setup_grub_theme "Slackware"
 EOF
+
+# Run Setup Script
+setup_chroot "slackware"

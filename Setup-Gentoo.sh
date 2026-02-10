@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# Exit early if installed via cinnamon-ISO
+if [ -f ".iso.done" ]; then
+  echo "This install was done via cinnamon-ISO"
+  echo "Now run Theme.sh with the following command:"
+  echo "./Theme.sh"
+  exit 0
+fi
+
 # Source common functions
 die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
 [ -f ./Setup-Common.sh ] || die "Setup-Common.sh not found."
@@ -32,7 +40,7 @@ if eselect profile show | grep -q systemd; then
 else
   GENTOO_INIT="openrc"
 fi
-echo "Detected init system: $GENTOO_INIT"
+echo "Init System: $GENTOO_INIT"
 
 # Check if custom make.conf and VIDEO_CARDS have already been set previously
 if is_makeconf_configured; then

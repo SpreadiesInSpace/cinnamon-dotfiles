@@ -48,6 +48,12 @@ prompt_timezone
 # Prompt for GRUB timeout
 prompt_grub_timeout
 
+# Autologin Prompt
+prompt_for_autologin
+
+# VM Prompt
+prompt_for_vm
+
 # Prompt for init system
 prompt_init_system
 
@@ -229,7 +235,7 @@ IS_INTEL="false"
 # Ensure variables are exported before chroot
 export drive hostname timezone username rootpasswd userpasswd BOOTMODE \
   REMOVABLE_BOOT GENTOO_INIT SYNC_URI_V3 SYNC_URI GIT_PKGS SYSTEM_PKGS \
-  PHYSICAL_PKGS IS_INTEL grub_timeout || \
+  PHYSICAL_PKGS IS_INTEL grub_timeout enable_autologin is_vm || \
   die "Failed to export required variables."
 
 #=========================== Chroot Variables - END ===========================
@@ -469,3 +475,6 @@ clone_dotfiles "gentoo"
 # Setup GRUB theme
 setup_grub_theme "Gentoo"
 EOF
+
+# Run Setup Script
+setup_chroot "gentoo"

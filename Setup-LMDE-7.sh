@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# Exit early if installed via cinnamon-ISO
+if [ -f ".iso.done" ]; then
+  echo "This install was done via cinnamon-ISO"
+  echo "Now run Theme.sh with the following command:"
+  echo "./Theme.sh"
+  exit 0
+fi
+
 # Source common functions
 die() { echo -e "\033[1;31mError:\033[0m $*" >&2; exit 1; }
 [ -f ./Setup-Common.sh ] || die "Setup-Common.sh not found."

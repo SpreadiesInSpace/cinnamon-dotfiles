@@ -97,7 +97,7 @@ retry nixos-install --no-root-passwd || \
   die "Failed to install NixOS."
 
 # Ensure variables are exported before chroot
-export username rootpasswd userpasswd grub_timeout || \
+export username rootpasswd userpasswd grub_timeout enable_autologin is_vm || \
   die "Failed to export required variables."
 
 # Set Passwords
