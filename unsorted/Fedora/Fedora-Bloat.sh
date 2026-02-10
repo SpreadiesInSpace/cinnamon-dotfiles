@@ -8,11 +8,23 @@ if [ "$EUID" -ne 0 ]; then
   die "Please run the script as superuser."
 fi
 
-# Set GRUB timeout to 0
-sed -i '/^#*GRUB_TIMEOUT=/s/^#*GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' \
-  /etc/default/grub || die "Failed to update GRUB_TIMEOUT."
-grub2-mkconfig -o /boot/grub2/grub.cfg || \
-  die "Failed to regenerate GRUB config."
+# Run if not installed via cinnamon-ISO
+if [[ ! -f ".fedora-43.done" ]]; then
+  # Set GRUB timeout to 0
+  sed -i '/^#*GRUB_TIMEOUT=/s/^#*GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' \
+    /etc/default/grub || die "Failed to update GRUB_TIMEOUT."
+  grub2-mkconfig -o /boot/grub2/grub.cfg || \
+    die "Failed to regenerate GRUB config."
+  # Disable Gnome Software Automatic Updates
+  sudo -u "$SUDO_USER" \
+    env XDG_RUNTIME_DIR="/run/user/$(id -u "$SUDO_USER")" \
+    gsettings set org.gnome.software allow-updates false || \
+    die "Failed to disable Gnome Software updates."
+  sudo -u "$SUDO_USER" \
+    env XDG_RUNTIME_DIR="/run/user/$(id -u "$SUDO_USER")" \
+    gsettings set org.gnome.software download-updates false || \
+    die "Failed to disable Gnome Software auto-downloads."
+fi
 
 # Disable Problem Reporting
 systemctl disable --now abrtd.service >/dev/null 2>&1 || true
@@ -44,13 +56,3 @@ rm -rf /var/cache/PackageKit || \
 echo "Refreshing Metadata Cache..."
 pkcon refresh force -c -1 >/dev/null 2>&1 || \
   die "Failed to refresh metadata cache."
-
-# Disable Gnome Software Automatic Updates
-sudo -u "$SUDO_USER" \
-  env XDG_RUNTIME_DIR="/run/user/$(id -u "$SUDO_USER")" \
-  gsettings set org.gnome.software allow-updates false || \
-  die "Failed to disable Gnome Software updates."
-sudo -u "$SUDO_USER" \
-  env XDG_RUNTIME_DIR="/run/user/$(id -u "$SUDO_USER")" \
-  gsettings set org.gnome.software download-updates false || \
-  die "Failed to disable Gnome Software auto-downloads."

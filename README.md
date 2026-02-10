@@ -46,7 +46,7 @@ cd cinnamon-dotfiles
 ```
 3. Run setup script
 ```bash
-# NixOS installed via cinnamon-ISO? Skip this step.
+# Installed via cinnamon-ISO? Skip this step.
 ./Setup.sh
 ```
 4. Then run theme script

@@ -9,10 +9,12 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 # Set GRUB timeout to 0
-sed -i '/^#*GRUB_TIMEOUT=/s/^#*GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' \
-  /etc/default/grub || die "Failed to update GRUB timeout."
-grub-mkconfig -o /boot/grub/grub.cfg || \
-  die "Failed to regenerate GRUB config."
+if [[ ! -f ".lmde-7.done" ]]; then
+  sed -i '/^#*GRUB_TIMEOUT=/s/^#*GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' \
+    /etc/default/grub || die "Failed to update GRUB timeout."
+  grub-mkconfig -o /boot/grub/grub.cfg || \
+    die "Failed to regenerate GRUB config."
+fi
 
 # Remove Bloat
 apt remove -y \

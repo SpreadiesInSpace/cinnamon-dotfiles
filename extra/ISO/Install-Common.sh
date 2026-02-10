@@ -236,9 +236,9 @@ prompt_drive() {
         die "Drive $drive has mounted partitions. Aborting."
       fi
       # Display Status from Prompts
-      echo
+      echo "----------------------------------------------------"
       echo "WARNING: This will erase all data on $drive"
-      echo "----------------------------------------"
+      echo "----------------------------------------------------"
       echo "Hostname: $hostname"
       echo "Timezone: $timezone"
       echo "Username: $username"
@@ -248,7 +248,7 @@ prompt_drive() {
       # Only display if set (Gentoo)
       [ -n "${init_system:-}" ] && echo "Init System: $init_system"
       [ -n "${video_card:-}" ] && echo "Video Card: $video_card"
-      echo "----------------------------------------"
+      echo "----------------------------------------------------"
       while true; do
         read -rp "Continue with these settings? [y/N]: " confirm
         case "$confirm" in
@@ -776,13 +776,13 @@ setup_chroot() {
       cd ~/cinnamon-dotfiles &&
       SUDO_PASSWORD='$userpasswd' bash Setup.sh &&
       touch .iso.done
-    " || echo "Warning: Setup.sh failed or needs manual intervention"
+    " || die "Post-Install Setup failed."
   elif [ "$distro" = "void" ] && command -v xchroot >/dev/null 2>&1; then
     xchroot "$MNT" su - "$username" -c "
       cd ~/cinnamon-dotfiles &&
       SUDO_PASSWORD='$userpasswd' bash Setup.sh &&
       touch .iso.done
-    " || echo "Warning: Setup.sh failed or needs manual intervention"
+    " || die "Post-Install Setup failed."
   else
     chroot "$MNT" /bin/bash -c "
       source /etc/profile
@@ -790,9 +790,8 @@ setup_chroot() {
         cd ~/cinnamon-dotfiles &&
         SUDO_PASSWORD=\"$userpasswd\" bash Setup.sh &&
         touch .iso.done'
-    " || echo "Warning: Setup.sh failed or needs manual intervention"
+    " || die "Post-Install Setup failed."
   fi
-  echo "All done! You can now reboot."
 }
 
 # Only Void uses this
