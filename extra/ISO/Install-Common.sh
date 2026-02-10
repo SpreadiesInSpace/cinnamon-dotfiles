@@ -698,7 +698,7 @@ clone_dotfiles() {
         touch home/.physical || \
           { echo \"Failed to create physical flag.\"; exit 1; }
       fi
-      # echo \"Reboot and run Theme.sh in cinnamon-dotfiles located in \
+      echo \"Reboot and run Theme.sh in cinnamon-dotfiles located in \
 \$HOME/cinnamon-dotfiles\"'"
   else
     cat << CLONE | su - "$username"
@@ -706,7 +706,7 @@ cd && git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles || \
   die "Failed to clone repo."
 cd cinnamon-dotfiles || die "Failed to enter repo directory."
 touch .$distro.done || die "Failed to create flag."
-# echo "Reboot and run Setup.sh in cinnamon-dotfiles located in \
+echo "Reboot and run Setup.sh in cinnamon-dotfiles located in \
 \$HOME/cinnamon-dotfiles"
 CLONE
   fi
@@ -741,36 +741,6 @@ setup_grub_theme() {
       die "Failed to enter GRUB theme directory."
     bash "$distro.sh" >/dev/null 2>&1 || die "Failed to setup GRUB theme."
   fi
-}
-
-# NixOS doesn't use this
-setup_chroot() {
-  # Run Setup Script
-  local distro="${1:-}"
-  local MNT="/mnt"
-  # Gentoo uses /mnt/gentoo instead of /mnt
-  [ "$distro" = "gentoo" ] && MNT="/mnt/gentoo"
-  echo "Installation complete. Running Setup.sh..."
-  # Determine which chroot command to use
-  if command -v arch-chroot >/dev/null 2>&1; then
-    # Arch Linux - arch-chroot automatically sources /etc/profile
-    arch-chroot "$MNT" su - "$username" -c "
-      cd ~/cinnamon-dotfiles && bash Setup.sh
-    " || echo "Warning: Setup.sh failed or needs manual intervention"
-  elif [ "$distro" = "void" ] && command -v xchroot >/dev/null 2>&1; then
-    # Void Linux - xchroot sources /etc/profile automatically
-    xchroot "$MNT" su - "$username" -c "
-      cd ~/cinnamon-dotfiles && bash Setup.sh
-    " || echo "Warning: Setup.sh failed or needs manual intervention"
-  else
-    # Other distros - regular chroot needs manual profile sourcing
-    chroot "$MNT" /bin/bash -c "
-      source /etc/profile
-      su - $username -c 'cd ~/cinnamon-dotfiles && bash Setup.sh'
-    " || echo "Warning: Setup.sh failed or needs manual intervention"
-  fi
-  touch .iso.done || die "Failed to create flag."
-  echo "All done! You can now reboot."
 }
 
 # Only Void uses this
