@@ -17,6 +17,7 @@ else
 fi
 [ -f ./Install-Common.sh ] || die "Install-Common.sh not found."
 source ./Install-Common.sh || die "Failed to source Install-Common.sh"
+touch .debug
 
 # Declare variables that will be set by sourced functions
 declare init_system
@@ -84,8 +85,8 @@ SCRIPT_DIR="$(pwd)"
 #====================== Gentoo Install - The Stage File =======================
 
 # Move to Mounted Root Partition
-cd /mnt/gentoo || \
-  die "Failed to change directory to /mnt/gentoo."
+cd /mnt || \
+  die "Failed to change directory to /mnt."
 
 # Grab the Latest Systemd Stage 3 Desktop Profile
 GENTOO_MIRROR="https://distfiles.gentoo.org"
@@ -163,11 +164,11 @@ fi
 # If all verifications passed, extract the tarball
 echo; echo "All verifications passed. Extracting tarball..."
 tar xpf "$STAGE3_TARBALL" --xattrs-include='*.*' --numeric-owner \
-  -C /mnt/gentoo || \
+  -C /mnt || \
   die "Failed to extract tarball."
 
 # Pull make.conf with use flags, jobs, licenses, mirrors, etc already set
-configure_make_conf "/mnt/gentoo/etc/portage/make.conf" "stage3" "true"
+configure_make_conf "/mnt/etc/portage/make.conf" "stage3" "true"
 
 # Set VIDEO_CARDS value in package.use
 echo; write_video_card "mnt" || \
@@ -179,8 +180,8 @@ mark_makeconf_configured "mnt"
 #============= Gentoo Install - Installing the Gentoo Base System =============
 
 # Copy Network Info
-cp --dereference /etc/resolv.conf /mnt/gentoo/etc/ || \
-  die "Failed to copy resolv.conf to /mnt/gentoo/etc/"
+cp --dereference /etc/resolv.conf /mnt/etc/ || \
+  die "Failed to copy resolv.conf to /mnt/etc/"
 
 # Mount Filesystems
 mount_system_partitions "gentoo"
@@ -198,7 +199,7 @@ fi
 
 # Copy common functions to chroot environment
 cp "$SCRIPT_DIR/Install-Common.sh" "$SCRIPT_DIR/Master-Common.sh" \
-  /mnt/gentoo/ || \
+  /mnt/ || \
   die "Failed to copy Install-Common.sh to chroot."
 
 #============================== Chroot Variables ==============================
@@ -241,7 +242,7 @@ export drive hostname timezone username rootpasswd userpasswd BOOTMODE \
 #=========================== Chroot Variables - END ===========================
 
 # Entering Chroot
-cat << EOF | chroot /mnt/gentoo /bin/bash || die "Failed to enter chroot."
+cat << EOF | chroot /mnt /bin/bash || die "Failed to enter chroot."
 
 # Source common functions inside chroot
 source Install-Common.sh || \

@@ -401,7 +401,7 @@ mount_partitions() {
   # Mount the partitions
   local distro="${1:-}"
   local MNT="/mnt"
-  [ "$distro" = "gentoo" ] && MNT="/mnt/gentoo"
+  # [ "$distro" = "gentoo" ] && MNT="/mnt/gentoo"
   mkdir -p "$MNT" || \
     die "Failed to create $MNT."
   mount -t btrfs -o noatime,compress=zstd,discard=async,subvol=@ \
@@ -473,7 +473,7 @@ mount_system_partitions() {
   local distro="${1:-}"
   # Mount System Partitions
   local MNT="/mnt"
-  [ "$distro" = "gentoo" ] && MNT="/mnt/gentoo"
+  # [ "$distro" = "gentoo" ] && MNT="/mnt/gentoo"
 
   mkdir -p "$MNT"/{proc,sys,dev,run} || \
     die "Failed to create system mount points."
@@ -766,14 +766,14 @@ setup_chroot() {
   local MNT="/mnt"
   local CHROOT="chroot"
   # Gentoo uses /mnt/gentoo instead of /mnt
-  [ "$distro" = "gentoo" ] && MNT="/mnt/gentoo"
+  # [ "$distro" = "gentoo" ] && MNT="/mnt/gentoo"
   if [[ ! -f ".debug" ]]; then
     # Prefer xchroot, then arch-chroot, fall back to chroot
     command -v xchroot >/dev/null 2>&1 && CHROOT="xchroot"
     command -v arch-chroot >/dev/null 2>&1 && 
       [ "$distro" != "slackware" ] && CHROOT="arch-chroot"
     echo "Basic install complete. Running post-install setup..."
-    retry $CHROOT "$MNT" su - "$username" -c "
+    $CHROOT "$MNT" su - "$username" -c "
       cd ~/cinnamon-dotfiles &&
       SUDO_PASSWORD='$userpasswd' bash Setup.sh
     " || die "Post-install setup failed."

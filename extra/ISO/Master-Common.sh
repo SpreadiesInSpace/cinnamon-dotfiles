@@ -188,7 +188,7 @@ write_video_card() {
 
   # "mnt" for Install-Gentoo.sh, empty for Setup-Gentoo.sh
   if [ "$prefix" = "mnt" ]; then
-    target_path="/mnt/gentoo$base_path"
+    target_path="/mnt$base_path"
   else
     target_path="$base_path"
   fi
@@ -298,7 +298,7 @@ mark_makeconf_configured() {
   local flag_file="/etc/portage/.makeconf_configured"
 
   # Handle "mnt" prefix for Install-Gentoo.sh
-  [ "$prefix" = "mnt" ] && flag_file="/mnt/gentoo$flag_file"
+  [ "$prefix" = "mnt" ] && flag_file="/mnt$flag_file"
 
   touch "$flag_file" || die "Failed to create $flag_file flag."
 }
