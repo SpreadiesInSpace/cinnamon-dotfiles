@@ -17,7 +17,6 @@ else
 fi
 [ -f ./Install-Common.sh ] || die "Install-Common.sh not found."
 source ./Install-Common.sh || die "Failed to source Install-Common.sh"
-touch .debug
 
 # Declare variables that will be set by sourced functions
 declare init_system
