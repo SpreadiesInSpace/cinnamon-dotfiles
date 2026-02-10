@@ -94,8 +94,8 @@ select _ in "${options[@]}"; do
       if [[ "$REPLY" == "7" ]]; then
         # Slackware ISO doesn't have sudo & timed breaks after time_sync
         /bin/time -f "Time Elapsed: %E" bash "$filename"
-      elif [[ "$REPLY" == "1" ]]; then
-        # Ensure debug flag is added before Install script runs
+      elif [[ "$REPLY" == "3" ]]; then
+        # Ensure debug flag is added before Install-Gentoo.sh runs
         touch .debug && timed sudo bash "$filename"
       else
         timed sudo bash "$filename"
