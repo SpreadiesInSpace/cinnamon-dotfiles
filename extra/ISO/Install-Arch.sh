@@ -91,7 +91,7 @@ cp Install-Common.sh Master-Common.sh /mnt/ || \
 
 # Ensure variables are exported before chroot
 export drive hostname timezone username rootpasswd userpasswd BOOTMODE \
-  REMOVABLE_BOOT grub_timeout || \
+  REMOVABLE_BOOT grub_timeout enable_autologin is_vm || \
   die "Failed to export required variables."
 
 # Entering Chroot

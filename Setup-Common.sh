@@ -11,15 +11,26 @@ get_current_username() {
 }
 
 prompt_for_autologin() {
+  # Check if flag exists from ISO install
+  if [ -f "home/.autologintrue" ]; then
+    enable_autologin=true
+    return
+  elif [ -f "home/.autologinfalse" ]; then
+    enable_autologin=false
+    return
+  fi
+
   # Autologin Prompt
   while true; do
     read -rp "Enable autologin for $username? [y/N]: " autologin_input
     if [[ "$autologin_input" =~ ^([yY]|[yY][eE][sS])$ ]]; then
       enable_autologin=true
+      sudo -u "$username" touch home/.autologintrue
       break
     elif [[ "$autologin_input" =~ ^([nN]|[nN][oO])$ || \
         -z "$autologin_input" ]]; then
       enable_autologin=false
+      sudo -u "$username" touch home/.autologinfalse
       break
     else
       echo "Invalid input. Please answer y or n."
@@ -28,6 +39,17 @@ prompt_for_autologin() {
 }
 
 prompt_for_vm() {
+  # Check if flags exist from ISO install
+  if [ -f "home/.vm" ]; then
+    is_vm=true
+    sudo -u "$username" touch home/.skipdisplay
+    return
+  elif [ -f "home/.physical" ]; then
+    is_vm=false
+    sudo -u "$username" touch home/.skipdisplay
+    return
+  fi
+
   # VM Prompt
   while true; do
     read -rp "Is this a Virtual Machine? [y/N]: " response
@@ -46,6 +68,11 @@ prompt_for_vm() {
 }
 
 display_status() {
+  # Check if flags exist from ISO install
+  if [ -f "home/.skipdisplay" ]; then
+    return
+  fi
+
   # Display Status from Prompts
   echo "Autologin: $1"
   echo "Is VM: $2"

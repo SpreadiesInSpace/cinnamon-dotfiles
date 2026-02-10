@@ -230,6 +230,7 @@ prompt_for_vm() {
       echo "Invalid input. Please answer y or n."
     fi
   done
+  export is_vm
 }
 
 partition_drive() {
@@ -704,6 +705,16 @@ cd && git clone https://github.com/SpreadiesInSpace/cinnamon-dotfiles || \
   die "Failed to clone repo."
 cd cinnamon-dotfiles || die "Failed to enter repo directory."
 touch .$distro.done || die "Failed to create flag."
+if [ "$is_vm" = true ]; then
+  touch home/.vm || die "Failed to create VM flag."
+else
+  touch home/.physical || die "Failed to create physical flag."
+fi
+if [ "$enable_autologin" = true ]; then
+  touch home/.autologintrue || die "Failed to create autologin flag."
+else
+  touch home/.autologinfalse || die "Failed to create autologin flag."
+fi
 # echo "Reboot and run Setup.sh in cinnamon-dotfiles located in \
 \$HOME/cinnamon-dotfiles"
 CLONE
@@ -753,22 +764,24 @@ setup_chroot() {
   if command -v arch-chroot >/dev/null 2>&1; then
     arch-chroot "$MNT" su - "$username" -c "
       cd ~/cinnamon-dotfiles &&
-      SUDO_PASSWORD='$userpasswd' bash Setup.sh
+      SUDO_PASSWORD='$userpasswd' bash Setup.sh &&
+      touch .iso.done
     " || echo "Warning: Setup.sh failed or needs manual intervention"
   elif [ "$distro" = "void" ] && command -v xchroot >/dev/null 2>&1; then
     xchroot "$MNT" su - "$username" -c "
       cd ~/cinnamon-dotfiles &&
-      SUDO_PASSWORD='$userpasswd' bash Setup.sh
+      SUDO_PASSWORD='$userpasswd' bash Setup.sh &&
+      touch .iso.done
     " || echo "Warning: Setup.sh failed or needs manual intervention"
   else
     chroot "$MNT" /bin/bash -c "
       source /etc/profile
       su - $username -c '
         cd ~/cinnamon-dotfiles &&
-        SUDO_PASSWORD=\"$userpasswd\" bash Setup.sh'
+        SUDO_PASSWORD=\"$userpasswd\" bash Setup.sh &&
+        touch .iso.done'
     " || echo "Warning: Setup.sh failed or needs manual intervention"
   fi
-  touch .iso.done || die "Failed to create flag."
   echo "All done! You can now reboot."
 }
 
