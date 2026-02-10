@@ -17,6 +17,7 @@ else
 fi
 [ -f ./Install-Common.sh ] || die "Install-Common.sh not found."
 source ./Install-Common.sh || die "Failed to source Install-Common.sh"
+touch .debug || die "Failed to add debug flag."
 
 # Declare variables that will be set by sourced functions
 declare init_system
@@ -77,9 +78,6 @@ create_btrfs_subvolumes
 
 # Mount the partitions
 mount_partitions "gentoo"
-
-# Store Script Directory (for Install-Common.sh copy to chroot)
-SCRIPT_DIR="$(pwd)"
 
 #====================== Gentoo Install - The Stage File =======================
 
@@ -197,8 +195,7 @@ if test -L /dev/shm; then
 fi
 
 # Copy common functions to chroot environment
-cp "$SCRIPT_DIR/Install-Common.sh" "$SCRIPT_DIR/Master-Common.sh" \
-  /mnt/ || \
+cd && cp Install-Common.sh Master-Common.sh /mnt/ || \
   die "Failed to copy Install-Common.sh to chroot."
 
 #============================== Chroot Variables ==============================
