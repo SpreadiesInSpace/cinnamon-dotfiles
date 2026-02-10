@@ -770,28 +770,30 @@ setup_chroot() {
   local MNT="/mnt"
   # Gentoo uses /mnt/gentoo instead of /mnt
   [ "$distro" = "gentoo" ] && MNT="/mnt/gentoo"
-  echo "Installation complete. Running Setup.sh..."
+  echo "Basic install complete. Running post-install setup..."
   # Determine which chroot command to use
-  if command -v arch-chroot >/dev/null 2>&1; then
+  if command -v arch-chroot >/dev/null 2>&1 &&
+     [ "$distro" != "slackware" ]; then
     arch-chroot "$MNT" su - "$username" -c "
       cd ~/cinnamon-dotfiles &&
-      SUDO_PASSWORD='$userpasswd' bash Setup.sh &&
+      SUDO_PASSWORD='$userpasswd' bash Setup.sh || exit 1
       touch .iso.done
-    " || die "Post-Install Setup failed."
-  elif [ "$distro" = "void" ] && command -v xchroot >/dev/null 2>&1; then
+    " || die "Post-install setup failed."
+  elif [ "$distro" = "void" ] &&
+       command -v xchroot >/dev/null 2>&1; then
     xchroot "$MNT" su - "$username" -c "
       cd ~/cinnamon-dotfiles &&
-      SUDO_PASSWORD='$userpasswd' bash Setup.sh &&
+      SUDO_PASSWORD='$userpasswd' bash Setup.sh || exit 1
       touch .iso.done
-    " || die "Post-Install Setup failed."
+    " || die "Post-install setup failed."
   else
     chroot "$MNT" /bin/bash -c "
       source /etc/profile
       su - $username -c '
         cd ~/cinnamon-dotfiles &&
-        SUDO_PASSWORD=\"$userpasswd\" bash Setup.sh &&
+        SUDO_PASSWORD=\"$userpasswd\" bash Setup.sh || exit 1
         touch .iso.done'
-    " || die "Post-Install Setup failed."
+    " || die "Post-install setup failed."
   fi
 }
 

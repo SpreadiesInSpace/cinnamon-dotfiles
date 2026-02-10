@@ -187,12 +187,9 @@ packages=(
 retry xbps-install -Sy "${packages[@]}" || \
   die "Failed to install packages."
 
-# Install Brave, VSCodium & neofetch
-cd home/theming/Void || \
-  die "Failed to move to theming/Void folder."
-./update_xdeb.sh || \
-  die "Failed to install Brave/VSCodium."
-cd ..
+# Install Brave, VSCodium & neofetch via xdeb
+bash home/theming/Void/update_xdeb.sh  || \
+  die "Failed to install Brave/neofetch/VSCodium."
 
 # Protect neofetch from being removed
 xbps-pkgdb -m hold neofetch || \
