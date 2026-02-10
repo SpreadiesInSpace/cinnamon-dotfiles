@@ -198,7 +198,6 @@ prompt_drive() {
   done
 }
 
-# Only NixOS uses this
 prompt_for_autologin() {
   # Autologin Prompt
   while true; do
@@ -217,7 +216,6 @@ prompt_for_autologin() {
   export enable_autologin
 }
 
-# Only NixOS uses this
 prompt_for_vm() {
   # VM Prompt
   while true; do

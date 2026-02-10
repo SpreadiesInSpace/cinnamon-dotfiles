@@ -26,13 +26,19 @@ check_if_not_root_account
 get_current_username
 
 # Autologin Prompt
-prompt_for_autologin
+if [ -z "$enable_autologin" ]; then
+  prompt_for_autologin
+fi
 
 # VM Prompt
-prompt_for_vm
+if [ -z "$is_vm" ]; then
+  prompt_for_vm
+fi
 
 # Display Status from Prompts
-display_status "$enable_autologin" "$is_vm"
+if [ ! -f ".iso.done" ]; then
+  display_status "$enable_autologin" "$is_vm"
+fi
 
 # Check if Color, ParallelDownloads, and ILoveCandy are in /etc/pacman.conf
 echo "Configuring pacman..."
