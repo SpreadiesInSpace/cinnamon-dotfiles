@@ -99,7 +99,7 @@ ENABLE = false
 MIRROR = "http://mirror.nl.leaseweb.net/slackware/slackware64-current/patches/"
 
 [SLACK_TESTING]
-ENABLE = false
+ENABLE = true
 MIRROR = "https://mirror.nl.leaseweb.net/slackware/slackware64-current/testing/"
 
 [ALIEN]

@@ -263,7 +263,7 @@ packages=(
   "usbredir"
   "vde2"
   "virglrenderer"
-  #"qemu" # TARGETS=x86_64-softmmu
+  "qemu" # TARGETS=x86_64-softmmu
   "libbpf" # for conraid's qemu
   "jack" # for conraid's qemu
   "virtiofsd"
@@ -275,8 +275,10 @@ packages=(
 retry slpkg install -y -P -B "${packages[@]}" -o conraid || \
   die "Failed to install conraid packages."
 
-# Install Self-Compiled qemu from SBo
-bash unsorted/Slackware/qemu.sh
+# Install glibc 2.43 from testing for Conraid packages
+retry slpkg install -y -P -B aaa_glibc-solibs glibc glibc-i18n \
+  glibc-profile -o "slack_testing" || \
+  die "Failed to install glibc 2.43"
 
 # GFS packages
 gnome_packages=(
