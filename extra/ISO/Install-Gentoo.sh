@@ -320,7 +320,8 @@ echo "*/* \$(cpuid2cpuflags)" > /etc/portage/package.use/00-cpu-flags || \
 enable_pipewire
 
 # Update World Set
-retry emerge -vqDuN @world || die "Failed to update the world set."
+retry emerge -vqDuN --with-bdeps=y @world || \
+  die "Failed to update the world set."
 
 # Remove Obsolete Packages
 emerge -q --depclean || die "Failed to remove obsolete packages."
