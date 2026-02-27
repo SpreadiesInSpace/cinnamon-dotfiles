@@ -169,7 +169,7 @@ else
   enable_pipewire
 
   # Update World Set & Cleanup
-  retry emerge -vqDuN @world || \
+  retry emerge -vqDuN --with-bdeps=y @world || \
     die "Failed to emerge world update."
   emerge -q --depclean || \
     die "Failed to clean up unused dependencies."
