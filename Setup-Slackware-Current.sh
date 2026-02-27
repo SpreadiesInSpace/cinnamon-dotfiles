@@ -306,7 +306,7 @@ gnome_packages=(
 # Install eog (current eog from repo doesn't work)
 EOG="eog-49.1-x86_64-3_gfs.txz"
 EOGLINK="https://reddoglinux.ddns.net/mirror/new/$EOG"
-wget -c -T 10 -t 10 -q --show-progress "$EOGLINK" || true
+wget -c -T 3 -t 3 -q --show-progress "$EOGLINK" || true
 installpkg $EOG || true
 rm $EOG || true
 
