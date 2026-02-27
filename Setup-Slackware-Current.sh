@@ -303,6 +303,13 @@ gnome_packages=(
   #"rhythmbox" # using Elisa instead
 )
 
+# Install eog (current eog from repo doesn't work)
+EOG="eog-49.1-x86_64-3_gfs.txz"
+EOGLINK="https://reddoglinux.ddns.net/mirror/new/$EOG"
+wget -c -T 10 -t 10 -q --show-progress "$EOGLINK" || true
+installpkg $EOG || true
+rm $EOG || true
+
 # Install packages from GFS over SBo to reduce compile times
 retry slpkg install -y -P -B "${gnome_packages[@]}" -o gnome || \
   die "Failed to install gnome packages."
