@@ -5,7 +5,7 @@
 ## Supported Distros (with ISO download links)
 * [Arch](https://archlinux.org/download/)
 * [Fedora 43](https://fedoraproject.org/spins/cinnamon/download/)
-* [Gentoo](https://www.gentoo.org/downloads/)
+* [Gentoo](https://www.gentoo.org/downloads/amd64/)
 * [LMDE 7 (Linux Mint Debian Edition)](https://linuxmint.com/edition.php?id=325)
 * [NixOS 25.11](https://nixos.org/download/#nixos-iso)
 * [openSUSE Tumbleweed*](https://get.opensuse.org/tumbleweed/#download)
