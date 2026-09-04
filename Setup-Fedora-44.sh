@@ -78,7 +78,7 @@ retry dnf -y group install sound-and-video || \
   die "Failed to install sound-and-video group."
 
 # Debloat if installed via cinnamon-ISO
-if [[ -f ".fedora-43.done" ]]; then
+if [[ -f ".fedora-44.done" ]]; then
   bash unsorted/Fedora/Fedora-Bloat.sh || \
     die "Failed to remove bloat."
   sudo -u "$username" touch home/.fedora.gnome
@@ -144,7 +144,7 @@ packages=(
   "xkill"
   "xrandr"
   # Network utilities
-  "filezilla"
+  #"filezilla"
   "gvfs"
   "gvfs-afc"
   "gvfs-gphoto2"
@@ -180,7 +180,7 @@ packages=(
   "nemo-extensions"
   "qt5ct"
   "qt6ct"
-  "rhythmbox"
+  #"rhythmbox"
   # Applications
   "bleachbit"
   "gpaste"

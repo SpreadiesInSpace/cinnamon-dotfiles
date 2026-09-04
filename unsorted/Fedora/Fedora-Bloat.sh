@@ -9,7 +9,7 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 # Run if not installed via cinnamon-ISO
-if [[ ! -f ".fedora-43.done" ]]; then
+if [[ ! -f ".fedora-44.done" ]]; then
   # Set GRUB timeout to 0
   sed -i '/^#*GRUB_TIMEOUT=/s/^#*GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' \
     /etc/default/grub || die "Failed to update GRUB_TIMEOUT."

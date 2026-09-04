@@ -36,7 +36,7 @@ copy_fonts "default"
 copy_sounds_and_wallpapers
 
 # Copies applets to appropriate directories
-copy_applets "applets.640"
+copy_applets "applets.660"
 
 # Backup and copy KDE Global defaults to ~/.config
 copy_kdeglobals

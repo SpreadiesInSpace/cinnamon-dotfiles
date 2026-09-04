@@ -110,12 +110,17 @@ StartupWMClass=brave-browser
 TryExec=brave
 Exec=brave %U
 Terminal=false
-Icon=browser
+Icon=brave-browser
 Type=Application
 Categories=Network;WebBrowser;
 MimeType=application/pdf;application/rdf+xml;application/rss+xml;application/xhtml+xml;application/xhtml_xml;application/xml;image/gif;image/jpeg;image/png;image/webp;text/html;text/xml;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/ipfs;x-scheme-handler/ipns;
 Actions=new-window;new-private-window;
+Name[en_US]=Brave
+Exec[en_US]=brave %U
+Comment[en_US]=Access the Internet
 PrefersNonDefaultGPU=false
+Icon[en_US]=brave
+Type[en_US]=Application
 
 [Desktop Action new-window]
 Name=New Window

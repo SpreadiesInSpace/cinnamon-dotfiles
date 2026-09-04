@@ -1,0 +1,16 @@
+[Desktop Entry]
+Categories=Utility;TextEditor;Development;IDE
+Comment=Code Editing. Redefined.
+Exec=codium --open-url %U
+GenericName=Text Editor
+Icon=vscodium
+Keywords=vscode
+MimeType=x-scheme-handler/vscodium
+Name=VSCodium
+NoDisplay=true
+StartupNotify=true
+StartupWMClass=vscodium
+Type=Application
+Version=1.5
+Terminal=false
+PrefersNonDefaultGPU=false

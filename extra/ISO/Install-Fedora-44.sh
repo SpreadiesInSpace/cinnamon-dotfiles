@@ -232,7 +232,7 @@ fixfiles -F onboot || die "Failed to turn SELinux back on."
 rm -rf Install-Common.sh Master-Common.sh
 
 # Clone cinnamon-dotfiles repo as new user
-clone_dotfiles "fedora-43"
+clone_dotfiles "fedora-44"
 
 # Setup GRUB theme
 setup_grub_theme "Fedora"

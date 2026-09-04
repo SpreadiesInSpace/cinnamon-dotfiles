@@ -121,7 +121,7 @@ packages=(
   "xkill"
   "xrandr"
   # Network utilities
-  "filezilla"
+  #"filezilla"
   "gvfs"
   "gvfs-backends"
   "kdeconnect-kde"
@@ -155,7 +155,7 @@ packages=(
   "nemo-extension-share"
   "qt5ct"
   "qt6ct"
-  "rhythmbox"
+  #"rhythmbox"
   # Applications
   "bleachbit"
   "bottom"

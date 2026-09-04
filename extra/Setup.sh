@@ -89,10 +89,10 @@ fi
 # Setup script list
 scripts=(
   "Setup-Arch.sh"
-  "Setup-Fedora-43.sh"
+  "Setup-Fedora-44.sh"
   "Setup-Gentoo.sh"
   "Setup-LMDE-7.sh"
-  "Setup-NixOS-25.11.sh"
+  "Setup-NixOS-26.05.sh"
   "Setup-OpenSUSE-Tumbleweed.sh"
   "Setup-Slackware-Current.sh"
   "Setup-Void.sh"
@@ -107,7 +107,7 @@ for script in "${scripts[@]}"; do
     pretty_name="$(tr '[:lower:]' '[:upper:]' <<< "${flag:1:1}")${flag:2:-5}"
     echo -e "${GREEN}Detected flag: $pretty_name. Running $script...${NC}"
     chmod +x "$script"
-    if [[ "$script" == "Setup-NixOS-25.11.sh" ]]; then
+    if [[ "$script" == "Setup-NixOS-26.05.sh" ]]; then
       timed nix-shell -p unzip --run "sudo bash $script"
     else
       if [ -n "$SUDO_PASSWORD" ]; then
@@ -131,7 +131,7 @@ select script in "${scripts[@]}" "Exit"; do
     [[ -f "$script" ]] || die "Script $script not found."
     echo -e "${GREEN}Running $script...${NC}"
     chmod +x "$script"
-    if [[ "$script" == "Setup-NixOS-25.11.sh" ]]; then
+    if [[ "$script" == "Setup-NixOS-26.05.sh" ]]; then
       timed nix-shell -p unzip --run "sudo bash $script"
     else
       timed sudo bash "$script"

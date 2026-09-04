@@ -1,0 +1,15 @@
+[Desktop Entry]
+Name=VSCodium
+Exec=/usr/bin/codium
+StartupWMClass=VSCodium
+Icon=vscodium
+Type=Application
+Categories=Development;Programming
+Name[en_US]=VSCodium
+Exec[en_US]=/usr/bin/codium
+Comment=
+Comment[en_US]=
+Terminal=false
+PrefersNonDefaultGPU=false
+Icon[en_US]=vscodium
+Type[en_US]=Application

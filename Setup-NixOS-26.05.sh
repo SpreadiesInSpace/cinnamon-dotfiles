@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Exit early if installed via cinnamon-ISO
-if [ -f ".nixos-25.11.done" ]; then
+if [ -f ".nixos-26.05.done" ]; then
   echo "This install was done via cinnamon-ISO"
   echo "Now run Theme.sh with the following command:"
   echo "./Theme.sh"

@@ -205,7 +205,7 @@ packages=(
   "gnome-extra/nemo-fileroller"
   "x11-misc/qt5ct"
   "gui-apps/qt6ct"
-  "media-sound/rhythmbox"
+  #"media-sound/rhythmbox"
   "app-editors/vscodium"
   # System utilities
   "app-admin/eclean-kernel"
@@ -222,7 +222,7 @@ packages=(
   "x11-apps/xkill"
   "x11-apps/xrandr"
   # Network utilities
-  "net-ftp/filezilla"
+  #"net-ftp/filezilla"
   "gnome-base/gvfs"
   "kde-misc/kdeconnect"
   "net-fs/samba"

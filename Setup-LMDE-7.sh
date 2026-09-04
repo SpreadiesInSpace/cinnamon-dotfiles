@@ -121,7 +121,7 @@ packages=(
   "unzip"
   "x11-xserver-utils"
   # Network utilities
-  "filezilla"
+  #"filezilla"
   "gvfs"
   "gvfs-backends"
   "kdeconnect"
@@ -152,7 +152,7 @@ packages=(
   "qt5-style-kvantum"
   "qt6-style-kvantum"
   "qt-style-kvantum-themes"
-  "rhythmbox"
+  #"rhythmbox"
   # Applications
   "bleachbit"
   "btm"

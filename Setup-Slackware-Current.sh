@@ -210,11 +210,11 @@ packages=(
   #"xkill"
   #"xrandr"
   # For Filezilla
-  "libfilezilla"
-  "libmspack"
-  "pugixml"
-  "wxwidgets"
-  "filezilla"
+  #"libfilezilla"
+  #"libmspack"
+  #"pugixml"
+  #"wxwidgets"
+  #"filezilla"
   # Network utilities
   #"gvfs"
   #"kdeconnect"

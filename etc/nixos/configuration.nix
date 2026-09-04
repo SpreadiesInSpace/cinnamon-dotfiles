@@ -130,7 +130,7 @@ in
       evince
       eog
       ffmpegthumbnailer
-      filezilla
+      # filezilla
       gcc
       gedit
       git
@@ -145,7 +145,7 @@ in
       neovim
       qbittorrent
       ripgrep
-      rhythmbox
+      # rhythmbox
       timeshift
       unzip
       virt-manager

@@ -102,7 +102,7 @@ packages=(
   "xorg-xkill"
   "xorg-xrandr"
   # Network utilities
-  "filezilla"
+  #"filezilla"
   "gvfs"
   "gvfs-afc"
   "gvfs-gphoto2"
@@ -138,7 +138,7 @@ packages=(
   "nemo-share"
   "qt5ct"
   "qt6ct"
-  "rhythmbox"
+  #"rhythmbox"
   "vscodium-bin"
   # Applications
   "bleachbit"
