@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<description xmlns="http://openoffice.org/extensions/description/2006"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            xmlns:lo="http://libreoffice.org/extensions/description/2011">
+
+    <version value="26.8.0"/>
+
+    <platform value="all" />
+
+    <display-name>
+       <name lang="en">Stop Begging</name>
+    </display-name>
+
+     <icon>
+       <default xlink:href="images/donateLO.png" />
+       <high-contrast xlink:href="images/donateLO.png" />
+     </icon>
+
+    <extension-description>
+        <src xlink:href="description/desc_en.txt" lang="en" />
+    </extension-description>
+
+</description>

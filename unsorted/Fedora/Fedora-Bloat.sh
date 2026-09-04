@@ -33,7 +33,7 @@ systemctl disable --now abrtd.service >/dev/null 2>&1 || true
 dnf remove -y \
   baobab bulky celluloid drawing eom exaile firefox \
   gnome-calendar google-noto-seriff* hexchat hp* hypnotix \
-  ibus* mediawriter mint-artwork mint-backgrounds* \
+  ibus mediawriter mint-artwork mint-backgrounds* \
   mintbackup mintstick mintupdate numix* paper-icon-theme \
   papirus-icon-theme pidgin pix pppoeconf redshift \
   shotwell simple-scan tecla thingy thunderbird tracker-miners \

@@ -303,7 +303,6 @@
 <item oor:path="/org.openoffice.Office.UI/ColorScheme/ColorSchemes/org.openoffice.Office.UI:ColorScheme['COLOR_SCHEME_LIBREOFFICE_AUTOMATIC']/WriterIdxShadings"><prop oor:name="IsVisible" oor:op="fuse"><value>false</value></prop></item>
 <item oor:path="/org.openoffice.Office.UI/ColorScheme/ColorSchemes/org.openoffice.Office.UI:ColorScheme['COLOR_SCHEME_LIBREOFFICE_AUTOMATIC']/WriterNonPrintChars"><prop oor:name="Color" oor:op="fuse"><value xsi:nil="true"/></prop></item>
 <item oor:path="/org.openoffice.Office.UI/ColorScheme/ColorSchemes/org.openoffice.Office.UI:ColorScheme['COLOR_SCHEME_LIBREOFFICE_AUTOMATIC']/WriterPageBreaks"><prop oor:name="Color" oor:op="fuse"><value xsi:nil="true"/></prop></item>
-<item oor:path="/org.openoffice.Office.UI/ColorScheme/ColorSchemes/org.openoffice.Office.UI:ColorScheme['COLOR_SCHEME_LIBREOFFICE_AUTOMATIC']/WriterScriptIndicator"><prop oor:name="Color" oor:op="fuse"><value xsi:nil="true"/></prop></item>
 <item oor:path="/org.openoffice.Office.UI/ColorScheme/ColorSchemes/org.openoffice.Office.UI:ColorScheme['COLOR_SCHEME_LIBREOFFICE_AUTOMATIC']/WriterSectionBoundaries"><prop oor:name="Color" oor:op="fuse"><value xsi:nil="true"/></prop></item>
 <item oor:path="/org.openoffice.Office.UI/ColorScheme/ColorSchemes/org.openoffice.Office.UI:ColorScheme['COLOR_SCHEME_LIBREOFFICE_AUTOMATIC']/WriterTextGrid"><prop oor:name="Color" oor:op="fuse"><value xsi:nil="true"/></prop></item>
 <item oor:path="/org.openoffice.Office.UI/ColorScheme"><prop oor:name="CurrentColorScheme" oor:op="fuse"><value>COLOR_SCHEME_LIBREOFFICE_AUTOMATIC</value></prop></item>
@@ -525,19 +524,19 @@
 <item oor:path="/org.openoffice.Office.Writer/Content/Zoom"><prop oor:name="ZoomValue" oor:op="fuse"><value>100</value></prop></item>
 <item oor:path="/org.openoffice.Office.Writer/FmtAidsAutocomplete"><prop oor:name="EncloseWithCharacters" oor:op="fuse"><value>true</value></prop></item>
 <item oor:path="/org.openoffice.Setup/L10N"><prop oor:name="ooLocale" oor:op="fuse"><value>en-US</value></prop></item>
-<item oor:path="/org.openoffice.Setup/Office/Factories/org.openoffice.Setup:Factory['com.sun.star.drawing.DrawingDocument']"><prop oor:name="ooSetupFactoryWindowAttributes" oor:op="fuse"><value>0,44,2,2;5;0,44,1921,991;</value></prop></item>
-<item oor:path="/org.openoffice.Setup/Office/Factories/org.openoffice.Setup:Factory['com.sun.star.formula.FormulaProperties']"><prop oor:name="ooSetupFactoryWindowAttributes" oor:op="fuse"><value>0,44,200,674;5;0,44,1921,991;</value></prop></item>
+<item oor:path="/org.openoffice.Setup/Office/Factories/org.openoffice.Setup:Factory['com.sun.star.drawing.DrawingDocument']"><prop oor:name="ooSetupFactoryWindowAttributes" oor:op="fuse"><value>0,44,218,692;5;0,44,1921,991;</value></prop></item>
+<item oor:path="/org.openoffice.Setup/Office/Factories/org.openoffice.Setup:Factory['com.sun.star.formula.FormulaProperties']"><prop oor:name="ooSetupFactoryWindowAttributes" oor:op="fuse"><value>0,44,218,692;5;0,44,1921,991;</value></prop></item>
 <item oor:path="/org.openoffice.Setup/Office/Factories/org.openoffice.Setup:Factory['com.sun.star.frame.StartModule']"><prop oor:name="ooSetupFactoryWindowAttributes" oor:op="fuse"><value>0,44,218,692;5;0,44,1921,991;</value></prop></item>
-<item oor:path="/org.openoffice.Setup/Office/Factories/org.openoffice.Setup:Factory['com.sun.star.presentation.PresentationDocument']"><prop oor:name="ooSetupFactoryWindowAttributes" oor:op="fuse"><value>0,44,200,674;5;0,44,1921,991;</value></prop></item>
-<item oor:path="/org.openoffice.Setup/Office/Factories/org.openoffice.Setup:Factory['com.sun.star.sheet.SpreadsheetDocument']"><prop oor:name="ooSetupFactoryWindowAttributes" oor:op="fuse"><value>0,44,217,691;5;0,44,1921,991;</value></prop></item>
+<item oor:path="/org.openoffice.Setup/Office/Factories/org.openoffice.Setup:Factory['com.sun.star.presentation.PresentationDocument']"><prop oor:name="ooSetupFactoryWindowAttributes" oor:op="fuse"><value>0,44,218,692;5;0,44,1921,991;</value></prop></item>
+<item oor:path="/org.openoffice.Setup/Office/Factories/org.openoffice.Setup:Factory['com.sun.star.sheet.SpreadsheetDocument']"><prop oor:name="ooSetupFactoryWindowAttributes" oor:op="fuse"><value>0,44,218,692;5;0,44,1921,991;</value></prop></item>
 <item oor:path="/org.openoffice.Setup/Office/Factories/org.openoffice.Setup:Factory['com.sun.star.text.TextDocument']"><prop oor:name="ooSetupFactoryWindowAttributes" oor:op="fuse"><value>0,44,218,692;5;0,44,1921,991;</value></prop></item>
-<item oor:path="/org.openoffice.Setup/Office"><prop oor:name="LastCompatibilityCheckID" oor:op="fuse"><value>580(Build:2)</value></prop></item>
+<item oor:path="/org.openoffice.Setup/Office"><prop oor:name="LastCompatibilityCheckID" oor:op="fuse"><value>620(Build:1)</value></prop></item>
 <item oor:path="/org.openoffice.Setup/Office"><prop oor:name="OfficeRestartInProgress" oor:op="fuse"><value>false</value></prop></item>
 <item oor:path="/org.openoffice.Setup/Office"><prop oor:name="ooSetupInstCompleted" oor:op="fuse"><value>true</value></prop></item>
-<item oor:path="/org.openoffice.Setup/Product"><prop oor:name="LastTimeDonateShown" oor:op="fuse"><value>1756573350</value></prop></item>
-<item oor:path="/org.openoffice.Setup/Product"><prop oor:name="LastTimeGetInvolvedShown" oor:op="fuse"><value>1765293196</value></prop></item>
+<item oor:path="/org.openoffice.Setup/Product"><prop oor:name="LastTimeDonateShown" oor:op="fuse"><value>1788527151</value></prop></item>
+<item oor:path="/org.openoffice.Setup/Product"><prop oor:name="LastTimeGetInvolvedShown" oor:op="fuse"><value>1788527147</value></prop></item>
 <item oor:path="/org.openoffice.Setup/Product"><prop oor:name="WhatsNewDialog" oor:op="fuse"><value>false</value></prop></item>
-<item oor:path="/org.openoffice.Setup/Product"><prop oor:name="ooSetupLastVersion" oor:op="fuse"><value>25.8</value></prop></item>
+<item oor:path="/org.openoffice.Setup/Product"><prop oor:name="ooSetupLastVersion" oor:op="fuse"><value>26.2</value></prop></item>
 <item oor:path="/org.openoffice.UserProfile/Data"><prop oor:name="c" oor:op="fuse"><value></value></prop></item>
 <item oor:path="/org.openoffice.UserProfile/Data"><prop oor:name="encryptionkey" oor:op="fuse"><value></value></prop></item>
 <item oor:path="/org.openoffice.UserProfile/Data"><prop oor:name="encryptionkeydisplayname" oor:op="fuse"><value></value></prop></item>

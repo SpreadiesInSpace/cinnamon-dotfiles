@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<oor:component-data oor:name="Setup" oor:package="org.openoffice"
+    xmlns:oor="http://openoffice.org/2001/registry" 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" >
+
+    <!-- Never show the "Get Involved" or "Donate" Infobar messages.
+         WARNING: Crashes with LO 6.1.0 - 6.1.2. Use 6.1.3+ -->
+    <node oor:name="Product">
+        <prop oor:name="LastTimeDonateShown" oor:finalized="true" >
+            <value>2147483646</value>
+        </prop>
+    </node>
+    <node oor:name="Product">
+        <prop oor:name="LastTimeGetInvolvedShown" oor:finalized="true" >
+            <value>2147483646</value>
+        </prop>
+    </node>
+
+</oor:component-data>

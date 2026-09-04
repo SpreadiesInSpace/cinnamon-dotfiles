@@ -34,6 +34,7 @@
                     	<value xml:lang="be">MediaWiki</value>
                     	<value xml:lang="bg">MediaWiki</value>
                     	<value xml:lang="bn">মিডিয়া-উইকি</value>
+                    	<value xml:lang="bn-IN">মিডিয়া-উইকি</value>
                     	<value xml:lang="br">MediaWiki</value>
                     	<value xml:lang="bs">MediaWiki</value>
                     	<value xml:lang="ca">MediaWiki</value>
@@ -62,6 +63,7 @@
                     	<value xml:lang="hi">MediaWiki</value>
                     	<value xml:lang="hr">MediaWiki</value>
                     	<value xml:lang="hu">MediaWiki</value>
+                    	<value xml:lang="hy">MediaWiki</value>
                     	<value xml:lang="id">MediaWiki</value>
                     	<value xml:lang="is">MediaWiki</value>
                     	<value xml:lang="it">MediaWiki</value>
@@ -79,7 +81,7 @@
                     	<value xml:lang="mn">МэдиаВики</value>
                     	<value xml:lang="mr">मिडिया विकी</value>
                     	<value xml:lang="nb">MediaWiki</value>
-                    	<value xml:lang="ne">MediaWiki</value>
+                    	<value xml:lang="ne">मेडियाविकी</value>
                     	<value xml:lang="nl">MediaWiki</value>
                     	<value xml:lang="nn">MediaWiki</value>
                     	<value xml:lang="nr">MediaWiki</value>
@@ -107,6 +109,7 @@
                     	<value xml:lang="te">మీడియావికీ</value>
                     	<value xml:lang="tg">MediaWiki</value>
                     	<value xml:lang="th">MediaWiki</value>
+                    	<value xml:lang="tl">MediaWiki</value>
                     	<value xml:lang="tn">MediaWiki</value>
                     	<value xml:lang="tr">MediaWiki</value>
                     	<value xml:lang="ts">MediaWiki</value>

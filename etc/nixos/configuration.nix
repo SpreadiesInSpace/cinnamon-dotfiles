@@ -141,7 +141,7 @@ in
       libnotify
       libreoffice
       ncdu
-      neofetch
+      nixpkgs_23_05.neofetch
       neovim
       qbittorrent
       ripgrep
