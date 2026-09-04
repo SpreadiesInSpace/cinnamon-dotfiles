@@ -1,9 +1,9 @@
 # General configuration file for slpkg.
 # Location: /etc/slpkg/slpkg.toml
-# Last Updated: 20/07/2025
-# Version: 5.4.0
+# Last Updated: 21/05/2026
+# Version: 6.1.6
 
-[CONFIGS]
+[logging]
 
 # Sets the minimum severity level for log messages written by the application.
 # Messages with a lower severity than the configured level will be ignored.
@@ -18,28 +18,111 @@
 # Default: "INFO"
 LOGGING_LEVEL = "INFO"
 
-# Specifies the download location for packages.
-# Note: This path is only used with the 'download' command.
-# Default is /tmp/slpkg.
-DOWNLOAD_ONLY_PATH = "/tmp/slpkg/"
+[ui]
+
+# Enable or disable colorful menu display.
+# Default is true. [true/false]
+COLORS = true
+
+# Specifies the terminal pager command to use when viewing paginated output.
+# This command should accept content via standard input (stdin).
+# Common pagers include "less -R" (recommended for color support), "more", or "most".
+# The "-R" option for 'less' allows ANSI color escape sequences to be interpreted.
+# Set to "" to disable. Default is "most".
+PAGER = "most"
+
+# Specifies the default text editor to use for opening and editing files.
+# This variable is typically read from the environment (e.g., EDITOR=$EDITOR)
+# but can be explicitly set here. Common editors include "vim", "nano", "emacs".
+EDITOR = "nano"
+
+# Enable or disable the use of dialog for interactive shell
+# scripts. Dialog allows you to display questions or messages
+# using dialog boxes. Default is false. [true/false]
+DIALOG = false
+
+# Enable or disable the terminal selector for interactive shell
+# scripts. Allows you to display a checkbox to choose packages.
+# Default is true. [true/false]
+TERMINAL_SELECTOR = true
+
+# Enable quiet mode permanently. When true, build/process output is
+# suppressed and a progress bar is shown instead (same effect as the
+# '--quiet' command-line flag). Default is true. [true/false]
+QUIET = true
+
+# Choose a spinner style for the progress bar. Options include:
+# [spinner/pie/moon/line/pixel/ball/clock]. Default is 'spinner'.
+PROGRESS_SPINNER = "spinner"
+
+# Choose a color for the progress bar spinner. Default is white.
+# Options: [white/green/yellow/cyan/grey/red]
+SPINNER_COLOR = "green"
+
+[packages]
+
+# List of file suffixes for binary packages.
+# These are the supported package formats for installation.
+# Default is [".txz", ".tgz", ".tlz", ".tbz"].
+PACKAGE_TYPE = [".txz", ".tgz", ".tlz", ".tbz"]
 
 # Specifies the file suffix for package list files.
 # Change this value if you intend to use '.sqf' files instead.
 # Default is ".pkgs".
 FILE_LIST_SUFFIX = ".pkgs"
 
-# List of file suffixes for binary packages.
-# These are the supported package formats for installation.
-# Default is [".tgz", ".txz"].
-PACKAGE_TYPE = [".tgz", ".txz"]
-
-# Enable or disable colorful menu display.
+# There are two different methods to choose from when upgrading
+# your installed packages: the "version" method and the
+# "package" method.
+#
+# - The "version" method (PACKAGE_METHOD = false): Compares the version
+#   and build number of the packages, following semantic versioning rules.
+#   Recommended for -current users.
+#   WARNING: Packages that do not follow semantic versioning rules are ignored.
+#
+# - The "package" method (PACKAGE_METHOD = true, default): Checks for
+#   differences between the installed and repository package names, which
+#   means it may also suggest downgrades if the installed package is newer
+#   than the one in the repository.
+#
 # Default is true. [true/false]
-COLORS = true
+PACKAGE_METHOD = false
+
+# Enable or disable the ability to downgrade packages.
+# This setting only works when PACKAGE_METHOD = false (version method).
+# Default is false. [true/false]
+DOWNGRADE_PACKAGES = false
+
+# View missing dependencies as main packages from
+# the repository. Some repositories include packages only
+# as dependencies, but not as standalone main packages.
+# Default is false. [true/false]
+VIEW_MISSING_DEPS = false
+
+# Remove the kernel version from custom SlackBuilds
+# (e.g., nvidia-kernel, virtualbox-kernel) to simplify version
+# comparison between installed and repository packages.
+# This is ignored if PACKAGE_METHOD is true.
+# Default is true. [true/false]
+KERNEL_VERSION = true
+
+# Specify a command to run after a kernel upgrade to update
+# the bootloader.
+# Example for GRUB: grub-mkconfig -o /boot/grub/grub.cfg.
+# Default is "".
+BOOTLOADER_COMMAND = ""
+
+[build]
 
 # Specify the number of concurrent jobs to run during builds.
 # Default is '-j4'.
-MAKEFLAGS = "-j16"
+MAKEFLAGS = "-j4"
+
+# Delete downloaded source files after building or
+# installing packages. Default is false. [true/false]
+DELETE_SOURCES = false
+
+[verification]
 
 # Enable or disable GPG verification for package integrity.
 # If set to true, ensure repositories are updated to import GPG keys.
@@ -51,75 +134,37 @@ GPG_VERIFICATION = false
 # Default is true. [true/false].
 CHECKSUM_MD5 = true
 
-# Enable or disable the use of dialog for interactive shell
-# scripts. Dialog allows you to display questions or messages
-# using dialog boxes. Default is false. [true/false]
-DIALOG = false
+# Virtual filesystem path prefixes to skip during 'slpkg verify'.
+# Files under these paths are never present on a real filesystem and
+# are always excluded from the missing-file check.
+# Default is ["dev/", "proc/", "sys/", "run/"].
+VERIFY_SKIP_VIRTUAL = ["dev/", "proc/", "sys/", "run/"]
 
-# Specifies the terminal pager command to use when viewing paginated output.
-# This command should accept content via standard input (stdin).
-# Common pagers include "less -R" (recommended for color support), "more", or "most".
-# The "-R" option for 'less' allows ANSI color escape sequences to be interpreted.
-PAGER = "most"
+# Path prefixes to skip during 'slpkg verify'.
+# Files whose path starts with any of these prefixes will not be reported
+# as missing. Add runtime-populated paths such as virus databases or caches.
+# Paths must be relative (no leading '/'), matching the FILE LIST format.
+# Example: VERIFY_SKIP_PREFIXES = ["install/", "var/lib/clamav/"]
+# Default is ["install/"].
+VERIFY_SKIP_PREFIXES = ["install/"]
 
-# Specifies the default text editor to use for opening and editing files.
-# This variable is typically read from the environment (e.g., EDITOR=$EDITOR)
-# but can be explicitly set here. Common editors include "vim", "nano", "emacs".
-EDITOR = "nano"
+# File suffixes to skip during 'slpkg verify'.
+# Files whose name ends with any of these suffixes will not be reported
+# as missing. Useful for config placeholders or runtime-generated files.
+# Example: VERIFY_SKIP_SUFFIXES = [".new", ".sample", ".db"]
+# Default is [".new", ".sample"].
+VERIFY_SKIP_SUFFIXES = [".new", ".sample"]
 
-# Enable or disable to use the terminal selector for interactive shell
-# scripts. Selector allows you to display checkbox to choose packages.
-# Default is true. [true/false]
-TERMINAL_SELECTOR = true
+[download]
 
-# View missing dependencies as main packages from
-# the repository. Some repositories include packages only
-# as dependencies, but not as standalone main packages.
-# Default is false. [true/false]
-VIEW_MISSING_DEPS = false
+# Choose a downloader tool. Options: [wget/wget2/curl/aria2c/lftp].
+# Default is 'wget'.
+DOWNLOADER = "wget"
 
-# There are two different methods to choose from when upgrading
-# your installed packages: the "version" method and the
-# "package" method. Recommended for -current users.
-#
-# - The "version" method: This compares the version
-#   and build number of the packages, following semantic
-#   versioning rules.
-#   WARNING: Packages that do not follow semantic versioning rules are ignored.
-#
-# - The "package" method (default): This checks for differences between
-#   the installed and repository packages, which means it may
-#   also suggest downgrades if the installed package is newer
-#   than the one in the repository.
-#
-# The default value is true. [true/false]
-PACKAGE_METHOD = false
-
-# Enable or disable the ability to downgrade packages.
-# This setting only works if the 'package' method is set
-# to false. Default is false. [true/false]
-DOWNGRADE_PACKAGES = false
-
-# Delete downloaded source files after building or
-# installing packages. Default is false. [true/false]
-DELETE_SOURCES = false
-
-# Enable or disable interactive questions. If set to false,
-# the --yes option will not work. Default is true. [true/false]
-ASK_QUESTION = true
-
-# Remove the kernel version from custom SlackBuilds
-# (e.g., nvidia-kernel, virtualbox-kernel) to simplify version
-# comparison between installed and repository packages.
-# This ignored if PACKAGE_METHOD is true.
-# Default is true. [true/false]
-KERNEL_VERSION = true
-
-# Specify a command to run after a kernel upgrade to update
-# the bootloader.
-# Example for GRUB: grub-mkconfig -o /boot/grub/grub.cfg.
-# Default is "".
-BOOTLOADER_COMMAND = ""
+# Specifies the download location for packages.
+# Note: This path is only used with the 'download' command.
+# Default is /tmp/slpkg.
+DOWNLOAD_ONLY_PATH = "/tmp/slpkg/"
 
 # Enable or disable parallel downloading of sources.
 # Default is false. [true/false]
@@ -130,43 +175,6 @@ PARALLEL_DOWNLOADS = true
 # Default is 5.
 MAXIMUM_PARALLEL = 5
 
-# Enable or disable the progress bar. If enabled, executed
-# commands are not printed.Default is false. [true/false]
-PROGRESS_BAR = true
-
-# Choose a spinner style for the progress bar. Options include:
-# [spinner/pie/moon/line/pixel/ball/clock]. Default is 'spinner'.
-PROGRESS_SPINNER = "spinner"
-
-# Choose a color for the progress bar spinner. Default is green.
-# Options: [white/green/yellow/cyan/grey/red]
-SPINNER_COLOR = "green"
-
-# Keep process log files in the /var/log/slpkg/ directory.
-# Default is true. [true/false]
-PROCESS_LOG = true
-
-# Specify the Slackware command for installing packages. By default,
-# 'upgradepkg' is used with the '--install-new' option to install new
-# packages alongside upgrades. See the 'upgradepkg' manpage for details.
-# Default is "upgradepkg --install-new".
-INSTALLPKG = "upgradepkg --install-new"
-
-# Specify the Slackware command for reinstalling packages. By default,
-# 'upgradepkg' is used with the '--reinstall' option to force
-# re-installation even if the same version is already installed.
-# Default is "upgradepkg --reinstall".
-REINSTALL = "upgradepkg --reinstall"
-
-# Specify the Slackware command for removing packages. By default,
-# 'removepkg' is used. See the 'removepkg' manpage for details.
-# Default is "removepkg".
-REMOVEPKG = "removepkg"
-
-# Choose a downloader tool. Options: [wget/wget2/curl/aria2c/lftp].
-# Default is 'wget'.
-DOWNLOADER = "wget"
-
 # Specify options for the Wget downloader:
 # -c, --continue: Resume partial downloads.
 # -q: Suppress Wget's output.
@@ -175,6 +183,7 @@ DOWNLOADER = "wget"
 WGET_OPTIONS = "-c -T 10 -t 10 -q --progress=bar:force:noscroll --show-progress"
 
 # Specify options for the Curl downloader.
+# Default is "".
 CURL_OPTIONS = ""
 
 # Specify options for the aria2c downloader.
@@ -195,6 +204,55 @@ LFTP_MIRROR_OPTIONS = "-c mirror --parallel=100 --only-newer --delete"
 # in repositories.toml. Default is "git clone --depth 1".
 GIT_CLONE = "git clone --depth 1"
 
+[commands]
+
+# Specify the Slackware command for installing packages. By default,
+# 'upgradepkg' is used with the '--install-new' option to install new
+# packages alongside upgrades. See the 'upgradepkg' manpage for details.
+# Default is "upgradepkg --install-new".
+INSTALLPKG = "upgradepkg --install-new"
+
+# Specify the Slackware command used by 'slpkg install-pkg' to install
+# local package files directly. By default, 'installpkg' is used.
+# Change to "upgradepkg --install-new" if you prefer upgradepkg behaviour.
+# Default is "installpkg".
+LOCAL_INSTALLPKG = "installpkg"
+
+# Specify the Slackware command for reinstalling packages. By default,
+# 'upgradepkg' is used with the '--reinstall' option to force
+# re-installation even if the same version is already installed.
+# Default is "upgradepkg --reinstall".
+REINSTALL = "upgradepkg --reinstall"
+
+# Specify the Slackware command for removing packages. By default,
+# 'removepkg' is used. See the 'removepkg' manpage for details.
+# Default is "removepkg".
+REMOVEPKG = "removepkg"
+
+[behavior]
+
+# Enable or disable interactive questions. If set to false,
+# the --yes option will not work. Default is true. [true/false]
+ASK_QUESTION = true
+
+# Confirmation behaviour when using '-o all' (or '-o "*"') with 'upgrade' or 'install'.
+# "once"     - Ask for confirmation once for all repositories (default).
+# "per_repo" - Ask for confirmation before processing each repository individually.
+ALL_REPOS_CONFIRM = "once"
+
+# Keep process log files in the /var/log/slpkg/ directory.
+# Default is true. [true/false]
+PROCESS_LOG = true
+
+# Warn during 'slpkg update' if a repository mirror URL does not match
+# the installed Slackware version (stable vs. current).
+# The check is skipped when the mirror URL contains no recognisable
+# version hint ('current' or a version number like '15.0').
+# Default is true. [true/false]
+MIRROR_VERSION_CHECK = true
+
+[network]
+
 # Configure Python urllib3 settings for changelog file comparisons.
 # Timeouts control how long requests are allowed to run before being
 # aborted. By default, urllib3 retries requests 3 times and follows
@@ -205,6 +263,8 @@ GIT_CLONE = "git clone --depth 1"
 URLLIB_RETRIES = false
 URLLIB_REDIRECT = false
 URLLIB_TIMEOUT = 3.0
+
+[proxy]
 
 # Configure proxy server settings. Choose between 'http' or 'socks'
 # proxy types. For SOCKS proxies, install the PySocks package.

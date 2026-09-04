@@ -166,11 +166,11 @@ else
 fi
 
 # Install Bash Completion for csb
-retry slpkg install -y -P -B bash-completion -o "slack_extra" || \
+retry slpkg install -y -P -q bash-completion -o "slack_extra" || \
   die "Failed to install bash-completion."
 
 # Install Cinnamon, LightDM and set Default DE System-Wide
-retry slpkg install -y -P -B '*' -o csb || die "Failed to install Cinnamon"
+retry slpkg install -y -P -q '*' -o csb || die "Failed to install Cinnamon"
 ln -sf /etc/X11/xinit/xinitrc.cinnamon-session /etc/X11/xinit/xinitrc || \
   die "Failed to create symlink for xinitrc."
 ln -sf /etc/X11/xinit/xinitrc.cinnamon-session /etc/X11/xsession || \
@@ -198,7 +198,7 @@ alien_packages=(
 )
 
 # Install packages from Alien over SBo to reduce compile times
-retry slpkg install -y -P -B "${alien_packages[@]}" -o alien -O || \
+retry slpkg install -y -P -q "${alien_packages[@]}" -o alien -N || \
   die "Failed to install alienbob packages."
 
 # All packages
@@ -246,39 +246,39 @@ packages=(
   "libvirt-glib"
   "python-libvirt-python"
   "gtk-vnc"
-  "spice"
+  #"spice"
   "spice-gtk"
-  "spice-protocol"
+  #"spice-protocol"
   "spice-vdagent"
   "audit"
-  "device-tree-compiler"
+  #"device-tree-compiler"
   #"bridge-utils"
   #"dmidecode"
   #"dnsmasq"
   #"iptables"
-  "libcacard"
-  "libslirp"
-  "libnfs"
+  #"libcacard"
+  #"libslirp"
+  #"libnfs" # ???
   "snappy"
-  "usbredir"
-  "vde2"
-  "virglrenderer"
-  "qemu" # TARGETS=x86_64-softmmu
-  "libbpf" # for conraid's qemu
-  "jack" # for conraid's qemu
-  "virtiofsd"
+  #"usbredir"
+  #"vde2"
+  #"virglrenderer"
+  #"qemu" # TARGETS=x86_64-softmmu
+  #"libbpf" # for conraid's qemu
+  #"jack" # for conraid's qemu
+  #"virtiofsd"
   "edk2-ovmf-bin"
   "virt-manager"
 )
 
 # Install packages from Conraid over SBo to reduce compile times
-retry slpkg install -y -P -B "${packages[@]}" -o conraid || \
+retry slpkg install -y -P -q "${packages[@]}" -o conraid || \
   die "Failed to install conraid packages."
 
-# Install glibc 2.43 from testing for Conraid packages
-retry slpkg install -y -P -B aaa_glibc-solibs glibc glibc-i18n \
+# Install glibc from testing for Conraid packages
+retry slpkg install -y -P -q aaa_glibc-solibs glibc glibc-i18n \
   glibc-profile -o "slack_testing" || \
-  die "Failed to install glibc 2.43"
+  die "Failed to install glibc"
 
 # GFS packages
 gnome_packages=(
@@ -304,15 +304,8 @@ gnome_packages=(
 )
 
 # Install packages from GFS over SBo to reduce compile times
-retry slpkg install -y -P -B "${gnome_packages[@]}" -o gnome || \
+retry slpkg install -y -P -q "${gnome_packages[@]}" -o gnome || \
   die "Failed to install gnome packages."
-
-# Install eog (current eog from repo doesn't work)
-EOG="eog-49.1-x86_64-3_gfs.txz"
-EOGLINK="https://reddoglinux.ddns.net/mirror/new/$EOG"
-wget -c -T 3 -t 3 -q --show-progress "$EOGLINK" || true
-installpkg $EOG || true
-rm $EOG || true
 
 # SBo packages
 sbo_packages=(
@@ -334,11 +327,11 @@ sbo_packages=(
 )
 
 # Install Packages
-retry slpkg install -y -P -B "${sbo_packages[@]}" || \
+retry slpkg install -y -P -q "${sbo_packages[@]}" || \
   die "Failed to install SBo packages."
 
 # Install w/out parallel downloads to prevent download fails.
-retry slpkg install -y -B bottom ripgrep || \
+retry slpkg install -y -q bottom ripgrep || \
   die "Failed to install bottom."
 
 # Slint packages
@@ -349,7 +342,7 @@ slint_packages=(
 )
 
 # Install packages from Slint over SBo to reduce compile times
-retry slpkg install -y -P -B "${slint_packages[@]}" -o slint -O || \
+retry slpkg install -y -P -q "${slint_packages[@]}" -o slint -N || \
   die "Failed to install slint packages."
 
 # Set TERMINAL_SELECTOR back to true

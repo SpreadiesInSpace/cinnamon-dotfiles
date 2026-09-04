@@ -29,6 +29,10 @@
       <Filename>org.kde.cantor.desktop</Filename>
       <Filename>org.kde.rocs.desktop</Filename>
       <Filename>org.kde.step.desktop</Filename>
+      <Filename>nethack.desktop</Filename>
+      <Filename>org.kde.labplot.desktop</Filename>
+      <Filename>org.kde.marble.behaim.desktop</Filename>
+      <Filename>org.kde.marble.maps.desktop</Filename>
     </Include>
   </Menu>
   <!-- Internet Category -->
@@ -103,6 +107,9 @@
       <Filename>org.kde.picmi.desktop</Filename>
       <Filename>org.kde.ksame.desktop</Filename>
       <Filename>org.kde.kshisen.desktop</Filename>
+      <Filename>org.kde.kdominate.desktop</Filename>
+      <Filename>org.kde.ktuberling.desktop</Filename>
+      <Filename>org.kde.skladnik.desktop</Filename>
     </Include>
   </Menu>
   <!-- Graphics Category -->
@@ -130,6 +137,18 @@
       <Filename>org.kde.calligrawords.desktop</Filename>
       <Filename>org.kde.calligrasheets.desktop</Filename>
       <Filename>org.kde.calligrastage.desktop</Filename>
+      <Filename>org.kde.gcompris.desktop</Filename>
+      <Filename>org.kde.klettres.desktop</Filename>
+      <Filename>org.kde.arianna.desktop</Filename>
+      <Filename>org.kde.calligra.braindump.desktop</Filename>
+      <Filename>org.kde.calligra.desktop</Filename>
+      <Filename>org.kde.calligra.sheets.desktop</Filename>
+      <Filename>org.kde.calligra.stage.desktop</Filename>
+      <Filename>org.kde.calligra.words.desktop</Filename>
+      <Filename>org.kde.calligra.karbon.desktop</Filename>
+      <Filename>org.kde.merkuro.mail.desktop</Filename>
+      <Filename>org.kde.onlinequoteseditor6.desktop</Filename>
+      <Filename>org.kde.calligraplanportfolio.desktop</Filename>
     </Include>
   </Menu>
   <!-- Preferences Category -->
@@ -142,7 +161,7 @@
       <Filename>org.kde.marble.maps.desktop</Filename>
     </Include>
   </Menu>
-  <!-- Hidden Entries from Criginal Categories -->
+  <!-- Hidden Entries from Original Categories -->
   <Menu>
     <Name>Education</Name>
     <Exclude>
@@ -162,6 +181,8 @@
       <Filename>org.kde.minuet.desktop</Filename>
       <Filename>org.kde.step.desktop</Filename>
       <Filename>org.kde.parley.desktop</Filename>
+      <Filename>org.kde.gcompris.desktop</Filename>
+      <Filename>org.kde.klettres.desktop</Filename>
     </Exclude>
     <AppDir>/home/f16poom/.local/share/applications</AppDir>
   </Menu>
@@ -215,6 +236,10 @@
       <Filename>org.kde.picmi.desktop</Filename>
       <Filename>org.kde.ksame.desktop</Filename>
       <Filename>org.kde.kshisen.desktop</Filename>
+      <Filename>org.kde.gcompris.desktop</Filename>
+      <Filename>org.kde.kdominate.desktop</Filename>
+      <Filename>org.kde.ktuberling.desktop</Filename>
+      <Filename>org.kde.skladnik.desktop</Filename>
     </Exclude>
   </Menu>
   <Menu>
@@ -247,6 +272,16 @@
       <Filename>org.kde.sieveeditor.desktop</Filename>
       <Filename>org.kde.ghostwriter.desktop</Filename>
       <Filename>libreoffice-extension-manager.desktop</Filename>
+      <Filename>org.kde.arianna.desktop</Filename>
+      <Filename>org.kde.calligra.braindump.desktop</Filename>
+      <Filename>org.kde.calligra.desktop</Filename>
+      <Filename>org.kde.calligra.sheets.desktop</Filename>
+      <Filename>org.kde.calligra.stage.desktop</Filename>
+      <Filename>org.kde.calligra.words.desktop</Filename>
+      <Filename>org.kde.calligra.karbon.desktop</Filename>
+      <Filename>org.kde.merkuro.mail.desktop</Filename>
+      <Filename>org.kde.onlinequoteseditor6.desktop</Filename>
+      <Filename>org.kde.calligraplanportfolio.desktop</Filename>
     </Exclude>
     <AppDir>/home/f16poom/.local/share/applications</AppDir>
   </Menu>
@@ -255,7 +290,9 @@
     <Exclude>
       <Filename>kcm_fcitx5.desktop</Filename>
       <Filename>org.gnome.RestDemo.desktop</Filename>
+      <Filename>nethack.desktop</Filename>
     </Exclude>
+    <AppDir>/home/f16poom/.local/share/applications</AppDir>
   </Menu>
   <Menu>
     <Name>Universal Access</Name>
@@ -282,6 +319,9 @@
       <Filename>org.kde.rocs.desktop</Filename>
       <Filename>xaos.desktop</Filename>
       <Filename>org.kde.kalzium.desktop</Filename>
+      <Filename>org.kde.labplot.desktop</Filename>
+      <Filename>org.kde.marble.behaim.desktop</Filename>
+      <Filename>org.kde.marble.maps.desktop</Filename>
     </Exclude>
     <AppDir>/home/f16poom/.local/share/applications</AppDir>
   </Menu>

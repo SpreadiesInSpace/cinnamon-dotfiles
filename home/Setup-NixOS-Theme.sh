@@ -75,7 +75,7 @@ copy_menu_preferences "nixos"
 copy_qbittorrent_config "arch"
 
 # Backup and copy LibreOffice config to appropriate directory
-copy_libreoffice_config "nixos"
+copy_libreoffice_config "gentoo"
 
 # Backup and copy Filezilla config to appropriate directory
 copy_filezilla_config
