@@ -44,7 +44,6 @@ setup_xdeb() {
   chmod 0744 xdeb || die "Failed to set permissions on xdeb."
 }
 
-# Function to check and download the latest Brave version
 check_and_download_brave() {
   echo "Checking latest Brave release info..."
   LATEST_RELEASE=$(curl -sS --retry 10 --retry-delay 10 \
@@ -56,8 +55,8 @@ check_and_download_brave() {
     grep -oP '"tag_name": "\K(.*)(?=")') || \
     die "Failed to parse Brave version."
   DEB_URL=$(echo "$LATEST_RELEASE" | \
-    grep -oP '"browser_download_url": "\K(.*amd64.deb)(?=")') || \
-    die "Failed to find Brave .deb URL."
+    grep -oP '"browser_download_url": "\K([^"]*amd64\.deb)' | head -n 1)
+  [[ -n "$DEB_URL" ]] || die "Failed to find Brave .deb URL."
   echo "Latest Brave version: ${VERSION#v}"
 
   # Check installed Brave version
@@ -76,7 +75,7 @@ check_and_download_brave() {
 
   echo "Downloading Brave $VERSION..."
   curl -sS -fL --retry 10 --retry-delay 10 --connect-timeout 10 \
-    --retry-connrefused -O "$DEB_URL" || \
+    --retry-connrefused -o "brave-browser.deb" "$DEB_URL" || \
     die "Failed to download Brave .deb package."
 }
 

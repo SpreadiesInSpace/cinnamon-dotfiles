@@ -152,7 +152,7 @@ in
       vscodium
       wget
       xclip
-      xorg.xkill
+      xkill
     ];
     cinnamon.excludePackages = with pkgs.gnome // pkgs; [
       bulky

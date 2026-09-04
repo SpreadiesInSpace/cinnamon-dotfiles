@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<manifest:manifest> 
+  <manifest:file-entry manifest:full-path="common.xcu" manifest:media-type="application/vnd.sun.star.configuration-data"/> 
+  <manifest:file-entry manifest:full-path="setup.xcu" manifest:media-type="application/vnd.sun.star.configuration-data"/> 
+</manifest:manifest> 

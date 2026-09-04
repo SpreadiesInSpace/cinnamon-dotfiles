@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<oor:component-data oor:name="Common" oor:package="org.openoffice.Office"
+    xmlns:oor="http://openoffice.org/2001/registry" 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" >
+
+    <node oor:name="Misc">
+        <!-- Never show the "Tip of the Day -->
+        <prop oor:name="ShowTipOfTheDay"
+              oor:type="xs:boolean"
+              oor:finalized="false" >
+            <value>false</value>
+        </prop>
+
+	<!-- Never show the "Start Center donation banner/button -->
+        <prop oor:name="ShowDonation"
+              oor:type="xs:boolean"
+              oor:finalized="false" >
+            <value>false</value>
+        </prop>
+    </node>
+
+</oor:component-data>

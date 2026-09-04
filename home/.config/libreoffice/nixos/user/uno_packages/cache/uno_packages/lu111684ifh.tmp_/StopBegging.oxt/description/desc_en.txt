@@ -1,0 +1,3 @@
+Disable GetInvolved and Donate infobar, StartCenter donation banner,
+and (as a bonus) defaults to not show the Tip of the Day
+
