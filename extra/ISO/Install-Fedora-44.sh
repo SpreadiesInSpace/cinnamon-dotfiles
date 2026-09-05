@@ -95,7 +95,7 @@ retry dnf --installroot=/mnt --setopt=max_parallel_downloads=10 \
   grub2-tools grub2-tools-efi grub2-tools-extra \
   grub2-tools-minimal grubby intel-vsc-firmware iwlegacy-firmware \
   iwlwifi-* kernel libertas-firmware microcode_ctl mokutil \
-  shim-x64 spice-vdagent unzip || \
+  NetworkManager* shim-x64 spice-vdagent unzip || \
   die "Failed to install system packages."
 
 # Copy Network Info

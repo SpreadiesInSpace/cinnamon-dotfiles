@@ -169,7 +169,7 @@ packages=(
   "iptables"
   "dmidecode"
   "guestfs-tools"
-  #"qemu-block-gluster"
+  #"qemu-block-gluster" # removed from AUR
   "qemu-block-iscsi"
 )
 
