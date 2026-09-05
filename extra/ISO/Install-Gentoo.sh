@@ -201,7 +201,7 @@ cd && cp Install-Common.sh Master-Common.sh /mnt/ || \
 #============================== Chroot Variables ==============================
 
 # Binary Repos
-SYNC_URI_V3="http://download.nus.edu.sg/mirror/gentoo/releases/amd64"
+SYNC_URI_V3="https://distfiles.gentoo.org/releases/amd64"
 SYNC_URI_V3="$SYNC_URI_V3/binpackages/23.0/x86-64-v3/"
 SYNC_URI="https://distfiles.gentoo.org/releases/amd64/binpackages/23.0/x86-64/"
 

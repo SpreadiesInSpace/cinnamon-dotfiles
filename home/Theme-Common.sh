@@ -26,9 +26,13 @@ check_app() {
 check_dependencies() {
   local missing=()
   local deps=(
-    dconf dbus-launch git gsettings kvantummanager
-    qt5ct qt6ct sudo unzip
+    dconf dbus-launch git gsettings kvantummanager qt6ct sudo unzip
   )
+
+  # qt5ct is only required outside Gentoo
+  if ! grep -qi "gentoo" /etc/os-release; then
+    deps+=(qt5ct)
+  fi
 
   # Verify array has elements
   if [ ${#deps[@]} -eq 0 ]; then

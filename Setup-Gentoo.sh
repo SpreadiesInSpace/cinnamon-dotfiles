@@ -175,6 +175,10 @@ else
     die "Failed to clean up unused dependencies."
 fi
 
+# Temporary Flatpak fix
+FEATURES="-getbinpkg" retry emerge -1Dvq acct-group/flatpak || \
+  die "Failed to emerge acct-group/flatpak"
+
 # All Packages
 packages=(
   # Unstable Packages
@@ -203,7 +207,7 @@ packages=(
   "media-video/haruna"
   "gnome-extra/nemo"
   "gnome-extra/nemo-fileroller"
-  "x11-misc/qt5ct"
+  #"x11-misc/qt5ct" # removed from gentoo repo
   "gui-apps/qt6ct"
   #"media-sound/rhythmbox"
   "app-editors/vscodium"
