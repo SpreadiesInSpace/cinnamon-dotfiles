@@ -7,6 +7,7 @@
 export PS1="\[\e[38;5;9m\][\[\e[38;5;11m\]\u\[\e[38;5;2m\]@\[\e[38;5;12m\]\h \
 \[\e[38;5;5m\]\w\[\e[38;5;9m\]]\[\e[0m\]# "
 
+<<skip
 check_terminal_support() {
   local pid=$PPID
   local max_depth=5
@@ -35,6 +36,7 @@ if check_terminal_support; then
     source "$HOME/.config/synth-shell/synth-shell-prompt.sh"
   fi
 fi
+skip
 
 #============================ User Customizations =============================
 # Add your personal aliases, functions, and settings below this line
