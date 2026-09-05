@@ -154,8 +154,9 @@ convert_and_install_vscodium() {
 # Function to check and download neofetch
 check_and_download_neofetch() {
   VERSION="7.1.0"
-  DEB_URL="http://ftp.de.debian.org/debian/pool/main/n/neofetch"
+  DEB_URL="https://ftp.de.debian.org/debian/pool/main/n/neofetch"
   DEB_URL="$DEB_URL/neofetch_7.1.0-4_all.deb"
+  DEB_SHA256="ee9776898de3949cbb98c73b8ae7521385bf85039eee2ec24b8dc63a4de3ea1"
   
   echo "Latest neofetch version: $VERSION"
 
