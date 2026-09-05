@@ -156,7 +156,7 @@ check_and_download_neofetch() {
   VERSION="7.1.0"
   DEB_URL="http://ftp.de.debian.org/debian/pool/main/n/neofetch"
   DEB_URL="$DEB_URL/neofetch_7.1.0-4_all.deb"
-  
+
   echo "Latest neofetch version: $VERSION"
 
   if command -v neofetch &>/dev/null; then

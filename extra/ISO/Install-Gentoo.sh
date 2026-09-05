@@ -79,6 +79,9 @@ create_btrfs_subvolumes
 # Mount the partitions
 mount_partitions "gentoo"
 
+# Store Script Directory (for Install-Common.sh copy to chroot)
+SCRIPT_DIR="$(pwd)"
+
 #====================== Gentoo Install - The Stage File =======================
 
 # Move to Mounted Root Partition
@@ -195,8 +198,8 @@ if test -L /dev/shm; then
 fi
 
 # Copy common functions to chroot environment
-cd && cp Install-Common.sh Master-Common.sh /mnt/ || \
-  die "Failed to copy Install-Common.sh to chroot."
+cp "$SCRIPT_DIR/Install-Common.sh" "$SCRIPT_DIR/Master-Common.sh" \
+  /mnt/ || die "Failed to copy Install-Common.sh to chroot."
 
 #============================== Chroot Variables ==============================
 
