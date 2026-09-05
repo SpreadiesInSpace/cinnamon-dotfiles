@@ -186,7 +186,7 @@ in
   qt = {
     enable = true;
     style = "kvantum";
-    platformTheme = "qt5ct";
+    platformTheme = "gtk2";
   };
 
   programs = {
